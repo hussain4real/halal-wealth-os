@@ -51,11 +51,19 @@ const user = computed(() => page.props.auth.user);
                     class="mt-1 block w-full"
                     name="name"
                     :default-value="user.name"
+                    :aria-invalid="Boolean(errors.name)"
+                    :aria-describedby="
+                        errors.name ? 'profile-name-error' : undefined
+                    "
                     required
                     autocomplete="name"
                     placeholder="Full name"
                 />
-                <InputError class="mt-2" :message="errors.name" />
+                <InputError
+                    id="profile-name-error"
+                    class="mt-2"
+                    :message="errors.name"
+                />
             </div>
 
             <div class="grid gap-2">
@@ -66,11 +74,19 @@ const user = computed(() => page.props.auth.user);
                     class="mt-1 block w-full"
                     name="email"
                     :default-value="user.email"
+                    :aria-invalid="Boolean(errors.email)"
+                    :aria-describedby="
+                        errors.email ? 'profile-email-error' : undefined
+                    "
                     required
                     autocomplete="username"
                     placeholder="Email address"
                 />
-                <InputError class="mt-2" :message="errors.email" />
+                <InputError
+                    id="profile-email-error"
+                    class="mt-2"
+                    :message="errors.email"
+                />
             </div>
 
             <div v-if="page.props.mustVerifyEmail && !user.email_verified_at">

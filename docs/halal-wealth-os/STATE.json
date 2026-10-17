@@ -12,7 +12,19 @@
         "default_production_actions": false,
         "default_external_effects": false
     },
-    "active_run": null,
+    "active_run": {
+        "phase": "M0-P3",
+        "owner": "cloud-m0-p3-owner",
+        "worktree": ".",
+        "branch": "feat/m0-p3-identity-ownership",
+        "baseline_head": "6bac1581ade9023ecc30f27ec4c60a3575469d69",
+        "started_at": "2026-10-17T15:23:09.109002+00:00",
+        "status": "READY_FOR_REVIEW",
+        "cycles_used": 5,
+        "max_cycles": 6,
+        "checkpoint": "Cycle5: published audit finding fixed with red/green evidence; local75/281,236/245,TIA75record/replay PASS; final independent inventory review and follow-up CI pending",
+        "stopped_at": "2026-10-17T15:42:52.225557+00:00"
+    },
     "repository": {
         "root": null,
         "remote": "https://github.com/hussain4real/halal-wealth-os",
@@ -102,11 +114,11 @@
         {
             "id": "M0-P3",
             "depends_on": ["M0-P2"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "READY_FOR_REVIEW",
+            "owner": "cloud-m0-p3-owner",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M0-P3-local.md"
         },
         {
             "id": "M1-P1",
@@ -335,37 +347,33 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "phase": "M0-P2",
-        "authorized": false,
-        "scope": "Isolated M0-P2 runtime/full starter/verification plus sanitized feature branch and PR to dev; no merges, deployment, security/trust changes, persistent credentials or external account connections",
-        "starter_commit": "d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab",
+        "phase": "M0-P3",
+        "authorized": true,
+        "authority": "Human Merge and proceed, manager supplied canonical scope and delegated sole next-phase implementation",
+        "scope": "Canonical M0-P3 only; accepted-stack compatible dependencies; no merge/deploy/security settings/live credentials/real user provisioning/financial behavior/later phase; later manager authorization permits sanitized commit/push and one PR to dev plus hosted CI/review reconciliation",
+        "accepted_dependencies": ["M0-P2"],
         "remote_writes": true,
         "production_actions": false,
-        "accepted_dependencies": ["M0-P1"],
-        "php_constraint": "~8.5.0",
-        "completed_at": "2026-10-17T15:08:11.290788+00:00"
+        "php_constraint": "~8.5.0"
     },
     "execution_status": {
-        "phase": "M0-P2",
-        "outcome": "ACCEPTED",
-        "accepted": true,
-        "sourceImported": true,
-        "npmLockResolved": true,
-        "composerLockResolved": true,
+        "phase": "M0-P3",
+        "outcome": "READY_FOR_REVIEW",
+        "accepted": false,
+        "evidence": "runs/M0-P3-local.md",
         "applicationVerified": true,
-        "hostedCI": "PASS_CORRECTED_IMPLEMENTATION",
-        "evidence": "runs/M0-P2-acceptance.md",
+        "tests": 75,
+        "assertions": 281,
+        "coveredStatements": 236,
+        "applicationStatements": 245,
+        "nodeTests": 16,
+        "browserSmoke": "PASS_9_CHECKS",
+        "tia": "PASS_FULL_RECORD_AND_EXPLICIT_75_REPLAY",
+        "hostedCI": "ORIGINAL_74_CASE_PASS_FOLLOWUP_CORRECTION_PENDING",
+        "independentReview": "Password reset correction source PASS; exact publication inventory review recorded separately",
         "remainingBlockers": [],
-        "fullStarterFinalized": true,
-        "coverageVerified": true,
-        "cleanLockInstallVerified": true,
-        "failureRestorationVerified": true,
-        "browserSmoke": "PASS",
-        "recordingBoundary": "Human conditional approval applied after exact corrected-head independent review and successful full PR CI. Merge/post-merge CI are recorded separately; later phases remain unaccepted.",
-        "tests": 55,
-        "assertions": 171,
-        "coveredStatements": 149,
-        "applicationStatements": 159
+        "remoteWrites": true,
+        "productionActions": false
     },
     "dependency_patch": {
         "authorized": true,
@@ -478,19 +486,20 @@
     },
     "merge_checkpoint": {
         "authority": "Human owner approved merging PR1 to dev and proceeding after fresh checks and independent review; manager delegated acceptance recording and next phase ownership",
-        "cycles_used": 2,
+        "cycles_used": 3,
         "max_cycles": 6,
         "prior_publication_cycles_used": 6,
         "reviewed_approved_head": "9ebbc61e04bf324670bd8cf6bf6c624d3689b79b",
-        "status": "ACCEPTANCE_RECORDED_PENDING_MERGE",
+        "status": "MERGED_POST_MERGE_CI_PASS",
         "evidence": "runs/M0-P2-merge.md",
         "acceptance": "HUMAN_ACCEPTED_AFTER_FRESH_CHECKS",
-        "post_merge_ci": "PENDING_MERGE",
-        "next_phase_specification": "M0-P3 title and IDs present; task/acceptance descriptions requested, implementation not started",
+        "post_merge_ci": "PASS: https://github.com/hussain4real/halal-wealth-os/actions/runs/39044320828",
+        "next_phase_specification": "Canonical M0-P3 descriptions supplied by manager and restored in phases/M0-P3.md",
         "accepted_at": "2026-10-17T15:08:11.290788+00:00",
         "validated_head": "5eea7d3afc437eb1c56683b931cc068acd81aaff",
         "validated_tree": "758b5e3cbf118a87cd234ceea69770b08f2eed8d",
-        "validated_ci": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39043431382"
+        "validated_ci": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39043431382",
+        "merge_sha": "6bac1581ade9023ecc30f27ec4c60a3575469d69"
     },
     "completed_runs": [
         {
@@ -512,5 +521,63 @@
             "validated_head": "5eea7d3afc437eb1c56683b931cc068acd81aaff",
             "acceptance_evidence": "runs/M0-P2-acceptance.md"
         }
-    ]
+    ],
+    "authorization_history": [
+        {
+            "phase": "M0-P2",
+            "authorized": false,
+            "scope": "Isolated M0-P2 runtime/full starter/verification plus sanitized feature branch and PR to dev; no merges, deployment, security/trust changes, persistent credentials or external account connections",
+            "starter_commit": "d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab",
+            "remote_writes": true,
+            "production_actions": false,
+            "accepted_dependencies": ["M0-P1"],
+            "php_constraint": "~8.5.0",
+            "completed_at": "2026-10-17T15:08:11.290788+00:00"
+        }
+    ],
+    "execution_status_history": [
+        {
+            "phase": "M0-P2",
+            "outcome": "ACCEPTED",
+            "accepted": true,
+            "sourceImported": true,
+            "npmLockResolved": true,
+            "composerLockResolved": true,
+            "applicationVerified": true,
+            "hostedCI": "PASS_CORRECTED_IMPLEMENTATION",
+            "evidence": "runs/M0-P2-acceptance.md",
+            "remainingBlockers": [],
+            "fullStarterFinalized": true,
+            "coverageVerified": true,
+            "cleanLockInstallVerified": true,
+            "failureRestorationVerified": true,
+            "browserSmoke": "PASS",
+            "recordingBoundary": "Human conditional approval applied after exact corrected-head independent review and successful full PR CI. Merge/post-merge CI are recorded separately; later phases remain unaccepted.",
+            "tests": 55,
+            "assertions": 171,
+            "coveredStatements": 149,
+            "applicationStatements": 159
+        }
+    ],
+    "m0p3_publication": {
+        "authority": "Manager confirms owner Merge and proceed plus all PRs to dev; publish reviewed M0-P3 and monitor CI/reviews",
+        "status": "CORRECTION_VERIFIED_PENDING_REVIEW_AND_FOLLOWUP_CI",
+        "cycles_used": 5,
+        "max_cycles": 6,
+        "base": "dev",
+        "base_head": "6bac1581ade9023ecc30f27ec4c60a3575469d69",
+        "branch": "feat/m0-p3-identity-ownership",
+        "accepted": false,
+        "merge_authorized": false,
+        "evidence": "runs/M0-P3-publication.md",
+        "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/2",
+        "original_head": "8438de75810bd74cd6d488974d5c103227415736",
+        "original_ci": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39046824070",
+        "original_ci_conclusion": "success",
+        "review_findings": 1,
+        "review_disposition": "Single published P2 confirmed and corrected with actual guest-reset red/green evidence",
+        "corrected_local_tests": 75,
+        "corrected_local_assertions": 281,
+        "corrected_local_coverage": "236/245"
+    }
 }

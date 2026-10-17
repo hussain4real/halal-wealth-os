@@ -8,7 +8,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
-import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 import PasskeyVerify from '@/components/PasskeyVerify.vue';
@@ -55,9 +54,13 @@ defineProps<{
                     v-focus
                     :tabindex="1"
                     autocomplete="email"
+                    :aria-invalid="Boolean(errors.email)"
+                    :aria-describedby="
+                        errors.email ? 'login-email-error' : undefined
+                    "
                     placeholder="email@example.com"
                 />
-                <InputError :message="errors.email" />
+                <InputError id="login-email-error" :message="errors.email" />
             </div>
 
             <div class="grid gap-2">
@@ -78,9 +81,16 @@ defineProps<{
                     required
                     :tabindex="2"
                     autocomplete="current-password"
+                    :aria-invalid="Boolean(errors.password)"
+                    :aria-describedby="
+                        errors.password ? 'login-password-error' : undefined
+                    "
                     placeholder="Password"
                 />
-                <InputError :message="errors.password" />
+                <InputError
+                    id="login-password-error"
+                    :message="errors.password"
+                />
             </div>
 
             <div class="flex items-center justify-between">
@@ -102,9 +112,8 @@ defineProps<{
             </Button>
         </div>
 
-        <div class="text-center text-sm text-muted-foreground">
-            Don't have an account?
-            <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
-        </div>
+        <p class="text-center text-sm text-muted-foreground">
+            Private owner access. Public signup is closed.
+        </p>
     </Form>
 </template>
