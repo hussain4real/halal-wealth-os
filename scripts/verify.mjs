@@ -29,7 +29,7 @@ try {
     if (phase && !roadmap.phases.some((item) => item.id === phase)) {
         throw new VerificationFailure(`Unknown phase: ${phase}`);
     }
-    if (phase && !['M0-P1', 'M0-P2'].includes(phase)) {
+    if (phase && !['M0-P1', 'M0-P2', 'M0-P3'].includes(phase)) {
         throw new VerificationFailure(
             `NOT_APPLICABLE: ${phase} has no implemented verification suite. No passing result is claimed.`,
         );
@@ -41,7 +41,11 @@ try {
     if (phase === 'M0-P1') {
         console.log('PASS M0-P1 documentation checks');
     } else {
-        run('node', ['--test', 'scripts/verification.test.mjs']);
+        run('node', [
+            '--test',
+            'scripts/verification.test.mjs',
+            'scripts/currency-display.test.mjs',
+        ]);
         const missing = [];
         for (const command of ['php', 'composer', 'node', 'npm', 'psql']) {
             const result = spawnSync(command, ['--version'], {
@@ -103,6 +107,7 @@ try {
             ],
             { env },
         );
+        run('php', ['artisan', 'filament:assets', '--no-interaction'], { env });
         run('npm', ['run', 'check'], { env });
         run('npm', ['run', 'types:check'], { env });
         run('npm', ['run', 'build'], { env });
@@ -139,6 +144,17 @@ try {
             }
         }
         const scripts = manifest().scripts;
+        for (const required of [
+            'IdentityBoundaryTest',
+            'PrivateOnboardingTest',
+            'SessionAuditTest',
+        ]) {
+            if (!discovered.stdout.includes(required)) {
+                throw new VerificationFailure(
+                    `BLOCKED: missing M0-P3 required suite ${required}`,
+                );
+            }
+        }
         if (
             !scripts['test:coverage']?.some((entry) =>
                 entry.includes('artisan test'),
@@ -150,9 +166,9 @@ try {
         }
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
-        console.log('PASS M0-P2 implemented baseline');
+        console.log('PASS M0-P2 and M0-P3 implemented baseline');
         console.log(
-            'NOT_APPLICABLE: future financial suites, domain owner-isolation/admin work, integrations, live AI and deployment.',
+            'NOT_APPLICABLE: future financial suites, integrations, live AI and deployment.',
         );
     }
 } catch (error) {

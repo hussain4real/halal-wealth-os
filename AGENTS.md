@@ -46,3 +46,25 @@ docs/halal-wealth-os/runs/M0-P2-acceptance.md against corrected implementation
 head 5eea7d3afc437eb1c56683b931cc068acd81aaff after independent review and full CI success.
 The M0-P2 claim is closed; later phases and milestone gates remain unaccepted.
 M0-P3 awaits its canonical descriptions and post-merge checks before execution.
+
+## Current M0-P3 authorization
+
+M0-P2 merged into dev and its original push CI passed. The manager supplied
+canonical M0-P3 tasks/acceptance criteria and delegated the sole implementation
+claim on feat/m0-p3-identity-ownership. Implement only phases/M0-P3.md with the
+accepted stack and at most six scoped cycles. Preserve starter auth features,
+PHP8.5-only and full uncached gates; make onboarding private. Independent
+source-read-only review is required. Stop at READY_FOR_REVIEW or a blocker.
+No merge, deployment, infrastructure/security-setting changes, live credentials,
+real user provisioning, financial behavior, external accounts or later phase.
+Phase/milestone acceptance remains a human decision.
+
+## M0-P3 feature publication authorization
+
+The manager subsequently confirmed the owner approved publishing the reviewed
+M0-P3 source on its feature branch and one PR targeting dev, monitoring original
+hosted CI and reconciling review findings with scoped fixes and independent
+re-review. This supersedes the prior local-only publication boundary. Preserve
+READY_FOR_REVIEW/unaccepted state, the same sole writer and six-cycle history.
+No M0-P3 merge, acceptance, later phase, stage/main promotion, deployment, live
+credentials, real users or security-setting changes are authorized.

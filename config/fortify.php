@@ -161,7 +161,8 @@ return [
     */
 
     'features' => [
-        Features::registration(),
+        // Registration UI/actions remain in the starter, but public routes are
+        // disabled. Initial onboarding is console-only (owner:onboard).
         Features::resetPasswords(),
         Features::emailVerification(),
         Features::twoFactorAuthentication([

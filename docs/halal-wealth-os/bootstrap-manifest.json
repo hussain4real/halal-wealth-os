@@ -22,10 +22,11 @@
         "inertiaVue": "3.9.1",
         "vue": "3.5.44",
         "typescript": "5.9.3",
-        "filament": null,
+        "filament": "5.10.2",
         "phpStaticAnalyzer": "PHPStan 2.3.1 / Larastan 3.13.0",
         "phpTestRunner": "Pest 5.3.2 / Laravel plugin 5.0.1 / PHPUnit 13.4.2",
-        "postgresqlServer": "18.6"
+        "postgresqlServer": "18.6",
+        "livewire": "4.4.7"
     },
     "packageManager": {
         "selected": "npm",
@@ -277,5 +278,15 @@
         "evidence": "runs/M0-P2-merge.md"
     },
     "acceptanceScope": "Reviewed M0-P2 starter only; proposed future application pins and financial compatibility remain unverified",
-    "ownerAcceptanceEvidence": "runs/M0-P2-acceptance.md"
+    "ownerAcceptanceEvidence": "runs/M0-P2-acceptance.md",
+    "m0p3IdentityAdmin": {
+        "status": "LOCAL_READY_FOR_REVIEW_NOT_ACCEPTED",
+        "filamentConstraint": "~5.10.2",
+        "lockedFilament": "5.10.2",
+        "lockedLivewire": "4.4.7",
+        "existingResolvedVersionsChanged": false,
+        "scope": "Private identity/owner-scoped administration only; proposed future financial compatibility remains unverified",
+        "officialMetadata": "https://raw.githubusercontent.com/filamentphp/filament/v5.10.2/packages/support/composer.json",
+        "evidence": "runs/M0-P3-local.md"
+    }
 }

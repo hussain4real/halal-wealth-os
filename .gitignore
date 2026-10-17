@@ -61,3 +61,8 @@ yarn-error.log
 /.env.ci
 
 !.env.testing.example
+
+# Generated from the locked Filament release by verification/startup
+/public/css/filament/
+/public/js/filament/
+/public/fonts/filament/

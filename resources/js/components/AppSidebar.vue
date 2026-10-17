@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-import { BookOpen, FolderGit2, LayoutGrid } from '@lucide/vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import { LayoutGrid, UserRound, Shield } from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
-import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import {
@@ -15,9 +14,13 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import { edit as profile } from '@/routes/profile';
+import { edit as security } from '@/routes/security';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
+    { title: 'Profile', href: profile(), icon: UserRound },
+    { title: 'Security', href: security(), icon: Shield },
     {
         title: 'Dashboard',
         href: dashboard(),
@@ -25,18 +28,7 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: FolderGit2,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
-];
+const page = usePage();
 </script>
 
 <template>
@@ -54,11 +46,16 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <nav aria-label="Primary"><NavMain :items="mainNavItems" /></nav>
+            <a
+                v-if="page.props.auth.canAdmin"
+                href="/admin/owners"
+                class="m-3 rounded px-2 py-1 text-sm underline focus-visible:outline-2"
+                >Administration</a
+            >
         </SidebarContent>
 
         <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
     </Sidebar>

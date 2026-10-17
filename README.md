@@ -19,7 +19,9 @@ registration, email verification, two-factor authentication, passkeys and
 password confirmation. Bundled UI components and development tooling remain.
 The approved Vite Plus 0.3.3 patch includes the matching Vite core alias and
 bundled Vitest override. Both dependency locks record actual resolution.
-No financial functionality or domain owner-isolation/admin work is implemented.
+M0-P3 adds the private identity shell and owner-scoped administration described
+below. No financial functionality is implemented. Public registration routes
+are disabled while the bundled registration view/action source is retained.
 
 ## Runtime
 
@@ -55,6 +57,7 @@ installed both locks without copying dependencies or generated assets.
 test -f composer.lock && test -f package-lock.json
 composer install --prefer-dist --no-interaction --no-scripts
 php artisan package:discover --ansi
+php artisan filament:assets --no-interaction
 npm ci --ignore-scripts --no-fund
 cp .env.example .env
 cp .env.testing.example .env.testing
@@ -91,6 +94,7 @@ export HWO_TEST_HOST="$PWD/.runtime/postgresql"
 export HWO_TEST_USER=hwo
 ./bin/verify --phase M0-P1
 ./bin/verify --phase M0-P2
+./bin/verify --phase M0-P3
 ./bin/verify --all
 ./bin/probe-failure
 ```
@@ -152,3 +156,40 @@ CI and full verification explicitly use Pest --ci --no-tia and retain frontend
 lint/types/build, database checks, coverage and deliberate failure/restoration.
 TIA files, installed dependencies and real environment files must never be
 committed. Official engine documentation: [Pest TIA](https://pestphp.com/docs/tia).
+
+## M0-P3 private identity shell
+
+M0-P3 is a local review candidate, not human-accepted or merged. Its
+[canonical specification](docs/halal-wealth-os/phases/M0-P3.md) and
+[run evidence](docs/halal-wealth-os/runs/M0-P3-local.md) map each acceptance
+criterion. M0-P2 merged into dev and its original
+[post-merge CI](https://github.com/hussain4real/halal-wealth-os/actions/runs/39044320828)
+passed before this branch began.
+
+Public registration is closed. The interactive initial-owner onboarding
+command is console-only; this phase has not provisioned any real user. Read
+[identity, authorization, audit and session conventions](docs/halal-wealth-os/IDENTITY.md)
+before onboarding or personal production use. Confirmed two-factor enrollment
+is required before personal production workspace/admin access. Do not run
+onboarding in automated setup or tests against a live database.
+
+The Inertia shell includes keyboard navigation, accessible core form failures,
+explicit empty states and exact decimal/currency presentation. Administration
+uses locked Filament5.10.2 / Livewire4.4.7 with server-side capability checks,
+self-only resource queries and local avatars. Ordinary profile fields cannot
+grant admin access or select another owner.
+
+The local uncached gate passes **74 tests / 273 assertions**, coverage **235/244
+application statements**, formatting/static analysis, frontend lint/types/build,
+owned PostgreSQL migration smoke and dependency audits. The two former public
+registration cases now assert private route denial; the other53 prior cases
+remain. Nineteen additional identity/session cases bring the total to74.
+Sixteen Node checks pass. Browser keyboard/form/isolation checks passed with
+normal TLS verification. Local TIA records the full74-case baseline and its
+unchanged replay separately; cached results never replace uncached evidence.
+No M0-P3 hosted CI, production readiness, merge, deployment or milestone
+acceptance is claimed. Later phases remain unaccepted.
+
+M0-P3 feature publication and original hosted CI are separately authorized and
+tracked in the [publication checkpoint](docs/halal-wealth-os/runs/M0-P3-publication.md).
+This does not authorize a merge or record phase acceptance.
