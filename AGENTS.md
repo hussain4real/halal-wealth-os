@@ -26,3 +26,17 @@ deploy, change protections/security settings or publish raw private evidence.
 PHP support is 8.5.x only: the application constraint is ~8.5.0. Keep runtime,
 CI and verification aligned; do not alter vendor constraints or prune starter
 features to enforce this application requirement. M0-P2 remains unaccepted.
+
+## Latest merge and proceed authorization
+
+The human owner subsequently approved merging PR #1 into dev after fresh
+head/check/review verification, with acceptance of M0-P2 conditional on those
+checks. The manager delegated accurate acceptance recording and proceeding
+with canonical M0-P3 after post-merge CI. This supersedes the earlier no-merge
+restriction for PR #1 into dev only. Preserve main/stage; do not deploy, alter
+protections/security settings, create persistent access credentials or connect
+external accounts. Review and validate necessary pre-merge corrections. Keep
+all prior cycle history; the distinct merge checkpoint and later phase each
+use the established bounded cycle policy. Do not invent absent canonical task
+or acceptance descriptions. One implementation writer and independent review
+remain required.

@@ -7,7 +7,8 @@ SaaS or access to personal financial data.
 **M0-P2 is ready for review and remains unaccepted.** The local application
 baseline and original hosted CI pass. The sanitized scaffold is published in
 [PR #1](https://github.com/hussain4real/halal-wealth-os/pull/1) targeting dev. See
-[the publication run](docs/halal-wealth-os/runs/M0-P2-publication.md) for current
+[the merge checkpoint](docs/halal-wealth-os/runs/M0-P2-merge.md) and
+[publication run](docs/halal-wealth-os/runs/M0-P2-publication.md) for current
 evidence and remaining gates. Only M0-P1 is accepted.
 
 The starter is pinned to `d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab`. All five
@@ -105,8 +106,9 @@ test and restored a successful full `bin/verify --all` baseline. The same comman
 The follow-up CI setup copies the public testing template to prevent missing-file
 warnings; the latest result is visible in PR checks. Reports are ignored local `build/junit.xml` and `build/coverage.xml`.
 
-The observed application suite has 52 passing tests and 155 assertions; coverage
-includes 146 of 156 application statements. These are bootstrap results, not
+The current application suite has 55 passing tests and 171 assertions; coverage
+includes 149 of 159 application statements. The original 52 cases remain, with
+three profile-email regressions added after independent pre-merge review. These are bootstrap results, not
 future financial coverage, ownership, integration, performance or release gates.
 Both dependency advisory checks report zero findings.
 

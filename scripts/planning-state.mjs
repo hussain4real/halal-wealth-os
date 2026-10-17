@@ -3,6 +3,24 @@ import assert from 'node:assert/strict';
 const nonempty = (value) =>
     typeof value === 'string' && value.trim().length > 0;
 const compareIds = (left, right) => left.localeCompare(right);
+const phaseStatuses = new Set([
+    'PLANNED',
+    'IN_PROGRESS',
+    'RUNNING',
+    'BLOCKED',
+    'READY_FOR_REVIEW',
+    'PAUSED',
+    'HANDED_OFF',
+    'ACCEPTED',
+]);
+const milestoneStatuses = new Set([
+    'PLANNED',
+    'IN_PROGRESS',
+    'BLOCKED',
+    'READY_FOR_REVIEW',
+    'READY_FOR_OWNER',
+    'ACCEPTED',
+]);
 
 // Validate recorded lifecycle structure. JSON cannot authenticate a human decision;
 // the manager must still verify its authority and the referenced evidence.
@@ -56,6 +74,10 @@ export function validatePlanningState(roadmap, state) {
 
     for (const phase of roadmap.phases) {
         const record = phases.get(phase.id);
+        assert(
+            phaseStatuses.has(record.status),
+            `${phase.id}: unsupported phase status`,
+        );
         assert.deepEqual(
             record.depends_on,
             phase.dependencies,
@@ -93,6 +115,10 @@ export function validatePlanningState(roadmap, state) {
     }
     for (const milestone of roadmap.milestones) {
         const record = milestones.get(milestone.id);
+        assert(
+            milestoneStatuses.has(record.status),
+            `${milestone.id}: unsupported milestone status`,
+        );
         acceptance(record, 'review_evidence');
         if (record.status === 'ACCEPTED') {
             for (const phase of roadmap.phases.filter(

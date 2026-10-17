@@ -40,3 +40,44 @@ test('test_correct_password_must_be_provided_to_delete_account', function () {
     $response->assertSessionHasErrors('password')->assertRedirect(route('profile.edit'));
     $this->assertNotNull($user->fresh());
 });
+
+test('profile email update normalizes before saving and subsequent login', function () {
+    $user = User::factory()->create();
+    $this->actingAs($user)->patch(route('profile.update'), [
+        'name' => $user->name,
+        'email' => 'Updated.Owner@EXAMPLE.TEST',
+    ])->assertSessionHasNoErrors()->assertRedirect(route('profile.edit'));
+
+    $this->assertSame('updated.owner@example.test', $user->refresh()->email);
+    $this->assertNull($user->email_verified_at);
+    $this->post(route('logout'));
+    $this->post(route('login.store'), [
+        'email' => 'UPDATED.OWNER@example.test',
+        'password' => 'password',
+    ])->assertRedirect(route('dashboard', absolute: false));
+    $this->assertAuthenticatedAs($user);
+});
+
+test('profile email validation rejects another accounts case variant', function () {
+    User::factory()->create(['email' => 'taken@example.test']);
+    $user = User::factory()->create();
+    $originalEmail = $user->email;
+
+    $this->actingAs($user)->patch(route('profile.update'), [
+        'name' => $user->name,
+        'email' => 'TAKEN@EXAMPLE.TEST',
+    ])->assertSessionHasErrors('email');
+    $this->assertSame($originalEmail, $user->refresh()->email);
+});
+
+test('case only profile email edit keeps verification', function () {
+    $user = User::factory()->create(['email' => 'owner@example.test']);
+    $verifiedAt = $user->email_verified_at;
+
+    $this->actingAs($user)->patch(route('profile.update'), [
+        'name' => $user->name,
+        'email' => 'OWNER@EXAMPLE.TEST',
+    ])->assertSessionHasNoErrors();
+    $this->assertSame('owner@example.test', $user->refresh()->email);
+    $this->assertTrue($verifiedAt->equalTo($user->email_verified_at));
+});

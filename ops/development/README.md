@@ -115,3 +115,12 @@ The current Pest resolver cannot transform shared Vue components. The local
 wrapper conservatively rebuilds the whole TIA baseline on shared frontend or
 resolver configuration changes; PHP and individual Inertia pages keep native
 selection. Both graph and branch-bound frontend snapshot are required.
+
+## Disposable-resource ownership limit
+
+The database name and explicit local marker identify the selected target;
+they do not independently attest that its contents are disposable. Verification
+is restricted to a separately inspected, task-owned isolated PostgreSQL
+container or the disposable CI service. Never mark a same-named database on a
+shared local server disposable. This review checkpoint adds no server-side
+sentinel or database authentication change.

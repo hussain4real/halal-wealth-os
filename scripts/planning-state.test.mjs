@@ -192,3 +192,27 @@ await test('executing work cannot omit its active claim and authorization', () =
         );
     }
 });
+
+await test('unknown phase status cannot evade the executing claim check', () => {
+    for (const status of ['RUNNNING', 'ACCEPTE', 'UNKNOWN']) {
+        const state = structuredClone(baseline);
+        phase(state, 'M0-P2').status = status;
+        state.active_run = null;
+        delete state.execution_authorization;
+        assert.throws(
+            () => validatePlanningState(roadmap, state),
+            /unsupported phase status/,
+        );
+    }
+});
+
+await test('unknown milestone status is rejected', () => {
+    for (const status of ['ACCEPTEDD', 'UNKNOWN']) {
+        const state = structuredClone(baseline);
+        state.milestones[0].status = status;
+        assert.throws(
+            () => validatePlanningState(roadmap, state),
+            /unsupported milestone status/,
+        );
+    }
+});

@@ -246,7 +246,7 @@
         "fullApplicationCompatibilityVerified": false
     },
     "localBaselineVerified": true,
-    "localBaselineScope": "M0-P2 starter: PHP 8.5.x constraint/platform, lock installs, PostgreSQL migrations, frontend lint/types/build, static analysis, 52 tests/155 assertions and real coverage; strict browser PASS; original hosted CI PASS; follow-up configuration checks tracked on PR",
+    "localBaselineScope": "M0-P2 starter: PHP 8.5.x constraint/platform, lock installs, PostgreSQL migrations, frontend lint/types/build, static analysis, 55 tests/171 assertions and real coverage; strict browser PASS on reviewed starter; original hosted CI PASS; pre-merge correction and post-merge checks tracked on PR",
     "applicationPhpConstraint": "~8.5.0",
     "pestTia": {
         "pest": "5.3.2",
@@ -264,5 +264,14 @@
         "conclusion": "success",
         "latestChecks": "https://github.com/hussain4real/halal-wealth-os/pull/1/checks",
         "scope": "M0-P2 starter baseline only; phase/milestone acceptance and future financial compatibility are separate"
+    },
+    "preMergeCorrection": {
+        "tests": 55,
+        "assertions": 171,
+        "coveredStatements": 149,
+        "applicationStatements": 159,
+        "originalTestsPreserved": 52,
+        "profileRegressionTestsAdded": 3,
+        "evidence": "runs/M0-P2-merge.md"
     }
 }
