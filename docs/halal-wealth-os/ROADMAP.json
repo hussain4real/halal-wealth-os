@@ -1,0 +1,721 @@
+{
+  "schemaVersion": 1,
+  "baseline": "October 10 2026 implementation plan v1.1",
+  "visibility": "Public-safe identifier index; original documents remain private",
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "Foundation and execution controls",
+      "release": "personal-v1",
+      "reviewGate": "Owner-accepted independent milestone review required before next milestone"
+    },
+    {
+      "id": "M1",
+      "title": "Ledger and multi-currency foundation",
+      "release": "personal-v1",
+      "reviewGate": "Owner-accepted independent milestone review required before next milestone"
+    },
+    {
+      "id": "M2",
+      "title": "Cash flow, goals and emergency reserves",
+      "release": "personal-v1",
+      "reviewGate": "Owner-accepted independent milestone review required before next milestone"
+    },
+    {
+      "id": "M3",
+      "title": "Investments and valuation",
+      "release": "personal-v1",
+      "reviewGate": "Owner-accepted independent milestone review required before next milestone"
+    },
+    {
+      "id": "M4",
+      "title": "Shariah evidence and investment decisions",
+      "release": "personal-v1",
+      "reviewGate": "Owner-accepted independent milestone review required before next milestone"
+    },
+    {
+      "id": "M5",
+      "title": "Dashboard and personal V1 release",
+      "release": "personal-v1",
+      "reviewGate": "Owner-accepted independent milestone review required before next milestone"
+    },
+    {
+      "id": "M6",
+      "title": "Controlled integrations and notifications",
+      "release": "post-v1",
+      "reviewGate": "Owner-accepted independent milestone review required before next milestone"
+    },
+    {
+      "id": "M7",
+      "title": "Read-only Wealth Copilot and V2 gate",
+      "release": "post-v1",
+      "reviewGate": "Owner-accepted independent milestone review required before next milestone"
+    }
+  ],
+  "phases": [
+    {
+      "id": "M0-P1",
+      "title": "Freeze scope and inspect the repository",
+      "milestone": "M0",
+      "dependencies": [],
+      "tasks": [
+        "M0-P1-T1",
+        "M0-P1-T2",
+        "M0-P1-T3",
+        "M0-P1-T4",
+        "M0-P1-T5",
+        "M0-P1-T6"
+      ],
+      "acceptanceIds": [
+        "M0-P1-AC1",
+        "M0-P1-AC2",
+        "M0-P1-AC3",
+        "M0-P1-AC4",
+        "M0-P1-AC5"
+      ],
+      "status": "ACCEPTED",
+      "sourceSection": "M0-P1 - Freeze scope and inspect the repository"
+    },
+    {
+      "id": "M0-P2",
+      "title": "Bootstrap the stack and verification harness",
+      "milestone": "M0",
+      "dependencies": [
+        "M0-P1"
+      ],
+      "tasks": [
+        "M0-P2-T1",
+        "M0-P2-T2",
+        "M0-P2-T3",
+        "M0-P2-T4",
+        "M0-P2-T5",
+        "M0-P2-T6"
+      ],
+      "acceptanceIds": [
+        "M0-P2-AC1",
+        "M0-P2-AC2",
+        "M0-P2-AC3",
+        "M0-P2-AC4",
+        "M0-P2-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M0-P2 - Bootstrap the stack and verification harness"
+    },
+    {
+      "id": "M0-P3",
+      "title": "Identity, ownership and application shell",
+      "milestone": "M0",
+      "dependencies": [
+        "M0-P2"
+      ],
+      "tasks": [
+        "M0-P3-T1",
+        "M0-P3-T2",
+        "M0-P3-T3",
+        "M0-P3-T4",
+        "M0-P3-T5",
+        "M0-P3-T6"
+      ],
+      "acceptanceIds": [
+        "M0-P3-AC1",
+        "M0-P3-AC2",
+        "M0-P3-AC3",
+        "M0-P3-AC4",
+        "M0-P3-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M0-P3 - Identity, ownership and application shell"
+    },
+    {
+      "id": "M1-P1",
+      "title": "Accounts, currencies and exact money",
+      "milestone": "M1",
+      "dependencies": [
+        "M0-P3"
+      ],
+      "tasks": [
+        "M1-P1-T1",
+        "M1-P1-T2",
+        "M1-P1-T3",
+        "M1-P1-T4",
+        "M1-P1-T5",
+        "M1-P1-T6"
+      ],
+      "acceptanceIds": [
+        "M1-P1-AC1",
+        "M1-P1-AC2",
+        "M1-P1-AC3",
+        "M1-P1-AC4",
+        "M1-P1-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M1-P1 - Accounts, currencies and exact money"
+    },
+    {
+      "id": "M1-P2",
+      "title": "Atomic posting, transfers and reversals",
+      "milestone": "M1",
+      "dependencies": [
+        "M1-P1"
+      ],
+      "tasks": [
+        "M1-P2-T1",
+        "M1-P2-T2",
+        "M1-P2-T3",
+        "M1-P2-T4",
+        "M1-P2-T5",
+        "M1-P2-T6"
+      ],
+      "acceptanceIds": [
+        "M1-P2-AC1",
+        "M1-P2-AC2",
+        "M1-P2-AC3",
+        "M1-P2-AC4",
+        "M1-P2-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M1-P2 - Atomic posting, transfers and reversals"
+    },
+    {
+      "id": "M1-P3",
+      "title": "Manual FX and account reconciliation",
+      "milestone": "M1",
+      "dependencies": [
+        "M1-P2"
+      ],
+      "tasks": [
+        "M1-P3-T1",
+        "M1-P3-T2",
+        "M1-P3-T3",
+        "M1-P3-T4",
+        "M1-P3-T5",
+        "M1-P3-T6"
+      ],
+      "acceptanceIds": [
+        "M1-P3-AC1",
+        "M1-P3-AC2",
+        "M1-P3-AC3",
+        "M1-P3-AC4",
+        "M1-P3-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M1-P3 - Manual FX and account reconciliation"
+    },
+    {
+      "id": "M2-P1",
+      "title": "Budgets and recurring commitments",
+      "milestone": "M2",
+      "dependencies": [
+        "M1-P3"
+      ],
+      "tasks": [
+        "M2-P1-T1",
+        "M2-P1-T2",
+        "M2-P1-T3",
+        "M2-P1-T4",
+        "M2-P1-T5",
+        "M2-P1-T6"
+      ],
+      "acceptanceIds": [
+        "M2-P1-AC1",
+        "M2-P1-AC2",
+        "M2-P1-AC3",
+        "M2-P1-AC4",
+        "M2-P1-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M2-P1 - Budgets and recurring commitments"
+    },
+    {
+      "id": "M2-P2",
+      "title": "Goals and emergency-fund protection",
+      "milestone": "M2",
+      "dependencies": [
+        "M2-P1"
+      ],
+      "tasks": [
+        "M2-P2-T1",
+        "M2-P2-T2",
+        "M2-P2-T3",
+        "M2-P2-T4",
+        "M2-P2-T5",
+        "M2-P2-T6"
+      ],
+      "acceptanceIds": [
+        "M2-P2-AC1",
+        "M2-P2-AC2",
+        "M2-P2-AC3",
+        "M2-P2-AC4",
+        "M2-P2-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M2-P2 - Goals and emergency-fund protection"
+    },
+    {
+      "id": "M2-P3",
+      "title": "Deployable cash and forecast scenarios",
+      "milestone": "M2",
+      "dependencies": [
+        "M2-P2"
+      ],
+      "tasks": [
+        "M2-P3-T1",
+        "M2-P3-T2",
+        "M2-P3-T3",
+        "M2-P3-T4",
+        "M2-P3-T5",
+        "M2-P3-T6"
+      ],
+      "acceptanceIds": [
+        "M2-P3-AC1",
+        "M2-P3-AC2",
+        "M2-P3-AC3",
+        "M2-P3-AC4",
+        "M2-P3-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M2-P3 - Deployable cash and forecast scenarios"
+    },
+    {
+      "id": "M3-P1",
+      "title": "Assets and portfolio account modes",
+      "milestone": "M3",
+      "dependencies": [
+        "M2-P3"
+      ],
+      "tasks": [
+        "M3-P1-T1",
+        "M3-P1-T2",
+        "M3-P1-T3",
+        "M3-P1-T4",
+        "M3-P1-T5",
+        "M3-P1-T6"
+      ],
+      "acceptanceIds": [
+        "M3-P1-AC1",
+        "M3-P1-AC2",
+        "M3-P1-AC3",
+        "M3-P1-AC4",
+        "M3-P1-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M3-P1 - Assets and portfolio account modes"
+    },
+    {
+      "id": "M3-P2",
+      "title": "Trades, IPO allotment and corporate actions",
+      "milestone": "M3",
+      "dependencies": [
+        "M3-P1"
+      ],
+      "tasks": [
+        "M3-P2-T1",
+        "M3-P2-T2",
+        "M3-P2-T3",
+        "M3-P2-T4",
+        "M3-P2-T5",
+        "M3-P2-T6"
+      ],
+      "acceptanceIds": [
+        "M3-P2-AC1",
+        "M3-P2-AC2",
+        "M3-P2-AC3",
+        "M3-P2-AC4",
+        "M3-P2-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M3-P2 - Trades, IPO allotment and corporate actions"
+    },
+    {
+      "id": "M3-P3",
+      "title": "Valuation and currency-aware performance",
+      "milestone": "M3",
+      "dependencies": [
+        "M3-P2"
+      ],
+      "tasks": [
+        "M3-P3-T1",
+        "M3-P3-T2",
+        "M3-P3-T3",
+        "M3-P3-T4",
+        "M3-P3-T5",
+        "M3-P3-T6"
+      ],
+      "acceptanceIds": [
+        "M3-P3-AC1",
+        "M3-P3-AC2",
+        "M3-P3-AC3",
+        "M3-P3-AC4",
+        "M3-P3-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M3-P3 - Valuation and currency-aware performance"
+    },
+    {
+      "id": "M4-P1",
+      "title": "Versioned Shariah assessment records",
+      "milestone": "M4",
+      "dependencies": [
+        "M3-P3"
+      ],
+      "tasks": [
+        "M4-P1-T1",
+        "M4-P1-T2",
+        "M4-P1-T3",
+        "M4-P1-T4",
+        "M4-P1-T5",
+        "M4-P1-T6"
+      ],
+      "acceptanceIds": [
+        "M4-P1-AC1",
+        "M4-P1-AC2",
+        "M4-P1-AC3",
+        "M4-P1-AC4",
+        "M4-P1-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M4-P1 - Versioned Shariah assessment records"
+    },
+    {
+      "id": "M4-P2",
+      "title": "Purification obligations and recorded payments",
+      "milestone": "M4",
+      "dependencies": [
+        "M4-P1"
+      ],
+      "tasks": [
+        "M4-P2-T1",
+        "M4-P2-T2",
+        "M4-P2-T3",
+        "M4-P2-T4",
+        "M4-P2-T5",
+        "M4-P2-T6"
+      ],
+      "acceptanceIds": [
+        "M4-P2-AC1",
+        "M4-P2-AC2",
+        "M4-P2-AC3",
+        "M4-P2-AC4",
+        "M4-P2-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M4-P2 - Purification obligations and recorded payments"
+    },
+    {
+      "id": "M4-P3",
+      "title": "Opportunities, theses and tranche plans",
+      "milestone": "M4",
+      "dependencies": [
+        "M4-P2"
+      ],
+      "tasks": [
+        "M4-P3-T1",
+        "M4-P3-T2",
+        "M4-P3-T3",
+        "M4-P3-T4",
+        "M4-P3-T5",
+        "M4-P3-T6"
+      ],
+      "acceptanceIds": [
+        "M4-P3-AC1",
+        "M4-P3-AC2",
+        "M4-P3-AC3",
+        "M4-P3-AC4",
+        "M4-P3-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M4-P3 - Opportunities, theses and tranche plans"
+    },
+    {
+      "id": "M5-P1",
+      "title": "Dashboard and explainable next actions",
+      "milestone": "M5",
+      "dependencies": [
+        "M4-P3"
+      ],
+      "tasks": [
+        "M5-P1-T1",
+        "M5-P1-T2",
+        "M5-P1-T3",
+        "M5-P1-T4",
+        "M5-P1-T5",
+        "M5-P1-T6"
+      ],
+      "acceptanceIds": [
+        "M5-P1-AC1",
+        "M5-P1-AC2",
+        "M5-P1-AC3",
+        "M5-P1-AC4",
+        "M5-P1-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M5-P1 - Dashboard and explainable next actions"
+    },
+    {
+      "id": "M5-P2",
+      "title": "End-to-end quality and security hardening",
+      "milestone": "M5",
+      "dependencies": [
+        "M5-P1"
+      ],
+      "tasks": [
+        "M5-P2-T1",
+        "M5-P2-T2",
+        "M5-P2-T3",
+        "M5-P2-T4",
+        "M5-P2-T5",
+        "M5-P2-T6"
+      ],
+      "acceptanceIds": [
+        "M5-P2-AC1",
+        "M5-P2-AC2",
+        "M5-P2-AC3",
+        "M5-P2-AC4",
+        "M5-P2-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M5-P2 - End-to-end quality and security hardening"
+    },
+    {
+      "id": "M5-P3",
+      "title": "Release readiness, export and restore",
+      "milestone": "M5",
+      "dependencies": [
+        "M5-P2"
+      ],
+      "tasks": [
+        "M5-P3-T1",
+        "M5-P3-T2",
+        "M5-P3-T3",
+        "M5-P3-T4",
+        "M5-P3-T5",
+        "M5-P3-T6"
+      ],
+      "acceptanceIds": [
+        "M5-P3-AC1",
+        "M5-P3-AC2",
+        "M5-P3-AC3",
+        "M5-P3-AC4",
+        "M5-P3-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M5-P3 - Release readiness, export and restore"
+    },
+    {
+      "id": "M6-P1",
+      "title": "Statement import and safe data portability",
+      "milestone": "M6",
+      "dependencies": [
+        "M5-P3"
+      ],
+      "tasks": [
+        "M6-P1-T1",
+        "M6-P1-T2",
+        "M6-P1-T3",
+        "M6-P1-T4",
+        "M6-P1-T5",
+        "M6-P1-T6"
+      ],
+      "acceptanceIds": [
+        "M6-P1-AC1",
+        "M6-P1-AC2",
+        "M6-P1-AC3",
+        "M6-P1-AC4",
+        "M6-P1-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M6-P1 - Statement import and safe data portability"
+    },
+    {
+      "id": "M6-P2",
+      "title": "Market and FX provider adapters",
+      "milestone": "M6",
+      "dependencies": [
+        "M6-P1"
+      ],
+      "tasks": [
+        "M6-P2-T1",
+        "M6-P2-T2",
+        "M6-P2-T3",
+        "M6-P2-T4",
+        "M6-P2-T5",
+        "M6-P2-T6"
+      ],
+      "acceptanceIds": [
+        "M6-P2-AC1",
+        "M6-P2-AC2",
+        "M6-P2-AC3",
+        "M6-P2-AC4",
+        "M6-P2-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M6-P2 - Market and FX provider adapters"
+    },
+    {
+      "id": "M6-P3",
+      "title": "Opt-in reminders and notifications",
+      "milestone": "M6",
+      "dependencies": [
+        "M6-P2"
+      ],
+      "tasks": [
+        "M6-P3-T1",
+        "M6-P3-T2",
+        "M6-P3-T3",
+        "M6-P3-T4",
+        "M6-P3-T5",
+        "M6-P3-T6"
+      ],
+      "acceptanceIds": [
+        "M6-P3-AC1",
+        "M6-P3-AC2",
+        "M6-P3-AC3",
+        "M6-P3-AC4",
+        "M6-P3-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M6-P3 - Opt-in reminders and notifications"
+    },
+    {
+      "id": "M6-P4",
+      "title": "Personal Google Drive export",
+      "milestone": "M6",
+      "dependencies": [
+        "M6-P3"
+      ],
+      "tasks": [
+        "M6-P4-T1",
+        "M6-P4-T2",
+        "M6-P4-T3",
+        "M6-P4-T4",
+        "M6-P4-T5",
+        "M6-P4-T6"
+      ],
+      "acceptanceIds": [
+        "M6-P4-AC1",
+        "M6-P4-AC2",
+        "M6-P4-AC3",
+        "M6-P4-AC4",
+        "M6-P4-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M6-P4 - Personal Google Drive export"
+    },
+    {
+      "id": "M7-P1",
+      "title": "Read-only financial tool boundary",
+      "milestone": "M7",
+      "dependencies": [
+        "M6-P4"
+      ],
+      "tasks": [
+        "M7-P1-T1",
+        "M7-P1-T2",
+        "M7-P1-T3",
+        "M7-P1-T4",
+        "M7-P1-T5",
+        "M7-P1-T6"
+      ],
+      "acceptanceIds": [
+        "M7-P1-AC1",
+        "M7-P1-AC2",
+        "M7-P1-AC3",
+        "M7-P1-AC4",
+        "M7-P1-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M7-P1 - Read-only financial tool boundary"
+    },
+    {
+      "id": "M7-P2",
+      "title": "Evidence-grounded answers and evaluation",
+      "milestone": "M7",
+      "dependencies": [
+        "M7-P1"
+      ],
+      "tasks": [
+        "M7-P2-T1",
+        "M7-P2-T2",
+        "M7-P2-T3",
+        "M7-P2-T4",
+        "M7-P2-T5",
+        "M7-P2-T6"
+      ],
+      "acceptanceIds": [
+        "M7-P2-AC1",
+        "M7-P2-AC2",
+        "M7-P2-AC3",
+        "M7-P2-AC4",
+        "M7-P2-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M7-P2 - Evidence-grounded answers and evaluation"
+    },
+    {
+      "id": "M7-P3",
+      "title": "Operational controls and V2 release gate",
+      "milestone": "M7",
+      "dependencies": [
+        "M7-P2"
+      ],
+      "tasks": [
+        "M7-P3-T1",
+        "M7-P3-T2",
+        "M7-P3-T3",
+        "M7-P3-T4",
+        "M7-P3-T5",
+        "M7-P3-T6"
+      ],
+      "acceptanceIds": [
+        "M7-P3-AC1",
+        "M7-P3-AC2",
+        "M7-P3-AC3",
+        "M7-P3-AC4",
+        "M7-P3-AC5"
+      ],
+      "status": "PLANNED",
+      "sourceSection": "M7-P3 - Operational controls and V2 release gate"
+    }
+  ],
+  "invariantIds": [
+    "INV-01",
+    "INV-02",
+    "INV-03",
+    "INV-04",
+    "INV-05",
+    "INV-06",
+    "INV-07",
+    "INV-08",
+    "INV-09",
+    "INV-10",
+    "INV-11",
+    "INV-12"
+  ],
+  "sourceTraceability": {
+    "baseline": "October 10 2026 implementation plan v1.1",
+    "representation": "Identifier/dependency index; public acceptance prose is paraphrased",
+    "privateProvenance": "Owner-held manifest maps exact source identity, rendered line ranges and all IDs",
+    "archiveReconciliation": "RECONCILED_LOCAL_DRAFT",
+    "sourceIdentity": "Verified user-supplied separated Codex kit v1.1; private original-byte manifest available to owner"
+  },
+  "fixtureIds": [
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "F08",
+    "F09",
+    "F10",
+    "F11",
+    "F12",
+    "F13",
+    "F14",
+    "F15",
+    "F16",
+    "F17",
+    "F18"
+  ]
+}

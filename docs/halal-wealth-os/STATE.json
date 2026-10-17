@@ -1,0 +1,383 @@
+{
+  "schema_version": 1,
+  "plan_version": "1.0",
+  "project": "Halal Wealth OS",
+  "updated_at": "2026-10-17T10:59:04Z",
+  "policy": {
+    "implementation_unit": "phase",
+    "one_implementation_owner": true,
+    "max_cycles": 6,
+    "max_repeated_failure_attempts": 3,
+    "default_remote_writes": false,
+    "default_production_actions": false,
+    "default_external_effects": false
+  },
+  "active_run": null,
+  "repository": {
+    "root": null,
+    "remote": "https://github.com/hussain4real/halal-wealth-os",
+    "base_branch": "main",
+    "worktree": null,
+    "head": null,
+    "verified_at": "2026-10-17T10:59:04Z",
+    "head_observation": "Unborn main before initial planning publication; Git history gives the current published HEAD"
+  },
+  "milestones": [
+    {
+      "id": "M0",
+      "status": "PLANNED",
+      "accepted_by": null,
+      "accepted_at": null,
+      "review_evidence": null
+    },
+    {
+      "id": "M1",
+      "status": "PLANNED",
+      "accepted_by": null,
+      "accepted_at": null,
+      "review_evidence": null
+    },
+    {
+      "id": "M2",
+      "status": "PLANNED",
+      "accepted_by": null,
+      "accepted_at": null,
+      "review_evidence": null
+    },
+    {
+      "id": "M3",
+      "status": "PLANNED",
+      "accepted_by": null,
+      "accepted_at": null,
+      "review_evidence": null
+    },
+    {
+      "id": "M4",
+      "status": "PLANNED",
+      "accepted_by": null,
+      "accepted_at": null,
+      "review_evidence": null
+    },
+    {
+      "id": "M5",
+      "status": "PLANNED",
+      "accepted_by": null,
+      "accepted_at": null,
+      "review_evidence": null
+    },
+    {
+      "id": "M6",
+      "status": "PLANNED",
+      "accepted_by": null,
+      "accepted_at": null,
+      "review_evidence": null
+    },
+    {
+      "id": "M7",
+      "status": "PLANNED",
+      "accepted_by": null,
+      "accepted_at": null,
+      "review_evidence": null
+    }
+  ],
+  "phases": [
+    {
+      "id": "M0-P1",
+      "depends_on": [],
+      "status": "ACCEPTED",
+      "owner": "planning-owner",
+      "accepted_by": "human-owner",
+      "accepted_at": "2026-10-17T10:59:04Z",
+      "evidence": "runs/M0-P1-local.md"
+    },
+    {
+      "id": "M0-P2",
+      "depends_on": [
+        "M0-P1"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M0-P3",
+      "depends_on": [
+        "M0-P2"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M1-P1",
+      "depends_on": [
+        "M0-P3"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M1-P2",
+      "depends_on": [
+        "M1-P1"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M1-P3",
+      "depends_on": [
+        "M1-P2"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M2-P1",
+      "depends_on": [
+        "M1-P3"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M2-P2",
+      "depends_on": [
+        "M2-P1"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M2-P3",
+      "depends_on": [
+        "M2-P2"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M3-P1",
+      "depends_on": [
+        "M2-P3"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M3-P2",
+      "depends_on": [
+        "M3-P1"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M3-P3",
+      "depends_on": [
+        "M3-P2"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M4-P1",
+      "depends_on": [
+        "M3-P3"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M4-P2",
+      "depends_on": [
+        "M4-P1"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M4-P3",
+      "depends_on": [
+        "M4-P2"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M5-P1",
+      "depends_on": [
+        "M4-P3"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M5-P2",
+      "depends_on": [
+        "M5-P1"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M5-P3",
+      "depends_on": [
+        "M5-P2"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M6-P1",
+      "depends_on": [
+        "M5-P3"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M6-P2",
+      "depends_on": [
+        "M6-P1"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M6-P3",
+      "depends_on": [
+        "M6-P2"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M6-P4",
+      "depends_on": [
+        "M6-P3"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M7-P1",
+      "depends_on": [
+        "M6-P4"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M7-P2",
+      "depends_on": [
+        "M7-P1"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    },
+    {
+      "id": "M7-P3",
+      "depends_on": [
+        "M7-P2"
+      ],
+      "status": "PLANNED",
+      "owner": null,
+      "accepted_by": null,
+      "accepted_at": null,
+      "evidence": null
+    }
+  ],
+  "documentation_version": "1.1",
+  "adoption": {
+    "status": "RECONCILED_AND_M0_P1_HUMAN_ACCEPTED",
+    "source": "User-supplied separated Codex kit v1.1",
+    "source_state_plan_version_preserved": "1.0",
+    "prior_local_state": "Preserved privately before schema alignment; no accepted status or active claim existed",
+    "private_paths": "Held in owner-only reconciliation evidence; omitted from public state"
+  },
+  "review_package": {
+    "phase": "M0-P1",
+    "status": "HUMAN_ACCEPTED",
+    "acceptance": "ACCEPTED",
+    "bootstrapAuthorized": false,
+    "publicationAuthorized": true,
+    "blockers": [
+      "Runtime/dependency pins remain candidates; complete approved manifest unresolved",
+      "No verified Halal Wealth cloud environment or hosting selected",
+      "Manager must record M0-P2 owner/worktree/active_run and separate execution authorization"
+    ],
+    "next_authorized_phase": null,
+    "scope": "Human accepted planning baseline and six ADR directions; sanitized planning publication only; no M0-P2 execution",
+    "source_reconciliation": "Verified archive and reviewed actual runbook, state, phase, evidence template, architecture, invariants and verification contract; originals retained privately",
+    "readOnlyBootstrapPreparationAuthorized": true,
+    "acceptance_record": "ACCEPTANCE.md"
+  }
+}

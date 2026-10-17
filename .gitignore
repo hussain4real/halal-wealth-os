@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+.local/
+library-inputs/
+private-evidence/
+*Codex_Kit*.zip
+Halal_Wealth_OS_Implementation_Plan_No_Prompts.md
+Halal_Wealth_OS_Codex_Prompts.md
