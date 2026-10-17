@@ -4,8 +4,9 @@ A private personal wealth application bootstrapped with the complete official
 Laravel Inertia/Vue starter. Public source visibility does not authorize public
 SaaS or access to personal financial data.
 
-**M0-P2 remains unaccepted.** The local application baseline passes. Sanitized
-feature publication and a PR to dev are authorized; hosted CI is pending. See
+**M0-P2 is ready for review and remains unaccepted.** The local application
+baseline and original hosted CI pass. The sanitized scaffold is published in
+[PR #1](https://github.com/hussain4real/halal-wealth-os/pull/1) targeting dev. See
 [the publication run](docs/halal-wealth-os/runs/M0-P2-publication.md) for current
 evidence and remaining gates. Only M0-P1 is accepted.
 
@@ -99,8 +100,10 @@ empty required suites, skipped required tests and missing reports fail.
 
 The deliberate failure probe passed its 52-case baseline, observed the intended
 53rd failing Pest case through `bin/verify` exit 1, removed only that temporary
-test and restored a successful full `bin/verify --all` baseline. Its same command is wired into CI; hosted CI is
-still NOT_RUN. Reports are ignored local `build/junit.xml` and `build/coverage.xml`.
+test and restored a successful full `bin/verify --all` baseline. The same command passed in
+[the original CI run](https://github.com/hussain4real/halal-wealth-os/actions/runs/39040426083).
+The follow-up CI setup copies the public testing template to prevent missing-file
+warnings; the latest result is visible in PR checks. Reports are ignored local `build/junit.xml` and `build/coverage.xml`.
 
 The observed application suite has 52 passing tests and 155 assertions; coverage
 includes 146 of 156 application statements. These are bootstrap results, not

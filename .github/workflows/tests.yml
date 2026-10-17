@@ -72,6 +72,7 @@ jobs:
 
       - name: Install from locks without create-project side effects
         run: |
+          cp .env.testing.example .env.testing
           composer install --prefer-dist --no-interaction --no-progress --no-scripts
           php artisan package:discover --ansi
           npm ci --ignore-scripts --no-fund

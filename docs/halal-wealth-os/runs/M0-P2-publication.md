@@ -1,6 +1,6 @@
 # M0-P2 publication and CI checkpoint
 
-Status: authorized publication preparation; phase remains unaccepted. This
+Status: READY_FOR_REVIEW; phase remains unaccepted. This
 checkpoint supersedes earlier publication restrictions while preserving the
 previous five-cycle source/evidence record. No merges, deployments, branch
 protection changes, trust-store changes, persistent credentials, external
@@ -88,8 +88,30 @@ probes were restored. The npm lock retains the prior approved package set and
 exact bytes after removing the trial dependency. Dependabot's retained weekly
 actions updates explicitly target dev, matching the PR workflow rule.
 
-The publication snapshot is prepared for independent staged-file sanitation
-review. Hosted CI remains PENDING_PUBLICATION as of this source snapshot; its
-original run identity, conclusion and final PR status will be reported after
-publication. These pending remote checks are not claimed as passing here.
+The implementation snapshot passed independent staged-file sanitation review.
+The exact reviewed Git tree was 1a8d130493fc57f52351cdc6fb8f845d8fd8b74c,
+355 files; it was committed unchanged as
+2c6f3d388fd14f5a442b9971892d79d292e5d88f and published on
+feat/m0-p2-starter-harness in [PR #1](https://github.com/hussain4real/halal-wealth-os/pull/1),
+base dev. main, stage and dev read back at the original planning baseline.
 M0-P2 remains unaccepted and no later phase has started.
+
+The [original CI run](https://github.com/hussain4real/halal-wealth-os/actions/runs/39040426083)
+completed successfully on attempt 1 against the implementation commit above.
+Clean runtime setup and installs, all baseline/failure/restoration gates,
+coverage validation and report upload succeeded. Logs show 52 cases/155
+assertions and 146/156 covered statements, plus the intended 53rd failing case
+and restored success. The run also emitted missing-environment-file warnings;
+these were not test failures and are not hidden. The final scoped CI repair
+copies the public .env.testing.example to an ignored, ephemeral .env.testing
+before installation/bootstrap. Harness-supplied test variables and disposable
+PostgreSQL guards remain authoritative; no production or access credential is
+created. The [PR checks](https://github.com/hussain4real/halal-wealth-os/pull/1/checks)
+track the follow-up configuration/documentation commit. The original run is
+retained as the original evidence, not substituted by the follow-up run.
+
+Publication used six bounded cycles; the prior five-cycle history remains
+preserved. Independent review and this worker's READY_FOR_REVIEW report do not
+accept the phase, milestone or deployment. No merge, deployment, branch
+protection/security change, new external account or persistent access credential
+was performed.

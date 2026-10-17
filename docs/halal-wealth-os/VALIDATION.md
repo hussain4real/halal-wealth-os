@@ -35,7 +35,7 @@ M6 adapters may be reviewed disabled with deterministic mocks, but live connecti
 
 ## Current M0-P2 contract
 
-The harness checks real required tools, PHP extensions/coverage, both lockfiles and installed dependencies before bootstrap validation. It runs locked-package/platform/advisory checks, guarded PostgreSQL migration smoke, bundled frontend lint/type/build commands, real starter tests and coverage reports. Both Feature and Unit suites must discover tests. Missing reports, skipped required tests and zero covered executable statements fail. Financial coverage thresholds remain future gates. The deliberate failure probe requires a passing baseline, the intended Pest failure and a restored passing baseline; a prerequisite failure cannot stand in for that evidence. Hosted CI remains NOT_RUN.
+The harness checks real required tools, PHP extensions/coverage, both lockfiles and installed dependencies before bootstrap validation. It runs locked-package/platform/advisory checks, guarded PostgreSQL migration smoke, bundled frontend lint/type/build commands, real starter tests and coverage reports. Both Feature and Unit suites must discover tests. Missing reports, skipped required tests and zero covered executable statements fail. Financial coverage thresholds remain future gates. The deliberate failure probe requires a passing baseline, the intended Pest failure and a restored passing baseline; a prerequisite failure cannot stand in for that evidence. The original hosted CI passed; current publication and follow-up checks are recorded in the publication run and PR.
 
 ## PHP 8.5 and Pest/TIA publication gate
 

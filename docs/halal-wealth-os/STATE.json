@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-17T13:51:38.068490+00:00",
+    "updated_at": "2026-10-17T14:26:35.794292+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -19,13 +19,13 @@
         "branch": "feat/m0-p2-starter-harness",
         "baseline_head": "9f8db16620aabec70691538d82066eddc2d01e49",
         "started_at": "2026-10-17T12:45:47.854622+00:00",
-        "status": "IN_PROGRESS",
+        "status": "READY_FOR_REVIEW",
         "authority": "Owner explicitly approved publication/PR/CI and continued strict browser investigation via manager",
         "private_identity_evidence": "Verified recovery archive, predecessor stopped, successor environment identity and claim held privately",
-        "cycles_used": 5,
+        "cycles_used": 6,
         "prior_run_cycles_used": 5,
         "prior_runtime_build_failures": 3,
-        "checkpoint": "Publication cycle 5: all local gates pass, independent staged sanitation review and approved feature/PR publication to dev, monitor original CI",
+        "checkpoint": "Publication cycle 6: original CI succeeded; record reviewed publication and prepare ephemeral testing template to remove missing-file warnings; final follow-up CI checked on PR",
         "prior_successor_cycles_used": 5
     },
     "repository": {
@@ -108,7 +108,7 @@
         {
             "id": "M0-P2",
             "depends_on": ["M0-P1"],
-            "status": "IN_PROGRESS",
+            "status": "READY_FOR_REVIEW",
             "owner": "cloud-m0-p2-successor",
             "accepted_by": null,
             "accepted_at": null,
@@ -361,22 +361,21 @@
     },
     "execution_status": {
         "phase": "M0-P2",
-        "outcome": "IN_PROGRESS",
+        "outcome": "READY_FOR_REVIEW",
         "accepted": false,
         "sourceImported": true,
         "npmLockResolved": true,
         "composerLockResolved": true,
         "applicationVerified": true,
-        "hostedCI": "PENDING_PUBLICATION",
+        "hostedCI": "PASS_ORIGINAL_RUN",
         "evidence": "runs/M0-P2-publication.md",
-        "remainingBlockers": [
-            "Exact staged publication review, approved feature PR to dev and hosted CI completion pending."
-        ],
+        "remainingBlockers": [],
         "fullStarterFinalized": true,
         "coverageVerified": true,
         "cleanLockInstallVerified": true,
         "failureRestorationVerified": true,
-        "browserSmoke": "PASS"
+        "browserSmoke": "PASS",
+        "recordingBoundary": "Original implementation CI evidence is recorded here; the follow-up configuration/documentation commit is verified by its PR checks. Phase acceptance remains a separate human decision."
     },
     "dependency_patch": {
         "authorized": true,
@@ -464,18 +463,27 @@
             "stop_reason": "Local baseline, clean installs and independent source review completed; strict browser trust/form smoke and hosted CI remain incomplete. No automatic resumption."
         },
         "authority": "Explicit owner approval via manager: publish reviewed scaffold and PR to dev, monitor CI; PHP8.5 only",
-        "cycles_used": 5,
+        "cycles_used": 6,
         "max_cycles": 6,
         "main_baseline": "9f8db16620aabec70691538d82066eddc2d01e49",
         "pull_request_base": "dev",
         "php_constraint": "~8.5.0",
-        "hosted_ci": "PENDING_PUBLICATION",
+        "hosted_ci": "PASS",
         "pest_requirement": "Explicit owner request: Pest5 TIA local developer loop, full uncached CI coverage, preserve all tests/assertions",
         "local_gates": {
             "full_uncached": "PASS: 52 tests, 155 assertions, 146/156 covered statements",
             "failure_restoration": "PASS: baseline52, deliberate53rd failure exit1, restored full --all52",
             "browser": "PASS: hydration, invalid login, Instrument Sans, no page/request failures",
             "tia": "PASS: complete record, explicit52 replay, PHP/page selectivity; shared frontend changes force full fresh recording"
+        },
+        "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/1",
+        "original_ci": {
+            "id": 39040426083,
+            "url": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39040426083",
+            "head_sha": "2c6f3d388fd14f5a442b9971892d79d292e5d88f",
+            "attempt": 1,
+            "conclusion": "success",
+            "note": "All52 cases executed; missing environment-file warnings prompted ephemeral CI template setup in follow-up. Latest follow-up status is reported on the PR."
         }
     }
 }

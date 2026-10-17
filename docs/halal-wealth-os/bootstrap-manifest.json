@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "status": "AUTHORIZED_PUBLICATION_PENDING_VERIFICATION",
+    "status": "READY_FOR_REVIEW_UNACCEPTED",
     "installAuthorized": true,
     "compatibilityVerified": false,
     "application": {
@@ -246,7 +246,7 @@
         "fullApplicationCompatibilityVerified": false
     },
     "localBaselineVerified": true,
-    "localBaselineScope": "PHP 8.5.x constraint/platform, lock installs, PostgreSQL migrations, frontend lint/types/build, backend static analysis, 52 tests/155 assertions and real coverage; strict browser PASS; Pest TIA and hosted CI evidence tracked in publication run",
+    "localBaselineScope": "M0-P2 starter: PHP 8.5.x constraint/platform, lock installs, PostgreSQL migrations, frontend lint/types/build, static analysis, 52 tests/155 assertions and real coverage; strict browser PASS; original hosted CI PASS; follow-up configuration checks tracked on PR",
     "applicationPhpConstraint": "~8.5.0",
     "pestTia": {
         "pest": "5.3.2",
@@ -257,5 +257,12 @@
         "defaultBranch": "dev",
         "sharedBaselineFetching": false,
         "sharedFrontend": "Observed upstream Vue-transform limitation: shared frontend/configuration changes force a full fresh TIA recording; native PHP and Inertia-page selection retained"
+    },
+    "hostedCi": {
+        "originalRun": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39040426083",
+        "commit": "2c6f3d388fd14f5a442b9971892d79d292e5d88f",
+        "conclusion": "success",
+        "latestChecks": "https://github.com/hussain4real/halal-wealth-os/pull/1/checks",
+        "scope": "M0-P2 starter baseline only; phase/milestone acceptance and future financial compatibility are separate"
     }
 }
