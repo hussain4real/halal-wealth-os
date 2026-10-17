@@ -1,10 +1,10 @@
 # Validation contract
 
-M0-P1 checks documentation, JSON, requirement IDs/dependencies, links, publication hygiene and diff hygiene. There is no application, so PHP/JS tests, builds, migrations, browser flows and financial coverage are NOT_APPLICABLE at this stage.
+The accepted M0-P1 baseline checked documentation, JSON, requirement IDs/dependencies, links, publication hygiene and diff hygiene. Application checks were NOT_APPLICABLE to that historical planning-only snapshot.
 
-The proposed project commands ./bin/verify --phase Mx-Py and ./bin/verify --all belong to M0-P2. They are not native Codex commands and do not exist in this checkout. Do not fabricate success from a missing command.
+M0-P2 adds project-owned ./bin/verify --phase Mx-Py and ./bin/verify --all. They are not native Codex commands. They fail for missing prerequisites and do not establish success until the real checks execute. See the current phase run for observed outcomes.
 
-## Checks for this package
+## Historical M0-P1 publication checks
 
 - Parse every planning JSON file.
 - Confirm 8 milestones, 25 unique phases, 150 task IDs, 125 acceptance IDs and 12 invariant IDs.
@@ -32,3 +32,28 @@ The M5-P2 warm-dashboard target is server p95 at most one second over 30 sequent
 The later harness must fail for unknown phase IDs, zero required discovered tests, missing tools or unavailable required services. Full checks cover implemented modules and applicable prior accepted tests; unimplemented roadmap tests cannot be reported as passing. Use disposable PostgreSQL resources and never reset production/shared databases.
 
 M6 adapters may be reviewed disabled with deterministic mocks, but live connectivity remains NOT_TESTED/BLOCKED without separate destination/account authorization and an observed smoke check. M7-P2 requires separately recorded live-model evaluation; mocked transport is not live answer-quality evidence.
+
+## Current M0-P2 contract
+
+The harness checks real required tools, PHP extensions/coverage, both lockfiles and installed dependencies before bootstrap validation. It runs locked-package/platform/advisory checks, guarded PostgreSQL migration smoke, bundled frontend lint/type/build commands, real starter tests and coverage reports. Both Feature and Unit suites must discover tests. Missing reports, skipped required tests and zero covered executable statements fail. Financial coverage thresholds remain future gates. The deliberate failure probe requires a passing baseline, the intended Pest failure and a restored passing baseline; a prerequisite failure cannot stand in for that evidence. The original hosted CI passed; current publication and follow-up checks are recorded in the publication run and PR.
+
+## PHP 8.5 and Pest/TIA publication gate
+
+Application PHP support is 8.5.x only (~8.5.0). Both runtime checks and Composer
+platform/constraint checks reject earlier and future minor lines. Pest 5/Laravel 5
+plugin and PHPUnit 13 preserve all existing test bodies, setup behavior, data
+providers and database guards. Functional syntax is required by TIA.
+
+Full verification and CI use Pest --ci --no-tia, with both Feature/Unit discovery,
+uncached execution, real coverage, mandatory reports and no required skips.
+The optional local TIA entry point requires its own complete baseline and the
+same tool/coverage/database safety checks. Record baseline, unchanged replay,
+meaningful PHP/Vue selection and final uncached evidence separately. Do not
+classify cached results as newly executed tests or promise a speedup without
+measuring it. TIA cannot replace frontend lint/types/build or browser checks.
+
+Pest 5.3.2 cannot resolve this starter's shared Vue graph. The local wrapper
+fingerprints shared frontend sources and configuration; changes force a fresh
+complete TIA recording. Page bindings and PHP edges retain native selection.
+Missing branch-bound frontend metadata refuses execution until explicit
+recording. No shared-component selectivity is claimed.

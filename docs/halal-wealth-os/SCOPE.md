@@ -8,15 +8,15 @@ V1 covers private identity and owner isolation; an auditable exact-money ledger 
 
 ## Explicit exclusions and unmapped requirements
 
-| Requirement family | Disposition |
-| --- | --- |
-| Public SaaS, multi-household tenancy, adviser portal, subscriptions/billing | Deferred beyond the October baseline; public repository visibility changes none of these boundaries |
-| Zakat engine, inheritance or waqf administration, automatic religious rulings | Deferred; no automatic fatwas |
-| Bank/broker passwords or credential collection, identity-document collection merely to track holdings | Excluded |
-| Trading, payments, automated liquidation or broker execution | Excluded |
-| July risk/IPS requirements | Unmapped gap requiring explicit future owner decision; do not silently implement or treat as covered |
-| Advanced tax accounting, TWR/XIRR, complex corporate actions, mobile apps | Deferred |
-| Live providers, external messages, cloud/hosting deployment | Separate later gates and explicit authorization |
+| Requirement family                                                                                    | Disposition                                                                                          |
+| ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Public SaaS, multi-household tenancy, adviser portal, subscriptions/billing                           | Deferred beyond the October baseline; public repository visibility changes none of these boundaries  |
+| Zakat engine, inheritance or waqf administration, automatic religious rulings                         | Deferred; no automatic fatwas                                                                        |
+| Bank/broker passwords or credential collection, identity-document collection merely to track holdings | Excluded                                                                                             |
+| Trading, payments, automated liquidation or broker execution                                          | Excluded                                                                                             |
+| July risk/IPS requirements                                                                            | Unmapped gap requiring explicit future owner decision; do not silently implement or treat as covered |
+| Advanced tax accounting, TWR/XIRR, complex corporate actions, mobile apps                             | Deferred                                                                                             |
+| Live providers, external messages, cloud/hosting deployment                                           | Separate later gates and explicit authorization                                                      |
 
 Private owner amounts, account identifiers and financial examples belong in private configuration/evidence, never this public repository. Use synthetic data in future tests.
 

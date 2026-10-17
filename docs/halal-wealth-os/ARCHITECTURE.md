@@ -1,20 +1,20 @@
 # Architecture proposal
 
-Status: the personal-first modular-monolith direction and six ADR directions are human-accepted. Detailed module import edges below remain proposed. No application exists.
+Status: the personal-first modular-monolith direction and six ADR directions are human-accepted. Detailed module import edges below remain proposed. M0-P2 has imported the full official starter; the local bootstrap baseline is verified while hosted CI and phase acceptance remain pending. No financial functionality is implemented.
 
 Use a Laravel modular monolith. Inertia, Vue 3 and TypeScript serve the application UI; PostgreSQL stores financial records. Filament is restricted administration. Exact package/runtime versions are unresolved.
 
-| Module | Responsibility |
-| --- | --- |
-| Identity | Private registration, authentication, owner profile, policies, restricted administration and audit actor |
-| Ledger | Accounts, journal/posting rules, reversals, reconciliation and FX operations |
-| Planning | Categories, recurring commitments, goals, reservations and cash availability |
-| Portfolio | Assets, recorded investment events, positions, quotes and valuation |
-| Shariah | Attributed evidence, methodology/version, uncertainty, review history and purification links |
-| Decisions | Opportunities, thesis/review records and tranche plans |
-| Reporting | Dashboard, deterministic next actions, snapshots and owner-scoped exports |
-| Integrations, post-V1 | Disabled-by-default adapters, imports, outbox and separately approved destinations |
-| Intelligence, post-V1 | Consented read-only authorized tools, evaluation and usage controls |
+| Module                | Responsibility                                                                                           |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
+| Identity              | Private registration, authentication, owner profile, policies, restricted administration and audit actor |
+| Ledger                | Accounts, journal/posting rules, reversals, reconciliation and FX operations                             |
+| Planning              | Categories, recurring commitments, goals, reservations and cash availability                             |
+| Portfolio             | Assets, recorded investment events, positions, quotes and valuation                                      |
+| Shariah               | Attributed evidence, methodology/version, uncertainty, review history and purification links             |
+| Decisions             | Opportunities, thesis/review records and tranche plans                                                   |
+| Reporting             | Dashboard, deterministic next actions, snapshots and owner-scoped exports                                |
+| Integrations, post-V1 | Disabled-by-default adapters, imports, outbox and separately approved destinations                       |
+| Intelligence, post-V1 | Consented read-only authorized tools, evaluation and usage controls                                      |
 
 Financial rules belong in tested domain services. Controllers/jobs call application services. A financial operation commits its journal, investment events and idempotency record in one database transaction. Rebuildable projections and notifications happen after commit.
 
@@ -26,17 +26,17 @@ PostgreSQL integration evidence is mandatory; SQLite cannot stand in for transac
 
 This dependency graph is a local architecture proposal, not a claim that the private source specifies every import edge. Shared money/currency primitives and authorization contracts sit below the domains and cannot depend on them.
 
-| Module | Allowed outgoing dependencies |
-| --- | --- |
-| Identity | Shared primitives; no financial module |
-| Ledger | Identity authorization contracts and shared money/currency primitives |
-| Planning | Ledger read/posting ports and Identity |
-| Portfolio | Ledger posting/read ports and Identity |
-| Shariah | Portfolio read contracts and Identity |
-| Decisions | Planning, Portfolio and Shariah read contracts; Identity |
-| Reporting | Read contracts from the preceding modules; Identity |
+| Module              | Allowed outgoing dependencies                                                      |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| Identity            | Shared primitives; no financial module                                             |
+| Ledger              | Identity authorization contracts and shared money/currency primitives              |
+| Planning            | Ledger read/posting ports and Identity                                             |
+| Portfolio           | Ledger posting/read ports and Identity                                             |
+| Shariah             | Portfolio read contracts and Identity                                              |
+| Decisions           | Planning, Portfolio and Shariah read contracts; Identity                           |
+| Reporting           | Read contracts from the preceding modules; Identity                                |
 | Integrations, later | Application-service ports; Identity; external adapters remain outside domain rules |
-| Intelligence, later | Authorized Reporting/Decisions read facades only; Identity |
+| Intelligence, later | Authorized Reporting/Decisions read facades only; Identity                         |
 
 Cross-module operations belong to the initiating use case's application service: Portfolio application services coordinate a trade/event with Ledger; Planning application services coordinate funding/reservation annotations. They use one PostgreSQL transaction where records must commit together. Ledger never imports Portfolio or Planning, and read projections/notifications do not call back into posting rules.
 

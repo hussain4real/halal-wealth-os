@@ -15,26 +15,26 @@ Worker outcome: READY_FOR_REVIEW, followed by explicit human M0-P1 ACCEPTANCE. T
 
 ## Reconciliation checkpoints
 
-| Checkpoint | Change/check | Command/evidence | Observed result | Next action |
-| --- | --- | --- | --- | --- |
-| Initial discovery | Repository/runtime/scope audit and draft documents | Private command record and original draft inventory | Discovery evidence recorded; no application changes | Review documents |
-| Independent correction | Versions/sources, dependency rules, source traceability and naming | Private review and validation record | Earlier four findings resolved | Reconcile actual source kit |
-| Local kit | ZIP integrity/path validation, private extraction and source inspection | Archive verification manifest; no bundled command executed | All 74 members readable; original CRC/hash and safe paths verified | Align schema and template |
-| Documentation reconciliation | Preserve pre-kit draft; align state schema, template, gates and canonical M0-P1 criteria | Private reconciliation manifest and reproducible validator | Exact results recorded in final private validation | Independent review, then owner decision |
+| Checkpoint                   | Change/check                                                                             | Command/evidence                                           | Observed result                                                    | Next action                             |
+| ---------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------ | --------------------------------------- |
+| Initial discovery            | Repository/runtime/scope audit and draft documents                                       | Private command record and original draft inventory        | Discovery evidence recorded; no application changes                | Review documents                        |
+| Independent correction       | Versions/sources, dependency rules, source traceability and naming                       | Private review and validation record                       | Earlier four findings resolved                                     | Reconcile actual source kit             |
+| Local kit                    | ZIP integrity/path validation, private extraction and source inspection                  | Archive verification manifest; no bundled command executed | All 74 members readable; original CRC/hash and safe paths verified | Align schema and template               |
+| Documentation reconciliation | Preserve pre-kit draft; align state schema, template, gates and canonical M0-P1 criteria | Private reconciliation manifest and reproducible validator | Exact results recorded in final private validation                 | Independent review, then owner decision |
 
 These checkpoints describe documentation work only; no future application verification cycle is claimed. Preserve failed-check records separately.
 
 ## Requirement evidence
 
-| Requirement | Check | Evidence | Result |
-| --- | --- | --- | --- |
-| M0-P1-AC1 | Repository/worktree/branch/HEAD/dirty audit | [Repository audit](../REPOSITORY-AUDIT.md), private Git observations | Observed empty public remote and local unborn main; final planning inventory untracked |
-| M0-P1-AC2 | IDs and DAG against original plan, phase specs and source state | [Roadmap](../ROADMAP.json), private original-byte provenance and validator | 8 milestones, 25 phases, 150 tasks, 125 acceptance IDs, 12 invariants; strict acyclic sequence |
-| M0-P1-AC3 | Personal V1 and non-goals | [Scope](../SCOPE.md) | Excludes trade execution, automatic fatwas, public SaaS and bank credentials; July gaps explicit |
-| M0-P1-AC4 | Version/module/service reads and requirement metadata | [Runtime](../RUNTIME-MATRIX.md), private command evidence | Verified/unavailable/not-tested separated; candidate compatibility not presented as a resolved stack |
-| M0-P1-AC5 | File inventory, privacy/JSON/link/diff checks and gate flags | Final private content inventory; [state](../STATE.json) | Planning files only; bootstrap=false; human M0-P1 acceptance recorded; publication limited to this final independently reviewed planning snapshot |
-| INV-12 | No fabricated checks, acceptance or external actions | Command exits, review record and gate fields | Applied to audit/evidence; every unrun application/live gate explicitly disclosed |
-| INV-01 through INV-11 | Future financial/ownership behavior | [Invariant index](../INVARIANTS.md) and private canonical fixtures | NOT_APPLICABLE to application execution here; requirements retained, not reported as tested |
+| Requirement           | Check                                                           | Evidence                                                                   | Result                                                                                                                                            |
+| --------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0-P1-AC1             | Repository/worktree/branch/HEAD/dirty audit                     | [Repository audit](../REPOSITORY-AUDIT.md), private Git observations       | Observed empty public remote and local unborn main; final planning inventory untracked                                                            |
+| M0-P1-AC2             | IDs and DAG against original plan, phase specs and source state | [Roadmap](../ROADMAP.json), private original-byte provenance and validator | 8 milestones, 25 phases, 150 tasks, 125 acceptance IDs, 12 invariants; strict acyclic sequence                                                    |
+| M0-P1-AC3             | Personal V1 and non-goals                                       | [Scope](../SCOPE.md)                                                       | Excludes trade execution, automatic fatwas, public SaaS and bank credentials; July gaps explicit                                                  |
+| M0-P1-AC4             | Version/module/service reads and requirement metadata           | [Runtime](../RUNTIME-MATRIX.md), private command evidence                  | Verified/unavailable/not-tested separated; candidate compatibility not presented as a resolved stack                                              |
+| M0-P1-AC5             | File inventory, privacy/JSON/link/diff checks and gate flags    | Final private content inventory; [state](../STATE.json)                    | Planning files only; bootstrap=false; human M0-P1 acceptance recorded; publication limited to this final independently reviewed planning snapshot |
+| INV-12                | No fabricated checks, acceptance or external actions            | Command exits, review record and gate fields                               | Applied to audit/evidence; every unrun application/live gate explicitly disclosed                                                                 |
+| INV-01 through INV-11 | Future financial/ownership behavior                             | [Invariant index](../INVARIANTS.md) and private canonical fixtures         | NOT_APPLICABLE to application execution here; requirements retained, not reported as tested                                                       |
 
 ## Tests and limitations
 

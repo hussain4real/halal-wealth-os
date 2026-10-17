@@ -2,7 +2,7 @@
 
 Read the current human authorization, this file, docs/halal-wealth-os/AGENT-RUNBOOK.md, ARCHITECTURE.md, INVARIANTS.md, VALIDATION.md, STATE.json and the selected phase specification before editing.
 
-The human owner accepted M0-P1 and the six ADR directions and authorized commit/push of the final independently reviewed sanitized planning package. This turn permits that publication and read-only bootstrap preparation only. No application scaffolding, dependency/runtime installs, service provisioning, PRs, merges, new credentials or deployments are authorized.
+The human owner accepted M0-P1 and the six ADR directions and authorized commit/push of the final independently reviewed sanitized planning package. That historical planning authorization permitted publication and read-only preparation only. The later, current M0-P2 authorization below supersedes that restriction within its explicit scope.
 
 Use one implementation owner per phase. Do not spawn implementation subagents. Independent source-read-only review is permitted. Only the manager changes central phase acceptance, milestone gates or active-run claims. Never self-accept work. Preserve all unrelated work and sessions.
 
@@ -11,3 +11,38 @@ The repository is public. Keep original planning inputs, private financial setti
 The runtime manifest is a blocked proposal, not an install command or compatibility guarantee. Keep M0-P2 blocked until M0-P1 is owner accepted and a compatible manifest plus active owner claim is approved.
 
 The verified source kit is retained privately. This public-safe package summarizes it and preserves its state schema and empty active_run; only M0-P1 is human-accepted and all later phases remain PLANNED; no source-original settings or fixture amounts are adopted into public content. The owner must provide authorized workers private canonical specifications/fixtures before related implementation. Absence from a public summary does not remove a canonical requirement. Use runs/TEMPLATE.md for phase evidence and retain exact sensitive identity/path/transcript data privately.
+
+## Current M0-P2 authorization
+
+The human owner subsequently approved isolated runtime setup and full official Vue/Inertia starter scaffolding, tests and verification. The manager delegated the sole implementation ownership and claim recording to the dedicated cloud task. This supersedes the earlier read-only restriction for M0-P2 only. Preserve the full starter at d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab and its bundled features/tooling. Canonical scope is in docs/halal-wealth-os/phases/M0-P2.md. The later publication authorization below supersedes the former remote-publication restriction. Merges, production secrets, persistent access credentials, external accounts, deployment and public exposure remain unauthorized. Respect network-policy denials without mirrors or alternate-host bypasses. Workers may report READY_FOR_REVIEW or BLOCKED, never acceptance.
+
+## Branch and publication workflow
+
+The owner approved main, stage and dev branches. Preserve existing branch heads;
+create missing stage/dev from verified main only. All pull requests target dev.
+The current M0-P2 owner may publish its independently reviewed sanitized scaffold
+on a feature branch, open a PR against dev and diagnose its CI. Never merge,
+deploy, change protections/security settings or publish raw private evidence.
+PHP support is 8.5.x only: the application constraint is ~8.5.0. Keep runtime,
+CI and verification aligned; do not alter vendor constraints or prune starter
+features to enforce this application requirement. M0-P2 remains unaccepted.
+
+## Latest merge and proceed authorization
+
+The human owner subsequently approved merging PR #1 into dev after fresh
+head/check/review verification, with acceptance of M0-P2 conditional on those
+checks. The manager delegated accurate acceptance recording and proceeding
+with canonical M0-P3 after post-merge CI. This supersedes the earlier no-merge
+restriction for PR #1 into dev only. Preserve main/stage; do not deploy, alter
+protections/security settings, create persistent access credentials or connect
+external accounts. Review and validate necessary pre-merge corrections. Keep
+all prior cycle history; the distinct merge checkpoint and later phase each
+use the established bounded cycle policy. Do not invent absent canonical task
+or acceptance descriptions. One implementation writer and independent review
+remain required.
+
+The owner's conditional M0-P2 acceptance is now recorded in
+docs/halal-wealth-os/runs/M0-P2-acceptance.md against corrected implementation
+head 5eea7d3afc437eb1c56683b931cc068acd81aaff after independent review and full CI success.
+The M0-P2 claim is closed; later phases and milestone gates remain unaccepted.
+M0-P3 awaits its canonical descriptions and post-merge checks before execution.

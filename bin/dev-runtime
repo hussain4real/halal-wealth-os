@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+postgres_container="hwo-successor-postgres"
+command_name="${1:-}"
+if [[ $# -gt 0 ]]; then shift; fi
+
+case "$command_name" in
+    php|composer)
+        php_binary="$repo_dir/.runtime/php-prefix/bin/php"
+        if [[ ! -x "$php_binary" || ! -f "$repo_dir/.runtime/php-ini/00-runtime.ini" ]]; then
+            printf 'BLOCKED: task-local PHP runtime is incomplete. See ops/development/README.md.\n' >&2
+            exit 2
+        fi
+        export PHP_INI_SCAN_DIR="$repo_dir/.runtime/php-ini"
+        export LD_LIBRARY_PATH="$repo_dir/.runtime/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        # Symfony's supported executable override keeps Laravel's HTTP child on
+        # this launcher when ServeCommand rebuilds its environment for reloads.
+        export PHP_BINARY="$repo_dir/.runtime/bin/php"
+        export XDEBUG_MODE="${XDEBUG_MODE:-off}"
+        if [[ "$command_name" == composer ]]; then
+            export COMPOSER_HOME="${COMPOSER_HOME:-$repo_dir/.runtime/composer-home}"
+            export COMPOSER_CACHE_DIR="${COMPOSER_CACHE_DIR:-$repo_dir/.runtime/composer-cache}"
+            exec "$php_binary" "$repo_dir/.runtime/composer.phar" "$@"
+        fi
+        exec "$php_binary" "$@"
+        ;;
+    psql)
+        exec docker exec -i "$postgres_container" psql -U hwo "$@"
+        ;;
+    status)
+        docker inspect --format '{{.Name}} {{.State.Status}} network={{.HostConfig.NetworkMode}} ports={{json .HostConfig.PortBindings}}' "$postgres_container"
+        "$0" php --version
+        "$0" composer --version
+        ;;
+    stop)
+        printf 'Stopping only the named disposable database; its tmpfs data will be lost.\n'
+        docker stop "$postgres_container"
+        ;;
+    *)
+        printf 'Usage: bin/dev-runtime php|composer|psql <args> | status | stop\n' >&2
+        exit 2
+        ;;
+esac

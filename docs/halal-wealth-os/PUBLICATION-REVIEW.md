@@ -1,8 +1,13 @@
-# Publication review and authority
+# Historical M0-P1 publication review and authority
 
-Status: HUMAN_AUTHORIZED_FOR_FINAL_REVIEWED_PLANNING_SNAPSHOT. The owner accepted M0-P1 and the six ADR directions and explicitly authorized committing/pushing the sanitized planning package. Exact human authorization and independent-review/hash evidence are retained privately.
+Historical status: HUMAN_AUTHORIZED_FOR_FINAL_REVIEWED_PLANNING_SNAPSHOT. The owner accepted M0-P1 and the six ADR directions and explicitly authorized committing/pushing the sanitized planning package. Exact human authorization and independent-review/hash evidence are retained privately.
 
-This narrow authority covers the final public-safe planning set only. Independent review must confirm the actual final content before staging/commit/push. Runtime candidates remain unapproved and untested; M0-P2 execution, installs, provisioning, new credentials, financial implementation, PRs, merges and deployment remain blocked.
+The later M0-P2 execution and sanitized feature/PR publication authorization
+supersedes the restrictions below within its explicit scope. See the current
+[publication checkpoint](runs/M0-P2-publication.md). Merges, deployment and
+phase acceptance still require separate owner decisions.
+
+This historical narrow authority covered the final public-safe planning set only. Independent review must confirm the actual final content before staging/commit/push. Runtime candidates remain unapproved and untested; M0-P2 execution, installs, provisioning, new credentials, financial implementation, PRs, merges and deployment remain blocked.
 
 Original input documents, raw kit files, private profile/account/identity data, credentials, private evidence, absolute local paths and signed links must not enter the public Git tree. The commit uses the public account's noreply identity rather than a private email address.
 
