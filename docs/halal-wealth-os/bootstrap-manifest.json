@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "status": "READY_FOR_REVIEW_UNACCEPTED",
+    "status": "M0_P2_HUMAN_ACCEPTED",
     "installAuthorized": true,
     "compatibilityVerified": false,
     "application": {
@@ -263,7 +263,9 @@
         "commit": "2c6f3d388fd14f5a442b9971892d79d292e5d88f",
         "conclusion": "success",
         "latestChecks": "https://github.com/hussain4real/halal-wealth-os/pull/1/checks",
-        "scope": "M0-P2 starter baseline only; phase/milestone acceptance and future financial compatibility are separate"
+        "scope": "M0-P2 starter baseline only; phase/milestone acceptance and future financial compatibility are separate",
+        "correctedImplementationRun": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39043431382",
+        "correctedImplementationCommit": "5eea7d3afc437eb1c56683b931cc068acd81aaff"
     },
     "preMergeCorrection": {
         "tests": 55,
@@ -273,5 +275,7 @@
         "originalTestsPreserved": 52,
         "profileRegressionTestsAdded": 3,
         "evidence": "runs/M0-P2-merge.md"
-    }
+    },
+    "acceptanceScope": "Reviewed M0-P2 starter only; proposed future application pins and financial compatibility remain unverified",
+    "ownerAcceptanceEvidence": "runs/M0-P2-acceptance.md"
 }

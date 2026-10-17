@@ -40,3 +40,9 @@ all prior cycle history; the distinct merge checkpoint and later phase each
 use the established bounded cycle policy. Do not invent absent canonical task
 or acceptance descriptions. One implementation writer and independent review
 remain required.
+
+The owner's conditional M0-P2 acceptance is now recorded in
+docs/halal-wealth-os/runs/M0-P2-acceptance.md against corrected implementation
+head 5eea7d3afc437eb1c56683b931cc068acd81aaff after independent review and full CI success.
+The M0-P2 claim is closed; later phases and milestone gates remain unaccepted.
+M0-P3 awaits its canonical descriptions and post-merge checks before execution.

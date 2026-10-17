@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-17T14:55:36.919478+00:00",
+    "updated_at": "2026-10-17T15:08:11.290788+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -12,22 +12,7 @@
         "default_production_actions": false,
         "default_external_effects": false
     },
-    "active_run": {
-        "phase": "M0-P2",
-        "owner": "cloud-m0-p2-successor",
-        "worktree": ".",
-        "branch": "feat/m0-p2-starter-harness",
-        "baseline_head": "9f8db16620aabec70691538d82066eddc2d01e49",
-        "started_at": "2026-10-17T12:45:47.854622+00:00",
-        "status": "READY_FOR_REVIEW",
-        "authority": "Owner explicitly approved publication/PR/CI and continued strict browser investigation via manager",
-        "private_identity_evidence": "Verified recovery archive, predecessor stopped, successor environment identity and claim held privately",
-        "cycles_used": 6,
-        "prior_run_cycles_used": 5,
-        "prior_runtime_build_failures": 3,
-        "checkpoint": "Publication cycle 6: original CI succeeded; record reviewed publication and prepare ephemeral testing template to remove missing-file warnings; final follow-up CI checked on PR",
-        "prior_successor_cycles_used": 5
-    },
+    "active_run": null,
     "repository": {
         "root": null,
         "remote": "https://github.com/hussain4real/halal-wealth-os",
@@ -108,11 +93,11 @@
         {
             "id": "M0-P2",
             "depends_on": ["M0-P1"],
-            "status": "READY_FOR_REVIEW",
+            "status": "ACCEPTED",
             "owner": "cloud-m0-p2-successor",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M0-P2-publication.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-17T15:08:11.290788+00:00",
+            "evidence": "runs/M0-P2-acceptance.md"
         },
         {
             "id": "M0-P3",
@@ -324,7 +309,7 @@
     ],
     "documentation_version": "1.1",
     "adoption": {
-        "status": "RECONCILED_AND_M0_P1_HUMAN_ACCEPTED",
+        "status": "RECONCILED_AND_M0_P2_HUMAN_ACCEPTED",
         "source": "User-supplied separated Codex kit v1.1",
         "source_state_plan_version_preserved": "1.0",
         "prior_local_state": "Preserved privately before schema alignment; no accepted status or active claim existed",
@@ -351,31 +336,36 @@
     },
     "execution_authorization": {
         "phase": "M0-P2",
-        "authorized": true,
+        "authorized": false,
         "scope": "Isolated M0-P2 runtime/full starter/verification plus sanitized feature branch and PR to dev; no merges, deployment, security/trust changes, persistent credentials or external account connections",
         "starter_commit": "d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab",
         "remote_writes": true,
         "production_actions": false,
         "accepted_dependencies": ["M0-P1"],
-        "php_constraint": "~8.5.0"
+        "php_constraint": "~8.5.0",
+        "completed_at": "2026-10-17T15:08:11.290788+00:00"
     },
     "execution_status": {
         "phase": "M0-P2",
-        "outcome": "READY_FOR_REVIEW",
-        "accepted": false,
+        "outcome": "ACCEPTED",
+        "accepted": true,
         "sourceImported": true,
         "npmLockResolved": true,
         "composerLockResolved": true,
         "applicationVerified": true,
-        "hostedCI": "PASS_ORIGINAL_RUN",
-        "evidence": "runs/M0-P2-publication.md",
+        "hostedCI": "PASS_CORRECTED_IMPLEMENTATION",
+        "evidence": "runs/M0-P2-acceptance.md",
         "remainingBlockers": [],
         "fullStarterFinalized": true,
         "coverageVerified": true,
         "cleanLockInstallVerified": true,
         "failureRestorationVerified": true,
         "browserSmoke": "PASS",
-        "recordingBoundary": "Original implementation CI evidence is recorded here; the follow-up configuration/documentation commit is verified by its PR checks. Phase acceptance remains a separate human decision."
+        "recordingBoundary": "Human conditional approval applied after exact corrected-head independent review and successful full PR CI. Merge/post-merge CI are recorded separately; later phases remain unaccepted.",
+        "tests": 55,
+        "assertions": 171,
+        "coveredStatements": 149,
+        "applicationStatements": 159
     },
     "dependency_patch": {
         "authorized": true,
@@ -488,14 +478,39 @@
     },
     "merge_checkpoint": {
         "authority": "Human owner approved merging PR1 to dev and proceeding after fresh checks and independent review; manager delegated acceptance recording and next phase ownership",
-        "cycles_used": 1,
+        "cycles_used": 2,
         "max_cycles": 6,
         "prior_publication_cycles_used": 6,
         "reviewed_approved_head": "9ebbc61e04bf324670bd8cf6bf6c624d3689b79b",
-        "status": "IN_PROGRESS",
+        "status": "ACCEPTANCE_RECORDED_PENDING_MERGE",
         "evidence": "runs/M0-P2-merge.md",
-        "acceptance": "CONDITIONAL_ON_FRESH_REVIEW_AND_CHECKS",
-        "post_merge_ci": "PENDING",
-        "next_phase_specification": "M0-P3 title and IDs present; task/acceptance descriptions requested, implementation not started"
-    }
+        "acceptance": "HUMAN_ACCEPTED_AFTER_FRESH_CHECKS",
+        "post_merge_ci": "PENDING_MERGE",
+        "next_phase_specification": "M0-P3 title and IDs present; task/acceptance descriptions requested, implementation not started",
+        "accepted_at": "2026-10-17T15:08:11.290788+00:00",
+        "validated_head": "5eea7d3afc437eb1c56683b931cc068acd81aaff",
+        "validated_tree": "758b5e3cbf118a87cd234ceea69770b08f2eed8d",
+        "validated_ci": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39043431382"
+    },
+    "completed_runs": [
+        {
+            "phase": "M0-P2",
+            "owner": "cloud-m0-p2-successor",
+            "worktree": ".",
+            "branch": "feat/m0-p2-starter-harness",
+            "baseline_head": "9f8db16620aabec70691538d82066eddc2d01e49",
+            "started_at": "2026-10-17T12:45:47.854622+00:00",
+            "status": "COMPLETED",
+            "authority": "Owner explicitly approved publication/PR/CI and continued strict browser investigation via manager",
+            "private_identity_evidence": "Verified recovery archive, predecessor stopped, successor environment identity and claim held privately",
+            "cycles_used": 6,
+            "prior_run_cycles_used": 5,
+            "prior_runtime_build_failures": 3,
+            "checkpoint": "Publication cycle 6: original CI succeeded; record reviewed publication and prepare ephemeral testing template to remove missing-file warnings; final follow-up CI checked on PR",
+            "prior_successor_cycles_used": 5,
+            "completed_at": "2026-10-17T15:08:11.290788+00:00",
+            "validated_head": "5eea7d3afc437eb1c56683b931cc068acd81aaff",
+            "acceptance_evidence": "runs/M0-P2-acceptance.md"
+        }
+    ]
 }

@@ -1,6 +1,6 @@
 # M0-P2 approved merge checkpoint
 
-Status: authorized; merge and conditional owner acceptance pending fresh checks.
+Status: owner acceptance recorded after fresh implementation checks; merge pending.
 The human owner approved merging PR #1 to dev and proceeding with the canonical
 next phase after post-merge CI. This is a new authorization checkpoint; prior
 six-cycle publication history and earlier runtime records remain intact.
@@ -28,7 +28,7 @@ Supported phase values are PLANNED, IN_PROGRESS, RUNNING, BLOCKED,
 READY_FOR_REVIEW, PAUSED, HANDED_OFF and ACCEPTED. Milestones support PLANNED,
 IN_PROGRESS, BLOCKED, READY_FOR_REVIEW, READY_FOR_OWNER and ACCEPTED. These
 checks do not authenticate an owner decision; exact approval evidence stays
-private and conditional acceptance has not yet been recorded as effective.
+private and the owner decision is recorded separately once its fresh-check conditions pass.
 
 The database-disposability review comment describes an assurance limit:
 configuration/name checks do not independently prove resource ownership or
@@ -55,3 +55,12 @@ statements. Platform, lock/audit, disposable PostgreSQL migration smoke,
 frontend lint/types/build, Pint and Larastan also passed. Separate TIA recording passed all 55 cases/171 assertions in 16.3 seconds
 wall time; unchanged replay explicitly reported 55 replayed in 2.0 seconds.
 Cached results are not fresh execution evidence. CI remains uncached.
+
+Correction 5eea7d3afc437eb1c56683b931cc068acd81aaff, exact reviewed tree 758b5e3cbf118a87cd234ceea69770b08f2eed8d,
+passed [fresh PR CI](https://github.com/hussain4real/halal-wealth-os/actions/runs/39043431382) on attempt 1. The 55-test baseline, deliberate
+56th-case failure and restored 55-test full baseline succeeded with
+171 assertions and 149/159 covered statements. All three published review leads
+have evidence-backed dispositions and no blocking source finding remains.
+The [owner acceptance record](M0-P2-acceptance.md) records the conditional
+human approval now satisfied; its documentation-only delta will be reviewed
+and checked before merging PR #1 into dev. No merge is claimed yet.

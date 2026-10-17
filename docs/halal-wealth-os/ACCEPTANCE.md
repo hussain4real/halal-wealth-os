@@ -30,3 +30,13 @@ The source kit's intentional plan_version1.0 remains preserved alongside documen
 ## Subsequent M0-P2 execution authorization
 
 The human owner approved isolated development runtime setup and full official Vue/Inertia starter scaffolding, tests and verification. The manager supplied the canonical phase criteria and delegated sole cloud implementation ownership and claim recording. This authorizes M0-P2 work only, not acceptance. All bundled starter features/tooling are retained; its supported ranges supersede the earlier custom minimal manifest. No remote publication, merges, persistent access credentials, external accounts, public exposure, production access or deployment are authorized. Network denials must not be bypassed. See phases/M0-P2.md and runs/M0-P2-cloud.md for execution evidence and blockers. M0-P1 acceptance and milestone gates remain unchanged.
+
+## Subsequent M0-P2 owner acceptance
+
+The owner approved the reviewed M0-P2 deliverable and PR #1 merge into dev,
+conditional on fresh head, checks and independent review. Those conditions
+passed at implementation head 5eea7d3afc437eb1c56683b931cc068acd81aaff. Acceptance was
+recorded at 2026-10-17T15:08:11.290788+00:00; see [the exact acceptance evidence](runs/M0-P2-acceptance.md).
+The manager delegated recording this human decision. M0-P3 and all milestone
+gates remain unaccepted. Next-phase execution requires its canonical scope and
+successful post-merge CI; no stage/main promotion or deployment is authorized.

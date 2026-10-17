@@ -4,12 +4,14 @@ A private personal wealth application bootstrapped with the complete official
 Laravel Inertia/Vue starter. Public source visibility does not authorize public
 SaaS or access to personal financial data.
 
-**M0-P2 is ready for review and remains unaccepted.** The local application
-baseline and original hosted CI pass. The sanitized scaffold is published in
+**M0-P2 is human-accepted.** The corrected local application baseline and
+[full implementation CI](https://github.com/hussain4real/halal-wealth-os/actions/runs/39043431382)
+pass; [acceptance evidence](docs/halal-wealth-os/runs/M0-P2-acceptance.md) records
+the exact reviewed head and scope. The sanitized scaffold is published in
 [PR #1](https://github.com/hussain4real/halal-wealth-os/pull/1) targeting dev. See
 [the merge checkpoint](docs/halal-wealth-os/runs/M0-P2-merge.md) and
 [publication run](docs/halal-wealth-os/runs/M0-P2-publication.md) for current
-evidence and remaining gates. Only M0-P1 is accepted.
+evidence and remaining gates. M0-P1 and M0-P2 are accepted; later phases and milestone gates remain unaccepted.
 
 The starter is pinned to `d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab`. All five
 optional authentication features were retained by its official finalizer:
