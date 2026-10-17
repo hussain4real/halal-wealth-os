@@ -1,224 +1,261 @@
 {
-  "schemaVersion": 1,
-  "status": "PROPOSED_BLOCKED",
-  "installAuthorized": false,
-  "compatibilityVerified": false,
-  "application": {
-    "architecture": "Laravel modular monolith",
-    "ui": "Inertia + Vue 3 + TypeScript",
-    "database": "PostgreSQL",
-    "admin": "Restricted Filament"
-  },
-  "candidateObservedRuntimePins": {
-    "php": "8.5.6",
-    "composer": "2.10.0",
-    "node": "22.7.0",
-    "npm": "10.9.0",
-    "postgresqlClient": "18.4"
-  },
-  "selectedApplicationPins": {
-    "laravel": null,
-    "inertiaLaravel": null,
-    "inertiaVue": null,
-    "vue": null,
-    "typescript": null,
-    "filament": null,
-    "phpStaticAnalyzer": null,
-    "phpTestRunner": null,
-    "postgresqlServer": null
-  },
-  "packageManager": {
-    "proposed": "npm",
-    "version": "11.19.1",
-    "reason": "Bundled with proposed Node 24.22.0 LTS; avoids currently failing home Corepack path",
-    "approved": false
-  },
-  "requiredBeforeBootstrap": [
-    "Resolve remaining tool/plugin requirements and security advisories against the proposed matrix",
-    "Owner approves exact application/runtime pins and package manager",
-    "Create actual lockfiles during separately authorized M0-P2",
-    "Verify isolated PostgreSQL test server",
-    "Verify coverage driver and real test harness",
-    "Manager records single-owner active-run claim"
-  ],
-  "commandsToRunNow": [],
-  "notes": [
-    "Observed runtime pins are reproducible inventory candidates, not an approved compatible stack.",
-    "Do not install from this manifest. No app manifests or lockfiles exist yet.",
-    "Exact proposed direct pins are metadata-reviewed candidates, not an approved or resolved lockfile. Current official starter scripts are not adopted; PHPUnit 13 differs from its current PHPUnit 12 range."
-  ],
-  "metadataRequirementsReviewedOn": "2026-10-17",
-  "metadataConstraintsReviewed": true,
-  "proposedRuntimePins": {
-    "php": "8.5.11",
-    "composer": "2.10.3",
-    "node": "24.22.0",
-    "npm": "11.19.1",
-    "postgresqlServer": "18.6",
-    "postgresqlClient": "18.6"
-  },
-  "proposedApplicationPins": {
-    "laravel/framework": "13.37.0",
-    "filament/filament": "5.10.2",
-    "livewire/livewire": "4.4.7",
-    "inertiajs/inertia-laravel": "3.5.1",
-    "@inertiajs/vue3": "3.9.1",
-    "@inertiajs/core": "3.9.1",
-    "vue": "3.5.44",
-    "typescript": "5.9.3",
-    "vite": "8.3.4",
-    "tailwindcss": "4.3.3",
-    "phpunit/phpunit": "13.4.3",
-    "phpstan/phpstan": "2.3.1"
-  },
-  "unresolvedToolPins": [
-    "vue-tsc",
-    "@vitejs/plugin-vue",
-    "laravel-vite-plugin",
-    "@tailwindcss/vite",
-    "PHP formatter",
-    "Laravel analysis extension",
-    "browser test tooling",
-    "all transitive dependencies"
-  ],
-  "officialSources": [
-    {
-      "id": "PHP-SUPPORT",
-      "url": "https://www.php.net/supported-versions.php",
-      "claim": "PHP 8.5 active support through 2027-12-31 and security through 2029-12-31.",
-      "checkedOn": "2026-10-17"
+    "schemaVersion": 1,
+    "status": "AUTHORIZED_PUBLICATION_PENDING_VERIFICATION",
+    "installAuthorized": true,
+    "compatibilityVerified": false,
+    "application": {
+        "architecture": "Laravel modular monolith",
+        "ui": "Inertia + Vue 3 + TypeScript",
+        "database": "PostgreSQL",
+        "admin": "Restricted Filament"
     },
-    {
-      "id": "PHP-RELEASE",
-      "url": "https://www.php.net/downloads.php?source=Y",
-      "claim": "Current stable PHP source listed as 8.5.11.",
-      "checkedOn": "2026-10-17"
+    "candidateObservedRuntimePins": {
+        "php": "8.5.6",
+        "composer": "2.10.0",
+        "node": "22.7.0",
+        "npm": "10.9.0",
+        "postgresqlClient": "18.4"
     },
-    {
-      "id": "LARAVEL-SUPPORT",
-      "url": "https://laravel.com/docs/13.x/releases",
-      "claim": "Laravel 13 supports PHP 8.3-8.5, bug fixes through Q3 2027, security through 2028-03-17.",
-      "checkedOn": "2026-10-17"
+    "selectedApplicationPins": {
+        "laravel": "13.37.0",
+        "inertiaLaravel": "3.5.1",
+        "inertiaVue": "3.9.1",
+        "vue": "3.5.44",
+        "typescript": "5.9.3",
+        "filament": null,
+        "phpStaticAnalyzer": "PHPStan 2.3.1 / Larastan 3.13.0",
+        "phpTestRunner": "Pest 5.3.2 / Laravel plugin 5.0.1 / PHPUnit 13.4.2",
+        "postgresqlServer": "18.6"
     },
-    {
-      "id": "LARAVEL-PIN",
-      "url": "https://github.com/laravel/framework/releases/tag/v13.37.0",
-      "claim": "Exact Laravel release candidate pin.",
-      "checkedOn": "2026-10-17"
+    "packageManager": {
+        "selected": "npm",
+        "version": "11.9.0",
+        "approved": true,
+        "reason": "Retain compatible cloud Node 24.19.0 and npm 11.9.0; full starter engine declarations reviewed"
     },
-    {
-      "id": "LARAVEL-REQ",
-      "url": "https://raw.githubusercontent.com/laravel/framework/v13.37.0/composer.json",
-      "claim": "PHP ^8.3; runtime API ^2.2; developer test ranges include PHPUnit ^13.0.3.",
-      "checkedOn": "2026-10-17"
+    "requiredBeforeBootstrap": [
+        "Strict Chromium browser smoke including retained external font and form submission",
+        "Hosted CI evidence after separate publication authorization",
+        "Independent final review and owner acceptance"
+    ],
+    "commandsToRunNow": [],
+    "notes": [
+        "Human approved isolated M0-P2 execution and the complete official starter. This is not phase or milestone acceptance.",
+        "Historical Mac observations and earlier direct pins below remain provenance, superseded by the starter selection.",
+        "Only actual locks and observed checks establish compatibility. Sanitized feature publication and a PR to dev are now authorized; no merge or deployment is authorized.",
+        "Later owner decision: PHP 8.5.x only; sanitized scaffold publication and PR to dev authorized; no merge/deploy/security change."
+    ],
+    "metadataRequirementsReviewedOn": "2026-10-17",
+    "metadataConstraintsReviewed": true,
+    "proposedRuntimePins": {
+        "php": "8.5.11",
+        "composer": "2.10.3",
+        "node": "24.22.0",
+        "npm": "11.19.1",
+        "postgresqlServer": "18.6",
+        "postgresqlClient": "18.6"
     },
-    {
-      "id": "FILAMENT-REQ",
-      "url": "https://filamentphp.com/docs/5.x/introduction/installation",
-      "claim": "PHP 8.2+, Laravel 11.28+, Tailwind 4.1+.",
-      "checkedOn": "2026-10-17"
+    "proposedApplicationPins": {
+        "laravel/framework": "13.37.0",
+        "filament/filament": "5.10.2",
+        "livewire/livewire": "4.4.7",
+        "inertiajs/inertia-laravel": "3.5.1",
+        "@inertiajs/vue3": "3.9.1",
+        "@inertiajs/core": "3.9.1",
+        "vue": "3.5.44",
+        "typescript": "5.9.3",
+        "vite": "8.3.4",
+        "tailwindcss": "4.3.3",
+        "phpunit/phpunit": "13.4.3",
+        "phpstan/phpstan": "2.3.1"
     },
-    {
-      "id": "FILAMENT-PIN",
-      "url": "https://github.com/filamentphp/filament/releases/tag/v5.10.2",
-      "claim": "Exact Filament release candidate pin.",
-      "checkedOn": "2026-10-17"
+    "unresolvedToolPins": [
+        "vue-tsc",
+        "@vitejs/plugin-vue",
+        "laravel-vite-plugin",
+        "@tailwindcss/vite",
+        "PHP formatter",
+        "Laravel analysis extension",
+        "browser test tooling",
+        "all transitive dependencies"
+    ],
+    "officialSources": [
+        {
+            "id": "PHP-SUPPORT",
+            "url": "https://www.php.net/supported-versions.php",
+            "claim": "PHP 8.5 active support through 2027-12-31 and security through 2029-12-31.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "PHP-RELEASE",
+            "url": "https://www.php.net/downloads.php?source=Y",
+            "claim": "Current stable PHP source listed as 8.5.11.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "LARAVEL-SUPPORT",
+            "url": "https://laravel.com/docs/13.x/releases",
+            "claim": "Laravel 13 supports PHP 8.3-8.5, bug fixes through Q3 2027, security through 2028-03-17.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "LARAVEL-PIN",
+            "url": "https://github.com/laravel/framework/releases/tag/v13.37.0",
+            "claim": "Exact Laravel release candidate pin.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "LARAVEL-REQ",
+            "url": "https://raw.githubusercontent.com/laravel/framework/v13.37.0/composer.json",
+            "claim": "PHP ^8.3; runtime API ^2.2; developer test ranges include PHPUnit ^13.0.3.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "FILAMENT-REQ",
+            "url": "https://filamentphp.com/docs/5.x/introduction/installation",
+            "claim": "PHP 8.2+, Laravel 11.28+, Tailwind 4.1+.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "FILAMENT-PIN",
+            "url": "https://github.com/filamentphp/filament/releases/tag/v5.10.2",
+            "claim": "Exact Filament release candidate pin.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "FILAMENT-SUPPORT",
+            "url": "https://filamentphp.com/docs/5.x/introduction/version-support-policy",
+            "claim": "Version 5 support milestones are relative to version 6 stable release, not fixed calendar dates.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "FILAMENT-METADATA",
+            "url": "https://raw.githubusercontent.com/filamentphp/filament/v5.10.2/packages/support/composer.json",
+            "claim": "Allows Illuminate ^13.0 and requires Livewire ^4.4.7.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "NODE",
+            "url": "https://nodejs.org/en/blog/release/v24.22.0",
+            "claim": "Node 24.22.0 LTS released 2026-10-14; includes npm 11.19.1.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "NODE-POLICY",
+            "url": "https://nodejs.org/en/about/previous-releases",
+            "claim": "Production use should follow Active or Maintenance LTS.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "VITE",
+            "url": "https://raw.githubusercontent.com/vitejs/vite/v8.3.4/packages/vite/package.json",
+            "claim": "Vite 8.3.4 requires Node ^20.19.0 or >=22.12.0.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "INERTIA-PHP",
+            "url": "https://raw.githubusercontent.com/inertiajs/inertia-laravel/v3.5.1/composer.json",
+            "claim": "Adapter 3.5.1 supports Laravel ^13.0 and PHP ^8.2.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "INERTIA-VUE",
+            "url": "https://raw.githubusercontent.com/inertiajs/inertia/v3.9.1/packages/vue3/package.json",
+            "claim": "Vue adapter 3.9.1 accepts Vue ^3.0.0.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "VUE",
+            "url": "https://github.com/vuejs/core/releases/tag/v3.5.44",
+            "claim": "Exact stable Vue release.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "STARTER",
+            "url": "https://raw.githubusercontent.com/laravel/vue-starter-kit/main/package.json",
+            "claim": "Reference starter uses Inertia 3, Vue 3, Vite 8 and TypeScript ^5.2.2. Floating main is contextual evidence, not a reproducible scaffold pin.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "TYPESCRIPT",
+            "url": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3",
+            "claim": "Exact TypeScript 5.9.3 stable release, chosen within reference starter range; not a claim of latest major.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "COMPOSER",
+            "url": "https://getcomposer.org/download/",
+            "claim": "Composer 2.10.x receives fixes; exact 2.10.3 release listed; current channel requires PHP 7.2+.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "POSTGRES",
+            "url": "https://www.postgresql.org/support/versioning/",
+            "claim": "PostgreSQL 18.6 current minor; major 18 supported through 2030-11-14.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "LARAVEL-PG",
+            "url": "https://laravel.com/docs/13.x/database",
+            "claim": "First-party PostgreSQL support includes 10+.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "PHPUNIT",
+            "url": "https://raw.githubusercontent.com/sebastianbergmann/phpunit/13.4.3/composer.json",
+            "claim": "PHPUnit 13.4.3 requires PHP >=8.4.1.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "PHPSTAN",
+            "url": "https://github.com/phpstan/phpstan/releases/tag/2.3.1",
+            "claim": "Exact PHPStan release, also used in reviewed Laravel framework dev metadata.",
+            "checkedOn": "2026-10-17"
+        },
+        {
+            "id": "TAILWIND",
+            "url": "https://github.com/tailwindlabs/tailwindcss/releases/tag/v4.3.3",
+            "claim": "Exact Tailwind 4.3.3 release; satisfies Filament documented minimum.",
+            "checkedOn": "2026-10-17"
+        }
+    ],
+    "starter": {
+        "repository": "https://github.com/laravel/vue-starter-kit",
+        "commit": "d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab",
+        "preserveFullFeaturesAndTooling": true,
+        "dependencyRanges": "Pinned upstream baseline plus approved Vite Plus 0.3.3 / matching Vite core alias and bundled Vitest override",
+        "sourceIdentity": "starter-source.json",
+        "supersedes": "Earlier bare Laravel skeleton, custom direct-package pins, PHPUnit 13 and omitted-Collision proposal"
     },
-    {
-      "id": "FILAMENT-SUPPORT",
-      "url": "https://filamentphp.com/docs/5.x/introduction/version-support-policy",
-      "claim": "Version 5 support milestones are relative to version 6 stable release, not fixed calendar dates.",
-      "checkedOn": "2026-10-17"
+    "approvedRuntimeSelection": {
+        "php": "8.5.11",
+        "composer": "2.10.3",
+        "node": "24.19.0",
+        "npm": "11.9.0",
+        "postgresqlServer": "18.6",
+        "postgresqlClient": "18.6",
+        "coverageCandidate": "Xdebug 3.5.3 installed; coverage observed"
     },
-    {
-      "id": "FILAMENT-METADATA",
-      "url": "https://raw.githubusercontent.com/filamentphp/filament/v5.10.2/packages/support/composer.json",
-      "claim": "Allows Illuminate ^13.0 and requires Livewire ^4.4.7.",
-      "checkedOn": "2026-10-17"
+    "approvedToolchainPatch": {
+        "vite-plus": "0.3.3",
+        "viteAlias": "npm:@voidzero-dev/vite-plus-core@0.3.3",
+        "vitestOverride": "4.1.11",
+        "oxfmt": "0.68.0",
+        "tinypool": "2.1.2",
+        "npmAudit": "0 vulnerabilities after actual locked installation",
+        "fullApplicationCompatibilityVerified": false
     },
-    {
-      "id": "NODE",
-      "url": "https://nodejs.org/en/blog/release/v24.22.0",
-      "claim": "Node 24.22.0 LTS released 2026-10-14; includes npm 11.19.1.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "NODE-POLICY",
-      "url": "https://nodejs.org/en/about/previous-releases",
-      "claim": "Production use should follow Active or Maintenance LTS.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "VITE",
-      "url": "https://raw.githubusercontent.com/vitejs/vite/v8.3.4/packages/vite/package.json",
-      "claim": "Vite 8.3.4 requires Node ^20.19.0 or >=22.12.0.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "INERTIA-PHP",
-      "url": "https://raw.githubusercontent.com/inertiajs/inertia-laravel/v3.5.1/composer.json",
-      "claim": "Adapter 3.5.1 supports Laravel ^13.0 and PHP ^8.2.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "INERTIA-VUE",
-      "url": "https://raw.githubusercontent.com/inertiajs/inertia/v3.9.1/packages/vue3/package.json",
-      "claim": "Vue adapter 3.9.1 accepts Vue ^3.0.0.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "VUE",
-      "url": "https://github.com/vuejs/core/releases/tag/v3.5.44",
-      "claim": "Exact stable Vue release.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "STARTER",
-      "url": "https://raw.githubusercontent.com/laravel/vue-starter-kit/main/package.json",
-      "claim": "Reference starter uses Inertia 3, Vue 3, Vite 8 and TypeScript ^5.2.2. Floating main is contextual evidence, not a reproducible scaffold pin.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "TYPESCRIPT",
-      "url": "https://github.com/microsoft/TypeScript/releases/tag/v5.9.3",
-      "claim": "Exact TypeScript 5.9.3 stable release, chosen within reference starter range; not a claim of latest major.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "COMPOSER",
-      "url": "https://getcomposer.org/download/",
-      "claim": "Composer 2.10.x receives fixes; exact 2.10.3 release listed; current channel requires PHP 7.2+.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "POSTGRES",
-      "url": "https://www.postgresql.org/support/versioning/",
-      "claim": "PostgreSQL 18.6 current minor; major 18 supported through 2030-11-14.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "LARAVEL-PG",
-      "url": "https://laravel.com/docs/13.x/database",
-      "claim": "First-party PostgreSQL support includes 10+.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "PHPUNIT",
-      "url": "https://raw.githubusercontent.com/sebastianbergmann/phpunit/13.4.3/composer.json",
-      "claim": "PHPUnit 13.4.3 requires PHP >=8.4.1.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "PHPSTAN",
-      "url": "https://github.com/phpstan/phpstan/releases/tag/2.3.1",
-      "claim": "Exact PHPStan release, also used in reviewed Laravel framework dev metadata.",
-      "checkedOn": "2026-10-17"
-    },
-    {
-      "id": "TAILWIND",
-      "url": "https://github.com/tailwindlabs/tailwindcss/releases/tag/v4.3.3",
-      "claim": "Exact Tailwind 4.3.3 release; satisfies Filament documented minimum.",
-      "checkedOn": "2026-10-17"
+    "localBaselineVerified": true,
+    "localBaselineScope": "PHP 8.5.x constraint/platform, lock installs, PostgreSQL migrations, frontend lint/types/build, backend static analysis, 52 tests/155 assertions and real coverage; strict browser PASS; Pest TIA and hosted CI evidence tracked in publication run",
+    "applicationPhpConstraint": "~8.5.0",
+    "pestTia": {
+        "pest": "5.3.2",
+        "laravelPlugin": "5.0.1",
+        "phpunit": "13.4.2",
+        "scope": "Optional local functional-test impact analysis; full CI uses --ci --no-tia and real coverage",
+        "cache": ".runtime/pest/tia",
+        "defaultBranch": "dev",
+        "sharedBaselineFetching": false,
+        "sharedFrontend": "Observed upstream Vue-transform limitation: shared frontend/configuration changes force a full fresh TIA recording; native PHP and Inertia-page selection retained"
     }
-  ]
 }

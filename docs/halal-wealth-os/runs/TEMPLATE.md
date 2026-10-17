@@ -15,18 +15,18 @@ Use one record for the authorized phase/run. Keep private identity, local paths,
 
 ## Bounded checkpoints
 
-| Cycle | Criterion/check | Documentation or implementation change | Exact command and exit | Finding | Next action |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Record the authorized criterion | No activity implied by this template | NOT_RUN | Pending | Pending |
+| Cycle | Criterion/check                 | Documentation or implementation change | Exact command and exit | Finding | Next action |
+| ----- | ------------------------------- | -------------------------------------- | ---------------------- | ------- | ----------- |
+| 1     | Record the authorized criterion | No activity implied by this template   | NOT_RUN                | Pending | Pending     |
 
 At most six cycles per authorization; stop earlier after three materially unsuccessful attempts on the same issue or any runbook blocker. Reference private logs without disclosing their contents.
 
 ## Requirement mapping
 
-| Requirement | Test/manual check | Command/artifact reference | Observed result |
-| --- | --- | --- | --- |
-| Phase acceptance ID | Specify an actual check | Exact command/log/hash | NOT_RUN |
-| Applicable invariant ID | Explain applicability | Exact evidence | NOT_RUN or explicit NOT_APPLICABLE |
+| Requirement             | Test/manual check       | Command/artifact reference | Observed result                    |
+| ----------------------- | ----------------------- | -------------------------- | ---------------------------------- |
+| Phase acceptance ID     | Specify an actual check | Exact command/log/hash     | NOT_RUN                            |
+| Applicable invariant ID | Explain applicability   | Exact evidence             | NOT_RUN or explicit NOT_APPLICABLE |
 
 ## Outcome and verification
 

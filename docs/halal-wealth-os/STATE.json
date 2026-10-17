@@ -1,383 +1,481 @@
 {
-  "schema_version": 1,
-  "plan_version": "1.0",
-  "project": "Halal Wealth OS",
-  "updated_at": "2026-10-17T10:59:04Z",
-  "policy": {
-    "implementation_unit": "phase",
-    "one_implementation_owner": true,
-    "max_cycles": 6,
-    "max_repeated_failure_attempts": 3,
-    "default_remote_writes": false,
-    "default_production_actions": false,
-    "default_external_effects": false
-  },
-  "active_run": null,
-  "repository": {
-    "root": null,
-    "remote": "https://github.com/hussain4real/halal-wealth-os",
-    "base_branch": "main",
-    "worktree": null,
-    "head": null,
-    "verified_at": "2026-10-17T10:59:04Z",
-    "head_observation": "Unborn main before initial planning publication; Git history gives the current published HEAD"
-  },
-  "milestones": [
-    {
-      "id": "M0",
-      "status": "PLANNED",
-      "accepted_by": null,
-      "accepted_at": null,
-      "review_evidence": null
+    "schema_version": 1,
+    "plan_version": "1.0",
+    "project": "Halal Wealth OS",
+    "updated_at": "2026-10-17T13:51:38.068490+00:00",
+    "policy": {
+        "implementation_unit": "phase",
+        "one_implementation_owner": true,
+        "max_cycles": 6,
+        "max_repeated_failure_attempts": 3,
+        "default_remote_writes": false,
+        "default_production_actions": false,
+        "default_external_effects": false
     },
-    {
-      "id": "M1",
-      "status": "PLANNED",
-      "accepted_by": null,
-      "accepted_at": null,
-      "review_evidence": null
+    "active_run": {
+        "phase": "M0-P2",
+        "owner": "cloud-m0-p2-successor",
+        "worktree": ".",
+        "branch": "feat/m0-p2-starter-harness",
+        "baseline_head": "9f8db16620aabec70691538d82066eddc2d01e49",
+        "started_at": "2026-10-17T12:45:47.854622+00:00",
+        "status": "IN_PROGRESS",
+        "authority": "Owner explicitly approved publication/PR/CI and continued strict browser investigation via manager",
+        "private_identity_evidence": "Verified recovery archive, predecessor stopped, successor environment identity and claim held privately",
+        "cycles_used": 5,
+        "prior_run_cycles_used": 5,
+        "prior_runtime_build_failures": 3,
+        "checkpoint": "Publication cycle 5: all local gates pass, independent staged sanitation review and approved feature/PR publication to dev, monitor original CI",
+        "prior_successor_cycles_used": 5
     },
-    {
-      "id": "M2",
-      "status": "PLANNED",
-      "accepted_by": null,
-      "accepted_at": null,
-      "review_evidence": null
+    "repository": {
+        "root": null,
+        "remote": "https://github.com/hussain4real/halal-wealth-os",
+        "base_branch": "main",
+        "worktree": null,
+        "head": "9f8db16620aabec70691538d82066eddc2d01e49",
+        "verified_at": "2026-10-17T11:48:35.090610Z",
+        "head_observation": "Published planning baseline verified against remote main; cloud worktree identity retained privately"
     },
-    {
-      "id": "M3",
-      "status": "PLANNED",
-      "accepted_by": null,
-      "accepted_at": null,
-      "review_evidence": null
-    },
-    {
-      "id": "M4",
-      "status": "PLANNED",
-      "accepted_by": null,
-      "accepted_at": null,
-      "review_evidence": null
-    },
-    {
-      "id": "M5",
-      "status": "PLANNED",
-      "accepted_by": null,
-      "accepted_at": null,
-      "review_evidence": null
-    },
-    {
-      "id": "M6",
-      "status": "PLANNED",
-      "accepted_by": null,
-      "accepted_at": null,
-      "review_evidence": null
-    },
-    {
-      "id": "M7",
-      "status": "PLANNED",
-      "accepted_by": null,
-      "accepted_at": null,
-      "review_evidence": null
-    }
-  ],
-  "phases": [
-    {
-      "id": "M0-P1",
-      "depends_on": [],
-      "status": "ACCEPTED",
-      "owner": "planning-owner",
-      "accepted_by": "human-owner",
-      "accepted_at": "2026-10-17T10:59:04Z",
-      "evidence": "runs/M0-P1-local.md"
-    },
-    {
-      "id": "M0-P2",
-      "depends_on": [
-        "M0-P1"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M0-P3",
-      "depends_on": [
-        "M0-P2"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M1-P1",
-      "depends_on": [
-        "M0-P3"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M1-P2",
-      "depends_on": [
-        "M1-P1"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M1-P3",
-      "depends_on": [
-        "M1-P2"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M2-P1",
-      "depends_on": [
-        "M1-P3"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M2-P2",
-      "depends_on": [
-        "M2-P1"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M2-P3",
-      "depends_on": [
-        "M2-P2"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M3-P1",
-      "depends_on": [
-        "M2-P3"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M3-P2",
-      "depends_on": [
-        "M3-P1"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M3-P3",
-      "depends_on": [
-        "M3-P2"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M4-P1",
-      "depends_on": [
-        "M3-P3"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M4-P2",
-      "depends_on": [
-        "M4-P1"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M4-P3",
-      "depends_on": [
-        "M4-P2"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M5-P1",
-      "depends_on": [
-        "M4-P3"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M5-P2",
-      "depends_on": [
-        "M5-P1"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M5-P3",
-      "depends_on": [
-        "M5-P2"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M6-P1",
-      "depends_on": [
-        "M5-P3"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M6-P2",
-      "depends_on": [
-        "M6-P1"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M6-P3",
-      "depends_on": [
-        "M6-P2"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M6-P4",
-      "depends_on": [
-        "M6-P3"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M7-P1",
-      "depends_on": [
-        "M6-P4"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M7-P2",
-      "depends_on": [
-        "M7-P1"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    },
-    {
-      "id": "M7-P3",
-      "depends_on": [
-        "M7-P2"
-      ],
-      "status": "PLANNED",
-      "owner": null,
-      "accepted_by": null,
-      "accepted_at": null,
-      "evidence": null
-    }
-  ],
-  "documentation_version": "1.1",
-  "adoption": {
-    "status": "RECONCILED_AND_M0_P1_HUMAN_ACCEPTED",
-    "source": "User-supplied separated Codex kit v1.1",
-    "source_state_plan_version_preserved": "1.0",
-    "prior_local_state": "Preserved privately before schema alignment; no accepted status or active claim existed",
-    "private_paths": "Held in owner-only reconciliation evidence; omitted from public state"
-  },
-  "review_package": {
-    "phase": "M0-P1",
-    "status": "HUMAN_ACCEPTED",
-    "acceptance": "ACCEPTED",
-    "bootstrapAuthorized": false,
-    "publicationAuthorized": true,
-    "blockers": [
-      "Runtime/dependency pins remain candidates; complete approved manifest unresolved",
-      "No verified Halal Wealth cloud environment or hosting selected",
-      "Manager must record M0-P2 owner/worktree/active_run and separate execution authorization"
+    "milestones": [
+        {
+            "id": "M0",
+            "status": "PLANNED",
+            "accepted_by": null,
+            "accepted_at": null,
+            "review_evidence": null
+        },
+        {
+            "id": "M1",
+            "status": "PLANNED",
+            "accepted_by": null,
+            "accepted_at": null,
+            "review_evidence": null
+        },
+        {
+            "id": "M2",
+            "status": "PLANNED",
+            "accepted_by": null,
+            "accepted_at": null,
+            "review_evidence": null
+        },
+        {
+            "id": "M3",
+            "status": "PLANNED",
+            "accepted_by": null,
+            "accepted_at": null,
+            "review_evidence": null
+        },
+        {
+            "id": "M4",
+            "status": "PLANNED",
+            "accepted_by": null,
+            "accepted_at": null,
+            "review_evidence": null
+        },
+        {
+            "id": "M5",
+            "status": "PLANNED",
+            "accepted_by": null,
+            "accepted_at": null,
+            "review_evidence": null
+        },
+        {
+            "id": "M6",
+            "status": "PLANNED",
+            "accepted_by": null,
+            "accepted_at": null,
+            "review_evidence": null
+        },
+        {
+            "id": "M7",
+            "status": "PLANNED",
+            "accepted_by": null,
+            "accepted_at": null,
+            "review_evidence": null
+        }
     ],
-    "next_authorized_phase": null,
-    "scope": "Human accepted planning baseline and six ADR directions; sanitized planning publication only; no M0-P2 execution",
-    "source_reconciliation": "Verified archive and reviewed actual runbook, state, phase, evidence template, architecture, invariants and verification contract; originals retained privately",
-    "readOnlyBootstrapPreparationAuthorized": true,
-    "acceptance_record": "ACCEPTANCE.md"
-  }
+    "phases": [
+        {
+            "id": "M0-P1",
+            "depends_on": [],
+            "status": "ACCEPTED",
+            "owner": "planning-owner",
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-17T10:59:04Z",
+            "evidence": "runs/M0-P1-local.md"
+        },
+        {
+            "id": "M0-P2",
+            "depends_on": ["M0-P1"],
+            "status": "IN_PROGRESS",
+            "owner": "cloud-m0-p2-successor",
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": "runs/M0-P2-publication.md"
+        },
+        {
+            "id": "M0-P3",
+            "depends_on": ["M0-P2"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M1-P1",
+            "depends_on": ["M0-P3"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M1-P2",
+            "depends_on": ["M1-P1"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M1-P3",
+            "depends_on": ["M1-P2"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M2-P1",
+            "depends_on": ["M1-P3"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M2-P2",
+            "depends_on": ["M2-P1"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M2-P3",
+            "depends_on": ["M2-P2"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M3-P1",
+            "depends_on": ["M2-P3"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M3-P2",
+            "depends_on": ["M3-P1"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M3-P3",
+            "depends_on": ["M3-P2"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M4-P1",
+            "depends_on": ["M3-P3"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M4-P2",
+            "depends_on": ["M4-P1"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M4-P3",
+            "depends_on": ["M4-P2"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M5-P1",
+            "depends_on": ["M4-P3"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M5-P2",
+            "depends_on": ["M5-P1"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M5-P3",
+            "depends_on": ["M5-P2"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M6-P1",
+            "depends_on": ["M5-P3"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M6-P2",
+            "depends_on": ["M6-P1"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M6-P3",
+            "depends_on": ["M6-P2"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M6-P4",
+            "depends_on": ["M6-P3"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M7-P1",
+            "depends_on": ["M6-P4"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M7-P2",
+            "depends_on": ["M7-P1"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        },
+        {
+            "id": "M7-P3",
+            "depends_on": ["M7-P2"],
+            "status": "PLANNED",
+            "owner": null,
+            "accepted_by": null,
+            "accepted_at": null,
+            "evidence": null
+        }
+    ],
+    "documentation_version": "1.1",
+    "adoption": {
+        "status": "RECONCILED_AND_M0_P1_HUMAN_ACCEPTED",
+        "source": "User-supplied separated Codex kit v1.1",
+        "source_state_plan_version_preserved": "1.0",
+        "prior_local_state": "Preserved privately before schema alignment; no accepted status or active claim existed",
+        "private_paths": "Held in owner-only reconciliation evidence; omitted from public state"
+    },
+    "review_package": {
+        "phase": "M0-P1",
+        "status": "HUMAN_ACCEPTED",
+        "acceptance": "ACCEPTED",
+        "bootstrapAuthorized": false,
+        "publicationAuthorized": true,
+        "blockers": [
+            "Runtime/dependency pins remain candidates; complete approved manifest unresolved",
+            "No verified Halal Wealth cloud environment or hosting selected",
+            "Manager must record M0-P2 owner/worktree/active_run and separate execution authorization"
+        ],
+        "next_authorized_phase": null,
+        "scope": "Human accepted planning baseline and six ADR directions; sanitized planning publication only; no M0-P2 execution",
+        "source_reconciliation": "Verified archive and reviewed actual runbook, state, phase, evidence template, architecture, invariants and verification contract; originals retained privately",
+        "readOnlyBootstrapPreparationAuthorized": true,
+        "acceptance_record": "ACCEPTANCE.md",
+        "historical": true,
+        "later_execution_authority": "execution_authorization"
+    },
+    "execution_authorization": {
+        "phase": "M0-P2",
+        "authorized": true,
+        "scope": "Isolated M0-P2 runtime/full starter/verification plus sanitized feature branch and PR to dev; no merges, deployment, security/trust changes, persistent credentials or external account connections",
+        "starter_commit": "d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab",
+        "remote_writes": true,
+        "production_actions": false,
+        "accepted_dependencies": ["M0-P1"],
+        "php_constraint": "~8.5.0"
+    },
+    "execution_status": {
+        "phase": "M0-P2",
+        "outcome": "IN_PROGRESS",
+        "accepted": false,
+        "sourceImported": true,
+        "npmLockResolved": true,
+        "composerLockResolved": true,
+        "applicationVerified": true,
+        "hostedCI": "PENDING_PUBLICATION",
+        "evidence": "runs/M0-P2-publication.md",
+        "remainingBlockers": [
+            "Exact staged publication review, approved feature PR to dev and hosted CI completion pending."
+        ],
+        "fullStarterFinalized": true,
+        "coverageVerified": true,
+        "cleanLockInstallVerified": true,
+        "failureRestorationVerified": true,
+        "browserSmoke": "PASS"
+    },
+    "dependency_patch": {
+        "authorized": true,
+        "authority": "Explicit human approval via manager",
+        "from": "vite-plus 0.3.0",
+        "to": "vite-plus 0.3.3 with required matching core alias and bundled Vitest override",
+        "status": "AVAILABLE_CHECKS_PASS_APPLICATION_BLOCKED",
+        "evidence": "runs/M0-P2-vite-patch.md",
+        "independent_review": "SOURCE_REVIEW_COMPLETE; runtime integration gap remains open",
+        "full_phase_outcome": "BLOCKED",
+        "runtime_builds_retried": false,
+        "available_results": {
+            "npm_ci": 0,
+            "npm_audit": 0,
+            "npm_audit_vulnerabilities": 0,
+            "npm_tree": 0,
+            "frontend_check": 0,
+            "frontend_types": 2,
+            "frontend_build": 1
+        },
+        "required_alignment": {
+            "vite": "npm:@voidzero-dev/vite-plus-core@0.3.3",
+            "overrides": {
+                "vite": "npm:@voidzero-dev/vite-plus-core@0.3.3",
+                "vitest": "4.1.11"
+            }
+        },
+        "historical": true
+    },
+    "network_recheck": {
+        "authority": "Human reported all domains enabled and requested one recheck",
+        "recorded_at": "2026-10-17T12:30:29Z",
+        "official_endpoints": "All five still proxy CONNECT 403",
+        "nested_container": "curl errno 60 self-signed certificate in certificate chain; PHP proxy hostname lookup unresolved",
+        "security_settings_changed": false,
+        "ca_imported": false,
+        "runtime_build_retried": false,
+        "historical": true
+    },
+    "offline_review": {
+        "outcome": "SOURCE_REVIEW_COMPLETE_FOR_PRESERVATION_AND_HANDOFF",
+        "phase_outcome": "BLOCKED",
+        "planning_checker": "Lifecycle-aware with stable synthetic fixtures and executing-claim checks",
+        "composer_verify": "Fixed Bash wrapper invocation",
+        "node_tests_passed": 11,
+        "frontend_lint_exit": 0,
+        "planning_harness_exit": 0,
+        "runtime_gap": "OPEN",
+        "evidence": "runs/M0-P2-preservation.md",
+        "ownership": "Existing blocked claim preserved; no successor claim or phase acceptance recorded",
+        "historical": true
+    },
+    "successor_checkpoint": {
+        "exclusive_transfer_verified": true,
+        "source_files_restored": 350,
+        "manifest_entries_verified": 418,
+        "baseline_head": "9f8db16620aabec70691538d82066eddc2d01e49",
+        "renewed_authority": "Manager transferred sole implementation ownership after prior owner stopped and official downloads succeeded",
+        "runtime": "Task-local native PHP/Composer and host Node/npm; isolated socket-only PostgreSQL; no host package/trust/network changes",
+        "tests": 52,
+        "assertions": 155,
+        "covered_statements": 145,
+        "application_statements": 155,
+        "hosted_ci": "NOT_RUN",
+        "browser": "Core pages hydrated; full browser check BLOCKED on external stylesheet TLS",
+        "accepted": false,
+        "independent_review": "SOURCE_REVIEW_COMPLETE_FOR_PRESERVATION_WITH_BROWSER_AND_CI_BLOCKERS"
+    },
+    "publication_checkpoint": {
+        "prior_run": {
+            "phase": "M0-P2",
+            "owner": "cloud-m0-p2-successor",
+            "worktree": ".",
+            "branch": "work",
+            "baseline_head": "9f8db16620aabec70691538d82066eddc2d01e49",
+            "started_at": "2026-10-17T12:45:47.854622+00:00",
+            "status": "BLOCKED",
+            "authority": "Manager explicitly transferred sole ownership after verified exclusive handoff; renewed environment checkpoint",
+            "private_identity_evidence": "Verified recovery archive, predecessor stopped, successor environment identity and claim held privately",
+            "cycles_used": 5,
+            "prior_run_cycles_used": 5,
+            "prior_runtime_build_failures": 3,
+            "checkpoint": "Final preserved checkpoint after five renewed cycles; sixth cycle unused",
+            "stopped_at": "2026-10-17T13:12:49.050738+00:00",
+            "stop_reason": "Local baseline, clean installs and independent source review completed; strict browser trust/form smoke and hosted CI remain incomplete. No automatic resumption."
+        },
+        "authority": "Explicit owner approval via manager: publish reviewed scaffold and PR to dev, monitor CI; PHP8.5 only",
+        "cycles_used": 5,
+        "max_cycles": 6,
+        "main_baseline": "9f8db16620aabec70691538d82066eddc2d01e49",
+        "pull_request_base": "dev",
+        "php_constraint": "~8.5.0",
+        "hosted_ci": "PENDING_PUBLICATION",
+        "pest_requirement": "Explicit owner request: Pest5 TIA local developer loop, full uncached CI coverage, preserve all tests/assertions",
+        "local_gates": {
+            "full_uncached": "PASS: 52 tests, 155 assertions, 146/156 covered statements",
+            "failure_restoration": "PASS: baseline52, deliberate53rd failure exit1, restored full --all52",
+            "browser": "PASS: hydration, invalid login, Instrument Sans, no page/request failures",
+            "tia": "PASS: complete record, explicit52 replay, PHP/page selectivity; shared frontend changes force full fresh recording"
+        }
+    }
 }

@@ -1,0 +1,90 @@
+{
+    "schema_version": 1,
+    "architecture": "Linux x86_64; Debian 13 ABI",
+    "php_image": "docker.io/library/php:8.5.11-cli@sha256:01a109229f4465bc9ef042d9198f09a4d9da7775a825dbd8572dcdbd8756c4d3",
+    "postgres_image": "docker.io/library/postgres:18.6@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336",
+    "composer": {
+        "version": "2.10.3",
+        "url": "https://getcomposer.org/download/2.10.3/composer.phar",
+        "sha256": "7a2d379d5b8ffdaa028580ef26494c36d2feef4b178d3dd1473a4dbc5e17c8d6",
+        "verification": "Compared with upstream composer.phar.sha256sum over verified TLS"
+    },
+    "xdebug": {
+        "version": "3.5.3",
+        "url": "https://pecl.php.net/get/xdebug-3.5.3.tgz",
+        "sha256": "f073de91bea046106abf4d6071c963ea71e58571df6ce58948ceca89d121cb2d",
+        "verification": "Official PECL HTTPS download; SHA256 records observed artifact identity"
+    },
+    "debian": {
+        "sources": [
+            "https://deb.debian.org/debian trixie main",
+            "https://deb.debian.org/debian trixie-updates main",
+            "https://deb.debian.org/debian-security trixie-security main"
+        ],
+        "verification": "Host APT with existing Debian archive keyring verifies signed indexes and package hashes; download-only; no host packages installed",
+        "packages": [
+            {
+                "file": "archives/icu-devtools_76.1-4_amd64.deb",
+                "bytes": 215436,
+                "sha256": "e3ab7c37d90f9defed366f2c6a87d61941b34c7a740ede0553bca02117a98a18"
+            },
+            {
+                "file": "archives/libicu-dev_76.1-4_amd64.deb",
+                "bytes": 10780064,
+                "sha256": "856ea1b86a008d71d3ffaf6a4a465ff38edf3a257ebab3f0222ce05fe94a5c1a"
+            },
+            {
+                "file": "archives/libicu76_76.1-4_amd64.deb",
+                "bytes": 9722072,
+                "sha256": "c1bf762996de9ecba9b9d871e4928a8090f023a3e9e7fa3240b3d90f892a01dc"
+            },
+            {
+                "file": "archives/libpq-dev_17.11-0+deb13u1_amd64.deb",
+                "bytes": 159068,
+                "sha256": "54c0ee29d174e4fa0cfb8d6d37af5ad7b338ee3b29d392ae189425e122aee1f5"
+            },
+            {
+                "file": "archives/libpq5_17.11-0+deb13u1_amd64.deb",
+                "bytes": 237376,
+                "sha256": "20a4c9ef58b4baf90deda67cfb2cc062871c062830dddc234d28f5ac7931b86b"
+            },
+            {
+                "file": "archives/libssl-dev_3.5.7-1~deb13u3_amd64.deb",
+                "bytes": 2968412,
+                "sha256": "c5f5f0383cac45209fefe85b3c3308e5ef6743663597d89bedcb96aaa06b8342"
+            },
+            {
+                "file": "archives/libzip-dev_1.11.3-2_amd64.deb",
+                "bytes": 180792,
+                "sha256": "7c56c8e81aa92e4acecbbb6c885f858f594080375cd74fac436098d95670d6c9"
+            },
+            {
+                "file": "archives/libzip5_1.11.3-2_amd64.deb",
+                "bytes": 62612,
+                "sha256": "efaa26f7a0fd7575427f44cd97d8b72eadd7e0852f0621e29a22685da487c204"
+            },
+            {
+                "file": "archives/zipcmp_1.11.3-2_amd64.deb",
+                "bytes": 19824,
+                "sha256": "6a87d3d0f539d69abff33b701e7e257890f0a849cf03a8480c9e8729517661e0"
+            },
+            {
+                "file": "archives/zipmerge_1.11.3-2_amd64.deb",
+                "bytes": 14540,
+                "sha256": "98ad72702a486728edf4d1c396a246d3d1b5d4829e23bd5ff4a43b82a825df9f"
+            },
+            {
+                "file": "archives/ziptool_1.11.3-2_amd64.deb",
+                "bytes": 22584,
+                "sha256": "6f4a879d8f80b5e096fb5d10d8bd6b2a4ddc279759fa47efb316b393c7506cfb"
+            },
+            {
+                "file": "archives/zlib1g-dev_1%3a1.3.dfsg+really1.3.1-1+b1_amd64.deb",
+                "bytes": 919744,
+                "sha256": "76ed5c858e1aef38b7be93acce5910e457e77bd6271471b9d05fb42e78826224"
+            }
+        ]
+    },
+    "network": "All source downloads use host configured proxy and TLS verification; extension build has no network",
+    "trust": "Existing host trust and proxy configuration preserved; no CA installed or trust settings changed"
+}
