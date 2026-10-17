@@ -79,3 +79,15 @@ Initial audit logs are structured/redacted local events, not an immutable
 compliance store. Personal production, mail delivery, real owner provisioning,
 external accounts, deployment, stage/main promotion, milestone acceptance and
 later phases remain excluded.
+
+## Later publication correction
+
+The three-cycle local checkpoint above is historical. The authorized
+[publication checkpoint](M0-P3-publication.md) preserves original hosted CI
+success and the single published password-reset audit finding. Cycle5's real
+guest reset regression failed before its scoped attribution correction and
+passed afterward. The corrected full local baseline is75 tests/281 assertions,
+coverage236/245; local TIA records all75 and explicitly replays75 separately.
+The original browser/UI evidence remains applicable because UI source is
+unchanged. M0-P3 remains unaccepted and unmerged; latest hosted status is
+reported on the PR rather than inferred here.

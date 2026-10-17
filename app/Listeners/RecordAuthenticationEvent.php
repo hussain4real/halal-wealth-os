@@ -22,8 +22,10 @@ class RecordAuthenticationEvent
         };
 
         $userId = $event->user instanceof User ? $event->user->id : null;
-        // A failed attempt targets this identity; it never authenticates its actor.
-        app(SecurityAudit::class)->record($kind, $event instanceof Failed ? null : $userId,
-            ['subject_id' => $event instanceof Failed ? $userId : null]);
+        // Failed attempts and forgotten-password resets identify a target,
+        // without establishing an authenticated requester as the actor.
+        $hasUnauthenticatedActor = $event instanceof Failed || $event instanceof PasswordReset;
+        app(SecurityAudit::class)->record($kind, $hasUnauthenticatedActor ? null : $userId,
+            ['subject_id' => $hasUnauthenticatedActor ? $userId : null]);
     }
 }

@@ -179,16 +179,17 @@ uses locked Filament5.10.2 / Livewire4.4.7 with server-side capability checks,
 self-only resource queries and local avatars. Ordinary profile fields cannot
 grant admin access or select another owner.
 
-The local uncached gate passes **74 tests / 273 assertions**, coverage **235/244
+The local uncached gate passes **75 tests / 281 assertions**, coverage **236/245
 application statements**, formatting/static analysis, frontend lint/types/build,
 owned PostgreSQL migration smoke and dependency audits. The two former public
 registration cases now assert private route denial; the other53 prior cases
-remain. Nineteen additional identity/session cases bring the total to74.
+remain. Twenty additional identity/session cases bring the total to75.
 Sixteen Node checks pass. Browser keyboard/form/isolation checks passed with
-normal TLS verification. Local TIA records the full74-case baseline and its
+normal TLS verification. Local TIA records the full75-case baseline and its
 unchanged replay separately; cached results never replace uncached evidence.
-No M0-P3 hosted CI, production readiness, merge, deployment or milestone
-acceptance is claimed. Later phases remain unaccepted.
+Original M0-P3 hosted CI passed; the independently reviewed password-reset
+audit correction awaits its exact-head follow-up CI. No production readiness,
+merge, deployment or milestone acceptance is claimed. Later phases remain unaccepted.
 
 M0-P3 feature publication and original hosted CI are separately authorized and
 tracked in the [publication checkpoint](docs/halal-wealth-os/runs/M0-P3-publication.md).

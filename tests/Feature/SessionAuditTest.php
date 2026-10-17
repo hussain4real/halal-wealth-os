@@ -5,7 +5,9 @@ namespace Tests\Feature;
 use App\Domain\Identity\SecurityAudit;
 use App\Domain\Identity\SecurityEvent;
 use App\Models\User;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Psr\Log\LoggerInterface;
@@ -57,4 +59,28 @@ test('real authentication events emit attributed structured records without requ
     $this->post(route('login.store'), ['email' => $owner->email, 'password' => 'wrong-secret']);
     $this->post(route('login.store'), ['email' => $owner->email, 'password' => 'password']);
     $this->post(route('logout'));
+});
+
+test('forgotten password reset records the unauthenticated requester separately from its target', function () {
+    Notification::fake();
+    $owner = User::factory()->create();
+    $logger = \Mockery::mock(LoggerInterface::class);
+    Log::shouldReceive('channel')->with('security')->andReturn($logger);
+    $records = [];
+    $logger->shouldReceive('notice')->andReturnUsing(function (string $message, array $context) use (&$records): void {
+        $records[] = ['message' => $message, 'context' => $context];
+    });
+    $this->post(route('password.email'), ['email' => $owner->email])->assertSessionHasNoErrors();
+
+    Notification::assertSentTo($owner, ResetPassword::class, function (ResetPassword $notification) use ($owner): bool {
+        $this->post(route('password.update'), [
+            'token' => $notification->token, 'email' => $owner->email,
+            'password' => 'synthetic-new-password', 'password_confirmation' => 'synthetic-new-password',
+        ])->assertSessionHasNoErrors()->assertRedirect(route('login'));
+        $this->assertGuest();
+        $this->assertTrue(Hash::check('synthetic-new-password', $owner->fresh()->password));
+
+        return true;
+    });
+    $this->assertSame([['message' => 'auth.password_reset', 'context' => ['actor_id' => null, 'subject_id' => $owner->id]]], $records);
 });

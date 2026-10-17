@@ -55,8 +55,9 @@ reset tokens, passkeys, recovery codes, session identifiers, names/emails or
 financial values to logs. Authentication success/failure/logout/reset events
 and profile updates are attributed where a server-authenticated actor exists;
 anonymous/console events have a null actor. Initial onboarding records a
-numeric subject separately. Failed attempts have a null actor and a numeric target subject when known;
-they do not authenticate the attempted user. Authentication failures do not persist attempted
+numeric subject separately. Failed attempts and forgotten-password resets have
+a null actor and a numeric target subject when known; the event's account is
+not an authenticated requester. Authentication failures do not persist attempted
 email addresses or credential arrays.
 
 The local daily security channel uses storage/logs/security-*.log and a 14-day
