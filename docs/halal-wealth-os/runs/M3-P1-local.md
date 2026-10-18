@@ -1,6 +1,6 @@
 # M3-P1 implementation and verification
 
-Status: READY_FOR_REVIEW, unaccepted. Cycle 2 of at most six. The human owner accepted
+Status: READY_FOR_REVIEW, unaccepted. Cycle 3 of at most six. The human owner accepted
 M2-P3/M2 at 14:41 UTC on 18 October 2026 and approved M3-P1 through implementation,
 independent technical/rendered review, sanitized dev PR, normal merge after exact
 head reviews/CI and original dev-push CI. Stop for owner phase acceptance before
@@ -140,3 +140,22 @@ verified. The phase is not human accepted. Final sanitized candidate/PR text,
 exact index/commit review, hosted exact-head CI/review and normal dev merge with
 original post-merge CI remain pending publication checkpoints. Main/stage are
 unchanged; no M3-P2 or deployment is authorized.
+
+## Cycle 3 hosted-review checkpoint correction
+
+PR [9](https://github.com/hussain4real/halal-wealth-os/pull/9) targets dev. Its
+first reviewed source head was 47372d62bd9dadc3060d187d35e085ff1ad6b8d2. The
+original attempt-1 [hosted run](https://github.com/hussain4real/halal-wealth-os/actions/runs/39144154216)
+passed. Raw logs verify the 519-test / 3,305-assertion baseline, the intended
+one-failure probe alongside 519 passing tests / 3,306 assertions, and the
+restored 519-test / 3,305-assertion baseline, with 2,544/2,744 application
+statements covered in both full gates.
+
+Hosted review identified E06: the active-run checkpoint still contained the
+initial cycle-1 NOT_RUN text despite the later observed gates. The current
+checkpoint and cycle count now reflect the actual publication state. This
+correction changes documentation only; validated application/test/frontend
+bytes and all local full, TIA and rendered evidence remain unchanged. Planning
+and lifecycle checks plus independent exact-document/commit review are required
+before publication. Fresh hosted CI/review on the corrected head remains pending;
+no merge, phase acceptance or later work is inferred from the first-head CI.

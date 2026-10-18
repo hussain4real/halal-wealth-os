@@ -20,9 +20,9 @@
         "baseline_head": "6a10cff7a772dff0d88efcf5104d3c3f7d37b149",
         "started_at": "2026-10-18T14:52:56.411032+00:00",
         "status": "IN_PROGRESS",
-        "cycles_used": 2,
+        "cycles_used": 3,
         "max_cycles": 6,
-        "checkpoint": "Cycle1 canonical asset/account/opening/mode design and implementation; all new tests NOT_RUN"
+        "checkpoint": "Cycle 3 publication: local full 519/3305, source/rendered and TIA gates pass; PR 9 first-head CI passed; stale checkpoint corrected; refreshed exact-head CI/review and dev merge/post-CI pending."
     },
     "repository": {
         "root": null,
@@ -362,8 +362,8 @@
     "execution_status": {
         "phase": "M3-P1",
         "status": "READY_FOR_REVIEW",
-        "checkpoint": "Cycle2 local full/source/rendered/TIA gates passed; final sanitation/exactcommit/hostedCIreview/devmerge/postCI pending; owner acceptance separate",
-        "observed_at": "2026-10-18T16:10:40.242142+00:00"
+        "checkpoint": "Cycle 3 publication: local full 519/3305, source/rendered and TIA gates pass; PR 9 first-head CI passed; stale checkpoint corrected; refreshed exact-head CI/review and dev merge/post-CI pending.",
+        "observed_at": "2026-10-18T16:21:56.680154+00:00"
     },
     "dependency_patch": {
         "authorized": true,
@@ -1182,7 +1182,7 @@
     "m3p1_checkpoint": {
         "status": "READY_FOR_REVIEW",
         "accepted": false,
-        "cycles_used": 2,
+        "cycles_used": 3,
         "max_cycles": 6,
         "baseline_head": "6a10cff7a772dff0d88efcf5104d3c3f7d37b149",
         "prior_acceptance_publication_head": "9f02a974647112e8c5a9c8a22001b2336496d48a",
@@ -1233,7 +1233,7 @@
             "native_planner": "PASS; simulated previous hashes only, no source/cache mutation or impacted execution",
             "complete_branch_results": 519
         },
-        "publication": "PENDING_FINAL_SANITATION_EXACT_COMMIT_HOSTED_CI_REVIEW_DEV_MERGE_POST_CI",
+        "publication": "PR9_OPEN;FIRST_HEAD_CI_PASS;CYCLE3_DOCUMENT_CHECKPOINT_CORRECTION_PENDING_EXACT_HEAD_REVIEW_CI",
         "cycle_history": [
             {
                 "cycle": 1,
@@ -1253,7 +1253,22 @@
                 "source_review": "PASS",
                 "rendered_review": "PASS",
                 "tia": "PASS"
+            },
+            {
+                "cycle": 3,
+                "scope": "Documentation-only active-run checkpoint correction from hosted review",
+                "application_source_changed": false,
+                "first_head_ci": "PASS",
+                "refreshed_hosted_head_review_ci": "PENDING"
             }
-        ]
+        ],
+        "first_publication": {
+            "pull_request": 9,
+            "source_head": "47372d62bd9dadc3060d187d35e085ff1ad6b8d2",
+            "original_ci_run": 39144154216,
+            "original_ci_attempt": 1,
+            "baseline_deliberate_restored": "PASS",
+            "review_finding": "E06 stale active-run checkpoint corrected in cycle3; fresh exact-head review pending"
+        }
     }
 }
