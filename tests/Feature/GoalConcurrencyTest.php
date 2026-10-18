@@ -178,6 +178,8 @@ test('goal migration refuses retained history and empty roundtrip preserves M1 a
     BudgetFixtures::rule($o, $cat);
     $before = DB::table('journal_entries')->get()->toJson();
     $budgets = DB::table('planning_schedules')->get()->toJson();
+    // Remove the later empty cash settings schema before this phase's downgrade.
+    $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
     $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
     expect(Schema::hasTable('goal_plans'))->toBeFalse();
     $this->artisan('migrate', ['--force' => true])->assertExitCode(0);
