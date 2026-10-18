@@ -204,3 +204,24 @@ native money, attributed FX cutoff, ownership, idempotency and retained history.
 No automatic transfers, trading, bank integration, main/stage change, deployment,
 credentials or security-setting changes. M2-P3/M2 acceptance remains human-only;
 stop after independent M2 review for owner milestone acceptance before M3.
+
+## Current M3-P1 authority
+
+The human owner explicitly accepted M2-P3 and M2 at 14:41 UTC on 18 October 2026,
+approved publication of the five final sanitized review records, and authorized
+canonical M3-P1 through implementation, independent source/rendered review,
+sanitized draft PR to dev, normal merge after exact-head reviews/CI and original
+dev-push CI. The manager delegates accurate acceptance recording and sole
+implementation ownership to this coordinator. This supersedes the earlier
+stop-before-M3 boundary only for M3-P1. Preserve all prior history, PHP8.5-only,
+full starter features, Pest TIA and full uncached gates. At most six scoped
+implementation cycles; no implementation subagents. Independent source-read-only
+reviewers use exclusive owned test resources. Detailed investment accounts
+contribute cash plus positions; aggregate accounts contribute one selected whole
+account value. Preserve exact fractional units/prices, unknown basis, immutable
+opening evidence, reconciliation previews, owner isolation and retained history.
+Platform labels imply no broker connection, verified ownership or Shariah status.
+Never seed real prices/listing dates/compliance from earlier chat examples.
+No M3-P2 trades/IPO/corporate actions, broker integration, complex sukuk cashflows,
+derivatives, assumed current market data, main/stage changes, deployment, new
+credentials or security-setting changes. Stop for owner M3-P1 acceptance.
