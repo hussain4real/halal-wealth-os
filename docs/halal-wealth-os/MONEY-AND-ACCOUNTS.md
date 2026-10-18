@@ -57,7 +57,10 @@ scoped. Clearing never inflates displayed wealth. No cross-currency net-worth
 aggregate is implemented or implied.
 
 AccountBalanceReader remains a read-only port. PostedAccountBalances reads
-opening completeness and the exact posted sum in one PostgreSQL statement.
+opening existence/amount, linked journal identity/status, completeness and the
+exact posted sum in one PostgreSQL statement. Account detail/list serialization
+uses this immutable per-account snapshot, without a later status query. This
+does not promise a shared snapshot across every account in a list.
 Both posted originals and originals labelled reversed contribute alongside
 their linked reversal legs. The full sum is checked only after cancellation.
 A genuinely complete empty ledger derives zero. An unconsumed opening request

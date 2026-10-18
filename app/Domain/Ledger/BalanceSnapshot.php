@@ -11,15 +11,15 @@ use InvalidArgumentException;
 /** Read-only derived values. An unposted request is never a movement. */
 final readonly class BalanceSnapshot
 {
-    private function __construct(public Currency $currency, public ?Money $money, public ?string $unavailableReason = null) {}
+    private function __construct(public Currency $currency, public ?Money $money, public ?string $unavailableReason = null, public ?OpeningRequestSnapshot $openingRequest = null) {}
 
-    public static function unavailable(Currency $currency, string $reason = 'source_unavailable'): self
+    public static function unavailable(Currency $currency, string $reason = 'source_unavailable', ?OpeningRequestSnapshot $openingRequest = null): self
     {
-        return new self($currency, null, $reason);
+        return new self($currency, null, $reason, $openingRequest);
     }
 
     /** @param iterable<Money> $completeSignedMovements Debit positive, credit negative. */
-    public static function derive(Currency $currency, iterable $completeSignedMovements): self
+    public static function derive(Currency $currency, iterable $completeSignedMovements, ?OpeningRequestSnapshot $openingRequest = null): self
     {
         $minor = '0';
         foreach ($completeSignedMovements as $movement) {
@@ -29,7 +29,7 @@ final readonly class BalanceSnapshot
             $minor = bcadd($minor, $movement->minor, 0);
         }
 
-        return new self($currency, Money::fromMinor($currency, $minor));
+        return new self($currency, Money::fromMinor($currency, $minor), openingRequest: $openingRequest);
     }
 
     public function netWorthContribution(AccountType $type): ?Money

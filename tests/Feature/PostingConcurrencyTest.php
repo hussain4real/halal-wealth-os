@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Domain\Ledger\AccountBalanceReader;
 use App\Domain\Ledger\AccountType;
+use App\Domain\Ledger\BalanceSnapshot;
 use App\Domain\Ledger\CreateAccount;
 use App\Domain\Ledger\JournalPosted;
 use App\Domain\Ledger\PostingService;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 // Real commits, independent PostgreSQL connections, no wrapping test transaction.
@@ -292,3 +294,58 @@ test('PostgreSQL rejects unbalanced state transitions and pending legs at actual
         $this->assertDatabaseCount('postings', 0);
     }
 });
+
+test('account responses retain one financial snapshot across a separate opening or reversal commit', function (string $surface, string $operation) {
+    $owner = User::factory()->create();
+    $account = app(CreateAccount::class)->create($owner, 'Synthetic snapshot race', AccountType::Bank, Currency::QAR, Money::fromMinor(Currency::QAR, '12550'));
+    $original = $operation === 'reverse' ? app(PostingService::class)->postOpening($owner, (string) $account->id, 'snapshot-original') : null;
+    $reader = app(AccountBalanceReader::class);
+    $readerBackend = DB::selectOne('select pg_backend_pid() as pid')->pid;
+    $connection = DB::getDefaultConnection();
+    config(['database.connections.snapshot_writer' => config('database.connections.'.$connection)]);
+    $committed = null;
+    $commit = function () use ($connection, $readerBackend, $owner, $account, $original, &$committed): void {
+        DB::setDefaultConnection('snapshot_writer');
+        try {
+            expect(DB::selectOne('select pg_backend_pid() as pid')->pid)->not->toBe($readerBackend);
+            $committed = $original === null
+                ? app(PostingService::class)->postOpening($owner, (string) $account->id, 'snapshot-opening')
+                : app(PostingService::class)->reverse($owner, (string) $original->id, 'snapshot-reversal', 'Synthetic snapshot reversal');
+            expect(DB::transactionLevel())->toBe(0);
+        } finally {
+            DB::disconnect('snapshot_writer');
+            DB::setDefaultConnection($connection);
+        }
+    };
+    app()->instance(AccountBalanceReader::class, new class($reader, $commit, $account->id) implements AccountBalanceReader
+    {
+        private bool $committed = false;
+
+        public function __construct(private AccountBalanceReader $reader, private \Closure $commit, private int $accountId) {}
+
+        public function forAccount(Account $account): BalanceSnapshot
+        {
+            $snapshot = $this->reader->forAccount($account);
+            if ($account->id === $this->accountId && ! $this->committed) {
+                $this->committed = true;
+                ($this->commit)();
+            }
+
+            return $snapshot;
+        }
+    });
+    $url = $surface === 'show' ? '/accounts/'.$account->id : '/accounts';
+    $path = $surface === 'show' ? 'account.' : 'accounts.0.';
+    $this->actingAs($owner)->get($url)->assertInertia(fn (Assert $page) => $page
+        ->where($path.'opening_request.status', $original === null ? 'awaiting_posting' : 'posted')
+        ->where($path.'opening_request.journal_id', $original === null ? null : (string) $original->id)
+        ->where($path.'balance', $original === null ? null : Money::fromMinor(Currency::QAR, '12550')->jsonSerialize())
+        ->where($path.'balance_reason', $original === null ? 'opening_pending' : null));
+    expect($committed)->toBeInstanceOf(JournalEntry::class);
+    app()->instance(AccountBalanceReader::class, $reader);
+    $this->get($url)->assertInertia(fn (Assert $page) => $page
+        ->where($path.'opening_request.status', $original === null ? 'posted' : 'reversed')
+        ->where($path.'opening_request.journal_id', (string) ($original?->id ?? $committed->id))
+        ->where($path.'balance.minor', $original === null ? '12550' : '0')
+        ->where($path.'balance_reason', null));
+})->with([['show', 'opening'], ['index', 'opening'], ['show', 'reverse'], ['index', 'reverse']]);

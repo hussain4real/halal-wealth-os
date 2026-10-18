@@ -32,3 +32,21 @@ The separate [visual/UX report](M1-P2-visual-review.md) records 28 actual-browse
 assertions and 22 inspected screenshots, with all observed findings resolved.
 No original private scenarios, runtime logs, user data, screenshots or access
 credentials are included in this public report.
+
+## Hosted snapshot-race correction
+
+The original PR CI passed on the initially reviewed commit. Hosted review then
+found one P2: a concurrent opening/reversal commit between separate balance and
+opening-status reads could produce contradictory account detail/list payloads.
+The coordinator reproduced all four interleavings using a distinct PostgreSQL
+backend and actual commit. They failed before correction and passed afterward
+(4 cases/124 assertions). Zero and out-of-range metadata cases also passed.
+
+The source reviewer confirmed one statement now captures opening existence,
+amount, owner-scoped journal identity/status and exact posted sum. Both derived
+and unavailable snapshots retain the same opening metadata; the controller no
+longer issues a separate relation/status read. Public JSON shape and reviewed
+Vue files are unchanged. The final full gate passed223 tests/1,280 assertions,
+655/699 statements; fresh TIA record and explicit223-result replay passed.
+This fourth scoped cycle preserves the earlier history and leaves exact-head
+follow-up CI/review and merge verification as distinct publication gates.

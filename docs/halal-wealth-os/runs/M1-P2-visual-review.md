@@ -22,3 +22,10 @@ Enlarged check uses720 CSS px at 2x scale for1440px display 200%-equivalent refl
 native browser-chrome zoom was not automated. This is not full WCAG, screen-reader,
 cross-browser or device certification. Review complements functional/concurrency
 gates and does not accept the phase.
+
+The later cycle4 account snapshot correction changes backend reads only. The
+reviewer rechecked all four reviewed Vue hashes and the nullable opening-request
+JSON shape: both remain unchanged. The prior28/22 rendered evidence remains
+applicable to presentation; it is not runtime verification of that backend patch.
+Fresh separate-connection HTTP regressions and the full223-case gate cover the
+corrected read behavior. No repeat browser run is claimed.

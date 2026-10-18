@@ -189,6 +189,32 @@ test('a consumed opening rejects an unused key rather than returning an unbound 
     $this->assertDatabaseCount('journal_entries', 1);
 });
 
+test('opening snapshot metadata survives zero and out of range derived balances', function (string $minor) {
+    $owner = User::factory()->create();
+    $account = postingAccount($owner, opening: $minor);
+    $reader = app(AccountBalanceReader::class);
+    $pending = $reader->forAccount($account);
+    expect($pending->money)->toBeNull()->and($pending->openingRequest?->amount->minor)->toBe($minor)
+        ->and($pending->openingRequest?->journalId)->toBeNull()->and($pending->openingRequest?->status)->toBe('awaiting_posting');
+    $service = app(PostingService::class);
+    $opening = $service->postOpening($owner, (string) $account->id, 'snapshot-boundary-opening');
+    if ($minor === Money::MAX_MINOR) {
+        $service->record($owner, 'snapshot-boundary-income', postingInput($account, amount: '0.01'));
+    }
+    $snapshot = $reader->forAccount($account);
+    expect($snapshot->money?->minor)->toBe($minor === '0' ? '0' : null)
+        ->and($snapshot->unavailableReason)->toBe($minor === '0' ? null : 'out_of_range')
+        ->and($snapshot->openingRequest?->journalId)->toBe((string) $opening->id)
+        ->and($snapshot->openingRequest?->status)->toBe('posted')->and($snapshot->openingRequest?->amount->minor)->toBe($minor);
+    $this->actingAs($owner)->get('/accounts/'.$account->id)->assertInertia(fn (Assert $page) => $page
+        ->where('account.opening_request.journal_id', (string) $opening->id)->where('account.opening_request.status', 'posted')
+        ->where('account.opening_request.amount.minor', $minor)->where('account.balance_reason', $minor === '0' ? null : 'out_of_range'));
+    $service->reverse($owner, (string) $opening->id, 'snapshot-boundary-reverse', 'Synthetic boundary reversal');
+    $reversed = $reader->forAccount($account);
+    expect($reversed->money?->minor)->toBe($minor === '0' ? '0' : '1')->and($reversed->openingRequest?->status)->toBe('reversed')
+        ->and($reversed->openingRequest?->journalId)->toBe((string) $opening->id)->and($reversed->unavailableReason)->toBeNull();
+})->with(['0', Money::MAX_MINOR]);
+
 test('year zero is rejected as a field error before reaching PostgreSQL', function () {
     $owner = User::factory()->create();
     $account = postingAccount($owner);

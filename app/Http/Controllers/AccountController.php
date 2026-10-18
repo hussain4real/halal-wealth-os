@@ -23,7 +23,7 @@ class AccountController extends Controller
 {
     public function index(Request $request, AccountBalanceReader $balances): Response
     {
-        $accounts = Account::query()->ownedBy($this->owner($request))->with('openingBalanceIntent')->orderBy('id')->get();
+        $accounts = Account::query()->ownedBy($this->owner($request))->orderBy('id')->get();
 
         return Inertia::render('accounts/Index', [
             'accounts' => $accounts->map(fn (Account $account): array => $this->payload($account, $balances))->all(),
@@ -47,7 +47,7 @@ class AccountController extends Controller
         $record = $this->owned($request, $account);
         Gate::authorize('view', $record);
 
-        return Inertia::render('accounts/Show', ['account' => $this->payload($record->load('openingBalanceIntent'), $balances)]);
+        return Inertia::render('accounts/Show', ['account' => $this->payload($record, $balances)]);
     }
 
     public function update(UpdateAccountRequest $request, string $account): RedirectResponse
@@ -101,8 +101,6 @@ class AccountController extends Controller
     private function payload(Account $account, AccountBalanceReader $balances): array
     {
         $snapshot = $balances->forAccount($account);
-        $intent = $account->openingBalanceIntent;
-        $openingJournal = $intent === null ? null : DB::table('opening_balance_postings')->join('journal_entries', 'journal_entries.id', '=', 'opening_balance_postings.journal_id')->where('opening_intent_id', $intent->id)->where('journal_entries.owner_id', $account->owner_id)->first(['journal_entries.id', 'journal_entries.status']);
 
         return [
             'id' => (string) $account->id,
@@ -116,11 +114,7 @@ class AccountController extends Controller
             'balance_status' => $snapshot->money === null ? 'unavailable' : 'derived',
             'balance_reason' => $snapshot->unavailableReason,
             'net_worth_contribution' => $snapshot->netWorthContribution($account->type)?->jsonSerialize(),
-            'opening_request' => $intent === null ? null : [
-                'status' => $openingJournal->status ?? 'awaiting_posting',
-                'journal_id' => $openingJournal === null ? null : (string) $openingJournal->id,
-                'amount' => Money::fromMinor($intent->currency_code, $intent->amount_minor)->jsonSerialize(),
-            ],
+            'opening_request' => $snapshot->openingRequest?->jsonSerialize(),
         ];
     }
 }

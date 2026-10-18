@@ -57,6 +57,13 @@ Archiving prevents new movements/replacements; necessary reversal of existing
 posted history remains possible. Authorized exact retries remain readable
 following archive, without creating additional movements.
 
+Account read responses capture opening existence/amount, linked journal ID/status
+and the complete posted sum in one PostgreSQL statement. The controller returns
+that immutable per-account snapshot even if another connection commits before
+serialization. The next read observes the new committed state. Pending, derived
+zero and out-of-range snapshots retain matching opening metadata. This is a
+per-account guarantee, not a shared snapshot across all accounts in a list.
+
 ## Exact amounts, dates and completeness
 
 Positive income, expense and transfer amounts are required. Zero openings are
