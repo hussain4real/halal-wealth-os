@@ -184,3 +184,23 @@ preserve its invariant and undergo separate review. No M2-P3 implementation,
 automatic bank transfers, assumed completion, interest projections, duplicate
 reminders, main/stage changes, deployment, live integrations, credentials or
 security-setting changes. M2-P2 and M2 acceptance remain human decisions.
+
+## Current M2-P3 and independent M2 review authority
+
+The human owner explicitly accepted M2-P2 and authorized publication of its four
+final reviewed records, then M2-P3 implementation, independent source/rendered
+review, sanitized draft PR to dev and normal merge after exact-head reviews/CI,
+original dev-push CI verification and independent M2 milestone review. The manager
+delegates acceptance recording and sole M2-P3 ownership to this coordinator.
+This supersedes the preceding no-M2-P3 boundary only within canonical M2-P3 scope.
+Preserve all earlier history, PHP 8.5-only, the full Vue/Inertia starter, Pest TIA
+and uncached full CI. At most six scoped implementation cycles; one implementation
+writer and independent read-only reviewers with exclusive verification resources.
+Separate actual signed cash, protected backing, nominal claims and underfunding.
+Future income is forecast only; goal high-water and clamped backing cannot replace
+signed cash. Explicit identity must prevent overlap between protection and future
+obligations; paid actual allocations are not future reservations. Preserve exact
+native money, attributed FX cutoff, ownership, idempotency and retained history.
+No automatic transfers, trading, bank integration, main/stage change, deployment,
+credentials or security-setting changes. M2-P3/M2 acceptance remains human-only;
+stop after independent M2 review for owner milestone acceptance before M3.

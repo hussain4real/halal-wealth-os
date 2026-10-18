@@ -1,5 +1,11 @@
 # M2-P2 implementation and verification
 
+Current status: ACCEPTED by the human owner at 11:19 UTC on 18 October 2026;
+final record publication and M2-P3 are authorized. See [acceptance](M2-P2-acceptance.md).
+The engineering record below preserves its historical status and cycle history.
+
+Historical engineering checkpoint:
+
 Status: READY_FOR_REVIEW, unaccepted. Four scoped cycles of at most six. The human
 owner accepted M2-P1 and authorized this phase through independent source/rendered
 review, sanitized draft PR to dev, normal merge after exact-head reviews/CI and
@@ -100,3 +106,18 @@ were zero after guarded cleanup; independent browser resources were released.
 
 Prior records and real failed/interrupted evidence remain retained privately;
 cycle history is never reset. Publication and human acceptance remain separate.
+
+## Final engineering handoff
+
+[PR 7](https://github.com/hussain4real/halal-wealth-os/pull/7) merged normally
+into dev at d1371f01fbc3e76743ff4d32668c4982bcc82f6b, with the exact reviewed source tree
+7bc759a17febf0e1c9b750265d98eba828a51edd. The original PR CI and original dev-push CI both
+passed on attempt 1; actual baseline, deliberate-failure and restored-baseline
+logs were checked. Exact-head hosted review completed without findings, and a
+fresh independent source confirmation preceded merge. See
+[publication evidence](M2-P2-publication.md).
+
+The sole claim is closed with four scoped cycles preserved. M2-P2 remains
+READY_FOR_REVIEW and human-unaccepted; M2 remains unaccepted. Four final status
+records are local/unpublished for owner review. No implementation change is
+pending; M2-P3, main/stage promotion and deployment have not started.
