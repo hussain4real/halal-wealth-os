@@ -42,3 +42,17 @@ and private canonical F04; the reviewer did not execute those checks. Focused
 independent rendered review passed16 distinct checks/13 inspected screenshots.
 New exact committed-head confirmation, hosted review and CI remain separate gates.
 Earlier a25b80c signoff is historical and does not approve this delta.
+
+## Exact corrected head and later milestone review
+
+The source reviewer separately confirmed committed head
+b3e456544f0ccebea782f3f8d95f9c3d4309aa2d and tree
+cd7141a6969fafecd6f29bc1caa10ffd7bc76a7e against all33 frozen source/policy
+hashes. Separate sanitation review matched all469 index/HEAD blobs and the PR
+text. Hosted review then completed without findings, normal dev merge retained
+the exact tree, and original post-merge CI passed.
+
+A separate reviewer completed the [independent M1 technical review](M1-independent-review.md)
+on the clean merged source with fresh full execution and browser checks. Human
+phase/milestone acceptance was not inferred. Later local status/header corrections
+are a separately reviewed documentation delta, not changes to the tested code.

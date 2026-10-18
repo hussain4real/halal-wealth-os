@@ -1,6 +1,6 @@
 # M1-P3 implementation and verification
 
-Status: READY_FOR_REVIEW, unaccepted; corrected local gates passed. Three of at most six scoped implementation/review cycles
+Status: READY_FOR_REVIEW, unaccepted; dev merge, original post-merge CI and independent M1 technical review passed. Three of at most six scoped implementation/review cycles
 used. The owner accepted M1-P2 and authorized this phase through implementation,
 independent source/rendered review, sanitized draft PR to dev, exact-head CI and
 normal merge, followed by independent M1 review. The sole coordinator preserves
@@ -150,3 +150,38 @@ Exact-head publication evidence follows independently. The old
 300-case hosted result does not prove this corrected candidate. Phase/milestone
 acceptance, normal merge, original post-merge CI and independent M1 review remain
 separate gates; M1-P3 is unaccepted.
+
+## Final dev merge and independent M1 checkpoint
+
+[PR #5](https://github.com/hussain4real/halal-wealth-os/pull/5) merged normally
+as b0f54bfa60dc2cb866ad35b7f52447a1578f600d, preserving exact reviewed head
+b3e456544f0ccebea782f3f8d95f9c3d4309aa2d and tree
+cd7141a6969fafecd6f29bc1caa10ffd7bc76a7e. Corrected original PR CI39105496328
+and original dev-push CI39105779693 passed attempt1, with actual baseline,
+intended failure and restoration verified. Exact-head hosted review completed
+without findings; the original P1 thread was answered and resolved.
+
+The independent M1 reviewer independently rechecked merge/source/remote evidence,
+then executed a fresh full310-test/1,927-assertion gate in124.10 seconds, with
+zero failures/errors/skips and1,053/1,137 coverage. Private F04 passed five checks;
+F02/F03 transfer/failure/retry probes also passed. Fresh desktop/360px Chromium
+review passed18 distinct checks with10 inspected screenshots. There were no
+JavaScript errors or unresolved application findings. Server/browser stopped,
+owned disposable DB reset to empty, and all469 tracked source hashes remained
+unchanged at the review freeze.
+
+See [the publication record](M1-P3-publication.md) and
+[independent milestone report](M1-independent-review.md). Formal M1 outcome is
+CHANGES_REQUIRED solely because M1-P3 human acceptance is missing. Technical
+verification is PASS. The residual stale posting-contract status header was
+corrected in this separate local documentation checkpoint after source freeze.
+These final records remain locally unpublished. Three implementation cycles are
+retained; phase/milestone remain unaccepted, and no M2 is started.
+
+## Subsequent owner decision
+
+The owner explicitly accepted M1-P3 and M1 at07:19UTC on18 October2026 and
+approved publishing these final records plus M2-P1 work. Earlier unaccepted/
+CHANGES_REQUIRED statements describe their observed checkpoint. See
+[M1-P3 acceptance](M1-P3-acceptance.md) and [M1 acceptance](M1-acceptance.md).
+The accepted application source and original test evidence remain unchanged.

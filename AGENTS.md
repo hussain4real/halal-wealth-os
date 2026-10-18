@@ -143,3 +143,24 @@ evidence and coherent saved financial snapshots. Include actual rendered mobile/
 desktop UX, accessibility and recovery review. No live financial integrations,
 new credentials, main/stage changes or deployment. Stop after the independent
 M1 review for human milestone acceptance; no M2. Never self-accept phases/gates.
+
+## Current M2-P1 authority
+
+The human owner explicitly accepted M1-P3 and M1, approved publication of the
+final review documents, and authorized M2-P1 through implementation, independent
+source/rendered review, sanitized draft PR to dev and normal merge after
+exact-head reviews/CI, then original dev-push CI. The manager delegates sole
+implementation and accurate acceptance/claim recording to this coordinator.
+This supersedes the prior stop-before-M2 boundary only for phases/M2-P1.md.
+Preserve all prior history, the eight reviewed M1 documents, PHP8.5-only, full
+official Vue/Inertia starter features, Pest TIA and full uncached gates. At most
+six scoped cycles; independent source-read-only reviewers and exclusive owned
+disposable PostgreSQL/browser resources. Forecasts are never actual cash;
+ScheduleOccurrence supports multiple explicit actual allocations. Matching only
+annotates existing actuals outside immutable journal metadata and never posts.
+Use Asia/Qatar planning dates, explicit UTC ledger-date conventions, independent
+normal/emergency flags and exact native currencies. Keep original F06 private;
+public synthetic translations preserve its invariant and are separately reviewed.
+No M2-P2/P3, bank instructions/default reminders, main/stage changes, deployment,
+live financial actions, new credentials or security-setting changes. M2-P1 and
+M2 acceptance remain human-only.

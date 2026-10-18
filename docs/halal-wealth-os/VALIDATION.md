@@ -64,5 +64,16 @@ The phase harness now requires ManualFxTest, FxConcurrencyTest, LedgerHttpTest,
 ReconciliationTest and FxMathTest in addition to every prior implemented suite.
 Real PostgreSQL commits cover paired posting/reversal constraints, retry races,
 listener failure recovery, shared snapshots and retained-data migration policy.
-Unimplemented-phase rejection now targets M2-P1. Browser evidence, private
+Unimplemented-phase rejection now targets M2-P2. Browser evidence, private
 canonical scenarios and exact-head publication checks remain separate gates.
+
+## M2-P1 implemented checks
+
+The harness requires BudgetTest, BudgetHttpTest, BudgetConcurrencyTest and
+BudgetCalendarTest alongside every prior suite. Planning tests cover independent
+flags, forecast-only salary, configured cadence/provision start, UTC actual dates
+and Qatar due dates, many-to-many exact allocations, historical corrections,
+owner isolation, retries and real independent PostgreSQL backend contention.
+The essential run-rate uses the explicitly labelled month-end policy. Historical
+M1 migration tests target their own schema after addition of the planning schema.
+Private original F06, rendered review and publication gates remain separate.
