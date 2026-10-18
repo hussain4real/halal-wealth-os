@@ -38,6 +38,10 @@ class TransactionController extends Controller
         if ($group !== null) {
             return redirect('/fx/'.$group);
         }
+        $investment = $this->investmentMember($original);
+        if ($investment !== null) {
+            return redirect('/portfolio/'.$investment['portfolio_account_id'].'/events/'.$investment['event_id']);
+        }
         abort_unless($original->status === 'posted' && in_array($original->kind, ['income', 'expense', 'transfer'], true), 404);
 
         return Inertia::render('transactions/Create', ['accounts' => $this->choices($request, $balances), 'today' => now()->toDateString(), 'original' => $this->payload($original)]);
@@ -142,7 +146,15 @@ class TransactionController extends Controller
         return ['id' => (string) $journal->id, 'reference' => $journal->reference, 'kind' => $journal->kind, 'status' => $journal->status, 'description' => $journal->description,
             'effective_date' => $journal->effective_date->format('Y-m-d'), 'recorded_at' => $journal->created_at->toIso8601String(), 'receipt_reference' => $journal->receipt_reference,
             'reverses_id' => $journal->reverses_journal_id === null ? null : (string) $journal->reverses_journal_id, 'replaces_id' => $journal->replaces_journal_id === null ? null : (string) $journal->replaces_journal_id,
-            'primary' => $primary, 'movements' => array_values($movements),
+            'primary' => $primary, 'movements' => array_values($movements), 'investment' => $this->investmentMember($journal),
             'fx_operation_id' => ($group = DB::table('fx_operation_journals')->where('owner_id', $journal->owner_id)->where('journal_id', $journal->id)->value('operation_id')) === null ? null : (string) $group];
+    }
+
+    /** @return array{event_id:string,portfolio_account_id:string}|null */
+    private function investmentMember(JournalEntry $journal): ?array
+    {
+        $member = DB::table('investment_event_journals')->where('owner_id', $journal->owner_id)->where('journal_id', $journal->id)->first();
+
+        return $member === null ? null : ['event_id' => (string) $member->event_id, 'portfolio_account_id' => (string) $member->portfolio_account_id];
     }
 }

@@ -45,6 +45,11 @@ defineProps<{
             }}. Source: {{ account.source }}.</template
         >
         <div class="flex flex-wrap gap-3">
+            <Button as-child variant="outline"
+                ><Link :href="'/portfolio/' + account.portfolio_id + '/events'"
+                    >Investment activity &amp; IPOs</Link
+                ></Button
+            >
             <template v-if="!account.archived"
                 ><Button as-child
                     ><Link
@@ -92,7 +97,7 @@ defineProps<{
                     {{
                         account.mode === 'aggregate'
                             ? 'Retained for reconciliation. This cash is already included in the whole-account value and is excluded from the selected contribution.'
-                            : 'Detailed mode includes this signed cash once, together with the opening positions.'
+                            : 'Detailed mode includes this signed cash once, together with replayed positions and paid application receivables.'
                     }}
                 </p>
                 <p class="mt-4 text-xs text-muted-foreground">
@@ -106,7 +111,7 @@ defineProps<{
         <section class="overflow-hidden rounded-2xl border bg-card">
             <header class="border-b p-5">
                 <h2 class="text-lg font-semibold">
-                    Opening positions
+                    Event-derived positions
                     <span class="text-sm font-normal text-muted-foreground"
                         >· {{ account.position_count }} total</span
                     >
@@ -120,7 +125,7 @@ defineProps<{
                               account.opening.source +
                               ' · statement v' +
                               account.opening.version
-                            : 'No opening statement recorded. The position book is empty.'
+                            : 'No opening statement recorded. Holdings derive from any retained investment events.'
                     }}
                 </p>
                 <p
@@ -135,8 +140,8 @@ defineProps<{
                 v-if="!positions.items.length"
                 class="p-6 text-sm text-muted-foreground"
             >
-                No positions on this page. An explicitly empty opening statement
-                is allowed.
+                No open positions on this page. Opening evidence and all
+                investment activity remain in retained history.
             </p>
             <article
                 v-for="row in positions.items"
@@ -197,7 +202,7 @@ defineProps<{
                     </div>
                     <div>
                         <dt class="text-xs text-muted-foreground">
-                            Opening cost basis
+                            Current replayed book cost
                         </dt>
                         <dd class="mt-1">
                             <CurrencyDisplay

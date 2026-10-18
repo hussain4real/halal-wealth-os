@@ -178,6 +178,9 @@ test('goal migration refuses retained history and empty roundtrip preserves M1 a
     BudgetFixtures::rule($o, $cat);
     $before = DB::table('journal_entries')->get()->toJson();
     $budgets = DB::table('planning_schedules')->get()->toJson();
+    // Remove the empty investment event schema without changing historical journal assertions.
+    $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
+    expect(Schema::hasTable('investment_events'))->toBeFalse();
     // Remove the later empty portfolio schema before the historical phase schemas.
     $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
     expect(Schema::hasTable('portfolio_accounts'))->toBeFalse();

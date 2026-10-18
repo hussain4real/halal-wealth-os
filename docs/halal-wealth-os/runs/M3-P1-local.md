@@ -1,5 +1,15 @@
 # M3-P1 implementation and verification
 
+Current owner decision: M3-P1 was human accepted at 17:09 UTC on 18 October 2026.
+See [phase acceptance](M3-P1-acceptance.md). Earlier readiness and pending statements
+below are preserved historical checkpoints. Final-record publication and M3-P2
+are now authorized; M3-P3 remains unauthorized.
+
+Current final checkpoint: normal dev merge and original post-merge CI passed.
+The active claim is closed, M3-P1 remains unaccepted, and final records are local
+for owner review. See [the publication record](M3-P1-publication.md). Earlier
+pending statements below describe their dated verification checkpoints.
+
 Status: READY_FOR_REVIEW, unaccepted. Cycle 3 of at most six. The human owner accepted
 M2-P3/M2 at 14:41 UTC on 18 October 2026 and approved M3-P1 through implementation,
 independent technical/rendered review, sanitized dev PR, normal merge after exact

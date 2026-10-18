@@ -51,6 +51,7 @@ final class PortfolioInput
         }
     }
 
+    /** @return numeric-string */
     public static function money(Currency $currency, mixed $value, string $field, bool $signed = false): string
     {
         try {
@@ -63,6 +64,20 @@ final class PortfolioInput
         } catch (InvalidArgumentException $e) {
             LedgerInput::fail($field, $e->getMessage());
         }
+    }
+
+    /** Normalize PostgreSQL BIGINTs and exact intermediate integers without accepting floats/exponents.
+     * @return numeric-string */
+    public static function integer(mixed $value): string
+    {
+        if (is_int($value)) {
+            $value = (string) $value;
+        }
+        if (! is_string($value) || ! is_numeric($value) || ! preg_match('/^-?[0-9]+$/D', $value)) {
+            LedgerInput::fail('amount', 'An exact integer amount is required.');
+        }
+
+        return bcadd($value, '0', 0);
     }
 
     /** Settle a full 24-place non-negative product without narrowing it first. */

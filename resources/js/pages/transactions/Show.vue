@@ -242,12 +242,29 @@ const reverse = () => {
                 ></Button
             >
         </section>
+        <section
+            v-if="transaction.investment"
+            class="rounded-2xl border p-5 sm:p-7"
+        >
+            <h2 class="font-medium">Part of an investment record</h2>
+            <p class="mt-2 text-sm text-muted-foreground">
+                Correct or cancel the investment fact and its cash movement
+                together.
+            </p>
+            <Button as-child variant="outline" class="mt-4 min-h-11"
+                ><Link
+                    :href="`/portfolio/${transaction.investment.portfolio_account_id}/events/${transaction.investment.event_id}`"
+                    >Open complete investment record</Link
+                ></Button
+            >
+        </section>
         <Dialog v-model:open="open"
             ><section
                 v-if="
                     transaction.status === 'posted' &&
                     transaction.kind !== 'reversal' &&
-                    !transaction.fx_operation_id
+                    !transaction.fx_operation_id &&
+                    !transaction.investment
                 "
                 class="rounded-2xl border border-dashed p-5 sm:p-7"
                 aria-labelledby="correction-heading"

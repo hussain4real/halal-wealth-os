@@ -87,7 +87,8 @@ final class PortfolioRead
         $date = substr($cutoff, 0, 10);
         $mode = $this->mode($owner, $id, $date);
         $opening = $this->opening($owner, $id, $date);
-        $rows = $this->rows($owner, $opening);
+        $investment = app(InvestmentReplay::class)->capture($owner, $id, $cutoff);
+        $rows = $investment['rows'];
         $ledger = app(FinancialSnapshot::class)->capture($owner, Currency::from($p->currency), $cutoff, (string) $p->account_id);
         $component = $ledger['components'][0];
         $actual = ['portfolio_id' => (string) $p->id, 'account_id' => (string) $p->account_id, 'name' => $p->name, 'currency' => $p->currency,
@@ -96,9 +97,10 @@ final class PortfolioRead
             'mode_version' => $mode === null ? null : (string) $mode->version, 'mode_effective_date' => $mode?->effective_date,
             'aggregate_value' => $mode?->aggregate_minor === null ? null : Money::fromMinor(Currency::from($p->currency), (string) $mode->aggregate_minor)->jsonSerialize(),
             'aggregate_as_of' => $mode?->aggregate_as_of,
+            'aggregate_event_watermark' => (string) ($mode->investment_watermark ?? 0),
             'opening' => $opening === null ? null : ['id' => (string) $opening->id, 'reference' => $opening->reference, 'version' => (string) $opening->version,
                 'as_of' => $opening->as_of, 'source' => $opening->source, 'reason' => $opening->reason],
-            'rows' => $rows, 'ledger_cash' => $component['native'], 'ledger_reason' => $component['native_reason'], 'ledger_evidence' => $component,
+            'rows' => $rows, 'investment' => $investment, 'ledger_cash' => $component['native'], 'ledger_reason' => $component['native_reason'], 'ledger_evidence' => $component,
             'cutoff' => $cutoff, 'date' => $date, 'manual_reference_policy' => 'same-UTC-date-only;not-current-quotes'];
         $actual['contribution'] = $this->contribution($actual);
 
@@ -125,6 +127,8 @@ final class PortfolioRead
             $asOf = $proposed === null ? $state['aggregate_as_of'] : $proposed['aggregate_as_of'];
             if ($minor === null || $asOf !== $state['date']) {
                 $missing[] = 'aggregate_value_missing_for_date';
+            } elseif ($proposed === null && $state['investment']['source_event_ids'] !== [] && bccomp(end($state['investment']['source_event_ids']), $state['aggregate_event_watermark'], 0) > 0) {
+                $missing[] = 'aggregate_value_precedes_investment_events';
             } else {
                 $subtotal = $minor;
             }
@@ -157,6 +161,8 @@ final class PortfolioRead
                     }
                 }
                 $selected[] = 'opening_positions';
+                $subtotal = bcadd($subtotal, $state['investment']['receivable_minor'], 0);
+                $selected[] = 'paid_ipo_receivables';
             }
         }
         try {
@@ -167,8 +173,8 @@ final class PortfolioRead
         }
 
         return ['mode' => $mode, 'state' => $missing === [] ? 'complete' : 'incomplete', 'value' => $missing === [] ? $total : null,
-            'missing' => $missing, 'selected' => $selected, 'excluded' => $mode === 'aggregate' ? ['ledger_cash', 'opening_positions'] : ['whole_account_value'],
-            'as_of' => $state['date'], 'source' => 'manual_reference_and_posted_cash;not_live_market'];
+            'missing' => $missing, 'selected' => $selected, 'excluded' => $mode === 'aggregate' ? ['ledger_cash', 'opening_positions', 'paid_ipo_receivables'] : ['whole_account_value'],
+            'as_of' => $state['date'], 'source' => 'manual_reference_posted_cash_and_paid_subscription_receivables;not_live_market'];
     }
 
     /** @param array<string,mixed> $state */

@@ -79,6 +79,7 @@ final readonly class PortfolioService
                 return $row;
             }
             $account = $this->active($owner, $id);
+            $priorFrames = app(InvestmentReplay::class)->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'))['cash_frames'];
             $prior = $this->read->opening($owner, $id);
             if (($input['prior_id'] ?? '') !== ($prior === null ? '' : (string) $prior->id)) {
                 LedgerInput::fail('prior_id', 'The opening statement changed. Reload its current version before correcting.');
@@ -128,6 +129,7 @@ final readonly class PortfolioService
             foreach ($prepared as $entry) {
                 DB::table('portfolio_opening_rows')->insert(['opening_id' => $row->id, ...$entry]);
             }
+            app(InvestmentReplay::class)->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), true, $priorFrames);
 
             return $row;
         });
@@ -190,7 +192,7 @@ final readonly class PortfolioService
 
             return $this->record($owner, $key, 'portfolio_modes', $input, ['owner_id' => $owner->id, 'portfolio_account_id' => $id, 'reference' => (string) Str::ulid(),
                 'version' => $prior === null ? 1 : $prior->version + 1, 'supersedes_id' => $prior?->id, 'preview_id' => $preview->id,
-                'effective_date' => $preview->business_date, ...$payload]);
+                'effective_date' => $preview->business_date, 'investment_watermark' => $state['investment']['source_event_ids'] === [] ? 0 : end($state['investment']['source_event_ids']), ...$payload]);
         });
     }
 

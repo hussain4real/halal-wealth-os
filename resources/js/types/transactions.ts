@@ -25,6 +25,7 @@ export type Transaction = {
     reverses_id: string | null;
     replaces_id: string | null;
     fx_operation_id: string | null;
+    investment: { event_id: string; portfolio_account_id: string } | null;
     primary: Movement | null;
     movements: Movement[];
 };
