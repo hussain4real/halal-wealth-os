@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings;
 
 use App\Domain\Identity\SecurityAudit;
 use App\Domain\Identity\SecurityEvent;
+use App\Domain\Ledger\LedgerInput;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileDeleteRequest;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
@@ -12,6 +13,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
@@ -58,13 +60,16 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        if (Account::query()->ownedBy($user)->exists()) {
-            throw ValidationException::withMessages(['password' => 'Your financial accounts must be retained. Archive accounts instead of deleting this profile.']);
-        }
-
-        Auth::logout();
-
-        $user->delete();
+        DB::transaction(function () use ($user): void {
+            LedgerInput::lock($user);
+            if (Account::query()->ownedBy($user)->exists() || DB::table('planning_categories')->where('owner_id', $user->id)->exists()) {
+                throw ValidationException::withMessages(['password' => 'Your financial accounts and planning history must be retained. This profile cannot be deleted.']);
+            }
+            // Logout rotates remember-token state while the model still exists.
+            // Saving it after deletion would recreate an otherwise empty profile.
+            Auth::logout();
+            $user->delete();
+        });
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

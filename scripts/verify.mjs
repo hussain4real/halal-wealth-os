@@ -31,7 +31,15 @@ try {
     }
     if (
         phase &&
-        !['M0-P1', 'M0-P2', 'M0-P3', 'M1-P1', 'M1-P2', 'M1-P3'].includes(phase)
+        ![
+            'M0-P1',
+            'M0-P2',
+            'M0-P3',
+            'M1-P1',
+            'M1-P2',
+            'M1-P3',
+            'M2-P1',
+        ].includes(phase)
     ) {
         throw new VerificationFailure(
             `NOT_APPLICABLE: ${phase} has no implemented verification suite. No passing result is claimed.`,
@@ -48,6 +56,9 @@ try {
             '--test',
             'scripts/verification.test.mjs',
             'scripts/currency-display.test.mjs',
+            'scripts/planning-identity.test.mjs',
+            'scripts/receipt-picker.test.mjs',
+            'scripts/planning-match-draft.test.mjs',
         ]);
         const missing = [];
         for (const command of ['php', 'composer', 'node', 'npm', 'psql']) {
@@ -160,6 +171,11 @@ try {
             'LedgerHttpTest',
             'FxMathTest',
             'ReconciliationTest',
+            'BudgetTest',
+            'BudgetReadBoundaryTest',
+            'BudgetHttpTest',
+            'BudgetConcurrencyTest',
+            'BudgetCalendarTest',
         ]) {
             if (!discovered.stdout.includes(required)) {
                 throw new VerificationFailure(
@@ -179,7 +195,7 @@ try {
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
         console.log(
-            'PASS M0-P2, M0-P3, M1-P1, M1-P2 and M1-P3 implemented baseline',
+            'PASS M0-P2, M0-P3, M1-P1, M1-P2, M1-P3 and M2-P1 implemented baseline',
         );
         console.log(
             'NOT_APPLICABLE: future domain suites, integrations, live AI and deployment.',

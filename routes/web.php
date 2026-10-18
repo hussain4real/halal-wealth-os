@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\TransactionController;
@@ -11,6 +12,21 @@ Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
+    Route::get('budgets', [BudgetController::class, 'index'])->name('budgets.index');
+    Route::get('budgets/schedules/{schedule}/receipts', [BudgetController::class, 'receipts'])->name('budgets.receipts');
+    Route::get('budgets/occurrences/{occurrence}', [BudgetController::class, 'history'])->name('budgets.history');
+    Route::get('budgets/categories/new', [BudgetController::class, 'categoryForm'])->name('budgets.categories.create');
+    Route::post('budgets/categories', [BudgetController::class, 'categoryStore'])->name('budgets.categories.store');
+    Route::get('budgets/categories/{category}/revise', [BudgetController::class, 'categoryForm'])->whereNumber('category')->name('budgets.categories.edit');
+    Route::post('budgets/categories/{category}/revise', [BudgetController::class, 'categoryStore'])->whereNumber('category')->name('budgets.categories.revise');
+    Route::get('budgets/schedules/new', [BudgetController::class, 'scheduleForm'])->name('budgets.schedules.create');
+    Route::post('budgets/schedules', [BudgetController::class, 'scheduleStore'])->name('budgets.schedules.store');
+    Route::get('budgets/schedules/{schedule}/revise', [BudgetController::class, 'scheduleForm'])->whereNumber('schedule')->name('budgets.schedules.edit');
+    Route::post('budgets/schedules/{schedule}/revise', [BudgetController::class, 'scheduleStore'])->whereNumber('schedule')->name('budgets.schedules.revise');
+    Route::post('budgets/classifications', [BudgetController::class, 'attribute'])->name('budgets.attribute');
+    Route::post('budgets/allocations', [BudgetController::class, 'allocate'])->name('budgets.allocate');
+    Route::post('budgets/allocations/{allocation}/release', [BudgetController::class, 'release'])->whereNumber('allocation')->name('budgets.release');
+
     Route::get('accounts', [AccountController::class, 'index'])->name('accounts.index');
     Route::post('accounts', [AccountController::class, 'store'])->name('accounts.store');
     Route::get('accounts/{account}', [AccountController::class, 'show'])->whereNumber('account')->name('accounts.show');

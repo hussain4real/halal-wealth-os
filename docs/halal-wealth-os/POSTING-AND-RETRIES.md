@@ -1,7 +1,10 @@
 # Atomic posting and retry contracts
 
-Status: M1-P2 implementation under independent review; not phase acceptance.
-No FX, live banking, reservations, external event delivery or deployment.
+Status: the inherited M1-P2 posting contract is human accepted. M1-P3 paired
+FX coordination and reporting are merged into dev and remain unaccepted; see
+[the FX policy](FX-AND-RECONCILIATION.md). This document describes the ordinary
+single-currency posting boundary used by that coordinator. No live banking,
+reservations, durable external event delivery or deployment is implemented.
 
 ## One financial write boundary
 

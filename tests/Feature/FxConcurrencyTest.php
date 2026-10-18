@@ -301,9 +301,11 @@ test('failed reconciliation result rolls back its posting and a retry produces o
 });
 
 test('empty FX migration rolls back and remigrates while populated evidence refuses downgrade before DDL', function () {
-    $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
+    // Target this schema explicitly; later planning migrations follow it now.
+    $migration = require database_path('migrations/2026_10_18_060000_create_manual_fx_and_reconciliation.php');
+    $migration->down();
     expect(Schema::hasTable('fx_operations'))->toBeFalse();
-    $this->artisan('migrate', ['--force' => true])->assertExitCode(0);
+    $migration->up();
     $owner = User::factory()->create();
     app(FxService::class)->record($owner, 'fx-downgrade-base', Fx::input(Fx::account($owner), Fx::account($owner, Currency::NGN)));
     $migration = require database_path('migrations/2026_10_18_060000_create_manual_fx_and_reconciliation.php');
