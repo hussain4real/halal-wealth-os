@@ -58,3 +58,7 @@ The manager delegates recording M0 acceptance and workspace-only M1-P1. See
 [the acceptance evidence](runs/M0-acceptance.md). The independent review and
 original post-merge CI are preserved. M1-P1/M1 are not accepted; no M1-P2/P3,
 commit, push, PR, merge, deployment or external publication is authorized.
+
+M1-P1 is now human accepted against the exact PR3 merge and original CI; see
+[the acceptance record](runs/M1-P1-acceptance.md). M1-P2 is separately
+authorized and in progress. The M1 milestone remains unaccepted.

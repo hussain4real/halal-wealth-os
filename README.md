@@ -194,3 +194,12 @@ merge, deployment or milestone acceptance is claimed. Later phases remain unacce
 M0-P3 feature publication and original hosted CI are separately authorized and
 tracked in the [publication checkpoint](docs/halal-wealth-os/runs/M0-P3-publication.md).
 This does not authorize a merge or record phase acceptance.
+
+## M1-P2 transaction workspace
+
+The current reviewed implementation adds exact, owner-scoped transaction entry,
+history and receipts with atomic posting, safe retries and retained corrections.
+See [posting contracts](docs/halal-wealth-os/POSTING-AND-RETRIES.md),
+[local verification](docs/halal-wealth-os/runs/M1-P2-local.md) and
+[independent rendered UX review](docs/halal-wealth-os/runs/M1-P2-visual-review.md).
+M1-P1 is human accepted; M1-P2 and the M1 milestone remain unaccepted.

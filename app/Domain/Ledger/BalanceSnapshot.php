@@ -11,11 +11,11 @@ use InvalidArgumentException;
 /** Read-only derived values. An unposted request is never a movement. */
 final readonly class BalanceSnapshot
 {
-    private function __construct(public Currency $currency, public ?Money $money) {}
+    private function __construct(public Currency $currency, public ?Money $money, public ?string $unavailableReason = null) {}
 
-    public static function unavailable(Currency $currency): self
+    public static function unavailable(Currency $currency, string $reason = 'source_unavailable'): self
     {
-        return new self($currency, null);
+        return new self($currency, null, $reason);
     }
 
     /** @param iterable<Money> $completeSignedMovements Debit positive, credit negative. */

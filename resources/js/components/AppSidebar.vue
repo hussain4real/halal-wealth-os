@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { LayoutGrid, UserRound, Shield, Wallet } from '@lucide/vue';
+import {
+    LayoutGrid,
+    UserRound,
+    Shield,
+    Wallet,
+    ReceiptText,
+} from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
@@ -20,6 +26,7 @@ import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
     { title: 'Accounts', href: '/accounts', icon: Wallet },
+    { title: 'Transactions', href: '/transactions', icon: ReceiptText },
     { title: 'Profile', href: profile(), icon: UserRound },
     { title: 'Security', href: security(), icon: Shield },
     {

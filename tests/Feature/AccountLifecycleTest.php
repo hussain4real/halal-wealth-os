@@ -48,7 +48,7 @@ test('each selected account type can be created but has no editable balance', fu
     $account = Account::query()->sole();
     expect($account->owner_id)->toBe($owner->id)->and($account->type)->toBe($type);
     expect(Schema::hasColumn('accounts', 'balance'))->toBeFalse()->and(Schema::hasColumn('accounts', 'balance_minor'))->toBeFalse();
-    $this->get('/accounts/'.$account->id)->assertInertia(fn (Assert $page) => $page->component('accounts/Show')->where('account.balance', null)->where('account.balance_status', 'unavailable')->where('account.included_in_net_worth', $type->contributesToNetWorth()));
+    $this->get('/accounts/'.$account->id)->assertInertia(fn (Assert $page) => $page->component('accounts/Show')->where('account.balance.minor', '0')->where('account.balance_status', 'derived')->where('account.included_in_net_worth', $type->contributesToNetWorth()));
 })->with(AccountType::cases());
 
 test('large opening input persists exact integer minor units and remains unposted through Inertia JSON', function () {
@@ -61,7 +61,8 @@ test('large opening input persists exact integer minor units and remains unposte
         ->where('account.id', (string) $account->id)->where('account.balance', null)->where('account.net_worth_contribution', null)
         ->where('account.opening_request.status', 'awaiting_posting')->where('account.opening_request.amount.minor', '9007199254740993')
         ->where('account.opening_request.amount.amount', '90071992547409.93'));
-    expect(Schema::hasTable('postings'))->toBeFalse()->and(Schema::hasTable('journal_entries'))->toBeFalse();
+    $this->assertDatabaseCount('postings', 0);
+    $this->assertDatabaseCount('journal_entries', 0);
 });
 
 test('invalid cash precision range and JSON numbers are rejected before any persistence', function (mixed $amount) {

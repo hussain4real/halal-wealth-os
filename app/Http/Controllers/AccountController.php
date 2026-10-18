@@ -102,6 +102,7 @@ class AccountController extends Controller
     {
         $snapshot = $balances->forAccount($account);
         $intent = $account->openingBalanceIntent;
+        $openingJournal = $intent === null ? null : DB::table('opening_balance_postings')->join('journal_entries', 'journal_entries.id', '=', 'opening_balance_postings.journal_id')->where('opening_intent_id', $intent->id)->where('journal_entries.owner_id', $account->owner_id)->first(['journal_entries.id', 'journal_entries.status']);
 
         return [
             'id' => (string) $account->id,
@@ -109,12 +110,15 @@ class AccountController extends Controller
             'type' => $account->type->value,
             'currency' => $account->currency_code->value,
             'archived' => $account->archived_at !== null,
+            'system' => $account->system_role !== null,
             'included_in_net_worth' => $account->type->contributesToNetWorth(),
             'balance' => $snapshot->money?->jsonSerialize(),
             'balance_status' => $snapshot->money === null ? 'unavailable' : 'derived',
+            'balance_reason' => $snapshot->unavailableReason,
             'net_worth_contribution' => $snapshot->netWorthContribution($account->type)?->jsonSerialize(),
             'opening_request' => $intent === null ? null : [
-                'status' => 'awaiting_posting',
+                'status' => $openingJournal->status ?? 'awaiting_posting',
+                'journal_id' => $openingJournal === null ? null : (string) $openingJournal->id,
                 'amount' => Money::fromMinor($intent->currency_code, $intent->amount_minor)->jsonSerialize(),
             ],
         ];

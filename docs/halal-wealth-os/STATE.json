@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-18T02:06:01.394473+00:00",
+    "updated_at": "2026-10-18T04:31:48.208704+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -13,17 +13,17 @@
         "default_external_effects": false
     },
     "active_run": {
-        "phase": "M1-P1",
-        "owner": "cloud-m1p1-coordinator",
+        "phase": "M1-P2",
+        "owner": "cloud-m1p2-coordinator",
         "worktree": ".",
-        "branch": "feat/m1-p1-accounts-money",
-        "baseline_head": "7fbf58536556bb7bb31d487420a4b254bb60068d",
-        "started_at": "2026-10-17T19:00:43.025309+00:00",
+        "branch": "feat/m1-p2-atomic-posting",
+        "baseline_head": "10ac3e3f79470bcd5585d6f2e0af87a8451aa151",
+        "started_at": "2026-10-18T03:56:04.393861+00:00",
         "status": "READY_FOR_REVIEW",
-        "cycles_used": 2,
+        "cycles_used": 3,
         "max_cycles": 6,
-        "checkpoint": "Cycle2 complete: independent full164/762430/445;89newcases481assertions;strictbrowser7PASS;archive raceRED2/GREEN2fixedandre-reviewed;TIA164record/164explicitreplay;localonly no acceptance",
-        "stopped_at": "2026-10-17T19:21:15.626609+00:00"
+        "checkpoint": "Cycle3 complete: full217/1102 653/696;53new340assert;PGconcurrency/events/upgrade;independent source PASS;rendered28checks22screensPASS;TIA217record217explicitreplay;publication checkpoint next",
+        "stopped_at": "2026-10-18T04:31:48.208704+00:00"
     },
     "repository": {
         "root": null,
@@ -124,20 +124,20 @@
         {
             "id": "M1-P1",
             "depends_on": ["M0-P3"],
-            "status": "READY_FOR_REVIEW",
+            "status": "ACCEPTED",
             "owner": "cloud-m1p1-coordinator",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M1-P1-local.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-18T03:56:04.393861+00:00",
+            "evidence": "runs/M1-P1-acceptance.md"
         },
         {
             "id": "M1-P2",
             "depends_on": ["M1-P1"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "READY_FOR_REVIEW",
+            "owner": "cloud-m1p2-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M1-P2-local.md"
         },
         {
             "id": "M1-P3",
@@ -348,42 +348,20 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "phase": "M1-P1",
+        "phase": "M1-P2",
         "authorized": true,
-        "authority": "Owner explicitly approves focused M1-P1 PR to dev and normal merge after CI/final independent review",
-        "scope": "Publish sanitized M1-P1 and M0 acceptance/review docs, inspect/fix in-scope feedback, exact-head review and dev merge, verify post-merge CI; no later phases or deployment",
-        "accepted_dependencies": ["M0-P3"],
+        "authority": "Owner accepts M1-P1 and approves next phase implementation/review/draft dev PR/normal merge after exact-head reviews and CI",
+        "scope": "Canonical M1-P2; polished transaction UX; real PostgreSQL concurrency and independent rendered desktop/mobile review; no M1-P3/main/stage/deployment",
+        "accepted_dependencies": ["M1-P1"],
         "remote_writes": true,
         "production_actions": false,
         "php_constraint": "~8.5.0"
     },
     "execution_status": {
-        "phase": "M1-P1",
-        "outcome": "READY_FOR_REVIEW",
-        "accepted": false,
-        "evidence": "runs/M1-P1-local.md",
-        "remoteWrites": true,
-        "productionActions": false,
-        "nativeGoalMode": "NOT_ACTIVATED_OR_CLAIMED",
-        "applicationVerified": true,
-        "tests": 164,
-        "assertions": 762,
-        "newTests": 89,
-        "newAssertions": 481,
-        "nodeTests": 16,
-        "coveredStatements": 430,
-        "applicationStatements": 445,
-        "moneyCoverage": "50/51",
-        "ledgerCoverage": "29/29",
-        "browserSmoke": "PASS_SEVEN_CHECKS_CLEANED_UP",
-        "tia": "PASS164_FULL_RECORD_AND164_EXPLICIT_REPLAY",
-        "hostedCI": "NOT_RUN_WORKSPACE_ONLY",
-        "independentAcceptanceDesign": "PASS",
-        "independentOwnershipReview": "PASS_AFTER_ARCHIVE_RACE_CORRECTION",
-        "independentVerification": "PASS",
-        "remainingBlockers": [],
-        "transitionalBalance": "UNAVAILABLE_UNTIL_POSTING_SOURCE_EXISTS",
-        "openingInput": "IMMUTABLE_UNPOSTED_INTENT_NOT_FINANCIAL_POSTING"
+        "phase": "M1-P2",
+        "status": "READY_FOR_REVIEW",
+        "checkpoint": "Local verification and independent review passed; approved publication/CI/merge checkpoint pending",
+        "observed_at": "2026-10-18T04:31:48.208704+00:00"
     },
     "dependency_patch": {
         "authorized": true,
@@ -547,6 +525,21 @@
             "validated_head": "3ae75ecc497b9992b4538d58b74ee20484b7eca9",
             "merge_sha": "7fbf58536556bb7bb31d487420a4b254bb60068d",
             "acceptance_evidence": "runs/M0-P3-acceptance.md"
+        },
+        {
+            "phase": "M1-P1",
+            "owner": "cloud-m1p1-coordinator",
+            "worktree": ".",
+            "branch": "feat/m1-p1-accounts-money",
+            "baseline_head": "7fbf58536556bb7bb31d487420a4b254bb60068d",
+            "started_at": "2026-10-17T19:00:43.025309+00:00",
+            "status": "ACCEPTED",
+            "cycles_used": 2,
+            "max_cycles": 6,
+            "checkpoint": "Cycle2 complete: independent full164/762430/445;89newcases481assertions;strictbrowser7PASS;archive raceRED2/GREEN2fixedandre-reviewed;TIA164record/164explicitreplay;localonly no acceptance",
+            "stopped_at": "2026-10-17T19:21:15.626609+00:00",
+            "closed_at": "2026-10-18T03:56:04.393861+00:00",
+            "acceptance_evidence": "runs/M1-P1-acceptance.md"
         }
     ],
     "authorization_history": [
@@ -590,6 +583,16 @@
             "scope": "Accounts, currencies and exact money only; pending opening input/future posting boundary; no M1-P2/M1-P3, commits, push, PR, merge, deployment or external publication",
             "accepted_dependencies": ["M0-P3"],
             "remote_writes": false,
+            "production_actions": false,
+            "php_constraint": "~8.5.0"
+        },
+        {
+            "phase": "M1-P1",
+            "authorized": true,
+            "authority": "Owner explicitly approves focused M1-P1 PR to dev and normal merge after CI/final independent review",
+            "scope": "Publish sanitized M1-P1 and M0 acceptance/review docs, inspect/fix in-scope feedback, exact-head review and dev merge, verify post-merge CI; no later phases or deployment",
+            "accepted_dependencies": ["M0-P3"],
+            "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
         }
@@ -758,18 +761,46 @@
     },
     "m1p1_publication": {
         "authority": "Owner approved publication and dev merge after CI and final review; manager delegates execution without repeat confirmation",
-        "status": "SOURCE_REVIEW_AND_REFRESH_CHECKS",
+        "status": "COMPLETE",
         "cycles_used": 1,
         "max_cycles": 6,
         "prior_implementation_cycles_used": 2,
         "base": "dev",
         "base_head": "7fbf58536556bb7bb31d487420a4b254bb60068d",
         "branch": "feat/m1-p1-accounts-money",
-        "accepted": false,
+        "accepted": true,
         "merge_authorized": true,
         "evidence": "runs/M1-P1-publication.md",
-        "hosted_ci": "NOT_RUN",
-        "post_merge_ci": "NOT_RUN",
-        "production_actions": false
+        "hosted_ci": "SUCCESS_ORIGINAL_ATTEMPT_1_39089155596",
+        "post_merge_ci": "SUCCESS_ORIGINAL_ATTEMPT_1_39089359856",
+        "production_actions": false,
+        "head": "1020380ab9d87cd7dd556dc75a4dc45a131d2cff",
+        "merge_sha": "10ac3e3f79470bcd5585d6f2e0af87a8451aa151",
+        "pr": 3
+    },
+    "m1p2_checkpoint": {
+        "status": "READY_FOR_REVIEW",
+        "accepted": false,
+        "implementation_cycles_used": 3,
+        "max_cycles": 6,
+        "tests": 217,
+        "assertions": 1102,
+        "covered_statements": 653,
+        "application_statements": 696,
+        "new_tests": 53,
+        "new_assertions": 340,
+        "browser_assertions": 28,
+        "inspected_screenshots": 22,
+        "unresolved_findings": [],
+        "source_review": "PASS_AFTER_CORRECTIONS",
+        "visual_review": "PASS_AFTER_CORRECTIONS",
+        "tia_record_tests": 217,
+        "tia_cached_replay": 217,
+        "evidence": "runs/M1-P2-local.md",
+        "independent_evidence": "runs/M1-P2-independent-review.md",
+        "visual_evidence": "runs/M1-P2-visual-review.md",
+        "hosted_ci": "PENDING",
+        "post_merge_ci": "PENDING",
+        "deployment": false
     }
 }
