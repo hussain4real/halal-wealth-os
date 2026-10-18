@@ -19,7 +19,7 @@ class AccountPolicy
 
     public function update(User $user, Account $account): bool
     {
-        return $this->view($user, $account) && $account->archived_at === null;
+        return $this->view($user, $account) && $account->archived_at === null && $account->system_role === null;
     }
 
     public function delete(User $user, Account $account): bool

@@ -23,7 +23,7 @@ class AccountController extends Controller
 {
     public function index(Request $request, AccountBalanceReader $balances): Response
     {
-        $accounts = Account::query()->ownedBy($this->owner($request))->with('openingBalanceIntent')->orderBy('id')->get();
+        $accounts = Account::query()->ownedBy($this->owner($request))->orderBy('id')->get();
 
         return Inertia::render('accounts/Index', [
             'accounts' => $accounts->map(fn (Account $account): array => $this->payload($account, $balances))->all(),
@@ -47,7 +47,7 @@ class AccountController extends Controller
         $record = $this->owned($request, $account);
         Gate::authorize('view', $record);
 
-        return Inertia::render('accounts/Show', ['account' => $this->payload($record->load('openingBalanceIntent'), $balances)]);
+        return Inertia::render('accounts/Show', ['account' => $this->payload($record, $balances)]);
     }
 
     public function update(UpdateAccountRequest $request, string $account): RedirectResponse
@@ -101,7 +101,6 @@ class AccountController extends Controller
     private function payload(Account $account, AccountBalanceReader $balances): array
     {
         $snapshot = $balances->forAccount($account);
-        $intent = $account->openingBalanceIntent;
 
         return [
             'id' => (string) $account->id,
@@ -109,14 +108,13 @@ class AccountController extends Controller
             'type' => $account->type->value,
             'currency' => $account->currency_code->value,
             'archived' => $account->archived_at !== null,
+            'system' => $account->system_role !== null,
             'included_in_net_worth' => $account->type->contributesToNetWorth(),
             'balance' => $snapshot->money?->jsonSerialize(),
             'balance_status' => $snapshot->money === null ? 'unavailable' : 'derived',
+            'balance_reason' => $snapshot->unavailableReason,
             'net_worth_contribution' => $snapshot->netWorthContribution($account->type)?->jsonSerialize(),
-            'opening_request' => $intent === null ? null : [
-                'status' => 'awaiting_posting',
-                'amount' => Money::fromMinor($intent->currency_code, $intent->amount_minor)->jsonSerialize(),
-            ],
+            'opening_request' => $snapshot->openingRequest?->jsonSerialize(),
         ];
     }
 }

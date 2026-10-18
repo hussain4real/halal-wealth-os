@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Domain\Ledger\AccountBalanceReader;
 use App\Domain\Ledger\DeferredOpeningBalances;
 use App\Domain\Ledger\OpeningBalanceGateway;
-use App\Domain\Ledger\UnavailableAccountBalances;
+use App\Domain\Ledger\PostedAccountBalances;
 use App\Models\Account;
 use App\Models\User;
 use App\Policies\AccountPolicy;
@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(AccountBalanceReader::class, UnavailableAccountBalances::class);
+        $this->app->bind(AccountBalanceReader::class, PostedAccountBalances::class);
         $this->app->bind(OpeningBalanceGateway::class, DeferredOpeningBalances::class);
     }
 

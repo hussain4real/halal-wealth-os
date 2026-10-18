@@ -12,7 +12,7 @@ use LogicException;
  * @property int $id
  * @property int $account_id
  * @property Currency $currency_code
- * @property string $amount_minor
+ * @property numeric-string $amount_minor
  */
 #[Fillable(['currency_code', 'amount_minor'])]
 class OpeningBalanceIntent extends Model

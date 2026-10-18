@@ -1,8 +1,9 @@
-# M1-P1 money and account contracts
+# Exact money and account contracts
 
-Status: local implementation decisions for M1-P1 review, following accepted
-ADR-001/002/003 directions. M1-P1 is not human accepted. No posting or FX
-conversion service is implemented by this phase.
+Status: M1-P1 is human accepted. The separately authorized M1-P2 integration
+is under review. Accepted ADR-001/002/003 directions and the original Money
+contract are retained. See [posting and retries](POSTING-AND-RETRIES.md). FX
+conversion remains outside the implemented scope.
 
 ## Exact representations
 
@@ -55,32 +56,35 @@ accounts and do not contribute to displayed net worth. They remain owner
 scoped. Clearing never inflates displayed wealth. No cross-currency net-worth
 aggregate is implemented or implied.
 
-AccountBalanceReader is a read-only port. BalanceSnapshot derives a cash value
-from a complete iterable of signed movements, computing a full exact sum
-before checking the final cash range. Current application binding is
-UnavailableAccountBalances: the real posting source does not exist, so the
-response carries `balance: null`, `balance_status: unavailable` and no net-worth
-contribution. Unknown is not zero. A complete empty source may derive zero;
-an absent source may not. The pure derivation and injected-reader tests are
-synthetic contract evidence, not actual posted-history integration.
+AccountBalanceReader remains a read-only port. PostedAccountBalances reads
+opening existence/amount, linked journal identity/status, completeness and the
+exact posted sum in one PostgreSQL statement. Account detail/list serialization
+uses this immutable per-account snapshot, without a later status query. This
+does not promise a shared snapshot across every account in a list.
+Both posted originals and originals labelled reversed contribute alongside
+their linked reversal legs. The full sum is checked only after cancellation.
+A genuinely complete empty ledger derives zero. An unconsumed opening request
+returns null/unavailable with opening_pending; unknown is never zero. A total
+outside the Money range returns null/unavailable with out_of_range, without
+truncation. Internal accounts stay excluded from net worth even at that edge.
 
 ## Opening input and lifecycle boundary
 
-Optional manual opening input goes through OpeningBalanceGateway. Its current
-DeferredOpeningBalances adapter saves one immutable opening request, in integer
-minor units, atomically with the account metadata. The account/request currency
-pair is constrained in PostgreSQL. The request is explicitly `awaiting_posting`;
-it does not create a journal/transaction, affect balances or wealth, schedule
-automatic posting, or claim a successful financial operation. It is retained
-for an explicitly authorized future posting-service integration. Missing input
-creates no request and does not silently set a zero balance.
+Optional manual opening input still goes through OpeningBalanceGateway.
+DeferredOpeningBalances saves one immutable intent atomically with account
+metadata; creation performs no journal posting. Its currency/account pair is
+constrained in PostgreSQL. An explicit confirmation calls the M1-P2 service,
+which posts the signed opening against internal equity and saves one unique
+intent-to-journal link in the same transaction. No migration consumes old
+requests. The original amount and timestamps stay unchanged. The UI reports
+awaiting_posting, posted or reversed from actual linked history. Reversal does
+not permit silently consuming the same intent again.
 
-There are no editable balance fields, posting endpoints, posting tables,
-idempotency/reversal logic or FX records. M1-P2 owns the actual balanced journal,
-opening posting and history/reversal constraints. M1-P3 owns FX provenance and
-conversion. This phase cannot demonstrate retaining real posted history that
-does not exist; it proves archive-only account retention and preservation of
-current metadata/unposted requests, and establishes the no-delete boundary.
+There are no editable balances. M1-P2 supplies the balanced journal and
+append-only reversal/replacement history. M1-P3 FX, observation provenance and
+reconciliation remain unimplemented. A complete account with no opening intent
+can now derive zero from its real empty journal, instead of the historical
+M1-P1 absent-source response.
 
 Every account query/write is owner scoped and policy checked, including direct
 URLs and admin users. Account routes require authentication, verified email
@@ -90,12 +94,10 @@ changed; owner/currency/type are immutable. Archiving preserves readable rows
 and requests and refuses further metadata/opening changes. No account DELETE
 route exists; the model refuses deletion. Owner deletion is refused when any
 active or archived account exists, with a PostgreSQL restrictive FK as a second
-boundary. No financial history cascades away through profile deletion. Future
-posting foreign keys must also restrict deletion; that future schema is not
-claimed here.
+boundary. No financial history cascades away through profile deletion. Posting and journal foreign keys also restrict deletion. Service-created
+internal accounts cannot be renamed or archived through the account UI.
 
 All financial strings remain strings through persistence, Inertia props and
-Vue display. UI inputs use text, never numeric coercion. The app distinguishes
-an unposted request from an unavailable posted balance and does not offer
-editing/confirmation that implies posting. It contains only synthetic test
+Vue display. UI inputs use text, never numeric coercion. The app distinguishes an unposted request from a complete posted balance.
+The explicit posting action leads to its durable journal receipt. It contains only synthetic test
 fixtures; no real owner/account or credential is provisioned.

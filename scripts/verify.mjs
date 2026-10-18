@@ -29,7 +29,10 @@ try {
     if (phase && !roadmap.phases.some((item) => item.id === phase)) {
         throw new VerificationFailure(`Unknown phase: ${phase}`);
     }
-    if (phase && !['M0-P1', 'M0-P2', 'M0-P3', 'M1-P1'].includes(phase)) {
+    if (
+        phase &&
+        !['M0-P1', 'M0-P2', 'M0-P3', 'M1-P1', 'M1-P2'].includes(phase)
+    ) {
         throw new VerificationFailure(
             `NOT_APPLICABLE: ${phase} has no implemented verification suite. No passing result is claimed.`,
         );
@@ -150,6 +153,8 @@ try {
             'SessionAuditTest',
             'MoneyPrimitivesTest',
             'AccountLifecycleTest',
+            'PostingServiceTest',
+            'PostingConcurrencyTest',
         ]) {
             if (!discovered.stdout.includes(required)) {
                 throw new VerificationFailure(
@@ -168,9 +173,9 @@ try {
         }
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
-        console.log('PASS M0-P2, M0-P3 and M1-P1 implemented baseline');
+        console.log('PASS M0-P2, M0-P3, M1-P1 and M1-P2 implemented baseline');
         console.log(
-            'NOT_APPLICABLE: future posting/FX/domain suites, integrations, live AI and deployment.',
+            'NOT_APPLICABLE: future FX/domain suites, integrations, live AI and deployment.',
         );
     }
 } catch (error) {

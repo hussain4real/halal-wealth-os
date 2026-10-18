@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Head, Link, router, useForm } from '@inertiajs/vue3';
+import { Head, Link, router, useForm, usePage } from '@inertiajs/vue3';
+import { ref } from 'vue';
 import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
 import InputError from '@/components/InputError.vue';
 import { Button } from '@/components/ui/button';
@@ -12,7 +13,24 @@ defineOptions({
 });
 const props = defineProps<{ account: Account }>();
 const form = useForm({ name: props.account.name });
+const page = usePage();
+const opening = useForm(
+    `opening:${page.props.auth.user.id}:${props.account.id}`,
+    { idempotency_key: crypto.randomUUID() },
+);
 const archive = () => router.patch(`/accounts/${props.account.id}/archive`);
+const openingUncertain = ref(false);
+const openingUnknown = () => {
+    openingUncertain.value = true;
+    return false;
+};
+const postOpening = () => {
+    openingUncertain.value = false;
+    opening.post(`/accounts/${props.account.id}/opening`, {
+        onNetworkError: openingUnknown,
+        onHttpException: openingUnknown,
+    });
+};
 </script>
 
 <template>
@@ -46,8 +64,11 @@ const archive = () => router.patch(`/accounts/${props.account.id}/archive`);
                 v-if="account.balance_status === 'unavailable'"
                 class="mt-2 text-muted-foreground"
             >
-                No posted balance is available. An opening request is not a
-                posted transaction.
+                {{
+                    account.balance_reason === 'out_of_range'
+                        ? 'The exact derived total exceeds the supported display range. No amount has been truncated.'
+                        : 'The opening request is still awaiting posting. Your complete balance is not yet available.'
+                }}
             </p>
             <p class="mt-2 text-sm">
                 Debt is negative; overpayment is positive. Balances cannot be
@@ -63,7 +84,14 @@ const archive = () => router.patch(`/accounts/${props.account.id}/archive`);
             class="rounded-lg border p-6"
         >
             <h2 id="opening-heading" class="text-lg font-medium">
-                Opening request · Awaiting posting
+                Opening request ·
+                {{
+                    account.opening_request.status === 'awaiting_posting'
+                        ? 'Awaiting posting'
+                        : account.opening_request.status === 'reversed'
+                          ? 'Reversed'
+                          : 'Posted'
+                }}
             </h2>
             <p class="mt-2">
                 <CurrencyDisplay
@@ -72,12 +100,51 @@ const archive = () => router.patch(`/accounts/${props.account.id}/archive`);
                 />
             </p>
             <p class="mt-2 text-sm text-muted-foreground">
-                This saved request has not changed your balance or net worth.
+                {{
+                    account.opening_request.status === 'awaiting_posting'
+                        ? 'This saved request has not changed your balance or net worth. Post it explicitly when you are ready.'
+                        : 'The immutable request is retained and linked to its journal history.'
+                }}
             </p>
+            <Link
+                v-if="account.opening_request.journal_id"
+                :href="`/transactions/${account.opening_request.journal_id}`"
+                class="mt-4 inline-block underline"
+                >View opening history</Link
+            >
+            <form
+                v-else-if="!account.archived"
+                class="mt-4 space-y-3"
+                @submit.prevent="postOpening"
+            >
+                <p v-if="openingUncertain" role="alert" class="text-sm">
+                    We could not confirm the result. Check history or retry this
+                    same request safely; its identity is kept.
+                    <Link href="/transactions" class="underline"
+                        >Check history</Link
+                    >
+                </p>
+                <InputError
+                    v-for="(error, key) in opening.errors"
+                    :key="key"
+                    :message="error"
+                /><Button
+                    type="submit"
+                    class="min-h-11"
+                    :disabled="opening.processing"
+                    >{{
+                        opening.processing ? 'Posting…' : 'Post opening balance'
+                    }}</Button
+                >
+            </form>
         </section>
         <p v-if="account.archived" role="status">
             This account is archived. Its details and opening request are
             retained.
+        </p>
+        <p v-else-if="account.system" class="text-sm text-muted-foreground">
+            This internal account is maintained by the posting service and
+            cannot be changed here.
         </p>
         <template v-else>
             <form

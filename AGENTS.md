@@ -111,3 +111,20 @@ reviews/checks before merge. Verify actual merge identity and original dev
 push CI. Do not bypass protections or independent gates. Phase acceptance
 remains separate; no M1-P2/P3, main/stage changes, deployment, live financial
 actions, new credentials or infrastructure/security-setting changes.
+
+## Current M1-P2 implementation, review and dev publication authority
+
+The human owner accepted completed M1-P1 and approved the next phase through
+implementation, independent review, a draft PR to dev and normal merge after
+exact-head reviews and CI pass. The manager delegates acceptance recording
+and the sole M1-P2 claim to this coordinator. This supersedes the earlier
+no-M1-P2 boundary only within phases/M1-P2.md. Preserve all prior history,
+PHP8.5-only, full starter/Pest TIA and full uncached CI. Use separately inspected
+disposable PostgreSQL with separate-connection concurrency evidence. At most
+six scoped implementation cycles; independent source/read-only reviewers and
+exclusive verification resources. Include actual desktop/mobile visual and UX
+review, accessibility, empty/error states, repeat submission and recovery.
+Preserve immutable opening intents and auditable reversal/replacement history.
+No M1-P3 implementation, main/stage change, deployment, real users, live
+financial actions, new credentials or infrastructure/security-setting changes.
+M1-P2 and M1 milestone acceptance remain separate human decisions.

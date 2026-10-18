@@ -19,6 +19,7 @@ use LogicException;
  * @property AccountType $type
  * @property Currency $currency_code
  * @property CarbonInterface|null $archived_at
+ * @property string|null $system_role
  * @property-read OpeningBalanceIntent|null $openingBalanceIntent
  */
 #[Fillable(['name', 'type', 'currency_code'])]
@@ -62,7 +63,7 @@ class Account extends Model
     protected static function booted(): void
     {
         static::updating(function (Account $account): void {
-            if ($account->getOriginal('archived_at') !== null || $account->isDirty(['owner_id', 'currency_code', 'type'])) {
+            if ($account->getOriginal('archived_at') !== null || $account->isDirty(['owner_id', 'currency_code', 'type', 'system_role']) || $account->system_role !== null) {
                 throw new LogicException('Archived accounts and account ownership/currency/type are immutable.');
             }
         });
