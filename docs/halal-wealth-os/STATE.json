@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-18T17:13:01.884162+00:00",
+    "updated_at": "2026-10-18T18:38:07.590769+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -19,10 +19,10 @@
         "branch": "feat/m3-p2-trades-ipo-corporate-actions",
         "baseline_head": "08e43860d4760985a6a44d5a5db3a9c637893c63",
         "started_at": "2026-10-18T17:13:01.884162+00:00",
-        "status": "IN_PROGRESS",
-        "cycles_used": 1,
+        "status": "READY_FOR_REVIEW",
+        "cycles_used": 4,
         "max_cycles": 6,
-        "checkpoint": "Cycle 1 canonical event/cash/IPO/replay design; new M3-P2 implementation and gates NOT_RUN"
+        "checkpoint": "All cycle 4 local gates pass: full uncached 580 tests / 3775 assertions, 2985/3205 covered statements, independent source/rendered reviews and fresh TIA plus unchanged replay/native planner. Publication sanitation, dev PR and exact-head hosted gates remain pending; M3-P2 is unaccepted."
     },
     "repository": {
         "root": null,
@@ -189,7 +189,7 @@
         {
             "id": "M3-P2",
             "depends_on": ["M3-P1"],
-            "status": "IN_PROGRESS",
+            "status": "READY_FOR_REVIEW",
             "owner": "cloud-m3p2-coordinator",
             "accepted_by": null,
             "accepted_at": null,
@@ -361,9 +361,9 @@
     },
     "execution_status": {
         "phase": "M3-P2",
-        "status": "IN_PROGRESS",
-        "checkpoint": "Cycle 1 canonical event/cash/IPO/replay design; new M3-P2 implementation and gates NOT_RUN",
-        "observed_at": "2026-10-18T17:13:01.884162+00:00"
+        "status": "READY_FOR_REVIEW",
+        "checkpoint": "All cycle 4 local gates pass: full uncached 580 tests / 3775 assertions, 2985/3205 covered statements, independent source/rendered reviews and fresh TIA plus unchanged replay/native planner. Publication sanitation, dev PR and exact-head hosted gates remain pending; M3-P2 is unaccepted.",
+        "observed_at": "2026-10-18T18:38:07.590769+00:00"
     },
     "dependency_patch": {
         "authorized": true,
@@ -1313,7 +1313,7 @@
             "review_finding": "E06 stale active-run checkpoint corrected in cycle3; fresh exact-head review pending"
         },
         "source_publication": "MERGED_TO_DEV",
-        "documentation_publication": "FINAL_RECORDS_AND_ACCEPTANCE_PENDING_REVIEWED_FEATURE_PUBLICATION",
+        "documentation_publication": "FINAL_RECORDS_AND_ACCEPTANCE_PUBLISHED_ON_M3P2_FEATURE_PENDING_DEV_MERGE",
         "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/9",
         "reviewed_head": "e68beea4ed23798f3af819bb64515a0eb5e5f24b",
         "reviewed_tree": "48f6fbd138d7f0cf0e43b28f08a9e71b26fdf62f",
@@ -1331,17 +1331,83 @@
         "acceptance_evidence": "runs/M3-P1-acceptance.md"
     },
     "m3p2_checkpoint": {
-        "status": "IN_PROGRESS",
+        "status": "READY_FOR_REVIEW",
         "accepted": false,
-        "cycles_used": 1,
+        "cycles_used": 4,
         "max_cycles": 6,
         "baseline_head": "08e43860d4760985a6a44d5a5db3a9c637893c63",
-        "full_gate": "NOT_RUN",
-        "source_review": "NOT_RUN",
-        "rendered_review": "NOT_RUN",
-        "tia": "NOT_RUN",
+        "full_gate": "PASS_580_TESTS_3775_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS",
+        "source_review": "PASS_CYCLE4_FROZEN_SOURCE",
+        "rendered_review": "PASS_49_CHECKS_36_INDIVIDUALLY_INSPECTED_SCREENSHOTS",
+        "tia": "PASS_FRESH580_REPLAY580_ZERO_NEW_EXECUTION_NATIVE_PHP_VUE_PLANNER",
         "next_phase_authorized": false,
         "evidence": "runs/M3-P2-local.md",
-        "unresolved_findings": []
+        "unresolved_findings": [],
+        "initial_core": {
+            "status": "PASS_AFTER_STRICT_BIGINT_CAST_FIX",
+            "tests": 22,
+            "assertions": 82
+        },
+        "initial_commit_checks": {
+            "status": "PASS",
+            "tests": 11,
+            "assertions": 94
+        },
+        "cycle_history": [
+            {
+                "cycle": 1,
+                "core_first": "19_PASS_3_FAIL_67_ASSERTIONS_STRICT_INT_STRING_CAST",
+                "core_corrected": "22_PASS_82_ASSERTIONS",
+                "actual_postgresql": "11_PASS_94_ASSERTIONS",
+                "http_first": "5_PASS_4_FAIL_MISSING_NEW_VITE_PAGES",
+                "http_after_build": "8_PASS_1_FAIL_EXPORT_CACHE_CONTROL",
+                "static": "FAIL_NUMERIC_STRING_CONTRACTS",
+                "preliminary_source": "CHANGES_REQUIRED_I01_I03_I04_I02_WITHDRAWN_ALREADY_PREVENTED"
+            },
+            {
+                "cycle": 2,
+                "scope": "Underfunding relief, aggregate range handling, exact deferred cash control/reversal guards and numeric typing",
+                "actual_red": "I01_ONE_FAILURE;I03_I04_THREE_FAILURES",
+                "status": "SCOPED_COMPLETE_FULL_INTERRUPTED_FOR_I05",
+                "focused_regressions": "PASS4_26_ASSERTIONS_AFTER_MIGRATION_CASE_SYNTAX_CORRECTION",
+                "static": "PHPSTAN_PASS",
+                "private_originals": "F08_F09_F10_PASS_ROLLBACK_PROBE",
+                "scoped_first": "51_PASS_1_FAIL_403_ASSERTIONS_UNIT_VALIDATION_CONTAINER_ISOLATION",
+                "full": "PARTIAL_PLATFORM_AUDIT_MIGRATION_FRONTEND_BUILD_PASS_STOPPED_BEFORE_PEST"
+            },
+            {
+                "cycle": 3,
+                "scope": "I05 actual generic-ledger-date cash suffix protection and legacy empty portfolio migration ordering",
+                "actual_red": "I05_TWO_FAILURES;LEGACY_PORTFOLIO_DOWN_FOREIGN_KEY_FAILURE",
+                "focused_green": "5_PASS_20_ASSERTIONS",
+                "static": "PHPSTAN_PASS",
+                "status": "FOCUSED_PASS_FULL_INTERRUPTED_FOR_ORIGINAL_DATE_FINDING",
+                "additional_review": "Backdated release new-day baseline RED reproduced; candidate/prior date union corrected; linked cash receipt redirects and generic-action suppression implemented",
+                "final_focused": "10_PASS_79_ASSERTIONS"
+            },
+            {
+                "cycle": 4,
+                "scope": "Retain union of every prior and candidate actual cash date through correction and reversal",
+                "status": "LOCAL_GATES_PASS_PUBLICATION_PENDING",
+                "actual_red": "ORIGINAL_DATE_CORRECTION_AND_CANCELLATION_TWO_FAILURES_TWO_ASSERTIONS",
+                "scoped_green": "61_PASS_465_ASSERTIONS",
+                "source_review": "PASS_FROZEN536_PATHS",
+                "full": "PASS580_3775_ASSERTIONS_COVERAGE2985_OF3205",
+                "full_wall_seconds": 660.2871064760001,
+                "rendered": "PASS49_CHECKS_36_SCREENSHOTS_RESOURCES_CLEANED",
+                "tia": "PASS_FRESH580_REPLAY580_NATIVE_PHP_VUE_SELECTION"
+            }
+        ],
+        "coverage": "2985/3205",
+        "rendered_evidence": "runs/M3-P2-rendered-review.md",
+        "publication": "PENDING_INDEPENDENT_SANITATION_AND_EXACT_HEAD_HOSTED_GATES",
+        "remaining_gates": [
+            "independent publication sanitation",
+            "dev PR",
+            "exact-head hosted CI and review",
+            "normal dev merge",
+            "original dev-push CI",
+            "human M3-P2 acceptance"
+        ]
     }
 }

@@ -12,6 +12,7 @@ use App\Models\OpeningBalanceIntent;
 use App\Models\User;
 use DateTimeImmutable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use InvalidArgumentException;
@@ -91,7 +92,7 @@ final class PostingService
             if ($effectiveDate !== null) {
                 LedgerInput::date($effectiveDate);
             }
-            if (! in_array($kind, ['adjustment', 'expense'], true)) {
+            if (! in_array($kind, ['adjustment', 'expense', 'income'], true)) {
                 $this->fail('kind', 'Unsupported balanced service operation.');
             }
             $description = $this->text($description, 'description');
@@ -124,11 +125,25 @@ final class PostingService
     {
         return DB::transaction(function () use ($owner, $currency, $role): Account {
             $this->lockOwner($owner);
-            if (! in_array($role, ['clearing', 'equity', 'expense'], true)) {
+            if (! in_array($role, ['clearing', 'equity', 'expense', 'income'], true)) {
                 $this->fail('offset', 'Unsupported internal account role.');
             }
 
             return $this->systemAccount($owner, $currency, $role);
+        });
+    }
+
+    /** Protected application-service port: the retained root cancellation must exist in this transaction. */
+    public function reverseInvestmentMember(User $owner, string $originalId, string $key, string $reason, int $reversalEventId): JournalEntry
+    {
+        return DB::transaction(function () use ($owner, $originalId, $key, $reason, $reversalEventId): JournalEntry {
+            $this->lockOwner($owner);
+            $original = $this->ownedJournal($owner, $originalId);
+            $member = DB::table('investment_event_journals')->where('owner_id', $owner->id)->where('journal_id', $original->id)->first();
+            $root = DB::table('investment_events')->where('owner_id', $owner->id)->where('id', $reversalEventId)->first();
+            abort_unless($member !== null && $root !== null && $root->kind === 'reversal' && $root->reverses_id === $member->event_id, 404);
+
+            return $this->reverseLocked($owner, $original, $key, $reason, effectiveDate: $root->effective_date, investmentEventId: $reversalEventId);
         });
     }
 
@@ -210,16 +225,19 @@ final class PostingService
         return $this->append($owner, $key, $payload, $kind, $date, $description, $receipt, $legs, replaces: $replaces?->id);
     }
 
-    private function reverseLocked(User $owner, JournalEntry $original, string $key, string $reason, ?int $fxOperationId = null, ?string $effectiveDate = null): JournalEntry
+    private function reverseLocked(User $owner, JournalEntry $original, string $key, string $reason, ?int $fxOperationId = null, ?string $effectiveDate = null, ?int $investmentEventId = null): JournalEntry
     {
         $accounts = $this->authorizeJournalAccounts($owner, $original);
-        if ($fxOperationId === null) {
+        if ($fxOperationId === null && $investmentEventId === null) {
             $this->requireUngrouped($owner, $original);
         }
         $reason = $this->text($reason, 'reason');
         $payload = ['kind' => 'reversal', 'original_id' => (string) $original->id, 'reason' => $reason];
         if ($effectiveDate !== null) {
             $payload['effective_date'] = LedgerInput::date($effectiveDate);
+        }
+        if ($investmentEventId !== null) {
+            $payload['context'] = ['investment_event_id' => (string) $investmentEventId];
         }
         if ($cached = $this->cached($owner, $key, $payload)) {
             return $cached;
@@ -274,6 +292,9 @@ final class PostingService
 
     private function requireUngrouped(User $owner, JournalEntry $journal): void
     {
+        if (Schema::hasTable('investment_event_journals') && DB::table('investment_event_journals')->where('owner_id', $owner->id)->where('journal_id', $journal->id)->exists()) {
+            $this->fail('journal', 'This cash journal belongs to an investment event. Open its investment receipt to reverse or correct cash and holdings together.');
+        }
         if (DB::table('fx_operation_journals')->where('owner_id', $owner->id)->where('journal_id', $journal->id)->exists()) {
             $this->fail('journal', 'This journal belongs to an FX conversion. Open its conversion receipt to reverse or correct the complete operation.');
         }

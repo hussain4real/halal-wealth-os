@@ -87,7 +87,7 @@ final readonly class Money implements JsonSerializable
         return (str_starts_with($this->minor, '-') ? '-' : '').bcdiv($absolute, self::factor($this->currency), $this->currency->exponent());
     }
 
-    /** @return array{currency: string, minor: string, amount: string} */
+    /** @return array{currency: string, minor: numeric-string, amount: string} */
     public function jsonSerialize(): array
     {
         return ['currency' => $this->currency->value, 'minor' => $this->minor, 'amount' => $this->amount()];

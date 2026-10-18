@@ -20,7 +20,7 @@ use stdClass;
 /** Reporting composes Portfolio with Ledger; ledger statements/reconciliation keep their cash-only meaning. */
 final readonly class NetWorthSnapshot
 {
-    public const string POLICY = 'portfolio-mode-v1;manual-same-UTC-date;full-product-half-up;legacy-ledger-preserved';
+    public const string POLICY = 'portfolio-mode-events-v2;manual-same-UTC-date;receivable-once;execution-price-not-quote;legacy-ledger-preserved';
 
     public function __construct(private FinancialSnapshot $ledger, private PortfolioRead $portfolio) {}
 
@@ -42,7 +42,7 @@ final readonly class NetWorthSnapshot
                         'platform_label' => $state['platform_label'], 'source' => $state['source'], 'selected' => $contribution['selected'], 'excluded' => $contribution['excluded'],
                         'missing' => $contribution['missing'], 'as_of' => $contribution['as_of'], 'opening' => $state['opening'],
                         'positions' => $state['rows'], 'aggregate_value' => $state['aggregate_value'], 'aggregate_as_of' => $state['aggregate_as_of'],
-                        'value_policy' => $state['manual_reference_policy']];
+                        'value_policy' => $state['manual_reference_policy'], 'investment' => $state['investment']];
                     $component['native'] = $contribution['value'];
                     $component['native_reason'] = $contribution['state'] === 'complete' ? null : 'portfolio:'.implode(',', $contribution['missing']);
                     $component['converted'] = null;

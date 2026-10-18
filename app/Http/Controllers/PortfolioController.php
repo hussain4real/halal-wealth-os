@@ -105,7 +105,7 @@ class PortfolioController extends Controller
             $owner = $this->owner($request);
             $state = $this->read->state($owner, $portfolio, $this->now());
 
-            return Inertia::render('portfolio/Opening', ['account' => $this->summary($state), 'initial_rows' => $state['rows'],
+            return Inertia::render('portfolio/Opening', ['account' => $this->summary($state), 'initial_rows' => $this->read->rows($owner, $this->read->opening($owner, $portfolio)),
                 'choices' => $this->assetChoices($owner, $request, $state['currency']), 'query' => $this->search($request), 'today' => now('UTC')->toDateString()]);
         });
     }
@@ -203,7 +203,7 @@ class PortfolioController extends Controller
     private function summary(array $state): array
     {
         $state['position_count'] = count($state['rows']);
-        unset($state['rows'], $state['ledger_evidence']);
+        unset($state['rows'], $state['ledger_evidence'], $state['investment']);
 
         return $state;
     }

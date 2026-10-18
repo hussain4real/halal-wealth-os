@@ -35,11 +35,11 @@ test('one mode selects cash plus positions or whole account value never both', f
     P::opening($this->owner, $this->portfolio, [P::row(P::asset($this->owner), ['quantity' => '3', 'unit_price' => '10'])]);
     P::mode($this->owner, $this->portfolio);
     $s = app(NetWorthSnapshot::class)->capture($this->owner, Currency::QAR, '2026-10-18T12:00:00Z');
-    expect($s['total']['minor'])->toBe('4000')->and($s['components'][0]['portfolio']['selected'])->toBe(['ledger_cash', 'opening_positions']);
+    expect($s['total']['minor'])->toBe('4000')->and($s['components'][0]['portfolio']['selected'])->toBe(['ledger_cash', 'opening_positions', 'paid_ipo_receivables']);
     P::mode($this->owner, $this->portfolio, ['mode' => 'aggregate', 'aggregate_value' => '50', 'aggregate_as_of' => '2026-10-18']);
     $s = app(NetWorthSnapshot::class)->capture($this->owner, Currency::QAR, '2026-10-18T12:00:00Z');
     expect($s['total']['minor'])->toBe('5000')->and($s['components'][0]['ledger_cash']['minor'])->toBe('1000')
-        ->and($s['components'][0]['portfolio']['excluded'])->toBe(['ledger_cash', 'opening_positions']);
+        ->and($s['components'][0]['portfolio']['excluded'])->toBe(['ledger_cash', 'opening_positions', 'paid_ipo_receivables']);
     expect(app(FinancialSnapshot::class)->capture($this->owner, Currency::QAR, '2026-10-18T12:00:00Z')['total']['minor'])->toBe('1000');
 });
 test('unknown basis differs from explicit known zero and never fabricates profit', function () {

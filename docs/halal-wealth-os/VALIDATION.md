@@ -103,11 +103,11 @@ settings retry and immutable what-if requests. Read totals remain complete
 beyond bounded disclosure pages; real independent PostgreSQL backends verify
 settings serialization and coherent cash/protection reads. Client recovery,
 private original F07 and rendered review are separate observed gates.
-That historical unimplemented-phase boundary was M3-P1. Current M3-P1 authority is recorded in AGENTS.md; the next unimplemented phase is M3-P2.
+That historical unimplemented-phase boundary was M3-P1. Current M3-P2 authority is recorded in AGENTS.md; the next unimplemented phase is M3-P3.
 
 ## M3-P1 implemented checks
 
-Unimplemented-phase rejection now targets M3-P2.
+At this historical checkpoint, unimplemented-phase rejection targeted M3-P2.
 
 The harness requires PortfolioTest, PortfolioHttpTest, PortfolioBoundaryTest,
 PortfolioConcurrencyTest and PortfolioMathTest alongside all prior suites.
@@ -121,3 +121,20 @@ commit checks exercise deferred complete-book enforcement and empty-schema
 downgrade/upgrade without changing existing ledger evidence. Destructive
 downgrades with retained portfolio data refuse before DDL. Browser, TIA and
 independent publication evidence remain separate gates.
+
+## M3-P2 implemented checks
+
+Unimplemented-phase rejection now targets M3-P3. The harness requires
+InvestmentTest, InvestmentHttpTest, InvestmentConcurrencyTest and BookCostTest
+alongside all prior suites. Exact moving weighted-average minor allocation,
+final-disposal residue, unknown basis, stable dated replay, linked cash
+cancellation/correction and whole-opening corrections remain mandatory.
+IPO intent, shared investment-cash earmarks, paid face-value receivable,
+confirmed allotment, refund and cancellation retain separate evidence.
+Actual independent PostgreSQL backends test duplicate purchases/allotments,
+overselling, shared earmarks and competing refunds. Actual commit checks cover
+rollback, deferred exact cash-control/reversal semantics, after-commit receipt
+recovery and retained migration guards. Authenticated complete export, owner
+isolation, bounded disclosure with complete totals, native range/precision,
+private original F08/F09/F10, uncached coverage, TIA and independent rendered
+desktop/mobile recovery checks remain separate observed gates.

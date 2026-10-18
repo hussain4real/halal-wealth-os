@@ -97,6 +97,9 @@ export const evidenceLabel = (value: string) =>
             'Whole-account value, including cash',
         ledger_cash: 'Posted ledger cash',
         opening_positions: 'Opening positions',
+        paid_ipo_receivables: 'Paid IPO receivables, not shares',
+        aggregate_value_precedes_investment_events:
+            'New investment facts require a fresh whole-account value review.',
         whole_account_value: 'Whole-account value',
         mode_not_confirmed: 'Choose and confirm a valuation mode.',
         aggregate_value_missing_for_date:

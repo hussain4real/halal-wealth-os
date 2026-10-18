@@ -42,6 +42,7 @@ try {
             'M2-P2',
             'M2-P3',
             'M3-P1',
+            'M3-P2',
         ].includes(phase)
     ) {
         throw new VerificationFailure(
@@ -198,6 +199,10 @@ try {
             'PortfolioBoundaryTest',
             'PortfolioConcurrencyTest',
             'PortfolioMathTest',
+            'InvestmentTest',
+            'InvestmentHttpTest',
+            'InvestmentConcurrencyTest',
+            'BookCostTest',
         ]) {
             if (!discovered.stdout.includes(required)) {
                 throw new VerificationFailure(
@@ -217,7 +222,7 @@ try {
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
         console.log(
-            'PASS M0-P2, M0-P3, M1-P1, M1-P2, M1-P3, M2-P1, M2-P2, M2-P3 and M3-P1 implemented baseline',
+            'PASS M0-P2, M0-P3, M1-P1, M1-P2, M1-P3, M2-P1, M2-P2, M2-P3, M3-P1 and M3-P2 implemented baseline',
         );
         console.log(
             'NOT_APPLICABLE: future domain suites, integrations, live AI and deployment.',

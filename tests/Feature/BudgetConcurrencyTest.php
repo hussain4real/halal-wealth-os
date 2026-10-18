@@ -175,6 +175,9 @@ test('planning downgrade refuses retained rows and an empty schema roundtrip pre
     app(PostingService::class)->record($owner, 'budget-upgrade-journal', ['kind' => 'income', 'account_id' => (string) $account->id, 'amount' => '17.35', 'effective_date' => '2026-10-18', 'description' => 'Synthetic upgrade evidence']);
     $before = DB::table('journal_entries')->orderBy('id')->get()->toJson();
     $legs = DB::table('postings')->orderBy('id')->get()->toJson();
+    // Remove the empty investment event schema without changing historical journal assertions.
+    $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
+    expect(Schema::hasTable('investment_events'))->toBeFalse();
     // Remove the later empty portfolio schema before the historical phase schemas.
     $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
     expect(Schema::hasTable('portfolio_accounts'))->toBeFalse();
