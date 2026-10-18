@@ -62,3 +62,13 @@ commit, push, PR, merge, deployment or external publication is authorized.
 M1-P1 is now human accepted against the exact PR3 merge and original CI; see
 [the acceptance record](runs/M1-P1-acceptance.md). M1-P2 is separately
 authorized and in progress. The M1 milestone remains unaccepted.
+
+## Subsequent M2-P1 owner acceptance and M2-P2 authority
+
+The human owner explicitly accepted completed M2-P1 at 10:03 UTC on 18 October
+2026 and approved publication of its final independently reviewed records, then
+M2-P2 implementation, independent source/rendered review, sanitized draft PR to
+dev and normal merge after exact-head reviews/CI, followed by original dev-push
+CI. See [the acceptance evidence](runs/M2-P1-acceptance.md). M2-P2 and M2 remain
+unaccepted. No M2-P3 implementation, main/stage promotion, deployment, live
+financial integration or new credentials are authorized.

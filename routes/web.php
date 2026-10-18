@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\TransactionController;
@@ -12,6 +13,15 @@ Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
+    Route::get('goals', [GoalController::class, 'index'])->name('goals.index');
+    Route::get('goals/new', [GoalController::class, 'form'])->name('goals.create');
+    Route::post('goals', [GoalController::class, 'store'])->name('goals.store');
+    Route::get('goals/{goal}', [GoalController::class, 'show'])->whereNumber('goal')->name('goals.show');
+    Route::get('goals/{goal}/revise', [GoalController::class, 'form'])->whereNumber('goal')->name('goals.edit');
+    Route::post('goals/{goal}/revise', [GoalController::class, 'store'])->whereNumber('goal')->name('goals.revise');
+    Route::post('goals/{goal}/reservations', [GoalController::class, 'reserve'])->whereNumber('goal')->name('goals.reserve');
+    Route::post('goals/{goal}/links', [GoalController::class, 'link'])->whereNumber('goal')->name('goals.link');
+    Route::post('goals/reservations/{reservation}/release', [GoalController::class, 'release'])->whereNumber('reservation')->name('goals.release');
     Route::get('budgets', [BudgetController::class, 'index'])->name('budgets.index');
     Route::get('budgets/schedules/{schedule}/receipts', [BudgetController::class, 'receipts'])->name('budgets.receipts');
     Route::get('budgets/occurrences/{occurrence}', [BudgetController::class, 'history'])->name('budgets.history');

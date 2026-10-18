@@ -10,6 +10,7 @@ import {
     ChartNoAxesCombined,
     ClipboardCheck,
     CalendarDays,
+    Target,
 } from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -30,6 +31,7 @@ import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
     { title: 'Monthly plan', href: '/budgets', icon: CalendarDays },
+    { title: 'Goals & protection', href: '/goals', icon: Target },
     { title: 'Accounts', href: '/accounts', icon: Wallet },
     { title: 'Transactions', href: '/transactions', icon: ReceiptText },
     { title: 'Currency exchange', href: '/fx', icon: ArrowLeftRight },

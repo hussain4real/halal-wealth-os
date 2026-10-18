@@ -1,0 +1,67 @@
+import type { BudgetMoney } from './budget';
+export type Goal = {
+    id: string;
+    root_id: string;
+    reference: string;
+    name: string;
+    currency: string;
+    mode: 'dedicated' | 'reserved';
+    account_id: string;
+    account_name: string;
+    account_archived: boolean;
+    target: BudgetMoney;
+    opening: BudgetMoney;
+    nominal: BudgetMoney;
+    backed: BudgetMoney | null;
+    shortfall: BudgetMoney | null;
+    backing_reason: string | null;
+    essential: BudgetMoney | null;
+    contribution: BudgetMoney;
+    policy: 'fixed_monthly' | 'variable';
+    first_deposit: string | null;
+    target_date: string | null;
+    standing_order: boolean;
+    reminders: boolean;
+    closed: boolean;
+    version: string;
+    projection: {
+        status: string;
+        remaining: BudgetMoney | null;
+        deposits: string | null;
+        completion_date: string | null;
+        date_reason: string | null;
+        coverage_months: string | null;
+        coverage_reason: string | null;
+        percent: string | null;
+        target_date_status: string;
+    };
+};
+export type GoalAccount = {
+    id: string;
+    name: string;
+    currency: string;
+    cash: BudgetMoney | null;
+    reserved: BudgetMoney;
+    reason: string | null;
+};
+export type GoalMovement = {
+    posting_id: string;
+    journal_id: string;
+    reference: string;
+    description: string;
+    kind: string;
+    status: string;
+    date: string;
+    amount: BudgetMoney;
+    linked: boolean;
+    link_reason: string | null;
+    reverses_journal_id: string | null;
+};
+export type GoalReservation = {
+    id: string;
+    reference: string;
+    amount: BudgetMoney;
+    reason: string;
+    released: boolean;
+    release_reason: string | null;
+};
