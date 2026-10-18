@@ -102,3 +102,42 @@ export function cashSettingsDraft(
         },
     };
 }
+
+export type CashRequirement = { schedule_id: string; required: string };
+export function reconcileCashRequirements(
+    rows: CashRequirement[],
+    choices: readonly { schedule_id: string; family: string }[],
+    families: Map<string, string>,
+): CashRequirement[] {
+    let result = rows.map((row) => ({ ...row }));
+    for (const choice of choices) {
+        const matches = (row: CashRequirement) =>
+            row.schedule_id === choice.schedule_id ||
+            families.get(row.schedule_id) === choice.family;
+        const explicit = (row: CashRequirement) =>
+            row.required === '0' || row.required === '1';
+        const retained =
+            result.find(
+                (row) =>
+                    row.schedule_id === choice.schedule_id && explicit(row),
+            ) ??
+            result.find((row) => matches(row) && explicit(row)) ??
+            result.find(matches);
+        let replaced = false;
+        result = result.flatMap((row) => {
+            if (!matches(row)) return [row];
+            if (replaced) return [];
+            replaced = true;
+            return [
+                {
+                    schedule_id: choice.schedule_id,
+                    required: retained?.required ?? '',
+                },
+            ];
+        });
+        if (!replaced)
+            result.push({ schedule_id: choice.schedule_id, required: '' });
+        families.set(choice.schedule_id, choice.family);
+    }
+    return result;
+}

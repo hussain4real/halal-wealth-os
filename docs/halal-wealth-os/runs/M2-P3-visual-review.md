@@ -9,3 +9,20 @@ A real source change caused 409 and required a successful baseline refresh befor
 The sole implementation owner corrected one rendered accessibility issue: rejected scenario inputs now receive focus after pending controls are enabled. It passed an actual final retest. All 29 frozen source/test/harness hashes stayed unchanged. Review resources were cleaned, and the coordinator's separate database remained ready with the same socket identity before and after review initialization/cleanup.
 
 Accessibility observations are scoped, not a full certification. Private canonical fixtures, financial concurrency, aggregate gates/CI and human phase/milestone acceptance are separate evidence and decisions.
+
+## Superseding cycle 4 rendered checkpoint
+
+The reviewer reproduced the original later-page revised-family save rejection,
+then passed a focused 10-check / six-image correction run and a fresh broad
+39-check / 15-image run on the corrected frozen source. All 21 current images
+were individually inspected. The runs remain separate evidence, not 49 unique
+scenarios. No JavaScript errors, rendered findings or blockers remain.
+
+A revised 21st family inherited its explicit classification; changing and saving
+it produced one current row per family. A lost committed response followed by
+another family revision and hard reload preserved the original attempt identity
+and exact payload. Actual mixed-currency rendering retained unrelated protection
+and disclosed rounding held back; zero commitments released no phantom overlap.
+Financial snapshots across 25 tables were unchanged by scenarios. All 29 source
+hashes remained fixed. Own servers/containers were removed; disposable data was
+empty and the coordinator database retained readiness and socket identity.

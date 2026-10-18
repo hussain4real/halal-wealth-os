@@ -1,7 +1,7 @@
 # M2-P3 implementation and verification
 
 Status: local engineering complete; authorized dev publication in progress,
-unaccepted. Cycle 3 of at most six. The human owner accepted
+unaccepted. Cycle 4 of at most six. The human owner accepted
 M2-P2 and authorized this phase through source/rendered review, sanitized draft
 PR to dev, normal merge after exact-head reviews/CI, original dev-push CI and
 independent M2 milestone review. Formal milestone review retains its prerequisite
@@ -55,7 +55,7 @@ a formatter absent from the locked toolchain and failed without installing it;
 the installed Vite Plus formatter then passed. Actual rendered retest, final
 full uncached checks, TIA and publication remain pending.
 
-## Final local engineering evidence
+## Preserved cycle 3 local engineering evidence
 
 The corrected full uncached gate passed 472 tests / 2,961 assertions, with no
 failures, errors or skips, and 2,126/2,271 covered application statements. All
@@ -100,3 +100,46 @@ commit review, original hosted checks, normal dev merge and original dev-push CI
 Independent M2 review follows; human phase and milestone acceptance remain
 separate. No M3, main/stage promotion, deployment, live integration, credentials
 or security-setting change is authorized.
+
+## Cycle 4 hosted-review correction
+
+PR 8 opened against dev at the independently reviewed cycle-three head. Original
+attempt-1 CI passed its actual baseline, intended failure and restored baseline.
+Hosted review then found per-currency protection rounding, retained family
+revisions across settings pages and a final month-end recurrence count boundary.
+Both financial/range cases failed in actual local RED tests. An independent
+browser RED reproduced the hidden old/new family duplicate and rejected save.
+Cycle four grouped these fixes with regressions. Converted bill overlap is now
+capped within its own native currency before aggregation; rounding cannot release
+unrelated protected cash. Settings reconcile later-page revisions by immutable
+family identity, preserving explicit and unsaved choices and exact retry payloads.
+Recurrence preflight and generation share the exact final eligible anchored index.
+
+Actual backend RED reproduced both financial/boundary failures; GREEN passed two
+cases / seven assertions. Focused suites passed 63 cases / 443 assertions; eight
+client regression checks passed. Private original F07 again passed seven checks.
+The final uncached gate passed 474 tests / 2,973 assertions, no failures, errors
+or skips, and 2,133/2,279 covered statements. All 41 Node checks passed (10 planning
+state plus 31 other checks), alongside dependency/platform/advisory, guarded
+PostgreSQL migration, lint/types/build, Pint and PHPStan gates.
+
+Fresh TIA executed 474 cases / 2,973 assertions in 318.53 seconds; unchanged replay
+explicitly reported 474 cached results in 3.24 seconds. Native planner probes
+selected seven affected PHP suites and two Vue-page suites, without mutating
+source/cache or claiming impacted-test execution. All 29 frozen source hashes
+and the calculation policy remained unchanged. The final build manifest matched
+the actual broad browser run. Read-only post-test inspection found all 20 inspected
+owned disposable tables empty.
+
+Independent source review passed the correction. Independent rendered review
+reproduced the old family-save failure, then passed a separate focused 10-check /
+six-image run and a fresh broad 39-check / 15-image run. These are separate runs,
+not 49 unique scenarios. All current images were individually inspected; no
+JavaScript errors or rendered findings remain. Positive cross-currency rounding
+protection and interrupted exact-key recovery across another family revision were
+actually rendered. Earlier passing and failing evidence is retained.
+
+PR 8 remains draft on the original source head until the reviewed correction is
+committed and pushed. Fresh exact-head hosted CI/review, normal dev merge,
+original post-merge CI and independent M2 review remain required. Human M2-P3/M2
+acceptance is pending; no M3 is authorized.

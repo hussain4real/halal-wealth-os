@@ -95,8 +95,11 @@ bill in the same settings version.
 Monthly bill overlap uses the same explicit, still-backed links as actual now,
 limited to next-month bills. Paying those bills consumes their reserved cash,
 so their protection is removed from the forecast remaining protection rather
-than subtracted twice. Cap converted overlap by both the scenario commitment
-amount and the currently converted actual protection. Separately rounded tiny
+than subtracted twice. Before aggregation, cap each native currency group's
+converted overlap by that same group's converted actual protection. Protection
+in another currency cannot cover a rounding difference. Separately cap the
+aggregate eligible overlap by the scenario commitment amount. Sum held-back
+rounding separately and limit its displayed amount to remaining scenario bills. Separately rounded tiny
 foreign flows can otherwise release more converted protection than exists.
 Disclose any overlap held back by this rounding cap; never present negative
 remaining protection or create extra forecast free funds from that difference.
@@ -131,9 +134,11 @@ Use full SQL aggregates/windows for financial totals and at most twenty visible
 detail rows per section, with owner-scoped keyset choices and retained selected
 identities for recovery; disclosure limits never truncate calculation inputs.
 A cheap recurrence-size check refuses evaluation above 100,000 candidate
-occurrences; actual generation uses the same per-version end/cutover bound,
-with an explicit incomplete state and unknown occurrence count.
-It does not calculate a truncated surplus or erase old obligations.
+occurrences with an explicit incomplete state and unknown occurrence count.
+Actual generation uses the same per-version end/cutover bound and final anchored
+due date. A partial final month does not count or enumerate an occurrence beyond
+that bound. The size limit never produces a truncated surplus or erases old
+obligations.
 All money and rates are exact strings, with bounded Money validation before
 presenting totals. Settings and links retain immutable owner-scoped evidence.
 Read-only scenarios are stateless; only settings writes require durable retry.

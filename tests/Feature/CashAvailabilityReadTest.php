@@ -170,3 +170,16 @@ test('ended ancient rules enumerate only candidates admitted by their own end bo
     // EXPLAIN reports rounded per-loop averages (for example 0.83 x 6).
     expect((int) round($enumerated))->toBe(5);
 });
+
+test('exactly one hundred thousand actual month-end occurrences remain within the evaluation bound', function () {
+    $category = B::category($this->owner);
+    $requirements = [];
+    foreach (['0001-01-31', '0001-01-31', '0001-01-31', '0001-01-31', '1793-02-28'] as $first) {
+        $rule = B::rule($this->owner, $category, ['amount' => '0.01', 'first_due_date' => $first, 'end_date' => '2026-02-01']);
+        $requirements[] = ['schedule_id' => (string) $rule->id, 'required' => '1'];
+    }
+    A::settings($this->owner, ['buffer' => '0', 'requirements' => $requirements]);
+    $snapshot = app(CashAvailability::class)->capture($this->owner);
+    expect($snapshot['actual']['state'])->toBe('complete')->and($snapshot['occurrence_count'])->toBe(100000)
+        ->and($snapshot['occurrences'])->toHaveCount(20)->and($snapshot['actual']['raw']['minor'])->toBe('-100000');
+});

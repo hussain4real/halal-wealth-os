@@ -108,3 +108,71 @@ await test('unexpected authority fields and oversized lists cannot become a reco
         }),
     );
 });
+
+await test('a revised family on a later page replaces its hidden old version and retains unsaved classifications', () => {
+    const rows = Array.from({ length: 24 }, (_, i) => ({
+        schedule_id: String(i + 1),
+        required: i === 0 ? '0' : '1',
+    }));
+    const families = new Map(
+        rows.map((row) => [row.schedule_id, 'family-' + row.schedule_id]),
+    );
+    const result = module.reconcileCashRequirements(
+        rows,
+        [{ schedule_id: '121', family: 'family-21' }],
+        families,
+    );
+    assert.equal(result.length, 24);
+    assert.equal(
+        result.some((row) => row.schedule_id === '21'),
+        false,
+    );
+    assert.equal(result.find((row) => row.schedule_id === '121').required, '1');
+    assert.equal(result[0].required, '0');
+    assert.equal(families.get('121'), 'family-21');
+});
+await test('revisiting and revising a family keeps one row and the newest explicit choice', () => {
+    const families = new Map([['21', 'family-21']]);
+    const rows = [
+        { schedule_id: '21', required: '1' },
+        { schedule_id: '121', required: '0' },
+    ];
+    const first = module.reconcileCashRequirements(
+        rows,
+        [{ schedule_id: '121', family: 'family-21' }],
+        families,
+    );
+    assert.deepEqual(first, [{ schedule_id: '121', required: '0' }]);
+    const second = module.reconcileCashRequirements(
+        first,
+        [{ schedule_id: '221', family: 'family-21' }],
+        families,
+    );
+    assert.deepEqual(second, [{ schedule_id: '221', required: '0' }]);
+    assert.deepEqual(
+        module.reconcileCashRequirements(
+            second,
+            [{ schedule_id: '221', family: 'family-21' }],
+            families,
+        ),
+        second,
+    );
+});
+await test('a newly visited family stays explicitly unanswered until the owner classifies it', () => {
+    const result = module.reconcileCashRequirements(
+        [],
+        [{ schedule_id: '9007199254740993', family: 'new-family' }],
+        new Map(),
+    );
+    assert.deepEqual(result, [
+        { schedule_id: '9007199254740993', required: '' },
+    ]);
+    const draft = module.cashSettingsDraft(
+        'new-family',
+        'original-request',
+        fields,
+    );
+    draft.save({ ...payload, requirements: JSON.stringify(result) });
+    assert.equal(draft.load().requirements, JSON.stringify(result));
+    draft.clear();
+});

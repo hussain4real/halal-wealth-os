@@ -2,6 +2,7 @@
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import { computed, reactive, ref, watch } from 'vue';
 import LedgerFeedback from '@/components/LedgerFeedback.vue';
+import { reconcileCashRequirements } from '@/composables/cashSettingsDraft';
 import { useCashSettingsForm } from '@/composables/useCashSettingsForm';
 import type { CashOverlap, CashSnapshot } from '@/types/cash';
 const props = defineProps<{
@@ -37,24 +38,17 @@ defineOptions({
 const page = usePage();
 const owner = String((page.props.auth as { user: { id: number } }).user.id);
 const initial = props.cash.settings;
-const initialRequirements = (initial?.requirements ?? []).map((r) => ({
-    schedule_id: r.schedule_id,
-    required: r.required ? '1' : '0',
-}));
-for (const choice of props.cash.required_choices) {
-    const old = initial?.requirements.find((r) => r.family === choice.family);
-    const index = old
-        ? initialRequirements.findIndex(
-              (r) => r.schedule_id === old.schedule_id,
-          )
-        : -1;
-    if (index >= 0) initialRequirements[index].schedule_id = choice.schedule_id;
-    else
-        initialRequirements.push({
-            schedule_id: choice.schedule_id,
-            required: '',
-        });
-}
+const requirementFamilies = new Map(
+    (initial?.requirements ?? []).map((row) => [row.schedule_id, row.family]),
+);
+const initialRequirements = reconcileCashRequirements(
+    (initial?.requirements ?? []).map((row) => ({
+        schedule_id: row.schedule_id,
+        required: row.required ? '1' : '0',
+    })),
+    props.cash.required_choices,
+    requirementFamilies,
+);
 const { form, feedback, recovered, submit } = useCashSettingsForm(owner, {
     prior_id: initial?.id ?? '',
     currency: initial?.currency ?? 'QAR',
@@ -90,11 +84,13 @@ watch(
     () => props.cash.required_choices,
     (choices) => {
         if (locked.value) return;
-        const rows = [...requirements.value];
-        for (const choice of choices)
-            if (!rows.some((r) => r.schedule_id === choice.schedule_id))
-                rows.push({ schedule_id: choice.schedule_id, required: '' });
-        form.requirements = JSON.stringify(rows);
+        form.requirements = JSON.stringify(
+            reconcileCashRequirements(
+                requirements.value,
+                choices,
+                requirementFamilies,
+            ),
+        );
     },
 );
 function nextSettingsPage(key: string, cursor: string) {

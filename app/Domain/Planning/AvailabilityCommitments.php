@@ -27,9 +27,13 @@ WITH versions AS (
 ), selected AS (
  SELECT *,least(?::date,coalesce(end_date,?::date),coalesce(next_cutover-1,?::date)) AS last_date FROM versions s
  WHERE (s.direction='income' AND s.salary) OR (s.direction='expense' AND EXISTS(SELECT 1 FROM jsonb_to_recordset(?::jsonb) AS r(family text,required boolean) WHERE r.family=s.family_reference AND r.required))
+), indexed AS (
+ SELECT *,CASE WHEN first_due_date>last_date THEN -1 WHEN interval_months=0 THEN 0 ELSE
+ ((extract(year FROM last_date)::int-extract(year FROM first_due_date)::int)*12+extract(month FROM last_date)::int-extract(month FROM first_due_date)::int)/interval_months END AS last_index FROM selected
+), bounded AS (
+ SELECT *,CASE WHEN last_index<0 THEN -1 WHEN (first_due_date+make_interval(months=>interval_months*last_index))::date>last_date THEN last_index-1 ELSE last_index END AS final_index FROM indexed
 )
-SELECT coalesce(sum(CASE WHEN first_due_date>last_date THEN 0 WHEN interval_months=0 THEN 1 ELSE
- ((extract(year FROM last_date)::int-extract(year FROM first_due_date)::int)*12+extract(month FROM last_date)::int-extract(month FROM first_due_date)::int)/interval_months+1 END),0)::text AS candidates FROM selected
+SELECT coalesce(sum(final_index+1),0)::text AS candidates FROM bounded
 SQL, [$owner->id, max($horizon, $end), max($horizon, $end), max($horizon, $end), json_encode($requirements, JSON_THROW_ON_ERROR)]);
         if (bccomp(PlanningInput::minor($budget->candidates), '100000', 0) > 0) {
             return ['groups' => [], 'occurrences' => [], 'occurrence_count' => null, 'month_start' => $start, 'month_end' => $end, 'reason' => 'projection_range_exceeded'];
@@ -44,11 +48,14 @@ versions AS (
 ), rules AS (
  SELECT s.*,least(greatest(parameters.horizon,parameters.month_end),coalesce(s.end_date,greatest(parameters.horizon,parameters.month_end)),coalesce(s.next_cutover-1,greatest(parameters.horizon,parameters.month_end))) AS last_date
  FROM versions s CROSS JOIN parameters WHERE (s.direction='income' AND s.salary) OR (s.direction='expense' AND EXISTS(SELECT 1 FROM classifications r WHERE r.family=s.family_reference AND r.required))
+), indexed_rules AS (
+ SELECT *,CASE WHEN first_due_date>last_date THEN -1 WHEN interval_months=0 THEN 0 ELSE
+ ((extract(year FROM last_date)::int-extract(year FROM first_due_date)::int)*12+extract(month FROM last_date)::int-extract(month FROM first_due_date)::int)/interval_months END AS last_index FROM rules
+), bounded_rules AS (
+ SELECT *,CASE WHEN last_index<0 THEN -1 WHEN (first_due_date+make_interval(months=>interval_months*last_index))::date>last_date THEN last_index-1 ELSE last_index END AS final_index FROM indexed_rules
 ), dates AS (
  SELECT s.*, (s.first_due_date+make_interval(months=>s.interval_months*n))::date AS due
- FROM rules s,LATERAL generate_series(0,CASE WHEN s.first_due_date>s.last_date THEN -1 WHEN s.interval_months=0 THEN 0 ELSE
- greatest(-1,((extract(year FROM s.last_date)::int-extract(year FROM s.first_due_date)::int)*12
- +extract(month FROM s.last_date)::int-extract(month FROM s.first_due_date)::int)/s.interval_months) END) n
+ FROM bounded_rules s,LATERAL generate_series(0,s.final_index) n
 ), valid AS (
  SELECT d.* FROM dates d,parameters WHERE d.due<=greatest(parameters.horizon,parameters.month_end)
  AND (d.end_date IS NULL OR d.due<=d.end_date) AND (d.next_cutover IS NULL OR d.due<d.next_cutover)

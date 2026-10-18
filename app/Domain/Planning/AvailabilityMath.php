@@ -23,6 +23,7 @@ final class AvailabilityMath
         $forecastMissing = [];
         $salaryCount = 0;
         $components = [];
+        $roundingOverlap = '0';
         foreach ($groups as $code => $group) {
             $currency = Currency::from($code);
             $g = [];
@@ -59,7 +60,13 @@ final class AvailabilityMath
                 $bills = $this->convert($currency, $g['monthly_commitments'], $base, $rates[$code] ?? null, $cutoff);
                 $unfunded = $this->convert($currency, bcsub($g['monthly_commitments'], $g['monthly_overlap'], 0), $base, $rates[$code] ?? null, $cutoff);
                 $totals['monthly_commitments'] = bcadd($totals['monthly_commitments'], $bills, 0);
-                $totals['monthly_overlap'] = bcadd($totals['monthly_overlap'], bcsub($bills, $unfunded, 0), 0);
+                $overlap = bcsub($bills, $unfunded, 0);
+                $protection = $converted['protected'] ?? '0';
+                if (bccomp($overlap, $protection, 0) > 0) {
+                    $roundingOverlap = bcadd($roundingOverlap, bcsub($overlap, $protection, 0), 0);
+                    $overlap = $protection;
+                }
+                $totals['monthly_overlap'] = bcadd($totals['monthly_overlap'], $overlap, 0);
             } catch (InvalidArgumentException $error) {
                 $forecastMissing[] = 'commitments:'.$code.':'.$error->getMessage();
             }
@@ -93,7 +100,7 @@ final class AvailabilityMath
             'raw' => $actualMissing === [] ? $rawMoney : null, 'deployable' => $actualMissing === [] ? $deployable : null, 'shortfall' => $actualMissing === [] ? $shortfall : null,
             'breakdown' => $actual, 'buffer' => $buffer === null ? null : Money::fromMinor($base, $buffer)->jsonSerialize(),
             'components' => $components, 'forecast_missing' => array_values(array_unique($forecastMissing)),
-            'forecast_inputs' => [...$totals, 'buffer' => $buffer, 'investment_target' => $investmentTarget], 'currency' => $base->value];
+            'forecast_inputs' => [...$totals, 'monthly_rounding_overlap' => $roundingOverlap, 'buffer' => $buffer, 'investment_target' => $investmentTarget], 'currency' => $base->value];
     }
 
     /** @param array<string,mixed>|null $rate
@@ -144,10 +151,13 @@ final class AvailabilityMath
             $missing[] = 'investment_target_missing';
         }
         $overlap = bccomp($input['monthly_overlap'], $input['monthly_commitments'], 0) > 0 ? $input['monthly_commitments'] : $input['monthly_overlap'];
-        $roundingOverlap = '0';
         if (bccomp($overlap, $input['protected'], 0) > 0) {
-            $roundingOverlap = bcsub($overlap, $input['protected'], 0);
             $overlap = $input['protected'];
+        }
+        $roundingOverlap = PlanningInput::minor($input['monthly_rounding_overlap'] ?? '0');
+        $remainingBills = bcsub($input['monthly_commitments'], $overlap, 0);
+        if (bccomp($roundingOverlap, $remainingBills, 0) > 0) {
+            $roundingOverlap = $remainingBills;
         }
         $investment = bcsub($input['investment_target'] ?? '0', $input['investment_backed'], 0);
         if (bccomp($investment, '0', 0) < 0) {

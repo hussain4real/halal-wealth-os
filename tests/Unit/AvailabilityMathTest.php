@@ -30,3 +30,15 @@ test('tiny foreign bill overlap never releases more rounded protection than exis
         ->and($forecast['details']['remaining_protection']['minor'])->toBe('0')->and($forecast['details']['bill_overlap']['minor'])->toBe('0')
         ->and($forecast['details']['rounding_overlap_not_applied']['minor'])->toBe('1')->and($forecast['free']['minor'])->toBe('0');
 });
+
+test('tiny foreign bill overlap cannot release protection held in another native currency', function () {
+    $math = new AvailabilityMath;
+    $rate = ['id' => '1', 'base' => 'USD', 'quote' => 'QAR', 'value' => '0.5', 'observed_at' => '2026-10-18T00:00:00Z', 'effective_at' => '2026-10-18T00:00:00Z'];
+    $actual = $math->calculate(Currency::QAR, ['QAR' => ['cash' => '100', 'protected' => '100', 'salary_count' => 1], 'USD' => ['cash' => '2', 'protected' => '1', 'monthly_commitments' => '1', 'monthly_overlap' => '1']], ['USD' => $rate], '2026-10-18T12:00:00Z', '0', '0', []);
+    $forecast = $math->forecast($actual);
+    expect($forecast['state'])->toBe('complete')->and($forecast['details']['remaining_protection']['minor'])->toBe('100')
+        ->and($forecast['details']['bill_overlap']['minor'])->toBe('0')->and($forecast['details']['rounding_overlap_not_applied']['minor'])->toBe('1')
+        ->and($forecast['free']['minor'])->toBe('0');
+    $zero = $math->forecast($actual, ['commitments' => '0']);
+    expect($zero['details']['remaining_protection']['minor'])->toBe('100')->and($zero['details']['rounding_overlap_not_applied']['minor'])->toBe('0')->and($zero['free']['minor'])->toBe('1');
+});
