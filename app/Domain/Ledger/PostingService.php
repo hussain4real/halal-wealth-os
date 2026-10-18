@@ -36,6 +36,7 @@ final class PostingService
             $this->lockOwner($owner);
             $original = $this->ownedJournal($owner, $originalId);
             $this->authorizeJournalAccounts($owner, $original);
+            $this->requireUngrouped($owner, $original);
             if (! in_array($original->kind, ['income', 'expense', 'transfer'], true)) {
                 $this->fail('journal', 'This record can be reversed, but cannot be replaced with a new transaction.');
             }
@@ -81,11 +82,18 @@ final class PostingService
      * Exact balanced application-service port; no FX, no inferred conversion.
      *
      * @param  list<array{account_id: string, minor: string}>  $movements
+     * @param  array<string, mixed>  $context
      */
-    public function postBalanced(User $owner, string $key, array $movements, string $description): JournalEntry
+    public function postBalanced(User $owner, string $key, array $movements, string $description, ?string $effectiveDate = null, array $context = [], string $kind = 'adjustment'): JournalEntry
     {
-        return DB::transaction(function () use ($owner, $key, $movements, $description): JournalEntry {
+        return DB::transaction(function () use ($owner, $key, $movements, $description, $effectiveDate, $context, $kind): JournalEntry {
             $this->lockOwner($owner);
+            if ($effectiveDate !== null) {
+                LedgerInput::date($effectiveDate);
+            }
+            if (! in_array($kind, ['adjustment', 'expense'], true)) {
+                $this->fail('kind', 'Unsupported balanced service operation.');
+            }
             $description = $this->text($description, 'description');
             $legs = [];
             foreach ($movements as $movement) {
@@ -94,7 +102,13 @@ final class PostingService
             }
             $canonical = array_map(fn (array $leg): array => ['account_id' => (string) $leg['account']->id, 'minor' => $leg['minor']], $legs);
             usort($canonical, fn (array $a, array $b): int => [$a['account_id'], $a['minor']] <=> [$b['account_id'], $b['minor']]);
-            $payload = ['kind' => 'adjustment', 'movements' => $canonical, 'description' => $description];
+            $payload = ['kind' => $kind, 'movements' => $canonical, 'description' => $description];
+            if ($effectiveDate !== null) {
+                $payload['effective_date'] = $effectiveDate;
+            }
+            if ($context !== []) {
+                $payload['context'] = $context;
+            }
             if ($cached = $this->cached($owner, $key, $payload)) {
                 return $cached;
             }
@@ -102,7 +116,32 @@ final class PostingService
                 $this->requireActive($leg['account']);
             }
 
-            return $this->append($owner, $key, $payload, 'adjustment', now()->toDateString(), $description, null, $legs);
+            return $this->append($owner, $key, $payload, $kind, $effectiveDate ?? now()->toDateString(), $description, null, $legs);
+        });
+    }
+
+    public function systemAccountFor(User $owner, Currency $currency, string $role): Account
+    {
+        return DB::transaction(function () use ($owner, $currency, $role): Account {
+            $this->lockOwner($owner);
+            if (! in_array($role, ['clearing', 'equity', 'expense'], true)) {
+                $this->fail('offset', 'Unsupported internal account role.');
+            }
+
+            return $this->systemAccount($owner, $currency, $role);
+        });
+    }
+
+    /** Only the FX coordinator can complete this under its outer transaction. */
+    public function reverseFxMember(User $owner, string $originalId, string $key, string $reason, int $operationId): JournalEntry
+    {
+        return DB::transaction(function () use ($owner, $originalId, $key, $reason, $operationId): JournalEntry {
+            $this->lockOwner($owner);
+            $original = $this->ownedJournal($owner, $originalId);
+            $member = DB::table('fx_operation_journals')->where('owner_id', $owner->id)->where('journal_id', $original->id)->first();
+            abort_unless($member !== null && $member->operation_id === $operationId && in_array($member->role, ['source', 'destination', 'fee'], true), 404);
+
+            return $this->reverseLocked($owner, $original, $key, $reason, $operationId);
         });
     }
 
@@ -171,9 +210,12 @@ final class PostingService
         return $this->append($owner, $key, $payload, $kind, $date, $description, $receipt, $legs, replaces: $replaces?->id);
     }
 
-    private function reverseLocked(User $owner, JournalEntry $original, string $key, string $reason): JournalEntry
+    private function reverseLocked(User $owner, JournalEntry $original, string $key, string $reason, ?int $fxOperationId = null): JournalEntry
     {
         $accounts = $this->authorizeJournalAccounts($owner, $original);
+        if ($fxOperationId === null) {
+            $this->requireUngrouped($owner, $original);
+        }
         $reason = $this->text($reason, 'reason');
         $payload = ['kind' => 'reversal', 'original_id' => (string) $original->id, 'reason' => $reason];
         if ($cached = $this->cached($owner, $key, $payload)) {
@@ -224,6 +266,13 @@ final class PostingService
     {
         if ($account->archived_at !== null) {
             $this->fail('account_id', 'This account is archived. Choose an active account. Existing transactions can still be reversed.');
+        }
+    }
+
+    private function requireUngrouped(User $owner, JournalEntry $journal): void
+    {
+        if (DB::table('fx_operation_journals')->where('owner_id', $owner->id)->where('journal_id', $journal->id)->exists()) {
+            $this->fail('journal', 'This journal belongs to an FX conversion. Open its conversion receipt to reverse or correct the complete operation.');
         }
     }
 

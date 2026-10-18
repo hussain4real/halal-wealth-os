@@ -19,7 +19,7 @@ import {
 } from './verification.mjs';
 
 await test('unknown and unimplemented phases never report a passing result', () => {
-    for (const phase of ['M99-P99', 'M1-P3']) {
+    for (const phase of ['M99-P99', 'M2-P1']) {
         const result = spawnSync(
             path.join(root, 'bin/verify'),
             ['--phase', phase],
@@ -28,7 +28,7 @@ await test('unknown and unimplemented phases never report a passing result', () 
         assert.equal(result.status, 2);
         assert.match(
             result.stderr,
-            phase === 'M1-P3' ? /NOT_APPLICABLE/ : /Unknown phase/,
+            phase === 'M2-P1' ? /NOT_APPLICABLE/ : /Unknown phase/,
         );
     }
 });

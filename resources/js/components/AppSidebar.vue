@@ -6,6 +6,9 @@ import {
     Shield,
     Wallet,
     ReceiptText,
+    ArrowLeftRight,
+    ChartNoAxesCombined,
+    ClipboardCheck,
 } from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -27,6 +30,9 @@ import type { NavItem } from '@/types';
 const mainNavItems: NavItem[] = [
     { title: 'Accounts', href: '/accounts', icon: Wallet },
     { title: 'Transactions', href: '/transactions', icon: ReceiptText },
+    { title: 'Currency exchange', href: '/fx', icon: ArrowLeftRight },
+    { title: 'Balance reports', href: '/reports', icon: ChartNoAxesCombined },
+    { title: 'Reconciliation', href: '/reconciliations', icon: ClipboardCheck },
     { title: 'Profile', href: profile(), icon: UserRound },
     { title: 'Security', href: security(), icon: Shield },
     {

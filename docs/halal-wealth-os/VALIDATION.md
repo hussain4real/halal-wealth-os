@@ -57,3 +57,12 @@ fingerprints shared frontend sources and configuration; changes force a fresh
 complete TIA recording. Page bindings and PHP edges retain native selection.
 Missing branch-bound frontend metadata refuses execution until explicit
 recording. No shared-component selectivity is claimed.
+
+## M1-P3 implemented checks
+
+The phase harness now requires ManualFxTest, FxConcurrencyTest, LedgerHttpTest,
+ReconciliationTest and FxMathTest in addition to every prior implemented suite.
+Real PostgreSQL commits cover paired posting/reversal constraints, retry races,
+listener failure recovery, shared snapshots and retained-data migration policy.
+Unimplemented-phase rejection now targets M2-P1. Browser evidence, private
+canonical scenarios and exact-head publication checks remain separate gates.

@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-18T04:31:48.208704+00:00",
+    "updated_at": "2026-10-18T06:16:47.476457+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -13,17 +13,16 @@
         "default_external_effects": false
     },
     "active_run": {
-        "phase": "M1-P2",
-        "owner": "cloud-m1p2-coordinator",
+        "phase": "M1-P3",
+        "owner": "cloud-m1p3-coordinator",
         "worktree": ".",
-        "branch": "feat/m1-p2-atomic-posting",
-        "baseline_head": "10ac3e3f79470bcd5585d6f2e0af87a8451aa151",
-        "started_at": "2026-10-18T03:56:04.393861+00:00",
-        "status": "READY_FOR_REVIEW",
-        "cycles_used": 4,
+        "branch": "feat/m1-p3-manual-fx-reconciliation",
+        "baseline_head": "8a4b5719ffab5aafb8916fe0586e9a20e7e08917",
+        "started_at": "2026-10-18T05:32:17.944957+00:00",
+        "status": "RUNNING",
+        "cycles_used": 2,
         "max_cycles": 6,
-        "checkpoint": "Cycle4 hosted snapshot-race correction: actual4RED/4GREEN;full223/1280 655/699;59new518assert;unchanged28check22screenUX;TIA223record223explicitreplay;corrected publication review/CI pending",
-        "stopped_at": "2026-10-18T04:52:25.474110+00:00"
+        "checkpoint": "Cycle2 implementation gatesPASS; full300/1830, coverage1047/1132, privateF04, independent source/rendered, freshTIA300 plus explicit300replay; exact publication gates pending"
     },
     "repository": {
         "root": null,
@@ -133,20 +132,20 @@
         {
             "id": "M1-P2",
             "depends_on": ["M1-P1"],
-            "status": "READY_FOR_REVIEW",
+            "status": "ACCEPTED",
             "owner": "cloud-m1p2-coordinator",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M1-P2-local.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-18T05:23:00+00:00",
+            "evidence": "runs/M1-P2-acceptance.md"
         },
         {
             "id": "M1-P3",
             "depends_on": ["M1-P2"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "READY_FOR_REVIEW",
+            "owner": "cloud-m1p3-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M1-P3-local.md"
         },
         {
             "id": "M2-P1",
@@ -348,11 +347,11 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "phase": "M1-P2",
+        "phase": "M1-P3",
         "authorized": true,
-        "authority": "Owner accepts M1-P1 and approves next phase implementation/review/draft dev PR/normal merge after exact-head reviews and CI",
-        "scope": "Canonical M1-P2; polished transaction UX; real PostgreSQL concurrency and independent rendered desktop/mobile review; no M1-P3/main/stage/deployment",
-        "accepted_dependencies": ["M1-P1"],
+        "authority": "Owner accepts M1-P2 and approves M1-P3 implementation/review/sanitized draft dev PR/normal merge after exact-head review and CI, then independent M1 milestone review",
+        "scope": "Canonical manual FX and reconciliation only; real PostgreSQL and rendered desktop/mobile review; stop for owner milestone acceptance before M2; no main/stage/deployment",
+        "accepted_dependencies": ["M1-P2"],
         "remote_writes": true,
         "production_actions": false,
         "php_constraint": "~8.5.0"
@@ -540,6 +539,23 @@
             "stopped_at": "2026-10-17T19:21:15.626609+00:00",
             "closed_at": "2026-10-18T03:56:04.393861+00:00",
             "acceptance_evidence": "runs/M1-P1-acceptance.md"
+        },
+        {
+            "phase": "M1-P2",
+            "owner": "cloud-m1p2-coordinator",
+            "worktree": ".",
+            "branch": "feat/m1-p2-atomic-posting",
+            "baseline_head": "10ac3e3f79470bcd5585d6f2e0af87a8451aa151",
+            "started_at": "2026-10-18T03:56:04.393861+00:00",
+            "status": "ACCEPTED",
+            "cycles_used": 4,
+            "max_cycles": 6,
+            "checkpoint": "Cycle4 hosted snapshot-race correction: actual4RED/4GREEN;full223/1280 655/699;59new518assert;unchanged28check22screenUX;TIA223record223explicitreplay;corrected publication review/CI pending",
+            "stopped_at": "2026-10-18T04:52:25.474110+00:00",
+            "closed_at": "2026-10-18T05:32:17.944957+00:00",
+            "validated_head": "e5a657011334b189a10ac4be22d9a938a8f0aff2",
+            "merge_sha": "8a4b5719ffab5aafb8916fe0586e9a20e7e08917",
+            "acceptance_evidence": "runs/M1-P2-acceptance.md"
         }
     ],
     "authorization_history": [
@@ -592,6 +608,16 @@
             "authority": "Owner explicitly approves focused M1-P1 PR to dev and normal merge after CI/final independent review",
             "scope": "Publish sanitized M1-P1 and M0 acceptance/review docs, inspect/fix in-scope feedback, exact-head review and dev merge, verify post-merge CI; no later phases or deployment",
             "accepted_dependencies": ["M0-P3"],
+            "remote_writes": true,
+            "production_actions": false,
+            "php_constraint": "~8.5.0"
+        },
+        {
+            "phase": "M1-P2",
+            "authorized": true,
+            "authority": "Owner accepts M1-P1 and approves next phase implementation/review/draft dev PR/normal merge after exact-head reviews and CI",
+            "scope": "Canonical M1-P2; polished transaction UX; real PostgreSQL concurrency and independent rendered desktop/mobile review; no M1-P3/main/stage/deployment",
+            "accepted_dependencies": ["M1-P1"],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -779,8 +805,8 @@
         "pr": 3
     },
     "m1p2_checkpoint": {
-        "status": "READY_FOR_REVIEW",
-        "accepted": false,
+        "status": "ACCEPTED",
+        "accepted": true,
         "implementation_cycles_used": 4,
         "max_cycles": 6,
         "tests": 223,
@@ -799,10 +825,36 @@
         "evidence": "runs/M1-P2-local.md",
         "independent_evidence": "runs/M1-P2-independent-review.md",
         "visual_evidence": "runs/M1-P2-visual-review.md",
-        "hosted_ci": "ORIGINAL_PR_PASS_CORRECTED_HEAD_PENDING",
-        "post_merge_ci": "PENDING",
+        "hosted_ci": "SUCCESS_CORRECTED_HEAD_ATTEMPT_1_39098740719",
+        "post_merge_ci": "SUCCESS_ORIGINAL_ATTEMPT_1_39098962695",
         "deployment": false,
-        "hosted_finding": "One P2 snapshot race reproduced and corrected; exact-head follow-up review pending",
-        "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/4"
+        "hosted_finding": "Snapshot race corrected with actual4RED/4GREEN; exact-head review completed without findings; original thread resolved",
+        "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/4",
+        "acceptance_evidence": "runs/M1-P2-acceptance.md"
+    },
+    "m1p3_checkpoint": {
+        "status": "READY_FOR_REVIEW",
+        "accepted": false,
+        "cycles_used": 2,
+        "max_cycles": 6,
+        "tests": 300,
+        "assertions": 1830,
+        "covered_statements": 1047,
+        "application_statements": 1132,
+        "browser_checks": 36,
+        "inspected_screenshots": 34,
+        "unresolved_findings": [],
+        "source_review": "PASS_FROZEN_FINANCIAL_SOURCE",
+        "visual_review": "PASS_AFTER_FOUR_CORRECTIONS",
+        "canonical_f04": "PASS_PRIVATE_ORIGINAL_INPUTS",
+        "tia": "PASS_FRESH_300_AND_EXPLICIT_300_REPLAY",
+        "evidence": "runs/M1-P3-local.md",
+        "independent_evidence": "runs/M1-P3-independent-review.md",
+        "visual_evidence": "runs/M1-P3-visual-review.md",
+        "hosted_ci": "NOT_ATTEMPTED",
+        "post_merge_ci": "NOT_ATTEMPTED",
+        "deployment": false,
+        "tia_record_seconds": 112.62,
+        "tia_replay_seconds": 4.25
     }
 }
