@@ -1,9 +1,10 @@
 # Exact money and account contracts
 
-Status: M1-P1 is human accepted. The separately authorized M1-P2 integration
-is under review. Accepted ADR-001/002/003 directions and the original Money
-contract are retained. See [posting and retries](POSTING-AND-RETRIES.md). FX
-conversion remains outside the implemented scope.
+Status: M1-P1 and M1-P2 are human accepted. M1-P3 manual FX/reporting and
+reconciliation is implemented and independently reviewed, but remains unaccepted.
+Accepted ADR-001/002/003 directions and the original Money contract are retained.
+See [posting and retries](POSTING-AND-RETRIES.md) and
+[manual FX/reconciliation policies](FX-AND-RECONCILIATION.md).
 
 ## Exact representations
 
@@ -27,16 +28,19 @@ rejected. Canonical output removes insignificant trailing fractional zeroes
 and negative zero. Decimal addition/multiplication compute exactly and reject
 an unrepresentable result; no PostgreSQL numeric cast is used to trim inputs.
 The representation is signed; future quantity/price/FX use cases must impose
-their own semantic sign/positivity rules. No FX observation or conversion is
+their own semantic sign/positivity rules. M1-P3 rates impose positivity. No FX observation or conversion is
 created by representing an exact decimal.
 
-Only the explicitly named cash `Money::settle` operation rounds an exact
+The explicitly named cash `Money::settle` operation rounds an exact
 decimal: HALF_UP at the currency exponent, with ties away from zero, including
 negative amounts. For example, QAR 1.005 becomes 1.01 and -1.005 becomes -1.01.
 The result still must fit the cash range. Source-authoritative settlements
 must be supplied as exact cash; this helper does not overwrite them. Remainder
-allocation, conversions, portfolio cost basis and final disposals remain later
-phase responsibilities. The installed required BCMath extension performs
+allocation, portfolio cost basis and final disposals remain later phase
+responsibilities. M1-P3 reporting conversion uses exact BCMath intermediates and
+HALF_UP at final target cash, including19-digit JPY major values that exceed the
+smaller ExactDecimal integer contract. Actual transaction cash is authoritative
+and is never recalculated from a reporting quote. The installed required BCMath extension performs
 string arithmetic; no dependency/lock change or JavaScript Number arithmetic
 is used. Both primitives reject out-of-range outputs rather than wrapping.
 
@@ -49,18 +53,25 @@ asset overdrafts reduce it. A liability owed 100 with a repayment of 30 is
 -70; an overpayment resulting in a credit of 10 is +10. Never apply `abs()` to
 liabilities or flip a credit into debt. Balances stay in native currency.
 Money addition/subtraction and derived movement input reject mixed currency;
-this phase has no conversion escape hatch.
+mixed currencies require the explicit M1-P3 FX operation and reporting policy.
 
 Internal clearing, equity, income and expense accounts are ledger bookkeeping
 accounts and do not contribute to displayed net worth. They remain owner
 scoped. Clearing never inflates displayed wealth. No cross-currency net-worth
-aggregate is implemented or implied.
+aggregate is inferred by account arithmetic. M1-P3 reports provide a separate
+cutoff-bound base-currency total only when every included native value and its
+required direct reporting observation are available and eligible. Otherwise
+native values, missing/stale/unavailable components and covered subtotals remain
+explicit; missing FX never becomes parity.
 
 AccountBalanceReader remains a read-only port. PostedAccountBalances reads
 opening existence/amount, linked journal identity/status, completeness and the
 exact posted sum in one PostgreSQL statement. Account detail/list serialization
 uses this immutable per-account snapshot, without a later status query. This
-does not promise a shared snapshot across every account in a list.
+does not promise a shared snapshot across every account in the account list.
+The separate M1-P3 FinancialSnapshot service reads all included account balances,
+opening states, journal IDs and selected reporting quotes in one SQL statement
+for coherent balance reports and saved reconciliation evidence.
 Both posted originals and originals labelled reversed contribute alongside
 their linked reversal legs. The full sum is checked only after cancellation.
 A genuinely complete empty ledger derives zero. An unconsumed opening request
@@ -81,8 +92,10 @@ awaiting_posting, posted or reversed from actual linked history. Reversal does
 not permit silently consuming the same intent again.
 
 There are no editable balances. M1-P2 supplies the balanced journal and
-append-only reversal/replacement history. M1-P3 FX, observation provenance and
-reconciliation remain unimplemented. A complete account with no opening intent
+append-only reversal/replacement history. M1-P3 adds complete paired FX
+reversals/replacements, immutable observation provenance and saved native
+reconciliation comparisons with explicit attributed, reversible adjustments.
+Saved evidence never changes when later rates or backdated movements arrive. A complete account with no opening intent
 can now derive zero from its real empty journal, instead of the historical
 M1-P1 absent-source response.
 

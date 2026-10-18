@@ -136,7 +136,7 @@ const submit = () => {
             <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {{
                     original
-                        ? 'The original is retained. Its reversal and your replacement are recorded together, or neither is recorded.'
+                        ? 'The original is retained and cancelled on its original business date. Your replacement uses the date below. Both records save together.'
                         : 'Choose the movement, add the details, and keep a reliable record.'
                 }}
             </p>

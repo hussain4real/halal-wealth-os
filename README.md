@@ -4,14 +4,11 @@ A private personal wealth application bootstrapped with the complete official
 Laravel Inertia/Vue starter. Public source visibility does not authorize public
 SaaS or access to personal financial data.
 
-**M0-P2 is human-accepted.** The corrected local application baseline and
-[full implementation CI](https://github.com/hussain4real/halal-wealth-os/actions/runs/39043431382)
-pass; [acceptance evidence](docs/halal-wealth-os/runs/M0-P2-acceptance.md) records
-the exact reviewed head and scope. The sanitized scaffold is published in
-[PR #1](https://github.com/hussain4real/halal-wealth-os/pull/1) targeting dev. See
-[the merge checkpoint](docs/halal-wealth-os/runs/M0-P2-merge.md) and
-[publication run](docs/halal-wealth-os/runs/M0-P2-publication.md) for current
-evidence and remaining gates. M0-P1 and M0-P2 are accepted; later phases and milestone gates remain unaccepted.
+M0, M1-P1 and M1-P2 are human accepted. M1-P3 manual FX and reconciliation
+is locally verified and unaccepted; M1 milestone acceptance remains a separate human
+decision. See [current state](docs/halal-wealth-os/STATE.json) and
+[the phase contract](docs/halal-wealth-os/phases/M1-P3.md). Historical verification
+counts below remain labelled with their original phase checkpoints.
 
 The starter is pinned to `d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab`. All five
 optional authentication features were retained by its official finalizer:
@@ -20,7 +17,7 @@ password confirmation. Bundled UI components and development tooling remain.
 The approved Vite Plus 0.3.3 patch includes the matching Vite core alias and
 bundled Vitest override. Both dependency locks record actual resolution.
 M0-P3 adds the private identity shell and owner-scoped administration described
-below. No financial functionality is implemented. Public registration routes
+below. M1 adds exact owner-scoped ledger functionality. Public registration routes
 are disabled while the bundled registration view/action source is retained.
 
 ## Runtime
@@ -112,7 +109,7 @@ test and restored a successful full `bin/verify --all` baseline. The same comman
 The follow-up CI setup copies the public testing template to prevent missing-file
 warnings; the latest result is visible in PR checks. Reports are ignored local `build/junit.xml` and `build/coverage.xml`.
 
-The current application suite has 55 passing tests and 171 assertions; coverage
+The historical M0-P2 application suite had 55 passing tests and 171 assertions; coverage
 includes 149 of 159 application statements. The original 52 cases remain, with
 three profile-email regressions added after independent pre-merge review. These are bootstrap results, not
 future financial coverage, ownership, integration, performance or release gates.
@@ -127,9 +124,8 @@ Both dependency advisory checks report zero findings.
 
 The owner approved main, stage and dev. Every pull request targets **dev**.
 Preserve existing branches; do not merge, promote or deploy without separate
-authorization. The M0-P2 feature branch may be published for hosted CI and review.
-Current publication evidence is tracked in
-[the publication run](docs/halal-wealth-os/runs/M0-P2-publication.md).
+authorization. M1-P3 is authorized through sanitized draft PR to dev, exact-head gates and normal
+merge, followed by independent M1 review. Main/stage and deployment are excluded.
 
 Pest 5.3.2, its Laravel plugin 5.0.1 and PHPUnit 13.4.2 replace the earlier
 PHPUnit-only runner. The functional conversion preserves the 52 scenarios,
@@ -159,7 +155,8 @@ committed. Official engine documentation: [Pest TIA](https://pestphp.com/docs/ti
 
 ## M0-P3 private identity shell
 
-M0-P3 is a local review candidate, not human-accepted or merged. Its
+M0-P3 was subsequently accepted and merged; the following records describe its
+original local verification checkpoint. Its
 [canonical specification](docs/halal-wealth-os/phases/M0-P3.md) and
 [run evidence](docs/halal-wealth-os/runs/M0-P3-local.md) map each acceptance
 criterion. M0-P2 merged into dev and its original
@@ -202,4 +199,19 @@ history and receipts with atomic posting, safe retries and retained corrections.
 See [posting contracts](docs/halal-wealth-os/POSTING-AND-RETRIES.md),
 [local verification](docs/halal-wealth-os/runs/M1-P2-local.md) and
 [independent rendered UX review](docs/halal-wealth-os/runs/M1-P2-visual-review.md).
-M1-P1 is human accepted; M1-P2 and the M1 milestone remain unaccepted.
+M1-P1 and M1-P2 are human accepted; the M1 milestone remains unaccepted.
+
+## M1-P3 manual FX and reconciliation
+
+The current phase adds paired currency journals with clearing and explicit fees,
+complete group reversals/replacements, immutable manual reporting rates, native/
+base balance reports and saved statement comparisons with attributed reversible
+adjustments. Missing/stale FX never silently becomes parity. Saved reports retain
+cutoffs, rate identities and included movements. Read
+[the calculation and reporting policy](docs/halal-wealth-os/FX-AND-RECONCILIATION.md).
+This is manual bookkeeping; no live bank, rate feed, trading or deployment exists.
+
+The M1-P3 local full uncached gate passed300 tests/1,830 assertions with
+1,047/1,132 application statements covered. See
+[the phase run](docs/halal-wealth-os/runs/M1-P3-local.md) for exact scope,
+independent reviews, TIA boundaries and the remaining publication/acceptance gates.

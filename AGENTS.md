@@ -128,3 +128,18 @@ Preserve immutable opening intents and auditable reversal/replacement history.
 No M1-P3 implementation, main/stage change, deployment, real users, live
 financial actions, new credentials or infrastructure/security-setting changes.
 M1-P2 and M1 milestone acceptance remain separate human decisions.
+
+## Current M1-P3 and independent M1 review authority
+
+The owner accepted completed M1-P2 and approved M1-P3 implementation, independent
+review, sanitized draft PR to dev and normal merge after exact-head reviews/CI,
+then independent M1 milestone review. The manager delegates the acceptance record
+and sole M1-P3 claim to this coordinator. This supersedes the preceding no-M1-P3
+boundary within phases/M1-P3.md. Preserve prior histories, PHP8.5-only, starter
+features, Pest TIA and full uncached CI. At most six scoped cycles; one source
+writer with independent source/read-only review and exclusive test resources.
+Use exact synthetic rates, paired FX/reversal atomicity, immutable source/time
+evidence and coherent saved financial snapshots. Include actual rendered mobile/
+desktop UX, accessibility and recovery review. No live financial integrations,
+new credentials, main/stage changes or deployment. Stop after the independent
+M1 review for human milestone acceptance; no M2. Never self-accept phases/gates.

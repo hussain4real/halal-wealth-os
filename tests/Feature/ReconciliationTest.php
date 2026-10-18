@@ -1,0 +1,170 @@
+<?php
+
+use App\Domain\Ledger\AccountBalanceReader;
+use App\Domain\Ledger\AccountType;
+use App\Domain\Ledger\CreateAccount;
+use App\Domain\Ledger\FinancialSnapshot;
+use App\Domain\Ledger\PostingService;
+use App\Domain\Ledger\ReconciliationService;
+use App\Domain\Shared\Money\Currency;
+use App\Domain\Shared\Money\Money;
+use App\Models\User;
+use Carbon\CarbonImmutable;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use Tests\Support\FxFixtures as Fx;
+use Tests\TestCase;
+
+uses(TestCase::class, RefreshDatabase::class);
+
+test('a saved reconciliation comparison is immutable and an explicit adjustment produces a linked zero difference', function () {
+    $owner = User::factory()->create();
+    $account = Fx::account($owner);
+    $cutoff = now('UTC')->format('Y-m-d\TH:i:s\Z');
+    $service = app(ReconciliationService::class);
+    $comparison = $service->record($owner, 'reconcile-before', (string) $account->id, '19.10', $cutoff);
+    expect((string) $comparison->difference)->toBe('1910')->and($comparison->status)->toBe('difference');
+    $bytes = $comparison->evidence;
+    $result = $service->adjust($owner, (string) $comparison->id, 'reconcile-adjust', 'equity', 'Synthetic statement correction');
+    expect($result->status)->toBe('matched')->and((string) $result->difference)->toBe('0')->and($result->supersedes_id)->toBe($comparison->id);
+    expect(DB::table('reconciliation_sessions')->find($comparison->id)->evidence)->toBe($bytes);
+    expect($service->adjust($owner, (string) $comparison->id, 'reconcile-adjust', 'equity', 'Synthetic statement correction')->id)->toBe($result->id);
+    expect(fn () => $service->adjust($owner, (string) $comparison->id, 'reconcile-other', 'equity', 'Synthetic statement correction'))->toThrow(ValidationException::class);
+    expect(DB::table('journal_entries')->whereIn('kind', ['income', 'expense'])->count())->toBe(0);
+    $journal = DB::table('journal_entries')->find($result->adjustment_journal_id);
+    expect($journal->description)->toBe('Synthetic statement correction')->and($journal->effective_date)->toBe(substr($cutoff, 0, 10));
+    app(PostingService::class)->reverse($owner, (string) $journal->id, 'reverse-statement-adjust', 'Synthetic adjustment reversal');
+    $next = $service->record($owner, 'reconcile-after-reverse', (string) $account->id, '19.10', $cutoff, (string) $result->id);
+    expect((string) $next->difference)->toBe('1910')->and(app(AccountBalanceReader::class)->forAccount($account)->money?->minor)->toBe('0');
+});
+
+test('stale reconciliation refuses even a net zero change in journal evidence', function () {
+    $owner = User::factory()->create();
+    $account = Fx::account($owner);
+    $service = app(ReconciliationService::class);
+    $comparison = $service->record($owner, 'reconcile-stale', (string) $account->id, '12.00', now('UTC')->format('Y-m-d\TH:i:s\Z'));
+    $posting = app(PostingService::class);
+    $journal = $posting->record($owner, 'stale-extra-income', ['kind' => 'income', 'account_id' => (string) $account->id, 'amount' => '1.00', 'effective_date' => now()->toDateString(), 'description' => 'Synthetic extra evidence']);
+    $posting->reverse($owner, (string) $journal->id, 'stale-extra-reverse', 'Synthetic net-zero change');
+    expect(app(AccountBalanceReader::class)->forAccount($account)->money?->minor)->toBe('0');
+    expect(fn () => $service->adjust($owner, (string) $comparison->id, 'stale-adjustment', 'equity', 'Reject stale evidence'))->toThrow(ValidationException::class);
+    $this->assertDatabaseCount('reconciliation_adjustments', 0);
+});
+
+test('historical cutoffs retain originals before later reversals and saved evidence never changes', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-10-15T12:00:00Z'));
+    $owner = User::factory()->create();
+    $account = Fx::account($owner);
+    $journal = app(PostingService::class)->record($owner, 'historical-income', ['kind' => 'income', 'account_id' => (string) $account->id, 'amount' => '12.34', 'effective_date' => '2026-10-15', 'description' => 'Synthetic historical receipt']);
+    $cutoff = '2026-10-15T12:00:00Z';
+    $saved = app(ReconciliationService::class)->record($owner, 'historical-compare', (string) $account->id, '12.34', $cutoff);
+    $bytes = $saved->evidence;
+    $this->travelTo(CarbonImmutable::parse('2026-10-16T12:00:00Z'));
+    app(PostingService::class)->reverse($owner, (string) $journal->id, 'historical-reverse', 'Synthetic next-day reversal');
+    $old = app(FinancialSnapshot::class)->capture($owner, Currency::QAR, $cutoff);
+    $new = app(FinancialSnapshot::class)->capture($owner, Currency::QAR, '2026-10-16T12:00:00Z');
+    expect($old['components'][0]['native']['minor'])->toBe('1234')->and($new['components'][0]['native']['minor'])->toBe('0');
+    expect(DB::table('reconciliation_sessions')->find($saved->id)->evidence)->toBe($bytes);
+});
+
+test('later opening consumption is retrospective without rewriting saved unknown evidence or consuming again', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-10-15T12:00:00Z'));
+    $owner = User::factory()->create();
+    $account = app(CreateAccount::class)->create($owner, 'Synthetic historical opening', AccountType::Bank, Currency::QAR, Money::fromMinor(Currency::QAR, '500'));
+    $snapshots = app(FinancialSnapshot::class);
+    $saved = app(ReconciliationService::class)->record($owner, 'opening-before-consume', (string) $account->id, '5.00', '2026-10-15T12:00:00Z');
+    expect($saved->status)->toBe('unavailable')->and($saved->difference)->toBeNull();
+    $this->travelTo(CarbonImmutable::parse('2026-10-16T12:00:00Z'));
+    $posting = app(PostingService::class);
+    $opening = $posting->postOpening($owner, (string) $account->id, 'historical-opening-post');
+    expect($snapshots->capture($owner, Currency::QAR, '2026-10-15T12:00:00Z')['components'][0]['native']['minor'])->toBe('500');
+    expect($snapshots->capture($owner, Currency::QAR, '2026-10-14T12:00:00Z')['components'][0]['native_reason'])->toBe('opening_after_cutoff');
+    $posting->reverse($owner, (string) $opening->id, 'historical-opening-reverse', 'Synthetic opening correction');
+    $old = $snapshots->capture($owner, Currency::QAR, '2026-10-15T12:00:00Z');
+    $current = $snapshots->capture($owner, Currency::QAR, '2026-10-16T12:00:00Z');
+    expect($old['components'][0]['opening']['state'])->toBe('posted')->and($old['components'][0]['native']['minor'])->toBe('500')
+        ->and($current['components'][0]['opening']['state'])->toBe('reversed')->and($current['components'][0]['native']['minor'])->toBe('0');
+    expect(fn () => $posting->postOpening($owner, (string) $account->id, 'historical-opening-again'))->toThrow(ValidationException::class);
+    expect(DB::table('reconciliation_sessions')->find($saved->id)->difference)->toBeNull();
+});
+
+test('MIN reconciliation adjustments and their split inverses preserve the complete Money range', function () {
+    $owner = User::factory()->create();
+    $account = Fx::account($owner);
+    $service = app(ReconciliationService::class);
+    $saved = $service->record($owner, 'minimum-comparison', (string) $account->id, Money::fromMinor(Currency::QAR, Money::MIN_MINOR)->amount(), now('UTC')->format('Y-m-d\TH:i:s\Z'));
+    $result = $service->adjust($owner, (string) $saved->id, 'minimum-adjustment', 'equity', 'Synthetic minimum correction');
+    expect($result->status)->toBe('matched')->and((string) $result->ledger_minor)->toBe(Money::MIN_MINOR);
+    app(PostingService::class)->reverse($owner, (string) $result->adjustment_journal_id, 'minimum-adjustment-reverse', 'Synthetic minimum reversal');
+    expect(app(AccountBalanceReader::class)->forAccount($account)->money?->minor)->toBe('0');
+});
+
+test('unbounded statement differences remain exact while unsupported single corrections are refused', function () {
+    $owner = User::factory()->create();
+    $account = app(CreateAccount::class)->create($owner, 'Synthetic difference bound', AccountType::Bank, Currency::QAR, Money::fromMinor(Currency::QAR, Money::MIN_MINOR));
+    app(PostingService::class)->postOpening($owner, (string) $account->id, 'difference-bound-opening');
+    $service = app(ReconciliationService::class);
+    $saved = $service->record($owner, 'large-difference-comparison', (string) $account->id, Money::fromMinor(Currency::QAR, Money::MAX_MINOR)->amount(), now('UTC')->format('Y-m-d\TH:i:s\Z'));
+    expect((string) $saved->difference)->toBe('18446744073709551615');
+    expect(fn () => $service->adjust($owner, (string) $saved->id, 'large-difference-adjustment', 'equity', 'Review unsupported single amount'))->toThrow(ValidationException::class);
+    $this->assertDatabaseCount('reconciliation_adjustments', 0);
+});
+
+test('ordinary historical corrections cannot duplicate balances at intermediate reconciliation cutoffs', function (string $replacementDate) {
+    $this->travelTo(CarbonImmutable::parse('2026-10-18T12:00:00Z'));
+    $owner = User::factory()->create();
+    $account = Fx::account($owner);
+    $input = ['kind' => 'income', 'account_id' => (string) $account->id, 'amount' => '17.35', 'effective_date' => '2026-10-15', 'description' => 'Synthetic original-date receipt'];
+    $posting = app(PostingService::class);
+    $original = $posting->record($owner, 'historic-ordinary-original', $input);
+    $saved = app(ReconciliationService::class)->record($owner, 'historic-ordinary-saved', (string) $account->id, '17.35', '2026-10-15T12:00:00Z');
+    $replacement = $posting->correct($owner, (string) $original->id, 'historic-ordinary-corrected', [...$input, 'amount' => '19.10', 'effective_date' => $replacementDate]);
+    foreach (['2026-10-12', '2026-10-13', '2026-10-14', '2026-10-15', '2026-10-16', '2026-10-17', '2026-10-18'] as $day) {
+        $evidence = app(FinancialSnapshot::class)->capture($owner, Currency::QAR, $day.'T12:00:00Z');
+        expect($evidence['components'][0]['native']['minor'])->toBe($day >= $replacementDate ? '1910' : '0');
+    }
+    expect(DB::table('journal_entries')->where('reverses_journal_id', $original->id)->value('effective_date'))->toBe('2026-10-15')
+        ->and(DB::table('reconciliation_sessions')->find($saved->id)->evidence)->toBe($saved->evidence)->and($replacement->effective_date->format('Y-m-d'))->toBe($replacementDate);
+})->with(['2026-10-13', '2026-10-15', '2026-10-17']);
+
+test('retained earlier-policy corrections make only ambiguous historical cutoffs unavailable without rewriting journals', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-10-18T12:00:00Z'));
+    $owner = User::factory()->create();
+    $account = Fx::account($owner);
+    $posting = app(PostingService::class);
+    $original = $posting->record($owner, 'legacy-original-receipt', ['kind' => 'income', 'account_id' => (string) $account->id, 'amount' => '17.35', 'effective_date' => '2026-10-15', 'description' => 'Synthetic retained receipt']);
+    $cancellation = $posting->reverse($owner, (string) $original->id, 'legacy-later-cancellation', 'Synthetic retained cancellation');
+    // Insert the exact valid shape produced by the accepted earlier service:
+    // cancellation today, replacement backdated, with every constraint enabled.
+    $replacementId = DB::transaction(function () use ($original) {
+        $copy = (array) DB::table('journal_entries')->find($original->id);
+        unset($copy['id']);
+        $copy['reference'] = (string) Str::ulid();
+        $copy['idempotency_key'] = 'legacy-retained-replacement';
+        $copy['payload_hash'] = str_repeat('0', 64);
+        $copy['request_payload'] = '{}';
+        $copy['replaces_journal_id'] = $original->id;
+        $copy['status'] = 'pending';
+        $copy['posted_at'] = null;
+        $id = DB::table('journal_entries')->insertGetId($copy);
+        foreach ($original->postings as $leg) {
+            DB::table('postings')->insert(['journal_id' => $id, 'owner_id' => $original->owner_id, 'account_id' => $leg->account_id, 'currency_code' => $leg->currency_code->value, 'amount_minor' => $leg->amount_minor]);
+        }
+        DB::table('journal_entries')->where('id', $id)->update(['status' => 'posted', 'posted_at' => now()]);
+
+        return $id;
+    });
+    $before = DB::table('journal_entries')->orderBy('id')->get()->toJson();
+    foreach (['2026-10-14', '2026-10-15', '2026-10-17', '2026-10-18'] as $day) {
+        $e = app(FinancialSnapshot::class)->capture($owner, Currency::QAR, $day.'T12:00:00Z');
+        $ambiguous = $day >= '2026-10-15' && $day < '2026-10-18';
+        expect($e['components'][0]['native']['minor'] ?? null)->toBe($ambiguous ? null : ($day < '2026-10-15' ? '0' : '1735'))
+            ->and($e['components'][0]['native_reason'])->toBe($ambiguous ? 'legacy_correction_timing' : null);
+    }
+    $comparison = app(ReconciliationService::class)->record($owner, 'legacy-unavailable-compare', (string) $account->id, '17.35', '2026-10-16T12:00:00Z');
+    expect($comparison->status)->toBe('unavailable')->and($comparison->ledger_minor)->toBeNull()->and($comparison->difference)->toBeNull();
+    expect(fn () => app(ReconciliationService::class)->adjust($owner, (string) $comparison->id, 'legacy-unsafe-adjustment', 'equity', 'Synthetic ambiguous attempt'))->toThrow(ValidationException::class);
+    expect(DB::table('journal_entries')->orderBy('id')->get()->toJson())->toBe($before)->and($replacementId)->toBeGreaterThan($cancellation->id);
+});

@@ -228,11 +228,26 @@ const reverse = () => {
                 </li>
             </ul>
         </section>
+        <section
+            v-if="transaction.fx_operation_id"
+            class="rounded-2xl border p-5 sm:p-7"
+        >
+            <h2 class="font-medium">Part of a currency exchange</h2>
+            <p class="mt-2 text-sm text-muted-foreground">
+                Both currencies and the recorded fee are corrected together.
+            </p>
+            <Button as-child variant="outline" class="mt-4 min-h-11"
+                ><Link :href="`/fx/${transaction.fx_operation_id}`"
+                    >Open complete conversion</Link
+                ></Button
+            >
+        </section>
         <Dialog v-model:open="open"
             ><section
                 v-if="
                     transaction.status === 'posted' &&
-                    transaction.kind !== 'reversal'
+                    transaction.kind !== 'reversal' &&
+                    !transaction.fx_operation_id
                 "
                 class="rounded-2xl border border-dashed p-5 sm:p-7"
                 aria-labelledby="correction-heading"

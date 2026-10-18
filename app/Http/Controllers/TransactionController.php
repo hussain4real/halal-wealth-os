@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -30,9 +31,13 @@ class TransactionController extends Controller
         return Inertia::render('transactions/Create', ['accounts' => $this->choices($request, $balances), 'today' => now()->toDateString(), 'original' => null]);
     }
 
-    public function correction(Request $request, string $journal, AccountBalanceReader $balances): Response
+    public function correction(Request $request, string $journal, AccountBalanceReader $balances): Response|RedirectResponse
     {
         $original = $this->owned($request, $journal)->load('postings.account');
+        $group = DB::table('fx_operation_journals')->where('owner_id', $this->owner($request)->id)->where('journal_id', $original->id)->value('operation_id');
+        if ($group !== null) {
+            return redirect('/fx/'.$group);
+        }
         abort_unless($original->status === 'posted' && in_array($original->kind, ['income', 'expense', 'transfer'], true), 404);
 
         return Inertia::render('transactions/Create', ['accounts' => $this->choices($request, $balances), 'today' => now()->toDateString(), 'original' => $this->payload($original)]);
@@ -137,6 +142,7 @@ class TransactionController extends Controller
         return ['id' => (string) $journal->id, 'reference' => $journal->reference, 'kind' => $journal->kind, 'status' => $journal->status, 'description' => $journal->description,
             'effective_date' => $journal->effective_date->format('Y-m-d'), 'recorded_at' => $journal->created_at->toIso8601String(), 'receipt_reference' => $journal->receipt_reference,
             'reverses_id' => $journal->reverses_journal_id === null ? null : (string) $journal->reverses_journal_id, 'replaces_id' => $journal->replaces_journal_id === null ? null : (string) $journal->replaces_journal_id,
-            'primary' => $primary, 'movements' => array_values($movements)];
+            'primary' => $primary, 'movements' => array_values($movements),
+            'fx_operation_id' => ($group = DB::table('fx_operation_journals')->where('owner_id', $journal->owner_id)->where('journal_id', $journal->id)->value('operation_id')) === null ? null : (string) $group];
     }
 }

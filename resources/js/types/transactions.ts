@@ -24,6 +24,7 @@ export type Transaction = {
     receipt_reference: string | null;
     reverses_id: string | null;
     replaces_id: string | null;
+    fx_operation_id: string | null;
     primary: Movement | null;
     movements: Movement[];
 };

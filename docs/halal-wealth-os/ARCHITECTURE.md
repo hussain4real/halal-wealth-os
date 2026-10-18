@@ -1,6 +1,8 @@
 # Architecture proposal
 
-Status: the personal-first modular-monolith direction and six ADR directions are human-accepted. Detailed module import edges below remain proposed. The full official starter, identity boundaries and original post-merge CI are verified. M0 is human accepted; see [the acceptance record](runs/M0-acceptance.md). M1-P1 is human accepted. M1-P2 is in progress and remains unaccepted.
+Status: the personal-first modular-monolith direction and six ADR directions are human-accepted. Detailed module import edges below remain proposed. The full official starter, identity boundaries and original post-merge CI are verified. M0 is human accepted; see [the acceptance record](runs/M0-acceptance.md). M1-P1 is human accepted. M1-P2 is human accepted. M1-P3 is locally verified and unaccepted; the M1 milestone
+remains unaccepted. Manual FX/reconciliation policies are recorded in
+[the phase decisions](FX-AND-RECONCILIATION.md).
 
 Use a Laravel modular monolith. Inertia, Vue 3 and TypeScript serve the application UI; PostgreSQL stores financial records. Filament is restricted administration. Exact selected versions are recorded in composer.lock, package-lock.json and [the runtime records](../../ops/development/README.md); PHP support is 8.5.x only.
 
