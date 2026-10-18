@@ -164,3 +164,23 @@ public synthetic translations preserve its invariant and are separately reviewed
 No M2-P2/P3, bank instructions/default reminders, main/stage changes, deployment,
 live financial actions, new credentials or security-setting changes. M2-P1 and
 M2 acceptance remain human-only.
+
+## Current M2-P2 authority
+
+The human owner explicitly accepted M2-P1 and approved publication of its four
+final reviewed status documents, then M2-P2 implementation, independent source
+and rendered UX review, sanitized draft PR to dev and normal merge after
+exact-head reviews/CI, followed by original dev-push CI verification. The manager
+delegates acceptance recording and the sole M2-P2 claim to this coordinator.
+This supersedes the preceding no-M2-P2 restriction only within phases/M2-P2.md.
+Preserve all earlier history and reviewed documents, PHP 8.5-only, the full
+official Vue/Inertia starter, Pest TIA and uncached full CI. At most six scoped
+implementation cycles; no implementation subagents. Independent read-only
+reviewers use exclusive verification resources. Separate planned contributions,
+nominal reservations and actual backing. Shared account capacity prevents
+cross-goal and cross-mode double backing; linked funding never duplicates a
+ledger movement. Keep original F05 private; anonymous public translations
+preserve its invariant and undergo separate review. No M2-P3 implementation,
+automatic bank transfers, assumed completion, interest projections, duplicate
+reminders, main/stage changes, deployment, live integrations, credentials or
+security-setting changes. M2-P2 and M2 acceptance remain human decisions.
