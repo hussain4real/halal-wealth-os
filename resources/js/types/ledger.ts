@@ -52,6 +52,22 @@ export type SnapshotComponent = {
     type: string;
     currency: string;
     archived: boolean;
+    portfolio?: {
+        id: string;
+        mode: string | null;
+        platform_label: string;
+        source: string;
+        selected: string[];
+        excluded: string[];
+        missing: string[];
+        as_of: string;
+        opening: import('./portfolio').OpeningEvidence | null;
+        positions: import('./portfolio').Position[];
+        aggregate_value: LedgerMoney | null;
+        aggregate_as_of: string | null;
+        value_policy: string;
+    };
+    ledger_cash?: LedgerMoney | null;
     native: LedgerMoney | null;
     native_reason: string | null;
     state: string;

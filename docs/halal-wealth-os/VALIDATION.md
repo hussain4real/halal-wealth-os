@@ -103,4 +103,21 @@ settings retry and immutable what-if requests. Read totals remain complete
 beyond bounded disclosure pages; real independent PostgreSQL backends verify
 settings serialization and coherent cash/protection reads. Client recovery,
 private original F07 and rendered review are separate observed gates.
-Unimplemented-phase rejection now targets M3-P1; no M3 is authorized.
+That historical unimplemented-phase boundary was M3-P1. Current M3-P1 authority is recorded in AGENTS.md; the next unimplemented phase is M3-P2.
+
+## M3-P1 implemented checks
+
+Unimplemented-phase rejection now targets M3-P2.
+
+The harness requires PortfolioTest, PortfolioHttpTest, PortfolioBoundaryTest,
+PortfolioConcurrencyTest and PortfolioMathTest alongside all prior suites.
+PostgreSQL checks preserve exact fractional units/prices through storage, owner
+display and authenticated JSON export. Detailed cash-plus-positions and selected
+whole-account values are mutually exclusive; basis uncertainty is separate from
+known zero. Confirmations require an owned, unexpired, unchanged reconciliation
+preview. Real independent backends cover lock order, same-key receipts, competing
+mode/opening versions, saved reporting and repeatable-read coherence. Actual
+commit checks exercise deferred complete-book enforcement and empty-schema
+downgrade/upgrade without changing existing ledger evidence. Destructive
+downgrades with retained portfolio data refuse before DDL. Browser, TIA and
+independent publication evidence remain separate gates.

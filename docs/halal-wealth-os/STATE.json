@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-18T14:46:09.191819+00:00",
+    "updated_at": "2026-10-18T14:52:56.411032+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -12,7 +12,18 @@
         "default_production_actions": false,
         "default_external_effects": false
     },
-    "active_run": null,
+    "active_run": {
+        "phase": "M3-P1",
+        "owner": "cloud-m3p1-coordinator",
+        "worktree": ".",
+        "branch": "feat/m3-p1-assets-portfolio-modes",
+        "baseline_head": "6a10cff7a772dff0d88efcf5104d3c3f7d37b149",
+        "started_at": "2026-10-18T14:52:56.411032+00:00",
+        "status": "IN_PROGRESS",
+        "cycles_used": 2,
+        "max_cycles": 6,
+        "checkpoint": "Cycle1 canonical asset/account/opening/mode design and implementation; all new tests NOT_RUN"
+    },
     "repository": {
         "root": null,
         "remote": "https://github.com/hussain4real/halal-wealth-os",
@@ -50,7 +61,7 @@
         },
         {
             "id": "M3",
-            "status": "PLANNED",
+            "status": "IN_PROGRESS",
             "accepted_by": null,
             "accepted_at": null,
             "review_evidence": null
@@ -169,11 +180,11 @@
         {
             "id": "M3-P1",
             "depends_on": ["M2-P3"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "READY_FOR_REVIEW",
+            "owner": "cloud-m3p1-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M3-P1-local.md"
         },
         {
             "id": "M3-P2",
@@ -350,9 +361,9 @@
     },
     "execution_status": {
         "phase": "M3-P1",
-        "status": "PLANNED",
-        "checkpoint": "Human accepted M2-P3 and M2; approved final-record publication and M3-P1; sole-writer preparation before implementation claim",
-        "observed_at": "2026-10-18T14:46:09.191807+00:00"
+        "status": "READY_FOR_REVIEW",
+        "checkpoint": "Cycle2 local full/source/rendered/TIA gates passed; final sanitation/exactcommit/hostedCIreview/devmerge/postCI pending; owner acceptance separate",
+        "observed_at": "2026-10-18T16:10:40.242142+00:00"
     },
     "dependency_patch": {
         "authorized": true,
@@ -1126,7 +1137,7 @@
         "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/8",
         "original_source_head": "495dd4844ca6a80321c57b7f7c9415c3656d62be",
         "original_ci": "SUCCESS_ATTEMPT1_39128367337",
-        "documentation_publication": "FINAL_RECORDS_AND_ACCEPTANCE_REVIEWED_PUBLICATION_PENDING",
+        "documentation_publication": "FINAL_RECORDS_AND_ACCEPTANCE_PUBLISHED_FEATURE_PENDING_DEV",
         "reviewed_head": "63d8136a11a290d2aee197bc84d4accb159dfdea",
         "reviewed_tree": "2a061c15e9814a43660e27b12f37023b227f4db1",
         "merge_sha": "6a10cff7a772dff0d88efcf5104d3c3f7d37b149",
@@ -1158,7 +1169,7 @@
         "source_and_resources": "ALL567_TRACKED_FILES_UNCHANGED_AT_REVIEW_HANDOFF_OWN_RESOURCES_CLEANED",
         "findings": [],
         "evidence": "runs/M2-independent-review.md",
-        "documentation_publication": "FINAL_RECORDS_AND_ACCEPTANCE_REVIEWED_PUBLICATION_PENDING",
+        "documentation_publication": "FINAL_RECORDS_AND_ACCEPTANCE_PUBLISHED_FEATURE_PENDING_DEV",
         "individual_phase_acceptance_pending": false,
         "formal_gate_accepted": true,
         "next_phase_authorized": true,
@@ -1167,5 +1178,82 @@
         "accepted_at": "2026-10-18T14:41:00Z",
         "acceptance_evidence": "runs/M2-acceptance.md",
         "historical_technical_verdict": "READY_FOR_OWNER"
+    },
+    "m3p1_checkpoint": {
+        "status": "READY_FOR_REVIEW",
+        "accepted": false,
+        "cycles_used": 2,
+        "max_cycles": 6,
+        "baseline_head": "6a10cff7a772dff0d88efcf5104d3c3f7d37b149",
+        "prior_acceptance_publication_head": "9f02a974647112e8c5a9c8a22001b2336496d48a",
+        "full_gate": {
+            "status": "PASS",
+            "tests": 519,
+            "assertions": 3305,
+            "failures": 0,
+            "errors": 0,
+            "skips": 0,
+            "covered_statements": 2544,
+            "statements": 2744,
+            "node_checks": 51
+        },
+        "source_review": "PASS",
+        "rendered_review": {
+            "status": "PASS",
+            "observed_checks": 34,
+            "individually_inspected_screenshots": 19,
+            "overlapping_recovery_coverage": true,
+            "evidence": "runs/M3-P1-rendered-review.md"
+        },
+        "next_phase_authorized": false,
+        "evidence": "runs/M3-P1-local.md",
+        "unresolved_findings": [],
+        "scoped_gate": {
+            "status": "PASS",
+            "tests": 45,
+            "assertions": 328,
+            "postgresql_commit_concurrency_checks": 8
+        },
+        "static_analysis": "PASS",
+        "tia": {
+            "status": "PASS",
+            "fresh": {
+                "executed_tests": 519,
+                "assertions": 3305,
+                "wall_seconds": 662.208901097,
+                "pest_seconds": 655.3
+            },
+            "unchanged_replay": {
+                "replayed_tests": 519,
+                "newly_executed_tests": 0,
+                "assertions_from_cache": 3305,
+                "wall_seconds": 13.092067275000002,
+                "pest_seconds": 8.44
+            },
+            "native_planner": "PASS; simulated previous hashes only, no source/cache mutation or impacted execution",
+            "complete_branch_results": 519
+        },
+        "publication": "PENDING_FINAL_SANITATION_EXACT_COMMIT_HOSTED_CI_REVIEW_DEV_MERGE_POST_CI",
+        "cycle_history": [
+            {
+                "cycle": 1,
+                "full_gate": "FAIL",
+                "passed": 517,
+                "failed": 2,
+                "assertions": 3294,
+                "source_review": "CHANGES_REQUIRED_E05",
+                "rendered_review": "CHANGES_REQUIRED_V01",
+                "original_evidence_retained": true
+            },
+            {
+                "cycle": 2,
+                "full_gate": "PASS",
+                "tests": 519,
+                "assertions": 3305,
+                "source_review": "PASS",
+                "rendered_review": "PASS",
+                "tia": "PASS"
+            }
+        ]
     }
 }

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Ledger\AccountType;
-use App\Domain\Ledger\FinancialSnapshot;
 use App\Domain\Ledger\FxObservationService;
 use App\Domain\Ledger\FxService;
 use App\Domain\Ledger\LedgerInput;
 use App\Domain\Ledger\ReconciliationService;
+use App\Domain\Reporting\NetWorthSnapshot;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
 use App\Http\Requests\LedgerRequest;
@@ -85,7 +85,7 @@ class LedgerController extends Controller
         $base = $this->currency($request->query('base_currency', 'QAR'));
         $cutoff = LedgerInput::instant($request->query('cutoff', now('UTC')->format('Y-m-d\TH:i:s\Z')), 'cutoff');
 
-        return $this->reportPage($request, app(FinancialSnapshot::class)->capture($this->owner($request), $base, $cutoff));
+        return $this->reportPage($request, app(NetWorthSnapshot::class)->capture($this->owner($request), $base, $cutoff));
     }
 
     public function reportShow(Request $request, string $report): Response
@@ -97,7 +97,7 @@ class LedgerController extends Controller
 
     public function reportStore(LedgerRequest $request): JsonResponse|RedirectResponse
     {
-        $row = app(FinancialSnapshot::class)->save($this->owner($request), $request->string('idempotency_key')->toString(), $this->currency($request->validated('base_currency')), $request->string('cutoff')->toString());
+        $row = app(NetWorthSnapshot::class)->save($this->owner($request), $request->string('idempotency_key')->toString(), $this->currency($request->validated('base_currency')), $request->string('cutoff')->toString());
 
         return $this->saved($request, $row, '/reports/'.$row->id);
     }
