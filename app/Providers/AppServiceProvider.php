@@ -2,7 +2,13 @@
 
 namespace App\Providers;
 
+use App\Domain\Ledger\AccountBalanceReader;
+use App\Domain\Ledger\DeferredOpeningBalances;
+use App\Domain\Ledger\OpeningBalanceGateway;
+use App\Domain\Ledger\UnavailableAccountBalances;
+use App\Models\Account;
 use App\Models\User;
+use App\Policies\AccountPolicy;
 use App\Policies\UserPolicy;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
@@ -18,7 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(AccountBalanceReader::class, UnavailableAccountBalances::class);
+        $this->app->bind(OpeningBalanceGateway::class, DeferredOpeningBalances::class);
     }
 
     /**
@@ -28,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureDefaults();
         Gate::policy(User::class, UserPolicy::class);
+        Gate::policy(Account::class, AccountPolicy::class);
         Gate::define('access-admin', fn (User $user): bool => $user->is_admin && $user->hasVerifiedEmail()
             && (! app()->isProduction() || $user->hasEnabledTwoFactorAuthentication()));
     }
