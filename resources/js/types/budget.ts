@@ -67,6 +67,8 @@ export type BudgetOccurrence = {
     standing_order: boolean;
     salary: boolean;
     allocations: BudgetAllocation[];
+    allocation_count: string;
+    history_more: boolean;
 };
 export type BudgetActual = {
     id: string;
@@ -120,5 +122,18 @@ export type BudgetMonth = {
         essential: boolean;
     }[];
     activity: BudgetActual[];
+    activity_before: string | null;
+    activity_next_cursor: string | null;
+};
+
+export type BudgetReceiptPage = {
     receipts: BudgetActual[];
+    selected: BudgetActual | null;
+    next_cursor: string | null;
+};
+export type BudgetHistoryPage = {
+    occurrence: BudgetOccurrence;
+    month: string;
+    before: string | null;
+    next_cursor: string | null;
 };

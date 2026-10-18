@@ -23,7 +23,19 @@ class BudgetController extends Controller
     {
         $month = PlanningInput::month($request->query('month', substr(BudgetCalendar::today(), 0, 7)));
 
-        return Inertia::render('budgets/Index', ['budget' => app(BudgetView::class)->month($this->owner($request), $month)]);
+        return Inertia::render('budgets/Index', ['budget' => app(BudgetView::class)->month($this->owner($request), $month, PlanningInput::activityCursor($request->query('activity_before')))]);
+    }
+
+    public function receipts(Request $request, string $schedule): JsonResponse
+    {
+        return response()->json(app(BudgetView::class)->receipts($this->owner($request), $schedule,
+            PlanningInput::cursor($request->query('before')), PlanningInput::search($request->query('q')),
+            PlanningInput::cursor($request->query('selected'))));
+    }
+
+    public function history(Request $request, string $occurrence): Response
+    {
+        return Inertia::render('budgets/History', ['history' => app(BudgetView::class)->history($this->owner($request), $occurrence, PlanningInput::cursor($request->query('before')))]);
     }
 
     public function categoryForm(Request $request, ?string $category = null): Response

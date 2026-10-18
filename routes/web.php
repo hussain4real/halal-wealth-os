@@ -13,6 +13,8 @@ Route::inertia('/', 'Welcome')->name('home');
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
     Route::get('budgets', [BudgetController::class, 'index'])->name('budgets.index');
+    Route::get('budgets/schedules/{schedule}/receipts', [BudgetController::class, 'receipts'])->name('budgets.receipts');
+    Route::get('budgets/occurrences/{occurrence}', [BudgetController::class, 'history'])->name('budgets.history');
     Route::get('budgets/categories/new', [BudgetController::class, 'categoryForm'])->name('budgets.categories.create');
     Route::post('budgets/categories', [BudgetController::class, 'categoryStore'])->name('budgets.categories.store');
     Route::get('budgets/categories/{category}/revise', [BudgetController::class, 'categoryForm'])->whereNumber('category')->name('budgets.categories.edit');

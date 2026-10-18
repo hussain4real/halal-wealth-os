@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-18T08:24:31.799234+00:00",
+    "updated_at": "2026-10-18T08:31:33.421132+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -20,9 +20,9 @@
         "baseline_head": "b0f54bfa60dc2cb866ad35b7f52447a1578f600d",
         "started_at": "2026-10-18T07:23:31.994363+00:00",
         "status": "RUNNING",
-        "cycles_used": 3,
+        "cycles_used": 6,
         "max_cycles": 6,
-        "checkpoint": "Local full/source/rendered/canonical/TIA gates PASS; sanitized publication, exact-head hosted CI/reviews and dev merge pending"
+        "checkpoint": "Cycle6 final local/source/rendered/canonical/TIA gates passed; sanitized corrected commit and exact-head hosted gates pending"
     },
     "repository": {
         "root": null,
@@ -107,9 +107,7 @@
         },
         {
             "id": "M0-P2",
-            "depends_on": [
-                "M0-P1"
-            ],
+            "depends_on": ["M0-P1"],
             "status": "ACCEPTED",
             "owner": "cloud-m0-p2-successor",
             "accepted_by": "human-owner",
@@ -118,9 +116,7 @@
         },
         {
             "id": "M0-P3",
-            "depends_on": [
-                "M0-P2"
-            ],
+            "depends_on": ["M0-P2"],
             "status": "ACCEPTED",
             "owner": "cloud-m0-p3-owner",
             "accepted_by": "human-owner",
@@ -129,9 +125,7 @@
         },
         {
             "id": "M1-P1",
-            "depends_on": [
-                "M0-P3"
-            ],
+            "depends_on": ["M0-P3"],
             "status": "ACCEPTED",
             "owner": "cloud-m1p1-coordinator",
             "accepted_by": "human-owner",
@@ -140,9 +134,7 @@
         },
         {
             "id": "M1-P2",
-            "depends_on": [
-                "M1-P1"
-            ],
+            "depends_on": ["M1-P1"],
             "status": "ACCEPTED",
             "owner": "cloud-m1p2-coordinator",
             "accepted_by": "human-owner",
@@ -151,9 +143,7 @@
         },
         {
             "id": "M1-P3",
-            "depends_on": [
-                "M1-P2"
-            ],
+            "depends_on": ["M1-P2"],
             "status": "ACCEPTED",
             "owner": "cloud-m1p3-coordinator",
             "accepted_by": "human-owner",
@@ -162,9 +152,7 @@
         },
         {
             "id": "M2-P1",
-            "depends_on": [
-                "M1-P3"
-            ],
+            "depends_on": ["M1-P3"],
             "status": "READY_FOR_REVIEW",
             "owner": "cloud-m2p1-coordinator",
             "accepted_by": null,
@@ -173,9 +161,7 @@
         },
         {
             "id": "M2-P2",
-            "depends_on": [
-                "M2-P1"
-            ],
+            "depends_on": ["M2-P1"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -184,9 +170,7 @@
         },
         {
             "id": "M2-P3",
-            "depends_on": [
-                "M2-P2"
-            ],
+            "depends_on": ["M2-P2"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -195,9 +179,7 @@
         },
         {
             "id": "M3-P1",
-            "depends_on": [
-                "M2-P3"
-            ],
+            "depends_on": ["M2-P3"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -206,9 +188,7 @@
         },
         {
             "id": "M3-P2",
-            "depends_on": [
-                "M3-P1"
-            ],
+            "depends_on": ["M3-P1"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -217,9 +197,7 @@
         },
         {
             "id": "M3-P3",
-            "depends_on": [
-                "M3-P2"
-            ],
+            "depends_on": ["M3-P2"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -228,9 +206,7 @@
         },
         {
             "id": "M4-P1",
-            "depends_on": [
-                "M3-P3"
-            ],
+            "depends_on": ["M3-P3"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -239,9 +215,7 @@
         },
         {
             "id": "M4-P2",
-            "depends_on": [
-                "M4-P1"
-            ],
+            "depends_on": ["M4-P1"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -250,9 +224,7 @@
         },
         {
             "id": "M4-P3",
-            "depends_on": [
-                "M4-P2"
-            ],
+            "depends_on": ["M4-P2"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -261,9 +233,7 @@
         },
         {
             "id": "M5-P1",
-            "depends_on": [
-                "M4-P3"
-            ],
+            "depends_on": ["M4-P3"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -272,9 +242,7 @@
         },
         {
             "id": "M5-P2",
-            "depends_on": [
-                "M5-P1"
-            ],
+            "depends_on": ["M5-P1"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -283,9 +251,7 @@
         },
         {
             "id": "M5-P3",
-            "depends_on": [
-                "M5-P2"
-            ],
+            "depends_on": ["M5-P2"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -294,9 +260,7 @@
         },
         {
             "id": "M6-P1",
-            "depends_on": [
-                "M5-P3"
-            ],
+            "depends_on": ["M5-P3"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -305,9 +269,7 @@
         },
         {
             "id": "M6-P2",
-            "depends_on": [
-                "M6-P1"
-            ],
+            "depends_on": ["M6-P1"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -316,9 +278,7 @@
         },
         {
             "id": "M6-P3",
-            "depends_on": [
-                "M6-P2"
-            ],
+            "depends_on": ["M6-P2"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -327,9 +287,7 @@
         },
         {
             "id": "M6-P4",
-            "depends_on": [
-                "M6-P3"
-            ],
+            "depends_on": ["M6-P3"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -338,9 +296,7 @@
         },
         {
             "id": "M7-P1",
-            "depends_on": [
-                "M6-P4"
-            ],
+            "depends_on": ["M6-P4"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -349,9 +305,7 @@
         },
         {
             "id": "M7-P2",
-            "depends_on": [
-                "M7-P1"
-            ],
+            "depends_on": ["M7-P1"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -360,9 +314,7 @@
         },
         {
             "id": "M7-P3",
-            "depends_on": [
-                "M7-P2"
-            ],
+            "depends_on": ["M7-P2"],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -402,9 +354,7 @@
         "authorized": true,
         "authority": "Explicit owner acceptance of M1-P3/M1 and approved next budgeting phase through independent review/dev PR/normal merge/post-CI",
         "scope": "Canonical M2-P1 only; preserve/publish reviewed M1 docs, no later phase/main/stage/deployment",
-        "accepted_dependencies": [
-            "M1-P3"
-        ],
+        "accepted_dependencies": ["M1-P3"],
         "remote_writes": true,
         "production_actions": false,
         "php_constraint": "~8.5.0"
@@ -636,9 +586,7 @@
             "starter_commit": "d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab",
             "remote_writes": true,
             "production_actions": false,
-            "accepted_dependencies": [
-                "M0-P1"
-            ],
+            "accepted_dependencies": ["M0-P1"],
             "php_constraint": "~8.5.0",
             "completed_at": "2026-10-17T15:08:11.290788+00:00"
         },
@@ -647,9 +595,7 @@
             "authorized": false,
             "authority": "Human Merge and proceed, manager supplied canonical scope and delegated sole next-phase implementation",
             "scope": "Canonical M0-P3 only; accepted-stack compatible dependencies; no merge/deploy/security settings/live credentials/real user provisioning/financial behavior/later phase; later manager authorization permits sanitized commit/push and one PR to dev plus hosted CI/review reconciliation",
-            "accepted_dependencies": [
-                "M0-P2"
-            ],
+            "accepted_dependencies": ["M0-P2"],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0",
@@ -660,9 +606,7 @@
             "authorized": false,
             "authority": "Human Merge and proceed, manager supplied canonical scope and delegated sole next-phase implementation",
             "scope": "M0-P3 implementation complete and human accepted; no next-phase execution authorized",
-            "accepted_dependencies": [
-                "M0-P2"
-            ],
+            "accepted_dependencies": ["M0-P2"],
             "remote_writes": false,
             "production_actions": false,
             "php_constraint": "~8.5.0",
@@ -673,9 +617,7 @@
             "authorized": true,
             "authority": "Owner approved recording M0 acceptance and proceeding; manager delegates workspace-only M1-P1 implementation and independent parallel reviews",
             "scope": "Accounts, currencies and exact money only; pending opening input/future posting boundary; no M1-P2/M1-P3, commits, push, PR, merge, deployment or external publication",
-            "accepted_dependencies": [
-                "M0-P3"
-            ],
+            "accepted_dependencies": ["M0-P3"],
             "remote_writes": false,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -685,9 +627,7 @@
             "authorized": true,
             "authority": "Owner explicitly approves focused M1-P1 PR to dev and normal merge after CI/final independent review",
             "scope": "Publish sanitized M1-P1 and M0 acceptance/review docs, inspect/fix in-scope feedback, exact-head review and dev merge, verify post-merge CI; no later phases or deployment",
-            "accepted_dependencies": [
-                "M0-P3"
-            ],
+            "accepted_dependencies": ["M0-P3"],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -697,9 +637,7 @@
             "authorized": true,
             "authority": "Owner accepts M1-P1 and approves next phase implementation/review/draft dev PR/normal merge after exact-head reviews and CI",
             "scope": "Canonical M1-P2; polished transaction UX; real PostgreSQL concurrency and independent rendered desktop/mobile review; no M1-P3/main/stage/deployment",
-            "accepted_dependencies": [
-                "M1-P1"
-            ],
+            "accepted_dependencies": ["M1-P1"],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -709,9 +647,7 @@
             "authorized": true,
             "authority": "Owner accepts M1-P2 and approves M1-P3 implementation/review/sanitized draft dev PR/normal merge after exact-head review and CI, then independent M1 milestone review",
             "scope": "Canonical manual FX and reconciliation only; real PostgreSQL and rendered desktop/mobile review; stop for owner milestone acceptance before M2; no main/stage/deployment",
-            "accepted_dependencies": [
-                "M1-P2"
-            ],
+            "accepted_dependencies": ["M1-P2"],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0",
@@ -852,10 +788,7 @@
                 "severity": "LOW",
                 "kind": "documentation",
                 "path": "ARCHITECTURE.md",
-                "lines": [
-                    3,
-                    5
-                ],
+                "lines": [3, 5],
                 "disposition": "CORRECTED_LOCALLY",
                 "summary": "Opening status/version statements describe an earlier checkpoint; label historical or update links to current runtime/acceptance records",
                 "correction_evidence": "runs/M0-acceptance.md"
@@ -1014,29 +947,39 @@
     "m2p1_checkpoint": {
         "status": "READY_FOR_REVIEW",
         "accepted": false,
-        "cycles_used": 3,
+        "cycles_used": 6,
         "max_cycles": 6,
         "baseline_head": "b0f54bfa60dc2cb866ad35b7f52447a1578f600d",
-        "tests": 370,
-        "source_review": "PASS_30_PATHS",
+        "tests": 378,
+        "source_review": "PASS_37_PATHS",
         "rendered_review": "PASS_ALL_OBSERVED_FINDINGS_CLOSED",
-        "hosted_ci": "NOT_ATTEMPTED",
+        "hosted_ci": "CORRECTED_HEAD_ORIGINAL_CI_PENDING_ORIGINAL_FAILURE_RETAINED",
         "post_merge_ci": "NOT_ATTEMPTED",
         "evidence": "runs/M2-P1-local.md",
         "deployment": false,
-        "full_gate": "PASS_UNCACHED",
-        "canonical_f06": "PASS_PRIVATE_ORIGINAL",
-        "assertions": 2305,
-        "covered_statements": 1417,
-        "application_statements": 1524,
-        "node_tests": 20,
-        "new_pest_tests": 60,
+        "full_gate": "PASS_UNCACHED_CYCLE6",
+        "canonical_f06": "PASS_PRIVATE_ORIGINAL_CYCLE6",
+        "assertions": 2423,
+        "covered_statements": 1489,
+        "application_statements": 1597,
+        "node_tests": 28,
+        "new_pest_tests": 68,
         "browser_checks": 35,
         "inspected_screenshots": 18,
         "focused_browser_checks": 8,
         "focused_inspected_screenshots": 4,
-        "tia": "PASS_FRESH_370_EXPLICIT_370_REPLAY_AND_NATIVE_PLANNER",
-        "unresolved_findings": [],
-        "publication_evidence": "runs/M2-P1-publication.md"
+        "tia": "PASS_FRESH_378_EXPLICIT_378_REPLAY_AND_NATIVE_PLANNER",
+        "unresolved_findings": [
+            "EXACT_CORRECTED_HEAD_HOSTED_REVIEW_AND_CI_PENDING"
+        ],
+        "publication_evidence": "runs/M2-P1-publication.md",
+        "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/6",
+        "original_head": "a70e8ec6c4cc5057c6004e0387355926658c4f60",
+        "original_ci": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39111597662",
+        "source_publication": "SANITIZED_DRAFT_PR_OPEN",
+        "pagination_browser_checks": 20,
+        "pagination_inspected_screenshots": 10,
+        "layout_browser_checks": 10,
+        "layout_inspected_screenshots": 4
     }
 }

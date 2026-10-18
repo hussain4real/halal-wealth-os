@@ -13,11 +13,11 @@ use stdClass;
 final class BudgetView
 {
     /** @return array{rules: list<array<string, mixed>>, categories: list<array<string, mixed>>, ...} */
-    public function month(User $owner, string $month): array
+    public function month(User $owner, string $month, ?string $activityBefore = null): array
     {
         PlanningInput::month($month);
 
-        return DB::transaction(function () use ($owner, $month): array {
+        return DB::transaction(function () use ($owner, $month, $activityBefore): array {
             // All app posting/planning writers share this owner boundary.
             LedgerInput::lock($owner);
             $categories = DB::table('planning_categories')->where('owner_id', $owner->id)->orderBy('id')->get()->keyBy('id')->all();
@@ -29,32 +29,28 @@ final class BudgetView
                 }
             }
             $stored = DB::table('planning_occurrences')->where('owner_id', $owner->id)->whereBetween('due_date', [$month.'-01', CarbonImmutable::parse($month.'-01')->endOfMonth()->toDateString()])->get();
-            $allocations = DB::table('planning_allocations as a')->join('journal_entries as j', 'j.id', '=', 'a.journal_id')
-                ->leftJoin('planning_releases as r', 'r.allocation_id', '=', 'a.id')->where('a.owner_id', $owner->id)
-                ->select('a.*', 'j.reference as journal_reference', 'j.status as journal_status', 'j.effective_date as journal_date', 'r.id as release_id', 'r.reason as release_reason')->orderBy('a.id')->get();
-            $allocationRows = array_values($allocations->map(fn (stdClass $a): array => ['id' => (string) $a->id, 'reference' => $a->reference,
-                'occurrence_id' => (string) $a->occurrence_id, 'journal_id' => (string) $a->journal_id, 'journal_reference' => $a->journal_reference,
-                'journal_date' => $a->journal_date, 'journal_status' => $a->journal_status, 'minor' => (string) $a->amount_minor,
-                'released' => $a->release_id !== null, 'release_reason' => $a->release_reason,
-                'effective' => $a->release_id === null && $a->journal_status === 'posted'])->all());
+            $history = app(BudgetHistory::class);
+            $summaries = $history->summaries($owner, $month);
+            $previews = $history->previews($owner, $month);
             $occurrences = [];
             foreach ($rules as $rule) {
                 $due = BudgetCalendar::due($rule, $month, $next[(string) $rule->id] ?? null);
                 if ($due !== null) {
                     $row = $stored->first(fn (stdClass $o): bool => $o->schedule_id === $rule->id && $o->due_date === $due);
-                    $occurrences[$rule->id.':'.$due] = $this->occurrence($rule, $categories[$rule->category_id], $due, $row, $allocationRows, false);
+                    $occurrences[$rule->id.':'.$due] = $this->occurrence($rule, $categories[$rule->category_id], $due, $row, $row === null ? [] : ($previews[(string) $row->id] ?? []), $row === null ? null : ($summaries[$row->id] ?? null), false);
                 }
             }
             foreach ($stored as $row) {
                 $key = $row->schedule_id.':'.$row->due_date;
                 if (! isset($occurrences[$key])) {
                     $rule = $rules->firstWhere('id', $row->schedule_id);
-                    $occurrences[$key] = $this->occurrence($rule, $categories[$row->category_id], $row->due_date, $row, $allocationRows, true);
+                    $occurrences[$key] = $this->occurrence($rule, $categories[$row->category_id], $row->due_date, $row, $previews[(string) $row->id] ?? [], $summaries[$row->id] ?? null, true);
                 }
             }
             uasort($occurrences, fn (array $a, array $b): int => [$a['due_date'], $a['schedule_id']] <=> [$b['due_date'], $b['schedule_id']]);
-            $allActivity = app(BudgetActivity::class)->rows($owner);
-            $activity = array_values(array_filter($allActivity, fn (stdClass $row): bool => substr($row->effective_date, 0, 7) === $month));
+            $activityService = app(BudgetActivity::class);
+            $activity = $activityService->groups($owner, $month);
+            $activityPage = $activityService->activityPage($owner, $month, $activityBefore);
             $buckets = [];
             $groups = [];
             foreach ($occurrences as $o) {
@@ -99,7 +95,10 @@ final class BudgetView
                 } else {
                     $this->add($buckets, $row->currency, 'unclassified_'.$row->direction, $row->minor, $reason);
                 }
-                $activityRows[] = [...$this->actual($row, $allocationRows), 'period_value' => BudgetActivity::money($row->currency, $row->minor, $reason)];
+
+            }
+            foreach ($activityPage['rows'] as $row) {
+                $activityRows[] = [...$this->actual($row), 'period_value' => BudgetActivity::money($row->currency, $row->minor, $row->legacy_timing ? 'legacy_correction_timing' : null)];
             }
             $totals = [];
             foreach ($buckets as $currency => $values) {
@@ -134,7 +133,45 @@ final class BudgetView
                     'version' => (string) $s->version, 'amount' => BudgetActivity::money($s->currency, (string) $s->expected_minor),
                     'category' => $this->category($categories[$s->category_id]), 'latest' => ! isset($next[(string) $s->id])])->all()),
                 'occurrences' => array_values($occurrences), 'totals' => $totals, 'comparisons' => $comparisons, 'provisions' => $provisions, 'activity' => $activityRows,
-                'receipts' => array_values(array_map(fn (stdClass $r): array => $this->actual($r, $allocationRows), array_filter($allActivity, fn (stdClass $r): bool => $r->kind !== 'reversal' && $r->status === 'posted' && bccomp($r->minor, '0', 0) > 0)))];
+                'activity_before' => $activityBefore, 'activity_next_cursor' => $activityPage['next_cursor']];
+        });
+    }
+
+    /** @return array<string,mixed> */
+    public function receipts(User $owner, string $scheduleId, ?string $before, string $search, ?string $selected): array
+    {
+        return DB::transaction(function () use ($owner, $scheduleId, $before, $search, $selected): array {
+            LedgerInput::lock($owner);
+            $rule = LedgerInput::owned('planning_schedules', $owner, $scheduleId);
+            $category = LedgerInput::owned('planning_categories', $owner, (string) $rule->category_id);
+            $service = app(BudgetActivity::class);
+            // Authorize remembered selection even when it no longer has capacity;
+            // same-key uncertain delivery must still be recoverable after reload.
+            $chosen = $selected === null ? null : $service->selected($owner, $selected);
+            if ($chosen !== null && ($chosen->currency !== $rule->currency || $chosen->direction !== $category->direction)) {
+                LedgerInput::fail('selected', 'Choose a receipt in this plan currency and direction.');
+            }
+            $page = $service->candidates($owner, $rule, $category, $before, $search);
+
+            return ['receipts' => array_map(fn (stdClass $row): array => $this->actual($row), $page['rows']), 'selected' => $chosen === null ? null : $this->actual($chosen), 'next_cursor' => $page['next_cursor']];
+        });
+    }
+
+    /** @return array<string,mixed> */
+    public function history(User $owner, string $occurrenceId, ?string $before): array
+    {
+        return DB::transaction(function () use ($owner, $occurrenceId, $before): array {
+            LedgerInput::lock($owner);
+            $stored = LedgerInput::owned('planning_occurrences', $owner, $occurrenceId);
+            $rule = LedgerInput::owned('planning_schedules', $owner, (string) $stored->schedule_id);
+            $category = LedgerInput::owned('planning_categories', $owner, (string) $stored->category_id);
+            $month = substr($stored->due_date, 0, 7);
+            $service = app(BudgetHistory::class);
+            $summaries = $service->summaries($owner, $month);
+            $page = $service->page($owner, $occurrenceId, $before);
+            $superseded = DB::table('planning_schedules')->where('owner_id', $owner->id)->where('supersedes_id', $rule->id)->where('cutover_date', '<=', $stored->due_date)->exists();
+
+            return ['month' => $month, 'before' => $before, 'next_cursor' => $page['next_cursor'], 'occurrence' => $this->occurrence($rule, $category, $stored->due_date, $stored, $page['rows'], $summaries[$stored->id] ?? null, $superseded)];
         });
     }
 
@@ -148,20 +185,11 @@ final class BudgetView
 
     /** @param list<array<string, mixed>> $allocations
      * @return array<string, mixed> */
-    private function occurrence(stdClass $rule, stdClass $category, string $due, ?stdClass $stored, array $allocations, bool $superseded): array
+    private function occurrence(stdClass $rule, stdClass $category, string $due, ?stdClass $stored, array $allocations, ?stdClass $summary, bool $superseded): array
     {
-        $history = array_values(array_filter($allocations, fn (array $a): bool => $stored !== null && $a['occurrence_id'] === (string) $stored->id));
-        $used = '0';
-        $review = false;
-        foreach ($history as &$allocation) {
-            $allocation['amount'] = BudgetActivity::money($rule->currency, $allocation['minor']);
-            if ($allocation['effective']) {
-                $used = bcadd($used, $allocation['minor'], 0);
-            } elseif (! $allocation['released']) {
-                $review = true;
-            }
-        }
-        unset($allocation);
+        $history = $allocations;
+        $used = PlanningInput::minor($summary->used ?? '0');
+        $review = (bool) ($summary->needs_review ?? false);
         $remaining = bcsub(PlanningInput::minor((string) $rule->expected_minor), $used, 0);
 
         return ['key' => $rule->id.':'.$due, 'id' => $stored === null ? null : (string) $stored->id, 'schedule_id' => (string) $rule->id,
@@ -169,19 +197,13 @@ final class BudgetView
             'matched' => BudgetActivity::money($rule->currency, $used), 'remaining' => BudgetActivity::money($rule->currency, $remaining),
             'category' => $this->category($category), 'status' => $superseded ? 'superseded' : ($remaining === '0' ? 'matched' : ($used === '0' ? 'unpaid' : 'partial')),
             'needs_review' => $review, 'overdue' => ! $superseded && $due < BudgetCalendar::today() && $remaining !== '0',
-            'superseded' => $superseded, 'standing_order' => (bool) $rule->standing_order, 'salary' => (bool) $rule->salary, 'allocations' => $history];
+            'allocation_count' => (string) ($summary->allocation_count ?? '0'), 'history_more' => (int) ($summary->allocation_count ?? 0) > count($history), 'superseded' => $superseded, 'standing_order' => (bool) $rule->standing_order, 'salary' => (bool) $rule->salary, 'allocations' => $history];
     }
 
-    /** @param list<array<string, mixed>> $allocations
-     * @return array<string, mixed> */
-    private function actual(stdClass $row, array $allocations): array
+    /** @return array<string, mixed> */
+    public function actual(stdClass $row): array
     {
-        $used = '0';
-        foreach ($allocations as $a) {
-            if ($a['journal_id'] === (string) $row->id && $a['effective']) {
-                $used = bcadd($used, $a['minor'], 0);
-            }
-        }
+        $used = PlanningInput::minor($row->allocated_minor);
 
         return ['id' => (string) $row->id, 'reference' => $row->reference, 'date' => $row->effective_date, 'kind' => $row->kind,
             'status' => $row->status, 'description' => $row->description, 'direction' => $row->direction,

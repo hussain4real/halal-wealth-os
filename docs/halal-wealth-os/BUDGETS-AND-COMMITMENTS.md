@@ -85,3 +85,25 @@ Public regressions use anonymous translations; original F06 is verified privatel
 No private salary, support amount, bank details or source-original profile is
 adopted. No goals/reservations, deployable cash, live integrations, default
 reminders, later phase, main/stage promotion or deployment belongs to this phase.
+
+## Bounded history reads
+
+Monthly posted totals and comparisons include all economic activity in the chosen
+UTC ledger month. The visible activity list uses 20-row keyset pages; changing a
+page never changes totals. Matching loads eligible receipts only when requested,
+with 20-row pages and literal description/reference search over every posted date.
+Arbitrarily old prepayments and late receipts remain eligible for explicit matching.
+
+Due cards show up to ten recent allocation links. Full retained matching history
+is available in pages of twenty, including released and reversed links. Remaining
+amounts, status and review warnings always use every allocation. A remembered
+selection can still be displayed after becoming full or reversed so a lost-response
+retry can recover its original saved identity; it does not grant a new allocation.
+Paginated responses are fresh coherent reads, not one immutable cross-page snapshot.
+
+An attempted match retains its exact receipt/amount in tab storage under the
+owner, occurrence and current pending request identity. Hard reload can restore
+that pending request even if its occurrence became fully matched. Confirmed
+success removes the draft and advances the request identity; stale drafts cannot
+become a new request. Denied tab storage leaves current-session recovery and
+retained history available, without claiming draft persistence after reload.

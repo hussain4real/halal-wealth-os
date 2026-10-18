@@ -69,8 +69,8 @@ canonical scenarios and exact-head publication checks remain separate gates.
 
 ## M2-P1 implemented checks
 
-The harness requires BudgetTest, BudgetHttpTest, BudgetConcurrencyTest and
-BudgetCalendarTest alongside every prior suite. Planning tests cover independent
+The harness requires BudgetTest, BudgetHttpTest, BudgetConcurrencyTest,
+BudgetReadBoundaryTest and BudgetCalendarTest alongside every prior suite. Planning tests cover independent
 flags, forecast-only salary, configured cadence/provision start, UTC actual dates
 and Qatar due dates, many-to-many exact allocations, historical corrections,
 owner isolation, retries and real independent PostgreSQL backend contention.

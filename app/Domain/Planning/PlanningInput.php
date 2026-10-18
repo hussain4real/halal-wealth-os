@@ -43,6 +43,35 @@ final class PlanningInput
         return $value;
     }
 
+    public static function cursor(mixed $value): ?string
+    {
+        return $value === null || $value === '' ? null : LedgerInput::identifier($value);
+    }
+
+    public static function activityCursor(mixed $value): ?string
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+        abort_unless(is_string($value) && preg_match('/^([1-9][0-9]{0,18}):([A-Z]{3})$/D', $value, $parts), 404);
+        LedgerInput::identifier($parts[1]);
+        abort_unless(Currency::tryFrom($parts[2]) !== null, 404);
+
+        return $value;
+    }
+
+    public static function search(mixed $value): string
+    {
+        if ($value === null) {
+            return '';
+        }
+        if (! is_string($value) || mb_strlen($value) > 120) {
+            LedgerInput::fail('q', 'Use a receipt description or reference up to 120 characters.');
+        }
+
+        return trim($value);
+    }
+
     public static function month(mixed $value): string
     {
         if (! is_string($value) || ! preg_match('/^\d{4}-\d{2}$/D', $value)) {

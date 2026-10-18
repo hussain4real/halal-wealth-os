@@ -228,11 +228,18 @@ test('legacy original and cancellation periods become unavailable while an inter
         return $id;
     });
     app(BudgetService::class)->attribute($owner, 'budget-legacy-new-category', (string) $replacement, (string) $cat->id, 'Explicit replacement mapping');
+    // The legacy component is outside the visible first page in both affected months.
+    foreach (['2026-01-20', '2026-03-17'] as $date) {
+        for ($i = 0; $i < 21; $i++) {
+            app(PostingService::class)->record($owner, 'budget-newer-'.$date.'-'.$i, ['kind' => 'expense', 'account_id' => (string) $account->id, 'amount' => '1.00', 'effective_date' => $date, 'description' => 'Synthetic newer activity']);
+        }
+    }
     $before = DB::table('journal_entries')->orderBy('id')->get()->toJson();
     foreach (['2026-01', '2026-03'] as $month) {
         $view = app(BudgetView::class)->month($owner, $month);
         expect($view['totals'][0]['actual_expense']['minor'])->toBeNull()->and($view['comparisons'][0]['actual']['reason'])->toBe('legacy_correction_timing')
-            ->and($view['comparisons'][0]['variance']['available'])->toBeFalse();
+            ->and($view['comparisons'][0]['variance']['available'])->toBeFalse()->and($view['activity'])->toHaveCount(20)
+            ->and(array_column($view['activity'], 'id'))->not->toContain((string) $original->id);
     }
     $feb = app(BudgetView::class)->month($owner, '2026-02');
     expect($feb['totals'][0]['actual_expense']['minor'])->toBe('1735')->and($feb['comparisons'][0]['variance']['minor'])->toBe('1735')

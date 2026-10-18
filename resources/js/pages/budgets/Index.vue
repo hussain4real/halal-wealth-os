@@ -266,7 +266,6 @@ const changeMonth = () =>
                     v-for="occurrence in budget.occurrences"
                     :key="occurrence.key"
                     :occurrence="occurrence"
-                    :receipts="budget.receipts"
                     :month="budget.month"
                 />
             </section>
@@ -406,16 +405,19 @@ const changeMonth = () =>
                 v-if="!budget.activity.length"
                 class="rounded-2xl border border-dashed p-6 text-sm text-muted-foreground"
             >
-                No posted income or expense in this UTC ledger month. Expected
-                salary and plans do not create actual activity.
+                {{
+                    budget.activity_before
+                        ? 'No older activity on this page. Use Latest activity to return.'
+                        : 'No posted income or expense in this UTC ledger month. Expected salary and plans do not create actual activity.'
+                }}
             </p>
             <ul v-else class="divide-y rounded-2xl border bg-card px-5 sm:px-6">
                 <li
                     v-for="actual in budget.activity"
                     :key="actual.id + actual.value.currency"
-                    class="flex min-w-0 flex-wrap items-start justify-between gap-4 py-5"
+                    class="flex min-w-0 flex-col items-start justify-between gap-4 py-5 sm:flex-row"
                 >
-                    <div class="min-w-0 flex-1">
+                    <div class="w-full min-w-0 sm:w-auto sm:flex-1">
                         <Link
                             :href="'/transactions/' + actual.id"
                             class="font-medium [overflow-wrap:anywhere] underline"
@@ -443,7 +445,7 @@ const changeMonth = () =>
                             Outside normal budget by selected category version
                         </p>
                     </div>
-                    <div class="min-w-0 space-y-3">
+                    <div class="w-full min-w-0 space-y-3 sm:w-auto">
                         <BudgetAmount
                             class="block font-medium"
                             :value="actual.period_value ?? actual.value"
@@ -456,6 +458,29 @@ const changeMonth = () =>
                     </div>
                 </li>
             </ul>
+            <p class="text-xs text-muted-foreground">
+                Totals include the whole month. Posted activity is shown in
+                pages of 20.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <Link
+                    v-if="budget.activity_before"
+                    :href="'/budgets?month=' + budget.month"
+                    class="inline-flex min-h-10 items-center text-sm underline"
+                    >Latest posted activity</Link
+                >
+                <Link
+                    v-if="budget.activity_next_cursor"
+                    :href="
+                        '/budgets?month=' +
+                        budget.month +
+                        '&activity_before=' +
+                        encodeURIComponent(budget.activity_next_cursor)
+                    "
+                    class="inline-flex min-h-10 items-center text-sm underline"
+                    >Older posted activity →</Link
+                >
+            </div>
         </section>
         <section class="grid gap-6 lg:grid-cols-2">
             <details class="min-w-0 rounded-2xl border p-5 sm:p-6">

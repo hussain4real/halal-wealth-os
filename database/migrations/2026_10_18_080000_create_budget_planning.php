@@ -54,6 +54,7 @@ CREATE TABLE planning_attributions (
  FOREIGN KEY(supersedes_id,owner_id) REFERENCES planning_attributions(id,owner_id) ON DELETE RESTRICT
 );
 CREATE UNIQUE INDEX planning_first_attribution ON planning_attributions(journal_id) WHERE supersedes_id IS NULL;
+CREATE INDEX planning_attributions_journal ON planning_attributions(owner_id,journal_id,id DESC);
 CREATE TABLE planning_allocations (
  id BIGSERIAL PRIMARY KEY, owner_id BIGINT NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
  reference CHAR(26) NOT NULL UNIQUE, occurrence_id BIGINT NOT NULL, journal_id BIGINT NOT NULL,
@@ -63,6 +64,7 @@ CREATE TABLE planning_allocations (
  FOREIGN KEY(journal_id,owner_id) REFERENCES journal_entries(id,owner_id) ON DELETE RESTRICT
 );
 CREATE INDEX planning_allocations_journal ON planning_allocations(owner_id,journal_id);
+CREATE INDEX planning_allocations_occurrence ON planning_allocations(owner_id,occurrence_id,id DESC);
 CREATE TABLE planning_releases (
  id BIGSERIAL PRIMARY KEY, owner_id BIGINT NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
  reference CHAR(26) NOT NULL UNIQUE, allocation_id BIGINT NOT NULL UNIQUE, reason VARCHAR(180) NOT NULL,
@@ -76,6 +78,9 @@ CREATE TABLE planning_requests (
  result_id BIGINT NOT NULL, result_reference CHAR(26) NOT NULL,
  created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP, UNIQUE(owner_id,operation,idempotency_key)
 );
+CREATE INDEX planning_occurrences_owner_due ON planning_occurrences(owner_id,due_date,id);
+CREATE INDEX planning_receipt_selection ON journal_entries(owner_id,id DESC) WHERE kind IN ('income','expense') AND status='posted';
+CREATE INDEX planning_postings_journal ON postings(owner_id,journal_id);
 CREATE OR REPLACE FUNCTION hwo_planning_version_guard() RETURNS trigger LANGUAGE plpgsql AS $$
 DECLARE previous RECORD; c RECORD; s RECORD; months INTEGER; intended DATE;
 BEGIN
@@ -175,6 +180,6 @@ SQL);
                 throw new RuntimeException('Retained planning history requires a forward migration; downgrade refused before DDL.');
             }
         }
-        DB::unprepared('DROP TABLE planning_requests,planning_releases,planning_allocations,planning_attributions,planning_occurrences,planning_schedules,planning_categories; DROP FUNCTION hwo_planning_allocation_guard(); DROP FUNCTION hwo_planning_attribution_guard(); DROP FUNCTION hwo_planning_version_guard();');
+        DB::unprepared('DROP INDEX planning_receipt_selection,planning_postings_journal; DROP TABLE planning_requests,planning_releases,planning_allocations,planning_attributions,planning_occurrences,planning_schedules,planning_categories; DROP FUNCTION hwo_planning_allocation_guard(); DROP FUNCTION hwo_planning_attribution_guard(); DROP FUNCTION hwo_planning_version_guard();');
     }
 };

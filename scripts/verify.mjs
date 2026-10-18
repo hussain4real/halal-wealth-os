@@ -57,6 +57,8 @@ try {
             'scripts/verification.test.mjs',
             'scripts/currency-display.test.mjs',
             'scripts/planning-identity.test.mjs',
+            'scripts/receipt-picker.test.mjs',
+            'scripts/planning-match-draft.test.mjs',
         ]);
         const missing = [];
         for (const command of ['php', 'composer', 'node', 'npm', 'psql']) {
@@ -170,6 +172,7 @@ try {
             'FxMathTest',
             'ReconciliationTest',
             'BudgetTest',
+            'BudgetReadBoundaryTest',
             'BudgetHttpTest',
             'BudgetConcurrencyTest',
             'BudgetCalendarTest',

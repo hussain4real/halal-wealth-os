@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link, useForm, usePage } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
+import { computed, ref, watch, onBeforeUnmount } from 'vue';
 import BudgetAmount from '@/components/BudgetAmount.vue';
 import BudgetRelease from '@/components/BudgetRelease.vue';
 import InputError from '@/components/InputError.vue';
@@ -18,11 +18,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { planningRequestIdentity } from '@/composables/planningRequestIdentity';
+import { planningMatchDraft } from '@/composables/planningMatchDraft';
 import { useLedgerFeedback } from '@/composables/useLedgerFeedback';
-import type { BudgetActual, BudgetOccurrence } from '@/types/budget';
+import { useReceiptPicker } from '@/composables/useReceiptPicker';
+import type { BudgetOccurrence } from '@/types/budget';
 const props = defineProps<{
     occurrence: BudgetOccurrence;
-    receipts: BudgetActual[];
     month: string;
 }>();
 const open = ref(false);
@@ -38,18 +39,16 @@ const form = useForm(
         month: props.month,
     },
 );
-const eligible = computed(() =>
-    props.receipts.filter(
-        (r) =>
-            r.direction === props.occurrence.category.direction &&
-            r.value.currency === props.occurrence.expected.currency &&
-            (r.family === null ||
-                r.family === props.occurrence.category.family) &&
-            r.remaining.available &&
-            r.remaining.minor !== '0' &&
-            !r.remaining.minor?.startsWith('-'),
-    ),
+const picker = useReceiptPicker(
+    props.occurrence.schedule_id,
+    () => form.journal_id,
 );
+const eligible = picker.choices;
+watch(open, (value) => {
+    if (value) void picker.start();
+    else picker.cancel();
+});
+onBeforeUnmount(picker.cancel);
 const chosen = computed(() =>
     eligible.value.find((r) => r.id === form.journal_id),
 );
@@ -59,20 +58,34 @@ const identity = planningRequestIdentity(
 );
 form.defaults('idempotency_key', identity.current);
 form.idempotency_key = identity.current;
+const pendingMatch = planningMatchDraft(
+    'budget-match:' + page.props.auth.user.id + ':' + props.occurrence.key,
+);
+const pendingDraft = pendingMatch.read(identity.current);
+if (pendingDraft) {
+    form.journal_id = pendingDraft.journal_id;
+    form.amount = pendingDraft.amount;
+}
 const feedback = useLedgerFeedback(
     () => form.errors,
     () => form.clearErrors(),
 );
-const submit = () =>
+const submit = () => {
+    pendingMatch.save(form.idempotency_key, {
+        journal_id: form.journal_id,
+        amount: form.amount,
+    });
     form.post(
         '/budgets/allocations',
         feedback.options(() => {
             open.value = false;
+            pendingMatch.clear(form.idempotency_key);
             form.idempotency_key = identity.complete();
             form.defaults('idempotency_key', form.idempotency_key);
             form.reset('journal_id', 'amount');
         }),
     );
+};
 </script>
 <template>
     <article
@@ -175,7 +188,10 @@ const submit = () =>
         </p>
         <Dialog v-model:open="open">
             <DialogTrigger
-                v-if="!occurrence.superseded && occurrence.status !== 'matched'"
+                v-if="
+                    !occurrence.superseded &&
+                    (occurrence.status !== 'matched' || form.journal_id)
+                "
                 as-child
                 ><Button variant="outline" class="mt-5 min-h-11"
                     >Match a posted actual</Button
@@ -192,6 +208,17 @@ const submit = () =>
                     ></DialogHeader
                 >
                 <form class="space-y-5" @submit.prevent="submit">
+                    <p
+                        v-if="
+                            occurrence.status === 'matched' && form.journal_id
+                        "
+                        role="status"
+                        class="rounded-lg border p-3 text-sm"
+                    >
+                        This plan is fully matched. Review its matching history,
+                        or retry your pending attempt unchanged to check its
+                        saved result.
+                    </p>
                     <LedgerFeedback
                         :errors="form.errors"
                         :uncertain="feedback.uncertain.value"
@@ -201,6 +228,68 @@ const submit = () =>
                         Plan remaining:
                         <BudgetAmount :value="occurrence.remaining" />
                     </p>
+                    <div class="space-y-2 rounded-lg border p-3">
+                        <Label :for="'receipt-search-' + occurrence.key"
+                            >Find a posted receipt</Label
+                        >
+                        <Input
+                            :id="'receipt-search-' + occurrence.key"
+                            v-model="picker.search.value"
+                            maxlength="120"
+                            placeholder="Description or receipt reference"
+                            @keydown.enter.prevent="picker.start"
+                        />
+                        <div class="flex flex-wrap gap-2">
+                            <Button
+                                type="button"
+                                variant="outline"
+                                :disabled="picker.loading.value"
+                                @click="picker.start"
+                                >Search receipts</Button
+                            >
+                            <Button
+                                v-if="picker.cursors.value.length > 1"
+                                type="button"
+                                variant="ghost"
+                                :disabled="picker.loading.value"
+                                @click="picker.newer"
+                                >Newer receipts</Button
+                            >
+                            <Button
+                                v-if="picker.next.value"
+                                type="button"
+                                variant="ghost"
+                                :disabled="picker.loading.value"
+                                @click="picker.older"
+                                >Older receipts</Button
+                            >
+                        </div>
+                        <p class="text-xs text-muted-foreground">
+                            All posted dates are searchable. Each page shows up
+                            to 20 eligible receipts; your selected receipt stays
+                            available for retry.
+                        </p>
+                        <p
+                            v-if="picker.loading.value"
+                            role="status"
+                            class="text-sm"
+                        >
+                            Loading posted receipts…
+                        </p>
+                        <p
+                            v-if="picker.error.value"
+                            role="alert"
+                            class="text-sm text-destructive"
+                        >
+                            {{ picker.error.value }}
+                            <Button
+                                type="button"
+                                variant="ghost"
+                                @click="picker.retry"
+                                >Retry loading receipts</Button
+                            >
+                        </p>
+                    </div>
                     <fieldset :disabled="form.processing" class="space-y-5">
                         <div>
                             <Label :for="'match-actual-' + occurrence.key"
@@ -211,6 +300,8 @@ const submit = () =>
                                 :id="'match-actual-' + occurrence.key"
                                 v-model="form.journal_id"
                                 required
+                                :disabled="picker.loading.value"
+                                :aria-busy="picker.loading.value"
                                 class="mt-2 min-h-11 w-full min-w-0 rounded-lg border border-input bg-background px-3 text-sm"
                                 :aria-invalid="!!form.errors.journal_id"
                                 :aria-describedby="
@@ -274,7 +365,11 @@ const submit = () =>
                         </div>
                     </fieldset>
                     <p
-                        v-if="!eligible.length"
+                        v-if="
+                            !picker.loading.value &&
+                            !picker.error.value &&
+                            !eligible.length
+                        "
                         class="text-sm text-muted-foreground"
                     >
                         No eligible receipt is available.
@@ -307,7 +402,7 @@ const submit = () =>
             class="mt-5 border-t pt-4"
         >
             <summary class="min-h-10 cursor-pointer text-sm font-medium">
-                Matching history · {{ occurrence.allocations.length }}
+                Matching history · {{ occurrence.allocation_count }}
             </summary>
             <ul class="mt-3 divide-y">
                 <li
@@ -340,6 +435,12 @@ const submit = () =>
                     />
                 </li>
             </ul>
+            <Link
+                v-if="occurrence.history_more"
+                :href="'/budgets/occurrences/' + occurrence.id"
+                class="mt-3 inline-flex min-h-10 items-center text-sm underline"
+                >View older matching history →</Link
+            >
         </details>
     </article>
 </template>
