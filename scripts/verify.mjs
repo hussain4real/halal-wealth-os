@@ -40,6 +40,7 @@ try {
             'M1-P3',
             'M2-P1',
             'M2-P2',
+            'M2-P3',
         ].includes(phase)
     ) {
         throw new VerificationFailure(
@@ -61,6 +62,7 @@ try {
             'scripts/receipt-picker.test.mjs',
             'scripts/planning-match-draft.test.mjs',
             'scripts/goal-request-draft.test.mjs',
+            'scripts/cash-settings-draft.test.mjs',
         ]);
         const missing = [];
         for (const command of ['php', 'composer', 'node', 'npm', 'psql']) {
@@ -183,6 +185,11 @@ try {
             'GoalConcurrencyTest',
             'GoalReadBoundaryTest',
             'GoalProjectionTest',
+            'CashAvailabilityTest',
+            'CashAvailabilityHttpTest',
+            'CashAvailabilityReadTest',
+            'CashAvailabilityConcurrencyTest',
+            'AvailabilityMathTest',
         ]) {
             if (!discovered.stdout.includes(required)) {
                 throw new VerificationFailure(
@@ -202,7 +209,7 @@ try {
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
         console.log(
-            'PASS M0-P2, M0-P3, M1-P1, M1-P2, M1-P3, M2-P1 and M2-P2 implemented baseline',
+            'PASS M0-P2, M0-P3, M1-P1, M1-P2, M1-P3, M2-P1, M2-P2 and M2-P3 implemented baseline',
         );
         console.log(
             'NOT_APPLICABLE: future domain suites, integrations, live AI and deployment.',

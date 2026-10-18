@@ -88,4 +88,19 @@ durable retry and retained migration guards are required. Actual independent
 PostgreSQL backends contend for reservations, releases, posting and account
 archiving. Client attempt recovery has separate Node and rendered browser checks.
 Private original F05 and independently reviewed public synthetic translations
-remain separate evidence. Unimplemented-phase rejection now targets M2-P3.
+remain separate evidence. At that checkpoint, unimplemented-phase rejection
+targeted M2-P3; the current implemented boundary is recorded below.
+
+## M2-P3 implemented checks
+
+The phase harness requires CashAvailabilityTest, CashAvailabilityHttpTest,
+CashAvailabilityReadTest, CashAvailabilityConcurrencyTest and AvailabilityMathTest
+alongside every prior suite. Signed liquid cash, actual protection, explicit
+required designations and reservation-occurrence overlap remain distinct.
+Uncached tests cover unpaid/early-paid/reversed obligations, full recurrence and
+version cutovers, native-group FX rounding/cutoff/range, owner isolation,
+settings retry and immutable what-if requests. Read totals remain complete
+beyond bounded disclosure pages; real independent PostgreSQL backends verify
+settings serialization and coherent cash/protection reads. Client recovery,
+private original F07 and rendered review are separate observed gates.
+Unimplemented-phase rejection now targets M3-P1; no M3 is authorized.

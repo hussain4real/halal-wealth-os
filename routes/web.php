@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CashAvailabilityController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\OwnerProfileController;
@@ -12,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
-    Route::inertia('dashboard', 'Dashboard')->name('dashboard');
+    Route::get('dashboard', [CashAvailabilityController::class, 'dashboard'])->name('dashboard');
+    Route::get('cash/settings', [CashAvailabilityController::class, 'settings'])->name('cash.settings');
+    Route::post('cash/settings', [CashAvailabilityController::class, 'save'])->name('cash.settings.save');
+    Route::get('cash/scenarios', [CashAvailabilityController::class, 'scenarios'])->name('cash.scenarios');
+    Route::post('cash/scenarios', [CashAvailabilityController::class, 'calculate'])->name('cash.scenarios.calculate');
     Route::get('goals', [GoalController::class, 'index'])->name('goals.index');
     Route::get('goals/new', [GoalController::class, 'form'])->name('goals.create');
     Route::post('goals', [GoalController::class, 'store'])->name('goals.store');

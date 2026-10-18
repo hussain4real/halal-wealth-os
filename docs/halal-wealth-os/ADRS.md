@@ -38,4 +38,15 @@ A detailed account contributes cash plus event-derived positions. An aggregate a
 
 Missing prices are unknown, not zero. Keep original/converted values and valuation provenance. Show simple percentage returns only where no-external-flow assumptions hold; otherwise show contributions and monetary gains. TWR/XIRR remain deferred. Pending: mode-change reconciliation and missing/stale evidence behavior.
 
-See [invariants](INVARIANTS.md) and [validation](VALIDATION.md). No ADR is implemented by this document.
+See [invariants](INVARIANTS.md) and [validation](VALIDATION.md). The historical
+ADR-001 through ADR-006 directions above do not establish implementation evidence;
+accepted phase records describe their implemented boundaries. ADR-007 below
+records the current M2-P3 implementation policy, with verification kept separate.
+
+## ADR-007: actual cash availability and isolated forecasts
+
+M2-P3 records its bounded formulas, explicit obligation overlap, conservative
+income-date horizon, known-FX policy and separate scenario assumptions in
+[cash availability](CASH-AVAILABILITY.md). This phase policy remains subject to
+independent verification and human acceptance; no later reporting or investment
+feature is authorized by this decision.
