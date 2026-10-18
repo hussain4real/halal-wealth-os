@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
+import { modeLabel, evidenceLabel } from '@/types/portfolio';
 import type { FinancialEvidence } from '@/types/ledger';
 defineProps<{ evidence: FinancialEvidence; showTotal?: boolean }>();
 const reasons: Record<string, string> = {
@@ -28,7 +29,9 @@ const reasons: Record<string, string> = {
                     {{
                         evidence.state === 'complete'
                             ? 'Complete total'
-                            : 'Incomplete conversion'
+                            : evidence.components.some((c) => c.portfolio)
+                              ? 'Incomplete value'
+                              : 'Incomplete conversion'
                     }}
                 </p>
                 <p
@@ -77,7 +80,7 @@ const reasons: Record<string, string> = {
     </section>
     <section class="overflow-hidden rounded-2xl border bg-card">
         <h2 class="border-b px-5 py-4 font-medium">
-            Native balances and evidence
+            Native values and evidence
         </h2>
         <div v-if="!evidence.components.length" class="space-y-3 p-6 text-sm">
             <p>No personal accounts are included yet.</p>
@@ -113,7 +116,13 @@ const reasons: Record<string, string> = {
             </div>
             <div class="mt-4 grid gap-4 sm:grid-cols-2">
                 <div class="min-w-0">
-                    <p class="text-xs text-muted-foreground">Native balance</p>
+                    <p class="text-xs text-muted-foreground">
+                        {{
+                            component.portfolio
+                                ? 'Selected native contribution'
+                                : 'Native balance'
+                        }}
+                    </p>
                     <p
                         v-if="component.native"
                         class="mt-1 font-medium [overflow-wrap:anywhere]"
@@ -149,8 +158,58 @@ const reasons: Record<string, string> = {
                     </p>
                 </div>
             </div>
+            <div
+                v-if="component.portfolio"
+                class="mt-4 space-y-2 rounded-xl border p-4 text-sm"
+            >
+                <Link
+                    :href="'/portfolio/' + component.portfolio.id"
+                    class="inline-flex min-h-10 items-center font-medium underline"
+                    >{{ modeLabel(component.portfolio.mode) }}</Link
+                >
+                <p
+                    class="text-xs [overflow-wrap:anywhere] text-muted-foreground"
+                >
+                    Label: {{ component.portfolio.platform_label }} · Source:
+                    {{ component.portfolio.source }} · UTC
+                    {{ component.portfolio.as_of }}
+                </p>
+                <p v-for="entry in component.portfolio.selected" :key="entry">
+                    Included: {{ evidenceLabel(entry) }}
+                </p>
+                <p
+                    v-for="entry in component.portfolio.excluded"
+                    :key="entry"
+                    class="text-muted-foreground"
+                >
+                    Excluded: {{ evidenceLabel(entry) }}
+                </p>
+                <p>
+                    Retained ledger cash:
+                    <CurrencyDisplay
+                        v-if="component.ledger_cash"
+                        :amount="component.ledger_cash.amount"
+                        :currency="component.currency"
+                    /><span v-else>Unavailable</span>
+                </p>
+                <p
+                    v-for="entry in [
+                        ...new Set(
+                            component.portfolio.missing.map(evidenceLabel),
+                        ),
+                    ]"
+                    :key="entry"
+                >
+                    {{ entry }}
+                </p>
+                <p class="text-xs text-muted-foreground">
+                    Manual reference values are usable only for the recorded UTC
+                    date. Platform labels do not verify connection, ownership or
+                    Shariah status.
+                </p>
+            </div>
             <p
-                v-if="component.native_reason"
+                v-if="component.native_reason && !component.portfolio"
                 class="mt-3 text-sm text-muted-foreground"
             >
                 {{

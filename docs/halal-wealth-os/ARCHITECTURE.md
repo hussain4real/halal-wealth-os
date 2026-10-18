@@ -1,12 +1,11 @@
 # Architecture proposal
 
 Status: the personal-first modular-monolith and six ADR directions are human
-accepted. M0 and M1 are human accepted; see [M1 acceptance](runs/M1-acceptance.md).
-Detailed module import edges remain proposed. M2-P1 budgets and recurring
-commitments are human accepted. M2-P2 goals and emergency protection are human accepted. M2-P3 cash
-availability and forecast scenarios are authorized and in progress, unaccepted;
-see [its calculation policy](CASH-AVAILABILITY.md). No M3 is authorized. Manual FX/reconciliation policies remain in
-[the phase decisions](FX-AND-RECONCILIATION.md).
+accepted. M0, M1 and M2 are human accepted; see [M2 acceptance](runs/M2-acceptance.md).
+Detailed module import edges remain proposed. M3-P1 asset/catalog and account-mode
+implementation is authorized; M3-P2 and later phases remain unauthorized. The
+accepted prior cash policy is in [cash availability](CASH-AVAILABILITY.md), and
+manual FX/reconciliation decisions remain in [their ADR](FX-AND-RECONCILIATION.md).
 
 Use a Laravel modular monolith. Inertia, Vue 3 and TypeScript serve the application UI; PostgreSQL stores financial records. Filament is restricted administration. Exact selected versions are recorded in composer.lock, package-lock.json and [the runtime records](../../ops/development/README.md); PHP support is 8.5.x only.
 

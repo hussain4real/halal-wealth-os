@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Domain\Ledger\AccountBalanceReader;
 use App\Domain\Ledger\AccountType;
 use App\Domain\Ledger\CreateAccount;
+use App\Domain\Reporting\NetWorthSnapshot;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
 use App\Http\Requests\Accounts\ArchiveAccountRequest;
@@ -26,7 +27,7 @@ class AccountController extends Controller
         $accounts = Account::query()->ownedBy($this->owner($request))->orderBy('id')->get();
 
         return Inertia::render('accounts/Index', [
-            'accounts' => $accounts->map(fn (Account $account): array => $this->payload($account, $balances))->all(),
+            'accounts' => $accounts->map(fn (Account $account): array => $this->payload($account, $balances, $this->owner($request)))->all(),
             'currencies' => array_map(fn (Currency $currency): array => ['code' => $currency->value, 'exponent' => $currency->exponent()], Currency::cases()),
             'types' => array_map(fn (AccountType $type): string => $type->value, AccountType::cases()),
         ]);
@@ -47,7 +48,7 @@ class AccountController extends Controller
         $record = $this->owned($request, $account);
         Gate::authorize('view', $record);
 
-        return Inertia::render('accounts/Show', ['account' => $this->payload($record, $balances)]);
+        return Inertia::render('accounts/Show', ['account' => $this->payload($record, $balances, $this->owner($request))]);
     }
 
     public function update(UpdateAccountRequest $request, string $account): RedirectResponse
@@ -98,9 +99,12 @@ class AccountController extends Controller
     }
 
     /** @return array<string, mixed> */
-    private function payload(Account $account, AccountBalanceReader $balances): array
+    private function payload(Account $account, AccountBalanceReader $balances, User $owner): array
     {
         $snapshot = $balances->forAccount($account);
+        $investment = $account->type === AccountType::Investment
+            ? app(NetWorthSnapshot::class)->capture($owner, $account->currency_code, now('UTC')->format('Y-m-d\TH:i:s\Z'), (string) $account->id)['components'][0]
+            : null;
 
         return [
             'id' => (string) $account->id,
@@ -113,7 +117,10 @@ class AccountController extends Controller
             'balance' => $snapshot->money?->jsonSerialize(),
             'balance_status' => $snapshot->money === null ? 'unavailable' : 'derived',
             'balance_reason' => $snapshot->unavailableReason,
-            'net_worth_contribution' => $snapshot->netWorthContribution($account->type)?->jsonSerialize(),
+            'net_worth_contribution' => $investment === null ? $snapshot->netWorthContribution($account->type)?->jsonSerialize() : $investment['native'],
+            'valuation_mode' => $investment === null ? 'ledger' : (isset($investment['portfolio']) ? ($investment['portfolio']['mode'] ?? 'unconfirmed') : 'legacy_ledger'),
+            'portfolio_id' => $investment['portfolio']['id'] ?? null,
+            'net_worth_reason' => $investment['native_reason'] ?? null,
             'opening_request' => $snapshot->openingRequest?->jsonSerialize(),
         ];
     }

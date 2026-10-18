@@ -64,6 +64,46 @@ const submit = () => form.post('/accounts');
                             :currency="account.currency"
                         />
                     </p>
+                    <div
+                        v-if="account.type === 'investment'"
+                        class="mt-4 space-y-2 text-sm"
+                    >
+                        <p>
+                            Net-worth mode:
+                            {{
+                                account.valuation_mode === 'aggregate'
+                                    ? 'Whole-account value'
+                                    : account.valuation_mode === 'detailed'
+                                      ? 'Detailed holdings'
+                                      : account.valuation_mode === 'unconfirmed'
+                                        ? 'Needs confirmation'
+                                        : 'Ledger cash only'
+                            }}
+                        </p>
+                        <p>
+                            Selected contribution:
+                            <CurrencyDisplay
+                                :amount="
+                                    account.net_worth_contribution?.amount ??
+                                    null
+                                "
+                                :currency="account.currency"
+                            />
+                        </p>
+                        <Link
+                            :href="
+                                account.portfolio_id
+                                    ? '/portfolio/' + account.portfolio_id
+                                    : '/portfolio'
+                            "
+                            class="inline-flex min-h-10 items-center underline"
+                            >{{
+                                account.portfolio_id
+                                    ? 'Review portfolio evidence'
+                                    : 'Set up portfolio mode'
+                            }}</Link
+                        >
+                    </div>
                     <p
                         v-if="!account.included_in_net_worth"
                         class="mt-1 text-sm text-muted-foreground"

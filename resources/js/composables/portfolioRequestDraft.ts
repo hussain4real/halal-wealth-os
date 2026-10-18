@@ -1,0 +1,92 @@
+const memory = new Map<string, Record<string, string>>();
+export function portfolioRequestDraft(
+    scope: string,
+    identity: string,
+    fields: string[],
+) {
+    const key = 'hwo:portfolio:attempt:' + scope;
+    const valid = (value: unknown): value is Record<string, string> => {
+        if (typeof value !== 'object' || value === null || Array.isArray(value))
+            return false;
+        const entries = Object.entries(value);
+        if (
+            entries.length !== fields.length + 1 ||
+            !entries.every(
+                ([k, v]) =>
+                    [...fields, 'idempotency_key'].includes(k) &&
+                    typeof v === 'string' &&
+                    (k === 'rows'
+                        ? v.length <= 400000
+                        : Array.from(v).length <= 180),
+            )
+        )
+            return false;
+        if (!('idempotency_key' in value) || value.idempotency_key !== identity)
+            return false;
+        if ('rows' in value) {
+            try {
+                const rows: unknown = JSON.parse(String(value.rows));
+                const keys = [
+                    'asset_id',
+                    'quantity',
+                    'unit_price',
+                    'manual_value',
+                    'basis_known',
+                    'cost_basis',
+                ];
+                if (
+                    !Array.isArray(rows) ||
+                    rows.length > 1000 ||
+                    !rows.every(
+                        (r: unknown) =>
+                            typeof r === 'object' &&
+                            r !== null &&
+                            !Array.isArray(r) &&
+                            Object.keys(r).length === keys.length &&
+                            Object.entries(r).every(
+                                ([k, v]) =>
+                                    keys.includes(k) &&
+                                    typeof v === 'string' &&
+                                    v.length <= 32,
+                            ),
+                    )
+                )
+                    return false;
+            } catch {
+                return false;
+            }
+        }
+        return true;
+    };
+    return {
+        load: () => {
+            let value: unknown = memory.get(key);
+            try {
+                if (!value && typeof window !== 'undefined')
+                    value = JSON.parse(
+                        window.sessionStorage.getItem(key) ?? 'null',
+                    );
+            } catch {
+                /* App-session fallback. */
+            }
+            return valid(value) ? { ...value } : null;
+        },
+        save: (value: Record<string, string>) => {
+            if (!valid(value)) throw new Error('Invalid portfolio attempt');
+            memory.set(key, { ...value });
+            try {
+                window.sessionStorage.setItem(key, JSON.stringify(value));
+            } catch {
+                /* App-session fallback. */
+            }
+        },
+        clear: () => {
+            memory.delete(key);
+            try {
+                window.sessionStorage.removeItem(key);
+            } catch {
+                /* App-session fallback. */
+            }
+        },
+    };
+}

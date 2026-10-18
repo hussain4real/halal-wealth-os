@@ -77,9 +77,10 @@ final class LedgerInput
         return (new DateTimeImmutable($value))->setTimezone(new DateTimeZone('UTC'))->format('Y-m-d\TH:i:s\Z');
     }
 
+    /** @return numeric-string */
     public static function identifier(mixed $id): string
     {
-        abort_unless(is_string($id) && preg_match('/^[1-9][0-9]{0,18}$/D', $id) && (strlen($id) < 19 || strcmp($id, Money::MAX_MINOR) <= 0), 404);
+        abort_unless(is_string($id) && is_numeric($id) && preg_match('/^[1-9][0-9]{0,18}$/D', $id) && (strlen($id) < 19 || strcmp($id, Money::MAX_MINOR) <= 0), 404);
 
         return $id;
     }

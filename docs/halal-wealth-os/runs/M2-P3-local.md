@@ -1,11 +1,13 @@
 # M2-P3 implementation and verification
 
-Status: local engineering complete; authorized dev publication in progress,
-unaccepted. Cycle 4 of at most six. The human owner accepted
-M2-P2 and authorized this phase through source/rendered review, sanitized draft
-PR to dev, normal merge after exact-head reviews/CI, original dev-push CI and
-independent M2 milestone review. Formal milestone review retains its prerequisite
-of individual phase acceptance. No M3, main/stage promotion or deployment.
+Current owner decision: M2-P3 and M2 were human accepted at 14:41 UTC on 18 October 2026. See [phase acceptance](M2-P3-acceptance.md) and [M2 acceptance](M2-acceptance.md). Earlier status and publication statements below are preserved historical checkpoints. Final records and acceptance are authorized for publication; no new push is claimed by this addendum. M3-P1 is separately authorized; M3-P2 remains unauthorized.
+
+Status: READY_FOR_REVIEW, unaccepted. Four of at most six scoped implementation
+cycles. Corrected PR 8 merged normally into dev; original exact-head and dev-push
+CI passed. Independent M2 technical verification passed; human M2-P3/M2 acceptance
+remains pending. Final owner-review records are local and unpublished. No M3,
+main/stage promotion or deployment. The preserved checkpoints below describe
+what was known at each earlier stage.
 
 The verified dev baseline is PR 7 merge d1371f01fbc3e76743ff4d32668c4982bcc82f6b.
 Four final reviewed M2-P2 documents were preserved byte for byte before human
@@ -143,3 +145,36 @@ PR 8 remains draft on the original source head until the reviewed correction is
 committed and pushed. Fresh exact-head hosted CI/review, normal dev merge,
 original post-merge CI and independent M2 review remain required. Human M2-P3/M2
 acceptance is pending; no M3 is authorized.
+
+## Verified dev merge and independent M2 checkpoint
+
+[PR 8](https://github.com/hussain4real/halal-wealth-os/pull/8) merged normally at
+6a10cff7a772dff0d88efcf5104d3c3f7d37b149, with parents
+d1371f01fbc3e76743ff4d32668c4982bcc82f6b and
+63d8136a11a290d2aee197bc84d4accb159dfdea. Its tree exactly matches the independently
+reviewed corrected candidate. All 567 files, byte counts and modes matched in the
+clean local dev checkout. Main/stage remain unchanged.
+
+Original corrected-head [CI 39130795131](https://github.com/hussain4real/halal-wealth-os/actions/runs/39130795131)
+and original dev-push [CI 39132279460](https://github.com/hussain4real/halal-wealth-os/actions/runs/39132279460)
+each passed attempt 1. Raw logs verify 474 passing cases / 2,973 assertions,
+the intended one-failure result / 2,974 assertions, then restored 474 / 2,973,
+with 2,133/2,279 covered statements. The exact corrected-head hosted review
+completed with no findings or unresolved findings; all three earlier threads
+have tested fixes and resolved dispositions. One intervening ready-event summary
+lacked commit attribution; a named-head request subsequently provided the actual
+completed corrected-head result. No incomplete result was used to merge.
+
+The independent reviewer then executed ./bin/verify --all on separate guarded
+disposable PostgreSQL: 474 tests / 2,973 assertions, zero failures/errors/skips,
+2,133/2,279 covered statements and 41 Node checks. Private F06/F05/F07 passed
+3/6/7 checks respectively. A temporary-server readiness race was caught before
+application tests; the private launcher waited for the final server on retry.
+This did not alter application source or reset implementation cycles.
+
+All 26 reviewer-owned data tables were empty at cleanup; its container was removed.
+The coordinator database remained ready with unchanged socket identity. All 567
+tracked files, merge identity and rendered build stayed unchanged at review
+handoff. See [the independent technical review](M2-independent-review.md).
+The phase claim is closed at READY_FOR_REVIEW. Owner M2-P3/M2 acceptance remains
+pending; M3 stays unauthorized. These final records are local and unpublished.

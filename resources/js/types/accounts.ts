@@ -11,6 +11,9 @@ export type Account = {
     balance: ExactMoney | null;
     balance_status: 'unavailable' | 'derived';
     balance_reason: string | null;
+    valuation_mode: string;
+    portfolio_id: string | null;
+    net_worth_reason: string | null;
     net_worth_contribution: ExactMoney | null;
     opening_request: {
         status: 'awaiting_posting' | 'posted' | 'reversed';
