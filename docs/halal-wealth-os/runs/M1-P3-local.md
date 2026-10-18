@@ -1,6 +1,6 @@
 # M1-P3 implementation and verification
 
-Status: READY_FOR_REVIEW, unaccepted. Two of at most six scoped implementation cycles
+Status: READY_FOR_REVIEW, unaccepted; corrected local gates passed. Three of at most six scoped implementation/review cycles
 used. The owner accepted M1-P2 and authorized this phase through implementation,
 independent source/rendered review, sanitized draft PR to dev, exact-head CI and
 normal merge, followed by independent M1 review. The sole coordinator preserves
@@ -65,9 +65,9 @@ explicit seconds for minute-only native values. Report preview uses form-bound
 validation feedback. The corrected candidate built successfully; independent browser re-verification
 and the final uncached/TIA gates passed as recorded below.
 
-## Remaining gates and limits
+## Cycle2 gates and limits
 
-Final `./bin/verify --all` passed, exit0, in155.13 seconds:300 tests/1,830
+The cycle2 `./bin/verify --all` passed, exit0, in155.13 seconds:300 tests/1,830
 assertions, no failures/errors/skips,1,047/1,132 covered application statements.
 It includes all223 prior accepted tests plus77 new cases/550 assertions. The
 full gate passed all16 Node harness/display checks, PHP8.5 platform/locks,
@@ -104,3 +104,49 @@ missing delivery never justifies reposting. A durable outbox is future scope.
 No full WCAG certification, screen-reader or cross-browser result is implied by
 rendered Chromium checks. No native Goal activation, real user provisioning,
 financial integration, credential/security change or deployment is claimed.
+
+## Hosted review correction checkpoint
+
+Cycle3 independent M1 preparation identified stale current-status prose in the
+Money/account contract. It now distinguishes accepted M1-P1/P2, delivered but
+unaccepted M1-P3, native account arithmetic and the separate coherent reporting
+snapshot, and final FX settlement precision. The original PR head a25b80c3b3157fcfbd2dd226bd36af89bdc96d90 passed its original
+hosted CI39103689107, including baseline/deliberate failure/restoration, before
+hosted review identified one P1 in past-date FX corrections.
+
+Six new ordinary/FX regressions reproduced intermediate-cutoff double counting
+before correction. They passed after cancellation journals, including FX fees,
+were assigned the original business date; replacement journals retain their
+submitted date. Standalone reversals remain today and default retry fingerprints
+are preserved. Retained earlier-policy linked corrections are explicitly native
+unavailable within ambiguous cutoffs, without editing immutable journals. New
+deferred guards require coherent FX reversal dates and original-date cancellation
+for new correction roots. The targeted145-case/1,158-assertion run passed; refreshed
+full/TIA/canonical/rendered/source/publication gates are recorded in the subsequent checkpoint.
+
+## Cycle3 final verification
+
+The refreshed full `./bin/verify --phase M1-P3` passed, exit0, in113.50 seconds:
+310 tests/1,927 assertions, no failures/errors/skips and1,053/1,137 covered
+application statements. All223 prior accepted cases remain;87 added cases cover
+this phase, including10 historical-timing and deferred-commit regressions. The
+full platform, lock/advisory, guarded migration,16 Node checks, lint/types/build,
+Pint and PHPStan gates passed. Private canonical F04 again passed all five checks.
+
+Independent source re-review closed all three requested follow-ups: the
+uniformly wrong cancellation-date commit guard regression, current posting
+contract and inclusive legacy cutoff wording. Focused rendered re-review passed
+16 distinct checks with13 newly inspected screenshots, recorded separately from
+the prior36 checks/34 images. It confirmed original-date cancellations including
+fees, replacement cutoffs without duplicated cash, ordinary correction, saved
+evidence stability, standalone reversal today, and legacy unavailability/recovery.
+No unresolved financial source or rendered finding remains locally.
+
+Fresh TIA recording passed310 tests/1,927 assertions in124.82 seconds. An
+unchanged replay explicitly reused310 results in5.43 seconds (native2.93 seconds);
+replay is not fresh test execution. The native planner probe again selected the
+FX service suites using a simulated previous hash without source/cache mutation.
+Exact-head publication evidence follows independently. The old
+300-case hosted result does not prove this corrected candidate. Phase/milestone
+acceptance, normal merge, original post-merge CI and independent M1 review remain
+separate gates; M1-P3 is unaccepted.

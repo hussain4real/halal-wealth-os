@@ -9,3 +9,7 @@ difference/adjustment/matched/reversed/unavailable/history and owner denial.
 Keyboard tab order, scroll navigation, dialog Escape/focus return, associated
 errors and mobile reflow were checked in the actual browser. Screenshots alone
 do not establish full accessibility compliance.
+
+## Cycle3 historical correction review
+
+Cycle3 scoped rendered re-review passed: 16 distinct completed checks and 13 newly captured, inspected screenshots, separate from the earlier broad UI review. Desktop and 360px mobile checks covered correction-date explanations, preserved original date defaults, a later FX replacement, original-date cancellation of both principals and fee, historical reports without duplicated cash, ordinary correction, unchanged saved report evidence, and standalone reversal retaining today's date. Retained legacy timing conflicts render an explicit unavailable balance and explanation; new comparisons offer no adjustment action during that window, and native balances become available at the cancellation-date boundary without rewriting retained journals. No unresolved rendered finding. Previous reviewed source hashes match except the three declared UI and three backend domain paths. Browser/server stopped and disposable DB released. Full accessibility certification and cross-browser coverage were not claimed.

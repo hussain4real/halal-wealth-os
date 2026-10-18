@@ -117,7 +117,7 @@ const fieldClass =
             <p class="mt-3 leading-relaxed text-muted-foreground">
                 {{
                     original
-                        ? 'The original and its fee are reversed, and your replacement is recorded together. All history is retained.'
+                        ? 'The original and its fee are cancelled on their original business date. Your replacement uses the date you choose below. All history is retained.'
                         : 'Enter the actual principal amounts from your receipt. Fees remain separate and never change those original amounts.'
                 }}
             </p>

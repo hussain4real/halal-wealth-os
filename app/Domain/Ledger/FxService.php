@@ -62,7 +62,7 @@ final class FxService
                 }
             }
             if ($original !== null) {
-                $this->reverse($owner, (string) $original->id, 'fx-correction:'.hash('sha256', $key), 'Correction of '.$original->reference);
+                $this->reverseGroup($owner, (string) $original->id, 'fx-correction:'.hash('sha256', $key), 'Correction of '.$original->reference, $original->effective_date);
             }
             $observation = app(FxObservationService::class)->record($owner, 'fx-rate:'.hash('sha256', $key), ['base_currency' => $source->currency_code->value,
                 'quote_currency' => $destination->currency_code->value, 'value' => $rate, 'source' => $payload['rate_source'], 'observed_at' => $observed, 'effective_at' => $date.'T00:00:00Z'], 'transaction');
@@ -89,10 +89,18 @@ final class FxService
 
     public function reverse(User $owner, string $id, string $key, string $reason): stdClass
     {
-        return DB::transaction(function () use ($owner, $id, $key, $reason): stdClass {
+        return $this->reverseGroup($owner, $id, $key, $reason);
+    }
+
+    private function reverseGroup(User $owner, string $id, string $key, string $reason, ?string $effectiveDate = null): stdClass
+    {
+        return DB::transaction(function () use ($owner, $id, $key, $reason, $effectiveDate): stdClass {
             LedgerInput::lock($owner);
             $operation = $this->owned($owner, $id);
             $payload = ['operation_id' => (string) $operation->id, 'reason' => LedgerInput::text($reason, 'reason')];
+            if ($effectiveDate !== null) {
+                $payload['effective_date'] = LedgerInput::date($effectiveDate);
+            }
             if ($cached = LedgerInput::cached('fx_reversals', $owner, $key, $payload)) {
                 return $operation;
             }
@@ -102,7 +110,7 @@ final class FxService
             DB::table('fx_reversals')->insert(['owner_id' => $owner->id, 'operation_id' => $operation->id, 'reference' => (string) Str::ulid(),
                 'idempotency_key' => $key, 'payload_hash' => LedgerInput::hash($payload), 'reason' => $payload['reason']]);
             foreach (DB::table('fx_operation_journals')->where('operation_id', $operation->id)->whereIn('role', ['source', 'destination', 'fee'])->orderBy('journal_id')->get() as $member) {
-                $journal = app(PostingService::class)->reverseFxMember($owner, (string) $member->journal_id, 'fx-reverse:'.hash('sha256', $key.':'.$member->role), $payload['reason'], $operation->id);
+                $journal = app(PostingService::class)->reverseFxMember($owner, (string) $member->journal_id, 'fx-reverse:'.hash('sha256', $key.':'.$member->role), $payload['reason'], $operation->id, $effectiveDate);
                 DB::table('fx_operation_journals')->insert(['operation_id' => $operation->id, 'owner_id' => $owner->id, 'journal_id' => $journal->id, 'role' => $member->role.'_reversal']);
             }
             DB::table('fx_operations')->where('id', $operation->id)->update(['status' => 'reversed']);

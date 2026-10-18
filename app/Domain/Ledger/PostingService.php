@@ -133,15 +133,15 @@ final class PostingService
     }
 
     /** Only the FX coordinator can complete this under its outer transaction. */
-    public function reverseFxMember(User $owner, string $originalId, string $key, string $reason, int $operationId): JournalEntry
+    public function reverseFxMember(User $owner, string $originalId, string $key, string $reason, int $operationId, ?string $effectiveDate = null): JournalEntry
     {
-        return DB::transaction(function () use ($owner, $originalId, $key, $reason, $operationId): JournalEntry {
+        return DB::transaction(function () use ($owner, $originalId, $key, $reason, $operationId, $effectiveDate): JournalEntry {
             $this->lockOwner($owner);
             $original = $this->ownedJournal($owner, $originalId);
             $member = DB::table('fx_operation_journals')->where('owner_id', $owner->id)->where('journal_id', $original->id)->first();
             abort_unless($member !== null && $member->operation_id === $operationId && in_array($member->role, ['source', 'destination', 'fee'], true), 404);
 
-            return $this->reverseLocked($owner, $original, $key, $reason, $operationId);
+            return $this->reverseLocked($owner, $original, $key, $reason, $operationId, $effectiveDate);
         });
     }
 
@@ -201,7 +201,7 @@ final class PostingService
             $this->requireActive($destination);
         }
         if ($replaces !== null) {
-            $this->reverseLocked($owner, $replaces, 'correction-reversal:'.hash('sha256', $key), 'Correction of '.$replaces->reference);
+            $this->reverseLocked($owner, $replaces, 'correction-reversal:'.hash('sha256', $key), 'Correction of '.$replaces->reference, effectiveDate: $replaces->effective_date->format('Y-m-d'));
         }
         $counter = $destination ?? $this->systemAccount($owner, $account->currency_code, $kind);
         $signed = $kind === 'income' ? $amount->minor : bcsub('0', $amount->minor, 0);
@@ -210,7 +210,7 @@ final class PostingService
         return $this->append($owner, $key, $payload, $kind, $date, $description, $receipt, $legs, replaces: $replaces?->id);
     }
 
-    private function reverseLocked(User $owner, JournalEntry $original, string $key, string $reason, ?int $fxOperationId = null): JournalEntry
+    private function reverseLocked(User $owner, JournalEntry $original, string $key, string $reason, ?int $fxOperationId = null, ?string $effectiveDate = null): JournalEntry
     {
         $accounts = $this->authorizeJournalAccounts($owner, $original);
         if ($fxOperationId === null) {
@@ -218,6 +218,9 @@ final class PostingService
         }
         $reason = $this->text($reason, 'reason');
         $payload = ['kind' => 'reversal', 'original_id' => (string) $original->id, 'reason' => $reason];
+        if ($effectiveDate !== null) {
+            $payload['effective_date'] = LedgerInput::date($effectiveDate);
+        }
         if ($cached = $this->cached($owner, $key, $payload)) {
             return $cached;
         }
@@ -228,7 +231,7 @@ final class PostingService
         foreach ($original->postings as $posting) {
             array_push($legs, ...$this->splitLeg($accounts[$posting->account_id], bcsub('0', $posting->amount_minor, 0)));
         }
-        $journal = $this->append($owner, $key, $payload, 'reversal', now()->toDateString(), $reason, null, $legs, reverses: $original->id);
+        $journal = $this->append($owner, $key, $payload, 'reversal', $effectiveDate ?? now('UTC')->toDateString(), $reason, null, $legs, reverses: $original->id);
         DB::table('journal_entries')->where('id', $original->id)->update(['status' => 'reversed']);
 
         return $journal;

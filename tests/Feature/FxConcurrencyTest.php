@@ -6,11 +6,13 @@ use App\Domain\Ledger\FinancialSnapshot;
 use App\Domain\Ledger\FxObservationService;
 use App\Domain\Ledger\FxService;
 use App\Domain\Ledger\JournalPosted;
+use App\Domain\Ledger\LedgerInput;
 use App\Domain\Ledger\PostingService;
 use App\Domain\Ledger\ReconciliationService;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
@@ -334,4 +336,66 @@ test('manual observation evidence without FX journals also blocks a destructive 
     expect(fn () => $migration->down())->toThrow(RuntimeException::class, 'retained financial evidence');
     $this->assertDatabaseCount('fx_observations', 1);
     expect(Schema::hasTable('reconciliation_sessions'))->toBeTrue();
+});
+
+test('a complete FX reversal cannot commit currency members on different business dates', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-10-18T12:00:00Z'));
+    $owner = User::factory()->create();
+    $input = [...Fx::input(Fx::account($owner), Fx::account($owner, Currency::NGN)), 'effective_date' => '2026-10-15', 'observed_at' => '2026-10-15T00:00:00Z'];
+    $original = app(FxService::class)->record($owner, 'cross-date-original', $input);
+    expect(fn () => DB::transaction(function () use ($owner, $original) {
+        DB::table('fx_reversals')->insert(['owner_id' => $owner->id, 'operation_id' => $original->id, 'reference' => (string) Str::ulid(), 'idempotency_key' => 'cross-date-reversal', 'payload_hash' => str_repeat('0', 64), 'reason' => 'Synthetic inconsistent period']);
+        foreach (DB::table('fx_operation_journals')->where('operation_id', $original->id)->get() as $member) {
+            $journal = app(PostingService::class)->reverseFxMember($owner, (string) $member->journal_id, 'cross-date-'.$member->role, 'Synthetic inconsistent period', $original->id, $member->role === 'destination' ? '2026-10-17' : '2026-10-15');
+            DB::table('fx_operation_journals')->insert(['operation_id' => $original->id, 'owner_id' => $owner->id, 'journal_id' => $journal->id, 'role' => $member->role.'_reversal']);
+        }
+        DB::table('fx_operations')->where('id', $original->id)->update(['status' => 'reversed']);
+    }))->toThrow(PDOException::class, 'one UTC business date');
+    $this->assertDatabaseCount('fx_reversals', 0);
+    $this->assertDatabaseCount('journal_entries', 3);
+    expect(DB::table('fx_operations')->value('status'))->toBe('posted');
+});
+
+test('historical FX replacement commits its original-date cancellations and correct cutoff balances together', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-10-18T12:00:00Z'));
+    $owner = User::factory()->create();
+    $input = [...Fx::input(Fx::account($owner), Fx::account($owner, Currency::NGN)), 'effective_date' => '2026-10-15', 'observed_at' => '2026-10-15T00:00:00Z'];
+    $original = app(FxService::class)->record($owner, 'committed-history-base', $input);
+    app(FxService::class)->record($owner, 'committed-history-corrected', [...$input, 'effective_date' => '2026-10-17'], (string) $original->id);
+    $before = app(FinancialSnapshot::class)->capture($owner, Currency::QAR, '2026-10-16T12:00:00Z');
+    $after = app(FinancialSnapshot::class)->capture($owner, Currency::QAR, '2026-10-17T12:00:00Z');
+    expect(array_column(array_column($before['components'], 'native'), 'minor'))->toBe(['0', '0'])
+        ->and(array_column(array_column($after['components'], 'native'), 'minor'))->toBe(['-7575', '2966625']);
+    $this->assertDatabaseCount('journal_entries', 9);
+    $this->assertDatabaseCount('fx_operations', 2);
+});
+
+test('a new FX replacement cannot commit uniformly dated but wrong-period original cancellations', function () {
+    $this->travelTo(CarbonImmutable::parse('2026-10-18T12:00:00Z'));
+    $owner = User::factory()->create();
+    $input = [...Fx::input(Fx::account($owner), Fx::account($owner, Currency::NGN)), 'effective_date' => '2026-10-15', 'observed_at' => '2026-10-15T00:00:00Z'];
+    $original = app(FxService::class)->record($owner, 'wrong-period-original', $input);
+    app(FxService::class)->reverse($owner, (string) $original->id, 'wrong-period-standalone', 'Synthetic standalone reversal today');
+    expect(fn () => DB::transaction(function () use ($owner, $original) {
+        $copy = (array) $original;
+        unset($copy['id']);
+        $copy['reference'] = (string) Str::ulid();
+        $copy['idempotency_key'] = 'wrong-period-replacement';
+        $copy['status'] = 'pending';
+        $copy['replaces_id'] = $original->id;
+        $payload = json_decode($copy['request_payload'], true, flags: JSON_THROW_ON_ERROR);
+        $payload['replaces_id'] = $original->id;
+        $copy['request_payload'] = json_encode($payload, JSON_THROW_ON_ERROR);
+        $copy['payload_hash'] = LedgerInput::hash($payload);
+        $id = DB::table('fx_operations')->insertGetId($copy);
+        foreach (DB::table('fx_operation_journals')->where('operation_id', $original->id)->whereIn('role', ['source', 'destination', 'fee'])->get() as $member) {
+            $legs = DB::table('postings')->where('journal_id', $member->journal_id)->get()->map(fn ($leg) => ['account_id' => (string) $leg->account_id, 'minor' => (string) $leg->amount_minor])->all();
+            $journal = app(PostingService::class)->postBalanced($owner, 'wrong-period-child-'.$member->role, $legs, 'Synthetic wrong-period replacement', $original->effective_date, ['fx_operation_id' => (string) $id], $member->role === 'fee' ? 'expense' : 'adjustment');
+            DB::table('fx_operation_journals')->insert(['operation_id' => $id, 'owner_id' => $owner->id, 'journal_id' => $journal->id, 'role' => $member->role]);
+        }
+        DB::table('fx_operations')->where('id', $id)->update(['status' => 'posted']);
+    }))->toThrow(PDOException::class, 'original business date');
+    $this->assertDatabaseCount('fx_operations', 1);
+    $this->assertDatabaseCount('journal_entries', 6);
+    $this->assertDatabaseCount('fx_reversals', 1);
 });

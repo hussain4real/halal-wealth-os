@@ -71,9 +71,11 @@ retained and explicitly postable. Negative opening balances and liability
 signs are preserved. No overdraft or available-cash restriction is invented in
 this phase. The recorded timestamp is immutable UTC; an effective calendar
 date from year 0001 through today may describe a historical movement. Future
-plans are not posted here. Reversals use the current effective date; a replacement uses its explicitly
-chosen date. Current balances include all committed movements. Historical
-statement-cutoff interpretation and reconciliation belong to M1-P3.
+plans are not posted here. Standalone reversals use the current UTC business date. Corrections cancel the
+original on its original effective date; replacements use their explicitly
+chosen date. Current balances include all committed movements. M1-P3 defines
+[historical cutoff and retained-correction boundaries](FX-AND-RECONCILIATION.md)
+without rewriting immutable journals or saved captures.
 
 Money keeps its full original signed range. Negating MIN mathematically needs
 MAX+1; the posting service splits that opposite into MAX and +1 legs, each

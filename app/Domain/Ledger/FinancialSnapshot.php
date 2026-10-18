@@ -15,7 +15,7 @@ use stdClass;
 
 final class FinancialSnapshot
 {
-    public const string POLICY = 'retrospective-UTC-businessdate-v1;direct-7d;sum-rounded-rows-v1';
+    public const string POLICY = 'retrospective-UTC-businessdate-v2;correction-originaldate;legacy-timing-unavailable;direct-7d;sum-rounded-rows-v1';
 
     /** @return array<string, mixed> */
     public function capture(User $owner, Currency $base, string $cutoff, ?string $accountId = null): array
@@ -34,6 +34,16 @@ SELECT a.id::text AS account_id,a.name,a.type,a.currency_code,a.archived_at,
  CASE WHEN i.id IS NULL THEN NULL WHEN opening.id IS NULL THEN 'awaiting_posting'
  WHEN opening.effective_date > (parameters.cutoff AT TIME ZONE 'UTC')::date THEN 'outside_cutoff'
  WHEN EXISTS(SELECT 1 FROM journal_entries r WHERE r.reverses_journal_id = opening.id AND r.owner_id = a.owner_id AND r.status IN ('posted','reversed') AND r.effective_date <= (parameters.cutoff AT TIME ZONE 'UTC')::date) THEN 'reversed' ELSE 'posted' END AS opening_state,
+ CASE WHEN EXISTS (
+  SELECT 1 FROM postings affected JOIN journal_entries original ON original.id = affected.journal_id AND original.owner_id = a.owner_id
+  JOIN journal_entries cancellation ON cancellation.reverses_journal_id = original.id AND cancellation.owner_id = a.owner_id
+  WHERE affected.account_id = a.id AND affected.owner_id = a.owner_id AND cancellation.status IN ('posted','reversed')
+  AND cancellation.effective_date <> original.effective_date
+  AND (parameters.cutoff AT TIME ZONE 'UTC')::date >= LEAST(original.effective_date,cancellation.effective_date)
+  AND (parameters.cutoff AT TIME ZONE 'UTC')::date < GREATEST(original.effective_date,cancellation.effective_date)
+  AND (EXISTS (SELECT 1 FROM journal_entries replacement WHERE replacement.replaces_journal_id = original.id AND replacement.owner_id = a.owner_id AND replacement.status IN ('posted','reversed'))
+   OR EXISTS (SELECT 1 FROM fx_operation_journals member JOIN fx_operations replacement ON replacement.replaces_id = member.operation_id AND replacement.owner_id = a.owner_id WHERE member.journal_id = original.id AND member.owner_id = a.owner_id AND replacement.status IN ('posted','reversed')))
+ ) THEN 'legacy_correction_timing' END AS legacy_timing_reason,
  movements.minor,movements.journals,
  q.id::text AS rate_id,q.value::text AS rate_value,q.source AS rate_source,q.observed_at,q.effective_at,q.series_id,q.version,
  to_char(statement_timestamp() AT TIME ZONE 'UTC','YYYY-MM-DD"T"HH24:MI:SS"Z"') AS captured_at
@@ -62,7 +72,7 @@ SQL, [$owner->id, $cutoff, $base->value, $accountId]);
         foreach ($rows as $row) {
             $currency = Currency::from($row->currency_code);
             $reason = match ($row->opening_state) {
-                'awaiting_posting' => 'opening_pending', 'outside_cutoff' => 'opening_after_cutoff', default => null,
+                'awaiting_posting' => 'opening_pending', 'outside_cutoff' => 'opening_after_cutoff', default => $row->legacy_timing_reason,
             };
             $native = null;
             if ($reason === null) {

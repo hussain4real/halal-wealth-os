@@ -4,6 +4,8 @@ import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
 import type { FinancialEvidence } from '@/types/ledger';
 defineProps<{ evidence: FinancialEvidence; showTotal?: boolean }>();
 const reasons: Record<string, string> = {
+    legacy_correction_timing:
+        'A retained correction uses a different cancellation date. This historical balance is unavailable. Review the included journals and choose a cutoff on or after the cancellation date.',
     opening_pending: 'Opening request has not been posted.',
     opening_after_cutoff: 'The consumed opening falls after this cutoff.',
     out_of_range:

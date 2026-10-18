@@ -43,6 +43,13 @@ observation IDs, cutoff and calculation policy; a new quote never rewrites it.
 Unconsumed openings remain unavailable. A consumed opening outside a cutoff
 cannot be silently treated as zero or made consumable again.
 
+Retained corrections from the earlier policy can have a later cancellation date
+than their original. The one-statement snapshot detects these linked records and
+returns native unavailable with legacy_correction_timing for the affected date
+window. It does not reinterpret or edit immutable journals. Cutoffs before that
+window or on/after its end remain eligible; saved captures remain unchanged.
+The calculation policy identifies this boundary explicitly.
+
 ## Atomic conversions and recovery
 
 One owner lock/outer transaction commits the operation identity, transaction-rate
@@ -53,6 +60,13 @@ destination cash; they are expense once, while principal is adjustment activity.
 Generic constituent reversal is rejected and linked to the conversion receipt.
 Full group reversal includes its recorded fee; correction reverses and replaces
 the group atomically. Database deferred group checks prevent committed halves.
+Correction cancellation journals, including fees, use the original operation's
+business date; the replacement uses its separately submitted date, whether
+before, equal to or after the original. Fresh reports therefore retain only the
+replacement on its actual date. Recorded timestamps/reasons/links retain when
+the correction was entered; saved evidence is unchanged. Standalone reversals
+remain effective today. All reversal members share one business date, and new
+FX correction roots require original-date cancellation at deferred commit.
 MIN inversions retain the accepted MAX/+1 split behavior. Empty installations
 can roll back the schema; once M1-P3 evidence exists, downgrade is explicitly
 blocked before any DDL. Corrections then require forward migrations.

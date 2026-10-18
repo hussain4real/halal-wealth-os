@@ -102,6 +102,8 @@ BEGIN
  THEN RAISE EXCEPTION 'FX operation must commit all currency and fee journals together'; END IF;
  IF NOT EXISTS (SELECT 1 FROM fx_observations q WHERE q.id = g.actual_rate_id AND q.owner_id = g.owner_id AND q.purpose = 'transaction' AND q.base_currency = g.source_currency AND q.quote_currency = g.destination_currency)
  THEN RAISE EXCEPTION 'FX transaction rate must match owned pair and purpose'; END IF;
+ IF g.status = 'reversed' AND (SELECT count(DISTINCT j.effective_date) FROM fx_operation_journals l JOIN journal_entries j ON j.id = l.journal_id WHERE l.operation_id = g.id AND l.role LIKE '%_reversal') <> 1
+ THEN RAISE EXCEPTION 'A complete FX reversal must use one UTC business date'; END IF;
  FOR m IN SELECT l.role,j.* FROM fx_operation_journals l JOIN journal_entries j ON j.id = l.journal_id WHERE l.operation_id = g.id AND l.role IN ('source','destination','fee') LOOP
   IF (g.status = 'posted' AND m.status <> 'posted') OR (g.status = 'reversed' AND m.status <> 'reversed') THEN RAISE EXCEPTION 'FX constituents cannot be reversed separately'; END IF;
   IF m.role = 'source' THEN cash_id := g.source_account_id; expected := -g.source_minor::numeric; expected_currency := g.source_currency; counter_role := 'clearing';
@@ -122,7 +124,14 @@ END $$;
 CREATE OR REPLACE FUNCTION hwo_check_fx_group() RETURNS trigger LANGUAGE plpgsql AS $$
 DECLARE group_id BIGINT;
 BEGIN
- IF TG_TABLE_NAME = 'fx_operations' THEN PERFORM hwo_validate_fx_group(NEW.id);
+ IF TG_TABLE_NAME = 'fx_operations' THEN
+  PERFORM hwo_validate_fx_group(NEW.id);
+  IF TG_OP = 'INSERT' AND EXISTS (
+   SELECT 1 FROM fx_operations replacement JOIN fx_operations original ON original.id = replacement.replaces_id AND original.owner_id = replacement.owner_id
+   WHERE replacement.id = NEW.id AND (original.status <> 'reversed' OR EXISTS (
+    SELECT 1 FROM fx_operation_journals member JOIN journal_entries cancellation ON cancellation.id = member.journal_id
+    WHERE member.operation_id = original.id AND member.role LIKE '%_reversal' AND cancellation.effective_date <> original.effective_date)))
+  THEN RAISE EXCEPTION 'A new FX correction must cancel its original on the original business date'; END IF;
  ELSIF TG_TABLE_NAME IN ('fx_operation_journals','fx_reversals') THEN PERFORM hwo_validate_fx_group(NEW.operation_id);
  ELSE FOR group_id IN SELECT operation_id FROM fx_operation_journals WHERE journal_id = NEW.id LOOP PERFORM hwo_validate_fx_group(group_id); END LOOP;
  END IF;

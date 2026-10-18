@@ -215,3 +215,21 @@ test('quote revisions cannot change owned pair purpose or fork an already revise
     expect(fn () => $service->record($owner, 'rate-version-fork', $revision))->toThrow(ValidationException::class);
     expect($service->record($owner, 'rate-version-second', [...$revision, 'value' => '0.003'])->id)->toBe($second->id);
 });
+
+test('historical FX corrections cancel original-date cash before applying the replacement on its own date', function (string $replacementDate) {
+    $this->travelTo(CarbonImmutable::parse('2026-10-18T12:00:00Z'));
+    $owner = User::factory()->create();
+    $source = Fx::account($owner);
+    $destination = Fx::account($owner, Currency::NGN);
+    $input = [...Fx::input($source, $destination), 'effective_date' => '2026-10-15', 'observed_at' => '2026-10-15T00:00:00Z'];
+    $original = app(FxService::class)->record($owner, 'historical-fx-original', $input);
+    $saved = app(FinancialSnapshot::class)->save($owner, 'historical-fx-saved', Currency::QAR, '2026-10-15T12:00:00Z');
+    $replacement = app(FxService::class)->record($owner, 'historical-fx-corrected', [...$input, 'effective_date' => $replacementDate, 'observed_at' => '2026-10-12T00:00:00Z', 'source_amount' => '74.25', 'destination_amount' => '30071.25'], (string) $original->id);
+    foreach (['2026-10-12', '2026-10-13', '2026-10-14', '2026-10-15', '2026-10-16', '2026-10-17', '2026-10-18'] as $day) {
+        $evidence = app(FinancialSnapshot::class)->capture($owner, Currency::QAR, $day.'T12:00:00Z');
+        expect(array_column(array_column($evidence['components'], 'native'), 'minor'))->toBe($day >= $replacementDate ? ['-7675', '3007125'] : ['0', '0']);
+    }
+    $dates = DB::table('fx_operation_journals as m')->join('journal_entries as j', 'j.id', '=', 'm.journal_id')->where('m.operation_id', $original->id)->where('m.role', 'like', '%_reversal')->pluck('j.effective_date')->unique()->values()->all();
+    expect($dates)->toBe(['2026-10-15'])->and($replacement->effective_date)->toBe($replacementDate)->and(DB::table('valuation_reports')->find($saved->id)->evidence)->toBe($saved->evidence);
+    expect(app(FxService::class)->record($owner, 'historical-fx-corrected', [...$input, 'effective_date' => $replacementDate, 'observed_at' => '2026-10-12T00:00:00Z', 'source_amount' => '74.25', 'destination_amount' => '30071.25'], (string) $original->id)->id)->toBe($replacement->id);
+})->with(['2026-10-13', '2026-10-15', '2026-10-17']);

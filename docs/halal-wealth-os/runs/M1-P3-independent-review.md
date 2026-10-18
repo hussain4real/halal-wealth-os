@@ -24,3 +24,21 @@ that run; exact logs and source identity are retained privately.
 Final per-file hashes and a stability check are retained privately. Exact staged
 index, committed HEAD, hosted review/CI and normal merge identity require fresh
 confirmation at publication. Never infer acceptance from a passing source review.
+
+## Cycle3 correction re-review
+
+The independent reviewer re-read the corrected28 primary financial paths and
+five supplemental policy/copy paths. No new actionable financial defect was
+found. Correction cancellations use the original date; replacements retain their
+own date, standalone reversals retain today, and retained legacy conflicts are
+unavailable only in the ambiguous cutoff window. Same-statement snapshot reads,
+owner locks, immutable evidence, MIN splitting and default retry payloads remain
+preserved. Deferred guards reject inconsistent member dates and uniformly dated
+but wrong-period new replacement roots. All three requested source follow-ups
+were implemented.
+
+Coordinator execution subsequently passed the full310-case/1,927-assertion gate
+and private canonical F04; the reviewer did not execute those checks. Focused
+independent rendered review passed16 distinct checks/13 inspected screenshots.
+New exact committed-head confirmation, hosted review and CI remain separate gates.
+Earlier a25b80c signoff is historical and does not approve this delta.
