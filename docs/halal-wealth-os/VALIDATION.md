@@ -64,7 +64,7 @@ The phase harness now requires ManualFxTest, FxConcurrencyTest, LedgerHttpTest,
 ReconciliationTest and FxMathTest in addition to every prior implemented suite.
 Real PostgreSQL commits cover paired posting/reversal constraints, retry races,
 listener failure recovery, shared snapshots and retained-data migration policy.
-Unimplemented-phase rejection now targets M2-P2. Browser evidence, private
+Unimplemented-phase rejection historically targeted M2-P2. Browser evidence, private
 canonical scenarios and exact-head publication checks remain separate gates.
 
 ## M2-P1 implemented checks
@@ -77,3 +77,15 @@ owner isolation, retries and real independent PostgreSQL backend contention.
 The essential run-rate uses the explicitly labelled month-end policy. Historical
 M1 migration tests target their own schema after addition of the planning schema.
 Private original F06, rendered review and publication gates remain separate.
+
+## M2-P2 implemented checks
+
+The phase harness requires GoalTest, GoalHttpTest, GoalConcurrencyTest,
+GoalReadBoundaryTest and GoalProjectionTest alongside every prior suite. Exact
+backing, cross-mode exclusivity, posted transfer annotations, FIFO shortfalls,
+zero/variable/missed-date projections, essential month-end policy, owner isolation,
+durable retry and retained migration guards are required. Actual independent
+PostgreSQL backends contend for reservations, releases, posting and account
+archiving. Client attempt recovery has separate Node and rendered browser checks.
+Private original F05 and independently reviewed public synthetic translations
+remain separate evidence. Unimplemented-phase rejection now targets M2-P3.

@@ -3,8 +3,8 @@
 Status: the personal-first modular-monolith and six ADR directions are human
 accepted. M0 and M1 are human accepted; see [M1 acceptance](runs/M1-acceptance.md).
 Detailed module import edges remain proposed. M2-P1 budgets and recurring
-commitments are authorized and in progress, unaccepted. No later phase is
-authorized. Manual FX/reconciliation policies remain in
+commitments are human accepted. M2-P2 goals and emergency protection are
+authorized and ready for review, unaccepted. No M2-P3 or later phase is authorized. Manual FX/reconciliation policies remain in
 [the phase decisions](FX-AND-RECONCILIATION.md).
 
 Use a Laravel modular monolith. Inertia, Vue 3 and TypeScript serve the application UI; PostgreSQL stores financial records. Filament is restricted administration. Exact selected versions are recorded in composer.lock, package-lock.json and [the runtime records](../../ops/development/README.md); PHP support is 8.5.x only.

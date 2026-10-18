@@ -1,6 +1,10 @@
 # M2-P1 implementation and verification
 
-Status: READY_FOR_REVIEW after local gates, unaccepted. Six cycles used of at
+Current status: ACCEPTED by the human owner at 10:03 UTC on 18 October 2026;
+final record publication and M2-P2 are authorized. See [acceptance](M2-P1-acceptance.md).
+The engineering checkpoints below preserve their historical status and cycle history.
+
+Historical engineering status: READY_FOR_REVIEW after dev merge and original post-merge CI, unaccepted. Six cycles used of at
 most six. The owner accepted M1-P3 and M1 and authorized this phase through
 independent source/rendered review, sanitized draft PR to dev and normal merge
 after exact-head reviews/CI, then original dev-push CI. One coordinator owns
@@ -141,3 +145,18 @@ amount and classification action. Cycle 6 stacks those sections at narrow widths
 and retains the side-by-side layout from the small-screen breakpoint upward.
 The scoped actual layout retest and final complete local gates passed.
 The six-cycle history is preserved; no later phase is authorized.
+
+## Engineering completion checkpoint
+
+[PR 6](https://github.com/hussain4real/halal-wealth-os/pull/6) merged normally into
+dev at 164e8901d81ef0d683bd4b784e9d2920e4c8353f from reviewed correction head
+32c759ef4e3dbdb7935740ee41d40aa502d88cbb. The reviewed tree, both merge parents
+and public no-reply author metadata were verified; main/stage remain unchanged.
+Original corrected-head CI and original dev-push CI both passed on attempt 1.
+Their actual baseline, deliberate failure and restored baseline executions were
+checked separately; see [publication](M2-P1-publication.md).
+
+All six cycles and failed evidence are retained. The active implementation claim
+was closed at READY_FOR_REVIEW. At that checkpoint M2-P1 and M2 were unaccepted,
+with no later phase authorized. The four post-merge status records were local/unpublished;
+all implementation and reviewed M1 final documents are merged into dev.
