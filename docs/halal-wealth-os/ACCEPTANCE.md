@@ -40,3 +40,21 @@ recorded at 2026-10-17T15:08:11.290788+00:00; see [the exact acceptance evidence
 The manager delegated recording this human decision. M0-P3 and all milestone
 gates remain unaccepted. Next-phase execution requires its canonical scope and
 successful post-merge CI; no stage/main promotion or deployment is authorized.
+
+## Subsequent M0-P3 owner acceptance
+
+The owner approved PR #2 merge and the independent M0 foundation review.
+The manager delegated acceptance recording after verified merge and original
+post-merge CI success. M0-P3 is now human accepted; see the
+[exact acceptance and merge evidence](runs/M0-P3-acceptance.md). M0-P1/P2 remain
+accepted. M0 itself and every later milestone/phase remain unaccepted; no M1
+implementation, stage/main promotion or deployment is authorized. This local
+record has not been published to the remote repository.
+
+## Subsequent M0 owner acceptance and M1-P1 authority
+
+The human owner approved recording the foundation as accepted and proceeding.
+The manager delegates recording M0 acceptance and workspace-only M1-P1. See
+[the acceptance evidence](runs/M0-acceptance.md). The independent review and
+original post-merge CI are preserved. M1-P1/M1 are not accepted; no M1-P2/P3,
+commit, push, PR, merge, deployment or external publication is authorized.

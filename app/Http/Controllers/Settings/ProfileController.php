@@ -7,11 +7,13 @@ use App\Domain\Identity\SecurityEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\ProfileDeleteRequest;
 use App\Http\Requests\Settings\ProfileUpdateRequest;
+use App\Models\Account;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -55,6 +57,10 @@ class ProfileController extends Controller
     public function destroy(ProfileDeleteRequest $request): RedirectResponse
     {
         $user = $request->user();
+
+        if (Account::query()->ownedBy($user)->exists()) {
+            throw ValidationException::withMessages(['password' => 'Your financial accounts must be retained. Archive accounts instead of deleting this profile.']);
+        }
 
         Auth::logout();
 

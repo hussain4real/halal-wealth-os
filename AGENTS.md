@@ -68,3 +68,46 @@ re-review. This supersedes the prior local-only publication boundary. Preserve
 READY_FOR_REVIEW/unaccepted state, the same sole writer and six-cycle history.
 No M0-P3 merge, acceptance, later phase, stage/main promotion, deployment, live
 credentials, real users or security-setting changes are authorized.
+
+## Latest PR #2 merge and independent M0 review authorization
+
+The owner explicitly approved merging PR #2 into dev and running the independent
+M0 foundation review. This supersedes the preceding no-merge restriction for
+PR #2 only. The manager delegated M0-P3 acceptance recording after verified
+merge and original post-merge CI success; those conditions passed. Preserve
+all previous cycle history. Only local acceptance/review documentation and
+source-read-only independent review remain in scope. M0 is not accepted. No M1,
+additional remote publication, stage/main promotion, deployment, real users,
+live credentials or infrastructure/security-setting changes are authorized.
+
+## Current workspace-only M1-P1 authorization
+
+The owner explicitly approved recording M0 acceptance and proceeding; the
+manager delegates that record and only M1-P1 implementation/test/review. This
+supersedes the preceding no-M1 restriction within phases/M1-P1.md. The six
+local M0 documents and existing edits must be preserved. One coordinator owns
+implementation; independent acceptance/test design, security/ownership review
+and verification sessions may run in parallel with disjoint files/resources.
+Do not spawn implementation writers. Preserve PHP8.5-only, full starter/Pest5
+TIA and uncached full gates, synthetic fixtures and separately inspected owned
+disposable PostgreSQL. At most six scoped cycles; retain prior phase history.
+Opening inputs must remain explicitly unposted pending future service support;
+no mutable balances, journal posting/idempotency/reversal or FX conversion.
+No M1-P2/P3, commit, push, PR, merge, deployment, external publication, real
+users, live credentials or infrastructure/security changes. Stop M1-P1 at
+READY_FOR_REVIEW or a documented blocker, never self-accept. Native Goal Mode
+is not activated or claimed.
+
+## Current M1-P1 publication and dev merge authorization
+
+The owner subsequently approved publishing the completed M1-P1 changes and
+associated M0 acceptance/review documentation as a focused PR to dev, then
+merging after actual hosted CI and final independent exact-head review pass.
+This supersedes the preceding workspace-only remote-write restriction for
+this M1-P1 publication checkpoint. Preserve prior two-cycle implementation
+history; use a separate bounded publication/check/review checkpoint. Inspect
+all feedback, fix scoped recoverable findings with regressions and refresh
+reviews/checks before merge. Verify actual merge identity and original dev
+push CI. Do not bypass protections or independent gates. Phase acceptance
+remains separate; no M1-P2/P3, main/stage changes, deployment, live financial
+actions, new credentials or infrastructure/security-setting changes.
