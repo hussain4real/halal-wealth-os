@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-18T14:52:56.411032+00:00",
+    "updated_at": "2026-10-18T17:13:01.884162+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -13,16 +13,16 @@
         "default_external_effects": false
     },
     "active_run": {
-        "phase": "M3-P1",
-        "owner": "cloud-m3p1-coordinator",
+        "phase": "M3-P2",
+        "owner": "cloud-m3p2-coordinator",
         "worktree": ".",
-        "branch": "feat/m3-p1-assets-portfolio-modes",
-        "baseline_head": "6a10cff7a772dff0d88efcf5104d3c3f7d37b149",
-        "started_at": "2026-10-18T14:52:56.411032+00:00",
+        "branch": "feat/m3-p2-trades-ipo-corporate-actions",
+        "baseline_head": "08e43860d4760985a6a44d5a5db3a9c637893c63",
+        "started_at": "2026-10-18T17:13:01.884162+00:00",
         "status": "IN_PROGRESS",
-        "cycles_used": 3,
+        "cycles_used": 1,
         "max_cycles": 6,
-        "checkpoint": "Cycle 3 publication: local full 519/3305, source/rendered and TIA gates pass; PR 9 first-head CI passed; stale checkpoint corrected; refreshed exact-head CI/review and dev merge/post-CI pending."
+        "checkpoint": "Cycle 1 canonical event/cash/IPO/replay design; new M3-P2 implementation and gates NOT_RUN"
     },
     "repository": {
         "root": null,
@@ -180,20 +180,20 @@
         {
             "id": "M3-P1",
             "depends_on": ["M2-P3"],
-            "status": "READY_FOR_REVIEW",
+            "status": "ACCEPTED",
             "owner": "cloud-m3p1-coordinator",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M3-P1-local.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-18T17:09:00Z",
+            "evidence": "runs/M3-P1-acceptance.md"
         },
         {
             "id": "M3-P2",
             "depends_on": ["M3-P1"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "IN_PROGRESS",
+            "owner": "cloud-m3p2-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M3-P2-local.md"
         },
         {
             "id": "M3-P3",
@@ -350,20 +350,20 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "phase": "M3-P1",
+        "phase": "M3-P2",
         "authorized": true,
-        "authority": "Explicit owner M2-P3/M2 acceptance and final-record publication, then M3-P1 implementation/independent source-rendered review/dev PR/normal merge after exact-head CI-review/original postmerge CI",
-        "scope": "Canonical M3-P1 only; stop for owner phase acceptance; no M3-P2/main/stage/deployment",
-        "accepted_dependencies": ["M2-P3"],
+        "authority": "Explicit owner M3-P1 acceptance/final-record publication and M3-P2 implementation, independent technical/rendered review, sanitized dev PR, normal merge after exact-head gates and original postmerge CI",
+        "scope": "Canonical M3-P2 only; stop for owner acceptance; no M3-P3/main/stage/deployment",
+        "accepted_dependencies": ["M3-P1"],
         "remote_writes": true,
         "production_actions": false,
         "php_constraint": "~8.5.0"
     },
     "execution_status": {
-        "phase": "M3-P1",
-        "status": "READY_FOR_REVIEW",
-        "checkpoint": "Cycle 3 publication: local full 519/3305, source/rendered and TIA gates pass; PR 9 first-head CI passed; stale checkpoint corrected; refreshed exact-head CI/review and dev merge/post-CI pending.",
-        "observed_at": "2026-10-18T16:21:56.680154+00:00"
+        "phase": "M3-P2",
+        "status": "IN_PROGRESS",
+        "checkpoint": "Cycle 1 canonical event/cash/IPO/replay design; new M3-P2 implementation and gates NOT_RUN",
+        "observed_at": "2026-10-18T17:13:01.884162+00:00"
     },
     "dependency_patch": {
         "authorized": true,
@@ -633,6 +633,26 @@
             "accepted_by": "human-owner",
             "accepted_at": "2026-10-18T14:41:00Z",
             "acceptance_evidence": "runs/M2-P3-acceptance.md"
+        },
+        {
+            "phase": "M3-P1",
+            "owner": "cloud-m3p1-coordinator",
+            "worktree": ".",
+            "branch": "feat/m3-p1-assets-portfolio-modes",
+            "baseline_head": "6a10cff7a772dff0d88efcf5104d3c3f7d37b149",
+            "started_at": "2026-10-18T14:52:56.411032+00:00",
+            "status": "ACCEPTED",
+            "cycles_used": 3,
+            "max_cycles": 6,
+            "checkpoint": "Historical engineering-close snapshot: Normal dev merge and original attempt-1 post-merge CI verified; all engineering gates pass; owner M3-P1 acceptance pending; final records local/unpublished.",
+            "stopped_at": "2026-10-18T16:48:11.434360+00:00",
+            "closed_at": "2026-10-18T16:48:11.434360+00:00",
+            "validated_head": "e68beea4ed23798f3af819bb64515a0eb5e5f24b",
+            "merge_sha": "08e43860d4760985a6a44d5a5db3a9c637893c63",
+            "evidence": "runs/M3-P1-publication.md",
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-18T17:09:00Z",
+            "acceptance_evidence": "runs/M3-P1-acceptance.md"
         }
     ],
     "authorization_history": [
@@ -725,6 +745,16 @@
             "authorized_at": "2026-10-18T14:41:00Z",
             "authority": "Human owner accepted M2 and approved final records plus asset/account phase through review/dev merge/post-CI",
             "scope": "M3-P1 only; stop for owner acceptance; no M3-P2 or deployment"
+        },
+        {
+            "phase": "M3-P1",
+            "authorized": true,
+            "authority": "Explicit owner M2-P3/M2 acceptance and final-record publication, then M3-P1 implementation/independent source-rendered review/dev PR/normal merge after exact-head CI-review/original postmerge CI",
+            "scope": "Canonical M3-P1 only; stop for owner phase acceptance; no M3-P2/main/stage/deployment",
+            "accepted_dependencies": ["M2-P3"],
+            "remote_writes": true,
+            "production_actions": false,
+            "php_constraint": "~8.5.0"
         }
     ],
     "execution_status_history": [
@@ -806,6 +836,18 @@
             "status": "MERGED_REVIEWED_AWAITING_OWNER",
             "checkpoint": "Original PR/dev CI pass and exact source/tree verified; all six cycles preserved; final records local/unpublished",
             "observed_at": "2026-10-18T09:42:35.287864+00:00"
+        },
+        {
+            "phase": "M3-P1",
+            "status": "READY_FOR_REVIEW",
+            "checkpoint": "Cycle 3 publication: local full 519/3305, source/rendered and TIA gates pass; PR 9 first-head CI passed; stale checkpoint corrected; refreshed exact-head CI/review and dev merge/post-CI pending.",
+            "observed_at": "2026-10-18T16:21:56.680154+00:00"
+        },
+        {
+            "phase": "M3-P1",
+            "status": "READY_FOR_REVIEW",
+            "checkpoint": "Normal dev merge and original attempt-1 post-merge CI verified; all engineering gates pass; owner M3-P1 acceptance pending; final records local/unpublished.",
+            "observed_at": "2026-10-18T16:48:11.434360+00:00"
         }
     ],
     "m0p3_publication": {
@@ -1180,8 +1222,8 @@
         "historical_technical_verdict": "READY_FOR_OWNER"
     },
     "m3p1_checkpoint": {
-        "status": "READY_FOR_REVIEW",
-        "accepted": false,
+        "status": "ACCEPTED",
+        "accepted": true,
         "cycles_used": 3,
         "max_cycles": 6,
         "baseline_head": "6a10cff7a772dff0d88efcf5104d3c3f7d37b149",
@@ -1205,7 +1247,7 @@
             "overlapping_recovery_coverage": true,
             "evidence": "runs/M3-P1-rendered-review.md"
         },
-        "next_phase_authorized": false,
+        "next_phase_authorized": true,
         "evidence": "runs/M3-P1-local.md",
         "unresolved_findings": [],
         "scoped_gate": {
@@ -1233,7 +1275,7 @@
             "native_planner": "PASS; simulated previous hashes only, no source/cache mutation or impacted execution",
             "complete_branch_results": 519
         },
-        "publication": "PR9_OPEN;FIRST_HEAD_CI_PASS;CYCLE3_DOCUMENT_CHECKPOINT_CORRECTION_PENDING_EXACT_HEAD_REVIEW_CI",
+        "publication": "ACCEPTED_MERGED_DEV_FINAL_RECORDS_AUTHORIZED_FOR_PUBLICATION",
         "cycle_history": [
             {
                 "cycle": 1,
@@ -1259,7 +1301,7 @@
                 "scope": "Documentation-only active-run checkpoint correction from hosted review",
                 "application_source_changed": false,
                 "first_head_ci": "PASS",
-                "refreshed_hosted_head_review_ci": "PENDING"
+                "refreshed_hosted_head_review_ci": "PASS"
             }
         ],
         "first_publication": {
@@ -1269,6 +1311,37 @@
             "original_ci_attempt": 1,
             "baseline_deliberate_restored": "PASS",
             "review_finding": "E06 stale active-run checkpoint corrected in cycle3; fresh exact-head review pending"
-        }
+        },
+        "source_publication": "MERGED_TO_DEV",
+        "documentation_publication": "FINAL_RECORDS_AND_ACCEPTANCE_PENDING_REVIEWED_FEATURE_PUBLICATION",
+        "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/9",
+        "reviewed_head": "e68beea4ed23798f3af819bb64515a0eb5e5f24b",
+        "reviewed_tree": "48f6fbd138d7f0cf0e43b28f08a9e71b26fdf62f",
+        "merge_sha": "08e43860d4760985a6a44d5a5db3a9c637893c63",
+        "hosted_ci": "SUCCESS_ORIGINAL_PR_ATTEMPT1_39145266016",
+        "hosted_ci_url": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39145266016",
+        "hosted_review": "COMPLETED_EXACT_HEAD_NO_FINDINGS_OR_UNRESOLVED",
+        "post_merge_ci": "SUCCESS_ORIGINAL_DEV_PUSH_ATTEMPT1_39146003430",
+        "post_merge_ci_url": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39146003430",
+        "publication_evidence": "runs/M3-P1-publication.md",
+        "remaining_gates": [],
+        "hosted_findings": "E06_DOCUMENT_CHECKPOINT_CORRECTED_INDEPENDENTLY_VERIFIED_THREAD_RESOLVED_FRESH_EXACT_HEAD_GATES_PASS",
+        "accepted_by": "human-owner",
+        "accepted_at": "2026-10-18T17:09:00Z",
+        "acceptance_evidence": "runs/M3-P1-acceptance.md"
+    },
+    "m3p2_checkpoint": {
+        "status": "IN_PROGRESS",
+        "accepted": false,
+        "cycles_used": 1,
+        "max_cycles": 6,
+        "baseline_head": "08e43860d4760985a6a44d5a5db3a9c637893c63",
+        "full_gate": "NOT_RUN",
+        "source_review": "NOT_RUN",
+        "rendered_review": "NOT_RUN",
+        "tia": "NOT_RUN",
+        "next_phase_authorized": false,
+        "evidence": "runs/M3-P2-local.md",
+        "unresolved_findings": []
     }
 }

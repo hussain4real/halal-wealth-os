@@ -225,3 +225,24 @@ Never seed real prices/listing dates/compliance from earlier chat examples.
 No M3-P2 trades/IPO/corporate actions, broker integration, complex sukuk cashflows,
 derivatives, assumed current market data, main/stage changes, deployment, new
 credentials or security-setting changes. Stop for owner M3-P1 acceptance.
+
+## Current M3-P2 authority
+
+The human owner accepted M3-P1 at 17:09 UTC on 18 October 2026, approved its four
+final sanitized records for publication, and authorized canonical M3-P2 through
+implementation, independent technical/rendered review, sanitized dev PR, normal
+merge after exact-head reviews/CI and original dev-push CI. The manager delegates
+acceptance recording and sole implementation ownership to this coordinator.
+This supersedes the preceding stop-before-M3-P2 boundary only within M3-P2.
+Preserve all history, PHP8.5-only, full starter features, Pest TIA and full
+uncached gates. At most six scoped cycles; no implementation subagents.
+Independent source-read-only reviewers use exclusive owned verification resources.
+Reconstruct holdings/book cost from immutable events, with atomic cash postings,
+moving weighted-average allocation and final-disposal rounding. Preserve exact
+units, unknown basis, owner isolation, mode exclusion and deterministic replay.
+IPO intent/reservation, paid receivable, confirmed allotment, refund and cancel
+remain distinct; unconfirmed applications never become shares. Use illustrative
+assets and separately reviewed synthetic public fixtures; book cost is not tax
+advice. No broker execution, margin/options, tax filing, M3-P3, main/stage changes,
+deployment, new credentials or security-setting changes. Stop for owner M3-P2
+acceptance; M3 milestone acceptance remains separate.
