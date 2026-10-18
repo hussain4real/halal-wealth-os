@@ -1,11 +1,14 @@
 <?php
 
+use App\Domain\Ledger\AccountType;
+use App\Domain\Ledger\CreateAccount;
 use App\Domain\Ledger\PostingService;
 use App\Domain\Portfolio\InvestmentService;
 use App\Domain\Portfolio\PortfolioRead;
 use App\Domain\Portfolio\PortfolioService;
 use App\Domain\Reporting\NetWorthSnapshot;
 use App\Domain\Shared\Money\Currency;
+use App\Domain\Shared\Money\Money;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -25,6 +28,104 @@ beforeEach(function () {
     $this->p = P::link($this->owner, $this->account);
     $this->asset = P::asset($this->owner);
     I::fund($this->owner, $this->account);
+});
+test('unknown pending cash permits opening revisions and neutral facts without funding new spending', function () {
+    $account = app(CreateAccount::class)->create($this->owner, 'Synthetic pending investment', AccountType::Investment, Currency::QAR, Money::fromDecimal(Currency::QAR, '75'));
+    $p = P::link($this->owner, $account);
+    $rows = [P::row($this->asset, ['quantity' => '4', 'basis_known' => '1', 'cost_basis' => '28'])];
+    $opening = P::opening($this->owner, $p, $rows);
+    $input = I::input($this->asset, ['kind' => 'split']);
+    $split = app(InvestmentService::class)->record($this->owner, (string) $p->id, 'synthetic-pending-split', $input);
+    expect(app(InvestmentService::class)->record($this->owner, (string) $p->id, 'synthetic-pending-split', $input)->id)->toBe($split->id);
+    P::opening($this->owner, $p, $rows, ['prior_id' => (string) $opening->id]);
+    $intent = I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_intent', 'amount' => '20']);
+    $before = DB::table('journal_entries')->count();
+    $events = DB::table('investment_events')->count();
+    foreach ([['kind' => 'buy'], ['kind' => 'fee', 'amount' => '1'], ['kind' => 'ipo_reserve', 'amount' => '1', 'subscription_id' => (string) $intent->id], ['kind' => 'ipo_pay', 'amount' => '1', 'subscription_id' => (string) $intent->id]] as $bad) {
+        expect(fn () => I::event($this->owner, $p, $this->asset, $bad))->toThrow(ValidationException::class);
+        $this->assertDatabaseCount('investment_events', $events);
+        $this->assertDatabaseCount('journal_entries', $before);
+    }
+    I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_cancel', 'subscription_id' => (string) $intent->id]);
+    $state = app(PortfolioRead::class)->state($this->owner, (string) $p->id, '2026-10-18T12:00:00Z');
+    expect($state['ledger_cash'])->toBeNull()->and($state['ledger_reason'])->toBe('opening_pending')
+        ->and($state['rows'][0]['quantity'])->toBe('8')->and($state['rows'][0]['cost_basis']['minor'])->toBe('2800');
+    $this->assertDatabaseCount('journal_entries', $before);
+});
+test('unknown out of range cash permits IPO allotment and earmark relief but never new cash use', function () {
+    $account = P::account($this->owner);
+    $p = P::link($this->owner, $account);
+    I::fund($this->owner, $account, '75');
+    $intent = I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_intent', 'amount' => '75']);
+    $s = ['subscription_id' => (string) $intent->id];
+    I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_reserve', 'amount' => '75', ...$s]);
+    I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_pay', 'amount' => '50', ...$s]);
+    I::fund($this->owner, $account, '92233720368547758.07');
+    $release = I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_release', 'amount' => '10', ...$s]);
+    expect(I::replay($this->owner, $p)['rows'])->toBeEmpty()->and(I::replay($this->owner, $p)['reserved_minor'])->toBe('1500');
+    $before = DB::table('journal_entries')->count();
+    $events = DB::table('investment_events')->count();
+    foreach ([['kind' => 'buy'], ['kind' => 'fee', 'amount' => '1'], ['kind' => 'ipo_reserve', 'amount' => '1', ...$s], ['kind' => 'ipo_pay', 'amount' => '1', ...$s]] as $bad) {
+        expect(fn () => I::event($this->owner, $p, $this->asset, $bad))->toThrow(ValidationException::class);
+    }
+    expect(fn () => app(InvestmentService::class)->reverse($this->owner, (string) $p->id, (string) $release->id, 'synthetic-unknown-release-reversal', 'Synthetic relief removal'))->toThrow(ValidationException::class);
+    $this->assertDatabaseCount('investment_events', $events);
+    $this->assertDatabaseCount('journal_entries', $before);
+    $input = I::input($this->asset, ['kind' => 'ipo_allot', 'amount' => '35', 'quantity' => '7', ...$s]);
+    $allot = app(InvestmentService::class)->record($this->owner, (string) $p->id, 'synthetic-unknown-allot', $input);
+    app(InvestmentService::class)->record($this->owner, (string) $p->id, 'synthetic-unknown-allot-correction', [...$input, 'amount' => '30', 'quantity' => '6', 'replaces_id' => (string) $allot->id]);
+    $refund = I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_refund', 'amount' => '20', ...$s]);
+    expect(fn () => app(InvestmentService::class)->reverse($this->owner, (string) $p->id, (string) $refund->id, 'synthetic-unknown-refund-reversal', 'Synthetic receipt removal'))->toThrow(ValidationException::class);
+    I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_cancel', ...$s]);
+    $state = app(PortfolioRead::class)->state($this->owner, (string) $p->id, '2026-10-18T12:00:00Z');
+    expect($state['ledger_cash'])->toBeNull()->and($state['ledger_reason'])->toBe('out_of_range')
+        ->and($state['investment']['reserved_minor'])->toBe('0')->and($state['investment']['receivable_minor'])->toBe('0')
+        ->and($state['rows'][0]['quantity'])->toBe('6')->and($state['rows'][0]['cost_basis']['minor'])->toBe('3000');
+});
+test('unknown cash retains signed positive receipts and permits eligible outflow correction and reversal', function () {
+    $buyInput = I::input($this->asset);
+    $buy = app(InvestmentService::class)->record($this->owner, (string) $this->p->id, 'synthetic-known-buy-before-range', $buyInput);
+    $incomeInput = I::input($this->asset, ['kind' => 'dividend', 'amount' => '11']);
+    $income = app(InvestmentService::class)->record($this->owner, (string) $this->p->id, 'synthetic-known-dividend-before-range', $incomeInput);
+    I::fund($this->owner, $this->account, '92233720368547758.07');
+    $correction = app(InvestmentService::class)->record($this->owner, (string) $this->p->id, 'synthetic-unknown-neutral-buy-correction', [...$buyInput, 'quantity' => '7', 'replaces_id' => (string) $buy->id]);
+    app(InvestmentService::class)->reverse($this->owner, (string) $this->p->id, (string) $correction->id, 'synthetic-unknown-buy-relief', 'Synthetic cash relief');
+    expect(I::replay($this->owner, $this->p)['rows'])->toBeEmpty();
+    expect(fn () => app(InvestmentService::class)->reverse($this->owner, (string) $this->p->id, (string) $income->id, 'synthetic-unknown-income-reversal', 'Synthetic receipt removal'))->toThrow(ValidationException::class);
+    expect(fn () => app(InvestmentService::class)->record($this->owner, (string) $this->p->id, 'synthetic-unknown-income-reduction', [...$incomeInput, 'amount' => '10', 'replaces_id' => (string) $income->id]))->toThrow(ValidationException::class);
+    expect(I::replay($this->owner, $this->p)['events'][0]['cash_minor'])->toBe('1100');
+});
+test('unknown cash carries both histories across new and vanished cashless dates', function () {
+    $account = P::account($this->owner);
+    $p = P::link($this->owner, $account);
+    I::fund($this->owner, $account, '75', '2026-10-16');
+    $intent = I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_intent', 'amount' => '75', 'effective_date' => '2026-10-16']);
+    $s = ['subscription_id' => (string) $intent->id];
+    I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_reserve', 'amount' => '75', 'effective_date' => '2026-10-16', ...$s]);
+    $input = I::input($this->asset, ['kind' => 'ipo_release', 'amount' => '10', 'effective_date' => '2026-10-17', ...$s]);
+    $release = app(InvestmentService::class)->record($this->owner, (string) $p->id, 'synthetic-release-before-unknown', $input);
+    I::fund($this->owner, $account, '92233720368547758.07', '2026-10-16');
+    expect(fn () => app(InvestmentService::class)->record($this->owner, (string) $p->id, 'synthetic-unknown-relief-date-move', [...$input, 'effective_date' => '2026-10-18', 'replaces_id' => (string) $release->id]))->toThrow(ValidationException::class);
+    expect(fn () => app(InvestmentService::class)->reverse($this->owner, (string) $p->id, (string) $release->id, 'synthetic-unknown-relief-date-removal', 'Synthetic relief removal'))->toThrow(ValidationException::class);
+    I::event($this->owner, $p, $this->asset, ['kind' => 'ipo_release', 'amount' => '5', ...$s]);
+    expect(I::replay($this->owner, $p)['reserved_minor'])->toBe('6000');
+    $this->assertDatabaseCount('investment_events', 4);
+});
+test('cash availability range transitions admit income relief and refuse spending into a representable range', function () {
+    app(PostingService::class)->record($this->owner, 'synthetic-negative-range-first', ['kind' => 'expense', 'account_id' => (string) $this->account->id, 'amount' => '92233720368547758.07', 'effective_date' => '2026-10-18', 'description' => 'Synthetic range stress']);
+    app(PostingService::class)->record($this->owner, 'synthetic-negative-range-second', ['kind' => 'expense', 'account_id' => (string) $this->account->id, 'amount' => '2100', 'effective_date' => '2026-10-18', 'description' => 'Synthetic range stress']);
+    expect(app(PortfolioRead::class)->state($this->owner, (string) $this->p->id, '2026-10-18T12:00:00Z')['ledger_cash'])->toBeNull();
+    I::event($this->owner, $this->p, $this->asset, ['kind' => 'dividend', 'amount' => '200']);
+    $cash = app(PortfolioRead::class)->state($this->owner, (string) $this->p->id, '2026-10-18T12:00:00Z')['ledger_cash'];
+    expect($cash['minor'])->toBe('-9223372036854765807');
+    $account = P::account($this->owner);
+    $p = P::link($this->owner, $account);
+    I::fund($this->owner, $account, '1');
+    I::event($this->owner, $p, $this->asset, ['kind' => 'dividend', 'amount' => '92233720368547758.07']);
+    $state = app(PortfolioRead::class)->state($this->owner, (string) $p->id, '2026-10-18T12:00:00Z');
+    expect($state['ledger_cash'])->toBeNull()->and($state['ledger_reason'])->toBe('out_of_range');
+    expect(fn () => I::event($this->owner, $p, $this->asset, ['kind' => 'fee', 'amount' => '1']))->toThrow(ValidationException::class);
+    expect(app(PortfolioRead::class)->state($this->owner, (string) $p->id, '2026-10-18T12:00:00Z')['ledger_cash'])->toBeNull();
 });
 test('synthetic fee inclusive purchase and partial sale preserve weighted basis and net cash separately', function () {
     I::event($this->owner, $this->p, $this->asset);

@@ -18,10 +18,10 @@ final class InvestmentReplay
 {
     public const string POLICY = 'weighted-average-rational-minor-half-up-final-remainder;effective-UTC-date-stable-order;retrospective-cancellation-v1';
 
-    /** @param array<string,numeric-string|null> $priorCashDeficits
+    /** @param array<string,array{cash:numeric-string,exposure:numeric-string,external:numeric-string|null}> $priorCashFrames
      * @param list<string> $checkDates
      * @return array<string,mixed> */
-    public function capture(User $owner, string $id, string $cutoff, bool $validateCash = false, array $priorCashDeficits = [], array $checkDates = []): array
+    public function capture(User $owner, string $id, string $cutoff, bool $validateCash = false, array $priorCashFrames = [], array $checkDates = []): array
     {
         $read = app(PortfolioRead::class);
         $account = $read->account($owner, $id);
@@ -41,7 +41,7 @@ final class InvestmentReplay
         $realized = '0';
         $allGainsKnown = true;
         $baselines = [];
-        $cashDeficits = [];
+        $cashFrames = [];
         $endOfDay = [];
         foreach ($events as $e) {
             if ($opening !== null && $e->effective_date < $opening->as_of) {
@@ -49,23 +49,6 @@ final class InvestmentReplay
             }
             $family = $e->asset_family;
             $cash = self::cash($e);
-            $reserved = $this->sum($subscriptions, 'reserved_minor');
-            $ownReserved = $subscriptions[(string) $e->subscription_id]['reserved_minor'] ?? '0';
-            if ($e->kind === 'ipo_reserve' || bccomp($cash, '0', 0) < 0) {
-                if (! array_key_exists($e->effective_date, $baselines)) {
-                    $baselines[$e->effective_date] = $this->externalCash($owner, $account, $e->effective_date);
-                }
-                $external = $baselines[$e->effective_date];
-                $available = $external === null ? null : bcsub(bcadd($external, $runningCash, 0), $reserved, 0);
-                if ($e->kind === 'ipo_pay') {
-                    $available = $available === null ? null : bcadd($available, bccomp($ownReserved, PortfolioInput::integer($e->amount_minor), 0) < 0 ? $ownReserved : PortfolioInput::integer($e->amount_minor), 0);
-                }
-                $required = $e->kind === 'ipo_reserve' ? PortfolioInput::integer($e->amount_minor) : bcsub('0', $cash, 0);
-                $key = $e->effective_date.':'.$e->sort_id;
-                $deficit = $available === null ? null : (bccomp($required, $available, 0) > 0 ? bcsub($required, $available, 0) : '0');
-                $cashDeficits[$key] = $deficit;
-                $this->validateDeficit($key, $deficit, $validateCash, $priorCashDeficits);
-            }
             $gain = null;
             $allocated = null;
             if ($e->kind === 'ipo_intent') {
@@ -149,7 +132,9 @@ final class InvestmentReplay
                 $positions[$family] = $row;
             }
             $runningCash = bcadd($runningCash, $cash, 0);
-            $endOfDay[$e->effective_date] = ['cash' => $runningCash, 'reserved' => $this->sum($subscriptions, 'reserved_minor')];
+            $reserved = $this->sum($subscriptions, 'reserved_minor');
+            $endOfDay[$e->effective_date] = ['cash' => $runningCash, 'reserved' => $reserved];
+            $cashFrames[$e->effective_date.':'.$e->sort_id] = ['cash' => $runningCash, 'exposure' => bcsub($reserved, $runningCash, 0), 'external' => null];
             $results[] = ['id' => (string) $e->id, 'kind' => $e->kind, 'effective_date' => $e->effective_date, 'sort_id' => (string) $e->sort_id,
                 'asset_id' => (string) $e->asset_id, 'asset_family' => $family, 'subscription_id' => $e->subscription_id === null ? null : (string) $e->subscription_id,
                 'cash_minor' => $cash, 'allocated_cost_minor' => $allocated, 'realized_gain_minor' => $gain];
@@ -161,7 +146,7 @@ final class InvestmentReplay
         $days = DB::table('postings as p')->join('journal_entries as j', 'j.id', '=', 'p.journal_id')
             ->where('p.owner_id', $owner->id)->where('p.account_id', $account->account_id)->where('j.owner_id', $owner->id)
             ->whereIn('j.status', ['posted', 'reversed'])->where('j.effective_date', '<=', $date)->distinct()->pluck('j.effective_date')->all();
-        $priorDates = array_map(fn (string $key): string => substr($key, 0, 10), array_keys($priorCashDeficits));
+        $priorDates = array_map(fn (string $key): string => substr($key, 0, 10), array_keys($priorCashFrames));
         $days = array_unique([...$days, ...array_keys($endOfDay), ...$checkDates, ...$priorDates, $date]);
         sort($days, SORT_STRING);
         $cashAtEnd = '0';
@@ -174,13 +159,13 @@ final class InvestmentReplay
             if (! array_key_exists($day, $baselines)) {
                 $baselines[$day] = $this->externalCash($owner, $account, $day);
             }
-            $external = $baselines[$day];
-            $free = $external === null ? null : bcsub(bcadd($external, $cashAtEnd, 0), $reservedAtEnd, 0);
-            $key = $day.':end';
-            $deficit = $free === null ? null : (bccomp($free, '0', 0) < 0 ? bcsub('0', $free, 0) : '0');
-            $cashDeficits[$key] = $deficit;
-            $this->validateDeficit($key, $deficit, $validateCash, $priorCashDeficits);
+            $cashFrames[$day.':end'] = ['cash' => $cashAtEnd, 'exposure' => bcsub($reservedAtEnd, $cashAtEnd, 0), 'external' => $baselines[$day]];
         }
+        foreach ($cashFrames as $key => &$frame) {
+            $frame['external'] = $baselines[substr($key, 0, 10)];
+        }
+        unset($frame);
+        $cashDeficits = $this->cashDeficits($cashFrames, $validateCash, $priorCashFrames);
 
         $rows = array_values(array_filter($positions, fn (array $r): bool => $r['quantity'] === null || bccomp($r['quantity'], '0', 12) > 0));
         if ($events->isNotEmpty()) {
@@ -191,20 +176,64 @@ final class InvestmentReplay
             usort($rows, fn (array $a, array $b): int => bccomp($a['id'], $b['id'], 0));
         }
 
-        return ['policy' => self::POLICY, 'rows' => $rows, 'cash_deficits' => $cashDeficits,
+        return ['policy' => self::POLICY, 'rows' => $rows, 'cash_deficits' => $cashDeficits, 'cash_frames' => $cashFrames,
             'source_event_ids' => DB::table('investment_events')->where('owner_id', $owner->id)->where('portfolio_account_id', $id)->where('effective_date', '<=', $date)->orderBy('id')->pluck('id')->map(fn ($v): string => (string) $v)->all(),
             'events' => $results, 'subscriptions' => array_values($subscriptions), 'receivable_minor' => $this->sum($subscriptions, 'receivable_minor'),
             'reserved_minor' => $this->sum($subscriptions, 'reserved_minor'), 'realized_gain' => $allGainsKnown ? $this->money($account->currency, $realized) : null,
             'realized_gain_reason' => $allGainsKnown ? null : 'unknown_opening_basis'];
     }
 
-    /** @param numeric-string|null $deficit
-     * @param array<string,numeric-string|null> $priorCashDeficits */
-    private function validateDeficit(string $key, ?string $deficit, bool $validateCash, array $priorCashDeficits): void
+    /** Compare inclusive event prefixes and end-of-day states on the full old/new union.
+     * Generic ledger cash is fixed by the owner lock; only investment cash and earmarks change.
+     *
+     * @param array<string,array{cash:numeric-string,exposure:numeric-string,external:numeric-string|null}> $frames
+     * @param array<string,array{cash:numeric-string,exposure:numeric-string,external:numeric-string|null}> $priorFrames
+     * @return array<string,numeric-string|null> */
+    private function cashDeficits(array $frames, bool $validateCash, array $priorFrames): array
     {
-        if ($validateCash && ($deficit === null || bccomp($deficit, $priorCashDeficits[$key] ?? '0', 0) > 0)) {
-            LedgerInput::fail('amount', 'Replay would create or worsen unavailable cash at an affected UTC business date. Existing external shortfalls may be relieved; new outflows and earmarks cannot use protected or future cash.');
+        $keys = array_unique([...array_keys($frames), ...array_keys($priorFrames)]);
+        usort($keys, function (string $a, string $b): int {
+            $dateOrder = strcmp(substr($a, 0, 10), substr($b, 0, 10));
+            if ($dateOrder !== 0) {
+                return $dateOrder;
+            }
+            $left = substr($a, 11);
+            $right = substr($b, 11);
+
+            return $left === $right ? 0 : ($left === 'end' ? 1 : ($right === 'end' ? -1 : bccomp(PortfolioInput::integer($left), PortfolioInput::integer($right), 0)));
+        });
+        $current = $prior = ['cash' => '0', 'exposure' => '0', 'external' => null];
+        $deficits = [];
+        foreach ($keys as $key) {
+            $current = $frames[$key] ?? $current;
+            $prior = $priorFrames[$key] ?? $prior;
+            $day = substr($key, 0, 10);
+            // A missing event frame carries the actual preceding state. Availability
+            // belongs to this date, not the preceding event's possibly different date.
+            $external = $frames[$day.':end']['external'];
+            $priorExternal = $priorFrames[$day.':end']['external'] ?? null;
+            $deficit = $external === null ? null : $this->deficit($current['exposure'], $external);
+            $deficits[$key] = $deficit;
+            if (! $validateCash) {
+                continue;
+            }
+            $worse = $external === null || $priorExternal === null
+                ? bccomp($current['cash'], $prior['cash'], 0) < 0 || bccomp($current['exposure'], $prior['exposure'], 0) > 0
+                : bccomp($deficit, $this->deficit($prior['exposure'], $priorExternal), 0) > 0;
+            if ($worse) {
+                LedgerInput::fail('amount', 'Replay would create or worsen unavailable cash at an affected UTC business date. Existing external shortfalls may be relieved; new outflows and earmarks cannot use protected or future cash.');
+            }
         }
+
+        return $deficits;
+    }
+
+    /** @param numeric-string $exposure
+     * @param numeric-string $external
+     * @return numeric-string */
+    private function deficit(string $exposure, string $external): string
+    {
+        return bccomp($exposure, $external, 0) > 0 ? bcsub($exposure, $external, 0) : '0';
     }
 
     /** @return numeric-string */

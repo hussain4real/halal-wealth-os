@@ -1,5 +1,9 @@
 <?php
 
+use App\Domain\Ledger\AccountType;
+use App\Domain\Ledger\CreateAccount;
+use App\Domain\Shared\Money\Currency;
+use App\Domain\Shared\Money\Money;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,6 +23,23 @@ beforeEach(function () {
     I::fund($this->owner, $this->account);
     $this->actingAs($this->owner);
     $this->url = '/portfolio/'.$this->p->id.'/events';
+});
+test('pending cash stays visibly unavailable while neutral split and opening correction succeed through HTTP', function () {
+    $account = app(CreateAccount::class)->create($this->owner, 'Synthetic pending investment', AccountType::Investment, Currency::QAR, Money::fromDecimal(Currency::QAR, '75'));
+    $p = P::link($this->owner, $account);
+    $rows = [P::row($this->asset, ['quantity' => '4', 'basis_known' => '1', 'cost_basis' => '28'])];
+    $opening = P::opening($this->owner, $p, $rows);
+    $url = '/portfolio/'.$p->id;
+    $input = ['idempotency_key' => 'investment-http-pending-split', ...I::input($this->asset, ['kind' => 'split'])];
+    $first = $this->postJson($url.'/events', $input)->assertCreated();
+    expect($this->postJson($url.'/events', $input)->assertCreated()->json('id'))->toBe($first->json('id'));
+    $this->postJson($url.'/opening', ['idempotency_key' => 'investment-http-pending-opening-correction', 'prior_id' => (string) $opening->id,
+        'as_of' => '2026-10-18', 'source' => 'Synthetic unchanged pending statement', 'reason' => 'Synthetic cashless correction', 'rows' => $rows])->assertCreated();
+    $this->get($url)->assertInertia(fn (Assert $page) => $page->where('account.ledger_cash', null)->where('account.ledger_reason', 'opening_pending')->where('positions.items.0.quantity', '8')->where('positions.items.0.cost_basis.minor', '2800'));
+    $this->get($url.'/events')->assertInertia(fn (Assert $page) => $page->where('book.available', null)->missing('book.cash_frames')->missing('book.cash_deficits'));
+    $this->postJson($url.'/events', ['idempotency_key' => 'investment-http-pending-fee', ...I::input($this->asset, ['kind' => 'fee', 'amount' => '1'])])->assertUnprocessable()->assertJsonValidationErrors('amount');
+    $this->assertDatabaseCount('investment_events', 1);
+    $this->assertDatabaseCount('journal_entries', 1);
 });
 test('activity form receipt exact export and protected cash journal routes resolve', function () {
     $this->get($this->url)->assertInertia(fn (Assert $p) => $p->component('portfolio/Events')->where('book.available.minor', '200000')->has('events.items', 0));

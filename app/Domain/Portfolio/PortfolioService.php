@@ -79,7 +79,7 @@ final readonly class PortfolioService
                 return $row;
             }
             $account = $this->active($owner, $id);
-            $priorDeficits = app(InvestmentReplay::class)->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'))['cash_deficits'];
+            $priorFrames = app(InvestmentReplay::class)->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'))['cash_frames'];
             $prior = $this->read->opening($owner, $id);
             if (($input['prior_id'] ?? '') !== ($prior === null ? '' : (string) $prior->id)) {
                 LedgerInput::fail('prior_id', 'The opening statement changed. Reload its current version before correcting.');
@@ -129,7 +129,7 @@ final readonly class PortfolioService
             foreach ($prepared as $entry) {
                 DB::table('portfolio_opening_rows')->insert(['opening_id' => $row->id, ...$entry]);
             }
-            app(InvestmentReplay::class)->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), true, $priorDeficits);
+            app(InvestmentReplay::class)->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), true, $priorFrames);
 
             return $row;
         });

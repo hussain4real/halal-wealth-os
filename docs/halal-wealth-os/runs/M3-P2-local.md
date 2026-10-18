@@ -1,6 +1,6 @@
 # M3-P2 implementation and verification
 
-Status: READY_FOR_REVIEW, unaccepted. Cycle 4 of at most six. The human owner accepted
+Status: READY_FOR_REVIEW, unaccepted. Cycle 5 of at most six. The human owner accepted
 M3-P1 at 17:09 UTC on 18 October 2026 and authorized M3-P2 through independent
 review, sanitized dev PR, normal merge after exact-head gates and original
 post-merge CI. One coordinator owns implementation. Stop before M3-P3.
@@ -164,3 +164,82 @@ interrupted broad runs and independent findings remain preserved above and in
 private evidence. M3-P2 is READY_FOR_REVIEW and unaccepted. Publication sanitation,
 exact-head hosted review/CI, normal dev merge, original post-merge CI and human
 acceptance remain separate gates in the [publication record](M3-P2-publication.md).
+
+## Cycle 5: hosted unknown-cash correction
+
+The cycle 4 implementation was independently sanitized, verified as exact
+committed blobs/modes/tree, and published in [dev PR 10](https://github.com/hussain4real/halal-wealth-os/pull/10).
+Its original [CI attempt](https://github.com/hussain4real/halal-wealth-os/actions/runs/39155383244)
+passed. Raw output independently checked the passing 580-test / 3,775-assertion
+baseline, exactly one intended failure with 3,776 assertions, and restored
+passing baseline with 2,985/3,205 covered statements. Hosted exact-head review
+then found native cash unavailability incorrectly rejected neutral facts and
+relief; the old head was not merged.
+
+Three actual regression cases failed on that published source, then passed
+with 38 assertions after the correction. Exact signed investment cash and
+capacity exposure are now compared at every aligned old/new event prefix and
+end-of-day checkpoint. Known baselines retain absolute deficit comparison;
+unknown baselines allow only no-worse relative cash/exposure. Pending opening
+cash remains unavailable, while neutral opening revisions, split, intention,
+confirmed allotment, earmark relief and eligible incoming cash remain possible.
+New spending, own-earmarked payments, reservations, removal/reduction of prior
+receipts or relief, and adverse historical moves still reject atomically.
+
+Expanded checks cover real out-of-range totals, positive/negative native-range
+transitions, signed unclamped exposure, eligible outflow correction/reversal
+and vanished cashless dates. The first broad investment run passed 66 cases
+and failed the new HTTP case because it addressed the page's account data as
+state. The corrected property path retains all financial assertions; that
+HTTP case passed with 33 assertions. Private original golden probes passed
+again. Static analysis passed after validating the numeric stable-order suffix.
+Fresh complete uncached, independent source/rendered and TIA gates are in
+progress; no fresh full PASS is claimed yet.
+
+The cycle 5 independent source review passed against all 536 frozen source
+hashes/modes. The focused rendered supplement passed nine checks with eight
+individually inspected screenshots; the earlier broad 49-check/36-image review
+remains historical. The first complete cycle 5 gate then failed with 473 tests
+passing and 113 failing (2,912 assertions) after disposable PostgreSQL exhausted
+its 512 MB tmpfs while writing WAL and shut down. Subsequent failures were
+connection/recovery errors; this run is retained and is not a full PASS. The
+same owned pinned container was restarted with its exact configuration, which
+reinitializes its disposable tmpfs. Database identity and free space were
+verified before rerunning the complete gate on unchanged source. No application,
+trust, network or security configuration was changed for this recovery.
+
+The recovered complete gate passed 586 tests / 3,856 assertions, with zero
+failures, errors or skips and 3,001/3,218 covered application statements. All
+51 Node checks, dependency/platform, migration, static, frontend and build gates
+passed. Exact source and compiled inventories remained unchanged. Wall time was
+411.569 seconds, including one explicitly recorded standard PostgreSQL CHECKPOINT
+for the owned disposable database; Pest execution was 332.39 seconds. This is
+application verification, not an unattended runtime or performance benchmark.
+The checkpoint changes no application rows, assertions, configuration or
+financial/durability policy. Independent review confirmed that distinction.
+The original failed run, maintenance receipt, successful raw output and actual
+XML reports remain retained. Before fresh TIA, the same disposable container was
+reinitialized with unchanged configuration after confirming zero users, events
+and journals; fresh TIA/replay/planner results remain pending at this checkpoint.
+
+## Cycle 5 final local evidence
+
+Fresh TIA recording executed all 586 tests / 3,856 assertions in 533.831 wall
+seconds (530.16 Pest seconds). One standard PostgreSQL checkpoint was recorded
+during this fresh recording, with configuration and durability unchanged; this
+is not an unattended resource benchmark. Unchanged replay returned 586 cached
+results and zero newly executed tests in 6.341 wall seconds (3.48 Pest seconds).
+The complete branch baseline contains 586 results. Native planner probes using
+simulated prior content hashes selected all three investment suites for the
+PHP service and the investment HTTP suite for the Vue page. They changed no
+source/cache and did not execute impacted tests. No shared Vue selectivity or
+fresh execution speedup is claimed.
+
+Actual full XML also identifies 67 passing investment/book-cost cases with
+546 assertions; this is a subset of that full execution, not a separate scoped
+rerun. All 536 source hashes/modes and 140 compiled hashes remained unchanged.
+Complete uncached, source, rendered supplement and refreshed TIA gates now pass
+within five of six cycles. Earlier failures and partial gates remain preserved.
+M3-P2 is READY_FOR_REVIEW and unaccepted; corrected exact-head publication,
+hosted CI/review, normal dev merge, original dev-push CI and owner acceptance
+remain separate gates. No M3-P3 work is authorized.

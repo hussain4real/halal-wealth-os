@@ -36,7 +36,7 @@ class InvestmentController extends Controller
             $more = count($events) > 20;
             $events = array_slice($events, 0, 20);
             $book = $s['investment'];
-            unset($book['rows'], $book['events'], $book['source_event_ids'], $book['cash_deficits']);
+            unset($book['rows'], $book['events'], $book['source_event_ids'], $book['cash_deficits'], $book['cash_frames']);
             $book['range_issues'] = [];
             foreach (['receivable_minor', 'reserved_minor'] as $field) {
                 $name = str_replace('_minor', '', $field);

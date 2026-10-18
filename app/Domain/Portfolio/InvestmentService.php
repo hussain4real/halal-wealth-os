@@ -32,7 +32,7 @@ final readonly class InvestmentService
             $account = $this->active($owner, $id);
             $data = $this->prepare($owner, $account, $input);
             $checkDates = [$data['effective_date']];
-            $priorDeficits = $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), checkDates: $checkDates)['cash_deficits'];
+            $priorFrames = $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), checkDates: $checkDates)['cash_frames'];
             $prior = ($input['replaces_id'] ?? '') === '' ? null : $this->member($owner, $id, LedgerInput::identifier($input['replaces_id']));
             if ($prior !== null) {
                 if ($prior->kind !== $data['kind'] || $prior->kind === 'ipo_intent' || $prior->action_reference !== $data['action_reference']) {
@@ -44,7 +44,7 @@ final readonly class InvestmentService
             }
             $event = $this->insert($owner, $account, $key, $payload, [...$data, 'replaces_id' => $prior?->id], $prior?->sort_id);
             $this->cash($owner, $account, $event);
-            $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), true, $priorDeficits, $checkDates);
+            $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), true, $priorFrames, $checkDates);
 
             return $event;
         });
@@ -60,9 +60,9 @@ final readonly class InvestmentService
             }
             $account = $this->active($owner, $id);
             $prior = $this->member($owner, $id, $eventId);
-            $priorDeficits = $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'))['cash_deficits'];
+            $priorFrames = $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'))['cash_frames'];
             $event = $this->cancel($owner, $account, $prior, $key, LedgerInput::text($reason, 'reason'), $payload);
-            $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), true, $priorDeficits);
+            $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), true, $priorFrames);
 
             return $event;
         });

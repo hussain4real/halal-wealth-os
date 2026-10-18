@@ -81,6 +81,19 @@ cancelling a cashless fact cannot discard an earlier deficit checkpoint.
 Relieving that retained shortfall remains possible. Cash uncertainty prevents
 unsupported new spending. Holdings and receivable checks always replay in full.
 
+If native cash is unavailable (for example an unposted opening or a ledger
+sum outside Money range), replay still retains exact signed cumulative investment
+cash C and exposure E = active earmarks minus C. With the generic ledger baseline
+fixed under the shared owner lock, every aligned old/new event prefix and
+end-of-day checkpoint must have candidate C at least prior C and candidate E at
+most prior E. This admits neutral opening revisions, splits and confirmed
+allotment, earmark relief and eligible incoming cash without pretending unknown
+cash is zero. It rejects new spending, own-earmarked payments, new reservations,
+and removal of prior positive cash/relief. Signed exposure is never clamped;
+vanished/new event slots carry the real preceding state. When both baselines
+are known, the absolute no-worse deficit rule continues to apply. Range
+transitions retain unavailable reporting unless the native total becomes valid.
+
 The root event, exact idempotency receipt and any cash journal/link share one
 owner-serialized PostgreSQL transaction. Detailed deferred guards verify cash
 amount, date, ownership, currency, internal control roles and linked reversal

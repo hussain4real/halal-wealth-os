@@ -30,3 +30,23 @@ Screenshots, synthetic fixture details, raw browser logs and the case matrix
 remain in private evidence. PostgreSQL concurrency and historical backend
 regressions are separate checks in the [implementation run](M3-P2-local.md).
 See the [investment event contract](../INVESTMENT-EVENTS.md).
+
+## Cycle 5 unknown-cash supplement
+
+The targeted supplement passed nine actual desktop/mobile checks with eight
+individually inspected screenshots. It supplements the historical 49-check /
+36-image review above, which was preserved rather than rerun. Pending and
+out-of-range cash stayed visibly unavailable while neutral split retry recovery,
+unchanged opening correction and eligible IPO release/allotment/refund/cancel
+remained usable. An interrupted response followed by Back and reload retained
+the same request payload/identity and produced one neutral event with no cash
+journal. New fee and earmark requests were refused. Confirmed units/basis and
+receivable/earmark conservation remained exact; only the refund posted cash.
+No material product finding or JavaScript page error remained.
+
+All 536 frozen source hashes/modes and 140 compiled asset hashes matched.
+The reviewer's owned resources were cleaned up; the coordinator socket remained
+unchanged during that review. An initial five-second login navigation timeout
+occurred before financial checks, was preserved separately, and was corrected
+only in the private harness wait. Its screenshot is excluded from the eight
+successful-run images. Full and hosted gates remain separate.
