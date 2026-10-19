@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import PortfolioShell from '@/components/PortfolioShell.vue';
+import AssessmentSummary from '@/components/AssessmentSummary.vue';
 import { Button } from '@/components/ui/button';
 import type { Asset, Page } from '@/types/portfolio';
 import { kindLabel } from '@/types/portfolio';
+import type { AssessmentSummary as Summary } from '@/types/shariah';
 defineOptions({
     layout: {
         breadcrumbs: [
@@ -12,7 +14,12 @@ defineOptions({
         ],
     },
 });
-defineProps<{ asset: Asset; current_id: string; history: Page<Asset> }>();
+defineProps<{
+    asset: Asset;
+    current_id: string;
+    history: Page<Asset>;
+    assessment_summary: Summary;
+}>();
 </script>
 <template>
     <PortfolioShell :title="asset.name" back="/assets"
@@ -65,6 +72,7 @@ defineProps<{ asset: Asset; current_id: string; history: Page<Asset> }>();
                 >.
             </p>
         </section>
+        <AssessmentSummary :summary="assessment_summary" :asset-id="asset.id" />
         <section class="max-w-3xl rounded-2xl border bg-card p-6">
             <h2 class="text-lg font-semibold">Reference history</h2>
             <ul class="mt-4 divide-y">

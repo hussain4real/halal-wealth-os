@@ -3,6 +3,7 @@ export function portfolioRequestDraft(
     scope: string,
     identity: string,
     fields: string[],
+    fieldLimits: Record<string, number> = {},
 ) {
     const key = 'hwo:portfolio:attempt:' + scope;
     const valid = (value: unknown): value is Record<string, string> => {
@@ -17,7 +18,7 @@ export function portfolioRequestDraft(
                     typeof v === 'string' &&
                     (k === 'rows'
                         ? v.length <= 400000
-                        : Array.from(v).length <= 180),
+                        : Array.from(v).length <= (fieldLimits[k] ?? 180)),
             )
         )
             return false;
@@ -42,10 +43,12 @@ export function portfolioRequestDraft(
                             typeof r === 'object' &&
                             r !== null &&
                             !Array.isArray(r) &&
-                            Object.keys(r).length === keys.length &&
+                            Object.keys(r).length >= keys.length &&
+                            Object.keys(r).length <= keys.length + 1 &&
+                            keys.every((k) => k in r) &&
                             Object.entries(r).every(
                                 ([k, v]) =>
-                                    keys.includes(k) &&
+                                    [...keys, 'acquired_on'].includes(k) &&
                                     typeof v === 'string' &&
                                     v.length <= 32,
                             ),

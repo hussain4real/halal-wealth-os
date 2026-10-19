@@ -289,6 +289,8 @@ test('empty portfolio migration down and upgrade preserve existing ledger accoun
     $a = P::account($owner);
     app(PostingService::class)->record($owner, 'portfolio-upgrade-cash', ['kind' => 'income', 'account_id' => (string) $a->id, 'amount' => '13.57', 'effective_date' => now('UTC')->toDateString(), 'description' => 'Synthetic retained cash']);
     $report = app(NetWorthSnapshot::class)->save($owner, 'portfolio-upgrade-report', Currency::QAR, now('UTC')->format('Y-m-d\\TH:i:s\\Z'));
+    $assessment = require database_path('migrations/2026_10_19_110000_create_shariah_assessment_evidence.php');
+    $assessment->down();
     $valuation = require database_path('migrations/2026_10_19_000001_create_investment_valuation_evidence.php');
     $valuation->down();
     $investment = require database_path('migrations/2026_10_18_171000_create_investment_event_subledger.php');
@@ -299,6 +301,7 @@ test('empty portfolio migration down and upgrade preserve existing ledger accoun
     $migration->up();
     $investment->up();
     $valuation->up();
+    $assessment->up();
     expect(app(NetWorthSnapshot::class)->capture($owner, Currency::QAR, now('UTC')->format('Y-m-d\\TH:i:s\\Z'))['total']['minor'])->toBe('1357')->and(DB::table('valuation_reports')->where('id', $report->id)->value('evidence'))->toBe($report->evidence);
     $this->assertDatabaseCount('journal_entries', 1);
     $this->assertDatabaseCount('portfolio_accounts', 0);

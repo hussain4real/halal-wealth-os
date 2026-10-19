@@ -6,6 +6,7 @@ use App\Domain\Ledger\LedgerInput;
 use App\Domain\Portfolio\PortfolioRead;
 use App\Domain\Portfolio\PortfolioService;
 use App\Domain\Shared\Money\Currency;
+use App\Domain\Shariah\AssessmentRead;
 use App\Http\Requests\PortfolioRequest;
 use App\Models\User;
 use Illuminate\Database\Query\Builder;
@@ -41,6 +42,7 @@ class PortfolioController extends Controller
         $history = $this->page(DB::table('portfolio_assets')->where('owner_id', $owner->id)->where('family_reference', $row->family_reference), $request->query('after'));
 
         return Inertia::render('portfolio/Asset', ['asset' => $this->assetPayload($row), 'current_id' => (string) $current->id,
+            'assessment_summary' => app(AssessmentRead::class)->view($owner, $asset, $this->now())['summary'],
             'history' => ['items' => array_map(fn (stdClass $a): array => $this->assetPayload($a), $history['items']), 'next' => $history['next']]]);
     }
 

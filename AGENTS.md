@@ -264,3 +264,54 @@ time value, scope-aware supported return and allocation completeness. No live
 feeds, TWR/XIRR, forecasts, broker execution, main/stage change, deployment, new
 credentials or security-setting changes. Stop for human M3-P3 acceptance before
 formal independent M3 milestone review or M4.
+
+## Current M3 completion records and independent review authority
+
+The human owner accepted M3-P3 and the specific PUB-MERGE-01 existing-history
+metadata exception at 08:33 UTC on 19 October 2026. The owner approved correcting
+and publishing sanitized completion records and running formal independent M3
+milestone review after all three phases were accepted. Preserve history, source
+and build files; independent reviewers remain source-read-only and may use owned
+isolated test resources. Report READY_FOR_OWNER or CHANGES_REQUIRED and stop for
+human M3 acceptance. This exception permits existing metadata only, not future
+personal-metadata exposure or history rewriting. Verify a supported noreply path
+before any future merge; stop if it requires account/security settings or
+permission changes. No M4, main/stage promotion, deployment, credentials or
+unrelated repository work is authorized.
+
+## Current M3 acceptance, documentation PR and M4 preparation authority
+
+The human owner accepted M3 at 10:23 UTC on 19 October 2026 after the independent
+READY_FOR_OWNER review. The owner approved the exact public documentation-only
+draft PR in hussain4real/halal-wealth-os, from docs/m3-completion-and-review into
+dev, containing the completion records and review summary. Record the decision,
+preserve the earlier reviews and accepted metadata exception, independently
+review sanitized updates, and retry the same previously denied PR creation once.
+If denied, stop without alternate routes. Preserve the approved noreply identity;
+no new merge, account/security-setting change or future personal email exposure
+is authorized. M4-P1 preparation is read-only and does not authorize M4 code,
+an implementation claim or alteration of the owner's Mac environment. Preserve
+main/stage and all unrelated work. See runs/M3-acceptance.md under the planning
+directory for the human decision; only later explicit authority can start M4.
+
+## Current M4-P1 authority
+
+The human owner explicitly approved canonical M4-P1 at 10:36 UTC on 19 October
+2026 after M3 acceptance. The manager delegates the sole implementation claim
+to this coordinator, through independent source and fresh desktop/mobile review,
+full uncached regressions, separate TIA, sanitized phase PR to dev, readiness,
+exact-head review/CI, normal noreply merge and terminal original dev-push CI.
+This supersedes the preceding read-only M4 boundary only for M4-P1. Preserve
+all history, PHP8.5-only, full starter features and at most six scoped cycles.
+No implementation subagents; independent source-read-only reviewers use exclusive
+owned resources. Preserve attributed immutable evidence and as-of history, pending
+unknowns, visible conflicts/overdue dates, separate business/financial findings,
+owner isolation and factual holdings regardless of assessment status. No rulings,
+unsourced thresholds, default AAOIFI ratios, hardcoded certification, purification
+or opportunities. Assessment changes never alter ledger/cash/units/cost/valuation.
+Use approved noreply author and committer identities, including a supported
+explicit noreply merge path; no account/security-setting changes. Carry only
+needed independently reviewed sanitized predecessor records in the phase workflow;
+do not retry or bypass the denied standalone M3 docs PR. Preserve that branch,
+main/stage, the Mac clone and unrelated work. No deployment, credentials, history
+rewrites or MSA changes. Stop for human M4-P1 acceptance.

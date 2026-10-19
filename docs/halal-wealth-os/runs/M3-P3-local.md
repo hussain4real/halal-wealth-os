@@ -1,6 +1,19 @@
 # M3-P3 implementation and verification
 
-Status: IN_PROGRESS, unaccepted. Cycle 4 of at most six. The owner accepted
+Subsequent milestone decision: the human owner accepted M3 at 10:23 UTC on
+19 October 2026. See [M3 acceptance](M3-acceptance.md). Earlier M3-pending and
+readiness statements below are preserved history. Only the exact documentation
+draft PR and read-only M4-P1 preparation are approved; M4 implementation remains
+unauthorized and the LOW guidance finding remains visible.
+
+Current owner decision: M3-P3 and the specific existing-history PUB-MERGE-01
+exception were accepted at 08:33 UTC on 19 October 2026. See
+[owner acceptance](M3-P3-acceptance.md). Sanitized completion-record publication
+and formal independent M3 review are authorized; M3 remains unaccepted and M4
+unauthorized. Earlier readiness, open-finding and pending statements below are
+preserved historical checkpoints, not the current owner decision.
+
+Status: READY_FOR_REVIEW, unaccepted. Cycle 4 of at most six. The owner accepted
 M3-P2 at 02:04 UTC on 19 October 2026 and authorized this phase through independent
 source/rendered review, full uncached/TIA gates and reviewed dev publication,
 normal merge and original post-merge CI. Stop for owner M3-P3 acceptance before
@@ -184,3 +197,72 @@ four documentation paths changed. No PHP, package, workflow or financial logic
 was changed and no new functional full-run result is claimed for this delta.
 Independent delta and exact-commit review remain required before the corrected
 push; the corrected original hosted run will execute the full gate.
+
+## Final code verification and owner handoff
+
+[PR #11](https://github.com/hussain4real/halal-wealth-os/pull/11) merged normally
+into dev as 04c8fd317dd415aaa9ed1ca4519eec43636ed54b. Reviewed head
+56b94c51272293e4e082580016a8478b8ae94ef4 and merge both have tree
+e6159429b3db276602a2b75b4114b4a489abd7f4. Merge parents are the verified dev
+baseline and reviewed head. Main/stage remain at their prior planning head.
+Local dev fast-forwarded normally to the merge; the application/build identities
+remain the 556-source/144-compiled freeze already independently reviewed.
+
+The corrected-head original PR CI attempt 1
+[39199641779](https://github.com/hussain4real/halal-wealth-os/actions/runs/39199641779)
+passed. [Hosted code review](https://github.com/hussain4real/halal-wealth-os/pull/11#issuecomment-6262391018)
+completed on exact head 56b94c51272293e4e082580016a8478b8ae94ef4 with no findings
+or unresolved code threads. Fresh pre-merge independent review inspected all
+formal reviews, inline comments and conversation/summary evidence before merge.
+
+Original dev-push CI attempt 1
+[39219000692](https://github.com/hussain4real/halal-wealth-os/actions/runs/39219000692)
+reached terminal success on the merge. Complete decoded logs from both successful
+runs independently retain the uncached baseline of 625 tests / 4,135 assertions,
+the intended one-failure probe with 625 passing tests / 4,136 assertions, and the
+restored 625-test / 4,135-assertion passing baseline. Covered statements remain
+3,466 / 3,695. No cached TIA replay or substituted workflow rerun is counted as
+these full executions. Prior failed/partial attempts and browser harness failures
+remain retained, with their limitations described above.
+
+### Publication metadata finding at the pre-acceptance handoff
+
+PUB-MERGE-01 is open for owner review. GitHub generated the merge author using
+account identity details that differ from the approved public noreply identity
+used by the source commits. Exact identity details remain in private evidence
+and are not repeated in these records. The source commits' approved metadata
+remains verified. No history rewrite, account-setting change or other corrective
+mutation was attempted; this is not an approved exception or an application bug.
+Do not interpret the passing code/CI gates as clearance of this publication issue.
+
+The phase claim is closed for owner handoff. These four final status records are
+local and unpublished. M3-P3 remains unaccepted, the publication finding needs
+owner review, and formal M3 milestone review/M4 remain unstarted. No main/stage
+promotion or deployment occurred.
+
+## Subsequent owner acceptance and review authority
+
+The owner accepted M3-P3 and preserving the existing PUB-MERGE-01 merge metadata
+at 08:33 UTC on 19 October 2026. The exception repeats earlier repository
+metadata exposure and covers existing history only; exact identity values are
+omitted. It does not authorize future exposure, history rewriting or settings
+changes. The obsolete running execution checkpoint is preserved in STATE history
+and replaced by the observed owner decision. All four implementation cycles,
+original failures, exact source identities and prior review evidence are retained.
+
+The corrected completion records require independent sanitation and exact-content
+approval before publication. Formal independent M3 review is authorized after
+all M3 phases were accepted. Only the human owner accepts M3; no M4, main/stage
+promotion or deployment is authorized.
+
+## Completed independent M3 review
+
+The formal [independent M3 review](M3-independent-review.md) returned
+READY_FOR_OWNER. Its fresh isolated full gate passed 625 tests / 4,135 assertions,
+zero errors/failures/skips, 3,466/3,695 covered statements and 51 Node checks.
+Fresh original private F08-F11 service probes passed and rolled back. All 556
+source and 144 build entries remained exact; reviewer resources were cleaned
+and removed. These fresh results are separate from retained CI/TIA/browser
+evidence. The review identifies one LOW, nonblocking stale-guidance finding; no
+application source was changed. M3 remains unaccepted pending the human owner,
+and M4 remains unauthorized.

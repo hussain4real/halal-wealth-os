@@ -177,6 +177,23 @@ watch(
             This records evidence; no order is placed. All cash and holdings
             changes save together, or none do.</template
         >
+        <section
+            class="max-w-4xl space-y-2 rounded-xl border bg-card p-4 text-sm"
+            aria-label="Compliance evidence and factual recording"
+        >
+            <p>
+                Review current assessment evidence before an investment
+                decision. Missing, conflicting or overdue evidence remains
+                unresolved. You can record an existing holding or actual event
+                with any assessment status.
+            </p>
+            <Link
+                v-if="form.asset_id"
+                :href="'/assets/' + form.asset_id + '/assessments'"
+                class="inline-flex min-h-10 items-center font-medium underline"
+                >Review the selected asset’s assessment evidence →</Link
+            >
+        </section>
         <form
             class="flex max-w-4xl flex-wrap items-end gap-3"
             @submit.prevent="searchAssets"
