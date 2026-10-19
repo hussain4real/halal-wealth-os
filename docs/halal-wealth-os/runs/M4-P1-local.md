@@ -1,8 +1,9 @@
 # M4-P1 implementation and verification
 
-Status: IN_PROGRESS, unaccepted. Cycle 4 of at most six. Local full uncached,
-source, fresh rendered and separate TIA checks passed; final publication and
-hosted gates are pending. The human owner approved
+Status: IN_PROGRESS, unaccepted. Cycle 6 of at most six. The corrected source,
+fresh rendered review, full uncached gate and separate TIA record/replay/planner
+checks passed. Final combined independent local review passed. Sanitation,
+publication and corrected-head hosted gates remain pending. Cycle 4 results remain historical evidence. The human owner approved
 M4-P1 at 10:36 UTC on 19 October 2026 after M3 acceptance. One coordinator owns
 implementation, independent reviewers remain source-read-only. The phase may
 proceed through reviewed sanitized publication, exact-head hosted checks, normal
@@ -19,10 +20,20 @@ predecessor records are preserved here so M3 acceptance and history accompany
 this authorized phase. The twice-denied standalone docs PR is not retried.
 
 Live GitHub merge-schema inspection confirms support for explicit author email
-and expected head. Use the approved noreply author/committer identity and verify
-actual returned merge metadata; do not change account settings or expose personal
-metadata. The owner's Mac clone remains untouched. The later disposable socket incident
-qualifies preservation of the prior idle cloud runtime.
+and expected head, but no author-name control. That email-only path does not
+verify every generated author field. Independent publication review found a
+normal local Git merge suitable under the existing conditional authority: use
+an isolated checkout, the exact reviewed source and fresh dev base, set both
+author and committer to the approved noreply identities, and independently
+verify the immutable merge object before any ordinary nonforce dev push.
+No merge is currently approved by these observations alone. Fresh exact-head
+CI, reviews, PR eligibility, source/base refs and the final merge-artifact review
+remain required. Stop on any denial, rule/bypass notice, changed refs or uncertain
+outcome; do not use force, an override or an alternate merge route. Push acceptance
+alone does not prove every protection applied. No account/security-setting
+changes or personal-metadata exposure are authorized. The owner's Mac clone
+remains untouched. The later disposable socket incident qualifies preservation
+of the prior idle cloud runtime.
 
 ## Initial evidence boundary
 
@@ -199,3 +210,151 @@ settings or durability changes. Connection-loss notifications did not terminate
 the existing full or TIA runs: the same environment and original workers were
 verified, logs advanced, and no duplicate checks were started. This is observed
 continuity, not a claim that an interrupted run passed.
+
+## Cycle 5 opening-flow guidance correction
+
+PR [#12](https://github.com/hussain4real/halal-wealth-os/pull/12) is open and ready.
+Its original head's first CI run completed successfully, including the reported
+baseline, deliberate-failure and restored-baseline step. Complete log download
+returned Forbidden; it was not retried through another route. No complete hosted
+log inspection is claimed. The earlier standalone documentation PR remains denied
+and untouched.
+
+Hosted review identified a valid P2: the opening statement flow did not show
+per-reference guidance or evidence links. An actual independent mobile browser
+confirmed the omission for both selected and added conflict/overdue references.
+Earlier broad T6/AC5 completeness approval is withdrawn pending fresh correction
+gates; the prior observed financial and test results remain historical evidence.
+
+Cycle 5 adds a bounded current-evidence read for the selected exact reference
+and up to 20 visible opening rows. It checks account ownership, exact asset
+ownership and native currency, including retained old versions. Guidance is
+transient view state, refreshed on selection, visible-page changes, navigation,
+focus and explicit refresh. Stale responses are canceled or ignored. Loading or
+unavailable responses clear prior classifications and retain exact evidence links
+and factual recording/retry. No classifications enter cached reference metadata
+or the financial request.
+
+The new HTTP regressions first failed at the missing endpoint (three failures),
+then passed three tests and 40 assertions after the correction. Six functional
+loader tests passed, covering bounded requests, selection races, clearing old
+status, malformed responses and leaving the form. TypeScript and PHP static
+checks passed. Six frontend warnings for unawaited Node-test promises were
+corrected, and the fresh whole frontend check passed without warnings.
+Fresh full uncached, independent frozen-source/rendered review, separate TIA,
+corrected-head hosted review/CI, normal merge and post-merge CI remain pending.
+
+The earlier missing socket on the idle cloud database remains unresolved; its
+contents are unverified and deployment readiness is not established. Current
+root and independent browser tests use distinct inspected disposable ports.
+No repair or restart of the older resource was attempted.
+
+Independent source review then identified M4P1-OPENING-NAV-01: the new same-tab
+evidence link has no preservation mechanism for fresh, unsubmitted opening
+edits. Submitted interrupted attempts have their separate retained retry draft.
+The actual fresh-unsaved navigation/browser reproduction and narrow correction
+remain pending; source review is CHANGES_REQUIRED, not approved.
+
+## Cycle 6 fresh-draft navigation correction
+
+An actual mobile browser confirmed M4P1-OPENING-NAV-01: after adding and editing
+a fresh opening position, following its new same-tab evidence link and pressing
+Back lost the unsaved row and statement fields. No financial POST occurred and
+database counts stayed unchanged. The original two screenshots were opened and
+retained privately. The cycle 5 full gate was intentionally stopped with exit 1
+after 164 observed passing checkmarks; its prerequisites, frontend build and
+static checks passed, but no terminal full/coverage success is claimed.
+
+The sixth and final scoped cycle changes the new evidence link to a native
+separate-tab link with an explicit label and noopener noreferrer. The original
+financial form stays open; no fresh request is persisted or locked as a side
+effect of reading evidence. Exact retries and financial payloads are unchanged.
+Fresh source/build, actual browser, full uncached, separate TIA and publication
+gates remain pending. The six-cycle budget is preserved and cannot be reset.
+
+## Cycle 6 terminal uncached gate
+
+The original final uncached `./bin/verify --all` passed 681 PHP tests and
+4,485 assertions, with zero errors, failures or skips. All 59 Node tests passed
+in groups of 10 and 49. Coverage recorded 3,636 of 3,868 configured application
+statements across 109 files. Dependency/advisory, guarded migration, frontend
+format/lint/types/build, Pint, static and report gates passed. Full wall time
+was 1,847.563 seconds; Pest reported 1,560.38 seconds. XML and coverage reports
+were copied and checksummed before starting separate TIA.
+
+The later connection notification was reconciled against the same environment
+and original runner/PHP workers, with an advancing log and no replacement run.
+That original run reached its terminal success. Source and build remain bound
+to the final 575-path and 109-path freezes reviewed independently.
+The separate TIA and final publication/hosted/merge gates remain pending.
+
+## Cycle 6 independent review and remaining gates
+
+Independent review passed the exact 575 source paths, 109 compiled paths and
+terminal full-run evidence. Fresh desktop/mobile review passed, including ten
+opened screenshots, fresh unsubmitted edits preserved across separately opened
+evidence, bounded current guidance and locked exact financial retries. One
+private browser-driver timing failure was archived before a single driver-only
+correction and successful rerun; application and compiled files did not change.
+The browser reviewer's 46 disposable data tables were empty and its own resources
+were removed. The coordinator's test resource remains reserved for TIA.
+
+The original separate TIA recording continues on the same frozen source and build.
+No terminal TIA result, replay or native planner pass is claimed yet. No seventh
+implementation cycle is authorized.
+
+A read-only branch-protection lookup was denied with HTTP 403; the separate
+ruleset response was empty. These observations do not establish whether classic
+protections apply to the administrator. Current owner-provided protection and
+bypass evidence is pending. Corrected-head publication and CI may proceed after
+the local gates, but dev merge remains held until both protection compliance
+and explicit noreply identity guarantees are established. No alternate credential,
+protection-read route or settings change is used.
+
+## Cycle 6 terminal separate TIA
+
+The original TIA record completed with exit 0: 681 executed tests and 4,485
+assertions, with a complete branch baseline containing 681 passing results.
+Wall time was 2,813.428 seconds; Pest reported 2,796.82 seconds. Recording began
+and ended on the existing source HEAD with the corrected source uncommitted;
+it is bound to the unchanged reviewed 575 source paths and 109 compiled paths.
+No replacement run or source change occurred during recording.
+
+The immediately following unchanged run passed with all 681 tests explicitly
+replayed, zero newly executed tests and 4,485 cached assertions. Wall time was
+45.896 seconds; Pest reported 33.81 seconds. Both graph and frontend cache files
+remained byte-identical. This is local developer-loop evidence; the separately
+observed uncached full gate supplies executable coverage evidence.
+
+The native planner probe independently discovered the assessment service in the
+phase diff. For three explicit files it used native current-content snapshots,
+confirmed no change against those snapshots, then simulated one prior hash at a
+time and called the recorded graph's affected-test planner. The service selected
+all three assessment suites; the assessment form selected its HTTP suite; the
+opening page selected AssessmentHttpTest, InvestmentHttpTest and PortfolioHttpTest.
+No source/cache mutation or impacted test execution is claimed. The unchanged
+filter claim covers those explicit probe files; the separate full-file integrity
+check covers all 575 source and 109 compiled paths, bytes and modes.
+
+After replay and planner checks, both cache files and all source/build files
+still matched. All 46 coordinator-owned disposable data tables were empty.
+The older missing database socket remained absent and its contents unverified.
+Final combined independent review and publication checks follow this checkpoint;
+merge remains held for the stated protection evidence and all exact-head gates.
+
+## Cycle 6 final independent local outcome
+
+Independent combined source, browser, full and TIA review returned PASS /
+READY_FOR_REVIEW with no unresolved new local technical findings. The phase
+remains IN_PROGRESS and unaccepted pending publication/hosted gates and the
+conditional merge boundary. This does not close inherited UX-M3-01 or establish
+deployment readiness.
+
+After all owned local database work ended and all 46 data tables were empty,
+the coordinator removed its disposable container. Container termination left
+its own Unix socket and lock; those entries were identified by the retained
+socket identity and explicit port, then removed. An initial premature cleanup
+inspection and the later stale-socket observation are retained privately. The
+older container's identity, process and restart count and the local environment
+file digest were verified preserved; its older missing socket remains absent.
+No restart, repair or data recovery of that older resource was attempted.

@@ -59,6 +59,14 @@ book cost, saved valuation or existing holding. The factual opening/trade workfl
 remains available with any assessment status. It links to assessment evidence
 and explains unresolved risks separately from recording what actually happened.
 
+The opening screen reads current evidence for its selected exact reference and
+up to 20 visible rows, including retained reference versions. The read is
+owner/account/native-currency scoped, private and no-store. Loading, failure
+and newer selections clear prior displayed classifications; guidance is never
+persisted in reference metadata or included in a financial request. Exact
+evidence links open in a labeled separate tab so the unsaved opening form stays
+available. Current guidance can refresh independently of a locked exact retry.
+
 ## Ownership, retries and administration
 
 Owner and administrator evidence navigation uses the same authenticated,

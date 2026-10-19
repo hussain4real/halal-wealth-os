@@ -39,6 +39,7 @@ Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->grou
     Route::post('portfolio', [PortfolioController::class, 'store'])->name('portfolio.store');
     Route::get('portfolio/{portfolio}', [PortfolioController::class, 'show'])->whereNumber('portfolio')->name('portfolio.show');
     Route::get('portfolio/{portfolio}/opening', [PortfolioController::class, 'openingForm'])->whereNumber('portfolio')->name('portfolio.opening');
+    Route::get('portfolio/{portfolio}/opening/assessment-guidance', [PortfolioController::class, 'openingGuidance'])->whereNumber('portfolio')->name('portfolio.opening.guidance');
     Route::post('portfolio/{portfolio}/opening', [PortfolioController::class, 'openingSave'])->whereNumber('portfolio')->name('portfolio.opening.save');
     Route::get('portfolio/{portfolio}/mode', [PortfolioController::class, 'modeForm'])->whereNumber('portfolio')->name('portfolio.mode');
     Route::post('portfolio/{portfolio}/previews', [PortfolioController::class, 'preview'])->whereNumber('portfolio')->name('portfolio.preview');

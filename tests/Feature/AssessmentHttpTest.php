@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\Support\AssessmentFixtures as A;
 use Tests\Support\PortfolioFixtures as P;
@@ -82,4 +83,63 @@ test('guest unverified and production-without-two-factor cannot enter evidence r
     $this->app->detectEnvironment(fn () => 'production');
     $this->actingAs($this->owner);
     $this->get($this->base)->assertRedirect('/settings/security');
+});
+test('opening assessment guidance uses current exact references without changing the financial book', function () {
+    $portfolio = P::link($this->owner, P::account($this->owner));
+    $opening = P::opening($this->owner, $portfolio, [P::row($this->asset)]);
+    $this->travel(2)->days();
+    A::record($this->owner, $this->asset, ['effective_on' => $opening->as_of, 'review_due_on' => now('UTC')->subDay()->toDateString()]);
+    A::record($this->owner, $this->asset, ['provider' => 'Synthetic conflicting source', 'classification' => 'non_compliant']);
+    $revised = P::asset($this->owner, ['prior_id' => (string) $this->asset->id]);
+    $this->get('/portfolio/'.$portfolio->id.'/opening')->assertInertia(fn (Assert $p) => $p->component('portfolio/Opening')->where('initial_rows.0.asset_id', (string) $this->asset->id)->where('initial_rows.0.asset_version', '1'));
+    $tables = ['journal_entries', 'postings', 'investment_events', 'portfolio_assets', 'portfolio_opening_rows', 'portfolio_modes', 'portfolio_prices', 'investment_valuation_runs'];
+    $before = [];
+    foreach ($tables as $table) {
+        $before[$table] = DB::table($table)->orderBy('id')->get()->toJson();
+    }
+    $url = '/portfolio/'.$portfolio->id.'/opening/assessment-guidance?'.http_build_query(['assets' => [(string) $this->asset->id, (string) $revised->id]]);
+    $response = $this->getJson($url)->assertOk()->assertHeader('Cache-Control', 'no-store, private')
+        ->assertJsonCount(2, 'items')->assertJsonPath('items.0.asset_id', (string) $this->asset->id)
+        ->assertJsonPath('items.0.summary.conflict', true)->assertJsonPath('items.0.summary.overdue', true)
+        ->assertJsonPath('items.1.asset_id', (string) $revised->id)->assertJsonPath('items.1.summary.classification', 'pending_review')
+        ->assertJsonPath('items.1.summary.other_reference_evidence', true);
+    expect(substr($response->json('cutoff'), 0, 10))->toBe(now('UTC')->toDateString())->not->toBe($opening->as_of);
+    foreach ($tables as $table) {
+        expect(DB::table($table)->orderBy('id')->get()->toJson())->toBe($before[$table]);
+    }
+});
+test('opening assessment guidance bounds inputs and isolates owned native references for ordinary owners and admins', function () {
+    $portfolio = P::link($this->owner, P::account($this->owner));
+    $base = '/portfolio/'.$portfolio->id.'/opening/assessment-guidance';
+    $id = (string) $this->asset->id;
+    foreach ([[], ['assets' => $id], ['assets' => ['named' => $id]], ['assets' => [$id, $id]], ['assets' => array_fill(0, 22, $id)], ['assets' => [$id], 'owner_id' => '9']] as $query) {
+        $this->getJson($base.'?'.http_build_query($query))->assertUnprocessable();
+    }
+    $this->getJson($base.'?'.http_build_query(['assets' => [$id, '0']]))->assertNotFound();
+    $wrongCurrency = P::asset($this->owner, ['currency' => 'USD']);
+    $this->getJson($base.'?'.http_build_query(['assets' => [(string) $wrongCurrency->id]]))->assertUnprocessable();
+    $foreignOwner = User::factory()->create();
+    $foreignAsset = P::asset($foreignOwner);
+    $foreignPortfolio = P::link($foreignOwner, P::account($foreignOwner));
+    foreach ([false, true] as $admin) {
+        $this->owner->forceFill(['is_admin' => $admin])->save();
+        $this->getJson($base.'?'.http_build_query(['assets' => [$id, (string) $foreignAsset->id]]))->assertNotFound();
+        $this->getJson('/portfolio/'.$foreignPortfolio->id.'/opening/assessment-guidance?'.http_build_query(['assets' => [$id]]))->assertNotFound();
+    }
+    $ids = [$id];
+    for ($i = 0; $i < 20; $i++) {
+        $ids[] = (string) P::asset($this->owner)->id;
+    }
+    $this->getJson($base.'?'.http_build_query(['assets' => $ids]))->assertOk()->assertJsonCount(21, 'items');
+});
+test('opening assessment guidance retains authentication verification and production two factor guards', function () {
+    $portfolio = P::link($this->owner, P::account($this->owner));
+    $url = '/portfolio/'.$portfolio->id.'/opening/assessment-guidance?'.http_build_query(['assets' => [(string) $this->asset->id]]);
+    auth()->logout();
+    $this->get($url)->assertRedirect('/login');
+    $this->actingAs(User::factory()->unverified()->create());
+    $this->get($url)->assertRedirect('/email/verify');
+    $this->app->detectEnvironment(fn () => 'production');
+    $this->actingAs($this->owner);
+    $this->get($url)->assertRedirect('/settings/security');
 });

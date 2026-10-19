@@ -119,6 +119,34 @@ class PortfolioController extends Controller
         return $this->saved($request, $row, '/portfolio/'.$portfolio);
     }
 
+    public function openingGuidance(Request $request, string $portfolio): JsonResponse
+    {
+        $owner = $this->owner($request);
+        $cutoff = $this->now();
+
+        return PortfolioRead::coherent(function () use ($request, $portfolio, $owner, $cutoff): JsonResponse {
+            $account = $this->read->account($owner, $portfolio);
+            $assets = $request->query('assets');
+            if (array_diff(array_keys($request->query()), ['assets']) !== [] || ! is_array($assets) || ! array_is_list($assets) || count($assets) < 1 || count($assets) > 21) {
+                LedgerInput::fail('assets', 'Choose between 1 and 21 exact asset references.');
+            }
+            $ids = array_map(fn (mixed $id): string => LedgerInput::identifier($id), $assets);
+            if (count(array_unique($ids)) !== count($ids)) {
+                LedgerInput::fail('assets', 'Choose each exact asset reference once.');
+            }
+            $items = [];
+            foreach ($ids as $id) {
+                $asset = LedgerInput::owned('portfolio_assets', $owner, $id);
+                if ($asset->currency !== $account->currency) {
+                    LedgerInput::fail('assets', 'Use references in this portfolio account currency.');
+                }
+                $items[] = ['asset_id' => $id, 'summary' => app(AssessmentRead::class)->view($owner, $id, $cutoff)['summary']];
+            }
+
+            return response()->json(['cutoff' => $cutoff, 'items' => $items])->header('Cache-Control', 'private, no-store');
+        });
+    }
+
     public function modeForm(Request $request, string $portfolio): Response
     {
         return PortfolioRead::coherent(fn (): Response => Inertia::render('portfolio/Mode', ['account' => $this->summary($this->read->state($this->owner($request), $portfolio, $this->now())), 'today' => now('UTC')->toDateString()]));

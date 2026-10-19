@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-19T11:50:12.319877+00:00",
+    "updated_at": "2026-10-19T14:01:03.304148+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -361,19 +361,18 @@
     "execution_status": {
         "phase": "M4-P1",
         "status": "IN_PROGRESS",
-        "cycle": 4,
+        "cycle": 6,
         "max_cycles": 6,
-        "implementation": "LOCAL_ENGINEERING_COMPLETE_UNACCEPTED",
-        "full_gate": "PASS_CYCLE4_UNCACHED678_TESTS4434_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS_COVERAGE3618_OF3850",
-        "tia": "PASS_FRESH678_EXECUTED4434_ASSERTIONS_REPLAY678_CACHED_ZERO_NEW_EXECUTIONS_NATIVE_PHP_VUE_PLANNER_PASS",
-        "rendered_review": "PASS_FINAL_FRESH_DESKTOP_MOBILE_EXACT572_SOURCE109_BUILD18_OPENED_IMAGES_BOTH_RECOVERY_CORRECTIONS_AND_CLEANUP",
-        "independent_review": "PASS_FINAL_LOCAL_ENGINEERING_NO_UNRESOLVED_NEW_TECHNICAL_FINDINGS",
-        "publication": "FINAL_SANITATION_REVIEW_IN_PROGRESS_NOT_PUBLISHED",
+        "implementation": "FINAL_SCOPED_SEPARATE_TAB_EVIDENCE_LINK_CORRECTION",
+        "full_gate": "PASS_CYCLE6_UNCACHED681_TESTS4485_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS_COVERAGE3636_OF3868",
+        "tia": "PASS_CYCLE6_RECORD681_REPLAY681_ZERO_NEW_NATIVE_PLANNER",
+        "rendered_review": "PASS_CYCLE6_FRESH_DESKTOP_MOBILE575_SOURCE109_COMPILED10_OPENED_IMAGES_FRESH_DRAFT_NEW_TAB_NOOPENER_BOUNDED_CURRENT_GUIDANCE_LOCKED_EXACT_RETRY_CLEANUP",
+        "independent_review": "PASS_FINAL_EXACT575_SOURCE109_BUILD_FULL681_4485_COVERAGE3636_3868_59NODE_FRESH_RENDERED_TIA_RECORD_REPLAY_NATIVE_PLANNER_NO_NEW_TECHNICAL_FINDING",
+        "source_review": "PASS_CYCLE6_EXACT575_HASHES_AND_MODES_M4P1_OPENING_NAV_01_SOURCE_FIXED_NO_UNRESOLVED_SOURCE_FINDINGS",
+        "publication": "PR12_OPEN_READY_HEAD866D49E_CORRECTION_NOT_YET_PUBLISHED",
         "merge": "NOT_RUN",
         "post_merge_ci": "NOT_RUN",
-        "scoped": "PASS9_ACQUISITION_DATE_DRAFT_TESTS_AFTER_ACTUAL_RED_AND2_HISTORICAL_MIGRATION_TESTS39_ASSERTIONS",
-        "independent_design": "COMPLETE_READ_ONLY_NO_START_BLOCKER",
-        "source_review": "PASS_CYCLE4_EXACT572_HASHES_AND_MODES"
+        "scoped": "Cycle5 endpoint3tests51assertions_and6loaderPASS; final6linksource_and_actualfreshdraftbrowserPASS"
     },
     "dependency_patch": {
         "authorized": true,
@@ -945,6 +944,41 @@
             "source_review": "CYCLE3_PASS; CYCLE4_NARROW_SHARED_DRAFT_AND_HISTORICAL_TEST_SETUP_DELTA_PENDING_REVIEW",
             "observed_at": "2026-10-19T11:50:12.319877+00:00",
             "checkpoint": "Historical cycle4 pre-terminal status preserved during final publication accuracy review; superseded by independently verified full/TIA/rendered/source outcomes."
+        },
+        {
+            "phase": "M4-P1",
+            "status": "IN_PROGRESS",
+            "cycle": 4,
+            "max_cycles": 6,
+            "implementation": "LOCAL_ENGINEERING_COMPLETE_UNACCEPTED",
+            "full_gate": "PASS_CYCLE4_UNCACHED678_TESTS4434_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS_COVERAGE3618_OF3850",
+            "tia": "PASS_FRESH678_EXECUTED4434_ASSERTIONS_REPLAY678_CACHED_ZERO_NEW_EXECUTIONS_NATIVE_PHP_VUE_PLANNER_PASS",
+            "rendered_review": "PASS_FINAL_FRESH_DESKTOP_MOBILE_EXACT572_SOURCE109_BUILD18_OPENED_IMAGES_BOTH_RECOVERY_CORRECTIONS_AND_CLEANUP",
+            "independent_review": "PASS_FINAL_LOCAL_ENGINEERING_NO_UNRESOLVED_NEW_TECHNICAL_FINDINGS",
+            "publication": "FINAL_SANITATION_REVIEW_IN_PROGRESS_NOT_PUBLISHED",
+            "merge": "NOT_RUN",
+            "post_merge_ci": "NOT_RUN",
+            "scoped": "PASS9_ACQUISITION_DATE_DRAFT_TESTS_AFTER_ACTUAL_RED_AND2_HISTORICAL_MIGRATION_TESTS39_ASSERTIONS",
+            "independent_design": "COMPLETE_READ_ONLY_NO_START_BLOCKER",
+            "source_review": "PASS_CYCLE4_EXACT572_HASHES_AND_MODES",
+            "historical_note": "Cycle 4 engineering results retained; subsequent hosted review found opening-flow guidance incomplete. Superseded by cycle 5 correction and fresh gates."
+        },
+        {
+            "phase": "M4-P1",
+            "status": "IN_PROGRESS",
+            "cycle": 5,
+            "max_cycles": 6,
+            "implementation": "SCOPED_OPENING_GUIDANCE_CORRECTION_LOCAL_UNCOMMITTED",
+            "full_gate": "PENDING_CYCLE5_FULL_UNCACHED",
+            "tia": "PENDING_CYCLE5_SEPARATE_RECORD_REPLAY_NATIVE_PLANNER",
+            "rendered_review": "ACTUAL_RED_COMPLETE_FRESH_GREEN_PENDING_FROZEN_SOURCE_AND_BUILD",
+            "independent_review": "CYCLE4_COMPLETENESS_WITHDRAWN_VALID_HOSTED_P2_CYCLE5_REVIEW_PENDING",
+            "source_review": "CHANGES_REQUIRED_M4P1_OPENING_NAV_01_FRESH_UNSUBMITTED_DRAFT_NOT_PRESERVED_BY_SAME_TAB_EVIDENCE_LINK_BROWSER_RED_PENDING",
+            "publication": "PR12_OPEN_READY_HEAD866D49E_CORRECTION_NOT_YET_PUBLISHED",
+            "merge": "NOT_RUN",
+            "post_merge_ci": "NOT_RUN",
+            "scoped": "HTTP3_TESTS40_ASSERTIONS_AND6_LOADER_TESTS_PASS_TYPES_PHPSTAN_FRONTEND_CHECK_PASS",
+            "historical_note": "Cycle5 full intentionally stopped after actual mobile RED confirmed fresh draft loss; no full pass claimed."
         }
     ],
     "m0p3_publication": {
@@ -1752,47 +1786,43 @@
     "m4p1_checkpoint": {
         "status": "IN_PROGRESS",
         "accepted": false,
-        "cycles_used": 4,
+        "cycles_used": 6,
         "max_cycles": 6,
         "baseline_head": "04c8fd317dd415aaa9ed1ca4519eec43636ed54b",
         "evidence": "runs/M4-P1-local.md",
-        "source_review": "PASS_CYCLE4_EXACT572_HASHES_AND_MODES_NO_UNRESOLVED_SOURCE_FINDINGS",
-        "rendered_review": "PASS_FRESH_DESKTOP_MOBILE_EXACT572_SOURCE109_COMPILED18_OPENED_IMAGES_TWO_RECOVERY_CORRECTIONS",
+        "source_review": "PASS_CYCLE6_EXACT575_HASHES_AND_MODES_M4P1_OPENING_NAV_01_SOURCE_FIXED_NO_UNRESOLVED_SOURCE_FINDINGS",
+        "rendered_review": "PASS_CYCLE6_FRESH_DESKTOP_MOBILE575_SOURCE109_COMPILED10_OPENED_IMAGES_FRESH_DRAFT_NEW_TAB_NOOPENER_BOUNDED_CURRENT_GUIDANCE_LOCKED_EXACT_RETRY_CLEANUP",
         "rendered_evidence": "runs/M4-P1-rendered-review.md",
-        "full_gate": "PASS_CYCLE4_UNCACHED678_TESTS4434_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS",
-        "tests": 678,
-        "assertions": 4434,
-        "coverage": "3618/3850",
-        "node_tests": 53,
-        "full_wall_seconds": 892.490643968,
+        "full_gate": "PASS_CYCLE6_UNCACHED681_TESTS4485_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS",
         "tia": {
-            "status": "PASS",
+            "status": "PASS_CYCLE6_RECORD_REPLAY_NATIVE_PLANNER_INDEPENDENTLY_REVIEWED",
             "full_gate_separate": true,
             "fresh": {
-                "executed_tests": 678,
-                "assertions": 4434,
-                "wall_seconds": 1281.556316022,
-                "pest_seconds": 1276.7
+                "executed_tests": 681,
+                "assertions": 4485,
+                "wall_seconds": 2813.4278431579996,
+                "pest_seconds": 2796.82
             },
             "unchanged_replay": {
-                "replayed_tests": 678,
+                "replayed_tests": 681,
                 "newly_executed_tests": 0,
-                "assertions_from_cache": 4434,
-                "wall_seconds": 15.76267934,
-                "pest_seconds": 9.98
+                "assertions_from_cache": 4485,
+                "wall_seconds": 45.895903728,
+                "pest_seconds": 33.81
             },
-            "complete_branch_results": 678,
-            "cache_unchanged_on_replay": true,
-            "native_planner": "PASS_SERVICE_TO_THREE_ASSESSMENT_SUITES_AND_FORM_TO_HTTP_SUITE_SIMULATED_PREVIOUS_HASHES_ONLY_NO_SOURCE_OR_CACHE_MUTATION_OR_IMPACTED_EXECUTION",
-            "operational_maintenance": "ONE_ORDINARY_SQL_CHECKPOINT_ON_OWN_DISPOSABLE_DATABASE_NO_SETTINGS_OR_DURABILITY_CHANGES"
+            "complete_branch_results": 681,
+            "cache_unchanged_on_replay_and_planner": true,
+            "native_planner": "PASS_NATIVE_EXPLICIT_FILE_CONTENT_SNAPSHOTS_AND_SIMULATED_PRIOR_HASHES;SERVICE_TO_THREE_ASSESSMENT_SUITES;FORM_TO_HTTP;OPENING_TO_ASSESSMENT_INVESTMENT_PORTFOLIO_HTTP;INDEPENDENT_NATIVE_PHASE_SOURCE_DISCOVERY;NO_SOURCE_CACHE_MUTATION_OR_IMPACTED_EXECUTION",
+            "recording_context": "Same original HEAD throughout record/replay; corrected575source109builduncommitted and frozen; publication must preserve all bytes/modes",
+            "own_disposable_tables_empty": 46
         },
-        "publication": "PENDING_FINAL_SANITATION_EXACT_COMMIT_AND_HOSTED_GATES",
+        "publication": "PR12_OPEN_READY_HEAD866D49E_CORRECTION_NOT_YET_COMMITTED",
         "next_phase_authorized": false,
         "remaining_gates": [
-            "final independent publication review",
-            "exact-commit noreply metadata review",
-            "phase PR and original hosted CI",
-            "normal explicit-noreply dev merge and original post-merge CI",
+            "sanitation and exact-commit noreply metadata review",
+            "corrected-head original hosted CI and review",
+            "owner-provided current dev protection and administrator-bypass evidence",
+            "normal explicit-noreply dev merge and original post-merge CI if all guarantees established",
             "human M4-P1 acceptance"
         ],
         "cycle_history": [
@@ -1815,6 +1845,29 @@
                 "cycle": 4,
                 "scope": "Acquisition-date draft compatibility and historical migration sequence",
                 "observed": "Actual Node RED then9draftPASS; historical checks2tests39assertionsPASS; source572/rendered572and109PASS; full678tests4434assertionsPASS; separate TIA fresh678/replay678zeroNew/nativePlannerPASS; final independent publication and hosted gates pending"
+            },
+            {
+                "cycle": 5,
+                "scope": "Hosted opening-flow assessment guidance gap",
+                "observed": "HTTPRED3then3/40PASS;19HTTP199PASS; retainedOpeningextraassertionint-versusstringfailurethen3/51PASS;6loaderPASS;types/PHPStan/frontend/buildPASS; source575reviewCHANGES_REQUIRED and actualmobileRED; fullstopped before correction",
+                "hosted_finding": "PR12 original-head P2 opening flow missing per-reference guidance/evidence links; earlier broad AC5 completeness withdrawn",
+                "original_hosted_ci": "SUCCESS_39249330030_ATTEMPT1_HEAD866D49E; complete log download Forbidden, no alternate-route retry",
+                "source_finding": "M4P1-OPENING-NAV-01 medium actualmobileRED: new same-tab evidence navigation and Back discard fresh unsubmitted row/source/amounts; no POST or database change",
+                "full_gate": "INTENTIONALLY_STOPPED_EXIT1_AFTER164_OBSERVED_PASSING_CHECKMARKS_NO_FULL_PASS"
+            },
+            {
+                "cycle": 6,
+                "scope": "Preserve fresh opening edits while reading assessment evidence",
+                "observed": "Source/browser/full/separateTIArecord681replay681zeroNew/nativePlanner/finalindependentlocalreviewPASS; finalsanitation/publication/hostedgatespending",
+                "cycle_budget": "SIXTH_AND_FINAL_AUTHORIZED_CYCLE_NO_RESET",
+                "rendered": "PASS575_SOURCE109_BUILD10_IMAGES_OPENED_FRESH_UNSUBMITTED_DRAFT_AND_LOCKED_RETRY_PRESERVED; oneprivateharnesstimingfailurearchivedthenonererunPASS_noappchanges;own46tablesemptyandresourcesremoved",
+                "full_gate": "PASS_CYCLE6_UNCACHED681_TESTS4485_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS",
+                "full_wall_seconds": 1847.562597863,
+                "pest_seconds": 1560.38,
+                "coverage": "3636/3868",
+                "node_tests": 59,
+                "connection_notification": "13:02 notification verified same environment/original runner and advancing log; no duplicate; original run terminal PASS",
+                "tia": "RECORD681_4485_REPLAY681_ZERO_NEW_NATIVE_PLANNER_PASS"
             }
         ],
         "operational_incident": "Coordinator bootstrap temporarily used default socket port; older idle cloud database socket unavailable, original server still running, no restart/reset/settings/data changes attempted; old contents not reverified. Safe recovery remains an owner disposition item.",
@@ -1823,6 +1876,49 @@
         ],
         "connection_notifications": "Same environment and original full/TIA workers verified; logs advanced and no duplicate checks started; terminal results preserved separately.",
         "local_engineering_complete": true,
-        "independent_local_engineering_review": "PASS_FINAL_EXACT572_SOURCE109_BUILD_FULL678_4434_COVERAGE3618_3850_53NODE_FRESH_RENDERED_TIA_RECORD_REPLAY_NATIVE_PLANNER_NO_NEW_TECHNICAL_FINDING"
+        "independent_local_engineering_review": "PASS_FINAL_EXACT575_SOURCE109_BUILD_FULL681_4485_COVERAGE3636_3868_59NODE_FRESH_RENDERED_TIA_RECORD_REPLAY_NATIVE_PLANNER_NO_NEW_TECHNICAL_FINDING",
+        "cycle4_historical_gates": {
+            "source_review": "PASS_CYCLE4_EXACT572_HASHES_AND_MODES_NO_UNRESOLVED_SOURCE_FINDINGS",
+            "rendered_review": "PASS_FRESH_DESKTOP_MOBILE_EXACT572_SOURCE109_COMPILED18_OPENED_IMAGES_TWO_RECOVERY_CORRECTIONS",
+            "full_gate": "PASS_CYCLE4_UNCACHED678_TESTS4434_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS",
+            "tests": 678,
+            "assertions": 4434,
+            "coverage": "3618/3850",
+            "node_tests": 53,
+            "full_wall_seconds": 892.490643968,
+            "tia": {
+                "status": "PASS",
+                "full_gate_separate": true,
+                "fresh": {
+                    "executed_tests": 678,
+                    "assertions": 4434,
+                    "wall_seconds": 1281.556316022,
+                    "pest_seconds": 1276.7
+                },
+                "unchanged_replay": {
+                    "replayed_tests": 678,
+                    "newly_executed_tests": 0,
+                    "assertions_from_cache": 4434,
+                    "wall_seconds": 15.76267934,
+                    "pest_seconds": 9.98
+                },
+                "complete_branch_results": 678,
+                "cache_unchanged_on_replay": true,
+                "native_planner": "PASS_SERVICE_TO_THREE_ASSESSMENT_SUITES_AND_FORM_TO_HTTP_SUITE_SIMULATED_PREVIOUS_HASHES_ONLY_NO_SOURCE_OR_CACHE_MUTATION_OR_IMPACTED_EXECUTION",
+                "operational_maintenance": "ONE_ORDINARY_SQL_CHECKPOINT_ON_OWN_DISPOSABLE_DATABASE_NO_SETTINGS_OR_DURABILITY_CHANGES"
+            },
+            "local_engineering_complete": true,
+            "independent_local_engineering_review": "PASS_FINAL_EXACT572_SOURCE109_BUILD_FULL678_4434_COVERAGE3618_3850_53NODE_FRESH_RENDERED_TIA_RECORD_REPLAY_NATIVE_PLANNER_NO_NEW_TECHNICAL_FINDING"
+        },
+        "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/12",
+        "hosted_ci": "ORIGINAL_HEAD866D49E_ATTEMPT1_39249330030_SUCCESS_COMPLETE_LOG_READ_FORBIDDEN_CORRECTED_HEAD_NOT_RUN",
+        "hosted_review": "VALID_P2_OPENING_GUIDANCE_UNRESOLVED_CORRECTION_IN_PROGRESS",
+        "tests": 681,
+        "assertions": 4485,
+        "coverage": "3636/3868",
+        "node_tests": 59,
+        "full_wall_seconds": 1847.562597863,
+        "merge_hold": "Current dev protection and administrator-bypass enforcement not established after denied protection read; owner-provided evidence pending; no alternate route, credential or settings change",
+        "own_resource_cleanup": "PASS_46EMPTY_OWN_CONTAINER_AND_VERIFIED5543_SOCKET_LOCK_REMOVED;OLDER_CONTAINER_ID_PID_RESTART_AND_ENV_DIGEST_PRESERVED_OLD5432_SOCKET_STILL_ABSENT_CONTENTS_UNVERIFIED"
     }
 }

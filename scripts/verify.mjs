@@ -69,6 +69,7 @@ try {
             'scripts/cash-settings-draft.test.mjs',
             'scripts/portfolio-request-draft.test.mjs',
             'scripts/portfolio-reference-cache.test.mjs',
+            'scripts/opening-assessment-guidance.test.mjs',
         ]);
         const missing = [];
         for (const command of ['php', 'composer', 'node', 'npm', 'psql']) {

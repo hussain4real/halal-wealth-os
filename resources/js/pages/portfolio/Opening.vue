@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { Link, router, usePage } from '@inertiajs/vue3';
-import { computed, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import PortfolioShell from '@/components/PortfolioShell.vue';
 import PortfolioAttempt from '@/components/PortfolioAttempt.vue';
+import OpeningAssessmentGuidance from '@/components/OpeningAssessmentGuidance.vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { usePortfolioForm } from '@/composables/usePortfolioForm';
 import { portfolioReferenceCache } from '@/composables/portfolioReferenceCache';
+import { openingAssessmentGuidance } from '@/composables/openingAssessmentGuidance';
+import type { OpeningGuidanceState } from '@/composables/openingAssessmentGuidance';
 import type {
     Asset,
     OpeningRow,
@@ -91,8 +94,56 @@ const visible = computed(() =>
     rows.value.slice(page.value * 20, page.value * 20 + 20),
 );
 const selected = ref('');
+watch(
+    () => props.choices.items,
+    (items) => {
+        if (
+            selected.value &&
+            !items.some((asset) => asset.id === selected.value)
+        ) {
+            selected.value = '';
+        }
+    },
+);
 const search = ref(props.query);
 const message = ref('');
+const guidance = ref<OpeningGuidanceState>({
+    status: 'unavailable',
+    cutoff: null,
+    items: new Map(),
+});
+const guidanceIds = computed(() => [
+    ...new Set([
+        ...visible.value.map((row) => row.asset_id),
+        ...(selected.value ? [selected.value] : []),
+    ]),
+]);
+const guidanceReader = openingAssessmentGuidance(
+    '/portfolio/' + props.account.portfolio_id + '/opening/assessment-guidance',
+    (state) => {
+        guidance.value = state;
+    },
+);
+const refreshGuidance = () => {
+    void guidanceReader.refresh(guidanceIds.value);
+};
+let stopGuidance: (() => void) | undefined;
+let stopNavigation: (() => void) | undefined;
+onMounted(() => {
+    stopGuidance = watch(() => guidanceIds.value.join(','), refreshGuidance, {
+        immediate: true,
+    });
+    stopNavigation = router.on('navigate', refreshGuidance);
+    window.addEventListener('focus', refreshGuidance);
+    window.addEventListener('pageshow', refreshGuidance);
+});
+onBeforeUnmount(() => {
+    stopGuidance?.();
+    stopNavigation?.();
+    guidanceReader.dispose();
+    window.removeEventListener('focus', refreshGuidance);
+    window.removeEventListener('pageshow', refreshGuidance);
+});
 const blocked = computed(
     () => form.processing || locked.value || props.account.archived,
 );
@@ -203,6 +254,38 @@ const rowError = (index: number, field: string) =>
                 only for the opening UTC date.
             </p>
         </section>
+        <section class="rounded-2xl border bg-card p-5 text-sm sm:p-7">
+            <h2 class="font-semibold">
+                Assessment evidence for the selected positions
+            </h2>
+            <p class="mt-2">
+                Review current sources before an investment decision. This
+                opening statement records facts; it does not certify assets or
+                restrict factual holdings by assessment status.
+            </p>
+            <Button
+                type="button"
+                variant="outline"
+                class="mt-3"
+                :disabled="!guidanceIds.length"
+                @click="refreshGuidance"
+                >Refresh current assessment evidence</Button
+            >
+            <p v-if="guidance.status === 'loading'" role="status" class="mt-3">
+                Checking current evidence for the selected and visible
+                references.
+            </p>
+            <p
+                v-else-if="
+                    guidance.status === 'unavailable' && guidanceIds.length
+                "
+                role="status"
+                class="mt-3"
+            >
+                Current evidence could not be loaded here. Use each reference’s
+                evidence link; factual recording remains available.
+            </p>
+        </section>
         <section class="rounded-2xl border bg-card p-5 sm:p-7">
             <h2 class="text-lg font-semibold">
                 Add a reference to the complete book
@@ -246,6 +329,11 @@ const rowError = (index: number, field: string) =>
                     >Add position</Button
                 >
             </div>
+            <OpeningAssessmentGuidance
+                v-if="selected"
+                :asset-id="selected"
+                :state="guidance"
+            />
             <p v-if="message" role="status" class="mt-3 text-sm">
                 {{ message }}
             </p>
@@ -354,6 +442,10 @@ const rowError = (index: number, field: string) =>
                             >Remove position</Button
                         >
                     </div>
+                    <OpeningAssessmentGuidance
+                        :asset-id="row.asset_id"
+                        :state="guidance"
+                    />
                     <div class="mt-5 grid gap-5 sm:grid-cols-2">
                         <template
                             v-if="

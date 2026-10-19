@@ -1,7 +1,14 @@
 # M4-P1 independent rendered review
 
-Result: PASS on the final cycle 4 source and production assets. This is
-engineering evidence, not human phase acceptance. The independent reviewer
+Current result: PASS on the final cycle 6 source and production assets. All
+575 source files and 109 compiled files matched before and after review. The
+cycle 5 failures remain retained below. This is engineering evidence; full,
+TIA, publication and human acceptance are separate gates.
+
+## Retained cycle 4 results
+
+Result: PASS on the cycle 4 source and production assets. This is
+historical engineering evidence, not human phase acceptance. The independent reviewer
 matched all 572 source files and 109 compiled files before and after review.
 
 Actual Chromium sessions exercised desktop at 1440 by 1000 and mobile at
@@ -43,3 +50,53 @@ No external provider, AI generation, external source navigation or production
 two-factor browser session was tested. Full uncached regression, separate TIA,
 source and exact-commit review, hosted CI and human acceptance remain distinct
 gates. Raw screenshots, scripts and receipts remain private.
+
+## Cycle 5 actual failures and cycle 6 correction
+
+A fresh mobile review confirmed the opening screen omitted current guidance and
+assessment links both before adding a reference and on its added row, for
+conflicting and overdue examples. Four screenshots were opened. After adding
+per-reference guidance, a separate fresh-unsaved navigation check confirmed that
+following a same-tab evidence link and pressing Back lost the added position and
+statement fields. No financial request was submitted and database counts stayed
+unchanged. Both failure screenshots were opened; source and build stayed frozen.
+
+The sixth and final cycle changes that evidence link to a labeled separate-tab
+anchor with noopener noreferrer. Fresh desktop/mobile guidance, exact references,
+bounded reads, error fallback, keyboard access and unchanged financial retry
+checks are in progress against a new source and compiled freeze.
+
+## Final cycle 6 observed results
+
+Independent fresh desktop/mobile Chromium review passed against the final
+frozen source and production build. Current evidence and exact-reference links
+were visible before adding a selected asset and beside retained visible rows.
+Search, catalog pagination, a statement exceeding 20 positions, older asset
+references and current evidence on a historical opening were exercised.
+Guidance requests reached, and never exceeded, 21 distinct references. Owner
+and administrator isolation negatives passed.
+
+The labeled separate-tab link had no opener. Fresh unsubmitted source, reason,
+row, units, cost and acquisition date stayed identical after evidence navigation,
+with no financial POST. Delayed-response and failed-request checks kept
+uncertainty visible while factual recording remained available; an actual 503
+fallback did not prevent saving the factual opening.
+
+After a committed opening response was lost and assessment evidence changed,
+reload displayed the new conflict and overdue state. The locked form's evidence
+link remained keyboard reachable, and retry retained the identical original
+financial payload/key without a duplicate revision. All 10 final screenshots
+were opened, including the fresh-draft proof. No horizontal overflow or
+JavaScript page errors were observed in the exercised states.
+
+The first broad attempt failed in the private delayed-response driver: its
+500-millisecond capture assertion ran while route.fetch was still pending.
+That raw log, JSON and screenshots were archived before one corrected-driver
+rerun. The successful complete rerun changed no application source or build.
+This harness failure is retained, not presented as a first-attempt pass.
+
+All 46 reviewer data tables were empty afterward. Its HTTP server, container
+and distinct socket were removed. Source/build hashes, application environment
+and the coordinator's distinct socket matched their baselines; the older
+socket remained absent, and its data contents remain unverified. UX-M3-01
+remains open. Chromium-only and other earlier review limitations still apply.
