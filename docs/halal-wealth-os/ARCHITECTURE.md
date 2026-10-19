@@ -3,8 +3,11 @@
 Status: the personal-first modular-monolith and six ADR directions are human
 accepted. M0, M1 and M2 are human accepted; see [M2 acceptance](runs/M2-acceptance.md).
 Detailed module import edges remain proposed. M3-P1 is human accepted; M3-P2 is human accepted; canonical M3-P3 dated valuation and performance
-implementation is authorized. Formal M3 review awaits M3-P3 owner acceptance;
-M4 and later phases remain unauthorized. The
+implementation is human accepted at 08:33 UTC on 19 October 2026. Formal
+independent M3 review returned READY_FOR_OWNER with one low, nonblocking guidance
+finding; M3 remains unaccepted and M4 and later phases remain unauthorized. See
+[M3-P3 acceptance](runs/M3-P3-acceptance.md) and the
+[independent M3 review](runs/M3-independent-review.md). The
 accepted prior cash policy is in [cash availability](CASH-AVAILABILITY.md), and
 manual FX/reconciliation decisions remain in [their ADR](FX-AND-RECONCILIATION.md).
 

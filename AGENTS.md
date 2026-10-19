@@ -264,3 +264,17 @@ time value, scope-aware supported return and allocation completeness. No live
 feeds, TWR/XIRR, forecasts, broker execution, main/stage change, deployment, new
 credentials or security-setting changes. Stop for human M3-P3 acceptance before
 formal independent M3 milestone review or M4.
+
+## Current M3 completion records and independent review authority
+
+The human owner accepted M3-P3 and the specific PUB-MERGE-01 existing-history
+metadata exception at 08:33 UTC on 19 October 2026. The owner approved correcting
+and publishing sanitized completion records and running formal independent M3
+milestone review after all three phases were accepted. Preserve history, source
+and build files; independent reviewers remain source-read-only and may use owned
+isolated test resources. Report READY_FOR_OWNER or CHANGES_REQUIRED and stop for
+human M3 acceptance. This exception permits existing metadata only, not future
+personal-metadata exposure or history rewriting. Verify a supported noreply path
+before any future merge; stop if it requires account/security settings or
+permission changes. No M4, main/stage promotion, deployment, credentials or
+unrelated repository work is authorized.
