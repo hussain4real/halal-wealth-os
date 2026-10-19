@@ -1,5 +1,12 @@
 # M3-P3 publication checkpoint
 
+Current milestone decision: the human owner accepted M3 at 10:23 UTC on
+19 October 2026 and approved the exact public documentation-only draft PR from
+docs/m3-completion-and-review into dev in hussain4real/halal-wealth-os. See
+[M3 acceptance](M3-acceptance.md). The earlier M3-pending and publication
+statements below are historical checkpoints. No new merge or M4 implementation
+is authorized; M4-P1 preparation is read-only.
+
 Status: merged normally to dev; code/review/CI gates complete. The human owner
 accepted M3-P3 and the existing-history PUB-MERGE-01 metadata exception at
 08:33 UTC on 19 October 2026. See [owner acceptance](M3-P3-acceptance.md).

@@ -278,3 +278,18 @@ personal-metadata exposure or history rewriting. Verify a supported noreply path
 before any future merge; stop if it requires account/security settings or
 permission changes. No M4, main/stage promotion, deployment, credentials or
 unrelated repository work is authorized.
+
+## Current M3 acceptance, documentation PR and M4 preparation authority
+
+The human owner accepted M3 at 10:23 UTC on 19 October 2026 after the independent
+READY_FOR_OWNER review. The owner approved the exact public documentation-only
+draft PR in hussain4real/halal-wealth-os, from docs/m3-completion-and-review into
+dev, containing the completion records and review summary. Record the decision,
+preserve the earlier reviews and accepted metadata exception, independently
+review sanitized updates, and retry the same previously denied PR creation once.
+If denied, stop without alternate routes. Preserve the approved noreply identity;
+no new merge, account/security-setting change or future personal email exposure
+is authorized. M4-P1 preparation is read-only and does not authorize M4 code,
+an implementation claim or alteration of the owner's Mac environment. Preserve
+main/stage and all unrelated work. See runs/M3-acceptance.md under the planning
+directory for the human decision; only later explicit authority can start M4.

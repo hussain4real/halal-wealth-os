@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-19T08:56:32.421825+00:00",
+    "updated_at": "2026-10-19T10:25:59.228065+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -50,9 +50,9 @@
         },
         {
             "id": "M3",
-            "status": "READY_FOR_OWNER",
-            "accepted_by": null,
-            "accepted_at": null,
+            "status": "ACCEPTED",
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-19T10:23:00Z",
             "review_evidence": "runs/M3-independent-review.md"
         },
         {
@@ -351,8 +351,8 @@
     "execution_status": {
         "phase": "M3-P3",
         "status": "ACCEPTED",
-        "checkpoint": "M3-P3 human accepted at 08:33 UTC with the existing-history PUB-MERGE-01 exception. Formal independent M3 review READY_FOR_OWNER: fresh full625/4135, coverage3466/3695, canonicalF08-F11 and cleanup pass; one LOW nonblocking stale-guidance finding. M3 remains unaccepted and M4 unauthorized. Sanitized documentation branch/PR publication only; no new merge.",
-        "observed_at": "2026-10-19T08:56:32.421825+00:00"
+        "checkpoint": "Human owner accepted M3 at 10:23 UTC after the independent READY_FOR_OWNER review. Exact documentation-only draft PR to dev and read-only canonical M4-P1 preparation approved. Existing LOW UX-M3-01 remains visible. No M4 implementation claim, new merge, account settings change or Mac alteration authorized.",
+        "observed_at": "2026-10-19T10:25:59.228065+00:00"
     },
     "dependency_patch": {
         "authorized": true,
@@ -763,6 +763,15 @@
             "evidence": "runs/M3-P3-acceptance.md",
             "future_metadata_exposure_authorized": false,
             "history_rewrite_authorized": false
+        },
+        {
+            "milestone": "M3",
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-19T10:23:00Z",
+            "decision": "Accept M3 after independent review; approve public documentation-only draft PR from docs/m3-completion-and-review into dev and canonical M4-P1 preparation only",
+            "evidence": "runs/M3-acceptance.md",
+            "implementation_authorized": false,
+            "new_merge_authorized": false
         }
     ],
     "execution_status_history": [
@@ -874,6 +883,12 @@
             "status": "ACCEPTED",
             "checkpoint": "Human owner accepted M3-P3 and the specific existing-history PUB-MERGE-01 exception at 08:33 UTC. Exact reviewed source merged to dev and original PR/post-merge CI passed. Completion-record correction/publication and independent source-read-only M3 review authorized; M3 remains unaccepted, M4 unauthorized.",
             "observed_at": "2026-10-19T08:35:54.228085+00:00"
+        },
+        {
+            "phase": "M3-P3",
+            "status": "ACCEPTED",
+            "checkpoint": "M3-P3 human accepted at 08:33 UTC with the existing-history PUB-MERGE-01 exception. Formal independent M3 review READY_FOR_OWNER: fresh full625/4135, coverage3466/3695, canonicalF08-F11 and cleanup pass; one LOW nonblocking stale-guidance finding. M3 remains unaccepted and M4 unauthorized. Sanitized documentation branch/PR publication only; no new merge.",
+            "observed_at": "2026-10-19T08:56:32.421825+00:00"
         }
     ],
     "m0p3_publication": {
@@ -1605,10 +1620,10 @@
         "evidence": "runs/M3-P3-acceptance.md"
     },
     "m3_review": {
-        "status": "READY_FOR_OWNER",
-        "accepted": false,
-        "accepted_by": null,
-        "accepted_at": null,
+        "status": "ACCEPTED",
+        "accepted": true,
+        "accepted_by": "human-owner",
+        "accepted_at": "2026-10-19T10:23:00Z",
         "reviewed_head": "04c8fd317dd415aaa9ed1ca4519eec43636ed54b",
         "reviewed_tree": "e6159429b3db276602a2b75b4114b4a489abd7f4",
         "technical_result": "PASS_INDEPENDENT_SOURCE_FULL_CANONICAL_GATES_WITH_ONE_LOW_NONBLOCKING_UX_FINDING",
@@ -1641,11 +1656,40 @@
             }
         ],
         "blocking_findings": [],
-        "formal_gate_accepted": false,
+        "formal_gate_accepted": true,
         "browser": "RETAINED14_SCREENSHOTS_INDIVIDUALLY_INSPECTED_NO_FRESH_MILESTONE_BROWSER_SESSION",
         "tia": "RETAINED_FRESH_AND_REPLAY_EVIDENCE_INSPECTED_NO_MILESTONE_TIA_RERUN",
         "hosted_ci": "COMPLETE_RETAINED_ORIGINAL_PR_AND_DEV_CI_LOGS_INSPECTED_SEPARATELY_FROM_FRESH_LOCAL_FULL",
         "review_completed_at": "2026-10-19T08:55:36.517836+00:00",
-        "documentation_publication": "OWNER_APPROVED_SANITIZED_DOCUMENTATION_BRANCH_AND_DRAFT_PR_ONLY_NO_NEW_MERGE"
+        "documentation_publication": "EXACT_PUBLIC_DOCS_BRANCH_TO_DEV_DRAFT_PR_APPROVED_NO_NEW_MERGE",
+        "acceptance_evidence": "runs/M3-acceptance.md",
+        "historical_technical_verdict": "READY_FOR_OWNER",
+        "preparation_authorized": true
+    },
+    "m4_preparation": {
+        "phase": "M4-P1",
+        "authorized": true,
+        "authorized_by": "human-owner",
+        "authorized_at": "2026-10-19T10:23:00Z",
+        "scope": "Read-only canonical title/goal/tasks/acceptance and implementation/testing/UX handoff only",
+        "implementation_authorized": false,
+        "claim_created": false,
+        "remote_writes": false,
+        "owner_Mac_alteration_authorized": false,
+        "evidence": "runs/M3-acceptance.md"
+    },
+    "documentation_PR_authorization": {
+        "authorized": true,
+        "authorized_by": "human-owner",
+        "authorized_at": "2026-10-19T10:23:00Z",
+        "repository": "hussain4real/halal-wealth-os",
+        "head": "docs/m3-completion-and-review",
+        "base": "dev",
+        "draft": true,
+        "scope": "Sanitized M3 completion records, owner acceptance and independent review summary",
+        "retry_after_prior_denial_limit": 1,
+        "new_merge_authorized": false,
+        "account_settings_changes_authorized": false,
+        "evidence": "runs/M3-acceptance.md"
     }
 }

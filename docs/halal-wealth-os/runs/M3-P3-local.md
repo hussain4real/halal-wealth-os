@@ -1,5 +1,11 @@
 # M3-P3 implementation and verification
 
+Subsequent milestone decision: the human owner accepted M3 at 10:23 UTC on
+19 October 2026. See [M3 acceptance](M3-acceptance.md). Earlier M3-pending and
+readiness statements below are preserved history. Only the exact documentation
+draft PR and read-only M4-P1 preparation are approved; M4 implementation remains
+unauthorized and the LOW guidance finding remains visible.
+
 Current owner decision: M3-P3 and the specific existing-history PUB-MERGE-01
 exception were accepted at 08:33 UTC on 19 October 2026. See
 [owner acceptance](M3-P3-acceptance.md). Sanitized completion-record publication

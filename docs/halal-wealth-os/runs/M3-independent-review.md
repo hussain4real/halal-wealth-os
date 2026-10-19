@@ -1,5 +1,12 @@
 # M3 independent milestone review
 
+Current owner decision: M3 was human accepted at 10:23 UTC on 19 October 2026.
+See [owner acceptance](M3-acceptance.md). The technical READY_FOR_OWNER verdict,
+LOW guidance finding and earlier pending statements below remain the preserved
+review checkpoint. The finding is not claimed fixed. Documentation-only draft
+PR publication and read-only M4-P1 preparation are approved; no new merge or M4
+implementation is authorized.
+
 Review outcome: **READY_FOR_OWNER**, with no blocking technical findings and one LOW, nonblocking guidance finding. M3 remains unaccepted; only the human owner accepts the gate or authorizes subsequent work.
 
 ## Reviewed identity and authority
