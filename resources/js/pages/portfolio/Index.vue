@@ -34,7 +34,7 @@ const { form, feedback, recovered, locked, submit } = usePortfolioForm(
             <Button as-child variant="outline"
                 ><Link href="/assets">Asset catalog</Link></Button
             ><Button as-child variant="outline"
-                ><Link href="/reports">Net-worth reports</Link></Button
+                ><Link href="/valuations">Valuation & performance</Link></Button
             >
         </div>
         <section

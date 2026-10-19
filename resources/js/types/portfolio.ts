@@ -9,12 +9,15 @@ export type Asset = {
     kind: string;
     currency: string;
     identifier: string | null;
+    geography?: string | null;
+    geography_source?: string | null;
     market: string | null;
     source: string;
     unsupported_terms: string | null;
     reason: string;
 };
 export type Position = {
+    acquired_on?: string | null;
     id: string;
     asset_id: string;
     asset_family: string;
@@ -23,6 +26,8 @@ export type Position = {
     kind: string;
     currency: string;
     identifier: string | null;
+    geography?: string | null;
+    geography_source?: string | null;
     market: string | null;
     asset_source: string;
     unsupported_terms: string | null;
@@ -70,6 +75,7 @@ export type PortfolioAccount = {
     date: string;
 };
 export type OpeningRow = {
+    acquired_on?: string;
     asset_id: string;
     quantity: string;
     unit_price: string;

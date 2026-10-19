@@ -24,15 +24,15 @@ class PortfolioRequest extends FormRequest
         if ($this->routeIs('assets.store')) {
             return [...$key, 'prior_id' => ['nullable', 'string', 'regex:/^[1-9][0-9]{0,18}$/D'], 'name' => $text,
                 'kind' => ['required', 'string', 'in:equity,unitized_fund,manual_investment'], 'currency' => ['required', 'string', 'max:3'],
-                'identifier' => $optional, 'market' => $optional, 'source' => $text, 'unsupported_terms' => $optional, 'reason' => $text];
+                'geography' => $optional, 'geography_source' => $optional, 'identifier' => $optional, 'market' => $optional, 'source' => $text, 'unsupported_terms' => $optional, 'reason' => $text];
         }
         if ($this->routeIs('portfolio.store')) {
             return [...$key, 'account_id' => $id, 'platform_label' => $text, 'source' => $text];
         }
         if ($this->routeIs('portfolio.opening.save')) {
             return [...$key, 'prior_id' => ['nullable', 'string', 'regex:/^[1-9][0-9]{0,18}$/D'], 'as_of' => ['required', 'string', 'max:10'], 'source' => $text, 'reason' => $text,
-                'rows' => ['present', 'array', 'max:1000'], 'rows.*' => ['array:asset_id,quantity,unit_price,manual_value,basis_known,cost_basis'],
-                'rows.*.asset_id' => $id, 'rows.*.quantity' => ['nullable', 'string', 'max:32'], 'rows.*.unit_price' => ['nullable', 'string', 'max:32'],
+                'rows' => ['present', 'array', 'max:1000'], 'rows.*' => ['array:asset_id,quantity,unit_price,manual_value,basis_known,cost_basis,acquired_on'],
+                'rows.*.acquired_on' => ['nullable', 'string', 'max:10'], 'rows.*.asset_id' => $id, 'rows.*.quantity' => ['nullable', 'string', 'max:32'], 'rows.*.unit_price' => ['nullable', 'string', 'max:32'],
                 'rows.*.manual_value' => ['nullable', 'string', 'max:32'], 'rows.*.basis_known' => ['required', 'string', 'in:0,1'], 'rows.*.cost_basis' => ['nullable', 'string', 'max:32']];
         }
         if ($this->routeIs('portfolio.preview')) {

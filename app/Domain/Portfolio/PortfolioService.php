@@ -19,7 +19,7 @@ final readonly class PortfolioService
     {
         return DB::transaction(function () use ($owner, $key, $input): stdClass {
             LedgerInput::lock($owner);
-            PortfolioInput::only($input, ['prior_id', 'name', 'kind', 'currency', 'identifier', 'market', 'source', 'unsupported_terms', 'reason']);
+            PortfolioInput::only($input, ['prior_id', 'name', 'kind', 'currency', 'identifier', 'market', 'source', 'unsupported_terms', 'reason', 'geography', 'geography_source']);
             if ($row = $this->cached($owner, $key, 'portfolio_assets', $input)) {
                 return $row;
             }
@@ -35,7 +35,10 @@ final readonly class PortfolioService
             if ($prior !== null && ($prior->currency !== $currency || $prior->kind !== $kind)) {
                 LedgerInput::fail('kind', 'A reference family retains its kind and currency. Create another reference for a different instrument.');
             }
-            $data = ['owner_id' => $owner->id, 'reference' => (string) Str::ulid(), 'family_reference' => $prior->family_reference ?? (string) Str::ulid(),
+            if (empty($input['geography']) !== empty($input['geography_source'])) {
+                LedgerInput::fail('geography', 'A geography classification requires its explicit source; leave both blank when unknown.');
+            }
+            $data = ['geography' => PortfolioInput::optional($input['geography'] ?? null, 'geography'), 'geography_source' => PortfolioInput::optional($input['geography_source'] ?? null, 'geography_source'), 'owner_id' => $owner->id, 'reference' => (string) Str::ulid(), 'family_reference' => $prior->family_reference ?? (string) Str::ulid(),
                 'version' => $prior === null ? 1 : $prior->version + 1, 'supersedes_id' => $prior?->id, 'name' => LedgerInput::text($input['name'] ?? null, 'name'),
                 'kind' => $kind, 'currency' => $currency, 'identifier' => PortfolioInput::optional($input['identifier'] ?? null, 'identifier'),
                 'market' => PortfolioInput::optional($input['market'] ?? null, 'market'), 'source' => LedgerInput::text($input['source'] ?? null, 'source'),
@@ -99,7 +102,7 @@ final readonly class PortfolioService
                 if (! is_array($entry)) {
                     LedgerInput::fail('rows', 'Each position must contain explicit fields.');
                 }
-                PortfolioInput::only($entry, ['asset_id', 'quantity', 'unit_price', 'manual_value', 'basis_known', 'cost_basis']);
+                PortfolioInput::only($entry, ['asset_id', 'quantity', 'unit_price', 'manual_value', 'basis_known', 'cost_basis', 'acquired_on']);
                 $asset = LedgerInput::owned('portfolio_assets', $owner, LedgerInput::identifier($entry['asset_id'] ?? null));
                 if ($asset->currency !== $account->currency || isset($families[$asset->family_reference])) {
                     LedgerInput::fail('rows', 'Use each asset family once and match the account native currency. Mixed-currency positions require separate accounts.');
@@ -117,7 +120,11 @@ final readonly class PortfolioService
                     || (! $manual && ! in_array($entry['manual_value'] ?? null, ['', null], true))) {
                     LedgerInput::fail('rows', 'Use units and an optional unit price for unitized assets; a manual value has no invented units or price.');
                 }
-                $prepared[] = ['owner_id' => $owner->id, 'asset_id' => $asset->id, 'asset_family' => $asset->family_reference, 'kind' => $asset->kind, 'currency' => $account->currency,
+                $acquired = empty($entry['acquired_on']) ? null : LedgerInput::date($entry['acquired_on'], 'acquired_on');
+                if ($acquired !== null && ($acquired > $asOf || $known !== '1')) {
+                    LedgerInput::fail('acquired_on', 'Use a sourced acquisition date at or before the statement, with known basis. Leave mixed or unknown acquisition dates blank.');
+                }
+                $prepared[] = ['acquired_on' => $acquired, 'owner_id' => $owner->id, 'asset_id' => $asset->id, 'asset_family' => $asset->family_reference, 'kind' => $asset->kind, 'currency' => $account->currency,
                     'quantity' => $manual ? null : PortfolioInput::decimal($entry['quantity'] ?? null, 'rows.'.$i.'.quantity', true),
                     'unit_price' => $manual || in_array($entry['unit_price'] ?? null, ['', null], true) ? null : PortfolioInput::decimal($entry['unit_price'], 'rows.'.$i.'.unit_price'),
                     'manual_minor' => ! $manual || in_array($entry['manual_value'] ?? null, ['', null], true) ? null : PortfolioInput::money($currency, $entry['manual_value'], 'rows.'.$i.'.manual_value'),

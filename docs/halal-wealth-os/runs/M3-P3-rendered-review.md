@@ -1,0 +1,7 @@
+# M3-P3 independent rendered review
+
+The scoped desktop/mobile UX review passed with no product findings. Actual Chromium and isolated PostgreSQL checks covered opposing native/base returns, exact price corrections, source details, partial/stale/unknown values, allocation, full export/pagination, saved-run immutability, duplicate submission, committed-response-loss recovery, retry after changing the displayed reporting currency, keyboard focus, search preservation and two-tab split-context rejection/recovery. Extreme exact values reflowed without page overflow. No JavaScript page errors were observed.
+
+There were 42 recorded passing checks across the broad run and focused continuation, including repeated/reflow checks; this is not 42 distinct scenario families. 32 current-run screenshots were individually inspected, with 25 accepted unique evidence images and 7 excluded for framing/failure/duplication. Earlier fixture-chronology and navigation-synchronization failures were retained. The broad run's final same-URL Back assumption was corrected in a focused continuation that passed; the broad run is not relabelled as an entirely passing harness.
+
+All 556 source and 144 compiled files remained unchanged. Each reviewer database was cleaned to zero and its owned server/container removed; resources were released and the coordinator database remained untouched. This is phase-specific rendered evidence, not full accessibility certification, source/full-test/TIA/hosted-CI evidence, human acceptance or formal M3 milestone review.

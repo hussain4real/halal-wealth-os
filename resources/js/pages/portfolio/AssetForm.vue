@@ -27,6 +27,8 @@ const { form, feedback, recovered, locked, submit } = usePortfolioForm(
         currency: props.prior?.currency ?? 'QAR',
         identifier: props.prior?.identifier ?? '',
         market: props.prior?.market ?? '',
+        geography: props.prior?.geography ?? '',
+        geography_source: props.prior?.geography_source ?? '',
         source: props.prior?.source ?? '',
         unsupported_terms: props.prior?.unsupported_terms ?? '',
         reason: '',
@@ -53,6 +55,30 @@ const { form, feedback, recovered, locked, submit } = usePortfolioForm(
                 history="/assets"
             />
             <fieldset :disabled="form.processing || locked" class="space-y-5">
+                <div class="grid gap-5 sm:grid-cols-2">
+                    <div>
+                        <Label for="geography"
+                            >Geography classification · optional</Label
+                        ><Input
+                            id="geography"
+                            v-model="form.geography"
+                            maxlength="180"
+                        />
+                        <p class="mt-2 text-xs text-muted-foreground">
+                            Use sourced classification. Currency, market and
+                            platform do not establish geography.
+                        </p>
+                    </div>
+                    <div>
+                        <Label for="geography-source"
+                            >Geography source · required when classified</Label
+                        ><Input
+                            id="geography-source"
+                            v-model="form.geography_source"
+                            maxlength="180"
+                        />
+                    </div>
+                </div>
                 <div>
                     <Label for="name">Asset name</Label
                     ><Input

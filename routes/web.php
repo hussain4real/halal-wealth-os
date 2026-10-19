@@ -9,12 +9,20 @@ use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ValuationController;
 use App\Http\Middleware\RequireProductionTwoFactor;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+    Route::get('valuations', [ValuationController::class, 'index'])->name('valuations.index');
+    Route::post('valuations', [ValuationController::class, 'store'])->name('valuations.store');
+    Route::get('valuations/export', [ValuationController::class, 'export'])->name('valuations.export');
+    Route::get('valuations/{run}', [ValuationController::class, 'show'])->whereNumber('run')->name('valuations.show');
+    Route::get('valuations/{run}/export', [ValuationController::class, 'export'])->whereNumber('run')->name('valuations.run.export');
+    Route::get('portfolio/{portfolio}/prices', [ValuationController::class, 'prices'])->whereNumber('portfolio')->name('prices.index');
+    Route::post('portfolio/{portfolio}/prices', [ValuationController::class, 'priceStore'])->whereNumber('portfolio')->name('prices.store');
     Route::get('assets', [PortfolioController::class, 'assets'])->name('assets.index');
     Route::get('assets/new', [PortfolioController::class, 'assetForm'])->name('assets.create');
     Route::post('assets', [PortfolioController::class, 'assetStore'])->name('assets.store');

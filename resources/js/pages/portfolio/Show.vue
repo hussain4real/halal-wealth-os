@@ -83,6 +83,17 @@ defineProps<{
             >
         </div>
         <div class="grid gap-5 md:grid-cols-2">
+            <div class="flex flex-wrap gap-3">
+                <Link
+                    :href="'/portfolio/' + account.portfolio_id + '/prices'"
+                    class="inline-flex min-h-11 items-center rounded-lg border px-4 text-sm underline"
+                    >Manual prices</Link
+                ><Link
+                    :href="'/valuations?account_id=' + account.account_id"
+                    class="inline-flex min-h-11 items-center rounded-lg border px-4 text-sm underline"
+                    >Dated valuation & performance</Link
+                >
+            </div>
             <PortfolioValue :value="account.contribution" />
             <section class="rounded-2xl border bg-muted/25 p-6">
                 <h2 class="text-lg font-semibold">Posted ledger cash</h2>

@@ -55,6 +55,7 @@ const initial = props.initial_rows.map((r) => ({
     manual_value: r.manual_value?.amount ?? '',
     basis_known: r.basis_known ? '1' : '0',
     cost_basis: r.cost_basis?.amount ?? '',
+    acquired_on: r.acquired_on ?? '',
 }));
 const { form, feedback, recovered, locked, submit } = usePortfolioForm(
     String(usePage().props.auth.user.id) +
@@ -126,6 +127,7 @@ const add = () => {
             manual_value: '',
             basis_known: '0',
             cost_basis: '',
+            acquired_on: '',
         },
     ]);
     page.value = Math.floor((rows.value.length - 1) / 20);
@@ -139,7 +141,10 @@ const update = (
 ) => {
     const next = rows.value.map((r) => ({ ...r }));
     next[index][field] = String(value);
-    if (field === 'basis_known' && value === '0') next[index].cost_basis = '';
+    if (field === 'basis_known' && value === '0') {
+        next[index].cost_basis = '';
+        next[index].acquired_on = '';
+    }
     form.rows = JSON.stringify(next);
 };
 const remove = (index: number) => {
@@ -491,6 +496,29 @@ const rowError = (index: number, field: string) =>
                                     )
                                 "
                             />
+                            <Label
+                                :for="'acquired-' + offset"
+                                class="mt-4 block"
+                                >Sourced acquisition date · optional</Label
+                            ><Input
+                                :id="'acquired-' + offset"
+                                type="date"
+                                :model-value="row.acquired_on ?? ''"
+                                :max="form.as_of"
+                                @update:model-value="
+                                    update(
+                                        page * 20 + offset,
+                                        'acquired_on',
+                                        $event,
+                                    )
+                                "
+                            />
+                            <p class="mt-2 text-xs text-muted-foreground">
+                                Leave blank for mixed acquisition dates or
+                                missing evidence. Foreign-currency opening cost
+                                stays unavailable without a sourced historical
+                                date and transaction FX.
+                            </p>
                             <p class="mt-2 text-xs text-muted-foreground">
                                 Explicit known zero is allowed. This amount is
                                 never a price.
