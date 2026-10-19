@@ -1,9 +1,9 @@
 # M3-P2 publication checkpoint
 
-Status: [PR 10](https://github.com/hussain4real/halal-wealth-os/pull/10) is open.
-The cycle 5 correction has passed all local gates. Corrected candidate sanitation,
-exact committed-content review and fresh exact-head hosted gates remain pending.
-M3-P2 is READY_FOR_REVIEW and unaccepted; no merge is claimed at this checkpoint.
+Status: [PR 10](https://github.com/hussain4real/halal-wealth-os/pull/10) merged
+normally into dev. Original corrected-head CI/review and original dev-push CI
+passed. M3-P2 is READY_FOR_REVIEW and unaccepted; the claim is closed. These four
+final status records are local and unpublished pending owner handoff.
 
 The owner accepted M3-P1 at 17:09 UTC on 18 October 2026, approved publication
 of its four final sanitized records, and authorized M3-P2 through independent
@@ -55,19 +55,57 @@ One standard checkpoint was likewise recorded during fresh TIA. Native PHP/Vue
 planner probes used simulated prior hashes without source/cache mutation or
 impacted execution. These timings are not unattended resource benchmarks.
 
-## Remaining publication gates
+## Completed publication and merge gates
 
-The corrected complete inventory and PR text require separate sanitation,
-then exact committed-content/metadata review before the same feature branch
-is updated. The old finding must be reconciled against that corrected head.
-Its original PR CI attempt and completed exact-head review must pass with no
-unresolved feedback. Only then may a normal dev merge occur, followed by original
-dev-push CI, verified merge parents/tree and a clean local dev comparison.
-No bypass or human acceptance is implied by local PASS.
+The corrected 627-file candidate and PR text passed separate independent
+sanitation. Exact committed blobs, modes, tree, parent and public author/committer
+metadata passed independent review before normal feature-branch push. Corrected
+source is 770679b247d097d7b8936c4fbc24965f49dcc218. PR 10 was already ready
+before its single explicit review request for this corrected head. The original
+unknown-cash thread was answered with actual correction evidence and resolved.
+
+Original corrected-head [CI 39159491329](https://github.com/hussain4real/halal-wealth-os/actions/runs/39159491329)
+passed attempt 1. Exact-head hosted review completed with no findings or
+unresolved findings. Fresh inspection covered every formal review, inline
+comment, issue comment and thread, current head/base, checks, mergeability and
+branch refs before merge. No blocking feedback or bypass remained.
+
+The normal merge at 19:44:42 UTC on 18 October 2026 produced
+fffc3061b75527a1fc5efa88dfaee38147061953. Parents are the verified dev baseline
+08e43860d4760985a6a44d5a5db3a9c637893c63 and reviewed source 770679b247d097d7b8936c4fbc24965f49dcc218.
+Merge tree e57946894b5b2c513e02e8dc2b7a379d052c5b0f equals the reviewed tree;
+merge metadata uses public noreply addresses. Main/stage remain at their
+verified baseline. M3-P1's approved final records and acceptance are published
+in dev through this merge.
+
+Original dev-push [CI 39160155916](https://github.com/hussain4real/halal-wealth-os/actions/runs/39160155916)
+also passed attempt 1. Both corrected PR and dev-push raw logs show the actual
+586-test / 3,856-assertion passing baseline, exactly one intended failure with
+3,857 assertions, and restored passing baseline with 3,001/3,218 coverage.
+The CLI credential expired during post-merge observation; the existing authorized
+GitHub connector supplied the completed run and full decoded job log for the
+same checks. No credentials or access/security settings were created or changed.
+Normal Git fetch and local dev fast-forward then succeeded. All 627 tracked
+files matched the reviewed candidate bytes/hashes/modes in a clean checkout
+before final-record edits.
+
+## Owner handoff and publication boundary
+
+Only STATE, the M3-P2 specification, local run and this publication record are
+modified locally after that clean comparison. These final four records are
+unpublished. The claim is closed; phase acceptance remains a human decision.
+M3-P2 is READY_FOR_REVIEW within five of six cycles. M3-P3 and later work remain
+unauthorized; no main/stage promotion, deployment or live trading occurred.
 
 See [implementation evidence](M3-P2-local.md),
 [rendered review](M3-P2-rendered-review.md) and
 [phase scope](../phases/M3-P2.md). Raw logs, original golden inputs, screenshots
-and authorization records remain private. Stop for M3-P2 owner acceptance;
-no M3-P3, main/stage promotion, deployment, live trading, new credentials or
-security-setting changes.
+and authorization records remain private.
+
+## Subsequent owner acceptance
+
+The human owner accepted M3-P2 at 02:04 UTC on 19 October 2026 and authorized
+publication of these four final reviewed records, then canonical M3-P3 through
+its engineering and dev publication gates. The earlier unaccepted and
+stop-before-M3-P3 statements above describe the preserved prior checkpoint.
+See [owner acceptance](M3-P2-acceptance.md). All five cycles and original failures remain retained.

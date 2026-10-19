@@ -103,7 +103,7 @@ settings retry and immutable what-if requests. Read totals remain complete
 beyond bounded disclosure pages; real independent PostgreSQL backends verify
 settings serialization and coherent cash/protection reads. Client recovery,
 private original F07 and rendered review are separate observed gates.
-That historical unimplemented-phase boundary was M3-P1. Current M3-P2 authority is recorded in AGENTS.md; the next unimplemented phase is M3-P3.
+That historical unimplemented-phase boundary was M3-P1. That historical checkpoint preceded the M3-P3 authority now recorded in AGENTS.md.
 
 ## M3-P1 implemented checks
 
@@ -124,7 +124,7 @@ independent publication evidence remain separate gates.
 
 ## M3-P2 implemented checks
 
-Unimplemented-phase rejection now targets M3-P3. The harness requires
+At the M3-P2 checkpoint, unimplemented-phase rejection targeted M3-P3. The harness requires
 InvestmentTest, InvestmentHttpTest, InvestmentConcurrencyTest and BookCostTest
 alongside all prior suites. Exact moving weighted-average minor allocation,
 final-disposal residue, unknown basis, stable dated replay, linked cash
@@ -138,3 +138,25 @@ recovery and retained migration guards. Authenticated complete export, owner
 isolation, bounded disclosure with complete totals, native range/precision,
 private original F08/F09/F10, uncached coverage, TIA and independent rendered
 desktop/mobile recovery checks remain separate observed gates.
+
+## M3-P3 implemented checks
+
+Unimplemented-phase rejection now targets M4-P1. The harness requires
+ValuationTest, ValuationHttpTest, ValuationConcurrencyTest and ValuationMathTest
+alongside all prior suites. Exact dated raw prices preserve observation versions
+and split-unit compatibility; server-issued retained-history context rejects
+stale new price confirmation while committed retries recover. Native weighted
+basis remains the event replay's truth; separate historical transaction-FX pools
+include opening acquisition evidence and payment-date IPO allocation/refund FX.
+
+Checks cover exact opposing native/base returns, partial prices, independent
+unknown basis, inclusive price/FX cutoffs, historical corrections, owned scopes,
+cache versions, immutable saved receipts, signed allocation denominators, common
+component rounding, aggregate/detail exclusion and unsupported external flows.
+Actual independent PostgreSQL backends contend for price/correction/run requests
+and verify repeatable-read cache/input coherence. Retained migration refusal and
+empty-schema roundtrip preserve prior evidence. Historical migration tests first
+remove the later empty valuation schema without changing earlier assertions.
+Original private F11, actual desktop/mobile UX, complete uncached coverage, fresh
+TIA/replay and exact-head publication/hosted CI remain separate observed gates.
+See [valuation policy](VALUATION.md) and [phase evidence](runs/M3-P3-local.md).

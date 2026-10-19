@@ -8,6 +8,8 @@ use App\Domain\Ledger\FinancialSnapshot;
 use App\Domain\Ledger\FxMath;
 use App\Domain\Ledger\LedgerInput;
 use App\Domain\Portfolio\PortfolioRead;
+use App\Domain\Portfolio\ValuationFx;
+use App\Domain\Portfolio\ValuationMath;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
 use App\Models\User;
@@ -20,7 +22,7 @@ use stdClass;
 /** Reporting composes Portfolio with Ledger; ledger statements/reconciliation keep their cash-only meaning. */
 final readonly class NetWorthSnapshot
 {
-    public const string POLICY = 'portfolio-mode-events-v2;manual-same-UTC-date;receivable-once;execution-price-not-quote;legacy-ledger-preserved';
+    public const string POLICY = 'portfolio-mode-dated-prices-v3;sum-selected-component-settlements;manual-statement-same-UTC-date;receivable-once;raw-split-context;execution-price-not-quote;legacy-ledger-preserved';
 
     public function __construct(private FinancialSnapshot $ledger, private PortfolioRead $portfolio) {}
 
@@ -70,6 +72,31 @@ final readonly class NetWorthSnapshot
                             }
                         }
                     }
+                }
+                if ($p !== null && $contribution['mode'] === 'detailed' && $component['native'] !== null) {
+                    $pieces = [$state['ledger_cash']['minor']];
+                    foreach ($state['rows'] as $row) {
+                        $pieces[] = $row['valuation']['market_value']['minor'];
+                    }
+                    $pieces[] = $state['investment']['receivable_minor'];
+                    $translated = '0';
+                    $available = true;
+                    $failure = null;
+                    foreach ($pieces as $minor) {
+                        $part = app(ValuationFx::class)->convert($owner, $minor, Currency::from($component['currency']), $base, $cutoff, 'reporting');
+                        if ($part['value'] === null) {
+                            $available = false;
+                            $failure ??= $part['reason'];
+                        } else {
+                            $translated = bcadd($translated, $part['value']['minor'], 0);
+                        }
+                    }
+                    $component['converted'] = $available ? ValuationMath::money($base, $translated) : null;
+                    $component['conversion_reason'] = $component['converted'] === null ? ($failure ?? 'converted_sum_out_of_range') : null;
+                    $component['state'] = $component['converted'] !== null ? 'complete' : match ($failure) {
+                        'fx_stale' => 'stale', 'fx_missing' => 'missing', default => 'unavailable',
+                    };
+                    $component['settlement_policy'] = 'sum_selected_component_settlements';
                 }
                 if ($component['converted'] !== null) {
                     $subtotal = bcadd($subtotal, $component['converted']['minor'], 0);

@@ -195,7 +195,7 @@ class PortfolioController extends Controller
     private function assetPayload(stdClass $a): array
     {
         return ['id' => (string) $a->id, 'family' => $a->family_reference, 'version' => (string) $a->version, 'prior_id' => $a->supersedes_id === null ? '' : (string) $a->supersedes_id,
-            'name' => $a->name, 'kind' => $a->kind, 'currency' => $a->currency, 'identifier' => $a->identifier, 'market' => $a->market, 'source' => $a->source, 'unsupported_terms' => $a->unsupported_terms, 'reason' => $a->reason];
+            'geography' => $a->geography, 'geography_source' => $a->geography_source, 'name' => $a->name, 'kind' => $a->kind, 'currency' => $a->currency, 'identifier' => $a->identifier, 'market' => $a->market, 'source' => $a->source, 'unsupported_terms' => $a->unsupported_terms, 'reason' => $a->reason];
     }
 
     /** @param array<string,mixed> $state

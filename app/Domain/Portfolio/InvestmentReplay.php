@@ -34,7 +34,7 @@ final class InvestmentReplay
         $events = DB::table('investment_events as e')->join('portfolio_assets as a', fn ($q) => $q->on('a.id', '=', 'e.asset_id')->on('a.owner_id', '=', 'e.owner_id'))
             ->where('e.owner_id', $owner->id)->where('e.portfolio_account_id', $id)->where('e.effective_date', '<=', $date)->where('e.kind', '<>', 'reversal')
             ->whereNotExists(fn ($q) => $q->selectRaw('1')->from('investment_events as r')->whereColumn('r.reverses_id', 'e.id')->where('r.owner_id', $owner->id))
-            ->orderBy('e.effective_date')->orderBy('e.sort_id')->orderBy('e.id')->select(['e.*', 'a.name', 'a.identifier', 'a.market', 'a.source as asset_source', 'a.unsupported_terms', 'a.version as asset_version'])->get();
+            ->orderBy('e.effective_date')->orderBy('e.sort_id')->orderBy('e.id')->select(['e.*', 'a.name', 'a.identifier', 'a.market', 'a.source as asset_source', 'a.unsupported_terms', 'a.version as asset_version', 'a.geography', 'a.geography_source'])->get();
         $subscriptions = [];
         $results = [];
         $runningCash = '0';
@@ -261,7 +261,7 @@ final class InvestmentReplay
     private function position(stdClass $e): array
     {
         return ['id' => (string) $e->id, 'asset_id' => (string) $e->asset_id, 'asset_family' => $e->asset_family, 'asset_version' => (string) $e->asset_version,
-            'name' => $e->name, 'kind' => $e->asset_kind, 'currency' => $e->currency, 'identifier' => $e->identifier, 'market' => $e->market,
+            'acquired_on' => null, 'geography' => $e->geography, 'geography_source' => $e->geography_source, 'name' => $e->name, 'kind' => $e->asset_kind, 'currency' => $e->currency, 'identifier' => $e->identifier, 'market' => $e->market,
             'asset_source' => $e->asset_source, 'unsupported_terms' => $e->unsupported_terms, 'quantity' => '0', 'unit_price' => null,
             'manual_value' => null, 'basis_known' => true, 'cost_basis' => $this->money($e->currency, '0')];
     }

@@ -66,12 +66,12 @@ final class PortfolioRead
 
         return array_values(DB::table('portfolio_opening_rows as r')->join('portfolio_assets as a', fn ($j) => $j->on('a.id', '=', 'r.asset_id')->on('a.owner_id', '=', 'r.owner_id'))
             ->where('r.owner_id', $owner->id)->where('r.opening_id', $opening->id)->orderBy('r.id')
-            ->select(['r.*', 'a.name', 'a.identifier', 'a.market', 'a.source as asset_source', 'a.unsupported_terms', 'a.version as asset_version'])
+            ->select(['r.*', 'a.name', 'a.identifier', 'a.market', 'a.source as asset_source', 'a.unsupported_terms', 'a.version as asset_version', 'a.geography', 'a.geography_source'])
             ->get()->map(function (stdClass $r): array {
                 $currency = Currency::from($r->currency);
 
                 return ['id' => (string) $r->id, 'asset_id' => (string) $r->asset_id, 'asset_family' => $r->asset_family, 'asset_version' => (string) $r->asset_version,
-                    'name' => $r->name, 'kind' => $r->kind, 'currency' => $r->currency, 'identifier' => $r->identifier, 'market' => $r->market,
+                    'acquired_on' => $r->acquired_on, 'geography' => $r->geography, 'geography_source' => $r->geography_source, 'name' => $r->name, 'kind' => $r->kind, 'currency' => $r->currency, 'identifier' => $r->identifier, 'market' => $r->market,
                     'asset_source' => $r->asset_source, 'unsupported_terms' => $r->unsupported_terms,
                     'quantity' => $r->quantity === null ? null : ExactDecimal::fromString((string) $r->quantity)->value,
                     'unit_price' => $r->unit_price === null ? null : ExactDecimal::fromString((string) $r->unit_price)->value,
@@ -102,6 +102,11 @@ final class PortfolioRead
                 'as_of' => $opening->as_of, 'source' => $opening->source, 'reason' => $opening->reason],
             'rows' => $rows, 'investment' => $investment, 'ledger_cash' => $component['native'], 'ledger_reason' => $component['native_reason'], 'ledger_evidence' => $component,
             'cutoff' => $cutoff, 'date' => $date, 'manual_reference_policy' => 'same-UTC-date-only;not-current-quotes'];
+        foreach ($actual['rows'] as &$row) {
+            $row['valuation'] = app(PositionPricing::class)->value($owner, $id, $row, $actual['opening'], $cutoff);
+        }
+        unset($row);
+        $actual['price_policy'] = PositionPricing::POLICY;
         $actual['contribution'] = $this->contribution($actual);
 
         return $actual;
@@ -142,22 +147,11 @@ final class PortfolioRead
             $selected[] = 'ledger_cash';
             if ($mode !== 'legacy_ledger') {
                 foreach ($state['rows'] as $row) {
-                    if (($state['opening']['as_of'] ?? null) !== $state['date']) {
-                        $missing[] = 'position:'.$row['id'].':valuation_missing_for_date';
-
-                        continue;
-                    }
-                    try {
-                        $value = $row['kind'] === 'manual_investment'
-                            ? ($row['manual_value'] === null ? null : Money::fromMinor($currency, $row['manual_value']['minor']))
-                            : ($row['unit_price'] === null ? null : PortfolioInput::product($currency, $row['quantity'], $row['unit_price']));
-                        if ($value === null) {
-                            $missing[] = 'position:'.$row['id'].':valuation_unknown';
-                        } else {
-                            $subtotal = bcadd($subtotal, $value->minor, 0);
-                        }
-                    } catch (InvalidArgumentException) {
-                        $missing[] = 'position:'.$row['id'].':out_of_range';
+                    $valuation = $row['valuation'] ?? null;
+                    if ($valuation === null || $valuation['market_value'] === null) {
+                        $missing[] = 'position:'.$row['id'].':'.($valuation['reason'] ?? 'valuation_unknown');
+                    } else {
+                        $subtotal = bcadd($subtotal, $valuation['market_value']['minor'], 0);
                     }
                 }
                 $selected[] = 'opening_positions';

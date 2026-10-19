@@ -246,3 +246,21 @@ assets and separately reviewed synthetic public fixtures; book cost is not tax
 advice. No broker execution, margin/options, tax filing, M3-P3, main/stage changes,
 deployment, new credentials or security-setting changes. Stop for owner M3-P2
 acceptance; M3 milestone acceptance remains separate.
+
+## Current M3-P3 authority
+
+The human owner accepted M3-P2 at 02:04 UTC on 19 October 2026, approved its
+four final sanitized records for publication, and authorized canonical M3-P3
+through implementation, independent technical and actual desktop/mobile rendered
+review, full uncached/TIA checks, sanitized dev PR, exact-head hosted review/CI,
+normal dev merge and original dev-push CI. The manager delegates acceptance
+recording and sole implementation ownership to this coordinator. This supersedes
+the prior no-M3-P3 boundary only within phases/M3-P3.md. Preserve all previous
+history, PHP8.5-only, full starter features and at most six scoped cycles. No
+implementation subagents; independent source-read-only reviewers use exclusive
+owned verification resources. Retain dated manual price/FX version evidence,
+exact arithmetic, field-specific missing data, transaction-time cost, valuation-
+time value, scope-aware supported return and allocation completeness. No live
+feeds, TWR/XIRR, forecasts, broker execution, main/stage change, deployment, new
+credentials or security-setting changes. Stop for human M3-P3 acceptance before
+formal independent M3 milestone review or M4.
