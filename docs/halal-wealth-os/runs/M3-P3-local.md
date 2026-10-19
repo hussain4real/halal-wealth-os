@@ -1,6 +1,6 @@
 # M3-P3 implementation and verification
 
-Status: IN_PROGRESS, unaccepted. Cycle 3 of at most six. The owner accepted
+Status: IN_PROGRESS, unaccepted. Cycle 4 of at most six. The owner accepted
 M3-P2 at 02:04 UTC on 19 October 2026 and authorized this phase through independent
 source/rendered review, full uncached/TIA gates and reviewed dev publication,
 normal merge and original post-merge CI. Stop for owner M3-P3 acceptance before
@@ -118,13 +118,13 @@ evidence images. Three harness failures remain disclosed; focused recovery
 completed the broad run's final navigation case. See the
 [rendered review](M3-P3-rendered-review.md) for the boundary and limitations.
 
-| Requirement | Observed final-source evidence | Result |
-| --- | --- | --- |
-| M3-P3-AC1 | Original private F11; opposing native/base return tests; rendered dated evidence | PASS |
-| M3-P3-AC2 | Missing/stale price and partial subtotal tests; actual mobile partial/unknown views | PASS |
-| M3-P3-AC3 | Historical cutoff/version, cache/save/retry and future-correction tests; immutable export browser checks | PASS |
-| M3-P3-AC4 | Detailed/aggregate exclusivity, signed/covered allocation and component-settlement tests; actual allocation/export | PASS |
-| M3-P3-AC5 | External-flow and scope/mode transition suppression tests; actual unsupported-return view | PASS |
+| Requirement | Observed final-source evidence                                                                                     | Result |
+| ----------- | ------------------------------------------------------------------------------------------------------------------ | ------ |
+| M3-P3-AC1   | Original private F11; opposing native/base return tests; rendered dated evidence                                   | PASS   |
+| M3-P3-AC2   | Missing/stale price and partial subtotal tests; actual mobile partial/unknown views                                | PASS   |
+| M3-P3-AC3   | Historical cutoff/version, cache/save/retry and future-correction tests; immutable export browser checks           | PASS   |
+| M3-P3-AC4   | Detailed/aggregate exclusivity, signed/covered allocation and component-settlement tests; actual allocation/export | PASS   |
+| M3-P3-AC5   | External-flow and scope/mode transition suppression tests; actual unsupported-return view                          | PASS   |
 
 INV-01 through INV-08 and INV-10 through INV-12 are covered by the full accepted
 regression suite plus exact-money, retained correction, price/FX provenance,
@@ -158,3 +158,29 @@ blocking finding remains. Complete-candidate sanitation, exact committed-tree
 verification and hosted publication/merge gates remain pending at this
 pre-publication snapshot. Formal M3 milestone review and M4 remain
 authorization boundaries; M3-P3 is unaccepted.
+
+## Cycle 4 documentation-only hosted correction
+
+The reviewed source commit 44385d53c82c67c2bed4ea9be7472028640d02f0 was normally
+pushed and draft PR #11 was created against dev. Its original attempt-1 CI run
+39198990060 passed setup/install, planning and all 51 Node checks, then stopped
+on formatting in STATE.json and this local run before PHP tests. The final
+record edits followed the successful cycle 3 full gate; their formatter check
+was missed before the first publication. This failure remains preserved and
+is not relabelled as a passing full hosted run.
+
+Cycle 4 changes documentation only. All 556 frozen application/source hashes
+and 144 compiled hashes remain the identity reviewed and tested in cycle 3.
+Formatting and planning checks plus independent delta/committed-content review
+will precede the corrected normal feature push. The corrected head must receive
+its own original full hosted CI and exact-head review; no CI bypass or weakening
+is permitted. Ready-for-review approval is pending after an automatic review
+denial of that separate public workflow transition. M3-P3 remains unaccepted.
+
+The correction's actual whole-repository `npm run check` passed (18.31 seconds),
+as did planning/relative-link checks and diff hygiene. Independent preservation
+checks found zero mismatches across 556 source and 144 compiled entries; exactly
+four documentation paths changed. No PHP, package, workflow or financial logic
+was changed and no new functional full-run result is claimed for this delta.
+Independent delta and exact-commit review remain required before the corrected
+push; the corrected original hosted run will execute the full gate.

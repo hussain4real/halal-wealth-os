@@ -61,3 +61,30 @@ ordinary PostgreSQL CHECKPOINT in each long full/TIA execution is disclosed in
 the local run; no settings changed. Final independent local source/evidence review
 passed with no remaining blocking finding. Complete-candidate sanitation and
 exact committed-tree verification remain required before normal publication.
+
+## Initial PR and original CI result
+
+Normal feature push published independently verified commit
+44385d53c82c67c2bed4ea9be7472028640d02f0, tree
+463e9814842924c245b434b1379c19e800d94d76. Draft
+[PR #11](https://github.com/hussain4real/halal-wealth-os/pull/11) targets dev at the
+verified baseline. Explicit owner approval resolved the initial draft-creation
+approval denial; a later approval-service capacity failure did not execute, and
+the subsequent same-path retry created the draft successfully. No workaround
+was used. Marking the draft ready timed out once, then automatic review denied
+the transition for separate approval. It remains a draft at this checkpoint.
+
+Original attempt-1 CI
+[39198990060](https://github.com/hussain4real/halal-wealth-os/actions/runs/39198990060)
+failed on two final documentation formatting issues after setup/install and
+51 Node checks; no PHP test baseline/deliberate/restored sequence ran. Cycle 4
+corrects documentation only and preserves that failure. Frozen application and
+compiled identities and local full/F11/rendered/TIA evidence are unchanged.
+The corrected commit requires independently reviewed content and original
+exact-head hosted checks before any normal dev merge.
+
+Local whole-repository formatting/lint checks and planning/link checks pass
+for the documentation correction. The application/build inventories remain
+unchanged. Independent sanitation and exact-commit verification of the four-doc
+delta precede the corrected feature push. The ready-for-review transition remains
+a separate unresolved approval checkpoint; no hosted review is claimed.
