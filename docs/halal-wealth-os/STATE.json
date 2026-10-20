@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-20T08:43:59.092109+00:00",
+    "updated_at": "2026-10-20T10:42:13.825443+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -362,7 +362,7 @@
     "execution_status": {
         "phase": "M4-P2",
         "status": "IN_PROGRESS",
-        "cycle": 4,
+        "cycle": 5,
         "max_cycles": 6,
         "predecessor_gate": "PASS_PR13_ORIGINAL_POSTMERGE_CI_AND_INDEPENDENT_REVIEW",
         "phase_acceptance": "UNACCEPTED"
@@ -2004,7 +2004,7 @@
     },
     "m4p2_checkpoint": {
         "status": "IN_PROGRESS",
-        "cycles_used": 4,
+        "cycles_used": 5,
         "max_cycles": 6,
         "cycle_history": [
             {
@@ -2076,6 +2076,14 @@
                     "planning_tests": 10,
                     "test_reruns": "NONE_APPLICATION_TEST_AND_VERIFICATION_BYTES_UNCHANGED"
                 }
+            },
+            {
+                "cycle": 5,
+                "scope": "Hosted P3: disable new allocation for zero/settled/excess while retaining locked exact-retry recovery",
+                "hosted_finding": "PR14 discussion4323649040 at4c1673c Record.vue; unresolved until verified correction",
+                "actual_red": "Sourcedzero and fullysettled positive allocation reach enabled confirmation; two actual browser images individually opened; no POST/write",
+                "correction": "One computed fresh-attempt guard for due/outstanding/source state shared by fieldset/button/proceed; exact saved locked retries remain enabled",
+                "gates": "PASS independent source/rendered/full/TIA reviews; actual2RED11GREEN, uncached749/4948, freshrecord/replay/nativeproof; final immutable publication and hosted gates pending"
             }
         ],
         "local_engineering_complete": true,
@@ -2089,15 +2097,81 @@
             "app_php_files": 113,
             "all_prior_case_identities": 681,
             "new_cases": 68,
+            "wall_seconds": 764.0145012440007,
+            "pest_seconds": 670.927,
+            "result": "PASS_CYCLE5",
+            "recording_context": "Frozen uncommitted707source118compiled based on4c1673c; final documentation refresh reviewed separately"
+        },
+        "node_tests": 62,
+        "source_review": "PASS_CYCLE5_EXACT707_SOURCE118_COMPILED;ONLY_RECORD_NON_DOCUMENTATION_DELTA",
+        "rendered_review": "PASS_CYCLE5_ACTUAL2RED11GREEN_ALL13_IMAGES_OPENED;ZERO_SETTLED_EXCESS_DISABLED;LOCKED_EXACT_RETRY_AFTER_FULL_SETTLEMENT_RECOVERS_ONCE;50TABLES_EMPTY_OWN_BROWSER_RESOURCES_REMOVED",
+        "rendered_evidence": "runs/M4-P2-rendered-review.md",
+        "tia": {
+            "status": "PASS_INDEPENDENT_RECORD_REPLAY_NATIVE_SELECTION_AND_PLAN_REVIEW",
+            "fresh": {
+                "executed_tests": 749,
+                "assertions": 4948,
+                "wall_seconds": 1206.5414945480006,
+                "pest_seconds": 1202.455
+            },
+            "unchanged_replay": {
+                "complete_cached_passing_results": 749,
+                "cached_assertions": 4948,
+                "wall_seconds": 8.625535208997462,
+                "pest_seconds": 2.828,
+                "graph_and_frontend_bytes_unchanged": true,
+                "native_plan_new_executions": 0,
+                "native_delta_and_rerun_files": [],
+                "unlocated_reruns": false,
+                "process_local_replay_counters": "NOT_SEPARATELY_EXPORTED; native post-replay plan and byte-identical caches corroborate unchanged replay"
+            },
+            "native_selection": "PASS_SERVICE_TO_THREE_PURIFICATION_FEATURE_SUITES_FORM_AND_RECORD_TO_HTTP;SIMULATED_PREVIOUS_HASHES_ONLY_NO_SOURCE_CACHE_MUTATION_OR_IMPACTED_EXECUTION",
+            "recording_context": "Frozen uncommitted707source118compiled based on4c1673c; recorded SHA is not corrected source commit",
+            "fresh_reason": "Actual shared frontend fingerprint changed after build; selective refresh prerequisites not met; retained cache never forced",
+            "owned_database_empty_tables": 50
+        },
+        "publication": "PR14_ORIGINAL_CORRECTED_HEAD4C_CI_PASS;ACTUAL4C_HOSTED_P3_ALLOCATION_AVAILABILITY_CORRECTION_CYCLE5",
+        "publication_evidence": "runs/M4-P2-publication.md",
+        "phase_accepted": false,
+        "later_phase_authorized": false,
+        "remaining_gates": [
+            "Sanitized final-document/index and actual immutable-commit review",
+            "Corrected-head original hosted CI and verified hosted finding disposition/review",
+            "Normal independently reviewed noreply dev merge and original exact-merge dev-push CI",
+            "Human M4-P2 acceptance"
+        ],
+        "carried_findings": ["InheritedLOWUX-M3-01 remains open outside phase"],
+        "original_pr_ci": {
+            "url": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39395124263",
+            "head": "e0e7850494c54c5376717af0fd49a40d1331c9fc",
+            "attempt": 1,
+            "conclusion": "failure",
+            "failed_step": 9,
+            "test_reports_produced": false,
+            "exact_hosted_failure_excerpt": "CONFIRMED_AUTHENTICATED_UI_LINES826_833_NPM_VP_CHECK_STATE_AND_LOCALRUN_FORMATTING2FILES_EXIT1"
+        },
+        "current_gate_status": {
+            "full_uncached": "PASS_CYCLE5",
+            "tia": "PASS_CYCLE5_INDEPENDENT_REVIEW",
+            "source": "PASS_CYCLE5",
+            "rendered": "PASS_CYCLE5_2RED11GREEN",
+            "exact_commit_and_hosted": "PENDING_CYCLE5"
+        },
+        "cycle3_full_gate_historical": {
+            "tests": 749,
+            "assertions": 4948,
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "coverage": "3914/4164",
+            "app_php_files": 113,
+            "all_prior_case_identities": 681,
+            "new_cases": 68,
             "wall_seconds": 844.0394171110001,
             "pest_seconds": 693.987,
             "result": "PASS"
         },
-        "node_tests": 62,
-        "source_review": "PASS_EXACT_TESTED_NON_DOCUMENTATION_SOURCE_AND118_BUILD;CYCLE4_DOC_REVIEW_PENDING",
-        "rendered_review": "PASS_RETAINED21_CYCLE2_AND_FRESH8_CYCLE3_IMAGES_INDIVIDUALLY_OPENED;M4P2_LOW_VERIFIED_FIXED",
-        "rendered_evidence": "runs/M4-P2-rendered-review.md",
-        "tia": {
+        "cycle3_tia_historical": {
             "status": "PASS_INDEPENDENT_RECORD_REPLAY_NATIVE_SELECTION_AND_PLAN_REVIEW",
             "fresh": {
                 "executed_tests": 749,
@@ -2121,25 +2195,15 @@
             "private_helper_failure": "Attempt1 missing PHPUnitConfigurationRegistry; preserved, corrected using installed native configuration builder; no test rerun",
             "owned_database_empty_tables": 50
         },
-        "publication": "PR14_ORIGINAL_HEAD_E0E7850_CI_FAILED_BEFORE_REPORTS;LOCAL_FINAL_DOC_FORMATTING_REPRODUCED;CORRECTION_REVIEW_PENDING",
-        "publication_evidence": "runs/M4-P2-publication.md",
-        "phase_accepted": false,
-        "later_phase_authorized": false,
-        "remaining_gates": [
-            "sanitized documentation/candidate and actual immutable noreply commit review",
-            "original exact-head PR CI and hosted feedback",
-            "normal independently reviewed noreply dev merge and original exact-merge dev-push CI",
-            "human M4-P2 acceptance"
-        ],
-        "carried_findings": ["InheritedLOWUX-M3-01 remains open outside phase"],
-        "original_pr_ci": {
-            "url": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39395124263",
-            "head": "e0e7850494c54c5376717af0fd49a40d1331c9fc",
+        "corrected_original_pr_ci_historical": {
+            "url": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39395996812",
+            "head": "4c1673ccf26c8657fa01af2e4bb9ca3972c52678",
             "attempt": 1,
-            "conclusion": "failure",
-            "failed_step": 9,
-            "test_reports_produced": false,
-            "exact_hosted_failure_excerpt": "PENDING_AUTHENTICATED_UI;NOT_INFERRED_FROM_GENERIC_ANNOTATION"
+            "result": "SUCCESS",
+            "baseline": "749passed4948assertions153.45s;report749coverage3914/4164",
+            "deliberate": "1failed749passed4949assertions143.86s;exit1andfailurepropagationPASS",
+            "restored": "749passed4948assertions146s;report749coverage3914/4164andrestorationPASS",
+            "provenance": "Parent authenticated ordinary UI bounded outcome/report blocks; not everyline/rawhostedXML; no archive retry"
         }
     }
 }

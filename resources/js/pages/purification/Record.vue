@@ -39,6 +39,14 @@ const reviewing = ref(false);
 const fixed = computed(
     () => locked.value || form.processing || reviewing.value,
 );
+const allocationBlocked = computed(
+    () =>
+        !locked.value &&
+        (!props.obligation.due ||
+            props.obligation.source_changed ||
+            !props.obligation.outstanding ||
+            props.obligation.outstanding.minor === '0'),
+);
 watch(
     () => form.hasErrors,
     (v) => {
@@ -52,6 +60,7 @@ watch(
     },
 );
 function proceed() {
+    if (form.processing || allocationBlocked.value) return;
     if (locked.value || reviewing.value) submit('/purification/allocations');
     else reviewing.value = true;
 }
@@ -216,6 +225,13 @@ function proceed() {
                 class="inline-flex min-h-11 items-center underline"
                 >Record or link a payment already made in a new tab</a
             >
+            <p v-if="obligation.outstanding?.minor === '0'" role="status">
+                No amount is outstanding. New allocations are unavailable.
+                <span v-if="locked">
+                    Retry the exact saved allocation below to recover its
+                    receipt.
+                </span>
+            </p>
             <form class="max-w-2xl space-y-4" @submit.prevent="proceed">
                 <PortfolioAttempt
                     :errors="form.errors"
@@ -224,11 +240,7 @@ function proceed() {
                     :history="'/purification/obligations/' + obligation.id"
                 />
                 <fieldset
-                    :disabled="
-                        fixed ||
-                        ((!obligation.due || obligation.source_changed) &&
-                            !locked)
-                    "
+                    :disabled="fixed || allocationBlocked"
                     class="space-y-4"
                 >
                     <div>
@@ -314,11 +326,7 @@ function proceed() {
                 <div class="flex flex-wrap gap-3">
                     <Button
                         type="submit"
-                        :disabled="
-                            form.processing ||
-                            ((!obligation.due || obligation.source_changed) &&
-                                !locked)
-                        "
+                        :disabled="form.processing || allocationBlocked"
                         >{{
                             locked
                                 ? 'Retry exact saved allocation'

@@ -1,7 +1,8 @@
 # M4-P2 rendered review
 
-Status: PASS for reviewed local implementation, phase unaccepted. No hosted or
-deployment result is implied.
+Status: cycle 5 affected review PASS; phase unaccepted. The following cycle 2
+and cycle 3 observations are historical evidence for their stated snapshots.
+No hosted or deployment result is implied.
 
 Independent actual browser review used synthetic records and exclusive
 disposable PostgreSQL and HTTP resources. Cycle 2 inspected 21 images covering
@@ -32,6 +33,31 @@ predicate was corrected to compare the original/retry pair separately from a
 later distinct allocation; the original summary and raw observations were
 retained unchanged. No application change or rerun was needed for that metadata
 correction.
+
+Cycle 5 independently reproduced the hosted allocation-availability finding on
+old source: sourced zero and fully settled obligations both reached enabled
+positive-allocation confirmation. Two actual RED images were opened; neither
+case posted an allocation. Against the corrected Record page and 118 frozen
+compiled files, 11 new GREEN images were individually opened. New zero, settled
+and excess attempts have disabled fields and submission controls. Native
+keyboard/click and dispatched submission paths made no POST and did not mutate
+a saved draft. Pending instructions and changed source remain blocked.
+
+A partial 75 then 125 allocation settled a synthetic 200 obligation and disabled
+the cleared fresh form. A separately committed full 200 allocation with a lost
+response restored a locked, enabled exact retry after reload at zero
+outstanding. The original/retry pair used identical payload/key and left one
+receipt/allocation with no duplicate journal/cash movement; after recovery the
+fresh form was disabled. That pair is distinct from the other allocation
+requests in the browser run. Retained release reopened 75 outstanding and
+re-enabled a fresh attempt. Desktop 1440 and mobile 390/360 layouts, dark mode,
+browser errors and overflow passed.
+
+All 707 source and 118 compiled file hashes and modes remained frozen through
+review and cleanup. All 50 reviewer data tables were empty before only its own
+HTTP/database resources were removed. The coordinator database was preserved.
+The hosted P3 is VERIFIED_FIXED locally; remote thread disposition and corrected
+exact-head review/CI remain publication gates. Inherited UX-M3-01 remains open.
 
 See [local verification](M4-P2-local.md) and
 [publication gates](M4-P2-publication.md).

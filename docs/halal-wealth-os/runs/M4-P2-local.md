@@ -1,6 +1,6 @@
 # M4-P2 local run
 
-Status: IN_PROGRESS, unaccepted. Cycle 4 of at most 6.
+Status: IN_PROGRESS, unaccepted. Cycle 5 of at most 6.
 
 Human authority covers canonical implementation, independent review, sanitized
 dev publication, normal noreply merge and original post-merge CI. No live
@@ -29,10 +29,10 @@ issue remained. Full uncached verification executed all 749 cases: 748 passed,
 4,940 assertions, one historical investment empty-schema downgrade error caused
 by the new successor foreign key. No failing full pass is claimed.
 
-Cycle 3 removes only that empty successor schema before the historical event
+Historical cycle 3 removes only that empty successor schema before the historical event
 roundtrip, retaining every original financial assertion, and resets the UI
 review state after a successful allocation. The historical migration regression
-passed one test and 10 assertions. Final full uncached verification passed all
+passed one test and 10 assertions. Cycle 3 full uncached verification passed all
 749 tests and 4,948 assertions, with zero errors, failures or skips. All 681
 prior case identities remain alongside 68 new purification cases: 15 math,
 24 domain, 19 HTTP and 10 concurrency cases. Coverage includes all 113
@@ -40,7 +40,7 @@ application PHP paths, 3,914/4,164 statements. Math covers 10/10, read 76/78,
 service 138/154 and controller 53/54 statements. The financial coverage
 threshold is a future M5-P2 gate, not a current release claim.
 
-The full gate measured 844.04 seconds of wall time; Pest reported 693.987
+The cycle 3 full gate measured 844.04 seconds of wall time; Pest reported 693.987
 seconds. All 62 Node checks, frontend lint/types/build, PHPStan, platform and
 dependency checks, report validation and disposable migration checks passed.
 Fresh affected rendered review passed eight individually opened images; the
@@ -48,7 +48,7 @@ stale-review finding is verified fixed. Retained cycle 2 browser evidence covers
 unchanged flows. See [rendered review](M4-P2-rendered-review.md) for provenance
 and the inherited low finding outside this phase.
 
-Separate fresh TIA recording passed 749 tests and 4,948 assertions in 910.50
+Cycle 3 separate fresh TIA recording passed 749 tests and 4,948 assertions in 910.50
 wall seconds. Unchanged replay passed in 8.37 seconds with byte-identical graph
 and frontend caches and all 749 passing results retained. A subsequent native
 planner inspection found no changed content, rerun files or unlocated reruns,
@@ -81,13 +81,63 @@ review and exact-head hosted gates are recorded separately in the
 
 Cycle 4 addresses final publication documentation formatting only. Original
 PR #14 CI at `e0e7850` failed in the verification step before test reports; its
-exact failing log excerpt remains pending authenticated UI inspection. A local
+exact failing log excerpt was later confirmed through authenticated UI inspection. A local
 check of the final documents reproduced formatter errors in STATE.json and this
 run table. The installed formatter corrected those documents; formatting/lint, planning,
 links and all 10 planning tests passed. All previously
 tested application, test and verification source remains unchanged. Earlier
 full/TIA results are retained; corrected documentation checks, independent
-immutable-commit review and original corrected-head hosted gates remain separate.
+immutable-commit review and original corrected-head hosted gates remained separate.
+That corrected original run on `4c1673c` passed: authenticated UI recorded
+749/4,948 baseline, one intentional failure plus 749 passes/4,949 assertions,
+and restored 749/4,948, with report coverage 3,914/4,164 and both propagation
+and restoration markers. Those outcomes do not substitute for cycle 5 gates.
+
+Cycle 5 addresses an actual hosted low-priority finding on `4c1673c`: a truthy
+money object kept new allocation controls enabled for sourced zero and fully
+settled obligations. Independent actual browser review reproduced both states
+and opened both images; no allocation was posted. One shared UI guard now blocks
+new attempts with missing instructions, changed sources or no outstanding amount
+in fields, submit controls and the submit handler. Locked saved attempts remain
+recoverable even when the original commit settled the amount and its response
+was lost. Actual affected rendered regression and source review passed. Independent browser
+review opened 13 images: two RED reproductions and 11 GREEN results. New zero,
+settled and excess allocations were blocked without a POST or saved-draft
+mutation. A committed full settlement with a lost response recovered its exact
+saved payload/key after reload at zero outstanding, without another allocation
+or journal/cash movement. Partial allocation and retained release restored the
+expected availability. Desktop/mobile/dark and native submission paths passed.
+The reviewer removed only its own resources after all 50 data tables were empty.
+
+Cycle 5 full uncached verification passed all 749 tests and 4,948 assertions,
+zero errors, failures or skips, all prior case identities and all 113 app PHP
+paths at 3,914/4,164 statements. Wall time was 764.01 seconds; Pest reported
+670.927 seconds. All 62 Node checks, frontend lint/types/build, PHPStan, platform,
+advisory, migration and report gates passed. Independent raw-report review
+passed. An initial summary reader counted only direct Clover files; using the
+full nested file set matched the aggregate. Raw reports were unchanged and no
+tests were rerun for that reader correction.
+
+The actual shared frontend fingerprint required a fresh TIA recording; the
+retained cache was never forced to qualify for selective refresh. Cycle 5 fresh
+recording passed 749 tests and 4,948 assertions in 1,206.54 wall seconds
+(Pest 1,202.455 seconds). Unchanged replay passed in 8.63 wall seconds
+(Pest 2.828 seconds), retaining all 749 cached passing cases and byte-identical
+graph/frontend caches. Native planner probes mapped service and Form/Record
+changes to the expected suites and found no changed content, rerun files or
+unlocated reruns after replay. The native plan requires zero new executions;
+process-local replay counters were not separately exported. These probes
+executed no impacted tests and changed no source/cache content. Independent
+fresh record/replay/native evidence review passed.
+
+These cycle 5 results bind the frozen uncommitted correction based on
+`4c1673c`, not a corrected implementation committed at that hash. All 707 source
+and 118 compiled files remained unchanged through full, browser and TIA checks.
+The guarded coordinator database contained 50 empty data tables afterward.
+Final documentation refresh and immutable correction-commit review, followed
+by exact-head hosted gates, remain separate. Earlier passes retain their
+stated snapshot provenance. The first CI formatting failure and its passing corrected run remain
+separate historical outcomes.
 
 Canonical tasks and criteria are in [the phase](../phases/M4-P2.md). Policy
 choices are in [purification recording policy](../PURIFICATION.md). Exact
