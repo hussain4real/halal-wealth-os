@@ -7,7 +7,10 @@ Detailed module import edges remain proposed. M3-P1 is human accepted; M3-P2 is 
 implementation is human accepted at 08:33 UTC on 19 October 2026. Formal
 independent M3 review returned READY_FOR_OWNER with one low, nonblocking guidance
 finding; the human owner accepted M3 at 10:23 UTC on 19 October 2026. Canonical M4-P1 attributed assessment implementation is authorized at 10:36 UTC
-on 19 October 2026 and is in progress, unaccepted. Later phases remain
+on 19 October 2026, merged to dev, and human accepted at
+06:27:44 UTC on 20 October 2026. Completion-record publication is authorized;
+M4 milestone acceptance and M4-P2 remain separate decisions. See
+[publication and CI](runs/M4-P1-publication.md). Later phases remain
 unauthorized. See [assessment evidence](SHARIAH-EVIDENCE.md),
 [M4-P1](phases/M4-P1.md) and
 [M3-P3 acceptance](runs/M3-P3-acceptance.md) and the

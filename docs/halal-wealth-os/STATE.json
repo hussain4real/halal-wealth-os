@@ -12,14 +12,7 @@
         "default_production_actions": false,
         "default_external_effects": false
     },
-    "active_run": {
-        "phase": "M4-P1",
-        "owner": "cloud-m4p1-coordinator",
-        "worktree": ".",
-        "branch": "feat/m4-p1-shariah-assessments",
-        "started_at": "2026-10-19T10:37:58.982740+00:00",
-        "base": "04c8fd317dd415aaa9ed1ca4519eec43636ed54b"
-    },
+    "active_run": null,
     "repository": {
         "root": null,
         "remote": "https://github.com/hussain4real/halal-wealth-os",
@@ -203,11 +196,11 @@
         {
             "id": "M4-P1",
             "depends_on": ["M3-P3"],
-            "status": "IN_PROGRESS",
+            "status": "ACCEPTED",
             "owner": "cloud-m4p1-coordinator",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M4-P1-local.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-20T06:27:44Z",
+            "evidence": "runs/M4-P1-publication.md"
         },
         {
             "id": "M4-P2",
@@ -347,7 +340,7 @@
     },
     "execution_authorization": {
         "phase": "M4-P1",
-        "authorized": true,
+        "authorized": false,
         "authorized_by": "human-owner",
         "authorized_at": "2026-10-19T10:36:00Z",
         "accepted_dependencies": ["M3-P3"],
@@ -356,11 +349,14 @@
         "main_stage_changes": false,
         "deployment": false,
         "credentials_or_security_settings": false,
-        "standalone_M3_docs_PR_retry": false
+        "standalone_M3_docs_PR_retry": false,
+        "historical": true,
+        "closed_at": "2026-10-20T06:27:44Z",
+        "closure_reason": "M4-P1 implementation human accepted; completion-record publication separately authorized; no M4-P2"
     },
     "execution_status": {
         "phase": "M4-P1",
-        "status": "IN_PROGRESS",
+        "status": "ACCEPTED",
         "cycle": 6,
         "max_cycles": 6,
         "implementation": "FINAL_SCOPED_SEPARATE_TAB_EVIDENCE_LINK_CORRECTION",
@@ -369,10 +365,12 @@
         "rendered_review": "PASS_CYCLE6_FRESH_DESKTOP_MOBILE575_SOURCE109_COMPILED10_OPENED_IMAGES_FRESH_DRAFT_NEW_TAB_NOOPENER_BOUNDED_CURRENT_GUIDANCE_LOCKED_EXACT_RETRY_CLEANUP",
         "independent_review": "PASS_FINAL_EXACT575_SOURCE109_BUILD_FULL681_4485_COVERAGE3636_3868_59NODE_FRESH_RENDERED_TIA_RECORD_REPLAY_NATIVE_PLANNER_NO_NEW_TECHNICAL_FINDING",
         "source_review": "PASS_CYCLE6_EXACT575_HASHES_AND_MODES_M4P1_OPENING_NAV_01_SOURCE_FIXED_NO_UNRESOLVED_SOURCE_FINDINGS",
-        "publication": "PR12_OPEN_READY_HEAD866D49E_CORRECTION_NOT_YET_PUBLISHED",
-        "merge": "NOT_RUN",
-        "post_merge_ci": "NOT_RUN",
-        "scoped": "Cycle5 endpoint3tests51assertions_and6loaderPASS; final6linksource_and_actualfreshdraftbrowserPASS"
+        "publication": "PR12_MERGED_REVIEWED_SOURCE8AC65D7",
+        "merge": "PASS_NORMAL_NO_FF_NOREPLY_221FD3F_INDEPENDENT_OBJECT_REVIEW_BEFORE_PUSH",
+        "post_merge_ci": "PASS_ORIGINAL39378291812_ATTEMPT1_EXACT221FD3F_THREE_OUTCOME_BLOCKS_AND_REPORT_METRICS",
+        "scoped": "Cycle5 endpoint3tests51assertions_and6loaderPASS; final6linksource_and_actualfreshdraftbrowserPASS",
+        "phase_acceptance": "HUMAN_ACCEPTED_2026-10-20T06:27:44Z",
+        "final_completion_records": "OWNER_ACCEPTED_AND_PUBLICATION_AUTHORIZED_DOCUMENTATION_BRANCH_DRAFT_PR_ONLY"
     },
     "dependency_patch": {
         "authorized": true,
@@ -662,6 +660,19 @@
             "accepted_by": "human-owner",
             "accepted_at": "2026-10-18T17:09:00Z",
             "acceptance_evidence": "runs/M3-P1-acceptance.md"
+        },
+        {
+            "phase": "M4-P1",
+            "owner": "cloud-m4p1-coordinator",
+            "worktree": ".",
+            "branch": "feat/m4-p1-shariah-assessments",
+            "started_at": "2026-10-19T10:37:58.982740+00:00",
+            "base": "04c8fd317dd415aaa9ed1ca4519eec43636ed54b",
+            "status": "ACCEPTED",
+            "stopped_at": "2026-10-20T06:19:04.718384+00:00",
+            "checkpoint": "Human accepted M4-P1 and approved reviewed completion-record publication; six implementation cycles preserved; no M4-P2",
+            "closed_at": "2026-10-20T06:27:44Z",
+            "acceptance_evidence": "runs/M4-P1-publication.md"
         }
     ],
     "authorization_history": [
@@ -1919,6 +1930,47 @@
         "node_tests": 59,
         "full_wall_seconds": 1847.562597863,
         "merge_hold": "Current dev protection and administrator-bypass enforcement not established after denied protection read; owner-provided evidence pending; no alternate route, credential or settings change",
-        "own_resource_cleanup": "PASS_46EMPTY_OWN_CONTAINER_AND_VERIFIED5543_SOCKET_LOCK_REMOVED;OLDER_CONTAINER_ID_PID_RESTART_AND_ENV_DIGEST_PRESERVED_OLD5432_SOCKET_STILL_ABSENT_CONTENTS_UNVERIFIED"
+        "own_resource_cleanup": "PASS_46EMPTY_OWN_CONTAINER_AND_VERIFIED5543_SOCKET_LOCK_REMOVED;OLDER_CONTAINER_ID_PID_RESTART_AND_ENV_DIGEST_PRESERVED_OLD5432_SOCKET_STILL_ABSENT_CONTENTS_UNVERIFIED",
+        "historical": true,
+        "superseded_by": "m4_p1_completion and execution_status; human accepted M4-P1 at2026-10-20T06:27:44Z; completion-record publication authorized"
+    },
+    "m4_p1_completion": {
+        "status": "ACCEPTED",
+        "source_head": "8ac65d73ae1f242405ba79524165dca659f0ffd1",
+        "source_tree": "8faede3e9350fd556956dba81cac446f40c92d21",
+        "merge": "221fd3fa27ed545046c5a1c7d6fcac6f93e30c89",
+        "pull_request": "https://github.com/hussain4real/halal-wealth-os/pull/12",
+        "original_PR_CI": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39266679236",
+        "original_dev_push_CI": "https://github.com/hussain4real/halal-wealth-os/actions/runs/39378291812",
+        "CI_attempts": 1,
+        "original_P2": "VERIFIED_FIXED_RESOLVED_AFTER_EXPLICIT_OWNER_APPROVAL",
+        "identities": "APPROVED_NOREPLY_AUTHOR_AND_COMMITTER_VERIFIED_BEFORE_AND_AFTER_PUSH",
+        "protection_evidence": "Authenticated owner UI20October05:38 no classic rules/rulesets; historical403 unretried; no settings changes",
+        "CI_evidence": "All three outcome blocks and report metrics inspected via authenticated UI; not every logline/rawXML",
+        "cycles_used": 6,
+        "prior_failures_preserved": true,
+        "unresolved_inherited_finding": "LOW UX-M3-01",
+        "older_database_contents": "UNVERIFIED; no recovery/restart attempted",
+        "publication_record": "runs/M4-P1-publication.md",
+        "human_acceptance": {
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-20T06:27:44Z",
+            "evidence": "runs/M4-P1-publication.md"
+        },
+        "later_phase_started": false,
+        "deployment": false,
+        "accepted_by": "human-owner",
+        "accepted_at": "2026-10-20T06:27:44Z",
+        "publication_authorization": {
+            "authorized": true,
+            "authorized_by": "human-owner",
+            "authorized_at": "2026-10-20T06:27:44Z",
+            "scope": "Five reviewed completion documents on a separate documentation branch and draft PR targeting dev; no new dev merge",
+            "M4_P2_implementation": false,
+            "main_stage_promotion": false,
+            "deployment": false,
+            "settings_changes": false,
+            "history_rewrite": false
+        }
     }
 }
