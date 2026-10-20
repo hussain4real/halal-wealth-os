@@ -9,6 +9,7 @@ use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\PurificationController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ValuationController;
 use App\Http\Middleware\RequireProductionTwoFactor;
@@ -17,6 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+
+    Route::get('purification', [PurificationController::class, 'index'])->name('purification.index');
+    Route::get('purification/new', [PurificationController::class, 'form'])->name('purification.create');
+    Route::get('purification/export', [PurificationController::class, 'export'])->name('purification.export');
+    Route::post('purification/obligations', [PurificationController::class, 'obligationStore'])->name('purification.obligations.store');
+    Route::get('purification/obligations/{obligation}', [PurificationController::class, 'show'])->whereNumber('obligation')->name('purification.obligations.show');
+    Route::get('purification/obligations/{obligation}/revise', [PurificationController::class, 'form'])->whereNumber('obligation')->name('purification.obligations.revise');
+    Route::get('purification/payments/new', [PurificationController::class, 'paymentForm'])->name('purification.payments.create');
+    Route::post('purification/payments', [PurificationController::class, 'paymentStore'])->name('purification.payments.store');
+    Route::get('purification/payments/{payment}', [PurificationController::class, 'paymentShow'])->whereNumber('payment')->name('purification.payments.show');
+    Route::post('purification/allocations', [PurificationController::class, 'allocate'])->name('purification.allocations.store');
+    Route::post('purification/allocations/{allocation}/release', [PurificationController::class, 'release'])->whereNumber('allocation')->name('purification.allocations.release');
+
     Route::get('assets/{asset}/assessments', [AssessmentController::class, 'index'])->whereNumber('asset')->name('assessments.index');
     Route::get('assets/{asset}/assessments/new', [AssessmentController::class, 'form'])->whereNumber('asset')->name('assessments.create');
     Route::post('assets/{asset}/assessments', [AssessmentController::class, 'store'])->whereNumber('asset')->name('assessments.store');

@@ -34,6 +34,11 @@ const mainNavItems: NavItem[] = [
     { title: 'Goals & protection', href: '/goals', icon: Target },
     { title: 'Portfolio', href: '/portfolio', icon: ChartNoAxesCombined },
     { title: 'Asset catalog', href: '/assets', icon: LayoutGrid },
+    {
+        title: 'Purification records',
+        href: '/purification',
+        icon: ClipboardCheck,
+    },
     { title: 'Accounts', href: '/accounts', icon: Wallet },
     { title: 'Transactions', href: '/transactions', icon: ReceiptText },
     { title: 'Currency exchange', href: '/fx', icon: ArrowLeftRight },

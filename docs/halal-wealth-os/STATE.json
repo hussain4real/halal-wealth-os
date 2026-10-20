@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-19T14:01:03.304148+00:00",
+    "updated_at": "2026-10-20T08:35:30.286547+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -12,7 +12,14 @@
         "default_production_actions": false,
         "default_external_effects": false
     },
-    "active_run": null,
+    "active_run": {
+        "phase": "M4-P2",
+        "owner": "cloud-m4p2-coordinator",
+        "worktree": ".",
+        "branch": "feat/m4-p2-purification",
+        "started_at": "2026-10-20T07:15:09.489073+00:00",
+        "base": "140d0b6a2dfbfafbc0a571e64dfe099d05549393"
+    },
     "repository": {
         "root": null,
         "remote": "https://github.com/hussain4real/halal-wealth-os",
@@ -96,7 +103,9 @@
         },
         {
             "id": "M0-P2",
-            "depends_on": ["M0-P1"],
+            "depends_on": [
+                "M0-P1"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m0-p2-successor",
             "accepted_by": "human-owner",
@@ -105,7 +114,9 @@
         },
         {
             "id": "M0-P3",
-            "depends_on": ["M0-P2"],
+            "depends_on": [
+                "M0-P2"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m0-p3-owner",
             "accepted_by": "human-owner",
@@ -114,7 +125,9 @@
         },
         {
             "id": "M1-P1",
-            "depends_on": ["M0-P3"],
+            "depends_on": [
+                "M0-P3"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m1p1-coordinator",
             "accepted_by": "human-owner",
@@ -123,7 +136,9 @@
         },
         {
             "id": "M1-P2",
-            "depends_on": ["M1-P1"],
+            "depends_on": [
+                "M1-P1"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m1p2-coordinator",
             "accepted_by": "human-owner",
@@ -132,7 +147,9 @@
         },
         {
             "id": "M1-P3",
-            "depends_on": ["M1-P2"],
+            "depends_on": [
+                "M1-P2"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m1p3-coordinator",
             "accepted_by": "human-owner",
@@ -141,7 +158,9 @@
         },
         {
             "id": "M2-P1",
-            "depends_on": ["M1-P3"],
+            "depends_on": [
+                "M1-P3"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m2p1-coordinator",
             "accepted_by": "human-owner",
@@ -150,7 +169,9 @@
         },
         {
             "id": "M2-P2",
-            "depends_on": ["M2-P1"],
+            "depends_on": [
+                "M2-P1"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m2p2-coordinator",
             "accepted_by": "human-owner",
@@ -159,7 +180,9 @@
         },
         {
             "id": "M2-P3",
-            "depends_on": ["M2-P2"],
+            "depends_on": [
+                "M2-P2"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m2p3-coordinator",
             "accepted_by": "human-owner",
@@ -168,7 +191,9 @@
         },
         {
             "id": "M3-P1",
-            "depends_on": ["M2-P3"],
+            "depends_on": [
+                "M2-P3"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m3p1-coordinator",
             "accepted_by": "human-owner",
@@ -177,7 +202,9 @@
         },
         {
             "id": "M3-P2",
-            "depends_on": ["M3-P1"],
+            "depends_on": [
+                "M3-P1"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m3p2-coordinator",
             "accepted_by": "human-owner",
@@ -186,7 +213,9 @@
         },
         {
             "id": "M3-P3",
-            "depends_on": ["M3-P2"],
+            "depends_on": [
+                "M3-P2"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m3p3-coordinator",
             "accepted_by": "human-owner",
@@ -195,7 +224,9 @@
         },
         {
             "id": "M4-P1",
-            "depends_on": ["M3-P3"],
+            "depends_on": [
+                "M3-P3"
+            ],
             "status": "ACCEPTED",
             "owner": "cloud-m4p1-coordinator",
             "accepted_by": "human-owner",
@@ -204,16 +235,20 @@
         },
         {
             "id": "M4-P2",
-            "depends_on": ["M4-P1"],
-            "status": "PLANNED",
-            "owner": null,
+            "depends_on": [
+                "M4-P1"
+            ],
+            "status": "IN_PROGRESS",
+            "owner": "cloud-m4p2-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M4-P2-local.md"
         },
         {
             "id": "M4-P3",
-            "depends_on": ["M4-P2"],
+            "depends_on": [
+                "M4-P2"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -222,7 +257,9 @@
         },
         {
             "id": "M5-P1",
-            "depends_on": ["M4-P3"],
+            "depends_on": [
+                "M4-P3"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -231,7 +268,9 @@
         },
         {
             "id": "M5-P2",
-            "depends_on": ["M5-P1"],
+            "depends_on": [
+                "M5-P1"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -240,7 +279,9 @@
         },
         {
             "id": "M5-P3",
-            "depends_on": ["M5-P2"],
+            "depends_on": [
+                "M5-P2"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -249,7 +290,9 @@
         },
         {
             "id": "M6-P1",
-            "depends_on": ["M5-P3"],
+            "depends_on": [
+                "M5-P3"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -258,7 +301,9 @@
         },
         {
             "id": "M6-P2",
-            "depends_on": ["M6-P1"],
+            "depends_on": [
+                "M6-P1"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -267,7 +312,9 @@
         },
         {
             "id": "M6-P3",
-            "depends_on": ["M6-P2"],
+            "depends_on": [
+                "M6-P2"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -276,7 +323,9 @@
         },
         {
             "id": "M6-P4",
-            "depends_on": ["M6-P3"],
+            "depends_on": [
+                "M6-P3"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -285,7 +334,9 @@
         },
         {
             "id": "M7-P1",
-            "depends_on": ["M6-P4"],
+            "depends_on": [
+                "M6-P4"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -294,7 +345,9 @@
         },
         {
             "id": "M7-P2",
-            "depends_on": ["M7-P1"],
+            "depends_on": [
+                "M7-P1"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -303,7 +356,9 @@
         },
         {
             "id": "M7-P3",
-            "depends_on": ["M7-P2"],
+            "depends_on": [
+                "M7-P2"
+            ],
             "status": "PLANNED",
             "owner": null,
             "accepted_by": null,
@@ -339,38 +394,28 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "phase": "M4-P1",
-        "authorized": false,
+        "phase": "M4-P2",
+        "authorized": true,
         "authorized_by": "human-owner",
-        "authorized_at": "2026-10-19T10:36:00Z",
-        "accepted_dependencies": ["M3-P3"],
-        "scope": "Canonical M4-P1 implementation, independent source/rendered review, sanitized phase PR to dev, exact-head CI/review and normal noreply merge, followed by terminal original dev-push CI; stop for human phase acceptance",
+        "authorized_at": "2026-10-20T06:38:50Z",
+        "accepted_dependencies": [
+            "M4-P1"
+        ],
+        "scope": "Canonical M4-P2 implementation, independent source/rendered review, sanitized dev PR, exact-head CI/review, normal noreply dev merge and original dev-push CI; stop for human phase acceptance",
         "max_cycles": 6,
         "main_stage_changes": false,
         "deployment": false,
+        "live_payments": false,
         "credentials_or_security_settings": false,
-        "standalone_M3_docs_PR_retry": false,
-        "historical": true,
-        "closed_at": "2026-10-20T06:27:44Z",
-        "closure_reason": "M4-P1 implementation human accepted; completion-record publication separately authorized; no M4-P2"
+        "later_phases": false
     },
     "execution_status": {
-        "phase": "M4-P1",
-        "status": "ACCEPTED",
-        "cycle": 6,
+        "phase": "M4-P2",
+        "status": "IN_PROGRESS",
+        "cycle": 3,
         "max_cycles": 6,
-        "implementation": "FINAL_SCOPED_SEPARATE_TAB_EVIDENCE_LINK_CORRECTION",
-        "full_gate": "PASS_CYCLE6_UNCACHED681_TESTS4485_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS_COVERAGE3636_OF3868",
-        "tia": "PASS_CYCLE6_RECORD681_REPLAY681_ZERO_NEW_NATIVE_PLANNER",
-        "rendered_review": "PASS_CYCLE6_FRESH_DESKTOP_MOBILE575_SOURCE109_COMPILED10_OPENED_IMAGES_FRESH_DRAFT_NEW_TAB_NOOPENER_BOUNDED_CURRENT_GUIDANCE_LOCKED_EXACT_RETRY_CLEANUP",
-        "independent_review": "PASS_FINAL_EXACT575_SOURCE109_BUILD_FULL681_4485_COVERAGE3636_3868_59NODE_FRESH_RENDERED_TIA_RECORD_REPLAY_NATIVE_PLANNER_NO_NEW_TECHNICAL_FINDING",
-        "source_review": "PASS_CYCLE6_EXACT575_HASHES_AND_MODES_M4P1_OPENING_NAV_01_SOURCE_FIXED_NO_UNRESOLVED_SOURCE_FINDINGS",
-        "publication": "PR12_MERGED_REVIEWED_SOURCE8AC65D7",
-        "merge": "PASS_NORMAL_NO_FF_NOREPLY_221FD3F_INDEPENDENT_OBJECT_REVIEW_BEFORE_PUSH",
-        "post_merge_ci": "PASS_ORIGINAL39378291812_ATTEMPT1_EXACT221FD3F_THREE_OUTCOME_BLOCKS_AND_REPORT_METRICS",
-        "scoped": "Cycle5 endpoint3tests51assertions_and6loaderPASS; final6linksource_and_actualfreshdraftbrowserPASS",
-        "phase_acceptance": "HUMAN_ACCEPTED_2026-10-20T06:27:44Z",
-        "final_completion_records": "OWNER_ACCEPTED_AND_PUBLICATION_AUTHORIZED_DOCUMENTATION_BRANCH_DRAFT_PR_ONLY"
+        "predecessor_gate": "PASS_PR13_ORIGINAL_POSTMERGE_CI_AND_INDEPENDENT_REVIEW",
+        "phase_acceptance": "UNACCEPTED"
     },
     "dependency_patch": {
         "authorized": true,
@@ -683,7 +728,9 @@
             "starter_commit": "d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab",
             "remote_writes": true,
             "production_actions": false,
-            "accepted_dependencies": ["M0-P1"],
+            "accepted_dependencies": [
+                "M0-P1"
+            ],
             "php_constraint": "~8.5.0",
             "completed_at": "2026-10-17T15:08:11.290788+00:00"
         },
@@ -692,7 +739,9 @@
             "authorized": false,
             "authority": "Human Merge and proceed, manager supplied canonical scope and delegated sole next-phase implementation",
             "scope": "Canonical M0-P3 only; accepted-stack compatible dependencies; no merge/deploy/security settings/live credentials/real user provisioning/financial behavior/later phase; later manager authorization permits sanitized commit/push and one PR to dev plus hosted CI/review reconciliation",
-            "accepted_dependencies": ["M0-P2"],
+            "accepted_dependencies": [
+                "M0-P2"
+            ],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0",
@@ -703,7 +752,9 @@
             "authorized": false,
             "authority": "Human Merge and proceed, manager supplied canonical scope and delegated sole next-phase implementation",
             "scope": "M0-P3 implementation complete and human accepted; no next-phase execution authorized",
-            "accepted_dependencies": ["M0-P2"],
+            "accepted_dependencies": [
+                "M0-P2"
+            ],
             "remote_writes": false,
             "production_actions": false,
             "php_constraint": "~8.5.0",
@@ -714,7 +765,9 @@
             "authorized": true,
             "authority": "Owner approved recording M0 acceptance and proceeding; manager delegates workspace-only M1-P1 implementation and independent parallel reviews",
             "scope": "Accounts, currencies and exact money only; pending opening input/future posting boundary; no M1-P2/M1-P3, commits, push, PR, merge, deployment or external publication",
-            "accepted_dependencies": ["M0-P3"],
+            "accepted_dependencies": [
+                "M0-P3"
+            ],
             "remote_writes": false,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -724,7 +777,9 @@
             "authorized": true,
             "authority": "Owner explicitly approves focused M1-P1 PR to dev and normal merge after CI/final independent review",
             "scope": "Publish sanitized M1-P1 and M0 acceptance/review docs, inspect/fix in-scope feedback, exact-head review and dev merge, verify post-merge CI; no later phases or deployment",
-            "accepted_dependencies": ["M0-P3"],
+            "accepted_dependencies": [
+                "M0-P3"
+            ],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -734,7 +789,9 @@
             "authorized": true,
             "authority": "Owner accepts M1-P1 and approves next phase implementation/review/draft dev PR/normal merge after exact-head reviews and CI",
             "scope": "Canonical M1-P2; polished transaction UX; real PostgreSQL concurrency and independent rendered desktop/mobile review; no M1-P3/main/stage/deployment",
-            "accepted_dependencies": ["M1-P1"],
+            "accepted_dependencies": [
+                "M1-P1"
+            ],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -744,7 +801,9 @@
             "authorized": true,
             "authority": "Owner accepts M1-P2 and approves M1-P3 implementation/review/sanitized draft dev PR/normal merge after exact-head review and CI, then independent M1 milestone review",
             "scope": "Canonical manual FX and reconciliation only; real PostgreSQL and rendered desktop/mobile review; stop for owner milestone acceptance before M2; no main/stage/deployment",
-            "accepted_dependencies": ["M1-P2"],
+            "accepted_dependencies": [
+                "M1-P2"
+            ],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0",
@@ -755,7 +814,9 @@
             "authorized": true,
             "authority": "Explicit owner acceptance of M1-P3/M1 and approved next budgeting phase through independent review/dev PR/normal merge/post-CI",
             "scope": "Canonical M2-P1 only; preserve/publish reviewed M1 docs, no later phase/main/stage/deployment",
-            "accepted_dependencies": ["M1-P3"],
+            "accepted_dependencies": [
+                "M1-P3"
+            ],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -771,7 +832,9 @@
             "authorized": true,
             "authority": "Explicit owner M2-P3/M2 acceptance and final-record publication, then M3-P1 implementation/independent source-rendered review/dev PR/normal merge after exact-head CI-review/original postmerge CI",
             "scope": "Canonical M3-P1 only; stop for owner phase acceptance; no M3-P2/main/stage/deployment",
-            "accepted_dependencies": ["M2-P3"],
+            "accepted_dependencies": [
+                "M2-P3"
+            ],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -781,7 +844,9 @@
             "authorized": true,
             "authority": "Explicit owner M3-P1 acceptance/final-record publication and M3-P2 implementation, independent technical/rendered review, sanitized dev PR, normal merge after exact-head gates and original postmerge CI",
             "scope": "Canonical M3-P2 only; stop for owner acceptance; no M3-P3/main/stage/deployment",
-            "accepted_dependencies": ["M3-P1"],
+            "accepted_dependencies": [
+                "M3-P1"
+            ],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
@@ -809,10 +874,30 @@
             "authorized": false,
             "authority": "Human M3-P3 acceptance at 08:33 UTC; implementation complete. Separate completion-record publication and formal independent M3 review authorization is recorded below.",
             "scope": "No further phase implementation; M3 independent source-read-only review and sanitized completion documentation only; no M4/main/stage/deployment/settings changes",
-            "accepted_dependencies": ["M3-P2"],
+            "accepted_dependencies": [
+                "M3-P2"
+            ],
             "remote_writes": true,
             "production_actions": false,
             "php_constraint": "~8.5.0"
+        },
+        {
+            "phase": "M4-P1",
+            "authorized": false,
+            "authorized_by": "human-owner",
+            "authorized_at": "2026-10-19T10:36:00Z",
+            "accepted_dependencies": [
+                "M3-P3"
+            ],
+            "scope": "Canonical M4-P1 implementation, independent source/rendered review, sanitized phase PR to dev, exact-head CI/review and normal noreply merge, followed by terminal original dev-push CI; stop for human phase acceptance",
+            "max_cycles": 6,
+            "main_stage_changes": false,
+            "deployment": false,
+            "credentials_or_security_settings": false,
+            "standalone_M3_docs_PR_retry": false,
+            "historical": true,
+            "closed_at": "2026-10-20T06:27:44Z",
+            "closure_reason": "M4-P1 implementation human accepted; completion-record publication separately authorized; no M4-P2"
         }
     ],
     "execution_status_history": [
@@ -990,6 +1075,24 @@
             "post_merge_ci": "NOT_RUN",
             "scoped": "HTTP3_TESTS40_ASSERTIONS_AND6_LOADER_TESTS_PASS_TYPES_PHPSTAN_FRONTEND_CHECK_PASS",
             "historical_note": "Cycle5 full intentionally stopped after actual mobile RED confirmed fresh draft loss; no full pass claimed."
+        },
+        {
+            "phase": "M4-P1",
+            "status": "ACCEPTED",
+            "cycle": 6,
+            "max_cycles": 6,
+            "implementation": "FINAL_SCOPED_SEPARATE_TAB_EVIDENCE_LINK_CORRECTION",
+            "full_gate": "PASS_CYCLE6_UNCACHED681_TESTS4485_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS_COVERAGE3636_OF3868",
+            "tia": "PASS_CYCLE6_RECORD681_REPLAY681_ZERO_NEW_NATIVE_PLANNER",
+            "rendered_review": "PASS_CYCLE6_FRESH_DESKTOP_MOBILE575_SOURCE109_COMPILED10_OPENED_IMAGES_FRESH_DRAFT_NEW_TAB_NOOPENER_BOUNDED_CURRENT_GUIDANCE_LOCKED_EXACT_RETRY_CLEANUP",
+            "independent_review": "PASS_FINAL_EXACT575_SOURCE109_BUILD_FULL681_4485_COVERAGE3636_3868_59NODE_FRESH_RENDERED_TIA_RECORD_REPLAY_NATIVE_PLANNER_NO_NEW_TECHNICAL_FINDING",
+            "source_review": "PASS_CYCLE6_EXACT575_HASHES_AND_MODES_M4P1_OPENING_NAV_01_SOURCE_FIXED_NO_UNRESOLVED_SOURCE_FINDINGS",
+            "publication": "PR12_MERGED_REVIEWED_SOURCE8AC65D7",
+            "merge": "PASS_NORMAL_NO_FF_NOREPLY_221FD3F_INDEPENDENT_OBJECT_REVIEW_BEFORE_PUSH",
+            "post_merge_ci": "PASS_ORIGINAL39378291812_ATTEMPT1_EXACT221FD3F_THREE_OUTCOME_BLOCKS_AND_REPORT_METRICS",
+            "scoped": "Cycle5 endpoint3tests51assertions_and6loaderPASS; final6linksource_and_actualfreshdraftbrowserPASS",
+            "phase_acceptance": "HUMAN_ACCEPTED_2026-10-20T06:27:44Z",
+            "final_completion_records": "OWNER_ACCEPTED_AND_PUBLICATION_AUTHORIZED_DOCUMENTATION_BRANCH_DRAFT_PR_ONLY"
         }
     ],
     "m0p3_publication": {
@@ -1051,7 +1154,10 @@
                 "severity": "LOW",
                 "kind": "documentation",
                 "path": "ARCHITECTURE.md",
-                "lines": [3, 5],
+                "lines": [
+                    3,
+                    5
+                ],
                 "disposition": "CORRECTED_LOCALLY",
                 "summary": "Opening status/version statements describe an earlier checkpoint; label historical or update links to current runtime/acceptance records",
                 "correction_evidence": "runs/M0-acceptance.md"
@@ -1746,7 +1852,11 @@
             {
                 "id": "UX-M3-01",
                 "severity": "LOW",
-                "requirements": ["M3-P1-T6", "M3-P3-T1", "M3-P3-T6"],
+                "requirements": [
+                    "M3-P1-T6",
+                    "M3-P3-T1",
+                    "M3-P3-T6"
+                ],
                 "locations": [
                     "resources/js/pages/portfolio/Show.vue:115",
                     "resources/js/pages/portfolio/Opening.vue:188",
@@ -1972,5 +2082,124 @@
             "settings_changes": false,
             "history_rewrite": false
         }
+    },
+    "m4p2_checkpoint": {
+        "status": "IN_PROGRESS",
+        "cycles_used": 3,
+        "max_cycles": 6,
+        "cycle_history": [
+            {
+                "cycle": 1,
+                "domain_math": {
+                    "tests": 36,
+                    "passed": 35,
+                    "assertions": 113,
+                    "errors": 1,
+                    "cause": "Test manually reversed distribution before calling existing correction which reverses itself; corrected fixture, no application change"
+                },
+                "http_concurrency": {
+                    "tests": 28,
+                    "passed": 24,
+                    "assertions": 206,
+                    "failed": 4,
+                    "cause": "Missing generated production Vite manifest in isolated new checkout; all9 new concurrency cases passed"
+                },
+                "types": "Initial missing Wayfinder generated files; generation performed; subsequent types PASS",
+                "phpstan": "20 numeric-string/iterable declaration errors to fix via existing validated exact integer adapter, no suppressions",
+                "independent_review": "Two medium UI findings R1retryfamilyscope/release/createvsrevise collision andR2oldpaymentreachability",
+                "next_cycle": 2
+            },
+            {
+                "cycle": 2,
+                "targeted": {
+                    "tests": 68,
+                    "assertions": 459,
+                    "result": "PASS"
+                },
+                "full": {
+                    "exit": 2,
+                    "tests": 749,
+                    "passed": 748,
+                    "assertions": 4940,
+                    "errors": 1,
+                    "pest_seconds": 706.72,
+                    "cause": "Sixth historical InvestmentConcurrencyTest empty event schema roundtrip did not first remove the new empty purification schema FK; no CASCADE or assertion weakening permitted"
+                },
+                "browser": "All5ACs actual desktop/mobile/recoveryPASS withoneLOWstale-reviewpanel; exact705source118compiled,21images opened, cleanup50tablesempty ownresourcesremoved",
+                "source_privacy_review": "PASS705source118compiledsha/modes; no blockingfindings",
+                "tia": "NOT_RUN",
+                "next_cycle": 3
+            },
+            {
+                "cycle": 3,
+                "scope": "Narrow historical empty-schema roundtrip and allocation review-state correction",
+                "targeted_historical": {
+                    "tests": 1,
+                    "assertions": 10,
+                    "result": "PASS"
+                },
+                "full": "PASS749_TESTS4948_ASSERTIONS_ZERO_ERRORS_FAILURES_SKIPS_ALL681_PRIOR_IDENTITIES",
+                "source": "PASS_EXACT705_SOURCE118_BUILD_BEFORE_DOC_REFRESH",
+                "rendered": "PASS8_FRESH_IMAGES_AFFECTED_FLOWS_AND_RECOVERY;LOW_VERIFIED_FIXED;50TABLES_EMPTY_OWN_RESOURCES_REMOVED",
+                "tia": "PASS_FRESH749_4948_REPLAY8.37S_IDENTICAL_CACHE_NATIVE_SELECTION_AND_ZERO_NEW_NATIVE_PLAN;COUNTERS_NOT_SEPARATELY_EXPORTED",
+                "publication": "PENDING"
+            }
+        ],
+        "local_engineering_complete": true,
+        "full_gate": {
+            "tests": 749,
+            "assertions": 4948,
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "coverage": "3914/4164",
+            "app_php_files": 113,
+            "all_prior_case_identities": 681,
+            "new_cases": 68,
+            "wall_seconds": 844.0394171110001,
+            "pest_seconds": 693.987,
+            "result": "PASS"
+        },
+        "node_tests": 62,
+        "source_review": "PASS_EXACT_FROZEN705_SOURCE_HASHES_AND_MODES_NO_BLOCKING_FINDINGS;DOC_REFRESH_REVIEW_PENDING",
+        "rendered_review": "PASS_RETAINED21_CYCLE2_AND_FRESH8_CYCLE3_IMAGES_INDIVIDUALLY_OPENED;M4P2_LOW_VERIFIED_FIXED",
+        "rendered_evidence": "runs/M4-P2-rendered-review.md",
+        "tia": {
+            "status": "PASS_INDEPENDENT_RECORD_REPLAY_NATIVE_SELECTION_AND_PLAN_REVIEW",
+            "fresh": {
+                "executed_tests": 749,
+                "assertions": 4948,
+                "wall_seconds": 910.4990081709984,
+                "pest_seconds": 906.205
+            },
+            "unchanged_replay": {
+                "complete_cached_passing_results": 749,
+                "cached_assertions": 4948,
+                "wall_seconds": 8.372325126998476,
+                "pest_seconds": 2.791,
+                "graph_and_frontend_bytes_unchanged": true,
+                "native_plan_new_executions": 0,
+                "native_delta_and_rerun_files": [],
+                "unlocated_reruns": false,
+                "process_local_replay_counters": "NOT_SEPARATELY_EXPORTED; native post-replay plan and byte-identical caches corroborate unchanged replay"
+            },
+            "native_selection": "PASS_SERVICE_TO_THREE_PURIFICATION_FEATURE_SUITES_FORM_AND_RECORD_TO_HTTP;SIMULATED_PREVIOUS_HASHES_ONLY_NO_SOURCE_CACHE_MUTATION_OR_IMPACTED_EXECUTION",
+            "recording_context": "Frozen uncommitted705source118compiled based on140d0b6; not committed implementation proof",
+            "private_helper_failure": "Attempt1 missing PHPUnitConfigurationRegistry; preserved, corrected using installed native configuration builder; no test rerun",
+            "owned_database_empty_tables": 50
+        },
+        "publication": "FINAL_SANITATION_AND_IMMUTABLE_COMMIT_REVIEW_PENDING",
+        "publication_evidence": "runs/M4-P2-publication.md",
+        "phase_accepted": false,
+        "later_phase_authorized": false,
+        "remaining_gates": [
+            "sanitized documentation/candidate and actual immutable noreply commit review",
+            "original exact-head PR CI and hosted feedback",
+            "normal independently reviewed noreply dev merge and original exact-merge dev-push CI",
+            "human M4-P2 acceptance"
+        ],
+        "carried_findings": [
+            "InheritedLOWUX-M3-01 remains open outside phase"
+        ]
     }
 }

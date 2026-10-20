@@ -9,8 +9,8 @@ independent M3 review returned READY_FOR_OWNER with one low, nonblocking guidanc
 finding; the human owner accepted M3 at 10:23 UTC on 19 October 2026. Canonical M4-P1 attributed assessment implementation is authorized at 10:36 UTC
 on 19 October 2026, merged to dev, and human accepted at
 06:27:44 UTC on 20 October 2026. Completion-record publication is authorized;
-M4 milestone acceptance and M4-P2 remain separate decisions. See
-[publication and CI](runs/M4-P1-publication.md). Later phases remain
+M4-P2 is authorized and in progress; M4 milestone acceptance remains separate. See
+[publication and CI](runs/M4-P1-publication.md). M4-P3 and later phases remain
 unauthorized. See [assessment evidence](SHARIAH-EVIDENCE.md),
 [M4-P1](phases/M4-P1.md) and
 [M3-P3 acceptance](runs/M3-P3-acceptance.md) and the
@@ -48,7 +48,7 @@ This dependency graph is a local architecture proposal, not a claim that the pri
 | Ledger              | Identity authorization contracts and shared money/currency primitives              |
 | Planning            | Ledger read/posting ports and Identity                                             |
 | Portfolio           | Ledger posting/read ports and Identity                                             |
-| Shariah             | Portfolio read contracts and Identity                                              |
+| Shariah             | Portfolio reads, Ledger posting/read ports and Identity                            |
 | Decisions           | Planning, Portfolio and Shariah read contracts; Identity                           |
 | Reporting           | Read contracts from the preceding modules; Identity                                |
 | Integrations, later | Application-service ports; Identity; external adapters remain outside domain rules |
@@ -57,3 +57,7 @@ This dependency graph is a local architecture proposal, not a claim that the pri
 Cross-module operations belong to the initiating use case's application service: Portfolio application services coordinate a trade/event with Ledger; Planning application services coordinate funding/reservation annotations. They use one PostgreSQL transaction where records must commit together. Ledger never imports Portfolio or Planning, and read projections/notifications do not call back into posting rules.
 
 Prohibit domain dependency cycles, reverse imports from Ledger into higher modules, calls from domain rules into provider adapters, and writes from Reporting or Intelligence. Model external adapters through inward-facing ports; core domains must remain runnable without enabled integrations. Public UI and admin call the same policy-checked application services. The owner must approve these proposed boundaries before implementation.
+
+Purification application services compose the existing Ledger expense posting
+port; obligations and allocation/release annotations never post cash. See
+[purification recording policy](PURIFICATION.md).

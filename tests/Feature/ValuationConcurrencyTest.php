@@ -103,16 +103,21 @@ test('price and saved evidence reject committed mutation and destructive downgra
     foreach ([['portfolio_prices', $p->id], ['investment_valuation_runs', $r->id]] as [$table, $id]) {
         expect(fn () => DB::transaction(fn () => DB::table($table)->where('id', $id)->delete()))->toThrow(PDOException::class);
     }
+    $purification = require database_path('migrations/2026_10_20_073000_create_purification_records.php');
+    $purification->down();
     $m = require database_path('migrations/2026_10_19_000001_create_investment_valuation_evidence.php');
     expect(fn () => $m->down())->toThrow(RuntimeException::class, 'before DDL');
     expect(Schema::hasTable('portfolio_prices'))->toBeTrue();
 });
 test('empty valuation migration roundtrip preserves pre-existing immutable opening and ledger rows', function () {
+    $purification = require database_path('migrations/2026_10_20_073000_create_purification_records.php');
+    $purification->down();
     $m = require database_path('migrations/2026_10_19_000001_create_investment_valuation_evidence.php');
     $rows = DB::table('portfolio_opening_rows')->orderBy('id')->get()->toJson();
     $accounts = DB::table('accounts')->orderBy('id')->get()->toJson();
     $m->down();
     expect(Schema::hasTable('portfolio_prices'))->toBeFalse();
     $m->up();
+    $purification->up();
     expect(DB::table('portfolio_opening_rows')->orderBy('id')->get()->toJson())->toBe($rows)->and(DB::table('accounts')->orderBy('id')->get()->toJson())->toBe($accounts);
 });
