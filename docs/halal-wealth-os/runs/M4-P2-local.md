@@ -1,6 +1,6 @@
 # M4-P2 local run
 
-Status: IN_PROGRESS, unaccepted. Cycle 3 of at most 6.
+Status: IN_PROGRESS, unaccepted. Cycle 4 of at most 6.
 
 Human authority covers canonical implementation, independent review, sanitized
 dev publication, normal noreply merge and original post-merge CI. No live
@@ -69,15 +69,25 @@ rendered and raw full-report independent reviews passed; final replay/publicatio
 review and exact-head hosted gates are recorded separately in the
 [publication checkpoint](M4-P2-publication.md).
 
-| Requirement | Observed evidence |
-| --- | --- |
-| T1-T2, AC1; INV-02/08/09 | F12 sourced gross NGN 100 at 2% yields NGN 2; net/custom/fixed sources, full percentage precision, assessment/distribution versions and source-change uncertainty; math/domain/HTTP plus actual rendered explanation |
-| T3, AC2; INV-01/04 | Obligation creates no cash movement; manual recorded payment composes one expense; linking existing expense adds no debit; rollback on invalid attribution, actual rendered journal/cash reconciliation |
-| T6, AC3; INV-09 | F15 missing method/source/base/rate remains pending; explicitly sourced zero remains distinct; rendered pending/empty/error states; no zakat engine |
-| T3, AC4; INV-05 | Partial/settled/outstanding totals, payment and obligation capacity under independent PostgreSQL contention, same-currency guard, overcapacity response without writes and repeated rendered allocation |
-| T4-T5, AC5; INV-03/11 | Exact retries, business duplicate guards, competing versions, retained payment/release history, upward/downward excess, corrected distributions and reversed/replaced expenses; actual committed-response-loss/reload recovery |
-| INV-06/07 | Purification consumes recorded distribution references; no positions, cost or valuation rewrite and no market-value base; retained prior investment/valuation suite identities passed |
-| INV-10/12 | F14 owner/admin read/write/history/export boundaries, forged fields and auth gates; actual second-owner/admin review; exact source/build bindings, full reports, independent reviews and separately pending hosted gates |
+| Requirement              | Observed evidence                                                                                                                                                                                                              |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| T1-T2, AC1; INV-02/08/09 | F12 sourced gross NGN 100 at 2% yields NGN 2; net/custom/fixed sources, full percentage precision, assessment/distribution versions and source-change uncertainty; math/domain/HTTP plus actual rendered explanation           |
+| T3, AC2; INV-01/04       | Obligation creates no cash movement; manual recorded payment composes one expense; linking existing expense adds no debit; rollback on invalid attribution, actual rendered journal/cash reconciliation                        |
+| T6, AC3; INV-09          | F15 missing method/source/base/rate remains pending; explicitly sourced zero remains distinct; rendered pending/empty/error states; no zakat engine                                                                            |
+| T3, AC4; INV-05          | Partial/settled/outstanding totals, payment and obligation capacity under independent PostgreSQL contention, same-currency guard, overcapacity response without writes and repeated rendered allocation                        |
+| T4-T5, AC5; INV-03/11    | Exact retries, business duplicate guards, competing versions, retained payment/release history, upward/downward excess, corrected distributions and reversed/replaced expenses; actual committed-response-loss/reload recovery |
+| INV-06/07                | Purification consumes recorded distribution references; no positions, cost or valuation rewrite and no market-value base; retained prior investment/valuation suite identities passed                                          |
+| INV-10/12                | F14 owner/admin read/write/history/export boundaries, forged fields and auth gates; actual second-owner/admin review; exact source/build bindings, full reports, independent reviews and separately pending hosted gates       |
+
+Cycle 4 addresses final publication documentation formatting only. Original
+PR #14 CI at `e0e7850` failed in the verification step before test reports; its
+exact failing log excerpt remains pending authenticated UI inspection. A local
+check of the final documents reproduced formatter errors in STATE.json and this
+run table. The installed formatter corrected those documents; formatting/lint, planning,
+links and all 10 planning tests passed. All previously
+tested application, test and verification source remains unchanged. Earlier
+full/TIA results are retained; corrected documentation checks, independent
+immutable-commit review and original corrected-head hosted gates remain separate.
 
 Canonical tasks and criteria are in [the phase](../phases/M4-P2.md). Policy
 choices are in [purification recording policy](../PURIFICATION.md). Exact

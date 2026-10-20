@@ -6,7 +6,8 @@ unaccepted and its sole-owner claim remains active through this checkpoint.
 The human owner authorized canonical M4-P2 through implementation, independent
 review, sanitized dev publication, normal explicit-noreply merge and original
 dev-push CI. The source is based on accepted predecessor merge `140d0b6`.
-Three of at most six scoped implementation cycles have been used; earlier
+Four of at most six scoped cycles have been used, including a documentation-only
+formatting correction after three implementation cycles; earlier
 failures remain in the [local run](M4-P2-local.md) and private raw evidence.
 
 Full uncached verification passed 749 tests and 4,948 assertions with no errors,
@@ -25,7 +26,12 @@ The stale-review finding is fixed; inherited low UX-M3-01 remains outside scope.
 
 Final independent replay/planner review: passed. Sanitized candidate/immutable
 source commit review: pending. Original exact-head PR CI and hosted feedback:
-pending. Normal noreply
+pending. Original PR #14 CI at `e0e7850` failed before test reports; a local
+final-document check reproduced formatting errors in STATE and the local run
+table. Those documents were corrected without application changes; formatting/lint,
+planning, links and all 10 planning tests passed. The
+exact hosted error excerpt and original corrected-head gates remain pending.
+Normal noreply
 dev merge and original exact-merge dev-push CI: pending. Local evidence does not
 stand in for these hosted gates. No hosted archive/raw XML inspection is claimed.
 
