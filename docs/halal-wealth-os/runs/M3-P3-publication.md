@@ -1,10 +1,19 @@
 # M3-P3 publication checkpoint
 
-Status: local execution gates passed; publication checkpoint in progress. At this
-pre-publication snapshot no M3-P3 source PR or dev merge has been attempted. Full
-uncached, independent source/rendered, private canonical and TIA gates passed.
-Final publication approval and exact-head hosted gates remain pending.
-M3-P3 remains unaccepted; formal M3 review and M4 are not authorized.
+Current milestone decision: the human owner accepted M3 at 10:23 UTC on
+19 October 2026 and approved the exact public documentation-only draft PR from
+docs/m3-completion-and-review into dev in hussain4real/halal-wealth-os. See
+[M3 acceptance](M3-acceptance.md). The earlier M3-pending and publication
+statements below are historical checkpoints. No new merge or M4 implementation
+is authorized; M4-P1 preparation is read-only.
+
+Status: merged normally to dev; code/review/CI gates complete. The human owner
+accepted M3-P3 and the existing-history PUB-MERGE-01 metadata exception at
+08:33 UTC on 19 October 2026. See [owner acceptance](M3-P3-acceptance.md).
+Corrected sanitized completion records are authorized for publication after
+independent approval. Formal independent M3 review is authorized; M3 remains
+unaccepted and M4 has not started. Earlier pending statements below are preserved
+historical checkpoints.
 
 ## Authority and baseline
 
@@ -88,3 +97,69 @@ for the documentation correction. The application/build inventories remain
 unchanged. Independent sanitation and exact-commit verification of the four-doc
 delta precede the corrected feature push. The ready-for-review transition remains
 a separate unresolved approval checkpoint; no hosted review is claimed.
+
+## Completed exact-head and merge gates
+
+The explicit owner approval resolved the ready-transition checkpoint. PR #11 was
+marked ready through the same approved tool path, then one exact-head hosted
+review was requested for 56b94c51272293e4e082580016a8478b8ae94ef4. Its
+[receipt](https://github.com/hussain4real/halal-wealth-os/pull/11#issuecomment-6262391018)
+and summary confirm completed code review with no findings or unresolved code
+threads. All formal reviews, inline comments and threads were inspected, and
+independent final pre-merge review passed the content/check/feedback packet.
+
+Corrected-head original PR CI
+[39199641779](https://github.com/hussain4real/halal-wealth-os/actions/runs/39199641779)
+attempt 1 passed on that head. Normal merge created
+04c8fd317dd415aaa9ed1ca4519eec43636ed54b with parents
+fffc3061b75527a1fc5efa88dfaee38147061953 and
+56b94c51272293e4e082580016a8478b8ae94ef4, tree
+e6159429b3db276602a2b75b4114b4a489abd7f4. Fresh remote read-back confirms dev
+advanced to that merge and main/stage were unchanged. Local dev was updated by
+normal fetch/switch/fast-forward only; no reset, force, bypass or deployment was
+used. The four accepted M3-P2 records and acceptance are now published in dev.
+
+Original dev-push CI
+[39219000692](https://github.com/hussain4real/halal-wealth-os/actions/runs/39219000692)
+attempt 1 reached terminal success on the merge. Both successful original runs'
+complete decoded logs verify baseline 625 passed / 4,135 assertions, deliberate
+one failure plus 625 passed / 4,136 assertions, and restored 625 passed / 4,135
+assertions. Both passing baselines report 3,466 / 3,695 covered statements.
+Immutable source/review/run IDs and raw log hashes are retained in private owner
+evidence. The earlier failed original formatting run remains recorded above.
+
+## PUB-MERGE-01 and acceptance boundary
+
+Post-merge publication review found that GitHub's generated merge author metadata
+uses account identity details differing from the approved public noreply metadata
+of the source commits. Exact identity values are omitted from these records; the affected merge metadata is public. Content identity, source commit metadata, hosted code review and CI pass;
+the merge-author metadata finding was open at the pre-acceptance handoff.
+No history rewrite, account-setting change or corrective remote action occurred.
+
+At 08:33 UTC on 19 October 2026 the owner explicitly accepted M3-P3 and the
+existing-history exception. This preserves the affected public metadata; it does
+not remove it or approve future exposure. No exact personal identity values are
+published in these records. Corrected completion records and formal independent
+M3 review are authorized. Only the human accepts M3; M4, main/stage promotion,
+deployment, settings changes and history rewriting remain unauthorized.
+
+## Completion-record publication boundary
+
+The merge connector has no author-email override. Read-only inspection of the
+existing authenticated CLI and live GraphQL schema confirms support for an
+explicit merge authorEmail, without settings or permission changes. That alone
+does not verify control of every generated author field. Account privacy settings
+were not changed. This checkpoint publishes independently approved noreply
+documentation commits on a separate branch and a draft PR targeting dev; no new
+GitHub-generated merge is attempted. Future merges require a verified supported
+identity path within the owner's privacy boundary.
+
+## Completed formal review
+
+The [independent M3 review](M3-independent-review.md) returned READY_FOR_OWNER,
+with no blocking technical findings and one LOW, nonblocking guidance finding.
+Fresh full execution passed 625 tests / 4,135 assertions, coverage 3,466/3,695
+and all 51 Node checks; fresh private F08-F11 probes and owned-resource cleanup
+passed. Retained original CI, TIA and browser evidence are separately attributed.
+Only the human owner can accept M3. No M4, main/stage promotion, deployment,
+history rewriting or account/security-setting changes occurred.

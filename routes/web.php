@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CashAvailabilityController;
 use App\Http\Controllers\GoalController;
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+    Route::get('assets/{asset}/assessments', [AssessmentController::class, 'index'])->whereNumber('asset')->name('assessments.index');
+    Route::get('assets/{asset}/assessments/new', [AssessmentController::class, 'form'])->whereNumber('asset')->name('assessments.create');
+    Route::post('assets/{asset}/assessments', [AssessmentController::class, 'store'])->whereNumber('asset')->name('assessments.store');
+    Route::get('assets/{asset}/assessments/export', [AssessmentController::class, 'export'])->whereNumber('asset')->name('assessments.export');
+    Route::get('assets/{asset}/assessments/{assessment}', [AssessmentController::class, 'show'])->whereNumber(['asset', 'assessment'])->name('assessments.show');
+    Route::get('assets/{asset}/assessments/{assessment}/revise', [AssessmentController::class, 'form'])->whereNumber(['asset', 'assessment'])->name('assessments.revise');
     Route::get('valuations', [ValuationController::class, 'index'])->name('valuations.index');
     Route::post('valuations', [ValuationController::class, 'store'])->name('valuations.store');
     Route::get('valuations/export', [ValuationController::class, 'export'])->name('valuations.export');
@@ -32,6 +39,7 @@ Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->grou
     Route::post('portfolio', [PortfolioController::class, 'store'])->name('portfolio.store');
     Route::get('portfolio/{portfolio}', [PortfolioController::class, 'show'])->whereNumber('portfolio')->name('portfolio.show');
     Route::get('portfolio/{portfolio}/opening', [PortfolioController::class, 'openingForm'])->whereNumber('portfolio')->name('portfolio.opening');
+    Route::get('portfolio/{portfolio}/opening/assessment-guidance', [PortfolioController::class, 'openingGuidance'])->whereNumber('portfolio')->name('portfolio.opening.guidance');
     Route::post('portfolio/{portfolio}/opening', [PortfolioController::class, 'openingSave'])->whereNumber('portfolio')->name('portfolio.opening.save');
     Route::get('portfolio/{portfolio}/mode', [PortfolioController::class, 'modeForm'])->whereNumber('portfolio')->name('portfolio.mode');
     Route::post('portfolio/{portfolio}/previews', [PortfolioController::class, 'preview'])->whereNumber('portfolio')->name('portfolio.preview');

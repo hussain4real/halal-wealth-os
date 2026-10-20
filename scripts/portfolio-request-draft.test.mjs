@@ -27,6 +27,38 @@ const payload = {
     amount: '9223372036854775807',
     reason: 'Synthetic claim',
 };
+await test('assessment attempts retain bounded long evidence without truncating exact retry context', () => {
+    const fields = ['notes', 'evidence_refs', 'context'];
+    const limits = { notes: 4000, evidence_refs: 13000 };
+    const d = stripped.portfolioRequestDraft(
+        'assessment-owner1:asset1',
+        'assessment-request',
+        fields,
+        limits,
+    );
+    const p = {
+        idempotency_key: 'assessment-request',
+        notes: '🟢'.repeat(4000),
+        evidence_refs: 'Synthetic retained reference\n'.repeat(12),
+        context: 'a'.repeat(64),
+    };
+    d.save(p);
+    assert.deepEqual(d.load(), p);
+    assert.equal(
+        stripped
+            .portfolioRequestDraft(
+                'assessment-owner2:asset1',
+                'assessment-request',
+                fields,
+                limits,
+            )
+            .load(),
+        null,
+    );
+    assert.throws(() => d.save({ ...p, notes: 'x'.repeat(4001) }));
+    assert.deepEqual(d.load(), p);
+    d.clear();
+});
 await test('an interrupted exact payload restores only with matching owner scope and pending identity', () => {
     stripped
         .portfolioRequestDraft('owner1:reserve1', 'request-one', [
@@ -170,6 +202,44 @@ await test('complete opening attempts preserve exact units prices manual value a
     ])
         assert.throws(() => d.save({ ...p, rows: invalid }));
     assert.deepEqual(d.load(), p);
+});
+
+await test('opening acquisition dates survive exact retries with both current and retained legacy row shapes', () => {
+    const row = {
+        asset_id: '9007199254740993',
+        quantity: '2.123456789012',
+        unit_price: '3.000000000001',
+        manual_value: '',
+        basis_known: '0',
+        cost_basis: '',
+        acquired_on: '2026-09-17',
+    };
+    const draft = stripped.portfolioRequestDraft(
+        'opening-acquired',
+        'acquired-attempt',
+        ['rows'],
+    );
+    const payload = {
+        idempotency_key: 'acquired-attempt',
+        rows: JSON.stringify([row]),
+    };
+    draft.save(payload);
+    assert.deepEqual(draft.load(), payload);
+    assert.deepEqual(JSON.parse(draft.load().rows), [row]);
+    const { acquired_on: _acquired, ...legacy } = row;
+    const retained = { ...payload, rows: JSON.stringify([legacy]) };
+    draft.save(retained);
+    assert.deepEqual(draft.load(), retained);
+    for (const invalid of [
+        { ...row, acquired_on: 20260917 },
+        { ...row, owner_id: '99' },
+        { ...row, asset_id: undefined },
+    ])
+        assert.throws(() =>
+            draft.save({ ...payload, rows: JSON.stringify([invalid]) }),
+        );
+    assert.deepEqual(draft.load(), retained);
+    draft.clear();
 });
 
 await test('metadata strings use the server Unicode character bound rather than UTF-16 units', () => {

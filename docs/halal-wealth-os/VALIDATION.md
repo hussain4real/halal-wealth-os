@@ -160,3 +160,23 @@ remove the later empty valuation schema without changing earlier assertions.
 Original private F11, actual desktop/mobile UX, complete uncached coverage, fresh
 TIA/replay and exact-head publication/hosted CI remain separate observed gates.
 See [valuation policy](VALUATION.md) and [phase evidence](runs/M3-P3-local.md).
+
+## M4-P1 verification contract
+
+Unimplemented-phase rejection now targets M4-P2. The harness requires
+AssessmentTest, AssessmentHttpTest and AssessmentConcurrencyTest alongside every
+prior implemented suite. Check no-evidence pending state, separate source claims
+and personal/AI notes, independent conflicts, absent/overdue review dates, exact
+asset reference/family links, retained as-of author/evidence and trusted recorded
+cutoffs. Real PostgreSQL backends cover duplicate requests, competing successors,
+independent source conflicts and coherent reads. Immutable updates/deletions,
+retained downgrade refusal and empty migration roundtrip require actual commits.
+
+Verify owner/admin isolation on every read/write/history/export, forged-field
+rejection, stale-context recovery and changed retries. Assessment changes must
+preserve ledger, cash, units, cost and saved valuations; existing facts remain
+recordable for every classification. Long evidence draft recovery has separate
+Node checks. Fresh rendered desktop/mobile/keyboard/error/recovery review, full
+uncached coverage, independently recorded TIA and exact-head publication/hosted
+CI are separate gates. This contract does not claim they have passed; see the
+[phase run](runs/M4-P1-local.md) for observed results.

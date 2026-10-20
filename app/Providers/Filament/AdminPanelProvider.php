@@ -8,6 +8,7 @@ use App\Http\Middleware\AuthenticateAdmin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -23,6 +24,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel->default()->id('admin')->path('admin')->brandName('Halal Wealth administration')
             ->authGuard('web')->resources([OwnerResource::class])
+            ->navigationItems([NavigationItem::make('Shariah evidence')->url('/assets')->icon('heroicon-o-document-text')->sort(20)])
             ->defaultAvatarProvider(LocalAvatarProvider::class)
             ->middleware([
                 EncryptCookies::class, AddQueuedCookiesToResponse::class, StartSession::class,

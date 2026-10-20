@@ -6,6 +6,7 @@ import { useLedgerFeedback } from './useLedgerFeedback';
 export function usePortfolioForm(
     scope: string,
     defaults: Record<string, string>,
+    fieldLimits: Record<string, number> = {},
 ) {
     const identity = planningRequestIdentity(
         'portfolio:' + scope,
@@ -15,6 +16,7 @@ export function usePortfolioForm(
         scope,
         identity.current,
         Object.keys(defaults),
+        fieldLimits,
     );
     const form = useForm<Record<string, string>>({
         ...defaults,
@@ -41,7 +43,12 @@ export function usePortfolioForm(
             const next = identity.complete();
             form.defaults({ ...defaults, idempotency_key: next });
             form.reset();
-            draft = portfolioRequestDraft(scope, next, Object.keys(defaults));
+            draft = portfolioRequestDraft(
+                scope,
+                next,
+                Object.keys(defaults),
+                fieldLimits,
+            );
         });
         form.post(url, {
             ...options,
