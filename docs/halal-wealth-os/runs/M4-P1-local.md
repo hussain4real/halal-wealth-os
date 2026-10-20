@@ -1,5 +1,26 @@
 # M4-P1 implementation and verification
 
+Status: HUMAN_ACCEPTED at 06:27:44 UTC on 20 October 2026. The owner accepted
+M4-P1 after the independently reviewed normal noreply dev merge and terminal
+original post-merge CI, and approved publishing its reviewed completion records.
+The implementation claim is closed. All six correction cycles and earlier
+failed/partial attempts remain preserved below; no seventh cycle was started.
+
+The [publication and acceptance record](M4-P1-publication.md) identifies the
+reviewed source, merge, both original CI runs, authenticated outcome evidence
+and the separate owner decision. This current checkpoint supersedes historical
+pending/hold statements below. Completion-record publication uses a separate
+documentation branch and draft PR to dev; no new documentation merge is implied.
+M4-P2 and the M4 milestone remain unaccepted, and M4-P2 has not started.
+
+Inherited LOW UX-M3-01 remains open; the earlier idle database contents remain
+unverified and deployment readiness is not established. Earlier process/socket
+observations describe their recorded 19 October times, not current runtime state.
+No main/stage promotion, deployment, credentials, history rewrite or settings
+change is authorized by this acceptance.
+
+## Historical prepublication snapshot
+
 Status: IN_PROGRESS, unaccepted. Cycle 6 of at most six. The corrected source,
 fresh rendered review, full uncached gate and separate TIA record/replay/planner
 checks passed. Final combined independent local review passed. Sanitation,
