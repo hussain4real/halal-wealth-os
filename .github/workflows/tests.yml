@@ -48,6 +48,9 @@ jobs:
       - name: Require resolved dependency locks
         run: test -f composer.lock && test -f package-lock.json
 
+      - name: Verify public progress eligibility
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
@@ -102,3 +105,38 @@ jobs:
               printf 'NOT_PRODUCED: %s\n' "$report" >> "$GITHUB_STEP_SUMMARY"
             fi
           done
+
+  devnull:
+    name: Publish dev progress
+    needs: ci
+    if: >-
+      success() && needs.ci.result == 'success' &&
+      github.event_name == 'push' && github.ref == 'refs/heads/dev' &&
+      github.run_attempt == 1 && github.event.repository.private == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    concurrency:
+      group: devnull-${{ github.sha }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout verified merge
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Prepare public merged-PR update
+        id: progress
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/devnull_progress.py
+
+      - name: Publish signed progress update
+        if: steps.progress.outputs.publish == 'true'
+        uses: nunomaduro/dev-null.sh/.github/actions/commit@ee0ca417d219567146f633f69069790de89fd3e9
+        with:
+          body: ${{ steps.progress.outputs.body }}
+          ssh-key: ${{ secrets.DEVNULL_SSH_KEY }}
