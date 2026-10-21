@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-21T07:18:16.334852+00:00",
+    "updated_at": "2026-10-21T08:08:21.981945+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -13,12 +13,12 @@
         "default_external_effects": false
     },
     "active_run": {
-        "phase": "M4-P3",
-        "owner": "m4p3-coordinator",
+        "phase": "M5-P1",
+        "owner": "m5p1-coordinator",
         "worktree": ".",
-        "branch": "feat/m4-p3-opportunities-theses",
-        "started_at": "2026-10-21T06:45:11.880037+00:00",
-        "base": "713d94a19c1aa380c5a159c57e85d2b3393b14f8"
+        "branch": "feat/m5-p1-dashboard",
+        "started_at": "2026-10-21T08:08:21.981945+00:00",
+        "base": "7717c55820bfb56f9822f01c9f27008ff4cc5d37"
     },
     "repository": {
         "root": null,
@@ -64,10 +64,11 @@
         },
         {
             "id": "M4",
-            "status": "PLANNED",
-            "accepted_by": null,
-            "accepted_at": null,
-            "review_evidence": null
+            "status": "ACCEPTED",
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-21T08:08:21.981945+00:00",
+            "review_evidence": "runs/M4-independent-review.md",
+            "acceptance_evidence": "runs/M4-acceptance.md"
         },
         {
             "id": "M5",
@@ -221,20 +222,20 @@
         {
             "id": "M4-P3",
             "depends_on": ["M4-P2"],
-            "status": "IN_PROGRESS",
+            "status": "ACCEPTED",
             "owner": "m4p3-coordinator",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M4-P3-local.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-21T07:55:58.109427+00:00",
+            "evidence": "runs/M4-P3-acceptance.md"
         },
         {
             "id": "M5-P1",
             "depends_on": ["M4-P3"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "READY_FOR_REVIEW",
+            "owner": "m5p1-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M5-P1-local.md"
         },
         {
             "id": "M5-P2",
@@ -346,29 +347,34 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "phase": "M4-P3",
         "authorized": true,
         "authorized_by": "human-owner",
-        "authorized_at": "2026-10-21T06:45:11.880037+00:00",
-        "accepted_dependencies": ["M4-P2"],
-        "scope": "Canonical M4-P3 implementation, independent source/rendered review, sanitized dev PR, exact-head CI and fresh hosted review, normal noreply dev merge and original dev-push CI; stop for owner acceptance",
-        "max_cycles": 6,
+        "recorded_at": "2026-10-21T07:55:58.109427+00:00",
+        "scope": "Canonical M5-P1 implementation, independent source/rendered review, sanitized dev PR, exact-head CI and fresh review, normal noreply dev merge and original post-merge CI verification",
+        "predecessor_milestone_gate": "M4_OWNER_ACCEPTED_AFTER_READY_FOR_OWNER",
+        "implementation_started": true,
+        "max_cycles": 10,
         "main_stage_changes": false,
         "deployment": false,
-        "live_trades": false,
-        "credentials_or_security_settings": false,
-        "later_phases": false
+        "later_phases": false,
+        "phase": "M5-P1",
+        "accepted_dependencies": ["M4-P3"]
     },
     "execution_status": {
-        "phase": "M4-P3",
-        "status": "IN_PROGRESS",
-        "cycle": 6,
-        "max_cycles": 6,
-        "predecessor_gate": "M4-P2_OWNER_ACCEPTED_AFTER_PR15_ORIGINAL_POSTMERGE_CI_PASS",
+        "phase": "M5-P1",
+        "status": "READY_FOR_REVIEW",
+        "cycle": 10,
+        "cycles_used": 10,
+        "max_cycles": 10,
+        "predecessor_gate": "M4_OWNER_ACCEPTED",
         "phase_acceptance": "UNACCEPTED",
-        "cycles_used": 6,
-        "engineering_readiness": "READY_FOR_REVIEW",
-        "remaining_gate": "AUTHORIZED_PUBLICATION_AND_HUMAN_ACCEPTANCE"
+        "checkpoint": "Cycle10 full846/5587 zero fail/error/skip coverage4554/4839; all802predecessor+all845priorM5+1case retained; freshTIA846/5583 byteidenticalreplay/nativebindingsPASS; source/renderedREADY; latestheadhostedgatespending",
+        "blockers": [
+            "Exact staged/commit correction publication review",
+            "Fresh latest-commit original PR CI and hosted review",
+            "Addressed hosted thread reconciliation",
+            "Normal dev merge and original post-merge CI"
+        ]
     },
     "dependency_patch": {
         "authorized": true,
@@ -2241,10 +2247,10 @@
         }
     },
     "m4p3_checkpoint": {
-        "status": "LOCAL_READY_PUBLICATION_IN_PROGRESS",
+        "status": "ACCEPTED",
         "cycles_used": 6,
         "max_cycles": 6,
-        "phase_accepted": false,
+        "phase_accepted": true,
         "later_phase_authorized": false,
         "cycle_history": [
             {
@@ -2330,10 +2336,119 @@
             "source": "PASS_FINAL_CYCLE6",
             "privacy_and_reports": "PASS_INDEPENDENT",
             "rendered": "PASS_INDEPENDENT_ACTUAL_DESKTOP_MOBILE_RECOVERY_EXPORT_ISOLATION",
-            "hosted": "NOT_RUN",
+            "hosted": "PR16_ORIGINAL_PR_CI_AND_FRESH_EXACT_HEAD_REVIEW_PASS;ORIGINAL_DEV_PUSH_CI_PASS",
             "rendered_evidence": "runs/M4-P3-rendered-review.md"
         },
         "publication_evidence": "runs/M4-P3-publication.md",
-        "implementation_budget_exhausted": true
+        "implementation_budget_exhausted": true,
+        "acceptance_evidence": "runs/M4-P3-acceptance.md",
+        "publication": "PR16_MERGED_7717C55_ORIGINAL_POSTMERGE_CI_ATTEMPT1_SUCCESS"
+    },
+    "claim_history": [
+        {
+            "phase": "M4-P3",
+            "owner": "m4p3-coordinator",
+            "worktree": ".",
+            "branch": "feat/m4-p3-opportunities-theses",
+            "started_at": "2026-10-21T06:45:11.880037+00:00",
+            "base": "713d94a19c1aa380c5a159c57e85d2b3393b14f8",
+            "closed_at": "2026-10-21T07:55:58.109427+00:00",
+            "closure_reason": "M4-P3 explicitly owner accepted after verified PR16 merge and successful original dev-push CI"
+        }
+    ],
+    "m5p1_authorization": {
+        "authorized": true,
+        "authorized_by": "human-owner",
+        "recorded_at": "2026-10-21T07:55:58.109427+00:00",
+        "scope": "Canonical M5-P1 implementation, independent source/rendered review, sanitized dev PR, exact-head CI and fresh review, normal noreply dev merge and original post-merge CI verification",
+        "predecessor_milestone_gate": "M4_OWNER_ACCEPTED_AFTER_READY_FOR_OWNER",
+        "implementation_started": true,
+        "max_cycles": 10,
+        "main_stage_changes": false,
+        "deployment": false,
+        "later_phases": false
+    },
+    "m4_milestone_review": {
+        "status": "READY_FOR_OWNER",
+        "owner_accepted": true,
+        "evidence": "runs/M4-independent-review.md",
+        "full_tests": 802,
+        "full_assertions": 5322,
+        "coverage": "4258/4523",
+        "first_formatting_failure_retained": true
+    },
+    "m5p1_budget_extension": {
+        "authorized_by": "human-owner",
+        "additional_cycles": 2,
+        "previous_ceiling": 6,
+        "total_ceiling": 8,
+        "scope": "Confirmed dismissal-recovery correction and affected verification; prior six cycles preserved"
+    },
+    "m5p1_cycle8_engineering": {
+        "status": "READY_FOR_REVIEW",
+        "cycles_used": 8,
+        "original_budget": 6,
+        "additional_owner_authorized_cycles": 2,
+        "full": {
+            "tests": 845,
+            "assertions": 5558,
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "predecessor_cases_retained": 802,
+            "new_cases": 43,
+            "covered_statements": 4551,
+            "statements": 4837,
+            "application_php_files": 124
+        },
+        "tia": "Fresh845/5558; unchangedreplay; nativePHP/Dashboard/RulesHTTPbindings; no wholegraphbyteidentityclaim",
+        "source_review": "runs/M5-P1-source-review.md",
+        "rendered_review": "runs/M5-P1-rendered-review.md",
+        "publication": "runs/M5-P1-publication.md",
+        "phase_acceptance": "UNACCEPTED",
+        "deployment": false,
+        "source_commit": "732dcfca2aa703b88d675b27b2934a27406d593c"
+    },
+    "m5p1_engineering": {
+        "status": "READY_FOR_REVIEW",
+        "cycle": 10,
+        "cycles_used": 10,
+        "original_budget": 6,
+        "owner_authorized_extensions": [2, 2],
+        "max_cycles": 10,
+        "full": {
+            "tests": 846,
+            "assertions": 5587,
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "predecessor_cases_retained": 802,
+            "earlier_m5_cases_retained": 845,
+            "new_cases_total": 44,
+            "covered_statements": 4554,
+            "statements": 4839,
+            "application_php_files": 124
+        },
+        "tia": "Fresh846/5583; byteidenticalgraph/frontendunchangedreplay;724sourcesunchanged; nativePHP/Dashboard/RulesHTTPbindings",
+        "source_review": "runs/M5-P1-source-review.md",
+        "rendered_review": "runs/M5-P1-rendered-review.md",
+        "publication": "runs/M5-P1-publication.md",
+        "phase_acceptance": "UNACCEPTED",
+        "deployment": false
+    },
+    "m5p1_budget_extension_after_hosted_review": {
+        "authorized_by": "human-owner",
+        "additional_cycles": 2,
+        "previous_ceiling": 8,
+        "total_ceiling": 10,
+        "scope": "PR18 uncommittedobsoletecurrentdismissal correction plus affectedregression/browser/TIA/source and freshhostedgates"
+    },
+    "m5p1_initial_hosted_checkpoint": {
+        "source_commit": "732dcfca2aa703b88d675b27b2934a27406d593c",
+        "pull_request": 18,
+        "original_ci_run": 39585292280,
+        "ci": "SUCCESS_ATTEMPT1_OLD_HEAD_ONLY",
+        "fresh_review": "P2_UNCOMMITTED_OBSOLETE_DISMISSAL_RETRY_HELD_MERGE",
+        "correction_current_gates": "PENDING_NEW_HEAD"
     }
 }

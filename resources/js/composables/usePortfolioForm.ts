@@ -5,9 +5,12 @@ import { portfolioRequestDraft } from './portfolioRequestDraft';
 import { useLedgerFeedback } from './useLedgerFeedback';
 export function usePortfolioForm(
     scope: string,
-    defaults: Record<string, string>,
+    defaults: Record<string, string> | (() => Record<string, string>),
     fieldLimits: Record<string, number> = {},
 ) {
+    const currentDefaults = () =>
+        typeof defaults === 'function' ? defaults() : defaults;
+    const initialDefaults = currentDefaults();
     const identity = planningRequestIdentity(
         'portfolio:' + scope,
         crypto.randomUUID(),
@@ -15,11 +18,11 @@ export function usePortfolioForm(
     let draft = portfolioRequestDraft(
         scope,
         identity.current,
-        Object.keys(defaults),
+        Object.keys(initialDefaults),
         fieldLimits,
     );
     const form = useForm<Record<string, string>>({
-        ...defaults,
+        ...initialDefaults,
         idempotency_key: identity.current,
     });
     const restored = draft.load();
@@ -41,12 +44,12 @@ export function usePortfolioForm(
             recovered.value = false;
             locked.value = false;
             const next = identity.complete();
-            form.defaults({ ...defaults, idempotency_key: next });
+            form.defaults({ ...currentDefaults(), idempotency_key: next });
             form.reset();
             draft = portfolioRequestDraft(
                 scope,
                 next,
-                Object.keys(defaults),
+                Object.keys(initialDefaults),
                 fieldLimits,
             );
         });

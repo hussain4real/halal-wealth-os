@@ -1,10 +1,12 @@
 # Planning index
 
-Current status: M0, M1 and M2-P1 are human accepted. M2-P2 goals and emergency
-protection are authorized and ready for review, unaccepted. See [state](STATE.json),
-[M2-P1 acceptance](runs/M2-P1-acceptance.md), [M2-P2 scope](phases/M2-P2.md) and
-[goal decisions](GOALS-AND-PROTECTION.md). No M2-P3 or deployment is authorized.
-The planning-baseline statements below preserve historical context.
+Current status: M0 through M4 are human accepted. M5-P1 dashboard and explainable
+next actions are implemented and locally READY_FOR_REVIEW; acceptance,
+hosted review, merge and post-merge CI remain separate gates. See [state](STATE.json),
+[M4 acceptance](runs/M4-acceptance.md), [M5-P1 scope](phases/M5-P1.md),
+[dashboard policy](DASHBOARD.md) and [current evidence](runs/M5-P1-local.md).
+No later phase or deployment is authorized. The planning-baseline statements
+below preserve historical context.
 
 Execution baseline: October 10 2026 plan v1.1. This public-safe local derivative has been reconciled against the verified user-supplied separated kit. Source originals remain private; no application is implemented; only M0-P1 is human-accepted.
 

@@ -13,7 +13,7 @@ final class AvailabilitySources
      * @param list<string> $investmentGoals
      * @param list<string> $overlapReservations
      * @return array<string,mixed> */
-    public function read(User $owner, string $utcDate, array $investmentGoals, array $overlapReservations): array
+    public function read(User $owner, string $utcDate, array $investmentGoals, array $overlapReservations, bool $complete = false): array
     {
         $row = DB::selectOne(<<<'SQL'
 WITH parameters AS (SELECT ?::bigint AS owner_id,?::date AS today,?::jsonb AS investments,?::jsonb AS overlap_ids),
@@ -73,7 +73,7 @@ cash AS (
 )
 SELECT jsonb_build_object(
  'groups',coalesce((SELECT jsonb_agg(to_jsonb(g) ORDER BY currency) FROM groups g),'[]'::jsonb),
- 'accounts',coalesce((SELECT jsonb_agg(to_jsonb(a) ORDER BY id) FROM (SELECT id::text,name,currency,minor::text,protected::text,nominal_reserved::text,reservation_shortfall::text,reason,archived_at IS NOT NULL AS archived FROM account_values ORDER BY id LIMIT 20) a),'[]'::jsonb),
+ 'accounts',coalesce((SELECT jsonb_agg(to_jsonb(a) ORDER BY id) FROM (SELECT id::text,name,currency,minor::text,protected::text,nominal_reserved::text,reservation_shortfall::text,reason,archived_at IS NOT NULL AS archived FROM account_values ORDER BY id LIMIT CASE WHEN ?::boolean THEN NULL ELSE 20 END) a),'[]'::jsonb),
  'account_count',(SELECT count(*) FROM cash),
  'reservations',coalesce((SELECT jsonb_object_agg(r.id::text,jsonb_build_object('minor',r.backed::text,'currency',r.currency)) FROM reservations r,parameters WHERE jsonb_exists(parameters.overlap_ids,r.id::text)),'{}'::jsonb),
  'contributions',coalesce((SELECT jsonb_agg(to_jsonb(c) ORDER BY currency) FROM contributions c),'[]'::jsonb),
@@ -82,7 +82,7 @@ SELECT jsonb_build_object(
  'reservation_watermark',(SELECT coalesce(max(r.id),0)::text FROM goal_reservations r,parameters WHERE r.owner_id=parameters.owner_id),
  'release_watermark',(SELECT coalesce(max(r.id),0)::text FROM goal_releases r,parameters WHERE r.owner_id=parameters.owner_id)
 ) AS data
-SQL, [$owner->id, $utcDate, json_encode($investmentGoals, JSON_THROW_ON_ERROR), json_encode($overlapReservations, JSON_THROW_ON_ERROR)]);
+SQL, [$owner->id, $utcDate, json_encode($investmentGoals, JSON_THROW_ON_ERROR), json_encode($overlapReservations, JSON_THROW_ON_ERROR), $complete]);
 
         return json_decode($row->data, true, flags: JSON_THROW_ON_ERROR);
     }

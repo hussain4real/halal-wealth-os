@@ -17,6 +17,10 @@ const stripped = await import(
 const store = new Map();
 globalThis.window = {
     sessionStorage: {
+        get length() {
+            return store.size;
+        },
+        key: (i) => [...store.keys()][i] ?? null,
         getItem: (k) => store.get(k) ?? null,
         setItem: (k, v) => store.set(k, v),
         removeItem: (k) => store.delete(k),
@@ -144,6 +148,10 @@ await test('corrupt or unexpected persisted fields cannot replace a form attempt
 await test('denied session storage retains safe current-session retry state', () => {
     globalThis.window = {
         sessionStorage: {
+            get length() {
+                return store.size;
+            },
+            key: (i) => [...store.keys()][i] ?? null,
             getItem: () => {
                 throw new Error('denied');
             },
@@ -252,4 +260,68 @@ await test('metadata strings use the server Unicode character bound rather than 
     d.save(p);
     assert.deepEqual(d.load(), p);
     assert.throws(() => d.save({ ...p, source: '🟢'.repeat(181) }));
+});
+
+await test('pending command inventory survives absent actions and isolates owner and operation scopes', () => {
+    const scope = 'owner7:dashboard-dismiss:' + 'a'.repeat(64);
+    const draft = stripped.portfolioRequestDraft(scope, 'pending-dismissal', [
+        'reason',
+    ]);
+    const request = {
+        idempotency_key: 'pending-dismissal',
+        reason: 'Retain exact retry',
+    };
+    draft.save(request);
+    store.set(
+        'hwo:portfolio:attempt:owner8:dashboard-dismiss:' + 'b'.repeat(64),
+        '{}',
+    );
+    store.set('hwo:portfolio:attempt:owner7:dashboard-rules', '{}');
+    const fromStorage = 'owner7:dashboard-dismiss:' + 'c'.repeat(64);
+    store.set('hwo:portfolio:attempt:' + fromStorage, '{}');
+    assert.deepEqual(
+        stripped.portfolioRequestScopes('owner7:dashboard-dismiss:'),
+        [scope, fromStorage],
+    );
+    assert.deepEqual(draft.load(), request);
+    assert.equal(
+        stripped
+            .portfolioRequestDraft(fromStorage, 'unknown', ['reason'])
+            .load(),
+        null,
+    );
+    draft.clear();
+    assert.deepEqual(
+        stripped.portfolioRequestScopes('owner7:dashboard-dismiss:'),
+        [fromStorage],
+    );
+    store.delete('hwo:portfolio:attempt:' + fromStorage);
+    assert.deepEqual(
+        stripped.portfolioRequestScopes('owner7:dashboard-dismiss:'),
+        [],
+    );
+});
+
+await test('pending inventory observers see save and confirmed clear and unsubscribe cleanly', () => {
+    const scope = 'observer-owner:dashboard-dismiss:episode';
+    const states = [];
+    const unsubscribe = stripped.subscribePortfolioRequests(() => {
+        states.push(stripped.portfolioRequestScopes('observer-owner:'));
+    });
+    const draft = stripped.portfolioRequestDraft(scope, 'observer-request', [
+        'reason',
+    ]);
+    draft.save({
+        idempotency_key: 'observer-request',
+        reason: 'Original reason',
+    });
+    draft.clear();
+    assert.deepEqual(states, [[scope], []]);
+    unsubscribe();
+    draft.save({
+        idempotency_key: 'observer-request',
+        reason: 'Original reason',
+    });
+    assert.deepEqual(states, [[scope], []]);
+    draft.clear();
 });
