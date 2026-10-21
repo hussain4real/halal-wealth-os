@@ -1,6 +1,6 @@
 # M5-P1 local run
 
-Status: IN_PROGRESS, cycle 8 of at most 8 after an explicit two-cycle owner extension. M4 is human accepted following the
+Status: IN_PROGRESS, cycle 10 of at most 10 after two explicit two-cycle owner extensions. M4 is human accepted following the
 independent READY_FOR_OWNER review. The sole coordinator owns canonical M5-P1
 through independent source/rendered review, sanitized dev PR, exact-head CI and
 fresh review, normal noreply merge and original post-merge CI verification.
@@ -122,3 +122,60 @@ Local engineering is READY_FOR_REVIEW, unaccepted. The active claim remains
 through the separately observed dev publication workflow. Exact staged artifact
 review, fresh hosted exact-head review/CI, merge and original post-merge CI are
 not replaced by these local gates.
+
+PR #18's fresh hosted review identified a distinct P2 after cycle 8: a dismissal
+that never committed could remain locked if its episode disappeared before the
+exact retry. Cached committed receipts did not cover that case. The eight-cycle
+checkpoint was held, and the owner explicitly authorized two further scoped
+cycles, total ceiling ten. No budget was reset and no blocked result was merged.
+
+PR #17 separately passed original CI and fresh review, then merged normally to
+dev at b61d546 with approved noreply identities. Its original post-merge CI and
+publisher are separate pending observations. Normal integration into this branch
+preserves both AGENTS append sections; no dashboard application/build change is
+attributed to that integration.
+
+Cycle 9 keeps cached dismissal receipts first, then rejects an absent current
+episode with definitive action_key validation before writes. Historical/foreign
+snapshot 404s stay intact. Current dashboard feedback remains visible after the
+obsolete recovery control clears. New HTTP coverage requires zero new dismissal
+or request rows and unchanged postings; the existing committed path is extended
+to prove receipt recovery after the rule is disabled. Full/TIA/source/rendered
+and fresh hosted gates for the new correction remain pending.
+
+Cycle 9 focused verification passed 45 of 46 cases; the added JSON validation
+and committed-receipt assertions passed, but its subsequent feedback GET lacked
+the session error prop. A private error-only probe confirmed the POST had the
+correct flashed validation and the separate cookie-less GET started a new session.
+Cycle 10 corrects that test transport by requiring the response session cookie
+and carrying the actual session ID into the GET, as a browser does. The original
+feedback assertion and all no-write/receipt/ownership assertions remain. Both
+failed focused/probe receipts remain preserved outside this public checkout.
+
+Cycle 10 focused checks passed 46 cases / 264 assertions with the real session
+cookie carried across the validation redirect. The integrated publisher eligibility
+suite also passed all five Python cases. Current full and rendered gates remain
+pending, not inferred from those focused passes.
+
+Final cycle 10 full uncached verification passed 846 tests / 5,587 assertions,
+zero errors, failures or skips; coverage includes 124 application PHP files and
+4,554 / 4,839 statements. Independent report comparison retains all 802 milestone
+predecessor identities and all 845 earlier M5 cases, with one new meaningful
+obsolete-request case (44 total additions). The raw harness includes planning,
+59 Node checks, audits, migrations, frontend build/types/lint, Pint and PHP analysis.
+
+The separate fresh TIA run passed 846 / 5,583. Its unchanged replay passed with
+both graph and frontend files byte-identical; all 724 inspected application,
+resource, test, script, config, route and migration files remained unchanged.
+Native inspection reports empty delta/rerun, no unlocated tests, and the expected
+PHP snapshot/Dashboard/Rules HTTP bindings. These final cycle 10 receipts are
+separate from the earlier cycle 8 documentation-tree-only graph differences.
+
+Final source and actual rendered reviews are READY_FOR_REVIEW. The browser
+explicitly confirms uncommitted absent-episode validation, visible feedback,
+cleared recovery and zero rows; committed-after-disable retry still returns the
+original receipt. Foreign 404s, ordinary success, mobile feedback and financial
+row audits pass. All 887 inspected source files and 127 compiled files retain
+their hashes and modes within the final retest. Failed attempts, both budget
+extensions and the hosted P2 remain in the history above. Exact artifact and
+fresh latest-commit hosted gates remain required; M5-P1 is unaccepted.

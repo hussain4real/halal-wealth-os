@@ -51,8 +51,14 @@ test('rule and dismissal HTTP writes create no ledger posting and live action im
     $before = DB::table('postings')->get()->toJson();
     $this->actingAs($this->owner)->postJson('/dashboard/rules', [...D::settings(), 'idempotency_key' => 'synthetic-http-settings'])->assertCreated();
     $a = app(DashboardSnapshot::class)->current($this->owner, Currency::QAR)['actions'][0];
-    $this->postJson('/dashboard/dismissals', ['snapshot_id' => '', 'base_currency' => 'QAR', 'action_key' => $a['key'], 'reason' => 'Reviewed synthetic basis', 'idempotency_key' => 'synthetic-http-dismiss'])->assertCreated();
+    $payload = ['snapshot_id' => '', 'base_currency' => 'QAR', 'action_key' => $a['key'], 'reason' => 'Reviewed synthetic basis', 'idempotency_key' => 'synthetic-http-dismiss'];
+    $receipt = $this->postJson('/dashboard/dismissals', $payload)->assertCreated()->json('id');
     $this->get('/dashboard')->assertInertia(fn (Assert $p) => $p->where('dashboard.actions.0.dismissed', true));
+    $settings = app(DashboardSnapshot::class)->settings($this->owner);
+    $this->postJson('/dashboard/rules', [...D::settings(['settings_id' => $settings['id'], 'reconciliation' => '0', 'funding' => '0', 'evidence' => '0']), 'idempotency_key' => 'synthetic-http-disable-after-commit'])->assertCreated();
+    $this->postJson('/dashboard/dismissals', $payload)->assertCreated()->assertJsonPath('id', $receipt);
+    $this->assertDatabaseCount('dashboard_dismissals', 1);
+    $this->assertDatabaseCount('dashboard_dismissal_requests', 1);
     expect(DB::table('postings')->get()->toJson())->toBe($before);
 });
 
@@ -80,4 +86,17 @@ test('rule settings page exposes only the owners current version without writing
     $this->actingAs($this->owner)->get('/dashboard/rules')->assertOk()->assertInertia(fn (Assert $p) => $p->component('dashboard/Rules')->where('settings.id', (string) $settings->id)->where('settings.version', '1')->where('settings.data.grace_days', '7'));
     $this->assertDatabaseCount('dashboard_settings', 2);
     $this->assertDatabaseCount('dashboard_snapshots', 0);
+});
+
+test('obsolete uncommitted current dismissal is rejected definitively without writes and exposes recovery feedback', function () {
+    $action = app(DashboardSnapshot::class)->current($this->owner, Currency::QAR)['actions'][0];
+    $payload = ['snapshot_id' => '', 'base_currency' => 'QAR', 'action_key' => $action['key'], 'reason' => 'Interrupted before writing', 'idempotency_key' => 'synthetic-obsolete-uncommitted-dismissal'];
+    $before = DB::table('postings')->get()->toJson();
+    $this->actingAs($this->owner)->postJson('/dashboard/rules', [...D::settings(['reconciliation' => '0', 'funding' => '0', 'evidence' => '0']), 'idempotency_key' => 'synthetic-disable-before-dismissal'])->assertCreated();
+    $this->postJson('/dashboard/dismissals', $payload)->assertUnprocessable()->assertJsonValidationErrors('action_key');
+    $this->from('/dashboard')->post('/dashboard/dismissals', $payload)->assertRedirect('/dashboard')->assertSessionHasErrors('action_key')->assertCookie(config('session.cookie'));
+    $this->withCookie(config('session.cookie'), session()->getId())->get('/dashboard')->assertOk()->assertInertia(fn (Assert $p) => $p->has('errors.action_key'));
+    $this->assertDatabaseCount('dashboard_dismissals', 0);
+    $this->assertDatabaseCount('dashboard_dismissal_requests', 0);
+    expect(DB::table('postings')->get()->toJson())->toBe($before);
 });

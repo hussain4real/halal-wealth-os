@@ -12,6 +12,7 @@ import {
 } from '@/composables/portfolioRequestDraft';
 import type { CashSnapshot } from '@/types/cash';
 import type { DashboardView, MetricKey } from '@/types/dashboard';
+const page = usePage();
 const props = defineProps<{
     cash: CashSnapshot;
     dashboard: DashboardView;
@@ -338,6 +339,13 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
             </button>
         </section>
         <section class="space-y-5" aria-labelledby="next-actions">
+            <p
+                v-if="page.props.errors.action_key"
+                role="alert"
+                class="rounded-xl border border-destructive p-4 text-sm text-destructive"
+            >
+                {{ page.props.errors.action_key }}
+            </p>
             <div class="flex flex-wrap items-center justify-between gap-3">
                 <h2 id="next-actions" class="text-2xl font-semibold">
                     Next actions

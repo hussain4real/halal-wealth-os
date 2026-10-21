@@ -99,6 +99,9 @@ final class DashboardSnapshot
                     $action = $candidate;
                 }
             }
+            if ($action === null && $snapshotId === '') {
+                LedgerInput::fail('action_key', 'This review episode changed before the dismissal could write. No dismissal was recorded for this request. Review the current actions; an exact committed retry still recovers.');
+            }
             abort_unless($action !== null, 404);
             $reason = LedgerInput::text($input['reason'] ?? '', 'reason');
             $row = DB::table('dashboard_dismissals')->where('owner_id', $owner->id)->where('action_key', $actionKey)->first();

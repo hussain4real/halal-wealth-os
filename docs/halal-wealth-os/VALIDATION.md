@@ -241,3 +241,11 @@ cleanup. Actual browser recovery must cover normal success and both committed
 and pre-commit response loss when a dismissal episode is dismissed, absent or
 beyond the first visible page. A historical snapshot diagnostic alone cannot
 satisfy that current-view recovery gate.
+
+An uncommitted current dismissal whose episode disappears must return definitive
+no-write validation and visible feedback; the obsolete exact-request recovery
+must clear without a receipt. Complementary coverage disables the rule after a
+committed dismissal and still requires the original cached receipt. Foreign
+historical record 404s remain mandatory. HTTP feedback checks carry the actual
+session cookie across the validation redirect; browser checks verify the real
+response rather than injecting errors into a page.

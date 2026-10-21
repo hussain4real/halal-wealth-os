@@ -56,3 +56,9 @@ definitive stale-setting rejection permits refresh and a new attempt.
 
 No rule creates automatic financial decisions, external notifications or AI
 advice. M5-P2 release/performance acceptance is outside this phase.
+
+If a current review episode disappears before an interrupted dismissal ever
+commits, retry returns a definitive validation result without writing a dismissal
+or receipt. The dashboard explains the obsolete request and clears its recovery
+control. A previously committed exact request still recovers its original receipt
+before reevaluating current facts; foreign historical records remain 404.

@@ -411,3 +411,15 @@ pending dismissal recovery independently of current action visibility, then
 repeat affected full/TIA/source/rendered gates and the already authorized dev
 publication workflow. All previous scope, sole-writer, privacy and acceptance
 boundaries remain in force.
+
+## M5-P1 hosted-finding correction budget
+
+After the fresh PR #18 review identified the uncommitted obsolete-dismissal
+retry gap, the human owner explicitly authorized two further scoped correction
+and verification cycles on 21 October 2026. Preserve cycles 1-8 and both earlier
+budget decisions; the total ceiling is ten. Return a definitive no-write result
+for a current episode that disappears before its first dismissal commits, while
+preserving owner-boundary 404s and exact committed receipt recovery. Repeat
+regression/browser/TIA/source checks and fresh latest-commit hosted CI/review.
+The existing normal dev merge/post-merge CI authority and all scope, privacy,
+sole-writer, acceptance and deployment boundaries remain unchanged.

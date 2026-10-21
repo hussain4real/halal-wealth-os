@@ -353,7 +353,7 @@
         "scope": "Canonical M5-P1 implementation, independent source/rendered review, sanitized dev PR, exact-head CI and fresh review, normal noreply dev merge and original post-merge CI verification",
         "predecessor_milestone_gate": "M4_OWNER_ACCEPTED_AFTER_READY_FOR_OWNER",
         "implementation_started": true,
-        "max_cycles": 8,
+        "max_cycles": 10,
         "main_stage_changes": false,
         "deployment": false,
         "later_phases": false,
@@ -363,15 +363,16 @@
     "execution_status": {
         "phase": "M5-P1",
         "status": "READY_FOR_REVIEW",
-        "cycle": 8,
-        "cycles_used": 8,
-        "max_cycles": 8,
+        "cycle": 10,
+        "cycles_used": 10,
+        "max_cycles": 10,
         "predecessor_gate": "M4_OWNER_ACCEPTED",
         "phase_acceptance": "UNACCEPTED",
-        "checkpoint": "Cycle8 finalfull845/5558 zero failures/errors/skips;4551/4837; all802priorcases+43new; separateTIA+nativebindingPASS; source/renderedREADY_FOR_REVIEW; exactartifact/hostedPRgatespending; unaccepted",
+        "checkpoint": "Cycle10 full846/5587 zero fail/error/skip coverage4554/4839; all802predecessor+all845priorM5+1case retained; freshTIA846/5583 byteidenticalreplay/nativebindingsPASS; source/renderedREADY; latestheadhostedgatespending",
         "blockers": [
-            "Exact staged/commit publication review",
-            "Fresh hosted exact-head review and original PR CI",
+            "Exact staged/commit correction publication review",
+            "Fresh latest-commit original PR CI and hosted review",
+            "Addressed hosted thread reconciliation",
             "Normal dev merge and original post-merge CI"
         ]
     },
@@ -2362,7 +2363,7 @@
         "scope": "Canonical M5-P1 implementation, independent source/rendered review, sanitized dev PR, exact-head CI and fresh review, normal noreply dev merge and original post-merge CI verification",
         "predecessor_milestone_gate": "M4_OWNER_ACCEPTED_AFTER_READY_FOR_OWNER",
         "implementation_started": true,
-        "max_cycles": 8,
+        "max_cycles": 10,
         "main_stage_changes": false,
         "deployment": false,
         "later_phases": false
@@ -2383,7 +2384,7 @@
         "total_ceiling": 8,
         "scope": "Confirmed dismissal-recovery correction and affected verification; prior six cycles preserved"
     },
-    "m5p1_engineering": {
+    "m5p1_cycle8_engineering": {
         "status": "READY_FOR_REVIEW",
         "cycles_used": 8,
         "original_budget": 6,
@@ -2405,6 +2406,49 @@
         "rendered_review": "runs/M5-P1-rendered-review.md",
         "publication": "runs/M5-P1-publication.md",
         "phase_acceptance": "UNACCEPTED",
+        "deployment": false,
+        "source_commit": "732dcfca2aa703b88d675b27b2934a27406d593c"
+    },
+    "m5p1_engineering": {
+        "status": "READY_FOR_REVIEW",
+        "cycle": 10,
+        "cycles_used": 10,
+        "original_budget": 6,
+        "owner_authorized_extensions": [2, 2],
+        "max_cycles": 10,
+        "full": {
+            "tests": 846,
+            "assertions": 5587,
+            "errors": 0,
+            "failures": 0,
+            "skipped": 0,
+            "predecessor_cases_retained": 802,
+            "earlier_m5_cases_retained": 845,
+            "new_cases_total": 44,
+            "covered_statements": 4554,
+            "statements": 4839,
+            "application_php_files": 124
+        },
+        "tia": "Fresh846/5583; byteidenticalgraph/frontendunchangedreplay;724sourcesunchanged; nativePHP/Dashboard/RulesHTTPbindings",
+        "source_review": "runs/M5-P1-source-review.md",
+        "rendered_review": "runs/M5-P1-rendered-review.md",
+        "publication": "runs/M5-P1-publication.md",
+        "phase_acceptance": "UNACCEPTED",
         "deployment": false
+    },
+    "m5p1_budget_extension_after_hosted_review": {
+        "authorized_by": "human-owner",
+        "additional_cycles": 2,
+        "previous_ceiling": 8,
+        "total_ceiling": 10,
+        "scope": "PR18 uncommittedobsoletecurrentdismissal correction plus affectedregression/browser/TIA/source and freshhostedgates"
+    },
+    "m5p1_initial_hosted_checkpoint": {
+        "source_commit": "732dcfca2aa703b88d675b27b2934a27406d593c",
+        "pull_request": 18,
+        "original_ci_run": 39585292280,
+        "ci": "SUCCESS_ATTEMPT1_OLD_HEAD_ONLY",
+        "fresh_review": "P2_UNCOMMITTED_OBSOLETE_DISMISSAL_RETRY_HELD_MERGE",
+        "correction_current_gates": "PENDING_NEW_HEAD"
     }
 }
