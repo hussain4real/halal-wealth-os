@@ -196,6 +196,8 @@ test('empty event schema roundtrip preserves existing opening journal bytes and 
     P::opening($this->owner, $this->p, [P::row($this->asset)]);
     $journals = DB::table('journal_entries')->orderBy('id')->get()->toJson();
     $opening = DB::table('portfolio_opening_rows')->get()->toJson();
+    $decisions = require database_path('migrations/2026_10_21_064500_create_decision_records.php');
+    $decisions->down();
     $purification = require database_path('migrations/2026_10_20_073000_create_purification_records.php');
     $purification->down();
     $migration = require database_path('migrations/2026_10_18_171000_create_investment_event_subledger.php');
@@ -203,6 +205,7 @@ test('empty event schema roundtrip preserves existing opening journal bytes and 
     expect(Schema::hasTable('investment_events'))->toBeFalse();
     $migration->up();
     $purification->up();
+    $decisions->up();
     expect(DB::table('journal_entries')->orderBy('id')->get()->toJson())->toBe($journals)->and(DB::table('portfolio_opening_rows')->get()->toJson())->toBe($opening);
     $event = I::event($this->owner, $this->p, $this->asset);
     expect(fn () => DB::transaction(fn () => DB::table('investment_events')->where('id', $event->id)->update(['reason' => 'Mutated'])))->toThrow(PDOException::class);

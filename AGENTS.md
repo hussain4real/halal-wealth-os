@@ -333,3 +333,20 @@ missing-data uncertainty. No zakat engine, unsourced rates, actual charity
 transfers, live banking/payments, liquidation, M4-P3, main/stage promotion,
 deployment, credentials, settings changes, history rewriting or bypass. Stop
 READY_FOR_REVIEW for human acceptance; M4 milestone acceptance is separate.
+
+## Current M4-P3 authority
+
+The human owner accepted M4-P2 on 21 October 2026 and explicitly authorized
+M4-P3 implementation, independent source/rendered review, a sanitized PR to dev,
+normal explicit-noreply merge after exact-head CI and a fresh hosted review,
+then original post-merge CI verification. This supersedes the earlier no-M4-P3
+boundary only for phases/M4-P3.md. Record the owner's M4-P2 acceptance, preserve
+all prior cycles and the PR #14 audit failure/PR #15 dependency remediation,
+and retain one implementation writer with at most six scoped cycles. Reviewers
+remain source-read-only with exclusive owned verification resources. Keep plans,
+shared reservations and actual investment events distinct; preserve exact money,
+unknown evidence, version history, owner isolation and idempotent recovery.
+Keep the original opt-in example private and use public synthetic translations.
+No live trades, external financial actions, main/stage promotion, deployment,
+credentials, settings changes or M5 work are authorized. Stop for human M4-P3
+acceptance after the engineering gates; do not self-accept M4-P3 or M4.

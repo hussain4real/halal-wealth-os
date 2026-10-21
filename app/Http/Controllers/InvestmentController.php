@@ -146,6 +146,7 @@ class InvestmentController extends Controller
         $member = DB::table('investment_event_journals')->where('owner_id', $owner->id)->where('event_id', $e->id)->first();
         $reverse = DB::table('investment_events')->where('owner_id', $owner->id)->where('reverses_id', $e->id)->value('id');
         $replacement = DB::table('investment_events')->where('owner_id', $owner->id)->where('replaces_id', $e->id)->value('id');
+        $decision = DB::table('decision_event_links')->where('owner_id', $owner->id)->where('event_id', $e->id)->first();
         $cash = $member === null ? '0' : DB::table('postings')->where('journal_id', $member->journal_id)
             ->where('account_id', DB::table('portfolio_accounts')->where('owner_id', $owner->id)->where('id', $e->portfolio_account_id)->value('account_id'))
             ->selectRaw('coalesce(sum(amount_minor::numeric),0)::text as minor')->first()->minor;
@@ -158,7 +159,8 @@ class InvestmentController extends Controller
             'subscription_id' => $e->subscription_id === null ? '' : (string) $e->subscription_id, 'action_reference' => $e->action_reference, 'source' => $e->source, 'reason' => $e->reason,
             'cash_effect' => $this->money($e->currency, $cash), 'journal_id' => $member === null ? null : (string) $member->journal_id, 'reverses_id' => $e->reverses_id === null ? null : (string) $e->reverses_id,
             'replaces_id' => $e->replaces_id === null ? null : (string) $e->replaces_id, 'reversed_by' => $reverse === null ? null : (string) $reverse,
-            'replacement_id' => $replacement === null ? null : (string) $replacement];
+            'replacement_id' => $replacement === null ? null : (string) $replacement,
+            'decision' => $decision === null ? null : ['opportunity_id' => (string) $decision->opportunity_id, 'tranche_key' => $decision->tranche_key, 'reason' => $decision->reason]];
     }
 
     /** @param array<string,mixed> $s

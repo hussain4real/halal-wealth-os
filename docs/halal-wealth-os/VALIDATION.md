@@ -197,3 +197,24 @@ retaining every original financial assertion. Client retry scopes, actual
 desktop/mobile/browser recovery, full uncached coverage, separate fresh TIA
 record/replay/native selection and independent source/publication review are
 separate gates, not implied by this contract.
+
+## M4-P3 verification contract
+
+The harness requires DecisionTest, DecisionHttpTest, DecisionConcurrencyTest and
+DecisionImportTest alongside every previous suite; unimplemented-phase rejection
+now targets M5-P1. Verify exact target/tranche reconciliation, unknown watchlist
+terms, independent official evidence dates, configurable dated concentration
+limits, retained thesis versions and exact asset references. Planning creates
+no posting, reservation or shares. Explicit reservations use shared GoalService
+capacity; dedicated protection, other goal claims, cross-version tranche claims
+and later FIFO cash shortfalls remain visible and protected.
+
+Use real competing PostgreSQL backends for duplicate requests, revisions,
+tranche/cash contention and actual event links/reversal. Committed SQL guards,
+immutable records, retained downgrade refusal and empty-schema roundtrip must
+preserve all prior financial assertions. Verify owner/admin isolation, complete
+source-fact exports, stale and response-loss retries, exact actual buy/paid-IPO
+attribution without a second financial write, opt-in external private imports
+and the private original proposal separately. Full uncached coverage, separate
+TIA recording/replay, actual rendered desktop/mobile review and exact-head
+hosted CI/fresh review/original dev-push CI are separate observed gates.

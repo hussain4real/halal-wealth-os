@@ -40,6 +40,19 @@ const reviewing = ref(false);
             >{{ account.name }} · {{ event.currency }} · retained source version
             {{ event.asset_version }}. {{ event.reference }}</template
         >
+        <section v-if="event.decision" class="max-w-4xl rounded-2xl border p-5">
+            <h2 class="font-semibold">Original decision thesis</h2>
+            <Link
+                :href="'/opportunities/' + event.decision.opportunity_id"
+                class="inline-flex min-h-11 items-center underline"
+                >Open retained thesis · tranche
+                {{ event.decision.tranche_key }}</Link
+            >
+            <p class="text-sm text-muted-foreground">
+                {{ event.decision.reason }}. This attribution creates no
+                additional financial event.
+            </p>
+        </section>
         <section class="max-w-4xl rounded-2xl border bg-card p-5 sm:p-7">
             <div class="flex flex-wrap items-start justify-between gap-4">
                 <div>
