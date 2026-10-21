@@ -315,3 +315,21 @@ needed independently reviewed sanitized predecessor records in the phase workflo
 do not retry or bypass the denied standalone M3 docs PR. Preserve that branch,
 main/stage, the Mac clone and unrelated work. No deployment, credentials, history
 rewrites or MSA changes. Stop for human M4-P1 acceptance.
+
+## Current M4-P2 authority
+
+The human owner accepted M4-P1 and authorized canonical M4-P2 at 06:38:50 UTC
+on 20 October 2026 through implementation, independent source/rendered review,
+full uncached regressions, separate TIA, sanitized dev PR, exact-head hosted
+review/CI, normal explicit-noreply dev merge and original dev-push CI. The
+manager delegates the sole implementation claim to this coordinator after the
+accepted predecessor completion-record dependency passed all gates. This
+supersedes earlier diagnostic and no-M4-P2 boundaries only within M4-P2; preserve
+the stopped historical scaffold and all unrelated work. At most six scoped
+cycles, no implementation subagents; independent reviewers stay source-read-only
+with exclusive owned resources. Apply only recorded sourced instructions to
+their applicable distribution base, retain corrections/payment attribution and
+missing-data uncertainty. No zakat engine, unsourced rates, actual charity
+transfers, live banking/payments, liquidation, M4-P3, main/stage promotion,
+deployment, credentials, settings changes, history rewriting or bypass. Stop
+READY_FOR_REVIEW for human acceptance; M4 milestone acceptance is separate.

@@ -180,3 +180,20 @@ Node checks. Fresh rendered desktop/mobile/keyboard/error/recovery review, full
 uncached coverage, independently recorded TIA and exact-head publication/hosted
 CI are separate gates. This contract does not claim they have passed; see the
 [phase run](runs/M4-P1-local.md) for observed results.
+
+## M4-P2 verification contract
+
+The harness requires PurificationMathTest, PurificationTest, PurificationHttpTest
+and PurificationConcurrencyTest with all prior suites; unimplemented rejection
+now targets M4-P3. Exact sourced native income bases, pending versus sourced zero,
+versioned corrections, actual cash debit once, existing-journal linkage, partial
+allocation, full historical capacity, releases, generic ledger reversals, owner
+and admin boundaries and lost-response recovery require observed evidence.
+Real independent PostgreSQL backends contend for duplicate requests, revisions,
+actual payments, payment capacity, outstanding and reversal; coherent reads,
+immutable committed records and retained downgrade refusal remain mandatory.
+Historical migration checks remove only the new empty successor schema before
+retaining every original financial assertion. Client retry scopes, actual
+desktop/mobile/browser recovery, full uncached coverage, separate fresh TIA
+record/replay/native selection and independent source/publication review are
+separate gates, not implied by this contract.

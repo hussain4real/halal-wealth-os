@@ -63,6 +63,8 @@ test('committed assessment rows reject update deletion source substitution and a
 });
 test('retained assessment evidence refuses downgrade before any DDL', function () {
     A::record($this->owner, $this->asset);
+    $purification = require database_path('migrations/2026_10_20_073000_create_purification_records.php');
+    $purification->down();
     $migration = require database_path('migrations/2026_10_19_110000_create_shariah_assessment_evidence.php');
     expect(fn () => $migration->down())->toThrow(RuntimeException::class, 'before DDL');
     expect(Schema::hasTable('shariah_assessments'))->toBeTrue();
@@ -70,10 +72,13 @@ test('retained assessment evidence refuses downgrade before any DDL', function (
 });
 test('empty assessment migration roundtrip preserves pre-existing financial evidence', function () {
     $before = DB::table('portfolio_assets')->orderBy('id')->get()->toJson();
+    $purification = require database_path('migrations/2026_10_20_073000_create_purification_records.php');
+    $purification->down();
     $migration = require database_path('migrations/2026_10_19_110000_create_shariah_assessment_evidence.php');
     $migration->down();
     expect(Schema::hasTable('shariah_assessments'))->toBeFalse();
     $migration->up();
+    $purification->up();
     expect(Schema::hasTable('shariah_assessments'))->toBeTrue();
     expect(DB::table('portfolio_assets')->orderBy('id')->get()->toJson())->toBe($before);
 });
