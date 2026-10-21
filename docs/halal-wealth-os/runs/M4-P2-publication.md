@@ -1,3 +1,7 @@
+Current disposition: M4-P2 was human accepted on 21 October 2026. See
+[the acceptance record](M4-P2-acceptance.md). The snapshots below preserve
+their original cycle status, failures and verification limits.
+
 # M4-P2 publication checkpoint
 
 Status: cycle 5 local correction and verification passed; final publication gates pending. M4-P2 is

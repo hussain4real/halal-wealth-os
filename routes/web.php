@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CashAvailabilityController;
+use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\LedgerController;
@@ -18,6 +19,16 @@ use Illuminate\Support\Facades\Route;
 Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+
+    Route::get('opportunities', [DecisionController::class, 'index'])->name('opportunities.index');
+    Route::get('opportunities/new', [DecisionController::class, 'form'])->name('opportunities.create');
+    Route::get('opportunities/export', [DecisionController::class, 'export'])->name('opportunities.export');
+    Route::post('opportunities', [DecisionController::class, 'store'])->name('opportunities.store');
+    Route::post('opportunities/reservations', [DecisionController::class, 'reserve'])->name('opportunities.reserve');
+    Route::post('opportunities/reservations/{reservation}/release', [DecisionController::class, 'release'])->whereNumber('reservation')->name('opportunities.release');
+    Route::post('opportunities/event-links', [DecisionController::class, 'link'])->name('opportunities.link');
+    Route::get('opportunities/{opportunity}', [DecisionController::class, 'show'])->whereNumber('opportunity')->name('opportunities.show');
+    Route::get('opportunities/{opportunity}/revise', [DecisionController::class, 'form'])->whereNumber('opportunity')->name('opportunities.edit');
 
     Route::get('purification', [PurificationController::class, 'index'])->name('purification.index');
     Route::get('purification/new', [PurificationController::class, 'form'])->name('purification.create');

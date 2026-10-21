@@ -27,6 +27,11 @@ export type InvestmentEvent = {
     replaces_id: string | null;
     reversed_by: string | null;
     replacement_id: string | null;
+    decision: {
+        opportunity_id: string;
+        tranche_key: string;
+        reason: string;
+    } | null;
 };
 export type IpoApplication = {
     id: string;

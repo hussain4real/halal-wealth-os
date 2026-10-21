@@ -1,3 +1,7 @@
+Current disposition: M4-P2 was human accepted on 21 October 2026. See
+[the acceptance record](M4-P2-acceptance.md). The snapshots below preserve
+their original cycle status, failures and verification limits.
+
 # M4-P2 local run
 
 Status: IN_PROGRESS, unaccepted. Cycle 5 of at most 6.

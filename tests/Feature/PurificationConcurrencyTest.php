@@ -108,11 +108,14 @@ test('committed immutable purification records reject updates deletes forged att
     }
 });
 test('purification migration refuses retained evidence before DDL and empty roundtrip preserves earlier financial facts', function () {
+    $decisions = require database_path('migrations/2026_10_21_064500_create_decision_records.php');
+    $decisions->down();
     $m = require database_path('migrations/2026_10_20_073000_create_purification_records.php');
     $before = DB::table('postings')->orderBy('id')->get()->toJson();
     $m->down();
     expect(Schema::hasTable('purification_obligations'))->toBeFalse();
     $m->up();
+    $decisions->up();
     expect(Schema::hasTable('purification_obligations'))->toBeTrue()->and(DB::table('postings')->orderBy('id')->get()->toJson())->toBe($before);
     F::obligation($this->owner, $this->f);
     expect(fn () => $m->down())->toThrow(RuntimeException::class, 'before DDL');

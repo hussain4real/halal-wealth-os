@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-20T10:42:13.825443+00:00",
+    "updated_at": "2026-10-21T07:18:16.334852+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -13,12 +13,12 @@
         "default_external_effects": false
     },
     "active_run": {
-        "phase": "M4-P2",
-        "owner": "cloud-m4p2-coordinator",
+        "phase": "M4-P3",
+        "owner": "m4p3-coordinator",
         "worktree": ".",
-        "branch": "feat/m4-p2-purification",
-        "started_at": "2026-10-20T07:15:09.489073+00:00",
-        "base": "140d0b6a2dfbfafbc0a571e64dfe099d05549393"
+        "branch": "feat/m4-p3-opportunities-theses",
+        "started_at": "2026-10-21T06:45:11.880037+00:00",
+        "base": "713d94a19c1aa380c5a159c57e85d2b3393b14f8"
     },
     "repository": {
         "root": null,
@@ -212,20 +212,20 @@
         {
             "id": "M4-P2",
             "depends_on": ["M4-P1"],
-            "status": "IN_PROGRESS",
+            "status": "ACCEPTED",
             "owner": "cloud-m4p2-coordinator",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M4-P2-local.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-21T06:45:11.880037+00:00",
+            "evidence": "runs/M4-P2-acceptance.md"
         },
         {
             "id": "M4-P3",
             "depends_on": ["M4-P2"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "IN_PROGRESS",
+            "owner": "m4p3-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M4-P3-local.md"
         },
         {
             "id": "M5-P1",
@@ -346,26 +346,29 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "phase": "M4-P2",
+        "phase": "M4-P3",
         "authorized": true,
         "authorized_by": "human-owner",
-        "authorized_at": "2026-10-20T06:38:50Z",
-        "accepted_dependencies": ["M4-P1"],
-        "scope": "Canonical M4-P2 implementation, independent source/rendered review, sanitized dev PR, exact-head CI/review, normal noreply dev merge and original dev-push CI; stop for human phase acceptance",
+        "authorized_at": "2026-10-21T06:45:11.880037+00:00",
+        "accepted_dependencies": ["M4-P2"],
+        "scope": "Canonical M4-P3 implementation, independent source/rendered review, sanitized dev PR, exact-head CI and fresh hosted review, normal noreply dev merge and original dev-push CI; stop for owner acceptance",
         "max_cycles": 6,
         "main_stage_changes": false,
         "deployment": false,
-        "live_payments": false,
+        "live_trades": false,
         "credentials_or_security_settings": false,
         "later_phases": false
     },
     "execution_status": {
-        "phase": "M4-P2",
+        "phase": "M4-P3",
         "status": "IN_PROGRESS",
-        "cycle": 5,
+        "cycle": 6,
         "max_cycles": 6,
-        "predecessor_gate": "PASS_PR13_ORIGINAL_POSTMERGE_CI_AND_INDEPENDENT_REVIEW",
-        "phase_acceptance": "UNACCEPTED"
+        "predecessor_gate": "M4-P2_OWNER_ACCEPTED_AFTER_PR15_ORIGINAL_POSTMERGE_CI_PASS",
+        "phase_acceptance": "UNACCEPTED",
+        "cycles_used": 6,
+        "engineering_readiness": "READY_FOR_REVIEW",
+        "remaining_gate": "AUTHORIZED_PUBLICATION_AND_HUMAN_ACCEPTANCE"
     },
     "dependency_patch": {
         "authorized": true,
@@ -668,6 +671,20 @@
             "checkpoint": "Human accepted M4-P1 and approved reviewed completion-record publication; six implementation cycles preserved; no M4-P2",
             "closed_at": "2026-10-20T06:27:44Z",
             "acceptance_evidence": "runs/M4-P1-publication.md"
+        },
+        {
+            "phase": "M4-P2",
+            "owner": "cloud-m4p2-coordinator",
+            "worktree": ".",
+            "branch": "feat/m4-p2-purification",
+            "started_at": "2026-10-20T07:15:09.489073+00:00",
+            "base": "140d0b6a2dfbfafbc0a571e64dfe099d05549393",
+            "status": "ACCEPTED",
+            "closed_at": "2026-10-21T06:45:11.880037+00:00",
+            "accepted_by": "human-owner",
+            "acceptance_evidence": "runs/M4-P2-acceptance.md",
+            "merge_sha": "93ffba412e5f4d5833b029bb31cb507186d4aa7e",
+            "verified_successor": "713d94a19c1aa380c5a159c57e85d2b3393b14f8"
         }
     ],
     "authorization_history": [
@@ -824,6 +841,23 @@
             "historical": true,
             "closed_at": "2026-10-20T06:27:44Z",
             "closure_reason": "M4-P1 implementation human accepted; completion-record publication separately authorized; no M4-P2"
+        },
+        {
+            "phase": "M4-P2",
+            "authorized": false,
+            "authorized_by": "human-owner",
+            "authorized_at": "2026-10-20T06:38:50Z",
+            "accepted_dependencies": ["M4-P1"],
+            "scope": "Canonical M4-P2 implementation, independent source/rendered review, sanitized dev PR, exact-head CI/review, normal noreply dev merge and original dev-push CI; stop for human phase acceptance",
+            "max_cycles": 6,
+            "main_stage_changes": false,
+            "deployment": false,
+            "live_payments": false,
+            "credentials_or_security_settings": false,
+            "later_phases": false,
+            "historical": true,
+            "closed_at": "2026-10-21T06:45:11.880037+00:00",
+            "closure_reason": "M4-P2 explicitly owner accepted; successor authorization recorded separately"
         }
     ],
     "execution_status_history": [
@@ -2205,5 +2239,101 @@
             "restored": "749passed4948assertions146s;report749coverage3914/4164andrestorationPASS",
             "provenance": "Parent authenticated ordinary UI bounded outcome/report blocks; not everyline/rawhostedXML; no archive retry"
         }
+    },
+    "m4p3_checkpoint": {
+        "status": "LOCAL_READY_PUBLICATION_IN_PROGRESS",
+        "cycles_used": 6,
+        "max_cycles": 6,
+        "phase_accepted": false,
+        "later_phase_authorized": false,
+        "cycle_history": [
+            {
+                "cycle": 1,
+                "result": "FAILED_TRIGGER_ALIAS_AND_FIXTURE",
+                "tests": 32,
+                "passed": 22,
+                "errors": 10
+            },
+            {
+                "cycle": 2,
+                "result": "FAILED_NEW_FIXTURE_AND_OLD_ASSET_MANIFEST",
+                "tests": 50,
+                "passed": 44,
+                "failed": 5,
+                "errors": 1
+            },
+            {
+                "cycle": 3,
+                "result": "FOCUSED_PASS_FULL_STOPPED_PINT_SOURCE_REVIEW_EXPORT_FINDING",
+                "tests": 52,
+                "passed": 52,
+                "assertions": 358
+            },
+            {
+                "cycle": 4,
+                "result": "EXPORT_CONTEXT_TIMESTAMP_CORRECTION",
+                "tests": 53,
+                "passed": 48,
+                "failed": 1,
+                "errors": 4
+            },
+            {
+                "cycle": 5,
+                "result": "FOCUSED_PASS_ACTIVE_EXPORT_REVIEW_FINDING",
+                "tests": 53,
+                "passed": 53,
+                "assertions": 363
+            },
+            {
+                "cycle": 6,
+                "result": "FINAL_LOCAL_GATES_PASS_AFTER_OWNED_UTC_RUNTIME_CORRECTION",
+                "first_full": {
+                    "tests": 802,
+                    "passed": 690,
+                    "failed": 2,
+                    "errors": 110,
+                    "assertions": 4491
+                },
+                "application_tests_unchanged_for_runtime_correction": true,
+                "corrected_full": {
+                    "tests": 802,
+                    "passed": 802,
+                    "assertions": 5318,
+                    "errors": 0,
+                    "failed": 0,
+                    "skipped": 0
+                }
+            }
+        ],
+        "engineering": {
+            "full_uncached": {
+                "status": "PASS",
+                "tests": 802,
+                "assertions": 5318,
+                "failures": 0,
+                "errors": 0,
+                "skips": 0,
+                "coverage": "4258/4523",
+                "app_files": 119,
+                "predecessor_cases": 749,
+                "new_cases": 53
+            },
+            "tia": {
+                "fresh": "PASS_802_5322",
+                "unchanged_replay": "PASS_802_CACHED_5322",
+                "native_changed_and_rerun_files": [],
+                "unlocated_reruns": false,
+                "cache_bytes_unchanged": true,
+                "source_selection": "PASS_SERVICE_FOUR_DECISION_SUITES_FORM_SHOW_HTTP",
+                "not_a_full_uncached_replacement": true
+            },
+            "source": "PASS_FINAL_CYCLE6",
+            "privacy_and_reports": "PASS_INDEPENDENT",
+            "rendered": "PASS_INDEPENDENT_ACTUAL_DESKTOP_MOBILE_RECOVERY_EXPORT_ISOLATION",
+            "hosted": "NOT_RUN",
+            "rendered_evidence": "runs/M4-P3-rendered-review.md"
+        },
+        "publication_evidence": "runs/M4-P3-publication.md",
+        "implementation_budget_exhausted": true
     }
 }

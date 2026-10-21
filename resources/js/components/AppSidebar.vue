@@ -34,6 +34,7 @@ const mainNavItems: NavItem[] = [
     { title: 'Goals & protection', href: '/goals', icon: Target },
     { title: 'Portfolio', href: '/portfolio', icon: ChartNoAxesCombined },
     { title: 'Asset catalog', href: '/assets', icon: LayoutGrid },
+    { title: 'Opportunities', href: '/opportunities', icon: Target },
     {
         title: 'Purification records',
         href: '/purification',
