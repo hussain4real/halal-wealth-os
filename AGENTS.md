@@ -351,6 +351,25 @@ No live trades, external financial actions, main/stage promotion, deployment,
 credentials, settings changes or M5 work are authorized. Stop for human M4-P3
 acceptance after the engineering gates; do not self-accept M4-P3 or M4.
 
+## Current dev progress publishing authority
+
+The human owner explicitly requested the official /dev/null terminal integration
+and a HalalOS CI update after a dev merge passes CI on 21 October 2026. The owner
+then explicitly approved creating one dedicated Ed25519 key, registering its
+public half on the owner's GitHub account as a signing-only key, and saving its
+private half as the encrypted repository Actions secret DEVNULL_SSH_KEY. Setup
+is complete and local key copies were deleted. This narrow authority supersedes
+the earlier credential/settings prohibition only for this signing-only setup
+and the reviewed progress workflow. No authentication key, expanded OAuth scope,
+financial/AI credential or unrelated account/security setting is authorized.
+
+Publish only public merged-PR metadata after original successful dev CI, with
+no financial records, private inputs, logs or source content. The owner authorized
+this focused PR to dev, scoped review fixes, fresh exact-head CI and independent
+review, normal explicit-noreply merge after those gates pass, and original
+post-merge CI/publisher verification. Preserve main/stage, unrelated work and
+phase acceptance boundaries; do not bypass gates or rewrite history.
+
 ## Current M4-P3 acceptance and M5-P1 request
 
 The human owner explicitly accepted M4-P3 on 21 October 2026 and requested
