@@ -218,3 +218,26 @@ attribution without a second financial write, opt-in external private imports
 and the private original proposal separately. Full uncached coverage, separate
 TIA recording/replay, actual rendered desktop/mobile review and exact-head
 hosted CI/fresh review/original dev-push CI are separate observed gates.
+
+## M5-P1 implemented checks
+
+The harness now requires DashboardSnapshotTest, DashboardHttpTest,
+DashboardConcurrencyTest and DashboardRulesTest alongside the unchanged starter
+DashboardTest. Exact native/base totals, selected valuation modes, source lists
+beyond twenty rows, missing observations, retained bytes, owner isolation,
+settings validation and deterministic rule episodes have direct checks.
+Separate PostgreSQL backends exercise duplicate capture, competing settings,
+alternate dismissal receipts and capture versus financial withdrawal. Committed
+retention guards and empty-schema migration roundtrips remain required.
+
+The currency-target parser has separate Node checks. Full uncached coverage,
+separate native TIA record/replay/selection, rendered desktop/mobile recovery,
+publication sanitation, hosted exact-head review/CI and original dev-push CI are
+separate observed gates. The unimplemented-phase rejection now targets M5-P2.
+
+Final affected Node checks include owner/operation-scoped pending request
+inventory, malformed-draft rejection, confirmed-clear observation and listener
+cleanup. Actual browser recovery must cover normal success and both committed
+and pre-commit response loss when a dismissal episode is dismissed, absent or
+beyond the first visible page. A historical snapshot diagnostic alone cannot
+satisfy that current-view recovery gate.

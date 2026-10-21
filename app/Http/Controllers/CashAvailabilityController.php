@@ -17,11 +17,6 @@ use Inertia\Response;
 
 class CashAvailabilityController extends Controller
 {
-    public function dashboard(Request $request): Response
-    {
-        return Inertia::render('Dashboard', ['cash' => app(CashAvailability::class)->capture($this->owner($request))]);
-    }
-
     public function settings(Request $request): Response
     {
         $owner = $this->owner($request);

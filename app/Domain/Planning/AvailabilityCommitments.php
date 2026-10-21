@@ -15,7 +15,7 @@ final class AvailabilityCommitments
      * @param list<array<string,mixed>> $overlaps
      * @param array<string,array{minor:?string,currency:string}> $reservations
      * @return array<string,mixed> */
-    public function read(User $owner, string $utcDate, string $today, string $horizon, array $requirements, array $overlaps, array $reservations): array
+    public function read(User $owner, string $utcDate, string $today, string $horizon, array $requirements, array $overlaps, array $reservations, bool $complete = false): array
     {
         $next = CarbonImmutable::parse(substr($today, 0, 7).'-01', BudgetCalendar::ZONE)->addMonth();
         $start = $next->toDateString();
@@ -94,12 +94,12 @@ versions AS (
 SELECT jsonb_build_object(
  'groups',coalesce((SELECT jsonb_agg(to_jsonb(g) ORDER BY currency) FROM groups g),'[]'::jsonb),
  'occurrences',coalesce((SELECT jsonb_agg(to_jsonb(v) ORDER BY due,schedule_id) FROM
-  (SELECT schedule_id::text,name,currency,due::text,expected::text,paid::text,remaining::text,overlap::text,unfunded::text FROM actual_values WHERE due_now ORDER BY due,schedule_id LIMIT 20) v),'[]'::jsonb),
+  (SELECT schedule_id::text,name,currency,due::text,expected::text,paid::text,remaining::text,overlap::text,unfunded::text FROM actual_values WHERE due_now ORDER BY due,schedule_id LIMIT CASE WHEN ?::boolean THEN NULL ELSE 20 END) v),'[]'::jsonb),
  'linked_occurrences',coalesce((SELECT jsonb_object_agg(o.schedule_id::text||':'||o.due::text,jsonb_build_object('currency',o.currency,'remaining',o.remaining::text,'due',o.due::text)) FROM occurrences o WHERE o.direction='expense' AND EXISTS(SELECT 1 FROM configured_links l WHERE l.schedule_id=o.schedule_id AND l.due_date=o.due)),'{}'::jsonb),
  'occurrence_count',(SELECT count(*) FROM actual_values WHERE due_now),
  'month_start',(SELECT month_start::text FROM parameters),'month_end',(SELECT month_end::text FROM parameters)
 ) AS data
-SQL, [$owner->id, $utcDate, $horizon, $start, $end, json_encode($requirements, JSON_THROW_ON_ERROR), json_encode($links, JSON_THROW_ON_ERROR)]);
+SQL, [$owner->id, $utcDate, $horizon, $start, $end, json_encode($requirements, JSON_THROW_ON_ERROR), json_encode($links, JSON_THROW_ON_ERROR), $complete]);
 
         $result = json_decode($row->data, true, flags: JSON_THROW_ON_ERROR);
         $usedReservations = [];

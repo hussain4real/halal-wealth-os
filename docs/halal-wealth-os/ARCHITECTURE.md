@@ -1,22 +1,13 @@
 # Architecture proposal
 
-Status: the personal-first modular-monolith and six ADR directions are human
-accepted. M0, M1, M2 and M3 are human accepted; see
-[M3 acceptance](runs/M3-acceptance.md).
-Detailed module import edges remain proposed. M3-P1 is human accepted; M3-P2 is human accepted; canonical M3-P3 dated valuation and performance
-implementation is human accepted at 08:33 UTC on 19 October 2026. Formal
-independent M3 review returned READY_FOR_OWNER with one low, nonblocking guidance
-finding; the human owner accepted M3 at 10:23 UTC on 19 October 2026. Canonical M4-P1 attributed assessment implementation is authorized at 10:36 UTC
-on 19 October 2026, merged to dev, and human accepted at
-06:27:44 UTC on 20 October 2026. Completion-record publication is authorized;
-M4-P2 is authorized and in progress; M4 milestone acceptance remains separate. See
-[publication and CI](runs/M4-P1-publication.md). M4-P3 and later phases remain
-unauthorized. See [assessment evidence](SHARIAH-EVIDENCE.md),
-[M4-P1](phases/M4-P1.md) and
-[M3-P3 acceptance](runs/M3-P3-acceptance.md) and the
-[independent M3 review](runs/M3-independent-review.md). The
-accepted prior cash policy is in [cash availability](CASH-AVAILABILITY.md), and
-manual FX/reconciliation decisions remain in [their ADR](FX-AND-RECONCILIATION.md).
+Status: the personal-first modular monolith and six ADR directions are human
+accepted. M0 through M4 are human accepted; see [M4 acceptance](runs/M4-acceptance.md).
+M5-P1 is locally READY_FOR_REVIEW, with publication gates and acceptance still separate.
+Reporting composes existing source contracts inside a coherent database snapshot;
+it retains dashboard evidence and rule/dismissal history without posting financial
+transactions. See [dashboard policy](DASHBOARD.md), [cash availability](CASH-AVAILABILITY.md),
+[assessment evidence](SHARIAH-EVIDENCE.md) and [manual FX decisions](FX-AND-RECONCILIATION.md).
+Detailed module dependency directions below remain architectural proposals.
 
 Use a Laravel modular monolith. Inertia, Vue 3 and TypeScript serve the application UI; PostgreSQL stores financial records. Filament is restricted administration. Exact selected versions are recorded in composer.lock, package-lock.json and [the runtime records](../../ops/development/README.md); PHP support is 8.5.x only.
 

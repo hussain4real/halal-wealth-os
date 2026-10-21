@@ -16,9 +16,9 @@ final class CashAvailability
     public const string POLICY = 'cash-availability-v1;explicit-income-date;overdue-inclusive;native-group-paired-half-up;direct-reporting-7d';
 
     /** @return array<string,mixed> */
-    public function capture(User $owner, ?string $planAfter = null): array
+    public function capture(User $owner, ?string $planAfter = null, bool $complete = false): array
     {
-        return DB::transaction(function () use ($owner, $planAfter): array {
+        return DB::transaction(function () use ($owner, $planAfter, $complete): array {
             LedgerInput::lock($owner);
             $instant = now('UTC');
             $cutoff = $instant->format('Y-m-d\TH:i:s\Z');
@@ -29,8 +29,8 @@ final class CashAvailability
             $requirements = $settings === null ? [] : json_decode($settings->requirements, true, flags: JSON_THROW_ON_ERROR);
             $overlaps = $settings === null ? [] : json_decode($settings->overlap_links, true, flags: JSON_THROW_ON_ERROR);
             $investments = $settings === null ? [] : json_decode($settings->investment_goals, true, flags: JSON_THROW_ON_ERROR);
-            $sources = app(AvailabilitySources::class)->read($owner, $utcDate, $investments, array_values(array_unique(array_column($overlaps, 'reservation_id'))));
-            $commitments = app(AvailabilityCommitments::class)->read($owner, $utcDate, $today, $settings->next_income_date ?? $today, $requirements, $overlaps, $sources['reservations']);
+            $sources = app(AvailabilitySources::class)->read($owner, $utcDate, $investments, array_values(array_unique(array_column($overlaps, 'reservation_id'))), $complete);
+            $commitments = app(AvailabilityCommitments::class)->read($owner, $utcDate, $today, $settings->next_income_date ?? $today, $requirements, $overlaps, $sources['reservations'], $complete);
             $choices = DB::select(<<<'SQL'
 SELECT root.id::text AS root_id,s.id::text AS schedule_id,s.family_reference AS family,s.name,s.currency,c.direction
 FROM planning_schedules root JOIN planning_schedules s ON s.family_reference=root.family_reference AND s.owner_id=root.owner_id

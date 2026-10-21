@@ -350,3 +350,45 @@ Keep the original opt-in example private and use public synthetic translations.
 No live trades, external financial actions, main/stage promotion, deployment,
 credentials, settings changes or M5 work are authorized. Stop for human M4-P3
 acceptance after the engineering gates; do not self-accept M4-P3 or M4.
+
+## Current M4-P3 acceptance and M5-P1 request
+
+The human owner explicitly accepted M4-P3 on 21 October 2026 and requested
+canonical M5-P1 through implementation, independent source/rendered review, a
+sanitized PR to dev, normal explicit-noreply merge after exact-head CI and fresh
+review, then original post-merge CI verification. Record M4-P3 acceptance and
+close its claim. The canonical milestone boundary still requires independent
+M4 review and human M4 acceptance before M5 implementation; do not infer formal
+M4 acceptance from phase acceptance. Prepare the independent read-only M4 review
+with exclusive owned verification resources first. Preserve prior cycles,
+failures, private originals and all unrelated work. One implementation writer;
+independent reviewers remain source-read-only. No M5-P2, live financial actions,
+main/stage promotion, deployment, credentials, settings changes or history rewrite.
+
+## Current M4 acceptance and M5-P1 authority
+
+The human owner explicitly accepted M4 after the independent READY_FOR_OWNER
+review on 21 October 2026 and approved proceeding with canonical M5-P1. This
+resolves the preceding milestone gate. The sole coordinator owns implementation,
+independent source/rendered review, full uncached regressions and separate TIA,
+a sanitized PR to dev, exact-head CI/fresh hosted review, normal noreply merge
+and original post-merge CI. At most six scoped cycles; no implementation
+subagents. Reviewers remain source-read-only with exclusive owned resources.
+Reporting composes trusted source contracts without financial writes; preserve
+exact native/base partiality, source drilldown, coherent retained snapshots,
+configurable explainable actions and idempotent dismissals. No bank/market/AI
+credentials, automatic financial decisions, M5-P2, promotion or deployment.
+M5-P1 acceptance remains separate. The owner additionally authorized /dev/null
+progress CI and explicitly approved a dedicated signing-only key and encrypted
+repository secret; this narrow credential exception is isolated in PR17 and
+does not authorize authentication keys, OAuth expansion or other settings.
+
+## M5-P1 additional correction budget
+
+The human owner explicitly authorized two additional scoped correction and
+verification cycles after the six-cycle checkpoint on 21 October 2026. Preserve
+cycles 1-6 and their failures; the total ceiling is eight, not a reset. Correct
+pending dismissal recovery independently of current action visibility, then
+repeat affected full/TIA/source/rendered gates and the already authorized dev
+publication workflow. All previous scope, sole-writer, privacy and acceptance
+boundaries remain in force.

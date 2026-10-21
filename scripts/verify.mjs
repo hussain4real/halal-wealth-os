@@ -47,6 +47,7 @@ try {
             'M4-P1',
             'M4-P2',
             'M4-P3',
+            'M5-P1',
         ].includes(phase)
     ) {
         throw new VerificationFailure(
@@ -74,6 +75,7 @@ try {
             'scripts/opening-assessment-guidance.test.mjs',
             'scripts/purification-attempt.test.mjs',
             'scripts/decision-tranches.test.mjs',
+            'scripts/dashboard-targets.test.mjs',
         ]);
         const missing = [];
         for (const command of ['php', 'composer', 'node', 'npm', 'psql']) {
@@ -225,6 +227,11 @@ try {
             'DecisionHttpTest',
             'DecisionConcurrencyTest',
             'DecisionImportTest',
+            'DashboardTest',
+            'DashboardSnapshotTest',
+            'DashboardHttpTest',
+            'DashboardConcurrencyTest',
+            'DashboardRulesTest',
         ]) {
             if (!discovered.stdout.includes(required)) {
                 throw new VerificationFailure(
@@ -243,7 +250,7 @@ try {
         }
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
-        console.log('PASS M0-P2 through M4-P3 implemented baseline');
+        console.log('PASS M0-P2 through M5-P1 implemented baseline');
         console.log(
             'NOT_APPLICABLE: future domain suites, integrations, live AI and deployment.',
         );

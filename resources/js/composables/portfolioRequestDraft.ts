@@ -1,4 +1,14 @@
 const memory = new Map<string, Record<string, string>>();
+const listeners = new Set<() => void>();
+export function subscribePortfolioRequests(listener: () => void): () => void {
+    listeners.add(listener);
+    return () => {
+        listeners.delete(listener);
+    };
+}
+function changed() {
+    for (const listener of listeners) listener();
+}
 export function portfolioRequestDraft(
     scope: string,
     identity: string,
@@ -82,6 +92,7 @@ export function portfolioRequestDraft(
             } catch {
                 /* App-session fallback. */
             }
+            changed();
         },
         clear: () => {
             memory.delete(key);
@@ -90,6 +101,27 @@ export function portfolioRequestDraft(
             } catch {
                 /* App-session fallback. */
             }
+            changed();
         },
     };
+}
+
+// Inventory only: each form still validates its saved payload and request identity.
+export function portfolioRequestScopes(prefix: string): string[] {
+    const storagePrefix = 'hwo:portfolio:attempt:';
+    const keys = new Set(memory.keys());
+    try {
+        if (typeof window !== 'undefined') {
+            for (let i = 0; i < window.sessionStorage.length; i++) {
+                const key = window.sessionStorage.key(i);
+                if (key !== null) keys.add(key);
+            }
+        }
+    } catch {
+        // The app-session inventory remains available when storage is blocked.
+    }
+    return [...keys]
+        .filter((key) => key.startsWith(storagePrefix + prefix))
+        .map((key) => key.slice(storagePrefix.length))
+        .sort();
 }
