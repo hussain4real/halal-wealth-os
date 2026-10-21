@@ -65,9 +65,9 @@ reservation/event facts needed to reconstruct their associations.
 
 The export now retains exact native source amounts, account/goal references,
 release evidence, reversal/replacement IDs and current gross attribution with
-original thesis IDs. IDs serialize as strings. UI copy explains that subsequent
-sales/refunds remain separate investment facts and displays the concentration
-reference source/validity. Full Pint formatted the new import test. The added
+original thesis IDs. IDs serialize as strings. Policy and export copy explain
+that later sales and refunds remain separate investment facts. The UI labels gross spend and displays the concentration
+reference source and validity. Full Pint formatted the new import test. The added
 export check caught legacy source timestamps named created_at rather than the
 new decision table's recorded_at (48 passes, one failed HTTP assertion and four
 errors); the join and serializers were corrected together. The failed raw
