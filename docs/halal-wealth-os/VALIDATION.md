@@ -281,3 +281,28 @@ read/write/export regressions. Original hosted failure-propagation CI and a fres
 exact-head review precede normal dev merge; original dev-push application CI and
 external publishing are separately verified afterward. Phase/milestone acceptance
 remains a human decision.
+
+## M5-P3 implemented verification contract
+
+The full lane adds complete owner export, authenticated encrypted archive/file
+handling, real populated PostgreSQL dump/restore/reconciliation, production
+readiness/2FA and populated downgrade-refusal cases. A fresh per-run identity and
+source inventory bind the actual recovery producer; stale or focused receipts
+cannot be relabeled as a current full run. Final release proof also binds current
+JUnit, the built asset manifest and hashes, dependency locks, exact Git commit/
+tree/dirty state and ordered migrations. Local dirty evidence remains diagnostic;
+clean exact-head hosted evidence is required for merge.
+
+The map extends through all five M5-P3 ACs, retaining all prior exact selectors,
+fixtures, scoped manual evidence and financial floors. New artifacts are
+`build/release-recovery.json` and `build/release-record.json`; CI uploads sanitized
+reports only. The same pinned PostgreSQL 18 service supplies psql, pg_dump and
+pg_restore clients. Archive corruption tests reject before plaintext output;
+actual restore uses a fresh, owned target and checks restored triggers/sequences.
+The rehearsal does not populate every business scenario or authorize production.
+
+Native Pest TIA, new page bindings, full uncached gates, source/rendered review,
+publication sanitation, latest-head hosted review/CI and original dev CI plus
+actual signed progress publishing remain separate. M6-P1 is the next unimplemented
+phase rejection. No green report accepts M5-P3/M5 or permits deployment. See
+`ops/release/` for configuration, backup/rollback procedures and owner handover.

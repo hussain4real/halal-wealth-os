@@ -15,9 +15,17 @@ use App\Http\Controllers\PurificationController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ValuationController;
 use App\Http\Middleware\RequireProductionTwoFactor;
+use App\Support\Release\ReleaseReadiness;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'Welcome')->name('home');
+
+Route::get('ready', function () {
+    $healthy = app(ReleaseReadiness::class)->healthy();
+
+    return response()->json(['status' => $healthy ? 'ready' : 'unavailable'], $healthy ? 200 : 503)
+        ->header('Cache-Control', 'no-store');
+})->name('readiness');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
 

@@ -41,7 +41,7 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     $required = [];
     foreach ($roadmap['phases'] as $phase) {
         $required = [...$required, ...$phase['acceptanceIds']];
-        if ($phase['id'] === 'M5-P2') {
+        if ($phase['id'] === 'M5-P3') {
             break;
         }
     }

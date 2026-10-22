@@ -3,7 +3,7 @@
 $required = [
     'bcmath', 'ctype', 'curl', 'dom', 'fileinfo', 'filter', 'hash', 'intl',
     'json', 'libxml', 'mbstring', 'openssl', 'pcntl', 'pcre', 'PDO', 'pdo_pgsql',
-    'posix', 'session', 'tokenizer', 'xml', 'xmlwriter', 'zip',
+    'posix', 'session', 'sodium', 'tokenizer', 'xml', 'xmlwriter', 'zip',
 ];
 $missing = array_filter($required, fn (string $extension): bool => ! extension_loaded($extension));
 foreach ($missing as $extension) {

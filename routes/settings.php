@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\OwnerDataController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Settings\SecurityController;
+use App\Http\Middleware\RequireProductionTwoFactor;
 use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +26,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('user-password.update');
 
     Route::inertia('settings/appearance', 'settings/Appearance')->name('appearance.edit');
+});
+
+Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+    Route::get('settings/data', [OwnerDataController::class, 'index'])->name('data.index');
+    Route::get('settings/data/export', [OwnerDataController::class, 'download'])
+        ->middleware(['password.confirm', 'throttle:3,1'])->name('data.download');
 });
 
 Route::get('.well-known/passkey-endpoints', function () {

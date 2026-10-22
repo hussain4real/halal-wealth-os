@@ -3,7 +3,8 @@
 Status: the personal-first modular monolith and six ADR directions are human
 accepted. M0 through M4 are human accepted; see [M4 acceptance](runs/M4-acceptance.md).
 M5-P1 is human accepted; see [its acceptance](runs/M5-P1-acceptance.md).
-M5-P2 quality/security verification is authorized and remains unaccepted.
+M5-P2 is owner accepted; see [its acceptance](runs/M5-P2-acceptance.md).
+M5-P3 release/export/restore preparation is authorized and remains unaccepted.
 Reporting composes existing source contracts inside a coherent database snapshot;
 it retains dashboard evidence and rule/dismissal history without posting financial
 transactions. See [dashboard policy](DASHBOARD.md), [cash availability](CASH-AVAILABILITY.md),
