@@ -5,7 +5,7 @@ accepted. M0 through M4 are human accepted; see [M4 acceptance](runs/M4-acceptan
 M5-P1 is human accepted; see [its acceptance](runs/M5-P1-acceptance.md).
 M5-P2 is owner accepted; see [its acceptance](runs/M5-P2-acceptance.md).
 M5-P3 is owner accepted; see [its acceptance](runs/M5-P3-acceptance.md).
-All M5 phases and the M5 milestone are human accepted. M6-P1 is authorized and in progress;
+All M5 phases and the M5 milestone are human accepted. M6-P1 is implemented locally and its final dev delivery is in review;
 see [the review](runs/M5-independent-review.md).
 See [M5 acceptance](runs/M5-acceptance.md). Deployment and phases after M6-P1
 remain separate decisions.

@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-22T10:40:26.226800+00:00",
+    "updated_at": "2026-10-22T11:21:17.612355+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -19,7 +19,7 @@
         "branch": "feat/m6-p1-statement-import",
         "baseline_head": "6de411da86858763537be326914fab86d3ffa19a",
         "started_at": "2026-10-22T09:53:50.814621+00:00",
-        "status": "IN_PROGRESS"
+        "status": "READY_FOR_REVIEW"
     },
     "repository": {
         "root": null,
@@ -260,7 +260,7 @@
         {
             "id": "M6-P1",
             "depends_on": ["M5-P3"],
-            "status": "IN_PROGRESS",
+            "status": "READY_FOR_REVIEW",
             "owner": "m6p1-coordinator",
             "accepted_by": null,
             "accepted_at": null,
@@ -364,13 +364,13 @@
     },
     "execution_status": {
         "phase": "M6-P1",
-        "status": "IN_PROGRESS",
+        "status": "READY_FOR_REVIEW",
         "cycle": 5,
         "cycles_used": 5,
         "max_cycles": 6,
         "phase_acceptance": "PENDING_HUMAN_DECISION",
         "milestone_acceptance": "M5_ACCEPTED",
-        "checkpoint": "Cycle4 full1012tests/6807assertions, all61financialfloors, nativeHTTP/security/workload and populated63-table recovery passed. Finalizer correctly rejected its outdated reader inventory after imports added. Cycle5 extends exact required reader inventory with a missing-import-reader regression and repeats full clean gates; no final release/remote PASS yet."
+        "checkpoint": "Cycle5 local full original probe passed at598d0f7; final selector polish at0ab4ae8 passed affected HTTP/PHPStan/frontend and independent source/rendered re-review. Final fresh native TIA running. READY_FOR_REVIEW; exact-head hosted originalCI/freshreview, devmerge and originalpostmergeCI/publishing pending. Human M6-P1 acceptance pending."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2823,5 +2823,21 @@
         "phase_acceptance": "ACCEPTED",
         "milestone_acceptance": "PENDING_HUMAN_DECISION",
         "checkpoint": "M5-P3 owner accepted; one independent read-only M5 review cycle passed full uncached928tests/6344assertions,57floors,102IDs/287selectors, current encrypted restore/HTTP/security/performance and clean exact6de411d source/build. Milestone READY_FOR_OWNER; not accepted, no M6 or deployment authority."
+    },
+    "m6p1_local_completion": {
+        "full_gate_commit": "598d0f7d2f6a0dd738e3e7c355ddd1c52eee2a01",
+        "tests": 1012,
+        "assertions": 6807,
+        "financial_floors": 61,
+        "acceptance_and_invariant_ids": 107,
+        "exact_selectors": 367,
+        "recovery_tables": 63,
+        "original_failure_probe": "PASS_BASELINE_DELIBERATE_FAILURE_RESTORED_BASELINE",
+        "native_tia": "FRESH_PASS_1012_TESTS_6807_ASSERTIONS_BEFORE_SELECTOR_POLISH",
+        "source_review": "READY_FOR_REVIEW",
+        "rendered_review": "PASS_ACTUAL_JOURNEY_AND_POLISHED_SELECTOR_RECHECK",
+        "phase_acceptance": "PENDING_HUMAN_DECISION",
+        "hosted_delivery": "PENDING",
+        "independent_review": "runs/M6-P1-independent-review.md"
     }
 }

@@ -69,3 +69,37 @@ no advisories; no mirror, skip or suppressed diagnostic was used. Fresh native
 TIA independently passed the same 1,012 tests and 6,807 assertions. Independent
 source/publication review of ab37481 returned READY_FOR_REVIEW, with all four
 identity/ambiguity findings resolved and no demonstrated blocking issue.
+
+## Local release checkpoint
+
+The complete original `bin/probe-failure` passed at clean commit
+`598d0f7d2f6a0dd738e3e7c355ddd1c52eee2a01` in 550.519 seconds: passing full
+baseline, observed deliberate Pest failure/exit1, cleanup, then passing restored
+full baseline. The final run executed 1,012 tests /6,807 assertions, all 61
+financial floors, 107 AC/invariant IDs /367 exact selectors, actual native
+HTTP/security and the established seeded dashboard workload, plus authenticated
+63-table encrypted recovery and reopened import evidence. Source/JUnit/run,
+Git commit/tree/clean state, assets, locks and ordered migrations reconciled.
+F17 remains statement-only; provider/outbox retries and F18 remain future.
+
+Independent Playwright review exercised actual upload/mapping/row resolution,
+selected approval, a committed request with simulated lost response and unchanged
+retry, reupload, linked correction and the formula-safe download. Desktop/mobile,
+light/dark, keyboard focus, loading and accessible validation were inspected.
+A low usability finding prompted meaningful source/currency/preview labels and
+an explicit selected-preview link. That four-file polish passed PHPStan,
+7 HTTP tests /146 assertions, frontend lint/types and build; it does not relabel
+the earlier full release receipt as the newer head. The final rendered selector recheck passed at polished application head `0ab4ae8`.
+Fresh exact-head hosted full CI/review remain required before merge.
+
+All failed originals and full private reports/artifacts remain outside the public
+checkout. Local PHP8.5.12/Node24.15/PostgreSQL18.4 patch versions are distinguished
+from CI's pinned PHP8.5.12/Node24.19/PostgreSQL18.6. No phase acceptance or
+production release follows from these engineering checks.
+
+The final selected-preview label/link passed independent source and actual
+browser re-review. The browser opened the correct owned preview in a new tab and
+rechecked the mobile layout. No blocking source/rendered finding remains; all
+four identity findings and the low selector finding are resolved. See
+[the independent review](M6-P1-independent-review.md). Fresh hosted CI/review,
+normal dev merge and original post-merge CI/publication remain unclaimed here.
