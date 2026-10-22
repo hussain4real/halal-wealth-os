@@ -82,6 +82,9 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     }
     $rows = [];
     foreach ($map['requirements'] as $id => $entry) {
+        if (($entry['status'] ?? null) !== 'CONFIGURED_REQUIRES_CURRENT_EXECUTION') {
+            throw new RuntimeException('BLOCKED: invalid configured acceptance status '.$id);
+        }
         $caseIds = evidenceIds($entry['actual_case_ids'] ?? null, $id);
         $manualIds = evidenceIds($entry['manual_artifact_ids'] ?? null, $id);
         foreach ($caseIds as $caseId) {
@@ -102,11 +105,14 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     foreach ($map['fixtures'] as $id => $fixture) {
         evidenceIds($fixture['case_ids'] ?? null, $id);
         if (in_array($id, ['F17', 'F18'], true)) {
-            if (($fixture['case_ids'] ?? []) !== [] || $fixture['status'] !== ($id === 'F17' ? 'FUTURE_M6_NOT_IMPLEMENTED' : 'FUTURE_M7_NOT_IMPLEMENTED')) {
+            if (($fixture['case_ids'] ?? []) !== [] || ($fixture['status'] ?? null) !== ($id === 'F17' ? 'FUTURE_M6_NOT_IMPLEMENTED' : 'FUTURE_M7_NOT_IMPLEMENTED')) {
                 throw new RuntimeException('BLOCKED: future integration/AI fixtures cannot pass.');
             }
 
             continue;
+        }
+        if (($fixture['status'] ?? null) !== 'IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED') {
+            throw new RuntimeException('BLOCKED: applicable fixture is not passing '.$id);
         }
         if (($fixture['case_ids'] ?? []) === []) {
             throw new RuntimeException('BLOCKED: applicable fixture has no executed cases '.$id);
@@ -118,5 +124,5 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
         }
     }
 
-    return ['fixtures' => array_map(fn (array $fixture): array => ['case_ids' => $fixture['case_ids'], 'scope' => $fixture['scope'], 'current_executed_cases' => $fixture['case_ids'] !== [], 'original_input_execution_claim' => false], $map['fixtures']), 'requirements' => $rows, 'unique_executed_selectors' => count($map['cases']), 'manual_evidence_semantics' => 'Scoped manual observations retain their declared limits; they cannot replace configured executed cases, hosted CI or owner acceptance.'];
+    return ['fixtures' => array_map(fn (array $fixture): array => ['status' => $fixture['status'], 'case_ids' => $fixture['case_ids'], 'scope' => $fixture['scope'], 'current_executed_cases' => $fixture['case_ids'] !== [], 'original_input_execution_claim' => false], $map['fixtures']), 'requirements' => $rows, 'unique_executed_selectors' => count($map['cases']), 'manual_evidence_semantics' => 'Scoped manual observations retain their declared limits; they cannot replace configured executed cases, hosted CI or owner acceptance.'];
 }

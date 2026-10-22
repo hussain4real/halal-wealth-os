@@ -1226,6 +1226,91 @@
             "class": "Tests\\Unit\\AcceptanceMapTest",
             "name": "acceptance map refuses omitted criteria changed manual evidence and unsupported fixture pass claims with data set \"('missing-fixture')\"",
             "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-e6fa0b1f4326": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F01')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-94645805c579": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F02')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-fcabb98becd8": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F03')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-594ece0f15fb": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F04')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-f79098d971ec": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F05')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-9c14e21585d7": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F06')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-82d679603039": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F07')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-d378948628af": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F08')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-3e4b45171538": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F09')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-79a1a3deaea2": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F10')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-9d54183b9eca": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F11')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-92532858d885": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F12')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-0ed4ca961c58": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F13')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-fde2da4447a4": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F14')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-841aead3e903": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F15')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-c5ac3d7fda79": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses nonpassing missing or malformed applicable fixture statuses with data set \"('F16')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-6a011c3493bd": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses invalid configured requirement status",
+            "file": "tests/Unit/AcceptanceMapTest.php"
         }
     },
     "manual_artifacts": {
@@ -2258,7 +2343,24 @@
                 "case-c36fd13506c2",
                 "case-ef1b041b0dcc",
                 "case-f697e542bbf8",
-                "case-53ead0164a16"
+                "case-53ead0164a16",
+                "case-e6fa0b1f4326",
+                "case-94645805c579",
+                "case-fcabb98becd8",
+                "case-594ece0f15fb",
+                "case-f79098d971ec",
+                "case-9c14e21585d7",
+                "case-82d679603039",
+                "case-d378948628af",
+                "case-3e4b45171538",
+                "case-79a1a3deaea2",
+                "case-9d54183b9eca",
+                "case-92532858d885",
+                "case-0ed4ca961c58",
+                "case-fde2da4447a4",
+                "case-841aead3e903",
+                "case-c5ac3d7fda79",
+                "case-6a011c3493bd"
             ],
             "manual_artifact_ids": ["m5p2-source"],
             "tool_check": "ACCEPTANCE_MAP"

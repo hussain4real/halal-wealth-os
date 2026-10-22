@@ -22,6 +22,7 @@ beforeEach(function () {
 test('acceptance map resolves exact configured cases and explicit retained evidence without claiming a tool pass', function () {
     $report = HalalOS\Verification\acceptanceMap($this->acceptanceMap, $this->acceptanceJunit, base_path());
     expect($report['requirements'])->toHaveCount(97)->and($report)->not->toHaveKey('result');
+    expect(array_column($report['fixtures'], 'status'))->toBe(array_column($this->acceptanceMap['fixtures'], 'status'));
 });
 
 test('acceptance map refuses missing renamed skipped or zero-assertion executed cases', function (string $fault) {
@@ -51,3 +52,19 @@ test('acceptance map refuses omitted criteria changed manual evidence and unsupp
     }
     expect(fn () => HalalOS\Verification\acceptanceMap($this->acceptanceMap, $this->acceptanceJunit, base_path()))->toThrow(RuntimeException::class);
 })->with(['omitted', 'manual', 'future', 'null-evidence', 'missing-fixture']);
+
+test('acceptance map refuses nonpassing missing or malformed applicable fixture statuses', function (string $fixtureId) {
+    foreach (['FAILED', 'NOT_IMPLEMENTED', 'FUTURE_M6_NOT_IMPLEMENTED', 'PASS', '', null, false, []] as $status) {
+        $map = $this->acceptanceMap;
+        $map['fixtures'][$fixtureId]['status'] = $status;
+        expect(fn () => HalalOS\Verification\acceptanceMap($map, $this->acceptanceJunit, base_path()))->toThrow(RuntimeException::class, 'BLOCKED: applicable fixture is not passing '.$fixtureId);
+    }
+    $map = $this->acceptanceMap;
+    unset($map['fixtures'][$fixtureId]['status']);
+    expect(fn () => HalalOS\Verification\acceptanceMap($map, $this->acceptanceJunit, base_path()))->toThrow(RuntimeException::class, 'BLOCKED: applicable fixture is not passing '.$fixtureId);
+})->with(array_map(fn (int $i): string => sprintf('F%02d', $i), range(1, 16)));
+
+test('acceptance map refuses invalid configured requirement status', function () {
+    $this->acceptanceMap['requirements']['INV-10']['status'] = 'FAILED';
+    expect(fn () => HalalOS\Verification\acceptanceMap($this->acceptanceMap, $this->acceptanceJunit, base_path()))->toThrow(RuntimeException::class, 'BLOCKED: invalid configured acceptance status INV-10');
+});

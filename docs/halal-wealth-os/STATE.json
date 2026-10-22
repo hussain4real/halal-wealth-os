@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-22T02:31:53.399229+00:00",
+    "updated_at": "2026-10-22T02:49:57.131220+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -240,7 +240,7 @@
         {
             "id": "M5-P2",
             "depends_on": ["M5-P1"],
-            "status": "READY_FOR_REVIEW",
+            "status": "IN_PROGRESS",
             "owner": "m5p2-coordinator",
             "accepted_by": null,
             "accepted_at": null,
@@ -360,12 +360,12 @@
     },
     "execution_status": {
         "phase": "M5-P2",
-        "status": "READY_FOR_REVIEW",
-        "cycle": 4,
-        "cycles_used": 4,
+        "status": "VERIFICATION_PENDING_EXTERNAL_NPM_AUDIT",
+        "cycle": 5,
+        "cycles_used": 5,
         "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
-        "checkpoint": "Cycle4 full886/5659 PASS; 57 concrete financial files each>=90%; source and 126 rendered states READY_FOR_REVIEW; TIA fresh886/5663 and unchanged replay PASS. Final exact-source/JUnit proof and negative controls PASS. Hosted exact-head CI/review, merge and post-merge publishing remain pending."
+        "checkpoint": "Cycle5 independent current uncached application903/5950,57financialfiles>=90,HTTP/security/map97/262 PASS; p95 216.241542ms. SeparateTIA903/5954 record+replay PASS; source rereview READY. Full bin/verify and originaloldhead hostedrun39712132170 FAILED npm advisory endpoint timeout. Exact new-head full/CI/freshreview and merge/postCI/publisher pending; no audit bypass."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2499,6 +2499,36 @@
         "acceptance_evidence": "runs/M5-P1-acceptance.md"
     },
     "m5p2_engineering": {
+        "cycle": 5,
+        "max_cycles": 6,
+        "status": "VERIFICATION_PENDING_EXTERNAL_NPM_AUDIT",
+        "phase_acceptance": "UNACCEPTED",
+        "current_uncached_application": {
+            "tests": 903,
+            "assertions": 5950,
+            "failures": 0,
+            "errors": 0,
+            "skips": 0,
+            "scope": "Independently executed remaining real gates; not a full bin/verify pass"
+        },
+        "current_financial_files": 57,
+        "minimum_coverage_per_file_percent": 90,
+        "acceptance_ids": 97,
+        "exact_executed_selectors": 262,
+        "local_server_p95_ms": 216.241542,
+        "tia": "SEPARATE_FRESH_903_TESTS_5954_ASSERTIONS_AND_UNCHANGED_CACHED_REPLAY_PASS",
+        "full_verifier": "FAILED_EXTERNAL_NPM_ADVISORY_TIMEOUT",
+        "review_correction": "Strict applicablefixture and requirement states; report retains all18 fixturestatuses;16fixture+1requirement regression RED before / GREEN after; actual CLI rejects recordedFAIL with exit2",
+        "affected_source_review": "READY_FOR_REVIEW",
+        "browser": "PRIOR126STATES_RETAINED_APPLICATION_AND_BUILD_UNCHANGED_NO_NEW_BROWSER_RUN_CLAIM",
+        "hosted_ci": "INITIAL_HEAD_39712132170_FAILURE_NPM_ADVISORY_TIMEOUT_PRESERVED;NEW_HEAD_PENDING",
+        "fresh_hosted_review": "NEW_CORRECTED_HEAD_PENDING",
+        "merge": "PENDING",
+        "postmerge_ci": "PENDING",
+        "publisher": "TERMINAL_CLIENT_HTTP200_REAL_ELIGIBLE_DEV_RUN_PENDING",
+        "deployment": false
+    },
+    "m5p2_cycle4_engineering": {
         "cycle": 4,
         "max_cycles": 6,
         "status": "READY_FOR_REVIEW",
@@ -2536,8 +2566,8 @@
         "source_review": "runs/M5-P2-source-review.md",
         "rendered_review": "runs/M5-P2-rendered-review.md",
         "run": "runs/M5-P2-local.md",
-        "hosted_ci": "PENDING",
-        "fresh_hosted_review": "PENDING",
+        "hosted_ci": "FAILED_39712132170_NPM_ADVISORY_TIMEOUT",
+        "fresh_hosted_review": "P2_FIXTURE_STATUS_GAP_CORRECTED_IN_CYCLE5",
         "merge": "PENDING",
         "postmerge_ci": "PENDING",
         "publisher": "PENDING_REAL_ELIGIBLE_DEV_RUN",

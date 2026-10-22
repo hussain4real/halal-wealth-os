@@ -1,6 +1,6 @@
 # M5-P2 local run
 
-Current status: READY_FOR_REVIEW, cycle 4 of at most 6 under the owner's 22 October 2026
+Current status: VERIFICATION_PENDING_EXTERNAL_NPM_AUDIT, cycle 5 of at most 6 under the owner's 22 October 2026
 M5-P1 acceptance and M5-P2 authorization. The sole coordinator owns source;
 independent reviewers remain read-only with exclusive disposable resources.
 Base: dev merge `2060bfbe4cce27103dba843d454a642be642fe56`. Earlier M5-P1 cycles
@@ -172,3 +172,37 @@ PR head, normal noreply dev merge and original post-merge CI remain pending.
 The new eligible dev merge will recheck actual signed /dev/null publication;
 a successful website/client GET alone does not prove publishing. Prior original
 publisher HTTP-405 failures remain failures. No M5-P3 or deployment is started.
+
+## Cycle 5: fresh hosted-review correction
+
+Fresh review of original PR #19 head `d9fbf85` found that applicable fixture
+statuses were ignored even when explicitly failed. Merge was held. Sixteen
+fixture regressions and an adjacent invalid-requirement-status regression failed
+against that original behavior. The evaluator now requires each applicable
+fixture's exact implemented synthetic-execution state, requires the configured
+requirement state, preserves all 18 fixture statuses in output and keeps F17/F18
+future guards. Focused checks passed 27 tests / 302 assertions. The actual CLI
+also rejected a recorded fixture failure and a recorded requirement failure with
+exit 2, then passed after the original map bytes were restored.
+
+All 245 prior exact selectors were preserved and 17 new identities added, for 262. Independent affected-source review passed. Only evaluator/map/test source
+changed; application, Vue, runtime and compiled artifacts were unchanged. The
+prior actual 126-state browser evidence remains scoped to those unchanged
+artifacts; no new browser run is claimed.
+
+Separate fresh TIA passed 903 tests / 5,954 assertions and unchanged cached replay
+passed. Current independent uncached application checks passed 903 / 5,950,
+zero failures/errors/skips, all 57 financial files at or above 90%, migrations,
+format/types/build/static analysis, real HTTP/security journey, current map and
+source/JUnit binding. The repeated documented 30-sample server benchmark passed
+at p95 216.241542ms and owned HTTP/database cleanup passed. These separately
+executed remaining gates do not substitute for a full verifier pass.
+
+The original hosted CI run [39712132170](https://github.com/hussain4real/halal-wealth-os/actions/runs/39712132170)
+failed at the npm advisory endpoint's five-minute network timeout, before the
+application lane. The current local full `bin/verify --all` failed at the same
+endpoint. Both failures are retained. No advisory gate was disabled, downgraded
+or replaced by cached/alternate-registry evidence. The corrected head still
+requires full verification, original hosted CI and fresh review before merge.
+The /dev/null terminal client returned HTTP 200; actual signed CI publication
+remains pending an eligible green dev merge. M5-P2/M5 remain unaccepted.
