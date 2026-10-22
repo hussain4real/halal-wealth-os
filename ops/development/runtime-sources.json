@@ -1,7 +1,7 @@
 {
     "schema_version": 1,
     "architecture": "Linux x86_64; Debian 13 ABI",
-    "php_image": "docker.io/library/php:8.5.11-cli@sha256:01a109229f4465bc9ef042d9198f09a4d9da7775a825dbd8572dcdbd8756c4d3",
+    "php_image": "docker.io/library/php:8.5.12-cli@sha256:595a7cbb1e0547336319f228c4dc991c2a199350ab12b1c8fda05f73abd06e6b",
     "postgres_image": "docker.io/library/postgres:18.6@sha256:74935e72241653ca55e0414067e6d8763aceb8a810eb51b452253ec3dcfc4336",
     "composer": {
         "version": "2.10.3",
@@ -86,5 +86,16 @@
         ]
     },
     "network": "All source downloads use host configured proxy and TLS verification; extension build has no network",
-    "trust": "Existing host trust and proxy configuration preserved; no CA installed or trust settings changed"
+    "trust": "Existing host trust and proxy configuration preserved; no CA installed or trust settings changed",
+    "php_security_update": {
+        "recorded_on": "2026-10-22",
+        "previous_image": "docker.io/library/php:8.5.11-cli@sha256:01a109229f4465bc9ef042d9198f09a4d9da7775a825dbd8572dcdbd8756c4d3",
+        "minimum_php": "8.5.12",
+        "maximum_php_exclusive": "8.6.0",
+        "advisory": "https://www.php.net/archive/2026.php#2026-10-21-5",
+        "registry_verification": "Official Docker registry HTTPS; index, Linux amd64 manifest and config SHA256 verified; config PHP_VERSION=8.5.12",
+        "linux_amd64_manifest": "sha256:4c398f7eb2f25495d4bd9c38212d5affafb9df917817b89299135e15d5170305",
+        "linux_extension_rebuild": "NOT_RUN: retained dependency archives require fresh isolated build/platform verification on the supported ABI",
+        "local_verification": "Isolated native PHP8.5.12 official checksummed source; global host runtime unchanged"
+    }
 }

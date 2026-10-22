@@ -55,7 +55,7 @@ function remove(index: number) {
 </script>
 <template>
     <Head title="Dashboard action rules" />
-    <main
+    <div
         class="mx-auto max-w-4xl space-y-7 p-4 [overflow-wrap:anywhere] sm:p-8"
     >
         <Link
@@ -195,5 +195,5 @@ function remove(index: number) {
             apply only to the specific evidence episode; saved snapshots retain
             their original facts and rules.
         </p>
-    </main>
+    </div>
 </template>

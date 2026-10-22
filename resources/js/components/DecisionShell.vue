@@ -4,7 +4,7 @@ defineProps<{ title: string }>();
 </script>
 <template>
     <Head :title="title" />
-    <main
+    <div
         class="mx-auto w-full max-w-6xl space-y-7 px-4 py-8 [overflow-wrap:anywhere] sm:px-8 sm:py-12"
     >
         <nav class="flex flex-wrap gap-5 text-sm underline">
@@ -32,5 +32,5 @@ defineProps<{ title: string }>();
             No offer access, current price, religious ruling or recommendation
             is inferred.
         </footer>
-    </main>
+    </div>
 </template>

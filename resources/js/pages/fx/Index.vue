@@ -22,7 +22,7 @@ defineProps<{
 </script>
 <template>
     <Head title="Currency exchange" />
-    <main class="mx-auto w-full max-w-5xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto w-full max-w-5xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
         <LedgerNav />
         <header class="flex flex-wrap items-end justify-between gap-5">
             <div class="max-w-xl">
@@ -107,5 +107,5 @@ defineProps<{
             Manual bookkeeping. Reporting rates are managed separately from your
             actual paid and received amounts.
         </p>
-    </main>
+    </div>
 </template>

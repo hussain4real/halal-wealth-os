@@ -48,6 +48,7 @@ try {
             'M4-P2',
             'M4-P3',
             'M5-P1',
+            'M5-P2',
         ].includes(phase)
     ) {
         throw new VerificationFailure(
@@ -111,7 +112,13 @@ try {
             throw new VerificationFailure(`BLOCKED:\n${missing.join('\n')}`);
         const env = testingEnvironment();
         mkdirSync(path.join(root, 'build'), { recursive: true });
-        for (const file of ['junit.xml', 'coverage.xml'])
+        for (const file of [
+            'junit.xml',
+            'coverage.xml',
+            'financial-coverage.json',
+            'acceptance-http.json',
+            'acceptance-map-report.json',
+        ])
             rmSync(path.join(root, 'build', file), { force: true });
         run('composer', ['validate', '--strict'], { env });
         run('composer', ['check-platform-reqs'], { env });
@@ -232,6 +239,11 @@ try {
             'DashboardHttpTest',
             'DashboardConcurrencyTest',
             'DashboardRulesTest',
+            'ReleaseSecurityTest',
+            'FinancialCoverageEdgesTest',
+            'FinancialCoverageReportTest',
+            'AcceptanceMapTest',
+            'PerformanceReportTest',
         ]) {
             if (!discovered.stdout.includes(required)) {
                 throw new VerificationFailure(
@@ -250,7 +262,9 @@ try {
         }
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
-        console.log('PASS M0-P2 through M5-P1 implemented baseline');
+        run('node', ['scripts/acceptance-http.mjs'], { env });
+        run('php', ['scripts/verify-acceptance.php'], { env });
+        console.log('PASS M0-P2 through M5-P2 implemented verification');
         console.log(
             'NOT_APPLICABLE: future domain suites, integrations, live AI and deployment.',
         );

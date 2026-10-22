@@ -54,7 +54,7 @@ const submit = () =>
 </script>
 <template>
     <Head title="Reconciliation" />
-    <main class="mx-auto w-full max-w-5xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto w-full max-w-5xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
         <LedgerNav />
         <header class="max-w-2xl">
             <p
@@ -242,5 +242,5 @@ const submit = () =>
                 </ol>
             </section>
         </div>
-    </main>
+    </div>
 </template>

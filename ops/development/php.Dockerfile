@@ -1,5 +1,6 @@
 # Official PHP image; no system-wide host installation.
-FROM docker.io/library/php:8.5.11-cli@sha256:01a109229f4465bc9ef042d9198f09a4d9da7775a825dbd8572dcdbd8756c4d3
+FROM docker.io/library/php:8.5.12-cli@sha256:595a7cbb1e0547336319f228c4dc991c2a199350ab12b1c8fda05f73abd06e6b
+RUN php -r 'exit(PHP_VERSION_ID >= 80512 && PHP_VERSION_ID < 80600 ? 0 : 1);'
 
 # Build context contains packages fetched by host APT from signed official Debian
 # indexes and the official PECL source. Build with --network=none. No proxy CA or

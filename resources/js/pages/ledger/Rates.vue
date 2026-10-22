@@ -61,7 +61,7 @@ const selectClass =
 </script>
 <template>
     <Head title="Reporting rates" />
-    <main class="mx-auto w-full max-w-5xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto w-full max-w-5xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
         <LedgerNav />
         <header class="max-w-2xl">
             <p
@@ -307,5 +307,5 @@ const selectClass =
                 </p>
             </section>
         </div>
-    </main>
+    </div>
 </template>
