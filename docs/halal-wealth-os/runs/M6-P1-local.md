@@ -48,3 +48,10 @@ an owner must label a confirmed separate occurrence before it can be approved.
 The first committed clean full gate stopped at formatting in three evidence files
 edited after the prior formatter. No financial test or release pass was claimed.
 Keep the failed original, format the final records, then repeat all full gates.
+
+The corrected full run reached PHP static analysis and rejected 37 type-contract
+errors. Typed parser state helpers, actual numeric-string returns, tagged command
+shapes and separated boundary/work validation handling corrected those errors
+without suppressions or baseline changes. PHPStan then passed with zero errors;
+90 affected CSV/import/export/recovery tests passed 766 assertions. Full release
+proof still requires the final clean-source run.

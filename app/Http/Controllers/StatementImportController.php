@@ -106,10 +106,11 @@ final class StatementImportController extends Controller
         return app(StatementCsv::class)->download($this->owner($request), $snapshot);
     }
 
-    /** Always JSON: validation never flashes private request input into a redirect session. */
+    /** Always JSON: validation never flashes private request input into a redirect session.
+     * @param array<string,list<string>> $rules
+     * @param Closure(array<string,mixed>):JsonResponse $work */
     private function post(Request $request, array $rules, Closure $work, bool $financial = true): JsonResponse
     {
-        $entered = false;
         try {
             if ($request->query() !== []) {
                 LedgerInput::fail('query', 'Query selectors cannot be submitted.');
@@ -119,13 +120,15 @@ final class StatementImportController extends Controller
                 throw ValidationException::withMessages(array_fill_keys($unknown, 'This field cannot be submitted.'));
             }
             $data = $request->validate($rules);
-            $entered = true;
-
+        } catch (ValidationException $error) {
+            return response()->json(['message' => 'Review the import validation reasons.', 'errors' => $error->errors(), 'definitive_no_write' => true], 422);
+        }
+        try {
             return $work($data);
         } catch (ImportRejected $error) {
             return response()->json(['message' => $error->getMessage(), 'errors' => $error->errors, 'definitive_no_write' => true], 422);
         } catch (ValidationException $error) {
-            return response()->json(['message' => 'Review the import validation reasons.', 'errors' => $error->errors(), 'definitive_no_write' => ! $financial || ! $entered], 422);
+            return response()->json(['message' => 'Review the import validation reasons.', 'errors' => $error->errors(), 'definitive_no_write' => ! $financial], 422);
         }
     }
 
@@ -136,7 +139,12 @@ final class StatementImportController extends Controller
             LedgerInput::fail('file', 'Choose a UTF8 .csv text file. Documents, markup and executable files are unsupported.');
         }
 
-        return $file->get();
+        $bytes = $file->get();
+        if ($bytes === false) {
+            LedgerInput::fail('file', 'The uploaded CSV could not be read.');
+        }
+
+        return $bytes;
     }
 
     private function saved(stdClass $receipt): JsonResponse

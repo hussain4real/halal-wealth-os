@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
-        RateLimiter::for('statement-import', fn (Request $request) => Limit::perMinute(20)->by('statement:'.($request->user()?->id ?? $request->ip())));
+        RateLimiter::for('statement-import', fn (Request $request) => Limit::perMinute(20)->by('statement:'.($request->user()->id ?? $request->ip())));
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Account::class, AccountPolicy::class);
         Gate::define('access-admin', fn (User $user): bool => $user->is_admin && $user->hasVerifiedEmail()

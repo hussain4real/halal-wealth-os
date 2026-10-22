@@ -22,12 +22,15 @@ use InvalidArgumentException;
 use stdClass;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/** Owns import evidence and orchestration; existing domain services alone write finance. */
+/** Owns import evidence and orchestration; existing domain services alone write finance.
+ * @phpstan-type ImportCommand array{type:'ledger',currency:string,input:array<string,mixed>}|array{type:'investment',currency:string,input:array<string,mixed>,portfolio_id:string}|array{type:'match',currency:string,target:array<string,mixed>}
+ */
 final class StatementImports
 {
     public function __construct(private CsvStatement $csv, private PostingService $posting, private InvestmentService $investments) {}
 
-    /** @param array<string,mixed> $mapping */
+    /** @param array<string,mixed> $mapping
+     * @param array<mixed> $resolutions */
     public function preview(User $owner, string $bytes, string $namespace, string $accountId, string $adapterName, array $mapping, array $resolutions = []): stdClass
     {
         $namespace = LedgerInput::text($namespace, 'namespace');
@@ -71,7 +74,7 @@ final class StatementImports
         });
     }
 
-    /** @param array<string,array<string,string>> $resolutions */
+    /** @param array<mixed> $resolutions */
     public function revise(User $owner, string $id, array $resolutions): stdClass
     {
         $snapshot = LedgerInput::owned('statement_snapshots', $owner, $id);
@@ -134,7 +137,7 @@ final class StatementImports
                         $identityErrors = array_values(array_map(fn (array $messages): string => $messages[0], $error->errors()));
                     }
                     $repeated = $row['data']['provider_id'] === '' && $row['data']['occurrence'] === '' && ($keys[$this->fact($row)] ?? 0) > 1;
-                    $anchored = $existing !== null && in_array(LedgerInput::hash(['source', (string) $source->id, $row['number']]), $existing['logical_keys'], true);
+                    $anchored = $existing !== null && in_array($this->identity(['source', (string) $source->id, $row['number']]), $existing['logical_keys'], true);
                     if ($existing !== null && (! $repeated || $anchored)) {
                         $row['existing'] = ['receipt_id' => $existing['receipt_id'], 'token' => $existing['token'], 'type' => $existing['outcome']['type']];
                         $row['resolution_status'] = 'retained';
@@ -171,7 +174,7 @@ final class StatementImports
         });
     }
 
-    /** @param list<string> $selection */
+    /** @param array<mixed> $selection */
     public function approve(User $owner, string $id, string $key, array $selection): stdClass
     {
         return $this->atomic(function () use ($owner, $id, $key, $selection): stdClass {
@@ -278,7 +281,12 @@ final class StatementImports
             $snapshotId = (string) $original->snapshot_id;
             if ($replacementId !== null) {
                 $view = $this->show($owner, $replacementId);
-                $row = collect($view['rows'])->firstWhere('number', $replacementRow);
+                foreach ($view['rows'] as $candidate) {
+                    if ($candidate['number'] === $replacementRow) {
+                        $row = $candidate;
+                        break;
+                    }
+                }
                 if ($row === null || $row['base_errors'] !== [] || $row['resolution_status'] === 'ambiguous' || $row['command']['type'] === 'match') {
                     LedgerInput::fail('replacement', 'Choose an unresolved-free new replacement row from an owned preview.');
                 }
@@ -296,7 +304,10 @@ final class StatementImports
                     }
                 }
                 $command = $this->compile($owner, $this->account($owner, (string) $source->account_id), $row['data']);
-                if ($target['event_id'] !== null) {
+                if ($command['type'] === 'match' || $command['type'] !== $prior['command']['type']) {
+                    LedgerInput::fail('replacement', 'A replacement retains the original financial operation kind.');
+                }
+                if ($command['type'] === 'investment') {
                     if ($command['portfolio_id'] !== $target['portfolio_id'] || $command['input']['action_reference'] !== $prior['command']['input']['action_reference']) {
                         LedgerInput::fail('replacement', 'Investment corrections retain their portfolio and business action reference.');
                     }
@@ -320,7 +331,7 @@ final class StatementImports
                 'fact_hash' => $row === null ? $prior['fact_hash'] : $this->fact($row), 'transfer_hash' => $row === null ? $prior['transfer_hash'] : $this->transferHash($row), 'data' => $row['data'] ?? $prior['data'], 'command' => $row['command'] ?? $prior['command']];
             $receipt = $this->insert('receipts', $owner, ['idempotency_key' => LedgerInput::key($key), 'payload_hash' => LedgerInput::hash($payload), 'request_payload' => $this->json($payload),
                 'snapshot_id' => $snapshotId, 'corrects_receipt_id' => $receiptId, 'corrects_token' => $token, 'reason' => $reason, 'outcomes' => $this->json(['1' => $outcome])]);
-            if ($row !== null && $source !== null) {
+            if ($row !== null) {
                 foreach ($this->keys($source, $row, $row['resolution_status'] !== 'retained') as $logical => $hash) {
                     $this->claim($owner, $logical, $hash, (string) $receipt->id, '1', $result);
                 }
@@ -330,7 +341,8 @@ final class StatementImports
         });
     }
 
-    /** @param list<string> $selection @return list<string> */
+    /** @param array<mixed> $selection
+     * @return list<string> */
     private function selection(array $selection): array
     {
         if (! array_is_list($selection) || $selection === [] || count($selection) > 1000 || count(array_unique($selection, SORT_REGULAR)) !== count($selection)) {
@@ -357,7 +369,8 @@ final class StatementImports
         return $account;
     }
 
-    /** @param array<string,mixed> $d @return array<string,mixed> */
+    /** @param array<string,mixed> $d
+     * @return ImportCommand */
     private function compile(User $owner, Account $account, array $d): array
     {
         $kind = $d['kind'];
@@ -467,7 +480,8 @@ final class StatementImports
         return ['type' => 'investment', 'currency' => $currency, 'portfolio_id' => (string) $portfolio->id, 'input' => $input];
     }
 
-    /** @param array<string,mixed> $command @return array<string,mixed> */
+    /** @param ImportCommand $command
+     * @return array<string,mixed> */
     private function execute(User $owner, array $command, string $key): array
     {
         return match ($command['type']) {
@@ -486,24 +500,26 @@ final class StatementImports
         return LedgerInput::hash($data);
     }
 
-    /** @param array<string,mixed> $row @return array<string,string> */
+    /** @param array<string,mixed> $row
+     * @return array<string,string> */
     private function keys(stdClass $source, array $row, bool $retainFingerprint = true): array
     {
         $fact = $this->fact($row);
         $data = $row['data'];
         $primary = $data['provider_id'] === '' ? ['fingerprint', $fact, $data['occurrence']] : ['provider', $data['provider_id']];
-        $keys = [LedgerInput::hash(['source', (string) $source->id, $row['number']]) => $fact];
+        $keys = [$this->identity(['source', (string) $source->id, $row['number']]) => $fact];
         if ($retainFingerprint || $data['provider_id'] !== '') {
-            $keys[LedgerInput::hash([$source->namespace, (string) $source->account_id, ...$primary])] = $fact;
+            $keys[$this->identity([$source->namespace, (string) $source->account_id, ...$primary])] = $fact;
         }
         if (in_array($data['kind'], ['transfer_out', 'transfer_in'], true)) {
-            $keys[LedgerInput::hash(['transfer', $data['operation_reference']])] = $this->transferHash($row);
+            $keys[$this->identity(['transfer', $data['operation_reference']])] = $this->transferHash($row);
         }
 
         return $keys;
     }
 
-    /** @param array<string,string> $keys @return array<string,mixed>|null */
+    /** @param array<string,string> $keys
+     * @return array<string,mixed>|null */
     private function existing(User $owner, array $keys, ?string $transferHash = null): ?array
     {
         $found = null;
@@ -552,7 +568,8 @@ final class StatementImports
         return DB::table('statement_receipts')->where('owner_id', $owner->id)->where('corrects_receipt_id', $id)->where('corrects_token', $token)->first();
     }
 
-    /** @param array<string,mixed> $data */
+    /** @param array<string,mixed> $data
+     * @param numeric-string $cash */
     private function optionalCash(array $data, string $cash): void
     {
         $direction = bccomp($cash, '0', 0) === 0 ? '' : (str_starts_with($cash, '-') ? 'out' : 'in');
@@ -573,7 +590,8 @@ final class StatementImports
         return LedgerInput::hash($input);
     }
 
-    /** Cross-mode equality is ambiguity, never permission to collapse distinct provider IDs. */
+    /** Cross-mode equality is ambiguity, never permission to collapse distinct provider IDs.
+     * @param array<string,mixed> $row */
     private function crossMode(User $owner, stdClass $source, array $row): bool
     {
         $hasProvider = $row['data']['provider_id'] !== '';
@@ -626,6 +644,12 @@ final class StatementImports
         $id = DB::table('statement_'.$table)->insertGetId(['owner_id' => $owner->id, 'reference' => (string) Str::ulid(), ...$data]);
 
         return LedgerInput::owned('statement_'.$table, $owner, (string) $id);
+    }
+
+    /** @param list<mixed> $parts */
+    private function identity(array $parts): string
+    {
+        return hash('sha256', $this->json($parts));
     }
 
     /** @param array<mixed> $data */

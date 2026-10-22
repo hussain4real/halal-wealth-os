@@ -38,7 +38,7 @@ final class CsvStatement
             $columns[$field] = $header;
         }
         foreach (['date', 'type', 'amount', 'description'] as $required) {
-            if ($columns[$required] === '') {
+            if (($columns[$required] ?? '') === '') {
                 LedgerInput::fail('mapping', 'Map date, type, amount and description columns.');
             }
         }
@@ -79,22 +79,6 @@ final class CsvStatement
         $row = [];
         $field = '';
         $state = 'start';
-        $endField = function () use (&$row, &$field, &$state): void {
-            if (strlen($field) > 4096 || count($row) >= 32) {
-                LedgerInput::fail('file', 'CSV fields are limited to4KiB and records to32 columns.');
-            }
-            $row[] = $field;
-            $field = '';
-            $state = 'start';
-        };
-        $endRow = function () use (&$records, &$row, $endField): void {
-            $endField();
-            $records[] = $row;
-            $row = [];
-            if (count($records) > 1001) {
-                LedgerInput::fail('file', 'A CSV may contain at most1000 data rows.');
-            }
-        };
         for ($i = 0, $size = strlen($text); $i < $size; $i++) {
             $char = $text[$i];
             if ($state === 'quoted') {
@@ -107,12 +91,12 @@ final class CsvStatement
                 $field .= '"';
                 $state = 'quoted';
             } elseif ($char === $delimiter) {
-                $endField();
+                $this->endField($row, $field, $state);
             } elseif ($char === "\n" || $char === "\r") {
                 if ($char === "\r" && ($text[$i + 1] ?? '') === "\n") {
                     $i++;
                 }
-                $endRow();
+                $this->endRow($records, $row, $field, $state);
             } elseif ($state === 'start' && $char === '"') {
                 $state = 'quoted';
             } elseif ($state === 'closed' || $char === '"') {
@@ -129,7 +113,7 @@ final class CsvStatement
             LedgerInput::fail('file', 'A quoted CSV field was not closed.');
         }
         if ($state !== 'start' || $row !== [] || $field !== '') {
-            $endRow();
+            $this->endRow($records, $row, $field, $state);
         }
         $headers = array_shift($records) ?? [];
         if ($records === [] || count($headers) < 4 || count(array_unique($headers)) !== count($headers)) {
@@ -144,7 +128,31 @@ final class CsvStatement
         return ['headers' => $headers, 'rows' => $records];
     }
 
+    /** @param list<string> $row */
+    private function endField(array &$row, string &$field, string &$state): void
+    {
+        if (count($row) >= 32) {
+            LedgerInput::fail('file', 'CSV records are limited to32 columns.');
+        }
+        $row[] = $field;
+        $field = '';
+        $state = 'start';
+    }
+
+    /** @param list<list<string>> $records
+     * @param list<string> $row */
+    private function endRow(array &$records, array &$row, string &$field, string &$state): void
+    {
+        $this->endField($row, $field, $state);
+        $records[] = $row;
+        $row = [];
+        if (count($records) > 1001) {
+            LedgerInput::fail('file', 'A CSV may contain at most1000 data rows.');
+        }
+    }
+
     /** @param array<string,mixed> $mapping
+     * @param array<mixed> $resolutions
      * @return list<array<string,mixed>> */
     public function rows(string $bytes, array $mapping, Currency $native, array $resolutions = []): array
     {
@@ -245,7 +253,8 @@ final class CsvStatement
         return $value;
     }
 
-    /** @param array<string,mixed> $mapping */
+    /** @param array<string,mixed> $mapping
+     * @return numeric-string */
     private function money(string $value, array $mapping, Currency $currency): string
     {
         try {

@@ -14,6 +14,9 @@ final class StatementCsv
     {
         $view = app(StatementImports::class)->show($owner, $snapshotId);
         $output = fopen('php://temp', 'w+');
+        if ($output === false) {
+            throw new \RuntimeException('CSV output could not be opened.');
+        }
         try {
             fputcsv($output, ['source_reference', 'source_sha256', 'row', 'type', 'date', 'currency', 'amount_minor', 'description', 'provider_id', 'outcome', 'reasons'], ',', '"', '', "\r\n");
             foreach ($view['rows'] as $row) {

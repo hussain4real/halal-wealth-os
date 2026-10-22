@@ -64,9 +64,8 @@ are strings, preserving large IDs and exact decimals. Export size is capped at
 Structured CSV sources are retained privately in the owner-scoped database,
 including exact source bytes in complete JSON export v2. There is no generic
 file URL. Preview and resolve row reasons before selecting a batch; use linked
-receipt corrections rather than editing retained history. There is no live
-provider import, bank/market/AI connection, production
-penetration test or production performance guarantee is implemented here.
+receipt corrections rather than editing retained history. Live provider imports, bank/market/AI connections, production penetration tests
+and production performance guarantees remain outside the implemented scope.
 
 Original M5-P2 application CI passed, while its original progress publisher failed
 before the owner refreshed service key recognition. Preserve that failure. The
