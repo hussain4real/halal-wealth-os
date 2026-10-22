@@ -1898,229 +1898,229 @@
             "file": "tests/Unit/CsvStatementTest.php"
         },
         "case-m6p1-81155d667d96": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('income') / (false) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-ac9fe417b197": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('income') / (false) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-a62def69dfe8": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('income') / (true) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-993e6f2430ad": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('income') / (true) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-cc70241d0c2c": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('expense') / (false) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-f164581cd50b": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('expense') / (false) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-0816ad78f5c2": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('expense') / (true) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-d5b8a04a4a4a": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('expense') / (true) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-9a83635f39b7": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('transfer') / (false) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-3dc89276a188": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('transfer') / (false) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-515bf7b6af10": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('transfer') / (true) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-18c90d7f1252": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('transfer') / (true) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-3ba581b28152": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('buy') / (false) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-a9f2e8cb9121": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('buy') / (false) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-13271f624302": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('buy') / (true) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-62279d7237e6": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('buy') / (true) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-9c43256bbc95": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('sell') / (false) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-98095d728c03": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('sell') / (false) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-5acfb4d95bbd": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('sell') / (true) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-b68a8820e16f": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('sell') / (true) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-4db32283cc24": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('dividend') / (false) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-47c901a30dae": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('dividend') / (false) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-3b28d309e18c": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('dividend') / (true) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-a8718a1c9196": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('dividend') / (true) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-a6cc243690d9": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('fee') / (false) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-eeae090b2002": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('fee') / (false) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-530ea3ae01d1": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('fee') / (true) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-a13e0d14b682": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('fee') / (true) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-6841b11d3aeb": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('missing')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-44225c12e7d4": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('wrong-token')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-beceb241a1ce": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('wrong-target')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-1fcc49a9ba79": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('wrong-type')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-2778f9d0ef4b": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('wrong-origin')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-095f6590b0c1": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('missing')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-5abeb258bfe7": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('wrong-token')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-02660a5d6b46": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('wrong-target')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-643372793c12": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('wrong-type')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-411ed2641e9b": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('wrong-origin')\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-6f40208500b9": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "matched manual transfer and investment roots retain generic corrections and exact committed recovery with data set \"(false)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-124aa31b04a8": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "matched manual transfer and investment roots retain generic corrections and exact committed recovery with data set \"(true)\"",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-2beb7df1cd20": {
-            "class": "Tests.Feature.StatementImportTest",
+            "class": "Tests\\Feature\\StatementImportTest",
             "name": "cash replacement successor retains actual destination currency and remains guarded",
-            "file": "tests/Tests.Feature.StatementImportTest.php"
+            "file": "tests/Feature/StatementImportTest.php"
         },
         "case-m6p1-55331b5cfc00": {
-            "class": "Tests.Feature.StatementImportHttpTest",
+            "class": "Tests\\Feature\\StatementImportHttpTest",
             "name": "import-owned financial receipts route corrections through source history and reject generic writes with data set \"(false) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportHttpTest.php"
+            "file": "tests/Feature/StatementImportHttpTest.php"
         },
         "case-m6p1-a830dc56dce2": {
-            "class": "Tests.Feature.StatementImportHttpTest",
+            "class": "Tests\\Feature\\StatementImportHttpTest",
             "name": "import-owned financial receipts route corrections through source history and reject generic writes with data set \"(false) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportHttpTest.php"
+            "file": "tests/Feature/StatementImportHttpTest.php"
         },
         "case-m6p1-5295f26fda89": {
-            "class": "Tests.Feature.StatementImportHttpTest",
+            "class": "Tests\\Feature\\StatementImportHttpTest",
             "name": "import-owned financial receipts route corrections through source history and reject generic writes with data set \"(true) / (false)\"",
-            "file": "tests/Tests.Feature.StatementImportHttpTest.php"
+            "file": "tests/Feature/StatementImportHttpTest.php"
         },
         "case-m6p1-73a648c088a3": {
-            "class": "Tests.Feature.StatementImportHttpTest",
+            "class": "Tests\\Feature\\StatementImportHttpTest",
             "name": "import-owned financial receipts route corrections through source history and reject generic writes with data set \"(true) / (true)\"",
-            "file": "tests/Tests.Feature.StatementImportHttpTest.php"
+            "file": "tests/Feature/StatementImportHttpTest.php"
         }
     },
     "manual_artifacts": {
