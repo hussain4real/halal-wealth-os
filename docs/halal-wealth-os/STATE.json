@@ -249,7 +249,7 @@
         {
             "id": "M5-P3",
             "depends_on": ["M5-P2"],
-            "status": "IN_PROGRESS",
+            "status": "READY_FOR_REVIEW",
             "owner": "m5p3-coordinator",
             "accepted_by": null,
             "accepted_at": null,
@@ -360,12 +360,12 @@
     },
     "execution_status": {
         "phase": "M5-P3",
-        "status": "CORRECTING_HOSTED_REVIEW",
+        "status": "READY_FOR_REVIEW",
         "cycle": 4,
         "cycles_used": 4,
         "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
-        "checkpoint": "PR20 exact-head fresh review found P2: dirty checkout could emit PASS release record. Cycle4 rejects dirty/untracked before finalization and independently binds final acceptance to current cleanHEAD/tree; new tests, clean full CI/review required."
+        "checkpoint": "Cycle4 clean exact9e1da61 fullPASS928tests/57floors/102IDs287selectors; dirty-recordP2corrected+independentreviewPASS. Metadata-only completion follows; its original hostedCI/freshreview and postmerge gates remainpending."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2649,9 +2649,9 @@
         "max_cycles": 6
     },
     "m5p3_local_completion": {
-        "result": "HISTORICAL_CYCLE3_LOCAL_DIAGNOSTIC_REQUIRES_CLEAN_RELEASE_CORRECTION",
+        "result": "PASS_CLEAN_CORRECTION_COMMIT",
         "base": "e80e91aca00db441ac0670e66eefda074e0f583f",
-        "cycles_used": 3,
+        "cycles_used": 4,
         "tests": 928,
         "assertions": 6344,
         "acceptance_ids": 102,
@@ -2662,12 +2662,23 @@
         "source_review": "PASS",
         "rendered_review": "PASS",
         "native_tia": "FRESH_RECORD_REPLAY_PHP_AND_PAGE_SELECTION_PASS",
-        "hosted_ci": "PENDING",
-        "fresh_hosted_review": "P2_DIRTY_RELEASE_RECORD_CORRECTION_REQUIRED",
+        "hosted_ci": "PENDING_FINAL_METADATA_HEAD",
+        "fresh_hosted_review": "PENDING_FINAL_METADATA_HEAD",
         "dev_merge": "PENDING",
         "postmerge_application_ci": "PENDING",
         "signed_progress_publishing": "PENDING",
         "owner_phase_acceptance": "PENDING",
-        "deployment_authorized": false
+        "deployment_authorized": false,
+        "commit": "9e1da615b92db5b5d56a303bae564f09b8d46fcc",
+        "tree": "39c3f6e24b5729b683fb22f25363d1201145b791",
+        "dirty": false,
+        "preserved_original_ci": {
+            "run": 39736510681,
+            "attempt": 1,
+            "commit": "077034d8145e9d3d5778e623a55447c2a0026e7b",
+            "result": "FAILURE",
+            "reason": "npm audit API HTTP503 before test artifacts"
+        },
+        "npm_recheck": "PASS_ZERO_VULNERABILITIES"
     }
 }

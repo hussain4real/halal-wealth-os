@@ -1,6 +1,6 @@
 # M5-P3 execution record
 
-Status: CORRECTING_HOSTED_REVIEW, cycle 4/6. M5-P3 is unaccepted. The human owner accepted
+Status: READY_FOR_REVIEW, cycle 4/6. M5-P3 is unaccepted. The human owner accepted
 M5-P2 and authorized canonical M5-P3 through independently reviewed dev
 publication, conditional normal merge, original post-merge CI and existing
 progress publisher verification. No production operation or M6 is authorized.
@@ -131,3 +131,21 @@ the latter exited2, removed the old record and preserved recovery bytes. No
 legacy check or intentional failure-probe expectation was weakened. Commit the
 reviewed correction before the clean full gate, then publish only after that
 passes and require a fresh hosted review/CI on the corrected head.
+
+## Clean correction completion
+
+The cycle-4 clean full lane passed at correction commit
+`9e1da615b92db5b5d56a303bae564f09b8d46fcc`: 928 tests / 6344 assertions, no
+failures/errors/skips, all 57 concrete coverage floors, current HTTP/security/
+seeded workload, and 102 IDs / 287 exact selectors. Its release record reports
+that exact commit/tree and dirty:false. Independent correction review and strict
+Node/lint checks passed; native TIA re-recorded 928 actual cases separately.
+
+PR20's first original CI run39736510681/attempt1 failed at the official npm audit
+API with HTTP503 before producing test artifacts. It remains failed. The official
+npm recheck and the clean correction full lane both passed with zero reported
+vulnerabilities. No retry bypass, alternative registry or weakened audit was
+added. The metadata-only completion commit does not inherit the correction
+commit's Git identity; its own original hosted run must create a matching clean
+release record and receive a fresh review before merge. All post-merge CI/
+publishing and human acceptance/deployment gates remain pending.
