@@ -44,6 +44,8 @@ const errors = ref<string[]>([]);
 const chosen = ref('');
 const sourceType = ref('');
 const targetType = ref('income');
+const sourceCurrency = ref('');
+const targetCurrency = ref('');
 const native = computed(
     () => props.accounts.find((a) => a.id === account.value)?.currency ?? '',
 );
@@ -142,6 +144,20 @@ const addType = () => {
         { value: sourceType.value, target: targetType.value },
     ];
     sourceType.value = '';
+};
+const addCurrency = () => {
+    if (
+        !sourceCurrency.value.trim() ||
+        targetCurrency.value !== native.value ||
+        !native.value
+    )
+        return;
+    const value = sourceCurrency.value.trim();
+    mapping.value.currency_map = [
+        ...mapping.value.currency_map.filter((m) => m.value !== value),
+        { value, target: targetCurrency.value },
+    ];
+    sourceCurrency.value = '';
 };
 </script>
 
@@ -337,13 +353,14 @@ const addType = () => {
             </div>
             <details class="rounded-lg border p-3">
                 <summary class="cursor-pointer font-medium">
-                    Transaction labels and optional asset default
+                    Transaction and currency labels, optional asset default
                 </summary>
                 <p class="my-3 text-sm">
                     Canonical types: {{ kinds.join(', ') }}. Map other statement
                     labels explicitly. Existing matches also require a receipt
-                    number and in/out direction. ISO currencies are required;
-                    they must match {{ native || 'the selected account' }}.
+                    number and in/out direction. Map provider currency labels to
+                    their ISO currency; every row must match
+                    {{ native || 'the selected account' }}.
                 </p>
                 <div class="flex flex-wrap gap-2">
                     <Input
@@ -379,6 +396,72 @@ const addType = () => {
                         </button>
                     </li>
                 </ul>
+                <fieldset class="my-4 space-y-3">
+                    <legend class="font-medium">Currency label mappings</legend>
+                    <p class="text-sm text-muted-foreground">
+                        Map a statement label such as Riyal to the selected
+                        account currency. This does not convert money. Saved
+                        mappings retain these labels for reuse.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <Input
+                            v-model="sourceCurrency"
+                            aria-label="Source currency label"
+                            placeholder="Statement currency label"
+                            :maxlength="180"
+                            class="max-w-64"
+                        />
+                        <select
+                            v-model="targetCurrency"
+                            aria-label="Mapped ISO currency"
+                            class="rounded-md border bg-background p-2"
+                        >
+                            <option value="">Choose ISO currency</option>
+                            <option v-if="native" :value="native">
+                                {{ native }}
+                            </option>
+                        </select>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            :disabled="
+                                !sourceCurrency.trim() ||
+                                !native ||
+                                targetCurrency !== native ||
+                                (mapping.currency_map.length >= 40 &&
+                                    !mapping.currency_map.some(
+                                        (m) =>
+                                            m.value === sourceCurrency.trim(),
+                                    ))
+                            "
+                            @click="addCurrency"
+                            >Add currency mapping</Button
+                        >
+                    </div>
+                    <ul class="space-y-1 text-sm">
+                        <li
+                            v-for="entry in mapping.currency_map"
+                            :key="entry.value"
+                        >
+                            {{ entry.value }} → {{ entry.target }}
+                            <button
+                                type="button"
+                                class="ml-2 underline"
+                                :aria-label="
+                                    'Remove currency mapping ' + entry.value
+                                "
+                                @click="
+                                    mapping.currency_map =
+                                        mapping.currency_map.filter(
+                                            (m) => m.value !== entry.value,
+                                        )
+                                "
+                            >
+                                Remove
+                            </button>
+                        </li>
+                    </ul>
+                </fieldset>
                 <Label for="default-asset"
                     >Asset default for an investment-only statement</Label
                 ><select
@@ -402,8 +485,11 @@ const addType = () => {
                 busy ? 'Preparing preview…' : 'Create private dry-run preview'
             }}</Button>
             <p class="text-xs text-muted-foreground">
-                This saves source evidence and mapping only. Approval comes
-                after row review.
+                New previews and approvals stop at 24 MiB of retained import
+                evidence. Linked corrections have an 8 MiB reserve, up to a 32
+                MiB total; preparing a new replacement preview still uses the
+                normal limit. History is never deleted. This saves source
+                evidence and mapping only. Approval comes after row review.
             </p>
         </form>
         <section v-if="previews.length" class="space-y-3">

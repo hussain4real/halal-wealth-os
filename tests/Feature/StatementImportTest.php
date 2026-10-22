@@ -6,6 +6,7 @@ use App\Domain\Ledger\PostingService;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Tests\Support\FxFixtures;
 use Tests\Support\InvestmentFixtures as I;
 use Tests\Support\PortfolioFixtures as P;
@@ -297,4 +298,65 @@ test('an overlapping statement cannot collapse repeated unlabeled occurrences th
     $resolved = $this->imports->revise($this->owner, (string) $overlap->id, ['2' => ['occurrence' => 'confirmed-separate-occurrence']]);
     $this->imports->approve($this->owner, (string) $resolved->id, 'synthetic-confirmed-separate-overlap', ['2']);
     expect(DB::table('postings')->where('account_id', $this->bank->id)->sum('amount_minor'))->toBe('2468');
+});
+
+test('retained import budget bounds revisions and receipts while exact replay and correction reserve remain available', function () {
+    $s = S::preview($this->owner, $this->bank, [['provider_id' => 'RETENTION-FIRST']]);
+    $r = $this->imports->approve($this->owner, (string) $s->id, 'synthetic-retention-first', ['1']);
+    $pending = S::preview($this->owner, $this->bank, [['provider_id' => 'RETENTION-PENDING']]);
+    S::fillRetention($this->owner, 24 * 1024 * 1024);
+    $counts = array_map(fn (string $t): int => DB::table($t)->count(), ['statement_adapters', 'statement_sources', 'statement_snapshots', 'statement_receipts', 'statement_claims', 'journal_entries', 'postings']);
+    expect(S::preview($this->owner, $this->bank, [['provider_id' => 'RETENTION-FIRST']])->id)->toBe($s->id);
+    expect($this->imports->approve($this->owner, (string) $s->id, 'synthetic-retention-first', ['1'])->id)->toBe($r->id);
+    expect(fn () => $this->imports->revise($this->owner, (string) $s->id, ['1' => ['occurrence' => 'Synthetic new immutable occurrence']]))->toThrow(function (ValidationException $error) {
+        expect($error->errors())->toHaveKey('retention');
+    });
+    expect(fn () => S::preview($this->owner, $this->bank, [['provider_id' => 'RETENTION-NEW']]))->toThrow(function (ValidationException $error) {
+        expect($error->errors())->toHaveKey('retention');
+    });
+    expect(fn () => $this->imports->approve($this->owner, (string) $s->id, 'synthetic-retention-duplicate-new-key', ['1']))->toThrow(function (ImportRejected $error) {
+        expect($error->errors)->toHaveKey('retention');
+    });
+    expect(fn () => $this->imports->approve($this->owner, (string) $pending->id, 'synthetic-retention-uncommitted', ['1']))->toThrow(function (ImportRejected $error) {
+        expect($error->errors)->toHaveKey('retention');
+    });
+    expect(array_map(fn (string $t): int => DB::table($t)->count(), ['statement_adapters', 'statement_sources', 'statement_snapshots', 'statement_receipts', 'statement_claims', 'journal_entries', 'postings']))->toBe($counts);
+    $cancelled = $this->imports->correct($this->owner, (string) $r->id, '1', 'synthetic-retention-cancel', 'Synthetic reserved correction capacity');
+    expect($this->imports->correct($this->owner, (string) $r->id, '1', 'synthetic-retention-cancel', 'Synthetic reserved correction capacity')->id)->toBe($cancelled->id);
+    expect($this->imports->receipt($this->owner, (string) $cancelled->id)['outcomes'][0]['type'])->toBe('cancelled');
+    $other = User::factory()->create();
+    $account = FxFixtures::account($other);
+    expect(S::preview($other, $account, [[]])->id)->not->toBeNull();
+});
+
+test('absolute retained evidence ceiling rolls back linked reversal and preserves committed receipt recovery', function () {
+    $s = S::preview($this->owner, $this->bank, [['provider_id' => 'RETENTION-ABSOLUTE']]);
+    $r = $this->imports->approve($this->owner, (string) $s->id, 'synthetic-retention-absolute', ['1']);
+    $second = S::preview($this->owner, $this->bank, [['provider_id' => 'RETENTION-SECOND']]);
+    $r2 = $this->imports->approve($this->owner, (string) $second->id, 'synthetic-retention-second', ['1']);
+    $c = $this->imports->correct($this->owner, (string) $r2->id, '1', 'synthetic-retention-prior-cancel', 'Synthetic prior cancellation');
+    S::fillRetention($this->owner, 32 * 1024 * 1024);
+    expect(fn () => $this->imports->correct($this->owner, (string) $r->id, '1', 'synthetic-retention-overflow', 'Synthetic quota rollback'))->toThrow(function (ImportRejected $error) {
+        expect($error->errors)->toHaveKey('retention');
+    });
+    $this->assertDatabaseCount('journal_entries', 3);
+    $this->assertDatabaseCount('statement_receipts', 3);
+    expect($this->imports->receipt($this->owner, (string) $r->id)['outcomes'][0]['correction_receipt_id'])->toBeNull();
+    expect($this->imports->approve($this->owner, (string) $s->id, 'synthetic-retention-absolute', ['1'])->id)->toBe($r->id);
+    expect($this->imports->correct($this->owner, (string) $r2->id, '1', 'synthetic-retention-prior-cancel', 'Synthetic prior cancellation')->id)->toBe($c->id);
+});
+
+test('retention crossing caused by approval rolls back all financial writes and claims including escaped export bytes', function () {
+    $rows = array_map(fn (int $i): array => ['provider_id' => 'RETENTION-BOUNDARY-'.$i, 'description' => str_repeat('é', 180)], range(1, 100));
+    $s = S::preview($this->owner, $this->bank, $rows);
+    expect(array_unique(array_column($this->imports->show($this->owner, (string) $s->id)['rows'], 'ready')))->toBe([true]);
+    S::fillRetention($this->owner, 24 * 1024 * 1024 - 65536);
+    expect(S::retentionBytes($this->owner))->toBeLessThan(24 * 1024 * 1024);
+    expect(fn () => $this->imports->approve($this->owner, (string) $s->id, 'synthetic-retention-boundary', array_map('strval', range(1, 100))))->toThrow(function (ImportRejected $error) {
+        expect($error->errors)->toHaveKey('retention');
+    });
+    foreach (['journal_entries', 'postings', 'statement_receipts', 'statement_claims'] as $table) {
+        $this->assertDatabaseCount($table, 0);
+    }
+    expect(S::retentionBytes($this->owner))->toBeLessThan(24 * 1024 * 1024);
 });

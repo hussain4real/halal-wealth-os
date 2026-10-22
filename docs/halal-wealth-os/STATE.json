@@ -355,22 +355,30 @@
         "recorded_at": "2026-10-22T09:53:50.814621+00:00",
         "scope": "Accept M5; implement canonical M6-P1 only, open PR to dev, merge after exact-head full CI and fresh review, verify original post-merge CI and existing signed /dev/null publishing.",
         "accepted_dependencies": ["M5-P3"],
-        "max_cycles": 6,
+        "max_cycles": 8,
         "main_stage_changes": false,
         "deployment": false,
         "later_phases": false,
         "remote_pr_dev_merge": true,
-        "existing_signed_publisher": true
+        "existing_signed_publisher": true,
+        "original_max_cycles": 6,
+        "additional_cycle_authorization": {
+            "authorized_by": "human-owner",
+            "date": "2026-10-22",
+            "additional_cycles": 2,
+            "total_ceiling": 8,
+            "scope": "Fix both PR21 hosted P2 findings, then exact-head original CI/fresh review and normal dev merge/postmerge CI/publishing."
+        }
     },
     "execution_status": {
         "phase": "M6-P1",
         "status": "READY_FOR_REVIEW",
-        "cycle": 6,
-        "cycles_used": 6,
-        "max_cycles": 6,
+        "cycle": 7,
+        "cycles_used": 7,
+        "max_cycles": 8,
         "phase_acceptance": "PENDING_HUMAN_DECISION",
         "milestone_acceptance": "M5_ACCEPTED",
-        "checkpoint": "Cycle6 cancellation-switch fix verified by independent actualbrowser andsource, lint/types/build, freshnativeTIA1012tests6807assertions. No remaining demonstrated localfinding. READY_FOR_REVIEW; finalnewhead stillrequiresoriginalfullhostedCI/freshreview,devmerge,originalpostmergeCIandsignedpublicpost. M6-P1owneracceptancepending."
+        "checkpoint": "Cycle7 owner-authorized hosted-finding corrections passed strengthened original-service failure probes, fresh native and guarded TIA1018tests6912assertions, all373mappedselectors, static/frontend gates and independent source/rendered review. Currentnewhead full original hosted CI/fresh review, devmerge and original postmergeCI/signedpublicpost pending; owner acceptance pending."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2838,6 +2846,21 @@
         "rendered_review": "PASS_INITIAL_JOURNEY_POLISHED_SELECTOR_AND_CANCELLATION_SWITCH_PLUS_PENDING_REPLACEMENT_RETRY",
         "phase_acceptance": "PENDING_HUMAN_DECISION",
         "hosted_delivery": "PENDING",
-        "independent_review": "runs/M6-P1-independent-review.md"
+        "independent_review": "runs/M6-P1-independent-review.md",
+        "cycle7_corrections": {
+            "original_review_head": "d446cb627063954469354a2b58f15286d3cf15d4",
+            "authorization": "TWO_ADDITIONAL_CYCLES_TOTAL_CEILING_8",
+            "cycle": 7,
+            "retention_normal_mib": 24,
+            "retention_absolute_correction_mib": 32,
+            "new_replacement_preview": "NORMAL_BUDGET",
+            "source_verdict": "READY_FOR_REVIEW",
+            "native_tia_tests": 1018,
+            "native_tia_assertions": 6912,
+            "mapped_selectors": 373,
+            "final_hosted_gates": "PENDING",
+            "guarded_tia_record": "PASS_1018_TESTS_6912_ASSERTIONS",
+            "rendered_verdict": "PASS_CURRENCY_MAPPING_QUOTA_ROLLBACK_SHARED_THROTTLE_AND_RECOVERY_READS"
+        }
     }
 }

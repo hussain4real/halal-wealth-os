@@ -112,3 +112,21 @@ test('import rate limit remains bounded per owner without consuming password-cha
     $this->actingAs($foreign)->post('/imports/inspect', ['file' => UploadedFile::fake()->createWithContent('statement.csv', S::bytes([[]])), 'delimiter' => ','])->assertOk();
     $this->assertDatabaseCount('statement_sources', 0);
 });
+
+test('every retained import write shares the owner throttle without blocking receipt reads', function (string $route) {
+    $s = S::preview($this->owner, $this->bank, [[]]);
+    $r = app(StatementImports::class)->approve($this->owner, (string) $s->id, 'synthetic-throttle-receipt', ['1']);
+    $this->actingAs($this->owner);
+    for ($i = 0; $i < 20; $i++) {
+        $this->post('/imports/inspect', ['file' => UploadedFile::fake()->createWithContent('statement.csv', S::bytes([[]])), 'delimiter' => ','])->assertOk();
+    }
+    $path = match ($route) {
+        'revise' => '/imports/'.$s->id.'/revise',
+        'approve' => '/imports/'.$s->id.'/approve',
+        'correct' => '/imports/receipts/'.$r->id.'/1/correct',
+    };
+    $this->postJson($path, [])->assertTooManyRequests();
+    $this->getJson('/imports/requests/synthetic-throttle-receipt')->assertOk()->assertJsonPath('committed', true);
+    $this->get('/imports/receipts/'.$r->id)->assertOk();
+    $this->assertDatabaseCount('journal_entries', 1);
+})->with(['revise', 'approve', 'correct']);

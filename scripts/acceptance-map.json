@@ -1836,6 +1836,36 @@
             "class": "Tests\\Feature\\StatementImportTest",
             "name": "an overlapping statement cannot collapse repeated unlabeled occurrences through one old fallback fingerprint",
             "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-7e5e8c70dd9f": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained import budget bounds revisions and receipts while exact replay and correction reserve remain available",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-be68d851ddd3": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "absolute retained evidence ceiling rolls back linked reversal and preserves committed receipt recovery",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-f1438ff86476": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retention crossing caused by approval rolls back all financial writes and claims including escaped export bytes",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-8559f17a7294": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "every retained import write shares the owner throttle without blocking receipt reads with data set \"('revise')\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-ecaec7e7a74c": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "every retained import write shares the owner throttle without blocking receipt reads with data set \"('approve')\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-6540f7fff7ec": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "every retained import write shares the owner throttle without blocking receipt reads with data set \"('correct')\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
         }
     },
     "manual_artifacts": {
@@ -3160,7 +3190,9 @@
                 "case-m6p1-d28765ce066b",
                 "case-m6p1-05efb2a36325",
                 "case-m6p1-21002e13af8b",
-                "case-m6p1-4d8557edd310"
+                "case-m6p1-4d8557edd310",
+                "case-m6p1-7e5e8c70dd9f",
+                "case-m6p1-f1438ff86476"
             ],
             "manual_artifact_ids": [],
             "tool_check": "ACCEPTANCE_MAP"
@@ -3176,7 +3208,8 @@
                 "case-m6p1-d33c008d4bac",
                 "case-m6p1-2f7402cf77b4",
                 "case-m6p1-aa5572bdf50f",
-                "case-m6p1-c1ef4bc6175b"
+                "case-m6p1-c1ef4bc6175b",
+                "case-m6p1-be68d851ddd3"
             ],
             "manual_artifact_ids": [],
             "tool_check": "ACCEPTANCE_MAP"
@@ -3199,7 +3232,10 @@
                 "case-m6p1-79326d98453f",
                 "case-m6p1-69aeb17ebd6c",
                 "case-m6p1-c2f4ffaaca1d",
-                "case-m6p1-149d42f76543"
+                "case-m6p1-149d42f76543",
+                "case-m6p1-8559f17a7294",
+                "case-m6p1-ecaec7e7a74c",
+                "case-m6p1-6540f7fff7ec"
             ],
             "manual_artifact_ids": [],
             "tool_check": "HTTP_SECURITY"

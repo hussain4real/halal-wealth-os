@@ -35,10 +35,10 @@ Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->grou
     Route::post('imports', [StatementImportController::class, 'store'])->middleware('throttle:statement-import')->name('imports.store');
     Route::get('imports/requests/{key}', [StatementImportController::class, 'status'])->name('imports.status');
     Route::get('imports/receipts/{receipt}', [StatementImportController::class, 'receipt'])->whereNumber('receipt')->name('imports.receipt');
-    Route::post('imports/receipts/{receipt}/{token}/correct', [StatementImportController::class, 'correct'])->whereNumber(['receipt', 'token'])->name('imports.correct');
+    Route::post('imports/receipts/{receipt}/{token}/correct', [StatementImportController::class, 'correct'])->whereNumber(['receipt', 'token'])->middleware('throttle:statement-import')->name('imports.correct');
     Route::get('imports/{snapshot}', [StatementImportController::class, 'show'])->whereNumber('snapshot')->name('imports.show');
-    Route::post('imports/{snapshot}/revise', [StatementImportController::class, 'revise'])->whereNumber('snapshot')->name('imports.revise');
-    Route::post('imports/{snapshot}/approve', [StatementImportController::class, 'approve'])->whereNumber('snapshot')->name('imports.approve');
+    Route::post('imports/{snapshot}/revise', [StatementImportController::class, 'revise'])->whereNumber('snapshot')->middleware('throttle:statement-import')->name('imports.revise');
+    Route::post('imports/{snapshot}/approve', [StatementImportController::class, 'approve'])->whereNumber('snapshot')->middleware('throttle:statement-import')->name('imports.approve');
     Route::get('imports/{snapshot}/export', [StatementImportController::class, 'export'])->whereNumber('snapshot')->name('imports.export');
 
     Route::get('opportunities', [DecisionController::class, 'index'])->name('opportunities.index');

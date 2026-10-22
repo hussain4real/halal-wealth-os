@@ -327,3 +327,5 @@ retry scenarios remain future. F18 remains future M7. Unimplemented-phase
 rejection targets M6-P2. Full uncached gates, separate native TIA, failure
 propagation, independent source/rendered review, fresh hosted review/CI and
 original post-merge CI/publishing remain separate requirements.
+
+The M6-P1 hosted-review correction adds retained-evidence byte budgets across all five import tables:24MiB for new previews/revisions/approvals,32MiB for linked corrections with already-retained evidence. New replacement-preview preparation remains under the normal budget. Check the exact owner-export PHP encoding, including quotes, backslashes and Unicode line separators; rejection must roll back financial writes, receipts and claims together. Committed identical retries and receipt/status reads remain available. All import POST routes share a per-owner20/min limiter. Browser review must exercise currency-label add/replace/remove, saved reuse and mismatched-account errors without conversion.

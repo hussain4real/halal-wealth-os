@@ -69,8 +69,14 @@ final class StatementImports
             $interpretation = ['version' => 1, 'resolutions' => $resolutions, 'rows' => $rows];
             $snapshotDigest = LedgerInput::hash(['adapter' => $adapterDigest, 'interpretation' => $interpretation]);
 
-            return DB::table('statement_snapshots')->where('owner_id', $owner->id)->where('source_id', $source->id)->where('digest', $snapshotDigest)->first()
-                ?? $this->insert('snapshots', $owner, ['source_id' => $source->id, 'adapter_id' => $adapter->id, 'digest' => $snapshotDigest, 'interpretation' => $this->json($interpretation)]);
+            $snapshot = DB::table('statement_snapshots')->where('owner_id', $owner->id)->where('source_id', $source->id)->where('digest', $snapshotDigest)->first();
+            if ($snapshot !== null) {
+                return $snapshot;
+            }
+            $snapshot = $this->insert('snapshots', $owner, ['source_id' => $source->id, 'adapter_id' => $adapter->id, 'digest' => $snapshotDigest, 'interpretation' => $this->json($interpretation)]);
+            $this->retention($owner, 24 * 1024 * 1024);
+
+            return $snapshot;
         });
     }
 
@@ -238,6 +244,8 @@ final class StatementImports
                 $this->claim($owner, $logical, $claim['hash'], (string) $origin['receipt_id'], $origin['token'], $outcome['target']);
             }
 
+            $this->retention($owner, 24 * 1024 * 1024);
+
             return $receipt;
         });
     }
@@ -336,6 +344,8 @@ final class StatementImports
                     $this->claim($owner, $logical, $hash, (string) $receipt->id, '1', $result);
                 }
             }
+
+            $this->retention($owner, 32 * 1024 * 1024);
 
             return $receipt;
         });
@@ -636,6 +646,23 @@ final class StatementImports
         }
 
         return $interpretation['rows'];
+    }
+
+    /** Called under the owner lock, after every append and before the outer transaction commits. */
+    private function retention(User $owner, int $limit): void
+    {
+        $bytes = 0;
+        foreach (['adapters', 'sources', 'snapshots', 'receipts', 'claims'] as $table) {
+            $query = DB::table('statement_'.$table.' as t')->where('owner_id', $owner->id)
+                ->selectRaw('(SELECT json_object_agg(key, value) FROM jsonb_each_text(to_jsonb(t)))::text AS export_row');
+            foreach ($query->cursor() as $record) {
+                // Match OwnerExport's outer JSON encoding, including Unicode line-separator escapes.
+                $bytes += strlen($this->json((array) json_decode($record->export_row, false, flags: JSON_THROW_ON_ERROR))) + 1;
+                if ($bytes > $limit) {
+                    LedgerInput::fail('retention', 'Retained import evidence reached its limit. New previews and approvals stop at24MiB; linked corrections may use reserved capacity up to32MiB. Existing receipts and exact committed retries remain available; history is never deleted.');
+                }
+            }
+        }
     }
 
     /** @param array<string,mixed> $data */
