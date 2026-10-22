@@ -373,12 +373,12 @@
     "execution_status": {
         "phase": "M6-P1",
         "status": "READY_FOR_REVIEW",
-        "cycle": 7,
-        "cycles_used": 7,
+        "cycle": 8,
+        "cycles_used": 8,
         "max_cycles": 8,
         "phase_acceptance": "PENDING_HUMAN_DECISION",
         "milestone_acceptance": "M5_ACCEPTED",
-        "checkpoint": "Cycle7 owner-authorized hosted-finding corrections passed strengthened original-service failure probes, fresh native and guarded TIA1018tests6912assertions, all373mappedselectors, static/frontend gates and independent source/rendered review. Currentnewhead full original hosted CI/fresh review, devmerge and original postmergeCI/signedpublicpost pending; owner acceptance pending."
+        "checkpoint": "FinalauthorizedCycle8 READY: guardedfreshTIA1024tests6934assertions,52parserunit115assertions,3clientchecks, types/PHPStan/build, independent source/rendered review andownedruntimecleanupPASS. Bothnewfindingsresolvedlocally. NewheadfulloriginalCI/freshreview, normaldevmerge,originalpostCIandsignedpublicpoststillpending. Eightofeightcyclesused; owneracceptancepending."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2861,6 +2861,20 @@
             "final_hosted_gates": "PENDING",
             "guarded_tia_record": "PASS_1018_TESTS_6912_ASSERTIONS",
             "rendered_verdict": "PASS_CURRENCY_MAPPING_QUOTA_ROLLBACK_SHARED_THROTTLE_AND_RECOVERY_READS"
+        },
+        "cycle8_corrections": {
+            "cycle": 8,
+            "total_ceiling": 8,
+            "scope": "Typedemptyaccountnavigationandcanonicalmappingkeys",
+            "guarded_tia_tests": 1024,
+            "guarded_tia_assertions": 6934,
+            "parser_tests": 52,
+            "parser_assertions": 115,
+            "client_tests": 3,
+            "mapped_selectors": 379,
+            "source_verdict": "READY_FOR_REVIEW",
+            "rendered_verdict": "PASS_SCOPED_JOURNEY_OWNED_RUNTIME_AND_CREDENTIALS_CLEANED",
+            "new_hosted_gates": "PENDING"
         }
     }
 }

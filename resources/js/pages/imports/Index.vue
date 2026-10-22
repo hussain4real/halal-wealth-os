@@ -11,6 +11,8 @@ import {
     importUrl,
 } from '@/composables/useStatementRequest';
 import type { ImportChoice, ImportMapping } from '@/types/imports';
+import { statementMappingKey } from '@/composables/statementMappingKey';
+import { index as accountsIndex } from '@/routes/accounts';
 
 defineOptions({
     layout: { breadcrumbs: [{ title: 'Statement imports', href: '/imports' }] },
@@ -138,23 +140,28 @@ const preview = async () => {
     }
 };
 const addType = () => {
-    if (!sourceType.value.trim()) return;
+    const value = statementMappingKey(sourceType.value);
+    if (!value) return;
     mapping.value.type_map = [
-        ...mapping.value.type_map.filter((m) => m.value !== sourceType.value),
-        { value: sourceType.value, target: targetType.value },
+        ...mapping.value.type_map.filter(
+            (m) => statementMappingKey(m.value) !== value,
+        ),
+        { value, target: targetType.value },
     ];
     sourceType.value = '';
 };
 const addCurrency = () => {
     if (
-        !sourceCurrency.value.trim() ||
+        !statementMappingKey(sourceCurrency.value) ||
         targetCurrency.value !== native.value ||
         !native.value
     )
         return;
-    const value = sourceCurrency.value.trim();
+    const value = statementMappingKey(sourceCurrency.value);
     mapping.value.currency_map = [
-        ...mapping.value.currency_map.filter((m) => m.value !== value),
+        ...mapping.value.currency_map.filter(
+            (m) => statementMappingKey(m.value) !== value,
+        ),
         { value, target: targetCurrency.value },
     ];
     sourceCurrency.value = '';
@@ -195,7 +202,7 @@ const addCurrency = () => {
             </h2>
             <p v-if="accounts.length === 0" class="text-sm">
                 Create an
-                <Link href="/accounts/new" class="underline">account</Link>
+                <Link :href="accountsIndex()" class="underline">account</Link>
                 before importing its statement.
             </p>
             <div class="grid gap-4 sm:grid-cols-2">
@@ -425,13 +432,14 @@ const addCurrency = () => {
                             type="button"
                             variant="outline"
                             :disabled="
-                                !sourceCurrency.trim() ||
+                                !statementMappingKey(sourceCurrency) ||
                                 !native ||
                                 targetCurrency !== native ||
                                 (mapping.currency_map.length >= 40 &&
                                     !mapping.currency_map.some(
                                         (m) =>
-                                            m.value === sourceCurrency.trim(),
+                                            statementMappingKey(m.value) ===
+                                            statementMappingKey(sourceCurrency),
                                     ))
                             "
                             @click="addCurrency"

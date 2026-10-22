@@ -49,12 +49,17 @@ final class CsvStatement
                 LedgerInput::fail('mapping', 'Use a bounded list of explicit value mappings.');
             }
             $seen = [];
-            foreach ($entries as $entry) {
-                if (! is_array($entry) || array_keys($entry) !== ['value', 'target'] || ! is_string($entry['value']) || $entry['value'] === '' || mb_strlen($entry['value']) > 180
-                    || ! in_array($entry['target'], $allowed, true) || in_array($entry['value'], $seen, true)) {
+            foreach ($entries as $index => $entry) {
+                if (! is_array($entry) || array_keys($entry) !== ['value', 'target'] || ! is_string($entry['value']) || mb_strlen($entry['value']) > 180
+                    || ! in_array($entry['target'], $allowed, true)) {
                     LedgerInput::fail('mapping', 'Value mappings must have unique text values and supported targets.');
                 }
-                $seen[] = $entry['value'];
+                $value = trim($entry['value']);
+                if ($value === '' || in_array($value, $seen, true)) {
+                    LedgerInput::fail('mapping', 'Value mappings must have unique nonempty labels after trimming source-cell whitespace.');
+                }
+                $entries[$index]['value'] = $value;
+                $seen[] = $value;
             }
             usort($entries, fn (array $a, array $b): int => strcmp($a['value'], $b['value']));
             $maps[$field] = $entries;

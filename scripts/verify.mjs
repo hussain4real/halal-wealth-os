@@ -81,6 +81,7 @@ try {
             'scripts/decision-tranches.test.mjs',
             'scripts/dashboard-targets.test.mjs',
             'scripts/release-proof.test.mjs',
+            'scripts/statement-mapping-key.test.mjs',
         ]);
         const missing = [];
         for (const command of [

@@ -1866,6 +1866,36 @@
             "class": "Tests\\Feature\\StatementImportHttpTest",
             "name": "every retained import write shares the owner throttle without blocking receipt reads with data set \"('correct')\"",
             "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-7ec921299236": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value map keys trim like source cells and retain explicit mapped targets",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-508ecd69090a": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value maps reject labels that collide after trimming with data set \"('type_map', 'income', 'expense')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-40acd58a72a8": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value maps reject labels that collide after trimming with data set \"('currency_map', 'QAR', 'USD')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-db43e7f81c90": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value maps reject whitespace-only keys with data set \"('type_map', 'income')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-2effdf2b9331": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value maps reject whitespace-only keys with data set \"('currency_map', 'QAR')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-b098dc8db0fd": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV value maps preserve Unicode boundary labels consistently with source cell trimming",
+            "file": "tests/Unit/CsvStatementTest.php"
         }
     },
     "manual_artifacts": {
@@ -3177,7 +3207,13 @@
                 "case-m6p1-aa5572bdf50f",
                 "case-m6p1-c1ef4bc6175b",
                 "case-m6p1-149d42f76543",
-                "case-m6p1-c163a1c10dfa"
+                "case-m6p1-c163a1c10dfa",
+                "case-m6p1-7ec921299236",
+                "case-m6p1-508ecd69090a",
+                "case-m6p1-40acd58a72a8",
+                "case-m6p1-db43e7f81c90",
+                "case-m6p1-2effdf2b9331",
+                "case-m6p1-b098dc8db0fd"
             ],
             "manual_artifact_ids": [],
             "tool_check": "ACCEPTANCE_MAP"

@@ -80,3 +80,30 @@ test('spreadsheet CSV preserves ordinary exact text and values', function () {
         expect(StatementCsv::safe($value))->toBe($value);
     }
 });
+
+test('CSV canonical value map keys trim like source cells and retain explicit mapped targets', function () {
+    $csv = new CsvStatement;
+    $mapping = $csv->mapping(S::mapping(['type_map' => [['value' => ' Salary ', 'target' => 'income']], 'currency_map' => [['value' => "\tRiyal\t", 'target' => 'QAR']]]));
+    expect($mapping['type_map'][0]['value'])->toBe('Salary')->and($mapping['currency_map'][0]['value'])->toBe('Riyal');
+    $row = $csv->rows(S::bytes([['type' => ' Salary ', 'currency' => ' Riyal ']]), $mapping, Currency::QAR)[0];
+    expect($row['errors'])->toBe([])->and($row['data']['kind'])->toBe('income')->and($row['data']['currency'])->toBe('QAR');
+});
+
+test('CSV canonical value maps reject labels that collide after trimming', function (string $field, string $first, string $second) {
+    expect(fn () => (new CsvStatement)->mapping(S::mapping([$field => [['value' => 'Label', 'target' => $first], ['value' => ' Label ', 'target' => $second]]])))->toThrow(ValidationException::class);
+})->with([['type_map', 'income', 'expense'], ['currency_map', 'QAR', 'USD']]);
+
+test('CSV canonical value maps reject whitespace-only keys', function (string $field, string $target) {
+    expect(fn () => (new CsvStatement)->mapping(S::mapping([$field => [['value' => " \t ", 'target' => $target]]])))->toThrow(ValidationException::class);
+})->with([['type_map', 'income'], ['currency_map', 'QAR']]);
+
+test('CSV value maps preserve Unicode boundary labels consistently with source cell trimming', function () {
+    $csv = new CsvStatement;
+    foreach (["\u{00A0}", "\u{2028}", "\u{2029}"] as $edge) {
+        $label = $edge.'Salary'.$edge;
+        $mapping = $csv->mapping(S::mapping(['type_map' => [['value' => $label, 'target' => 'income']]]));
+        expect($mapping['type_map'][0]['value'])->toBe($label);
+        $row = $csv->rows(S::bytes([['type' => $label]]), $mapping, Currency::QAR)[0];
+        expect($row['errors'])->toBe([])->and($row['data']['kind'])->toBe('income');
+    }
+});
