@@ -1436,6 +1436,691 @@
             "class": "Tests\\Feature\\OwnerExportTest",
             "name": "authenticated data settings page exposes complete export without embedding owner records",
             "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-m6p1-640523d853ba": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV mapping is versioned explicit reusable and canonical across value map ordering",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-d75fa0f7d682": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "strict CSV supports BOM escaped quotes multiline records and explicit separator",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-baf49cf6766c": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"empty\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-4dcb40c30af5": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"oversized\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-19a8d615d845": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"binary\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-ae24ea559926": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"invalid utf8\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-aa686bb519c1": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"unclosed quote\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-3913afb8e346": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"unquoted quote\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-8c1d71503656": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"trailing quoted junk\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-442726794715": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"duplicate header\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-462670355562": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"empty header\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-eedd2b788ed7": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"markup header\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-269dddaad140": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"header only\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-dba901aff76e": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"long header\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-aaeebc9cad7e": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"long field\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-da7096b5b02b": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"too many columns\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-5f899754b2a6": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "unsafe or malformed CSV containers fail before source retention with data set \"dataset \"too many rows\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-1b351bdb6d20": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"calendar\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-5645c7b641be": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"format\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-c05bfdcc28f2": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"future\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-f6efe08f4ff8": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"type\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-4480d66aec61": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"currency\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-7edb4c14753a": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"precision\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-5b529020a6c7": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"zero precision preserved\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-7f0344e3e501": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"overflow\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-33f55523108d": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"exponent\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-3c0b18204e13": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"grouping\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-293068076864": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"negative\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-26b8d07429ca": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"zero\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-865b557f9075": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"missing description\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-40922e27201e": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"reference\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-5e7f5991ac38": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"negative fee\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-6cd413d217a1": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"negative tax\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-4a087d8c0bce": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"unit precision\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-cc15dea1d9f2": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV invalid scalars remain row reasons with no guessed dates currency sign or precision with data set \"dataset \"long source ID\"\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-e9d2261f2d7d": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV explicit date decimal currency and missing optional column policies remain exact",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-3118ed0d3081": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('=1+1')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-c21cb7f06cc0": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('+SUM(A1)')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-04b027bf4d62": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('-cmd')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-078b5fc0d0cb": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('@formula')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-29197cf63cfb": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('  =value')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-46c4edaf1a02": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('\t=payload')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-bf8c7043dfb6": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('\\r+payload')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-ca6ec3d460a2": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('@payload')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-2bbd6b443436": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('\u00a0=payload')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-0f0c8e04bff8": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "spreadsheet CSV preserves ordinary exact text and values",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-a4632ba04e7d": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "statement preview never posts and selected approval reuploads by provider and fingerprint exactly once",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-276ac2db7f81": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "unresolved repeated rows require explicit stable occurrences and byte replay cannot relabel a committed row",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-c7b6ce68d4e0": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "stable ID and same-source reinterpretation conflicts never create a guessed replacement",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-1d30f4a0ea4f": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "a later real investment failure rolls back earlier posting and all batch evidence then retries consistently",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-95b5a0dd1a98": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "explicit transfer legs across accounts create one journal and exact existing matches add no cash",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-4b50c9816760": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "new trade and exact event cash match retain one position and one investment cash journal",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-0f51bea5739b": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "linked cash replacement cancellation and old source replay preserve nonforking provenance",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-da480fc63334": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "committed receipt recovery precedes archived eligibility and changed selections are refused",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-79ffb39ea822": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "contradictory supplied cash direction and unused financial relationships are row errors",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-0ea4ca00021b": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "explicit matches reject conflicting supplied counterparty and investment quantities",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-9d771f7fba54": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "provider availability mode switches fail closed while distinct provider IDs remain legitimate equal facts with data set \"(true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-670a61eb755b": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "provider availability mode switches fail closed while distinct provider IDs remain legitimate equal facts with data set \"(false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-26e51de9b996": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "corrected transfer source and opposite leg replay recognize authorized hash history only",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-a333c9b937e8": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "distinct provider IDs and separate account namespaces preserve legitimate equal transactions",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-7ad7171d8368": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "investment replacement and root reversal preserve exact units cash links and original source identity",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-9174f0754e5b": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "standard investment CSV kinds preserve net cash fees tax and no implicit units",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-64aa96039eaa": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "statement import pages require authentication and verified email",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-905ea4741ec7": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "HTTP upload inspect preview selection receipt retry and safe CSV remain private without session input",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-79326d98453f": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "foreign owners and admins cannot read approve revise correct or export another import with data set \"(false)\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-69aeb17ebd6c": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "foreign owners and admins cannot read approve revise correct or export another import with data set \"(true)\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-c2f4ffaaca1d": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "unsupported files malformed mappings unknown selectors and altered approval requests never commit",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-dd4de00e7945": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "HTTP immutable resolutions and linked corrections expose original and replacement receipts",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-d28765ce066b": {
+            "class": "Tests\\Feature\\StatementImportConcurrencyTest",
+            "name": "same-key import contention across actual blocked PostgreSQL backends recovers one batch",
+            "file": "tests/Feature/StatementImportConcurrencyTest.php"
+        },
+        "case-m6p1-05efb2a36325": {
+            "class": "Tests\\Feature\\StatementImportConcurrencyTest",
+            "name": "different-key concurrent reexports retain two request receipts and one logical posting",
+            "file": "tests/Feature/StatementImportConcurrencyTest.php"
+        },
+        "case-m6p1-21002e13af8b": {
+            "class": "Tests\\Feature\\StatementImportConcurrencyTest",
+            "name": "competing provider conflicts and corrections cannot branch financial history",
+            "file": "tests/Feature/StatementImportConcurrencyTest.php"
+        },
+        "case-m6p1-4d8557edd310": {
+            "class": "Tests\\Feature\\StatementImportConcurrencyTest",
+            "name": "after-commit response loss recovers the durable import receipt before archived eligibility",
+            "file": "tests/Feature/StatementImportConcurrencyTest.php"
+        },
+        "case-m6p1-e49b8249e2fe": {
+            "class": "Tests\\Feature\\StatementImportConcurrencyTest",
+            "name": "import evidence is immutable and retained history refuses downgrade before any DDL",
+            "file": "tests/Feature/StatementImportConcurrencyTest.php"
+        },
+        "case-m6p1-f023fa6935a8": {
+            "class": "Tests\\Feature\\StatementImportConcurrencyTest",
+            "name": "empty import schema roundtrip preserves all preceding financial bytes",
+            "file": "tests/Feature/StatementImportConcurrencyTest.php"
+        },
+        "case-m6p1-d33c008d4bac": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "correction cannot bypass repeated-row or cross-identity-mode ambiguity warnings",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-2f7402cf77b4": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "preview flags conflicting candidate provider facts before any partial selection can commit",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-aa5572bdf50f": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "same-root provider conflict cannot mask independent cross-mode replacement ambiguity",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-c1ef4bc6175b": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "replaying a known unlabeled source row cannot claim its still pending equal occurrence",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-149d42f76543": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "import rate limit remains bounded per owner without consuming password-change quota",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-c163a1c10dfa": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "an overlapping statement cannot collapse repeated unlabeled occurrences through one old fallback fingerprint",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-7e5e8c70dd9f": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained import budget bounds revisions and receipts while exact replay and correction reserve remain available",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-be68d851ddd3": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "absolute retained evidence ceiling rolls back linked reversal and preserves committed receipt recovery",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-f1438ff86476": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retention crossing caused by approval rolls back all financial writes and claims including escaped export bytes",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-8559f17a7294": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "every retained import write shares the owner throttle without blocking receipt reads with data set \"('revise')\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-ecaec7e7a74c": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "every retained import write shares the owner throttle without blocking receipt reads with data set \"('approve')\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-6540f7fff7ec": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "every retained import write shares the owner throttle without blocking receipt reads with data set \"('correct')\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-7ec921299236": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value map keys trim like source cells and retain explicit mapped targets",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-508ecd69090a": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value maps reject labels that collide after trimming with data set \"('type_map', 'income', 'expense')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-40acd58a72a8": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value maps reject labels that collide after trimming with data set \"('currency_map', 'QAR', 'USD')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-db43e7f81c90": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value maps reject whitespace-only keys with data set \"('type_map', 'income')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-2effdf2b9331": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV canonical value maps reject whitespace-only keys with data set \"('currency_map', 'QAR')\"",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-b098dc8db0fd": {
+            "class": "Tests\\Unit\\CsvStatementTest",
+            "name": "CSV value maps preserve Unicode boundary labels consistently with source cell trimming",
+            "file": "tests/Unit/CsvStatementTest.php"
+        },
+        "case-m6p1-81155d667d96": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('income') / (false) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-ac9fe417b197": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('income') / (false) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-a62def69dfe8": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('income') / (true) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-993e6f2430ad": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('income') / (true) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-cc70241d0c2c": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('expense') / (false) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-f164581cd50b": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('expense') / (false) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-0816ad78f5c2": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('expense') / (true) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-d5b8a04a4a4a": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('expense') / (true) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-9a83635f39b7": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('transfer') / (false) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-3dc89276a188": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('transfer') / (false) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-515bf7b6af10": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('transfer') / (true) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-18c90d7f1252": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic cash corrections cannot bypass imported root or latest replacement history with data set \"('transfer') / (true) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-3ba581b28152": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('buy') / (false) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-a9f2e8cb9121": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('buy') / (false) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-13271f624302": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('buy') / (true) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-62279d7237e6": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('buy') / (true) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-9c43256bbc95": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('sell') / (false) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-98095d728c03": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('sell') / (false) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-5acfb4d95bbd": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('sell') / (true) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-b68a8820e16f": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('sell') / (true) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-4db32283cc24": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('dividend') / (false) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-47c901a30dae": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('dividend') / (false) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-3b28d309e18c": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('dividend') / (true) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-a8718a1c9196": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('dividend') / (true) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-a6cc243690d9": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('fee') / (false) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-eeae090b2002": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('fee') / (false) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-530ea3ae01d1": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('fee') / (true) / (false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-a13e0d14b682": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "generic investment corrections cannot bypass imported root or latest replacement history with data set \"('fee') / (true) / (true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-6841b11d3aeb": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('missing')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-44225c12e7d4": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('wrong-token')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-beceb241a1ce": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('wrong-target')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-1fcc49a9ba79": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('wrong-type')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-2778f9d0ef4b": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(false) / ('wrong-origin')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-095f6590b0c1": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('missing')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-5abeb258bfe7": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('wrong-token')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-02660a5d6b46": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('wrong-target')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-643372793c12": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('wrong-type')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-411ed2641e9b": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "retained correction completion cannot commit absent or mismatched successor proof with data set \"(true) / ('wrong-origin')\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-6f40208500b9": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "matched manual transfer and investment roots retain generic corrections and exact committed recovery with data set \"(false)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-124aa31b04a8": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "matched manual transfer and investment roots retain generic corrections and exact committed recovery with data set \"(true)\"",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-2beb7df1cd20": {
+            "class": "Tests\\Feature\\StatementImportTest",
+            "name": "cash replacement successor retains actual destination currency and remains guarded",
+            "file": "tests/Feature/StatementImportTest.php"
+        },
+        "case-m6p1-55331b5cfc00": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "import-owned financial receipts route corrections through source history and reject generic writes with data set \"(false) / (false)\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-a830dc56dce2": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "import-owned financial receipts route corrections through source history and reject generic writes with data set \"(false) / (true)\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-5295f26fda89": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "import-owned financial receipts route corrections through source history and reject generic writes with data set \"(true) / (false)\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p1-73a648c088a3": {
+            "class": "Tests\\Feature\\StatementImportHttpTest",
+            "name": "import-owned financial receipts route corrections through source history and reject generic writes with data set \"(true) / (true)\"",
+            "file": "tests/Feature/StatementImportHttpTest.php"
         }
     },
     "manual_artifacts": {
@@ -2341,7 +3026,13 @@
             "actual_case_ids": [
                 "case-2451928c330c",
                 "case-420cee76ce21",
-                "case-66d3d5c300db"
+                "case-66d3d5c300db",
+                "case-m6p1-1d30f4a0ea4f",
+                "case-m6p1-905ea4741ec7",
+                "case-m6p1-d28765ce066b",
+                "case-m6p1-05efb2a36325",
+                "case-m6p1-21002e13af8b",
+                "case-m6p1-4d8557edd310"
             ],
             "manual_artifact_ids": []
         },
@@ -2351,7 +3042,32 @@
                 "case-61e4d6008f81",
                 "case-542059a2589a",
                 "case-5ce628fad92f",
-                "case-f680c6448bd1"
+                "case-f680c6448bd1",
+                "case-m6p1-640523d853ba",
+                "case-m6p1-d75fa0f7d682",
+                "case-m6p1-1b351bdb6d20",
+                "case-m6p1-5645c7b641be",
+                "case-m6p1-c05bfdcc28f2",
+                "case-m6p1-f6efe08f4ff8",
+                "case-m6p1-4480d66aec61",
+                "case-m6p1-7edb4c14753a",
+                "case-m6p1-5b529020a6c7",
+                "case-m6p1-7f0344e3e501",
+                "case-m6p1-33f55523108d",
+                "case-m6p1-3c0b18204e13",
+                "case-m6p1-293068076864",
+                "case-m6p1-26b8d07429ca",
+                "case-m6p1-865b557f9075",
+                "case-m6p1-40922e27201e",
+                "case-m6p1-5e7f5991ac38",
+                "case-m6p1-6cd413d217a1",
+                "case-m6p1-4a087d8c0bce",
+                "case-m6p1-cc15dea1d9f2",
+                "case-m6p1-e9d2261f2d7d",
+                "case-m6p1-276ac2db7f81",
+                "case-m6p1-79ffb39ea822",
+                "case-m6p1-0ea4ca00021b",
+                "case-m6p1-c2f4ffaaca1d"
             ],
             "manual_artifact_ids": []
         },
@@ -2360,7 +3076,57 @@
             "actual_case_ids": [
                 "case-5de96dd4a2da",
                 "case-aaeebe535f2a",
-                "case-159dd1b34aa7"
+                "case-159dd1b34aa7",
+                "case-m6p1-0f51bea5739b",
+                "case-m6p1-26e51de9b996",
+                "case-m6p1-7ad7171d8368",
+                "case-m6p1-dd4de00e7945",
+                "case-m6p1-21002e13af8b",
+                "case-m6p1-81155d667d96",
+                "case-m6p1-ac9fe417b197",
+                "case-m6p1-a62def69dfe8",
+                "case-m6p1-993e6f2430ad",
+                "case-m6p1-cc70241d0c2c",
+                "case-m6p1-f164581cd50b",
+                "case-m6p1-0816ad78f5c2",
+                "case-m6p1-d5b8a04a4a4a",
+                "case-m6p1-9a83635f39b7",
+                "case-m6p1-3dc89276a188",
+                "case-m6p1-515bf7b6af10",
+                "case-m6p1-18c90d7f1252",
+                "case-m6p1-3ba581b28152",
+                "case-m6p1-a9f2e8cb9121",
+                "case-m6p1-13271f624302",
+                "case-m6p1-62279d7237e6",
+                "case-m6p1-9c43256bbc95",
+                "case-m6p1-98095d728c03",
+                "case-m6p1-5acfb4d95bbd",
+                "case-m6p1-b68a8820e16f",
+                "case-m6p1-4db32283cc24",
+                "case-m6p1-47c901a30dae",
+                "case-m6p1-3b28d309e18c",
+                "case-m6p1-a8718a1c9196",
+                "case-m6p1-a6cc243690d9",
+                "case-m6p1-eeae090b2002",
+                "case-m6p1-530ea3ae01d1",
+                "case-m6p1-a13e0d14b682",
+                "case-m6p1-6841b11d3aeb",
+                "case-m6p1-44225c12e7d4",
+                "case-m6p1-beceb241a1ce",
+                "case-m6p1-1fcc49a9ba79",
+                "case-m6p1-2778f9d0ef4b",
+                "case-m6p1-095f6590b0c1",
+                "case-m6p1-5abeb258bfe7",
+                "case-m6p1-02660a5d6b46",
+                "case-m6p1-643372793c12",
+                "case-m6p1-411ed2641e9b",
+                "case-m6p1-6f40208500b9",
+                "case-m6p1-124aa31b04a8",
+                "case-m6p1-2beb7df1cd20",
+                "case-m6p1-55331b5cfc00",
+                "case-m6p1-a830dc56dce2",
+                "case-m6p1-5295f26fda89",
+                "case-m6p1-73a648c088a3"
             ],
             "manual_artifact_ids": []
         },
@@ -2370,7 +3136,17 @@
                 "case-547405900300",
                 "case-b2036b2d9c9d",
                 "case-aa0977db160e",
-                "case-4988f351b3c2"
+                "case-4988f351b3c2",
+                "case-m6p1-a4632ba04e7d",
+                "case-m6p1-276ac2db7f81",
+                "case-m6p1-c7b6ce68d4e0",
+                "case-m6p1-4b50c9816760",
+                "case-m6p1-9d771f7fba54",
+                "case-m6p1-670a61eb755b",
+                "case-m6p1-26e51de9b996",
+                "case-m6p1-a333c9b937e8",
+                "case-m6p1-d28765ce066b",
+                "case-m6p1-05efb2a36325"
             ],
             "manual_artifact_ids": []
         },
@@ -2389,7 +3165,17 @@
             "actual_case_ids": [
                 "case-f8fa4ee4ae00",
                 "case-beda2c4af963",
-                "case-44aff7eb41e0"
+                "case-44aff7eb41e0",
+                "case-m6p1-a4632ba04e7d",
+                "case-m6p1-276ac2db7f81",
+                "case-m6p1-c7b6ce68d4e0",
+                "case-m6p1-4b50c9816760",
+                "case-m6p1-9d771f7fba54",
+                "case-m6p1-670a61eb755b",
+                "case-m6p1-26e51de9b996",
+                "case-m6p1-a333c9b937e8",
+                "case-m6p1-d28765ce066b",
+                "case-m6p1-05efb2a36325"
             ],
             "manual_artifact_ids": []
         },
@@ -2435,7 +3221,67 @@
                 "case-a97bf5aa4efd",
                 "case-6bf1dd6eb1d4",
                 "case-c62d410a59b6",
-                "case-05bcd30f0cdb"
+                "case-05bcd30f0cdb",
+                "case-m6p1-3118ed0d3081",
+                "case-m6p1-c21cb7f06cc0",
+                "case-m6p1-04b027bf4d62",
+                "case-m6p1-078b5fc0d0cb",
+                "case-m6p1-29197cf63cfb",
+                "case-m6p1-46c4edaf1a02",
+                "case-m6p1-bf8c7043dfb6",
+                "case-m6p1-ca6ec3d460a2",
+                "case-m6p1-2bbd6b443436",
+                "case-m6p1-0f0c8e04bff8",
+                "case-m6p1-64aa96039eaa",
+                "case-m6p1-905ea4741ec7",
+                "case-m6p1-79326d98453f",
+                "case-m6p1-69aeb17ebd6c",
+                "case-m6p1-c2f4ffaaca1d",
+                "case-m6p1-81155d667d96",
+                "case-m6p1-ac9fe417b197",
+                "case-m6p1-a62def69dfe8",
+                "case-m6p1-993e6f2430ad",
+                "case-m6p1-cc70241d0c2c",
+                "case-m6p1-f164581cd50b",
+                "case-m6p1-0816ad78f5c2",
+                "case-m6p1-d5b8a04a4a4a",
+                "case-m6p1-9a83635f39b7",
+                "case-m6p1-3dc89276a188",
+                "case-m6p1-515bf7b6af10",
+                "case-m6p1-18c90d7f1252",
+                "case-m6p1-3ba581b28152",
+                "case-m6p1-a9f2e8cb9121",
+                "case-m6p1-13271f624302",
+                "case-m6p1-62279d7237e6",
+                "case-m6p1-9c43256bbc95",
+                "case-m6p1-98095d728c03",
+                "case-m6p1-5acfb4d95bbd",
+                "case-m6p1-b68a8820e16f",
+                "case-m6p1-4db32283cc24",
+                "case-m6p1-47c901a30dae",
+                "case-m6p1-3b28d309e18c",
+                "case-m6p1-a8718a1c9196",
+                "case-m6p1-a6cc243690d9",
+                "case-m6p1-eeae090b2002",
+                "case-m6p1-530ea3ae01d1",
+                "case-m6p1-a13e0d14b682",
+                "case-m6p1-6841b11d3aeb",
+                "case-m6p1-44225c12e7d4",
+                "case-m6p1-beceb241a1ce",
+                "case-m6p1-1fcc49a9ba79",
+                "case-m6p1-2778f9d0ef4b",
+                "case-m6p1-095f6590b0c1",
+                "case-m6p1-5abeb258bfe7",
+                "case-m6p1-02660a5d6b46",
+                "case-m6p1-643372793c12",
+                "case-m6p1-411ed2641e9b",
+                "case-m6p1-6f40208500b9",
+                "case-m6p1-124aa31b04a8",
+                "case-m6p1-2beb7df1cd20",
+                "case-m6p1-55331b5cfc00",
+                "case-m6p1-a830dc56dce2",
+                "case-m6p1-5295f26fda89",
+                "case-m6p1-73a648c088a3"
             ],
             "manual_artifact_ids": [],
             "scope": "Executed module-specific owner/admin/export negatives for currently implemented modules. M6 jobs/uploads and M7 AI tools remain unimplemented, not claimed tested. New release web-session revocation regression remains mandatory pending separately."
@@ -2446,7 +3292,58 @@
                 "case-d0a28d239b04",
                 "case-d86f6f417643",
                 "case-8bb354ac8957",
-                "case-0463f98e702b"
+                "case-0463f98e702b",
+                "case-m6p1-1d30f4a0ea4f",
+                "case-m6p1-905ea4741ec7",
+                "case-m6p1-d28765ce066b",
+                "case-m6p1-05efb2a36325",
+                "case-m6p1-21002e13af8b",
+                "case-m6p1-4d8557edd310",
+                "case-m6p1-81155d667d96",
+                "case-m6p1-ac9fe417b197",
+                "case-m6p1-a62def69dfe8",
+                "case-m6p1-993e6f2430ad",
+                "case-m6p1-cc70241d0c2c",
+                "case-m6p1-f164581cd50b",
+                "case-m6p1-0816ad78f5c2",
+                "case-m6p1-d5b8a04a4a4a",
+                "case-m6p1-9a83635f39b7",
+                "case-m6p1-3dc89276a188",
+                "case-m6p1-515bf7b6af10",
+                "case-m6p1-18c90d7f1252",
+                "case-m6p1-3ba581b28152",
+                "case-m6p1-a9f2e8cb9121",
+                "case-m6p1-13271f624302",
+                "case-m6p1-62279d7237e6",
+                "case-m6p1-9c43256bbc95",
+                "case-m6p1-98095d728c03",
+                "case-m6p1-5acfb4d95bbd",
+                "case-m6p1-b68a8820e16f",
+                "case-m6p1-4db32283cc24",
+                "case-m6p1-47c901a30dae",
+                "case-m6p1-3b28d309e18c",
+                "case-m6p1-a8718a1c9196",
+                "case-m6p1-a6cc243690d9",
+                "case-m6p1-eeae090b2002",
+                "case-m6p1-530ea3ae01d1",
+                "case-m6p1-a13e0d14b682",
+                "case-m6p1-6841b11d3aeb",
+                "case-m6p1-44225c12e7d4",
+                "case-m6p1-beceb241a1ce",
+                "case-m6p1-1fcc49a9ba79",
+                "case-m6p1-2778f9d0ef4b",
+                "case-m6p1-095f6590b0c1",
+                "case-m6p1-5abeb258bfe7",
+                "case-m6p1-02660a5d6b46",
+                "case-m6p1-643372793c12",
+                "case-m6p1-411ed2641e9b",
+                "case-m6p1-6f40208500b9",
+                "case-m6p1-124aa31b04a8",
+                "case-m6p1-2beb7df1cd20",
+                "case-m6p1-55331b5cfc00",
+                "case-m6p1-a830dc56dce2",
+                "case-m6p1-5295f26fda89",
+                "case-m6p1-73a648c088a3"
             ],
             "manual_artifact_ids": [],
             "scope": "Durable implemented financial idempotency plus obsolete uncommitted rejection. External publisher HTTP405 remains failed/unverified; this is not exactly-once external delivery evidence."
@@ -2614,6 +3511,175 @@
             ],
             "manual_artifact_ids": ["m5p3-source"],
             "tool_check": "RELEASE_READINESS"
+        },
+        "M6-P1-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p1-a4632ba04e7d",
+                "case-m6p1-276ac2db7f81",
+                "case-m6p1-c7b6ce68d4e0",
+                "case-m6p1-4b50c9816760",
+                "case-m6p1-9d771f7fba54",
+                "case-m6p1-670a61eb755b",
+                "case-m6p1-26e51de9b996",
+                "case-m6p1-a333c9b937e8",
+                "case-m6p1-d28765ce066b",
+                "case-m6p1-05efb2a36325",
+                "case-m6p1-d33c008d4bac",
+                "case-m6p1-2f7402cf77b4",
+                "case-m6p1-aa5572bdf50f",
+                "case-m6p1-c1ef4bc6175b",
+                "case-m6p1-c163a1c10dfa"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": "ACCEPTANCE_MAP"
+        },
+        "M6-P1-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p1-640523d853ba",
+                "case-m6p1-d75fa0f7d682",
+                "case-m6p1-1b351bdb6d20",
+                "case-m6p1-5645c7b641be",
+                "case-m6p1-c05bfdcc28f2",
+                "case-m6p1-f6efe08f4ff8",
+                "case-m6p1-4480d66aec61",
+                "case-m6p1-7edb4c14753a",
+                "case-m6p1-5b529020a6c7",
+                "case-m6p1-7f0344e3e501",
+                "case-m6p1-33f55523108d",
+                "case-m6p1-3c0b18204e13",
+                "case-m6p1-293068076864",
+                "case-m6p1-26b8d07429ca",
+                "case-m6p1-865b557f9075",
+                "case-m6p1-40922e27201e",
+                "case-m6p1-5e7f5991ac38",
+                "case-m6p1-6cd413d217a1",
+                "case-m6p1-4a087d8c0bce",
+                "case-m6p1-cc15dea1d9f2",
+                "case-m6p1-e9d2261f2d7d",
+                "case-m6p1-276ac2db7f81",
+                "case-m6p1-79ffb39ea822",
+                "case-m6p1-0ea4ca00021b",
+                "case-m6p1-c2f4ffaaca1d",
+                "case-m6p1-d33c008d4bac",
+                "case-m6p1-2f7402cf77b4",
+                "case-m6p1-aa5572bdf50f",
+                "case-m6p1-c1ef4bc6175b",
+                "case-m6p1-149d42f76543",
+                "case-m6p1-c163a1c10dfa",
+                "case-m6p1-7ec921299236",
+                "case-m6p1-508ecd69090a",
+                "case-m6p1-40acd58a72a8",
+                "case-m6p1-db43e7f81c90",
+                "case-m6p1-2effdf2b9331",
+                "case-m6p1-b098dc8db0fd"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": "ACCEPTANCE_MAP"
+        },
+        "M6-P1-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p1-1d30f4a0ea4f",
+                "case-m6p1-905ea4741ec7",
+                "case-m6p1-d28765ce066b",
+                "case-m6p1-05efb2a36325",
+                "case-m6p1-21002e13af8b",
+                "case-m6p1-4d8557edd310",
+                "case-m6p1-7e5e8c70dd9f",
+                "case-m6p1-f1438ff86476"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": "ACCEPTANCE_MAP"
+        },
+        "M6-P1-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p1-0f51bea5739b",
+                "case-m6p1-26e51de9b996",
+                "case-m6p1-7ad7171d8368",
+                "case-m6p1-dd4de00e7945",
+                "case-m6p1-21002e13af8b",
+                "case-m6p1-d33c008d4bac",
+                "case-m6p1-2f7402cf77b4",
+                "case-m6p1-aa5572bdf50f",
+                "case-m6p1-c1ef4bc6175b",
+                "case-m6p1-be68d851ddd3",
+                "case-m6p1-81155d667d96",
+                "case-m6p1-ac9fe417b197",
+                "case-m6p1-a62def69dfe8",
+                "case-m6p1-993e6f2430ad",
+                "case-m6p1-cc70241d0c2c",
+                "case-m6p1-f164581cd50b",
+                "case-m6p1-0816ad78f5c2",
+                "case-m6p1-d5b8a04a4a4a",
+                "case-m6p1-9a83635f39b7",
+                "case-m6p1-3dc89276a188",
+                "case-m6p1-515bf7b6af10",
+                "case-m6p1-18c90d7f1252",
+                "case-m6p1-3ba581b28152",
+                "case-m6p1-a9f2e8cb9121",
+                "case-m6p1-13271f624302",
+                "case-m6p1-62279d7237e6",
+                "case-m6p1-9c43256bbc95",
+                "case-m6p1-98095d728c03",
+                "case-m6p1-5acfb4d95bbd",
+                "case-m6p1-b68a8820e16f",
+                "case-m6p1-4db32283cc24",
+                "case-m6p1-47c901a30dae",
+                "case-m6p1-3b28d309e18c",
+                "case-m6p1-a8718a1c9196",
+                "case-m6p1-a6cc243690d9",
+                "case-m6p1-eeae090b2002",
+                "case-m6p1-530ea3ae01d1",
+                "case-m6p1-a13e0d14b682",
+                "case-m6p1-6841b11d3aeb",
+                "case-m6p1-44225c12e7d4",
+                "case-m6p1-beceb241a1ce",
+                "case-m6p1-1fcc49a9ba79",
+                "case-m6p1-2778f9d0ef4b",
+                "case-m6p1-095f6590b0c1",
+                "case-m6p1-5abeb258bfe7",
+                "case-m6p1-02660a5d6b46",
+                "case-m6p1-643372793c12",
+                "case-m6p1-411ed2641e9b",
+                "case-m6p1-6f40208500b9",
+                "case-m6p1-124aa31b04a8",
+                "case-m6p1-2beb7df1cd20",
+                "case-m6p1-55331b5cfc00",
+                "case-m6p1-a830dc56dce2",
+                "case-m6p1-5295f26fda89",
+                "case-m6p1-73a648c088a3"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": "ACCEPTANCE_MAP"
+        },
+        "M6-P1-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p1-3118ed0d3081",
+                "case-m6p1-c21cb7f06cc0",
+                "case-m6p1-04b027bf4d62",
+                "case-m6p1-078b5fc0d0cb",
+                "case-m6p1-29197cf63cfb",
+                "case-m6p1-46c4edaf1a02",
+                "case-m6p1-bf8c7043dfb6",
+                "case-m6p1-ca6ec3d460a2",
+                "case-m6p1-2bbd6b443436",
+                "case-m6p1-0f0c8e04bff8",
+                "case-m6p1-64aa96039eaa",
+                "case-m6p1-905ea4741ec7",
+                "case-m6p1-79326d98453f",
+                "case-m6p1-69aeb17ebd6c",
+                "case-m6p1-c2f4ffaaca1d",
+                "case-m6p1-149d42f76543",
+                "case-m6p1-8559f17a7294",
+                "case-m6p1-ecaec7e7a74c",
+                "case-m6p1-6540f7fff7ec"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": "HTTP_SECURITY"
         }
     },
     "fixtures": {
@@ -2748,9 +3814,34 @@
         },
         "F17": {
             "name": "Import and provider retry",
-            "status": "FUTURE_M6_NOT_IMPLEMENTED",
-            "case_ids": [],
-            "scope": "Statement upload/provider/outbox scenarios are future; existing private plan CLI import is a different implemented operation."
+            "status": "PARTIAL_M6_P1_STATEMENT_EXECUTED_PROVIDER_OUTBOX_FUTURE",
+            "case_ids": [
+                "case-m6p1-a4632ba04e7d",
+                "case-m6p1-276ac2db7f81",
+                "case-m6p1-c7b6ce68d4e0",
+                "case-m6p1-4b50c9816760",
+                "case-m6p1-9d771f7fba54",
+                "case-m6p1-670a61eb755b",
+                "case-m6p1-26e51de9b996",
+                "case-m6p1-a333c9b937e8",
+                "case-m6p1-d28765ce066b",
+                "case-m6p1-05efb2a36325",
+                "case-m6p1-1d30f4a0ea4f",
+                "case-m6p1-905ea4741ec7",
+                "case-m6p1-21002e13af8b",
+                "case-m6p1-4d8557edd310",
+                "case-m6p1-d33c008d4bac",
+                "case-m6p1-2f7402cf77b4",
+                "case-m6p1-aa5572bdf50f",
+                "case-m6p1-c1ef4bc6175b",
+                "case-m6p1-c163a1c10dfa"
+            ],
+            "scope": "Current exact synthetic statement reupload/identity/atomic retry cases only. Provider-job and outbox-delivery retries remain future unimplemented M6 phases; original private fixture inputs are not newly executed.",
+            "implemented_subscenarios": ["statement_reupload"],
+            "future_subscenarios": [
+                "provider_job_retry",
+                "outbox_delivery_retry"
+            ]
         },
         "F18": {
             "name": "AI trust boundary",

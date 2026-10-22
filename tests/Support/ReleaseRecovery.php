@@ -2,6 +2,7 @@
 
 namespace Tests\Support;
 
+use App\Domain\Imports\StatementImports;
 use App\Domain\Ledger\FinancialSnapshot;
 use App\Domain\Planning\GoalView;
 use App\Domain\Portfolio\PortfolioRead;
@@ -221,7 +222,10 @@ final class ReleaseRecovery
         $readers = ['cash' => $snapshot->fingerprint($snapshot->capture($owner, Currency::QAR, $cutoff)),
             'positions' => $portfolio->fingerprint($portfolio->state($owner, $fixture['portfolio'], $cutoff)),
             'reservations' => hash('sha256', json_encode(app(GoalView::class)->show($owner, $fixture['goal'], substr($cutoff, 0, 7)), JSON_THROW_ON_ERROR)),
-            'shariah' => hash('sha256', json_encode(DB::table('shariah_assessments')->where('owner_id', $owner->id)->orderBy('id')->get(), JSON_THROW_ON_ERROR))];
+            'shariah' => hash('sha256', json_encode(DB::table('shariah_assessments')->where('owner_id', $owner->id)->orderBy('id')->get(), JSON_THROW_ON_ERROR)),
+            'imports' => hash('sha256', json_encode(['preview' => app(StatementImports::class)->show($owner, $fixture['import_snapshot']),
+                'receipt' => app(StatementImports::class)->receipt($owner, $fixture['import_cancelled']),
+                'source_base64' => DB::table('statement_sources')->where('owner_id', $owner->id)->where('id', $fixture['import_source'])->value('source_base64')], JSON_THROW_ON_ERROR))];
 
         return ['tables' => $tables, 'readers' => $readers];
     }

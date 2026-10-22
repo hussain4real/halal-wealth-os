@@ -61,11 +61,14 @@ JSONB evidence is exported as its stored JSON text; it cannot reproduce original
 submission whitespace or object key order. All non-null database scalar values
 are strings, preserving large IDs and exact decimals. Export size is capped at
 64 MiB; larger exports fail completely with a generic retry/support response.
-No upload/file store, provider import, live bank/market/AI connection, production
-penetration test or production performance guarantee is implemented here.
+Structured CSV sources are retained privately in the owner-scoped database,
+including exact source bytes in complete JSON export v2. There is no generic
+file URL. Preview and resolve row reasons before selecting a batch; use linked
+receipt corrections rather than editing retained history. Live provider imports, bank/market/AI connections, production penetration tests
+and production performance guarantees remain outside the implemented scope.
 
 Original M5-P2 application CI passed, while its original progress publisher failed
 before the owner refreshed service key recognition. Preserve that failure. The
-next authorized original dev merge checks application CI and signed /dev/null
-submission separately. A submission awaiting moderation is not a publicly visible
+M5-P3 original dev CI and signed public post were later verified separately;
+each new authorized original dev merge repeats both checks. A submission awaiting moderation is not a publicly visible
 post. Progress contains only public merged-PR metadata.

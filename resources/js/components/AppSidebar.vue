@@ -42,6 +42,7 @@ const mainNavItems: NavItem[] = [
     },
     { title: 'Accounts', href: '/accounts', icon: Wallet },
     { title: 'Transactions', href: '/transactions', icon: ReceiptText },
+    { title: 'Statement imports', href: '/imports', icon: ClipboardCheck },
     { title: 'Currency exchange', href: '/fx', icon: ArrowLeftRight },
     { title: 'Balance reports', href: '/reports', icon: ChartNoAxesCombined },
     { title: 'Reconciliation', href: '/reconciliations', icon: ClipboardCheck },

@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-22T06:04:16.366428+00:00",
+    "updated_at": "2026-10-22T16:40:19.873799+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -13,12 +13,13 @@
         "default_external_effects": false
     },
     "active_run": {
-        "phase": "M5-P3",
-        "owner": "m5p3-coordinator",
+        "phase": "M6-P1",
+        "owner": "m6p1-coordinator",
         "worktree": ".",
-        "branch": "feat/m5-p3-release-readiness",
-        "started_at": "2026-10-22T06:04:16.366428+00:00",
-        "base": "e80e91aca00db441ac0670e66eefda074e0f583f"
+        "branch": "feat/m6-p1-statement-import",
+        "baseline_head": "6de411da86858763537be326914fab86d3ffa19a",
+        "started_at": "2026-10-22T09:53:50.814621+00:00",
+        "status": "VERIFICATION_PENDING"
     },
     "repository": {
         "root": null,
@@ -72,14 +73,15 @@
         },
         {
             "id": "M5",
-            "status": "PLANNED",
-            "accepted_by": null,
-            "accepted_at": null,
-            "review_evidence": null
+            "status": "ACCEPTED",
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-22T09:53:50.814621+00:00",
+            "review_evidence": "runs/M5-independent-review.md",
+            "acceptance_evidence": "runs/M5-acceptance.md"
         },
         {
             "id": "M6",
-            "status": "PLANNED",
+            "status": "IN_PROGRESS",
             "accepted_by": null,
             "accepted_at": null,
             "review_evidence": null
@@ -249,20 +251,20 @@
         {
             "id": "M5-P3",
             "depends_on": ["M5-P2"],
-            "status": "IN_PROGRESS",
+            "status": "ACCEPTED",
             "owner": "m5p3-coordinator",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M5-P3-local.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-22T09:26:31.211738+00:00",
+            "evidence": "runs/M5-P3-acceptance.md"
         },
         {
             "id": "M6-P1",
             "depends_on": ["M5-P3"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "READY_FOR_REVIEW",
+            "owner": "m6p1-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M6-P1-local.md"
         },
         {
             "id": "M6-P2",
@@ -347,25 +349,43 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "phase": "M5-P3",
+        "phase": "M6-P1",
         "authorized": true,
         "authorized_by": "human-owner",
-        "recorded_at": "2026-10-22T06:04:16.366428+00:00",
-        "scope": "Canonical release readiness, authenticated owner export, isolated backup/restore and security checks, owner handover, independent reviews, sanitized dev PR, exact-head CI/fresh review, normal noreply merge and original post-merge CI plus existing dev progress publishing verification",
-        "accepted_dependencies": ["M5-P2"],
-        "max_cycles": 6,
+        "recorded_at": "2026-10-22T09:53:50.814621+00:00",
+        "scope": "Accept M5; implement canonical M6-P1 only, open PR to dev, merge after exact-head full CI and fresh review, verify original post-merge CI and existing signed /dev/null publishing.",
+        "accepted_dependencies": ["M5-P3"],
+        "max_cycles": 10,
         "main_stage_changes": false,
         "deployment": false,
-        "later_phases": false
+        "later_phases": false,
+        "remote_pr_dev_merge": true,
+        "existing_signed_publisher": true,
+        "original_max_cycles": 6,
+        "additional_cycle_authorization": {
+            "authorized_by": "human-owner",
+            "date": "2026-10-22",
+            "additional_cycles": 2,
+            "total_ceiling": 8,
+            "scope": "Fix both PR21 hosted P2 findings, then exact-head original CI/fresh review and normal dev merge/postmerge CI/publishing."
+        },
+        "import_bypass_cycle_authorization": {
+            "authorized_by": "human-owner",
+            "additional_cycles": 2,
+            "previous_ceiling": 8,
+            "total_ceiling": 10,
+            "scope": "PR21 import correction bypass; preserve cycles1-8 and repeat exact-head CI, independent source/rendered and fresh hosted review, normal dev merge and original post-merge publishing"
+        }
     },
     "execution_status": {
-        "phase": "M5-P3",
-        "status": "CORRECTING_CI_WORKSPACE",
-        "cycle": 5,
-        "cycles_used": 5,
-        "max_cycles": 6,
-        "phase_acceptance": "UNACCEPTED",
-        "checkpoint": "CI85ec19c passed928tests/recovery/HTTP but strictclean guard rejected generatedPythonbytecode from progress unittest step. Exact command reproduced .github/scripts/__pycache__; -B proves5testsPASS with cleanstatus and no cache. Cycle5 preserves strictguard and changes only CIbytecode policy plus accurate metadata; fresh CI/review required."
+        "phase": "M6-P1",
+        "status": "VERIFICATION_PENDING",
+        "cycle": 10,
+        "cycles_used": 10,
+        "max_cycles": 10,
+        "phase_acceptance": "PENDING_HUMAN_DECISION",
+        "milestone_acceptance": "M5_ACCEPTED",
+        "checkpoint": "Cycle9 application/source/rendered-in-progress and1069uncachedtests7251assertions,63financialfloors,HTTP/security/performance/encryptedrecoveryPASS. Exactacceptancemapcorrectlyrejecteddotdisplayclassnamebindings. Cycle10corrects45newclass/filebindingsandrepeatsexact-sourceTIA/full/source/hostedgates; allpriorresultsretained. Noapplicationchange."
     },
     "dependency_patch": {
         "authorized": true,
@@ -883,6 +903,18 @@
             "deployment": false,
             "later_phases": false,
             "closed_at": "2026-10-22T06:04:16.366428+00:00"
+        },
+        {
+            "phase": "M5-P3",
+            "authorized": true,
+            "authorized_by": "human-owner",
+            "recorded_at": "2026-10-22T06:04:16.366428+00:00",
+            "scope": "Canonical release readiness, authenticated owner export, isolated backup/restore and security checks, owner handover, independent reviews, sanitized dev PR, exact-head CI/fresh review, normal noreply merge and original post-merge CI plus existing dev progress publishing verification",
+            "accepted_dependencies": ["M5-P2"],
+            "max_cycles": 6,
+            "main_stage_changes": false,
+            "deployment": false,
+            "later_phases": false
         }
     ],
     "execution_status_history": [
@@ -1103,6 +1135,25 @@
             "max_cycles": 6,
             "phase_acceptance": "UNACCEPTED",
             "checkpoint": "Cycle6 reproduced CI nativeGPCS environment boundary; two-file ownedstorage fix independently reviewed. Real nativeGPCS HTTP/security/benchmark229.823708ms/cleanup PASS; separate freshTIA903/5950+unchangedreplay PASS. Current full verifier pending npm audit; latest correctedsource originalCI/freshreview still required before merge. No globalini/application/log-control change or waiver."
+        },
+        {
+            "phase": "M5-P3",
+            "status": "CORRECTING_CI_WORKSPACE",
+            "cycle": 5,
+            "cycles_used": 5,
+            "max_cycles": 6,
+            "phase_acceptance": "UNACCEPTED",
+            "checkpoint": "CI85ec19c passed928tests/recovery/HTTP but strictclean guard rejected generatedPythonbytecode from progress unittest step. Exact command reproduced .github/scripts/__pycache__; -B proves5testsPASS with cleanstatus and no cache. Cycle5 preserves strictguard and changes only CIbytecode policy plus accurate metadata; fresh CI/review required."
+        },
+        {
+            "phase": "M5-P3",
+            "status": "ACCEPTED",
+            "cycle": 6,
+            "cycles_used": 6,
+            "max_cycles": 6,
+            "accepted_at": "2026-10-22T09:26:31.211738+00:00",
+            "evidence": "runs/M5-P3-acceptance.md",
+            "checkpoint": "Owner accepted after PR20 exact-head CI attempt2/fresh review, normal dev merge6de411d, original postmerge CI39747988040/attempt1 PASS928tests/6344assertions and actual signed publicly visible progress post; earlier failed originals remain failed."
         }
     ],
     "m0p3_publication": {
@@ -2418,6 +2469,16 @@
             "base": "2060bfbe4cce27103dba843d454a642be642fe56",
             "closed_at": "2026-10-22T06:04:16.366428+00:00",
             "closure_reason": "Explicit owner M5-P2 acceptance after verified PR19 merge, passing original application CI and separately retained publisher failure/key recovery"
+        },
+        {
+            "phase": "M5-P3",
+            "owner": "m5p3-coordinator",
+            "worktree": ".",
+            "branch": "feat/m5-p3-release-readiness",
+            "started_at": "2026-10-22T06:04:16.366428+00:00",
+            "base": "e80e91aca00db441ac0670e66eefda074e0f583f",
+            "closed_at": "2026-10-22T09:26:31.211738+00:00",
+            "closure_reason": "Explicit human M5-P3 acceptance and independent M5 milestone review request; six implementation cycles preserved."
         }
     ],
     "m5p1_authorization": {
@@ -2687,5 +2748,179 @@
             "result": "FAILURE",
             "reason": "Python unittest emitted untracked bytecode; release finalization correctly rejected dirty workspace after928tests/HTTP/recovery passed"
         }
+    },
+    "m5p3_completion": {
+        "status": "ACCEPTED",
+        "accepted_by": "human-owner",
+        "accepted_at": "2026-10-22T09:26:31.211738+00:00",
+        "acceptance_evidence": "runs/M5-P3-acceptance.md",
+        "pr": 20,
+        "head": "ad2c0bd7f36fd8c9fe77705a1aa6987407972d5f",
+        "merge": "6de411da86858763537be326914fab86d3ffa19a",
+        "tree": "ae87505e474348548bda01047798832ceb941366",
+        "pr_ci": {
+            "run": 39740028213,
+            "attempt": 2,
+            "result": "PASS"
+        },
+        "fresh_review": "COMPLETED_NO_FINDINGS",
+        "postmerge_ci": {
+            "run": 39747988040,
+            "attempt": 1,
+            "result": "PASS",
+            "tests": 928,
+            "assertions": 6344
+        },
+        "signed_progress": "PUBLICLY_VISIBLE",
+        "progress_url": "https://dev-null.sh/@hussain4real/commits/01a162cd-a42a-7031-aa38-f4c91a6f16c3",
+        "preserved_failed_originals": [39736510681, 39738220937, 39740028213],
+        "cycles_used": 6,
+        "max_cycles": 6,
+        "deployment": false
+    },
+    "m5_review_authorization": {
+        "authorized": false,
+        "authorized_by": "human-owner",
+        "recorded_at": "2026-10-22T09:26:31.211738+00:00",
+        "status": "COMPLETED_READY_FOR_OWNER",
+        "scope": "Independent source-read-only M5 milestone review of accepted M5-P1/P2/P3; inspect canonical criteria, actual source and evidence; rerun all implemented regression gates using exclusively owned disposable resources; report READY_FOR_OWNER or CHANGES_REQUIRED. Only manager records central status.",
+        "reviewed_code_commit": "6de411da86858763537be326914fab86d3ffa19a",
+        "phase_acceptance_overlay": "runs/M5-P3-acceptance.md",
+        "max_review_cycles": 6,
+        "application_implementation_cycles_preserved": 6,
+        "source_changes": false,
+        "remote_writes": false,
+        "deployment": false,
+        "later_phases": false,
+        "completed_at": "2026-10-22T09:37:01.936689+00:00",
+        "review_cycles_used": 1
+    },
+    "m5_milestone_review": {
+        "status": "READY_FOR_OWNER",
+        "owner_accepted": true,
+        "evidence": "runs/M5-independent-review.md",
+        "reviewed_commit": "6de411da86858763537be326914fab86d3ffa19a",
+        "reviewed_tree": "ae87505e474348548bda01047798832ceb941366",
+        "verification_source_sha256": "5bec9973706fa754dba04f0814d005f4c217d6302720116e40ec38396a768d17",
+        "review_cycles_used": 1,
+        "application_cycles_preserved": 6,
+        "fresh_full_tests": 928,
+        "fresh_full_assertions": 6344,
+        "fresh_failures_errors_skips": 0,
+        "coverage_statements": {
+            "covered": 4824,
+            "executable": 5118,
+            "files": 131
+        },
+        "financial_concrete_floors": 57,
+        "acceptance_invariant_ids": 102,
+        "exact_selectors": 287,
+        "recovery_tables": 58,
+        "fresh_browser": false,
+        "retained_browser_evidence_inspected": true,
+        "owned_resources_stopped": true,
+        "new_application_source_changes": false,
+        "deployment_authorized": false,
+        "later_implementation_authorized": false,
+        "status_evidence": "STATUS.md",
+        "report_sha256": "194950e70cc458857405e29934fd25ad39df4ca77ec381734cbc106fad61a497",
+        "inherited_guidance_issue": "UX-M3-01 verified fixed in M5-P2; historical M4 open status superseded",
+        "documentation_reconciliation": "README current status and historical M1 acceptance note reconciled; current roadmap summary in STATUS.md",
+        "accepted_at": "2026-10-22T09:53:50.814621+00:00",
+        "acceptance_evidence": "runs/M5-acceptance.md"
+    },
+    "prior_m5p3_execution_status": {
+        "phase": "M5-P3",
+        "status": "ACCEPTED_M5_READY_FOR_OWNER",
+        "cycle": 6,
+        "cycles_used": 6,
+        "max_cycles": 6,
+        "phase_acceptance": "ACCEPTED",
+        "milestone_acceptance": "PENDING_HUMAN_DECISION",
+        "checkpoint": "M5-P3 owner accepted; one independent read-only M5 review cycle passed full uncached928tests/6344assertions,57floors,102IDs/287selectors, current encrypted restore/HTTP/security/performance and clean exact6de411d source/build. Milestone READY_FOR_OWNER; not accepted, no M6 or deployment authority."
+    },
+    "m6p1_local_completion": {
+        "full_gate_commit": "598d0f7d2f6a0dd738e3e7c355ddd1c52eee2a01",
+        "tests": 1012,
+        "assertions": 6807,
+        "financial_floors": 61,
+        "acceptance_and_invariant_ids": 107,
+        "exact_selectors": 367,
+        "recovery_tables": 63,
+        "original_failure_probe": "PASS_BASELINE_DELIBERATE_FAILURE_RESTORED_BASELINE",
+        "native_tia": "FRESH_CYCLE6_PASS_1012_TESTS_6807_ASSERTIONS",
+        "source_review": "READY_FOR_REVIEW",
+        "rendered_review": "PASS_INITIAL_JOURNEY_POLISHED_SELECTOR_AND_CANCELLATION_SWITCH_PLUS_PENDING_REPLACEMENT_RETRY",
+        "phase_acceptance": "PENDING_HUMAN_DECISION",
+        "hosted_delivery": "PENDING",
+        "independent_review": "runs/M6-P1-independent-review.md",
+        "cycle7_corrections": {
+            "original_review_head": "d446cb627063954469354a2b58f15286d3cf15d4",
+            "authorization": "TWO_ADDITIONAL_CYCLES_TOTAL_CEILING_8",
+            "cycle": 7,
+            "retention_normal_mib": 24,
+            "retention_absolute_correction_mib": 32,
+            "new_replacement_preview": "NORMAL_BUDGET",
+            "source_verdict": "READY_FOR_REVIEW",
+            "native_tia_tests": 1018,
+            "native_tia_assertions": 6912,
+            "mapped_selectors": 373,
+            "final_hosted_gates": "PENDING",
+            "guarded_tia_record": "PASS_1018_TESTS_6912_ASSERTIONS",
+            "rendered_verdict": "PASS_CURRENCY_MAPPING_QUOTA_ROLLBACK_SHARED_THROTTLE_AND_RECOVERY_READS"
+        },
+        "cycle8_corrections": {
+            "cycle": 8,
+            "total_ceiling": 8,
+            "scope": "Typedemptyaccountnavigationandcanonicalmappingkeys",
+            "guarded_tia_tests": 1024,
+            "guarded_tia_assertions": 6934,
+            "parser_tests": 52,
+            "parser_assertions": 115,
+            "client_tests": 3,
+            "mapped_selectors": 379,
+            "source_verdict": "READY_FOR_REVIEW",
+            "rendered_verdict": "PASS_SCOPED_JOURNEY_OWNED_RUNTIME_AND_CREDENTIALS_CLEANED",
+            "new_hosted_gates": "PENDING"
+        }
+    },
+    "m6p1_budget_extension_after_import_bypass": {
+        "authorized_by": "human-owner",
+        "additional_cycles": 2,
+        "previous_ceiling": 8,
+        "total_ceiling": 10,
+        "scope": "PR21 import correction bypass; preserve cycles1-8 and repeat exact-head CI, independent source/rendered and fresh hosted review, normal dev merge and original post-merge publishing"
+    },
+    "m6p1_cycle9_engineering": {
+        "cycle": 9,
+        "total_ceiling": 10,
+        "status": "FINAL_SOURCE_PASS_RUNTIME_GATES_PENDING",
+        "scope": "Protect import-created and latest replacement targets at correction services and route UI to retained import history",
+        "phase_acceptance": "UNACCEPTED",
+        "deployment": false,
+        "fresh_tia_tests": 1069,
+        "fresh_tia_assertions": 7251,
+        "mapped_selectors": 424,
+        "source_review": "PASS_SOURCE_REVIEW",
+        "sanitation": "PUBLISHABLE_SOURCE",
+        "source_sha256": "9dcd405275b55cf36a618fda5ee537d6b5ef9065278ace49f7a9c0ecfd45921b"
+    },
+    "m6p1_cycle8_checkpoint": {
+        "phase": "M6-P1",
+        "status": "READY_FOR_REVIEW",
+        "cycle": 8,
+        "cycles_used": 8,
+        "max_cycles": 8,
+        "phase_acceptance": "PENDING_HUMAN_DECISION",
+        "milestone_acceptance": "M5_ACCEPTED",
+        "checkpoint": "FinalauthorizedCycle8 READY: guardedfreshTIA1024tests6934assertions,52parserunit115assertions,3clientchecks, types/PHPStan/build, independent source/rendered review andownedruntimecleanupPASS. Bothnewfindingsresolvedlocally. NewheadfulloriginalCI/freshreview, normaldevmerge,originalpostCIandsignedpublicpoststillpending. Eightofeightcyclesused; owneracceptancepending."
+    },
+    "m6p1_cycle10_engineering": {
+        "cycle": 10,
+        "total_ceiling": 10,
+        "status": "IN_PROGRESS",
+        "scope": "Correct45newJUnitcanonicalclass/filebindings; applicationunchanged; preservefullgatefailureandrepeatverification/source/hostedgates",
+        "phase_acceptance": "UNACCEPTED",
+        "deployment": false
     }
 }

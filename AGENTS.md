@@ -462,3 +462,38 @@ evidence. Use the existing approved progress signing key; its public lookup is
 recognized after owner sign-in, but no successful signed CI post is yet claimed.
 Do not deploy, migrate production, import real accounts, change permissions or
 credentials, alter main/stage, start M6, reset budgets or self-accept M5-P3/M5.
+
+## M5-P3 acceptance and independent M5 review
+
+The human owner explicitly accepted M5-P3 on 22 October 2026 and requested the
+independent M5 milestone review plus current roadmap status. Record that phase
+acceptance and close its implementation claim, preserving all six cycles and
+failed originals. All M5 constituent phases are accepted; M5 itself is not.
+
+An independent source-read-only reviewer must follow the private canonical
+M5 review instruction, inspect actual merged code and acceptance/evidence, and
+rerun all implemented release regression gates in exclusively owned resources.
+A clean isolated checkout at the verified dev merge may provide strict clean
+release proof; disclose the manager's uncommitted acceptance-only metadata
+overlay separately. Do not relax the clean-source guard or edit application
+source. The reviewer returns READY_FOR_OWNER or CHANGES_REQUIRED and writes
+only its report and permitted test-generated artifacts. The manager alone
+records central acceptance/status. This review authority does not reset the
+six-cycle M5-P3 implementation history. No commits, pushes, PRs, merges, new
+credentials, deployment, production operations, real imports or M6 work are
+authorized by this acceptance/review request. Only the human accepts M5 and
+authorizes any later milestone or deployment.
+
+## Current M6-P1 authority
+
+The human owner explicitly accepted M5 after its independent READY_FOR_OWNER review and authorized canonical M6-P1 on 22 October 2026. Record [M5 acceptance](docs/halal-wealth-os/runs/M5-acceptance.md), then implement [M6-P1](docs/halal-wealth-os/phases/M6-P1.md), open a PR to dev, merge only after full exact-head CI and fresh review pass, and verify original post-merge CI and existing signed /dev/null publishing. This supersedes earlier no-M6/no-remote restrictions within this scope.
+
+One source writer; independent grounding/design/source/rendered reviewers remain source-read-only with exclusively owned resources. At most six scoped cycles under this new phase authorization. Preserve all prior histories, starter features, PHP8.5 floor, financial invariants, TIA, uncached release checks, clean-source proof and public/private boundaries. No implementation subagents, real imports, deployment, new credentials, permissions changes, main/stage changes, later phases, history rewriting or self-acceptance. Use approved noreply author and committer for commits/normal merges.
+
+## M6-P1 hosted-finding correction budget
+
+The human owner explicitly authorized two additional scoped correction and verification cycles on 22 October 2026 for both PR #21 P2 findings: retained import evidence limits/throttling and currency-mapping UI. Preserve cycles1-6 and original results; the total ceiling is eight, not a reset. Correct both findings, repeat affected PostgreSQL/TIA/source/rendered checks, publish to the same PR against dev, and obtain fresh exact-head original CI and hosted review before normal approved-noreply merge. Verify original post-merge CI and actual existing signed /dev/null publishing. All prior sole-writer, privacy, acceptance, phase, credential and deployment boundaries remain in force.
+
+## M6-P1 import correction bypass budget
+
+The human owner explicitly authorized two additional scoped correction and verification cycles for PR #21's import correction bypass. Preserve cycles1-8 and earlier budget decisions; the total ceiling is ten. Correct generic transaction/investment correction paths while preserving owned import receipt successors, matched-only manual corrections, exact committed retries and atomicity. Repeat PostgreSQL/TIA/source/rendered gates and obtain fresh exact-head original CI and hosted review before normal approved-noreply dev merge. Verify original post-merge CI and actual existing signed /dev/null publishing. All prior sole-writer, privacy, phase acceptance, credential and deployment boundaries remain in force.

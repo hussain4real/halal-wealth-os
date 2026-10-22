@@ -29,14 +29,14 @@ test('complete owner export is unavailable to guests', function () {
 test('complete owner export contains every financial section and excludes authentication material', function () {
     $owner = User::factory()->create();
     $response = $this->actingAs($owner)->withSession(['auth.password_confirmed_at' => time()])
-        ->get('/settings/data/export')->assertOk()->assertDownload('halalos-owner-v1.json');
+        ->get('/settings/data/export')->assertOk()->assertDownload('halalos-owner-v2.json');
     $download = $response->baseResponse;
     $path = $download->getFile()->getPathname();
     $document = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
-    expect($document['schema_version'])->toBe(1)
+    expect($document['schema_version'])->toBe(2)
         ->and($document['profile']['id'])->toBe((string) $owner->id)
-        ->and($document['data'])->toHaveCount(48)
-        ->and($document['manifest']['sections'])->toHaveCount(48)
+        ->and($document['data'])->toHaveCount(53)
+        ->and($document['manifest']['sections'])->toHaveCount(53)
         ->and($document['profile'])->not->toHaveKeys(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes']);
     ob_start();
     try {
@@ -127,6 +127,13 @@ test('populated owner export retains revisions exact nested decimals and release
             ->and($data['decision_reservations'])->toHaveCount(1)->and($data['shariah_assessments'])->toHaveCount(2)
             ->and($data['purification_obligations'])->toHaveCount(1)->and($data['purification_allocations'])->toHaveCount(1)
             ->and(array_column($data['portfolio_opening_rows'], 'quantity'))->toContain('1.234567890123');
+        expect($data['statement_sources'])->toHaveCount(2)->and($data['statement_adapters'])->toHaveCount(1)
+            ->and($data['statement_snapshots'])->toHaveCount(2)->and($data['statement_receipts'])->toHaveCount(3)
+            ->and($data['statement_claims'])->not->toBeEmpty();
+        $source = collect($data['statement_sources'])->firstWhere('id', $fixture['import_source']);
+        expect(hash('sha256', base64_decode($source['source_base64'], true)))->toBe($source['digest'])
+            ->and(base64_decode($source['source_base64'], true))->toContain('SYNTHETIC-RECOVERY-IMPORT')
+            ->not->toContain('FOREIGN-STATEMENT-SOURCE-MUST-NOT-APPEAR');
         foreach ($data as $table => $rows) {
             foreach ($rows as $row) {
                 if (array_key_exists('owner_id', $row)) {

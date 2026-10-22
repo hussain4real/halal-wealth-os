@@ -41,7 +41,7 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     $required = [];
     foreach ($roadmap['phases'] as $phase) {
         $required = [...$required, ...$phase['acceptanceIds']];
-        if ($phase['id'] === 'M5-P3') {
+        if ($phase['id'] === 'M6-P1') {
             break;
         }
     }
@@ -104,9 +104,22 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     }
     foreach ($map['fixtures'] as $id => $fixture) {
         evidenceIds($fixture['case_ids'] ?? null, $id);
-        if (in_array($id, ['F17', 'F18'], true)) {
-            if (($fixture['case_ids'] ?? []) !== [] || ($fixture['status'] ?? null) !== ($id === 'F17' ? 'FUTURE_M6_NOT_IMPLEMENTED' : 'FUTURE_M7_NOT_IMPLEMENTED')) {
+        if ($id === 'F18') {
+            if (($fixture['case_ids'] ?? []) !== [] || ($fixture['status'] ?? null) !== 'FUTURE_M7_NOT_IMPLEMENTED') {
                 throw new RuntimeException('BLOCKED: future integration/AI fixtures cannot pass.');
+            }
+
+            continue;
+        }
+        if ($id === 'F17') {
+            if (($fixture['status'] ?? null) !== 'PARTIAL_M6_P1_STATEMENT_EXECUTED_PROVIDER_OUTBOX_FUTURE' || ($fixture['case_ids'] ?? []) === []
+                || ($fixture['implemented_subscenarios'] ?? null) !== ['statement_reupload'] || ($fixture['future_subscenarios'] ?? null) !== ['provider_job_retry', 'outbox_delivery_retry']) {
+                throw new RuntimeException('BLOCKED: F17 requires explicit executed statement-only evidence and future provider/outbox limits.');
+            }
+            foreach ($fixture['case_ids'] as $caseId) {
+                if (! isset($map['cases'][$caseId]) || ! str_starts_with($map['cases'][$caseId]['file'], 'tests/Feature/StatementImport')) {
+                    throw new RuntimeException('BLOCKED: F17 statement evidence must resolve an exact implemented import case.');
+                }
             }
 
             continue;
@@ -124,5 +137,5 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
         }
     }
 
-    return ['fixtures' => array_map(fn (array $fixture): array => ['status' => $fixture['status'], 'case_ids' => $fixture['case_ids'], 'scope' => $fixture['scope'], 'current_executed_cases' => $fixture['case_ids'] !== [], 'original_input_execution_claim' => false], $map['fixtures']), 'requirements' => $rows, 'unique_executed_selectors' => count($map['cases']), 'manual_evidence_semantics' => 'Scoped manual observations retain their declared limits; they cannot replace configured executed cases, hosted CI or owner acceptance.'];
+    return ['fixtures' => array_map(fn (array $fixture): array => ['status' => $fixture['status'], 'case_ids' => $fixture['case_ids'], 'scope' => $fixture['scope'], 'implemented_subscenarios' => $fixture['implemented_subscenarios'] ?? [], 'future_subscenarios' => $fixture['future_subscenarios'] ?? [], 'current_executed_cases' => $fixture['case_ids'] !== [], 'original_input_execution_claim' => false], $map['fixtures']), 'requirements' => $rows, 'unique_executed_selectors' => count($map['cases']), 'manual_evidence_semantics' => 'Scoped manual observations retain their declared limits; they cannot replace configured executed cases, hosted CI or owner acceptance.'];
 }

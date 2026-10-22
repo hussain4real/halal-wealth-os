@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Ledger\AccountBalanceReader;
+use App\Domain\Ledger\CorrectionHistory;
 use App\Domain\Ledger\PostingService;
 use App\Domain\Shared\Money\Currency;
 use App\Http\Requests\Transactions\TransactionRequest;
@@ -22,7 +23,7 @@ class TransactionController extends Controller
     {
         $journals = JournalEntry::query()->where('owner_id', $this->owner($request)->id)->with('postings.account')->orderByDesc('id')->simplePaginate(20);
 
-        return Inertia::render('transactions/Index', ['transactions' => $journals->getCollection()->map(fn (JournalEntry $journal): array => $this->payload($journal))->all(),
+        return Inertia::render('transactions/Index', ['transactions' => $journals->getCollection()->map(fn (JournalEntry $journal): array => $this->payload($journal, $this->owner($request)))->all(),
             'previous' => $journals->previousPageUrl(), 'next' => $journals->nextPageUrl(), 'has_accounts' => Account::query()->ownedBy($this->owner($request))->whereNull('archived_at')->whereNull('system_role')->whereIn('type', ['bank', 'cash', 'investment', 'liability'])->exists()]);
     }
 
@@ -42,9 +43,13 @@ class TransactionController extends Controller
         if ($investment !== null) {
             return redirect('/portfolio/'.$investment['portfolio_account_id'].'/events/'.$investment['event_id']);
         }
+        $import = app(CorrectionHistory::class)->origin($this->owner($request), 'journal', (string) $original->id);
+        if ($import !== null) {
+            return redirect('/imports/receipts/'.$import['receipt_id']);
+        }
         abort_unless($original->status === 'posted' && in_array($original->kind, ['income', 'expense', 'transfer'], true), 404);
 
-        return Inertia::render('transactions/Create', ['accounts' => $this->choices($request, $balances), 'today' => now()->toDateString(), 'original' => $this->payload($original)]);
+        return Inertia::render('transactions/Create', ['accounts' => $this->choices($request, $balances), 'today' => now()->toDateString(), 'original' => $this->payload($original, $this->owner($request))]);
     }
 
     public function store(TransactionRequest $request, PostingService $posting): JsonResponse|RedirectResponse
@@ -88,7 +93,7 @@ class TransactionController extends Controller
             }
         })->with('postings.account')->orderBy('id')->get();
 
-        return Inertia::render('transactions/Show', ['transaction' => $this->payload($record), 'related' => $related->map(fn (JournalEntry $journal): array => $this->payload($journal))->all()]);
+        return Inertia::render('transactions/Show', ['transaction' => $this->payload($record, $this->owner($request)), 'related' => $related->map(fn (JournalEntry $journal): array => $this->payload($journal, $this->owner($request)))->all()]);
     }
 
     private function owner(Request $request): User
@@ -128,7 +133,7 @@ class TransactionController extends Controller
     }
 
     /** @return array<string, mixed> */
-    private function payload(JournalEntry $journal): array
+    private function payload(JournalEntry $journal, User $owner): array
     {
         $movements = [];
         foreach ($journal->postings as $posting) {
@@ -146,6 +151,7 @@ class TransactionController extends Controller
         return ['id' => (string) $journal->id, 'reference' => $journal->reference, 'kind' => $journal->kind, 'status' => $journal->status, 'description' => $journal->description,
             'effective_date' => $journal->effective_date->format('Y-m-d'), 'recorded_at' => $journal->created_at->toIso8601String(), 'receipt_reference' => $journal->receipt_reference,
             'reverses_id' => $journal->reverses_journal_id === null ? null : (string) $journal->reverses_journal_id, 'replaces_id' => $journal->replaces_journal_id === null ? null : (string) $journal->replaces_journal_id,
+            'import_receipt_id' => app(CorrectionHistory::class)->origin($owner, 'journal', (string) $journal->id)['receipt_id'] ?? null,
             'primary' => $primary, 'movements' => array_values($movements), 'investment' => $this->investmentMember($journal),
             'fx_operation_id' => ($group = DB::table('fx_operation_journals')->where('owner_id', $journal->owner_id)->where('journal_id', $journal->id)->value('operation_id')) === null ? null : (string) $group];
     }

@@ -22,7 +22,7 @@ final class OwnerDataSchema
             throw new RuntimeException('Owner export schema is unavailable.');
         }
         $root = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
-        if (! is_array($root) || ($root['schema_version'] ?? null) !== 1 || ! is_array($root['tables'] ?? null) || ! array_is_list($root['tables'])) {
+        if (! is_array($root) || ($root['schema_version'] ?? null) !== 2 || ! is_array($root['tables'] ?? null) || ! array_is_list($root['tables'])) {
             throw new RuntimeException('Invalid owner export schema.');
         }
         $tables = [];
@@ -44,7 +44,7 @@ final class OwnerDataSchema
             }
             $tables[] = ['table' => self::identifier($table, 'table'), 'scope' => $scope, 'columns' => $columns, 'order' => self::identifiers($table['order'] ?? null)];
         }
-        $contract = ['schema_version' => 1, 'encoding' => self::text($root, 'encoding'), 'profile_fields' => self::identifiers($root['profile_fields'] ?? null),
+        $contract = ['schema_version' => 2, 'encoding' => self::text($root, 'encoding'), 'profile_fields' => self::identifiers($root['profile_fields'] ?? null),
             'excluded_reason' => self::text($root, 'excluded_reason'), 'tables' => $tables, 'sha256' => hash('sha256', $bytes)];
         $expected = [];
         foreach ($contract['tables'] as $table) {

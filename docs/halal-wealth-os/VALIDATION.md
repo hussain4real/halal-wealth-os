@@ -304,6 +304,30 @@ The rehearsal does not populate every business scenario or authorize production.
 
 Native Pest TIA, new page bindings, full uncached gates, source/rendered review,
 publication sanitation, latest-head hosted review/CI and original dev CI plus
-actual signed progress publishing remain separate. M6-P1 is the next unimplemented
-phase rejection. No green report accepts M5-P3/M5 or permits deployment. See
+actual signed progress publishing remain separate. The later M6-P1 contract below
+advances the implemented boundary. No green report grants owner acceptance or permits deployment. See
 `ops/release/` for configuration, backup/rollback procedures and owner handover.
+
+## M6-P1 implemented verification contract
+
+The full lane includes bounded CSV parsing/mapping, immutable private previews,
+explicit identity and matching, selected-batch atomicity, exact request recovery,
+real concurrent approvals/corrections, linked root reversals and safe CSV export.
+Native HTTP uses real multipart uploads, cookies and CSRF; it checks no preview
+financial writes, malformed selection rollback, once-only retry/reupload, foreign
+owner/admin denial, formula-safe download and linked cancellation.
+
+All five import relations are included in the strict owner-export v2 catalog and
+populated encrypted PostgreSQL recovery. Recovery reconciles all 63 tables and
+reopens the retained source, preview and correction receipt. Financial coverage
+adds every concrete Imports file at the unchanged 90 percent floor. The map adds
+all five M6-P1 criteria while retaining existing exact selectors and invariants.
+F17 claims only executed synthetic statement reupload; provider-job and outbox
+retry scenarios remain future. F18 remains future M7. Unimplemented-phase
+rejection targets M6-P2. Full uncached gates, separate native TIA, failure
+propagation, independent source/rendered review, fresh hosted review/CI and
+original post-merge CI/publishing remain separate requirements.
+
+The M6-P1 hosted-review correction adds retained-evidence byte budgets across all five import tables:24MiB for new previews/revisions/approvals,32MiB for linked corrections with already-retained evidence. New replacement-preview preparation remains under the normal budget. Check the exact owner-export PHP encoding, including quotes, backslashes and Unicode line separators; rejection must roll back financial writes, receipts and claims together. Committed identical retries and receipt/status reads remain available. All import POST routes share a per-owner20/min limiter. Browser review must exercise currency-label add/replace/remove, saved reuse and mismatched-account errors without conversion.
+
+Final M6-P1 review corrections additionally verify the empty-account CTA against the actual typed GET account-index form, canonical value-map key normalization before duplicate/empty validation, and exact alignment of UI keys with PHP CSV-cell trimming. Preserve Unicode boundary label characters and saved targets; new interpretations do not mutate retained snapshots. The full gate includes client normalization checks, and parser cases cover normalized collisions and whitespace-only keys.

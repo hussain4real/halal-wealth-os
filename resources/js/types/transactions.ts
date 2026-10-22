@@ -10,6 +10,7 @@ export type Movement = {
 export type Transaction = {
     id: string;
     reference: string;
+    import_receipt_id: string | null;
     kind:
         | 'income'
         | 'expense'

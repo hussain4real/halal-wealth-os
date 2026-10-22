@@ -20,6 +20,8 @@ use InvalidArgumentException;
 /** One owner-serialized, composable PostgreSQL transaction for every movement. */
 final class PostingService
 {
+    public function __construct(private readonly CorrectionHistory $history) {}
+
     /** @param array<string, mixed> $input */
     public function record(User $owner, string $key, array $input): JournalEntry
     {
@@ -33,7 +35,19 @@ final class PostingService
     /** @param array<string, mixed> $input */
     public function correct(User $owner, string $originalId, string $key, array $input): JournalEntry
     {
-        return DB::transaction(function () use ($owner, $originalId, $key, $input): JournalEntry {
+        return $this->correctOperation($owner, $originalId, $key, $input, null);
+    }
+
+    /** @param array<string,mixed> $input */
+    public function correctRetained(User $owner, string $originalId, string $key, array $input, RetainedCorrection $completion): JournalEntry
+    {
+        return $this->correctOperation($owner, $originalId, $key, $input, $completion);
+    }
+
+    /** @param array<string,mixed> $input */
+    private function correctOperation(User $owner, string $originalId, string $key, array $input, ?RetainedCorrection $completion): JournalEntry
+    {
+        return DB::transaction(function () use ($owner, $originalId, $key, $input, $completion): JournalEntry {
             $this->lockOwner($owner);
             $original = $this->ownedJournal($owner, $originalId);
             $this->authorizeJournalAccounts($owner, $original);
@@ -42,16 +56,26 @@ final class PostingService
                 $this->fail('journal', 'This record can be reversed, but cannot be replaced with a new transaction.');
             }
 
-            return $this->recordLocked($owner, $key, $input, $original);
+            return $this->recordLocked($owner, $key, $input, $original, $completion);
         });
     }
 
     public function reverse(User $owner, string $originalId, string $key, string $reason): JournalEntry
     {
-        return DB::transaction(function () use ($owner, $originalId, $key, $reason): JournalEntry {
+        return $this->reverseOperation($owner, $originalId, $key, $reason, null);
+    }
+
+    public function reverseRetained(User $owner, string $originalId, string $key, string $reason, RetainedCorrection $completion): JournalEntry
+    {
+        return $this->reverseOperation($owner, $originalId, $key, $reason, $completion);
+    }
+
+    private function reverseOperation(User $owner, string $originalId, string $key, string $reason, ?RetainedCorrection $completion): JournalEntry
+    {
+        return DB::transaction(function () use ($owner, $originalId, $key, $reason, $completion): JournalEntry {
             $this->lockOwner($owner);
 
-            return $this->reverseLocked($owner, $this->ownedJournal($owner, $originalId), $key, $reason);
+            return $this->reverseLocked($owner, $this->ownedJournal($owner, $originalId), $key, $reason, completion: $completion);
         });
     }
 
@@ -161,7 +185,7 @@ final class PostingService
     }
 
     /** @param array<string, mixed> $input */
-    private function recordLocked(User $owner, string $key, array $input, ?JournalEntry $replaces = null): JournalEntry
+    private function recordLocked(User $owner, string $key, array $input, ?JournalEntry $replaces = null, ?RetainedCorrection $completion = null): JournalEntry
     {
         $unknown = array_diff(array_keys($input), ['kind', 'account_id', 'destination_account_id', 'amount', 'effective_date', 'description', 'receipt_reference']);
         if ($unknown !== []) {
@@ -211,21 +235,29 @@ final class PostingService
         if ($cached = $this->cached($owner, $key, $payload)) {
             return $cached;
         }
+        if ($replaces !== null) {
+            $this->history->authorize($owner, 'journal', (string) $replaces->id, $completion);
+        }
         $this->requireActive($account);
         if ($destination !== null) {
             $this->requireActive($destination);
         }
         if ($replaces !== null) {
-            $this->reverseLocked($owner, $replaces, 'correction-reversal:'.hash('sha256', $key), 'Correction of '.$replaces->reference, effectiveDate: $replaces->effective_date->format('Y-m-d'));
+            $this->reverseLocked($owner, $replaces, 'correction-reversal:'.hash('sha256', $key), 'Correction of '.$replaces->reference, effectiveDate: $replaces->effective_date->format('Y-m-d'), replacement: true);
         }
         $counter = $destination ?? $this->systemAccount($owner, $account->currency_code, $kind);
         $signed = $kind === 'income' ? $amount->minor : bcsub('0', $amount->minor, 0);
         $legs = [['account' => $account, 'minor' => $signed], ['account' => $counter, 'minor' => bcsub('0', $signed, 0)]];
 
-        return $this->append($owner, $key, $payload, $kind, $date, $description, $receipt, $legs, replaces: $replaces?->id);
+        $journal = $this->append($owner, $key, $payload, $kind, $date, $description, $receipt, $legs, replaces: $replaces?->id);
+        if ($replaces !== null) {
+            $this->history->complete($owner, 'journal', (string) $replaces->id, (string) $journal->id, $account->currency_code->value, 'replacement', $completion);
+        }
+
+        return $journal;
     }
 
-    private function reverseLocked(User $owner, JournalEntry $original, string $key, string $reason, ?int $fxOperationId = null, ?string $effectiveDate = null, ?int $investmentEventId = null): JournalEntry
+    private function reverseLocked(User $owner, JournalEntry $original, string $key, string $reason, ?int $fxOperationId = null, ?string $effectiveDate = null, ?int $investmentEventId = null, ?RetainedCorrection $completion = null, bool $replacement = false): JournalEntry
     {
         $accounts = $this->authorizeJournalAccounts($owner, $original);
         if ($fxOperationId === null && $investmentEventId === null) {
@@ -242,6 +274,9 @@ final class PostingService
         if ($cached = $this->cached($owner, $key, $payload)) {
             return $cached;
         }
+        if (! $replacement) {
+            $this->history->authorize($owner, 'journal', (string) $original->id, $completion);
+        }
         if ($original->status !== 'posted' || $original->kind === 'reversal') {
             $this->fail('journal', 'This transaction has already been reversed or is not eligible for reversal.');
         }
@@ -251,6 +286,9 @@ final class PostingService
         }
         $journal = $this->append($owner, $key, $payload, 'reversal', $effectiveDate ?? now('UTC')->toDateString(), $reason, null, $legs, reverses: $original->id);
         DB::table('journal_entries')->where('id', $original->id)->update(['status' => 'reversed']);
+        if (! $replacement) {
+            $this->history->complete($owner, 'journal', (string) $original->id, (string) $journal->id, $journal->postings->firstOrFail()->currency_code->value, 'cancelled', $completion);
+        }
 
         return $journal;
     }

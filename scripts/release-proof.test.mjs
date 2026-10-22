@@ -20,6 +20,7 @@ const valid = () => ({
     table_fingerprints: { accounts: { rows: 7, sha256: 'd'.repeat(64) } },
     reader_fingerprints: {
         cash: source,
+        imports: source,
         positions: source,
         reservations: source,
         shariah: source,
@@ -56,6 +57,9 @@ await test('actual run identity is required and rejected receipts are never rela
         },
         (r) => {
             delete r.table_fingerprints.accounts;
+        },
+        (r) => {
+            delete r.reader_fingerprints.imports;
         },
     ]) {
         const receipt = valid();

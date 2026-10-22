@@ -15,7 +15,7 @@ final class PrivateExportDownload extends BinaryFileResponse
             'Cache-Control' => 'private, no-store, max-age=0',
             'X-Content-Type-Options' => 'nosniff',
         ], false, null, false, false);
-        $this->setContentDisposition('attachment', 'halalos-owner-v1.json');
+        $this->setContentDisposition('attachment', 'halalos-owner-v2.json');
     }
 
     public function sendContent(): static

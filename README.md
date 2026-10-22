@@ -4,18 +4,26 @@ A private personal wealth application bootstrapped with the complete official
 Laravel Inertia/Vue starter. Public source visibility does not authorize public
 SaaS or access to personal financial data.
 
-M0, M1-P1 and M1-P2 are human accepted. M1-P3 manual FX and reconciliation
-is locally verified and unaccepted; M1 milestone acceptance remains a separate human
-decision. See [current state](docs/halal-wealth-os/STATE.json) and
-[the phase contract](docs/halal-wealth-os/phases/M1-P3.md). Historical verification
-counts below remain labelled with their original phase checkpoints.
+M0 through M5 milestones and all 18 phases through M5-P3 are human accepted.
+M6-P1 implements private CSV mapping/preview, atomic selected approval, deduplication,
+explicit matching, linked corrections and safe evidence export; final dev delivery
+is in review. The accepted implementation through M5-P3
+is merged into dev. Production release and phases after M6-P1 require separate
+authority. See
+[current roadmap status](docs/halal-wealth-os/STATUS.md),
+[current state](docs/halal-wealth-os/STATE.json) and
+[the M5 review](docs/halal-wealth-os/runs/M5-independent-review.md).
+
+Historical phase notes below retain their original verification counts and
+pending-gate observations. They do not override the current status above.
 
 The starter is pinned to `d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab`. All five
 optional authentication features were retained by its official finalizer:
 registration, email verification, two-factor authentication, passkeys and
 password confirmation. Bundled UI components and development tooling remain.
-The approved Vite Plus 0.3.3 patch includes the matching Vite core alias and
-bundled Vitest override. Both dependency locks record actual resolution.
+Current locks pin Vite Plus 1.3.0 with its matching Vite core alias and Vitest
+5.0.5 override; earlier dependency-patch notes are historical. Both locks record
+actual resolution.
 M0-P3 adds the private identity shell and owner-scoped administration described
 below. M1 adds exact owner-scoped ledger functionality. Public registration routes
 are disabled while the bundled registration view/action source is retained.
@@ -23,7 +31,7 @@ are disabled while the bundled registration view/action source is retained.
 ## Runtime
 
 Only PHP **8.5.x** is supported (`~8.5.0`); PHP 8.4, 8.6 and other minors
-are rejected. The verified runtime is PHP 8.5.11 with the extensions checked by
+are rejected. CI pins PHP 8.5.12 with the extensions checked by
 `scripts/verify-platform.php`,
 Xdebug 3.5.3 with coverage enabled for verification, Composer 2.10.3,
 Node 24.19.0/npm 11.9.0 and PostgreSQL server/client 18.6. The cloud runtime
@@ -199,7 +207,8 @@ history and receipts with atomic posting, safe retries and retained corrections.
 See [posting contracts](docs/halal-wealth-os/POSTING-AND-RETRIES.md),
 [local verification](docs/halal-wealth-os/runs/M1-P2-local.md) and
 [independent rendered UX review](docs/halal-wealth-os/runs/M1-P2-visual-review.md).
-M1-P1 and M1-P2 are human accepted; the M1 milestone remains unaccepted.
+At that checkpoint M1-P1 and M1-P2 were accepted and the M1 milestone gate
+was pending. M1 was subsequently [owner accepted](docs/halal-wealth-os/runs/M1-acceptance.md).
 
 ## M1-P3 manual FX and reconciliation
 

@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Domain\Imports\StatementCorrectionHistory;
 use App\Domain\Ledger\AccountBalanceReader;
+use App\Domain\Ledger\CorrectionHistory;
 use App\Domain\Ledger\DeferredOpeningBalances;
 use App\Domain\Ledger\OpeningBalanceGateway;
 use App\Domain\Ledger\PostedAccountBalances;
@@ -11,9 +13,12 @@ use App\Models\User;
 use App\Policies\AccountPolicy;
 use App\Policies\UserPolicy;
 use Carbon\CarbonImmutable;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -24,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(CorrectionHistory::class, StatementCorrectionHistory::class);
         $this->app->bind(AccountBalanceReader::class, PostedAccountBalances::class);
         $this->app->bind(OpeningBalanceGateway::class, DeferredOpeningBalances::class);
     }
@@ -34,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        RateLimiter::for('statement-import', fn (Request $request) => Limit::perMinute(20)->by('statement:'.($request->user()->id ?? $request->ip())));
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Account::class, AccountPolicy::class);
         Gate::define('access-admin', fn (User $user): bool => $user->is_admin && $user->hasVerifiedEmail()

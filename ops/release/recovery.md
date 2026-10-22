@@ -9,8 +9,9 @@ It never accepts a production target argument.
 The rehearsal applies real migrations, seeds synthetic owners and retained
 financial history, runs PostgreSQL custom-format dump, encrypts it, verifies the
 whole archive, restores into the fresh empty target in one transaction, and
-reconciles all 58 tables plus existing cash, position, goal reservation and
-assessment records/references. It tests a wrong key without changing the target, a new
+reconciles all 63 tables plus existing cash, position, goal reservation and
+assessment records/references, including retained statement source bytes, previews
+and correction receipts. It tests a wrong key without changing the target, a new
 post-restore journal write and the restored immutable-posting trigger. It runs
 forward migrations again and compares migration order. A transactional populated
 downgrade rehearsal must refuse retained history and leave restored data intact. Only its own marked

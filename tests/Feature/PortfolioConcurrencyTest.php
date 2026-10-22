@@ -285,6 +285,8 @@ test('incomplete raw opening book rolls back at actual PostgreSQL commit', funct
     $this->assertDatabaseCount('portfolio_requests', 1);
 });
 test('empty portfolio migration down and upgrade preserve existing ledger accounts journals and report', function () {
+    $imports = require database_path('migrations/2026_10_22_100000_create_statement_imports.php');
+    $imports->down();
     $owner = User::factory()->create();
     $a = P::account($owner);
     app(PostingService::class)->record($owner, 'portfolio-upgrade-cash', ['kind' => 'income', 'account_id' => (string) $a->id, 'amount' => '13.57', 'effective_date' => now('UTC')->toDateString(), 'description' => 'Synthetic retained cash']);
@@ -308,6 +310,7 @@ test('empty portfolio migration down and upgrade preserve existing ledger accoun
     $assessment->up();
     $purification->up();
     $decisions->up();
+    $imports->up();
     expect(app(NetWorthSnapshot::class)->capture($owner, Currency::QAR, now('UTC')->format('Y-m-d\\TH:i:s\\Z'))['total']['minor'])->toBe('1357')->and(DB::table('valuation_reports')->where('id', $report->id)->value('evidence'))->toBe($report->evidence);
     $this->assertDatabaseCount('journal_entries', 1);
     $this->assertDatabaseCount('portfolio_accounts', 0);

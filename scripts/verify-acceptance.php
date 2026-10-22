@@ -18,6 +18,11 @@ try {
     if (($http['result'] ?? '') !== 'PASS' || $http['cleanup'] !== 'OWNED_SERVER_STOPPED_AND_DATABASE_RESET' || $http['journey']['result'] !== 'PASS' || $http['security']['result'] !== 'PASS' || $http['performance']['result'] !== 'PASS') {
         throw new RuntimeException('BLOCKED: current HTTP journey/security/performance did not pass.');
     }
+    foreach (['preview_no_financial_writes', 'malformed_selection_atomic', 'exact_request_and_reupload_once', 'safe_formula_download', 'real_csrf_rejection', 'linked_root_reversal'] as $check) {
+        if (($http['statement_import']['result'] ?? null) !== 'PASS' || ($http['statement_import'][$check] ?? null) !== true) {
+            throw new RuntimeException('BLOCKED: current native HTTP statement-import evidence did not pass.');
+        }
+    }
     $process = proc_open(['node', 'scripts/verification-source.mjs'], [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, $root);
     if (! is_resource($process)) {
         throw new RuntimeException('BLOCKED: source inventory could not start.');
