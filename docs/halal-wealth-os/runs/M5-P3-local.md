@@ -1,6 +1,6 @@
 # M5-P3 execution record
 
-Status: READY_FOR_REVIEW, cycle 4/6. M5-P3 is unaccepted. The human owner accepted
+Status: CORRECTING_CI_WORKSPACE, cycle 5/6. M5-P3 is unaccepted. The human owner accepted
 M5-P2 and authorized canonical M5-P3 through independently reviewed dev
 publication, conditional normal merge, original post-merge CI and existing
 progress publisher verification. No production operation or M6 is authorized.
@@ -149,3 +149,22 @@ added. The metadata-only completion commit does not inherit the correction
 commit's Git identity; its own original hosted run must create a matching clean
 release record and receive a fresh review before merge. All post-merge CI/
 publishing and human acceptance/deployment gates remain pending.
+
+## Cycle 5 CI workspace correction
+
+The original run39738220937/attempt1 at85ec19c passed 928 tests / 6344 assertions,
+all financial floors, real encrypted restore and HTTP/security/workload checks.
+Finalization then correctly rejected an unclean checkout, so the overall run
+remains failed and produced no passing release record. The exact CI progress
+unittest command was reproduced locally: Python generated untracked bytecode in
+`.github/scripts/__pycache__`, also changing the runtime source inventory. The
+corrected command uses Python's -B flag; all five actual tests passed without
+bytecode or a dirty checkout. CI now also asserts clean status immediately after
+that step. No ignore rule, source reset, cleanup-before-gate trick or relaxed
+release identity check is added.
+
+This correction changes only CI invocation and completion metadata; financial/
+export/authentication/recovery source and the prior real browser evidence remain
+unchanged. The new final head requires its own original full CI, clean release
+record and fresh hosted review. Earlier local clean proof remains scoped to
+9e1da61; both failed original hosted runs remain visible.

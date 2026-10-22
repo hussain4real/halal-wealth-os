@@ -249,7 +249,7 @@
         {
             "id": "M5-P3",
             "depends_on": ["M5-P2"],
-            "status": "READY_FOR_REVIEW",
+            "status": "IN_PROGRESS",
             "owner": "m5p3-coordinator",
             "accepted_by": null,
             "accepted_at": null,
@@ -360,12 +360,12 @@
     },
     "execution_status": {
         "phase": "M5-P3",
-        "status": "READY_FOR_REVIEW",
-        "cycle": 4,
-        "cycles_used": 4,
+        "status": "CORRECTING_CI_WORKSPACE",
+        "cycle": 5,
+        "cycles_used": 5,
         "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
-        "checkpoint": "Cycle4 clean exact9e1da61 fullPASS928tests/57floors/102IDs287selectors; dirty-recordP2corrected+independentreviewPASS. Metadata-only completion follows; its original hostedCI/freshreview and postmerge gates remainpending."
+        "checkpoint": "CI85ec19c passed928tests/recovery/HTTP but strictclean guard rejected generatedPythonbytecode from progress unittest step. Exact command reproduced .github/scripts/__pycache__; -B proves5testsPASS with cleanstatus and no cache. Cycle5 preserves strictguard and changes only CIbytecode policy plus accurate metadata; fresh CI/review required."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2679,6 +2679,13 @@
             "result": "FAILURE",
             "reason": "npm audit API HTTP503 before test artifacts"
         },
-        "npm_recheck": "PASS_ZERO_VULNERABILITIES"
+        "npm_recheck": "PASS_ZERO_VULNERABILITIES",
+        "preserved_second_original_ci": {
+            "run": 39738220937,
+            "attempt": 1,
+            "commit": "85ec19cad15d68fd4524ec0a3e6278ec45d8dea3",
+            "result": "FAILURE",
+            "reason": "Python unittest emitted untracked bytecode; release finalization correctly rejected dirty workspace after928tests/HTTP/recovery passed"
+        }
     }
 }
