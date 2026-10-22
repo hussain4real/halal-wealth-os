@@ -2,7 +2,11 @@
 import { Head, Link } from '@inertiajs/vue3';
 import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
 import ImportCorrection from '@/components/ImportCorrection.vue';
-import type { ImportReceipt, ImportTarget } from '@/types/imports';
+import type {
+    ImportPreviewChoice,
+    ImportReceipt,
+    ImportTarget,
+} from '@/types/imports';
 defineOptions({
     layout: {
         breadcrumbs: [
@@ -13,7 +17,7 @@ defineOptions({
 });
 defineProps<{
     receipt: ImportReceipt;
-    previews: { id: string; reference: string }[];
+    previews: ImportPreviewChoice[];
 }>();
 const targetUrl = (target: ImportTarget) =>
     target.event_id !== null

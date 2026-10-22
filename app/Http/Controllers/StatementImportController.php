@@ -81,7 +81,7 @@ final class StatementImportController extends Controller
     {
         $owner = $this->owner($request);
 
-        return Inertia::render('imports/Receipt', ['receipt' => app(StatementImports::class)->receipt($owner, $receipt), 'previews' => DB::table('statement_snapshots')->where('owner_id', $owner->id)->orderByDesc('id')->limit(100)->get(['id', 'reference'])->map(fn (stdClass $s): array => ['id' => (string) $s->id, 'reference' => $s->reference])->all()]);
+        return Inertia::render('imports/Receipt', ['receipt' => app(StatementImports::class)->receipt($owner, $receipt), 'previews' => DB::table('statement_snapshots as p')->join('statement_sources as s', 's.id', '=', 'p.source_id')->where('p.owner_id', $owner->id)->where('s.owner_id', $owner->id)->orderByDesc('p.id')->limit(100)->get(['p.id', 'p.reference', 's.namespace', 's.currency'])->map(fn (stdClass $p): array => ['id' => (string) $p->id, 'reference' => $p->reference, 'label' => $p->namespace.' · '.$p->currency.' · Preview #'.$p->id])->all()]);
     }
 
     public function status(Request $request, string $key): JsonResponse

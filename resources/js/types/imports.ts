@@ -1,3 +1,8 @@
+export type ImportPreviewChoice = {
+    id: string;
+    reference: string;
+    label: string;
+};
 export type ImportChoice = { id: string; name: string; currency: string };
 export type ImportReference = { id: string; label: string };
 export type ImportMapping = {

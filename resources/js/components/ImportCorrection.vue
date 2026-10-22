@@ -5,10 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useStatementRequest } from '@/composables/useStatementRequest';
+import type { ImportPreviewChoice } from '@/types/imports';
 const props = defineProps<{
     receiptId: string;
     token: string;
-    previews: { id: string; reference: string }[];
+    previews: ImportPreviewChoice[];
 }>();
 const { fields, locked, busy, errors, notice, submit, recover } =
     useStatementRequest(
@@ -76,9 +77,17 @@ const confirmed = ref(false);
                     >
                         <option value="">Cancel with reversal only</option>
                         <option v-for="p in previews" :key="p.id" :value="p.id">
-                            {{ p.reference }}
+                            {{ p.label }}
                         </option>
                     </select>
+                    <a
+                        v-if="fields.replacement_id"
+                        :href="'/imports/' + fields.replacement_id"
+                        target="_blank"
+                        rel="noopener"
+                        class="mt-2 inline-block text-sm underline"
+                        >Open selected preview and verify source row</a
+                    >
                 </div>
                 <div>
                     <Label :for="'replacement-row-' + token"
