@@ -1,3 +1,5 @@
+import { spawnSync } from 'node:child_process';
+
 export function validateRecoveryProof(receipt, source, runId, tables) {
     if (
         !/^[a-f0-9]{32}$/.test(runId ?? '') ||
@@ -51,4 +53,25 @@ export function validateFinalizedProof(receipt, source, junit) {
         receipt.proof?.junit_sha256 !== junit
     )
         throw new Error('Finalized recovery source/JUnit does not match');
+}
+
+export function readReleaseIdentity(directory) {
+    const git = (...args) => {
+        const result = spawnSync('git', args, {
+            cwd: directory,
+            encoding: 'utf8',
+        });
+        if (result.status !== 0) throw new Error('Release Git identity failed');
+        return result.stdout.trim();
+    };
+    const identity = {
+        commit: git('rev-parse', 'HEAD'),
+        tree: git('rev-parse', 'HEAD^{tree}'),
+        dirty: git('status', '--porcelain', '--untracked-files=normal') !== '',
+    };
+    if (identity.dirty)
+        throw new Error(
+            'Release finalization requires a clean tracked and untracked checkout',
+        );
+    return identity;
 }

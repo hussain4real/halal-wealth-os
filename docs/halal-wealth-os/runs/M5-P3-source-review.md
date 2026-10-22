@@ -60,3 +60,20 @@ synthetic values through existing writers. The devnull job remains unchanged,
 including public dev-push/original-attempt/exact-merged-PR eligibility and its
 pinned signing action. Failed originals and later key recognition are separate
 facts; no signed publication is claimed before observing its actual outcome.
+
+## Hosted exact-head release correction
+
+The first hosted review found a P2 missed by the initial local source review:
+release finalization could emit PASS with a dirty checkout while recording
+HEAD's commit/tree. The historical local diagnostic passes remain functional
+evidence, not valid clean release records. Cycle 4 rejects any tracked/untracked
+change before finalization writes, removes a stale generated release record on
+a failed attempt, and independently checks current clean HEAD/tree in final
+acceptance. Actual temporary Git fixtures test clean, modified-tracked and
+untracked states. A real dirty-checkout finalizer call returned exit2, removed
+the stale PASS record and left its recovery receipt unchanged.
+
+The intentional failure probe still runs its expected failing Pest case before
+finalization; only the clean restored baseline can issue a passing release
+record. Independent correction review and new clean exact-head full CI/fresh
+hosted review are required before merge.

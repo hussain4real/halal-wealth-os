@@ -8,7 +8,9 @@ hosting, real data entry, live integrations and public launch remain pending.
 
 1. Record the exact reviewed commit/tree and `build/release-record.json` from the
    passing run. Match the asset manifest, lock hashes and ordered migrations.
-   A dirty local run is diagnostic; only the clean reviewed head can be merged.
+   Finalization refuses tracked or untracked changes. Commit reviewed source
+   before the final full gate; focused editing tests do not issue a release
+   record. Only a clean reviewed head can be merged.
 2. Require full uncached tests, coverage floors, HTTP/security/workload checks,
    acceptance map, encrypted recovery, independent source/rendered review and
    fresh exact-head hosted review/CI. Do not replace a failed original workflow

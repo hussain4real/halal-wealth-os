@@ -249,7 +249,7 @@
         {
             "id": "M5-P3",
             "depends_on": ["M5-P2"],
-            "status": "READY_FOR_REVIEW",
+            "status": "IN_PROGRESS",
             "owner": "m5p3-coordinator",
             "accepted_by": null,
             "accepted_at": null,
@@ -360,12 +360,12 @@
     },
     "execution_status": {
         "phase": "M5-P3",
-        "status": "READY_FOR_REVIEW",
-        "cycle": 3,
-        "cycles_used": 3,
+        "status": "CORRECTING_HOSTED_REVIEW",
+        "cycle": 4,
+        "cycles_used": 4,
         "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
-        "checkpoint": "Cycle 3 final uncached PASS928tests/6344assertions,57financialfloors,102IDs/287selectors; independent source/rendered/sanitation and nativeTIA gates PASS. Exact-head hosted CI/review, dev merge and original postmerge CI/publisher pending."
+        "checkpoint": "PR20 exact-head fresh review found P2: dirty checkout could emit PASS release record. Cycle4 rejects dirty/untracked before finalization and independently binds final acceptance to current cleanHEAD/tree; new tests, clean full CI/review required."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2649,7 +2649,7 @@
         "max_cycles": 6
     },
     "m5p3_local_completion": {
-        "result": "READY_FOR_REVIEW",
+        "result": "HISTORICAL_CYCLE3_LOCAL_DIAGNOSTIC_REQUIRES_CLEAN_RELEASE_CORRECTION",
         "base": "e80e91aca00db441ac0670e66eefda074e0f583f",
         "cycles_used": 3,
         "tests": 928,
@@ -2663,7 +2663,7 @@
         "rendered_review": "PASS",
         "native_tia": "FRESH_RECORD_REPLAY_PHP_AND_PAGE_SELECTION_PASS",
         "hosted_ci": "PENDING",
-        "fresh_hosted_review": "PENDING",
+        "fresh_hosted_review": "P2_DIRTY_RELEASE_RECORD_CORRECTION_REQUIRED",
         "dev_merge": "PENDING",
         "postmerge_application_ci": "PENDING",
         "signed_progress_publishing": "PENDING",

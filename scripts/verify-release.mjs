@@ -1,20 +1,17 @@
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { sourceIdentity, root } from './verification.mjs';
 import {
+    readReleaseIdentity,
     validateRecoveryProof,
     validateFinalizedProof,
 } from './release-proof.mjs';
 
 const digest = (file) =>
     createHash('sha256').update(readFileSync(file)).digest('hex');
-const git = (...args) => {
-    const result = spawnSync('git', args, { cwd: root, encoding: 'utf8' });
-    if (result.status !== 0) throw new Error('Release git identity failed');
-    return result.stdout.trim();
-};
 try {
+    rmSync('build/release-record.json', { force: true });
+    const identity = readReleaseIdentity(root);
     const recovery = JSON.parse(
         readFileSync('build/release-recovery.json', 'utf8'),
     );
@@ -66,9 +63,7 @@ try {
         result: 'PASS',
         phase: 'M5-P3',
         ...proof,
-        commit: git('rev-parse', 'HEAD'),
-        tree: git('rev-parse', 'HEAD^{tree}'),
-        dirty: git('status', '--porcelain', '--untracked-files=normal') !== '',
+        ...identity,
         build_manifest_sha256: digest(manifestPath),
         assets: hashes,
         lock_sha256: {

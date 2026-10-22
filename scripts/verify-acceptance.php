@@ -43,9 +43,25 @@ try {
             throw new RuntimeException('BLOCKED: financial coverage floor failed.');
         }
     }
+    $gitIdentity = [];
+    foreach (['commit' => ['git', 'rev-parse', 'HEAD'], 'tree' => ['git', 'rev-parse', 'HEAD^{tree}'], 'status' => ['git', 'status', '--porcelain', '--untracked-files=normal']] as $field => $command) {
+        $process = proc_open($command, [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, $root);
+        if (! is_resource($process)) {
+            throw new RuntimeException('BLOCKED: release Git identity is unavailable.');
+        }
+        $gitIdentity[$field] = trim(stream_get_contents($pipes[1]));
+        stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        if (proc_close($process) !== 0) {
+            throw new RuntimeException('BLOCKED: release Git identity failed.');
+        }
+    }
     $release = json_decode(file_get_contents($root.'/build/release-record.json'), true, flags: JSON_THROW_ON_ERROR);
     $recovery = json_decode(file_get_contents($root.'/build/release-recovery.json'), true, flags: JSON_THROW_ON_ERROR);
-    if (($release['result'] ?? '') !== 'PASS' || ($recovery['result'] ?? '') !== 'PASS'
+    if (($release['dirty'] ?? null) !== false || $gitIdentity['status'] !== ''
+        || ($release['commit'] ?? '') !== $gitIdentity['commit'] || ($release['tree'] ?? '') !== $gitIdentity['tree']
+        || ($release['result'] ?? '') !== 'PASS' || ($recovery['result'] ?? '') !== 'PASS'
         || ! hash_equals($source, $release['source_sha256'] ?? '') || ! hash_equals($source, $recovery['proof']['source_sha256'] ?? '')
         || ! hash_equals(hash_file('sha256', $root.'/build/junit.xml'), $release['junit_sha256'] ?? '')
         || ! hash_equals($release['junit_sha256'], $recovery['proof']['junit_sha256'] ?? '')

@@ -1,6 +1,6 @@
 # M5-P3 execution record
 
-Status: READY_FOR_REVIEW, cycle 3/6. M5-P3 is unaccepted. The human owner accepted
+Status: CORRECTING_HOSTED_REVIEW, cycle 4/6. M5-P3 is unaccepted. The human owner accepted
 M5-P2 and authorized canonical M5-P3 through independently reviewed dev
 publication, conditional normal merge, original post-merge CI and existing
 progress publisher verification. No production operation or M6 is authorized.
@@ -117,3 +117,17 @@ authorized dev PR, exact-head hosted CI/fresh review, normal noreply merge and
 original post-merge application CI plus actual signed publishing are still
 pending at this source-record checkpoint; their actual outcomes belong to the
 PR and final handoff rather than an invented pre-merge success.
+
+## Cycle 4 hosted finding
+
+PR20's fresh review of 077034d found that a dirty checkout could still emit a
+PASS release record tied to HEAD metadata. This blocks merge. Earlier cycle-3
+functional/browser/TIA results remain observed, while its dirty PASS release
+record is not an acceptable clean release artifact. Cycle 4 rejects dirty
+tracked/untracked source before finalization, removes stale output on rejection,
+and independently requires final acceptance to match current clean HEAD/tree.
+Real temporary Git fixtures and a real dirty-checkout finalizer negative passed;
+the latter exited2, removed the old record and preserved recovery bytes. No
+legacy check or intentional failure-probe expectation was weakened. Commit the
+reviewed correction before the clean full gate, then publish only after that
+passes and require a fresh hosted review/CI on the corrected head.

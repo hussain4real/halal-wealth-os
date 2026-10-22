@@ -290,8 +290,9 @@ readiness/2FA and populated downgrade-refusal cases. A fresh per-run identity an
 source inventory bind the actual recovery producer; stale or focused receipts
 cannot be relabeled as a current full run. Final release proof also binds current
 JUnit, the built asset manifest and hashes, dependency locks, exact Git commit/
-tree/dirty state and ordered migrations. Local dirty evidence remains diagnostic;
-clean exact-head hosted evidence is required for merge.
+tree/dirty state and ordered migrations. Finalization and final acceptance reject tracked/untracked changes and require
+the recorded commit/tree to equal current HEAD. Commit reviewed source before
+the final full gate; focused editing tests cannot issue a passing release record.
 
 The map extends through all five M5-P3 ACs, retaining all prior exact selectors,
 fixtures, scoped manual evidence and financial floors. New artifacts are

@@ -1497,7 +1497,7 @@
         },
         "m5p3-source": {
             "public_path": "docs/halal-wealth-os/runs/M5-P3-source-review.md",
-            "sha256": "a22fe4218b05e3642ed650e69f1d560296485e1da4ce9dcda40a5efa35b8e635",
+            "sha256": "7db68adf16fa0e4df5331d50d5487469697b12424be94eb56e54e1cd008137ae",
             "scope": "Independent export/security, recovery and verification source review; no remaining blocking P1/P2 after correction. No runtime or hosted pass substituted."
         },
         "m5p3-rendered": {
