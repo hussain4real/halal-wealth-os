@@ -1,3 +1,4 @@
+import { randomBytes } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import path from 'node:path';
@@ -49,6 +50,7 @@ try {
             'M4-P3',
             'M5-P1',
             'M5-P2',
+            'M5-P3',
         ].includes(phase)
     ) {
         throw new VerificationFailure(
@@ -77,9 +79,18 @@ try {
             'scripts/purification-attempt.test.mjs',
             'scripts/decision-tranches.test.mjs',
             'scripts/dashboard-targets.test.mjs',
+            'scripts/release-proof.test.mjs',
         ]);
         const missing = [];
-        for (const command of ['php', 'composer', 'node', 'npm', 'psql']) {
+        for (const command of [
+            'php',
+            'composer',
+            'node',
+            'npm',
+            'psql',
+            'pg_dump',
+            'pg_restore',
+        ]) {
             const result = spawnSync(command, ['--version'], {
                 cwd: root,
                 stdio: 'ignore',
@@ -110,7 +121,10 @@ try {
         }
         if (missing.length)
             throw new VerificationFailure(`BLOCKED:\n${missing.join('\n')}`);
-        const env = testingEnvironment();
+        const env = {
+            ...testingEnvironment(),
+            HWO_RELEASE_RUN_ID: randomBytes(16).toString('hex'),
+        };
         mkdirSync(path.join(root, 'build'), { recursive: true });
         for (const file of [
             'junit.xml',
@@ -118,6 +132,8 @@ try {
             'financial-coverage.json',
             'acceptance-http.json',
             'acceptance-map-report.json',
+            'release-recovery.json',
+            'release-record.json',
         ])
             rmSync(path.join(root, 'build', file), { force: true });
         run('composer', ['validate', '--strict'], { env });
@@ -244,6 +260,11 @@ try {
             'FinancialCoverageReportTest',
             'AcceptanceMapTest',
             'PerformanceReportTest',
+            'OwnerExportTest',
+            'EncryptedBackupTest',
+            'BackupFileTest',
+            'ReleaseReadinessTest',
+            'ReleaseRecoveryTest',
         ]) {
             if (!discovered.stdout.includes(required)) {
                 throw new VerificationFailure(
@@ -263,8 +284,9 @@ try {
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
         run('node', ['scripts/acceptance-http.mjs'], { env });
+        run('node', ['scripts/verify-release.mjs'], { env });
         run('php', ['scripts/verify-acceptance.php'], { env });
-        console.log('PASS M0-P2 through M5-P2 implemented verification');
+        console.log('PASS M0-P2 through M5-P3 implemented verification');
         console.log(
             'NOT_APPLICABLE: future domain suites, integrations, live AI and deployment.',
         );

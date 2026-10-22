@@ -43,15 +43,44 @@ try {
             throw new RuntimeException('BLOCKED: financial coverage floor failed.');
         }
     }
+    $gitIdentity = [];
+    foreach (['commit' => ['git', 'rev-parse', 'HEAD'], 'tree' => ['git', 'rev-parse', 'HEAD^{tree}'], 'status' => ['git', 'status', '--porcelain', '--untracked-files=normal']] as $field => $command) {
+        $process = proc_open($command, [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, $root);
+        if (! is_resource($process)) {
+            throw new RuntimeException('BLOCKED: release Git identity is unavailable.');
+        }
+        $gitIdentity[$field] = trim(stream_get_contents($pipes[1]));
+        stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        if (proc_close($process) !== 0) {
+            throw new RuntimeException('BLOCKED: release Git identity failed.');
+        }
+    }
+    $release = json_decode(file_get_contents($root.'/build/release-record.json'), true, flags: JSON_THROW_ON_ERROR);
+    $recovery = json_decode(file_get_contents($root.'/build/release-recovery.json'), true, flags: JSON_THROW_ON_ERROR);
+    if (($release['dirty'] ?? null) !== false || $gitIdentity['status'] !== ''
+        || ($release['commit'] ?? '') !== $gitIdentity['commit'] || ($release['tree'] ?? '') !== $gitIdentity['tree']
+        || ($release['result'] ?? '') !== 'PASS' || ($recovery['result'] ?? '') !== 'PASS'
+        || ! hash_equals($source, $release['source_sha256'] ?? '') || ! hash_equals($source, $recovery['proof']['source_sha256'] ?? '')
+        || ! hash_equals(hash_file('sha256', $root.'/build/junit.xml'), $release['junit_sha256'] ?? '')
+        || ! hash_equals($release['junit_sha256'], $recovery['proof']['junit_sha256'] ?? '')
+        || ! hash_equals(hash_file('sha256', $root.'/build/release-recovery.json'), $release['recovery_sha256'] ?? '')
+        || ! hash_equals($source, $recovery['producer']['source_sha256'] ?? '')
+        || ! is_string(getenv('HWO_RELEASE_RUN_ID')) || ! preg_match('/^[a-f0-9]{32}$/D', getenv('HWO_RELEASE_RUN_ID'))
+        || ! hash_equals(getenv('HWO_RELEASE_RUN_ID'), $recovery['producer']['run_id'] ?? '')
+        || $release['deployment_authorized'] !== false || $release['owner_phase_acceptance'] !== 'PENDING') {
+        throw new RuntimeException('BLOCKED: current release identity and actual recovery evidence do not match.');
+    }
     $report['result'] = 'PASS';
-    $report['tool_checks'] = ['HTTP_JOURNEY' => 'PASS', 'ACCEPTANCE_MAP' => 'PASS', 'FINANCIAL_COVERAGE' => 'PASS', 'HTTP_SECURITY' => 'PASS', 'DASHBOARD_PERFORMANCE' => 'PASS'];
+    $report['tool_checks'] = ['HTTP_JOURNEY' => 'PASS', 'ACCEPTANCE_MAP' => 'PASS', 'FINANCIAL_COVERAGE' => 'PASS', 'HTTP_SECURITY' => 'PASS', 'DASHBOARD_PERFORMANCE' => 'PASS', 'RELEASE_READINESS' => 'PASS'];
     foreach ($report['requirements'] as $row) {
         if ($row['tool_check'] !== null && ! isset($report['tool_checks'][$row['tool_check']])) {
             throw new RuntimeException('BLOCKED: unknown acceptance tool check.');
         }
     }
     $report['artifact_sha256'] = [];
-    foreach (['junit.xml', 'coverage.xml', 'financial-coverage.json', 'acceptance-http.json'] as $file) {
+    foreach (['junit.xml', 'coverage.xml', 'financial-coverage.json', 'acceptance-http.json', 'release-record.json', 'release-recovery.json'] as $file) {
         $report['artifact_sha256'][$file] = hash_file('sha256', $root.'/build/'.$file);
     }
     file_put_contents($root.'/build/acceptance-map-report.json', json_encode($report, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR)."\n");

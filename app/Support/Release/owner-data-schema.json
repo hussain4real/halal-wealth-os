@@ -1,0 +1,4267 @@
+{
+    "schema_version": 1,
+    "encoding": "Every non-null PostgreSQL scalar is text. JSON/JSONB is stored database JSON text, preserving numeric values; JSONB does not retain original input whitespace or key order.",
+    "profile_fields": [
+        "id",
+        "name",
+        "email",
+        "email_verified_at",
+        "created_at",
+        "updated_at"
+    ],
+    "excluded_reason": "Authentication material, sessions, infrastructure and migration metadata are operational backup data, not portable owner data. Operational logs and files are not included. Business idempotency identities remain financial request history.",
+    "tables": [
+        {
+            "table": "accounts",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "type",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency_code",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "archived_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "system_role",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "cache",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "value",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "expiration",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["key"]
+        },
+        {
+            "table": "cache_locks",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "expiration",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["key"]
+        },
+        {
+            "table": "cash_availability_settings",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "buffer_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "next_income_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "investment_target_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "requirements",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "overlap_links",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "investment_goals",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "dashboard_dismissal_requests",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "dismissal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "dashboard_dismissals",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "action_key",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "basis",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "dashboard_settings",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "data",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "dashboard_snapshots",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "decision_event_links",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_is_admin",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "opportunity_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "series_id",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "tranche_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "event_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "decision_opportunities",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_is_admin",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "series_id",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "status",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "target_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "maximum_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "tranches",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "attributes",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "decision_reservations",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_is_admin",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "opportunity_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "series_id",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "tranche_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reservation_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "failed_jobs",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "uuid",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "connection",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "queue",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "exception",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "failed_at",
+                    "type": "timestamp without time zone",
+                    "udt": "timestamp",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "fx_observations",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "series_id",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "purpose",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "base_currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "quote_currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "value",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "observed_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "effective_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "correction_reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "fx_operation_journals",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "operation_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "role",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["operation_id", "journal_id"]
+        },
+        {
+            "table": "fx_operations",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "request_payload",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source_account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "destination_account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source_currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "destination_currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "destination_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "fee_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "fee_side",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actual_rate_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "effective_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "description",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "replaces_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "status",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "fx_reversals",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "operation_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "goal_funding_links",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "goal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "posting_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "goal_plans",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "family_reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "mode",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "target_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "opening_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "opening_journal_cutoff",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "policy",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "contribution_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "first_deposit",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "target_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "standing_order",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reminders",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "closed",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "goal_releases",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reservation_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "goal_requests",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "operation",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "result_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "result_reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "goal_reservations",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "goal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "amount_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "investment_event_journals",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "event_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "portfolio_account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["event_id", "journal_id"]
+        },
+        {
+            "table": "investment_events",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "portfolio_account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "sort_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "request_payload",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "effective_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_family",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "quantity",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "unit_price",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "amount_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "fee_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "tax_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "split_numerator",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "split_denominator",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "subscription_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "reverses_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "replaces_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "action_reference",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "investment_valuation_runs",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "job_batches",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "total_jobs",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "pending_jobs",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "failed_jobs",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "failed_job_ids",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "options",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "cancelled_at",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "finished_at",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "jobs",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "queue",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "attempts",
+                    "type": "smallint",
+                    "udt": "int2",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reserved_at",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "available_at",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "journal_entries",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "request_payload",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "status",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "effective_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "description",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "receipt_reference",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "reverses_journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "replaces_journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "posted_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "migrations",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "migration",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "batch",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "opening_balance_intents",
+            "scope": "account",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency_code",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "amount_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "opening_balance_postings",
+            "scope": "opening",
+            "columns": [
+                {
+                    "name": "opening_intent_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["opening_intent_id"]
+        },
+        {
+            "table": "passkeys",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "user_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "credential_id",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "credential",
+                    "type": "json",
+                    "udt": "json",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "last_used_at",
+                    "type": "timestamp without time zone",
+                    "udt": "timestamp",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp without time zone",
+                    "udt": "timestamp",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "timestamp without time zone",
+                    "udt": "timestamp",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "password_reset_tokens",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "email",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "token",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp without time zone",
+                    "udt": "timestamp",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["email"]
+        },
+        {
+            "table": "planning_allocations",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "occurrence_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "amount_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "planning_attributions",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "category_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "planning_categories",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "family_reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "direction",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "normal_budget",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "emergency_essential",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "planning_occurrences",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "schedule_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "due_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "category_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "expected_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "planning_releases",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "allocation_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "planning_requests",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "operation",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "result_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "result_reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "planning_schedules",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "family_reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "category_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "expected_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "cadence",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "interval_months",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "first_due_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "provision_start_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "end_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "cutover_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "salary",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "standing_order",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "portfolio_accounts",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "platform_label",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "configured_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "portfolio_assets",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "family_reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "identifier",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "market",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "source",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "unsupported_terms",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "geography",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "geography_source",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "portfolio_mode_previews",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "portfolio_account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "prior_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "business_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "expires_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "baseline_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "portfolio_modes",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "portfolio_account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "preview_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "mode",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "effective_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "platform_label",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "aggregate_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "aggregate_as_of",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "investment_watermark",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "portfolio_opening_rows",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "opening_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_family",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "quantity",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "unit_price",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "manual_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "basis_known",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "basis_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "acquired_on",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "portfolio_openings",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "portfolio_account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "event_kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "as_of",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "row_count",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "portfolio_prices",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "portfolio_account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_family",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "series_id",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "unit_price",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "observed_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "effective_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "split_basis",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "portfolio_requests",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "target_table",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "target_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "postings",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency_code",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "amount_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "purification_allocations",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_is_admin",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "obligation_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payment_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "amount_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "purification_obligations",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_is_admin",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "series_id",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "distribution_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "distribution_lineage",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "assessment_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "method_reference",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "method_version",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "source_instruction",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "base_kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "base_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "base_explanation",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "calculation",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "rate_percent",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "fixed_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "due_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "purification_payments",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_is_admin",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payment_reference",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "amount_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "purification_releases",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_is_admin",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "allocation_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "reconciliation_adjustments",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "original_session_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "result_session_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "offset_role",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "reconciliation_sessions",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "statement_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "cutoff",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "ledger_minor",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "difference",
+                    "type": "numeric",
+                    "udt": "numeric",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "status",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "adjustment_journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "sessions",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "user_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "ip_address",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "user_agent",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "payload",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "last_activity",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "shariah_assessments",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "actor_is_admin",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_family",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "asset_kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "series_id",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "provenance",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "provider",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "methodology_version",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "classification",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "effective_on",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "review_due_on",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "evidence_refs",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source_url",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "business_findings",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "financial_findings",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "notes",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "users",
+            "scope": "profile",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "email",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "email_verified_at",
+                    "type": "timestamp without time zone",
+                    "udt": "timestamp",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "password",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "remember_token",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp without time zone",
+                    "udt": "timestamp",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "timestamp without time zone",
+                    "udt": "timestamp",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "two_factor_secret",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "two_factor_recovery_codes",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "two_factor_confirmed_at",
+                    "type": "timestamp without time zone",
+                    "udt": "timestamp",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "is_admin",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "valuation_reports",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "base_currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "cutoff",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "evidence_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        }
+    ]
+}

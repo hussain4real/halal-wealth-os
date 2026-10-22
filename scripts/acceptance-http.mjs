@@ -216,7 +216,7 @@ child.stderr.on('data', (chunk) => {
 });
 const report = {
     schema: 1,
-    phase: 'M5-P2',
+    phase: 'M5-P3',
     source_sha256: source,
     junit_sha256: existsSync(path.join(root, 'build/junit.xml'))
         ? createHash('sha256')

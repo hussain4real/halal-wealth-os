@@ -1311,6 +1311,131 @@
             "class": "Tests\\Unit\\AcceptanceMapTest",
             "name": "acceptance map refuses invalid configured requirement status",
             "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-f7e374182ca1": {
+            "class": "Tests\\Feature\\ReleaseRecoveryTest",
+            "name": "encrypted populated recovery reconciles complete tables balances positions reservations and shariah references",
+            "file": "tests/Feature/ReleaseRecoveryTest.php"
+        },
+        "case-5ab61c8e30ed": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "complete owner export is unavailable to guests",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-c679e38fdfcd": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "complete owner export contains every financial section and excludes authentication material",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-41e6f1679145": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "complete export preserves exact large values both opening ownership paths and foreign-owner isolation",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-ed0760d25597": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "complete export rejects unreviewed schema changes without leaving a partial download with data set \"dataset \"column\"\"",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-430940298787": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "complete export rejects unreviewed schema changes without leaving a partial download with data set \"dataset \"table\"\"",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-ff708eec4ffc": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "complete export cannot inherit an unknown transaction snapshot",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-7a42bb6f7dab": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "complete export enforces email verification recent password confirmation and no owner selector",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-2480bad39f72": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "populated owner export retains revisions exact nested decimals and released reservations",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-3f1723e863f6": {
+            "class": "Tests\\Feature\\ReleaseReadinessTest",
+            "name": "readiness checks real database migrations and returns only a minimal status",
+            "file": "tests/Feature/ReleaseReadinessTest.php"
+        },
+        "case-961bdb0058de": {
+            "class": "Tests\\Feature\\ReleaseReadinessTest",
+            "name": "private release checker rejects unsafe configuration without revealing values",
+            "file": "tests/Feature/ReleaseReadinessTest.php"
+        },
+        "case-0669838da422": {
+            "class": "Tests\\Feature\\ReleaseReadinessTest",
+            "name": "private release checker passes an explicitly isolated production-like profile while retaining deployment signoff",
+            "file": "tests/Feature/ReleaseReadinessTest.php"
+        },
+        "case-3d0b3d55cdd7": {
+            "class": "Tests\\Feature\\ReleaseReadinessTest",
+            "name": "debug-off production error responses disclose no exception trace or secret marker",
+            "file": "tests/Feature/ReleaseReadinessTest.php"
+        },
+        "case-cb4ccea54660": {
+            "class": "Tests\\Feature\\ReleaseReadinessTest",
+            "name": "confirmed two-factor enrollment login and single-use recovery protect production data routes",
+            "file": "tests/Feature/ReleaseReadinessTest.php"
+        },
+        "case-84c438d1a07a": {
+            "class": "Tests\\Unit\\EncryptedBackupTest",
+            "name": "encrypted backup roundtrips empty and multi-frame binary archives with data set \"dataset \"empty\"\"",
+            "file": "tests/Unit/EncryptedBackupTest.php"
+        },
+        "case-e3eedb69669d": {
+            "class": "Tests\\Unit\\EncryptedBackupTest",
+            "name": "encrypted backup roundtrips empty and multi-frame binary archives with data set \"dataset \"binary\"\"",
+            "file": "tests/Unit/EncryptedBackupTest.php"
+        },
+        "case-33c8cd47334e": {
+            "class": "Tests\\Unit\\EncryptedBackupTest",
+            "name": "damaged encrypted backup rejects the complete archive before writing any plaintext with data set \"('header')\"",
+            "file": "tests/Unit/EncryptedBackupTest.php"
+        },
+        "case-55451f5db99b": {
+            "class": "Tests\\Unit\\EncryptedBackupTest",
+            "name": "damaged encrypted backup rejects the complete archive before writing any plaintext with data set \"('ciphertext')\"",
+            "file": "tests/Unit/EncryptedBackupTest.php"
+        },
+        "case-ad1c9d2bb277": {
+            "class": "Tests\\Unit\\EncryptedBackupTest",
+            "name": "damaged encrypted backup rejects the complete archive before writing any plaintext with data set \"('truncated')\"",
+            "file": "tests/Unit/EncryptedBackupTest.php"
+        },
+        "case-2b07d3d0b046": {
+            "class": "Tests\\Unit\\EncryptedBackupTest",
+            "name": "damaged encrypted backup rejects the complete archive before writing any plaintext with data set \"('missing final')\"",
+            "file": "tests/Unit/EncryptedBackupTest.php"
+        },
+        "case-de1ae454338d": {
+            "class": "Tests\\Unit\\EncryptedBackupTest",
+            "name": "damaged encrypted backup rejects the complete archive before writing any plaintext with data set \"('trailing')\"",
+            "file": "tests/Unit/EncryptedBackupTest.php"
+        },
+        "case-84047aa92624": {
+            "class": "Tests\\Unit\\EncryptedBackupTest",
+            "name": "damaged encrypted backup rejects the complete archive before writing any plaintext with data set \"('oversized frame')\"",
+            "file": "tests/Unit/EncryptedBackupTest.php"
+        },
+        "case-7c330ce3022f": {
+            "class": "Tests\\Unit\\EncryptedBackupTest",
+            "name": "damaged encrypted backup rejects the complete archive before writing any plaintext with data set \"('wrong key')\"",
+            "file": "tests/Unit/EncryptedBackupTest.php"
+        },
+        "case-7152ecb0d0d5": {
+            "class": "Tests\\Unit\\BackupFileTest",
+            "name": "private backup file tool round trips and refuses wrong keys unsafe permissions and overwrites",
+            "file": "tests/Unit/BackupFileTest.php"
+        },
+        "case-15311975f36d": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "authenticated data settings page exposes complete export without embedding owner records",
+            "file": "tests/Feature/OwnerExportTest.php"
         }
     },
     "manual_artifacts": {
@@ -1369,6 +1494,16 @@
             "evidence_kind": "current_independent_rendered_review",
             "scope": "Current scoped independent review; actual observations and limitations are explicit. Not owner acceptance, hosted CI, merge or deployment.",
             "current_execution_claim": false
+        },
+        "m5p3-source": {
+            "public_path": "docs/halal-wealth-os/runs/M5-P3-source-review.md",
+            "sha256": "7db68adf16fa0e4df5331d50d5487469697b12424be94eb56e54e1cd008137ae",
+            "scope": "Independent export/security, recovery and verification source review; no remaining blocking P1/P2 after correction. No runtime or hosted pass substituted."
+        },
+        "m5p3-rendered": {
+            "public_path": "docs/halal-wealth-os/runs/M5-P3-rendered-review.md",
+            "sha256": "935cc1d4473fa89fb398d435fc47d6ed1d0c715489254425f7d1a18514b449b8",
+            "scope": "Actual isolated browser TOTP/recovery/export/keyboard/theme/mobile flows; no production deployment, CI or owner acceptance claim."
         }
     },
     "requirements": {
@@ -2415,6 +2550,70 @@
             ],
             "manual_artifact_ids": [],
             "tool_check": "DASHBOARD_PERFORMANCE"
+        },
+        "M5-P3-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-f7e374182ca1",
+                "case-84c438d1a07a",
+                "case-e3eedb69669d",
+                "case-33c8cd47334e",
+                "case-55451f5db99b",
+                "case-ad1c9d2bb277",
+                "case-2b07d3d0b046",
+                "case-de1ae454338d",
+                "case-84047aa92624",
+                "case-7c330ce3022f",
+                "case-7152ecb0d0d5"
+            ],
+            "manual_artifact_ids": ["m5p3-source"],
+            "tool_check": "RELEASE_READINESS"
+        },
+        "M5-P3-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-5ab61c8e30ed",
+                "case-c679e38fdfcd",
+                "case-41e6f1679145",
+                "case-ed0760d25597",
+                "case-430940298787",
+                "case-ff708eec4ffc",
+                "case-7a42bb6f7dab",
+                "case-2480bad39f72",
+                "case-15311975f36d"
+            ],
+            "manual_artifact_ids": ["m5p3-source", "m5p3-rendered"],
+            "tool_check": "RELEASE_READINESS"
+        },
+        "M5-P3-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-3f1723e863f6",
+                "case-961bdb0058de",
+                "case-0669838da422",
+                "case-3d0b3d55cdd7",
+                "case-cb4ccea54660"
+            ],
+            "manual_artifact_ids": ["m5p3-source", "m5p3-rendered"],
+            "tool_check": "RELEASE_READINESS"
+        },
+        "M5-P3-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-f7e374182ca1", "case-7152ecb0d0d5"],
+            "manual_artifact_ids": ["m5p3-source"],
+            "tool_check": "RELEASE_READINESS"
+        },
+        "M5-P3-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-3f1723e863f6",
+                "case-961bdb0058de",
+                "case-0669838da422",
+                "case-3d0b3d55cdd7",
+                "case-cb4ccea54660"
+            ],
+            "manual_artifact_ids": ["m5p3-source"],
+            "tool_check": "RELEASE_READINESS"
         }
     },
     "fixtures": {

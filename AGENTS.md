@@ -443,3 +443,22 @@ not proof; never skip failures or lower severity/gates. No M5-P3, new product
 features, broad refactors, production penetration tests, deployment, permission
 changes, external financial actions, new credentials, history rewriting or
 main/stage changes. Human M5-P2 acceptance remains separate; never self-accept.
+
+## Current M5-P3 authority
+
+The human owner explicitly accepted M5-P2 on 22 October 2026 and authorized
+canonical M5-P3 release/export/restore work, independent source and rendered
+review, a sanitized PR to dev, normal explicit-noreply merge after exact-head CI
+and a fresh hosted review, then original post-merge CI and existing /dev/null
+publishing verification. This supersedes earlier no-M5-P3 restrictions only
+within phases/M5-P3.md. Close the accepted M5-P2 claim and preserve its six-cycle
+history, all original failures and the separately authorized attempt-2 CI pass.
+M5-P3 has at most six scoped cycles under its new authority. One source writer;
+independent reviewers remain source-read-only with exclusive owned resources.
+
+Use isolated synthetic data for export/restore/security rehearsals. Preserve
+all starter features, PHP8.5 security floor, financial invariants and acceptance
+evidence. Use the existing approved progress signing key; its public lookup is
+recognized after owner sign-in, but no successful signed CI post is yet claimed.
+Do not deploy, migrate production, import real accounts, change permissions or
+credentials, alter main/stage, start M6, reset budgets or self-accept M5-P3/M5.
