@@ -1,6 +1,6 @@
 # M6-P1 implementation record
 
-Status: IN_PROGRESS, cycle 3 of at most 6. Owner: m6p1-coordinator; sole implementation writer.
+Status: IN_PROGRESS, cycle 4 of at most 6. Owner: m6p1-coordinator; sole implementation writer.
 
 The human owner accepted M5 and authorized canonical M6-P1, a PR to dev, merge after full CI and a fresh exact-head review, original post-merge CI and existing signed /dev/null verification. Baseline dev: `6de411da86858763537be326914fab86d3ffa19a`. Existing M5 acceptance/review metadata is carried forward intact.
 
@@ -38,8 +38,13 @@ and 720 assertions. These are editing-time checks, not a full clean release,
 hosted CI, phase acceptance or delivery claim. All original failures remain in
 private evidence. Full uncached/native/TIA/rendered and hosted gates remain due.
 
-
 The adjacent overlap case is also covered: an earlier single-row fingerprint
 cannot collapse two indistinguishable rows in a new statement. Only exact
 source-row anchors can recover known occurrences through repeated-row ambiguity;
 an owner must label a confirmed separate occurrence before it can be approved.
+
+## Cycle4
+
+The first committed clean full gate stopped at formatting in three evidence files
+edited after the prior formatter. No financial test or release pass was claimed.
+Keep the failed original, format the final records, then repeat all full gates.

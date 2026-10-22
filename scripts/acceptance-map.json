@@ -1910,9 +1910,7 @@
         "M0-P1-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Historical planning-only M0-P1-AC1 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
             ]
@@ -1920,9 +1918,7 @@
         "M0-P1-AC2": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Historical planning-only M0-P1-AC2 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
             ]
@@ -1930,9 +1926,7 @@
         "M0-P1-AC3": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Historical planning-only M0-P1-AC3 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
             ]
@@ -1940,9 +1934,7 @@
         "M0-P1-AC4": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Historical planning-only M0-P1-AC4 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
             ]
@@ -1950,9 +1942,7 @@
         "M0-P1-AC5": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Historical planning-only M0-P1-AC5 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
             ]
@@ -1960,9 +1950,7 @@
         "M0-P2-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -1970,48 +1958,31 @@
         "M0-P2-AC2": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC3": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-e4c94321f095",
-                "case-8b16d86a2e36"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "actual_case_ids": ["case-e4c94321f095", "case-8b16d86a2e36"],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC4": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-c59fb47fcc75",
-                "case-1aba06bbca25"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "actual_case_ids": ["case-c59fb47fcc75", "case-1aba06bbca25"],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC5": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-1910dadf35cc",
-                "case-908509c2a960"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "actual_case_ids": ["case-1910dadf35cc", "case-908509c2a960"],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2024,9 +1995,7 @@
                 "case-de8bad201adf",
                 "case-ec0e784ced79"
             ],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2038,9 +2007,7 @@
                 "case-68965d54a976",
                 "case-c557154a9c93"
             ],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2053,9 +2020,7 @@
                 "case-aeca49f5da80",
                 "case-66783f1c703c"
             ],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2063,9 +2028,7 @@
         "M0-P3-AC4": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2077,35 +2040,23 @@
                 "case-bcb27aa54c7d",
                 "case-57e98a76f5b4"
             ],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
                 "Retained accepted M0-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-61e4d6008f81",
-                "case-4db8735a7e07"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "actual_case_ids": ["case-61e4d6008f81", "case-4db8735a7e07"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC2": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-f302dc5082e7",
-                "case-99ffd8583856"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "actual_case_ids": ["case-f302dc5082e7", "case-99ffd8583856"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2117,35 +2068,23 @@
                 "case-6535587e6d46",
                 "case-e9db6ae26638"
             ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC4": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-43d293f8eba6",
-                "case-2087667a9aef"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "actual_case_ids": ["case-43d293f8eba6", "case-2087667a9aef"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC5": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-c557154a9c93",
-                "case-2087667a9aef"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "actual_case_ids": ["case-c557154a9c93", "case-2087667a9aef"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2157,35 +2096,23 @@
                 "case-420cee76ce21",
                 "case-66d3d5c300db"
             ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC2": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-2451928c330c",
-                "case-b2036b2d9c9d"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "actual_case_ids": ["case-2451928c330c", "case-b2036b2d9c9d"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC3": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-5f1d1bb1a4f3",
-                "case-d2934fcfdd0f"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "actual_case_ids": ["case-5f1d1bb1a4f3", "case-d2934fcfdd0f"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2199,9 +2126,7 @@
                 "case-de959608d4c0",
                 "case-781ddd8e4626"
             ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2213,22 +2138,15 @@
                 "case-47609171857e",
                 "case-c557154a9c93"
             ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-3474fb0c27cf",
-                "case-8e2525045c32"
-            ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "actual_case_ids": ["case-3474fb0c27cf", "case-8e2525045c32"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2240,9 +2158,7 @@
                 "case-8e2525045c32",
                 "case-b2036b2d9c9d"
             ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2254,9 +2170,7 @@
                 "case-5ceba252d89c",
                 "case-cb7a8b546d9a"
             ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2268,9 +2182,7 @@
                 "case-a2b3ccfd141d",
                 "case-8ca9de4537f3"
             ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2282,9 +2194,7 @@
                 "case-e35b1a63f931",
                 "case-990618d1a5b4"
             ],
-            "manual_artifact_ids": [
-                "artifact-fe013981bf9b"
-            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
                 "Retained accepted M1-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2297,22 +2207,15 @@
                 "case-4a0f3337decd",
                 "case-a83e921300ad"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC2": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-a3b8a876e042",
-                "case-562838bc96c4"
-            ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "actual_case_ids": ["case-a3b8a876e042", "case-562838bc96c4"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2324,9 +2227,7 @@
                 "case-c073dd275586",
                 "case-f91a7cc2f008"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2339,9 +2240,7 @@
                 "case-d4048da6d28e",
                 "case-6b20c14b4ca0"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2353,35 +2252,23 @@
                 "case-6ff0770fb217",
                 "case-84f1872f19e3"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-47ea3cf46f97",
-                "case-301966240417"
-            ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "actual_case_ids": ["case-47ea3cf46f97", "case-301966240417"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC2": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-547405900300",
-                "case-87f2cad8ab02"
-            ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "actual_case_ids": ["case-547405900300", "case-87f2cad8ab02"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2393,9 +2280,7 @@
                 "case-ec9185e53baf",
                 "case-705e5bb5de77"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2407,9 +2292,7 @@
                 "case-f84d3e7760db",
                 "case-d9eed911d76e"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2421,22 +2304,15 @@
                 "case-9c99fcb3642d",
                 "case-301966240417"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-ccff5c0358f9",
-                "case-bca0cf569511"
-            ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "actual_case_ids": ["case-ccff5c0358f9", "case-bca0cf569511"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2448,22 +2324,15 @@
                 "case-051e5469d3b3",
                 "case-3c3a316c4aab"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC3": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-2878e01c757c",
-                "case-bd1e4854f681"
-            ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "actual_case_ids": ["case-2878e01c757c", "case-bd1e4854f681"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2476,9 +2345,7 @@
                 "case-19a5c0652244",
                 "case-0ecc9b2791c5"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2490,9 +2357,7 @@
                 "case-1686ee160614",
                 "case-92262d57e956"
             ],
-            "manual_artifact_ids": [
-                "artifact-a429dd02b34b"
-            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
                 "Retained accepted M2-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2504,35 +2369,23 @@
                 "case-686aeeb234c6",
                 "case-f680c6448bd1"
             ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC2": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-44e67225987c",
-                "case-e99d5121cae2"
-            ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "actual_case_ids": ["case-44e67225987c", "case-e99d5121cae2"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC3": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-3cb7e0534f84",
-                "case-43d357887387"
-            ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "actual_case_ids": ["case-3cb7e0534f84", "case-43d357887387"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2545,22 +2398,15 @@
                 "case-21b4a022523a",
                 "case-65062b8eb8fa"
             ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC5": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-445ec7f01f6c",
-                "case-67e5e308249f"
-            ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "actual_case_ids": ["case-445ec7f01f6c", "case-67e5e308249f"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "scope": "Automated spoofing/manual-instrument guards plus retained explicit label/source review. These selectors alone do not establish the current screen wording; inherited UX-M3-01 remains recorded until repaired and re-reviewed.",
             "manual_scope": [
                 "Retained accepted M3-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
@@ -2573,9 +2419,7 @@
                 "case-c3f5f69302d0",
                 "case-94e18d8978e8"
             ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2587,22 +2431,15 @@
                 "case-aa0977db160e",
                 "case-8a54ca4eef24"
             ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC3": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-3ef230e9017f",
-                "case-836fbdb05982"
-            ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "actual_case_ids": ["case-3ef230e9017f", "case-836fbdb05982"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2614,9 +2451,7 @@
                 "case-590db2a54e47",
                 "case-175d693dd46c"
             ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2628,22 +2463,15 @@
                 "case-beda2c4af963",
                 "case-44aff7eb41e0"
             ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-79cbc09de831",
-                "case-166f5dda32d2"
-            ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "actual_case_ids": ["case-79cbc09de831", "case-166f5dda32d2"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2655,9 +2483,7 @@
                 "case-43d357887387",
                 "case-ba0c551f61c3"
             ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2669,9 +2495,7 @@
                 "case-ef8315a58fbd",
                 "case-8ca0db056cce"
             ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2683,61 +2507,39 @@
                 "case-a7545c9276ec",
                 "case-8dec9b8e3264"
             ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC5": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-ca316273e5c8",
-                "case-20c43940e775"
-            ],
-            "manual_artifact_ids": [
-                "artifact-10ce17c36a57"
-            ],
+            "actual_case_ids": ["case-ca316273e5c8", "case-20c43940e775"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
                 "Retained accepted M3-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-11e37ec00cbd",
-                "case-599b93f8e711"
-            ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "actual_case_ids": ["case-11e37ec00cbd", "case-599b93f8e711"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC2": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-83c380d01fdf",
-                "case-043c5152045e"
-            ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "actual_case_ids": ["case-83c380d01fdf", "case-043c5152045e"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC3": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-6f0fade57e0b",
-                "case-92a7a05ac493"
-            ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "actual_case_ids": ["case-6f0fade57e0b", "case-92a7a05ac493"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2749,9 +2551,7 @@
                 "case-4eeef3b3a1f3",
                 "case-10b1b435e416"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2765,35 +2565,23 @@
                 "case-efd10f946d25",
                 "case-bb48da69d003"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-6de7d845e945",
-                "case-7da1491fef42"
-            ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "actual_case_ids": ["case-6de7d845e945", "case-7da1491fef42"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC2": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-6de7d845e945",
-                "case-a069fa805759"
-            ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "actual_case_ids": ["case-6de7d845e945", "case-a069fa805759"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2805,9 +2593,7 @@
                 "case-750483d21da6",
                 "case-a78977ca8f57"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2820,9 +2606,7 @@
                 "case-72b22c89aab8",
                 "case-55188ec93106"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2835,9 +2619,7 @@
                 "case-0ce307f47a21",
                 "case-294df6db2bce"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2849,9 +2631,7 @@
                 "case-c9053c83520c",
                 "case-7eae1d20bf2b"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2863,9 +2643,7 @@
                 "case-bdc6ab0f08d7",
                 "case-35320516b635"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2877,9 +2655,7 @@
                 "case-d33ca4f2fed4",
                 "case-ec9185e53baf"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2891,9 +2667,7 @@
                 "case-72a580a8f2ba",
                 "case-187a423cb915"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2905,9 +2679,7 @@
                 "case-c0ed6f0d9569",
                 "case-cf02e0b7e44a"
             ],
-            "manual_artifact_ids": [
-                "artifact-d6acb6501975"
-            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
                 "Retained accepted M4-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2919,9 +2691,7 @@
                 "case-87b71acce4c3",
                 "case-a32d275bc059"
             ],
-            "manual_artifact_ids": [
-                "artifact-41caa6f2a7f9"
-            ],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
                 "Retained accepted M5-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2933,35 +2703,23 @@
                 "case-4988f351b3c2",
                 "case-1e29a7686d4b"
             ],
-            "manual_artifact_ids": [
-                "artifact-41caa6f2a7f9"
-            ],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
                 "Retained accepted M5-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC3": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-c2210969e4db",
-                "case-5aeae6feaeff"
-            ],
-            "manual_artifact_ids": [
-                "artifact-41caa6f2a7f9"
-            ],
+            "actual_case_ids": ["case-c2210969e4db", "case-5aeae6feaeff"],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
                 "Retained accepted M5-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC4": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-d084eb6f3c5d",
-                "case-03db6e7dee30"
-            ],
-            "manual_artifact_ids": [
-                "artifact-41caa6f2a7f9"
-            ],
+            "actual_case_ids": ["case-d084eb6f3c5d", "case-03db6e7dee30"],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
                 "Retained accepted M5-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -2973,9 +2731,7 @@
                 "case-c35ab5c702f3",
                 "case-1044aaaadea8"
             ],
-            "manual_artifact_ids": [
-                "artifact-41caa6f2a7f9"
-            ],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
                 "Retained accepted M5-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
@@ -3175,9 +2931,7 @@
         "INV-12": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "artifact-fef43d579e25"
-            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
             "scope": "Retained manual original harness observations; current M5-P2 report/failure-propagation/mandatory-artifact gates must execute anew. No JUnit selector is invented to stand in for CLI/approval evidence.",
             "manual_scope": [
                 "Retained real failure propagation and negative report/tool/service checks; fresh full/CI receipts remain separate."
@@ -3186,9 +2940,7 @@
         "M5-P2-AC1": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
             "actual_case_ids": [],
-            "manual_artifact_ids": [
-                "m5p2-rendered"
-            ],
+            "manual_artifact_ids": ["m5p2-rendered"],
             "tool_check": "HTTP_JOURNEY"
         },
         "M5-P2-AC2": {
@@ -3222,9 +2974,7 @@
                 "case-c5ac3d7fda79",
                 "case-6a011c3493bd"
             ],
-            "manual_artifact_ids": [
-                "m5p2-source"
-            ],
+            "manual_artifact_ids": ["m5p2-source"],
             "tool_check": "ACCEPTANCE_MAP"
         },
         "M5-P2-AC3": {
@@ -3256,10 +3006,7 @@
                 "case-01f08e02ea1b",
                 "case-e1de6be96de6"
             ],
-            "manual_artifact_ids": [
-                "m5p2-source",
-                "m5p2-rendered"
-            ],
+            "manual_artifact_ids": ["m5p2-source", "m5p2-rendered"],
             "tool_check": "HTTP_SECURITY"
         },
         "M5-P2-AC5": {
@@ -3296,9 +3043,7 @@
                 "case-7c330ce3022f",
                 "case-7152ecb0d0d5"
             ],
-            "manual_artifact_ids": [
-                "m5p3-source"
-            ],
+            "manual_artifact_ids": ["m5p3-source"],
             "tool_check": "RELEASE_READINESS"
         },
         "M5-P3-AC2": {
@@ -3314,10 +3059,7 @@
                 "case-2480bad39f72",
                 "case-15311975f36d"
             ],
-            "manual_artifact_ids": [
-                "m5p3-source",
-                "m5p3-rendered"
-            ],
+            "manual_artifact_ids": ["m5p3-source", "m5p3-rendered"],
             "tool_check": "RELEASE_READINESS"
         },
         "M5-P3-AC3": {
@@ -3329,21 +3071,13 @@
                 "case-3d0b3d55cdd7",
                 "case-cb4ccea54660"
             ],
-            "manual_artifact_ids": [
-                "m5p3-source",
-                "m5p3-rendered"
-            ],
+            "manual_artifact_ids": ["m5p3-source", "m5p3-rendered"],
             "tool_check": "RELEASE_READINESS"
         },
         "M5-P3-AC4": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [
-                "case-f7e374182ca1",
-                "case-7152ecb0d0d5"
-            ],
-            "manual_artifact_ids": [
-                "m5p3-source"
-            ],
+            "actual_case_ids": ["case-f7e374182ca1", "case-7152ecb0d0d5"],
+            "manual_artifact_ids": ["m5p3-source"],
             "tool_check": "RELEASE_READINESS"
         },
         "M5-P3-AC5": {
@@ -3355,9 +3089,7 @@
                 "case-3d0b3d55cdd7",
                 "case-cb4ccea54660"
             ],
-            "manual_artifact_ids": [
-                "m5p3-source"
-            ],
+            "manual_artifact_ids": ["m5p3-source"],
             "tool_check": "RELEASE_READINESS"
         },
         "M6-P1-AC1": {
@@ -3477,130 +3209,91 @@
         "F01": {
             "name": "Exact money",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-61e4d6008f81",
-                "case-f302dc5082e7"
-            ],
+            "case_ids": ["case-61e4d6008f81", "case-f302dc5082e7"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F02": {
             "name": "Transfer invariance",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-2451928c330c",
-                "case-b2036b2d9c9d"
-            ],
+            "case_ids": ["case-2451928c330c", "case-b2036b2d9c9d"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F03": {
             "name": "Atomicity and retry",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-609e39e2e0d7",
-                "case-5f1d1bb1a4f3"
-            ],
+            "case_ids": ["case-609e39e2e0d7", "case-5f1d1bb1a4f3"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F04": {
             "name": "FX conversion",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-3474fb0c27cf",
-                "case-8e2525045c32"
-            ],
+            "case_ids": ["case-3474fb0c27cf", "case-8e2525045c32"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F05": {
             "name": "Emergency target",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-47ea3cf46f97",
-                "case-301966240417"
-            ],
+            "case_ids": ["case-47ea3cf46f97", "case-301966240417"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F06": {
             "name": "Different expense flags",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-487ccde9312d",
-                "case-4a0f3337decd"
-            ],
+            "case_ids": ["case-487ccde9312d", "case-4a0f3337decd"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F07": {
             "name": "Deployable-now",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-ccff5c0358f9",
-                "case-c34b5dfe431e"
-            ],
+            "case_ids": ["case-ccff5c0358f9", "case-c34b5dfe431e"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F08": {
             "name": "Book cost and sale",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-cb8ca63c36f1",
-                "case-94e18d8978e8"
-            ],
+            "case_ids": ["case-cb8ca63c36f1", "case-94e18d8978e8"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F09": {
             "name": "IPO subscription",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-f8fa4ee4ae00",
-                "case-8a54ca4eef24"
-            ],
+            "case_ids": ["case-f8fa4ee4ae00", "case-8a54ca4eef24"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F10": {
             "name": "Split",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-3ef230e9017f",
-                "case-836fbdb05982"
-            ],
+            "case_ids": ["case-3ef230e9017f", "case-836fbdb05982"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F11": {
             "name": "FX-adjusted return",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-79cbc09de831",
-                "case-166f5dda32d2"
-            ],
+            "case_ids": ["case-79cbc09de831", "case-166f5dda32d2"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F12": {
             "name": "Purification linkage",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-6de7d845e945",
-                "case-a069fa805759"
-            ],
+            "case_ids": ["case-6de7d845e945", "case-a069fa805759"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
         "F13": {
             "name": "Investment plan",
             "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
-            "case_ids": [
-                "case-a2eec4517c66",
-                "case-c9053c83520c"
-            ],
+            "case_ids": ["case-a2eec4517c66", "case-c9053c83520c"],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
         },
@@ -3615,9 +3308,7 @@
             ],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed.",
-            "requirement_refs": [
-                "INV-10"
-            ]
+            "requirement_refs": ["INV-10"]
         },
         "F15": {
             "name": "Missing evidence/data",
@@ -3642,11 +3333,7 @@
             ],
             "source_originals": "PRIVATE_NOT_EMBEDDED",
             "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed.",
-            "requirement_refs": [
-                "M2-P2-AC3",
-                "M2-P2-AC4",
-                "INV-05"
-            ]
+            "requirement_refs": ["M2-P2-AC3", "M2-P2-AC4", "INV-05"]
         },
         "F17": {
             "name": "Import and provider retry",
@@ -3673,9 +3360,7 @@
                 "case-m6p1-c163a1c10dfa"
             ],
             "scope": "Current exact synthetic statement reupload/identity/atomic retry cases only. Provider-job and outbox-delivery retries remain future unimplemented M6 phases; original private fixture inputs are not newly executed.",
-            "implemented_subscenarios": [
-                "statement_reupload"
-            ],
+            "implemented_subscenarios": ["statement_reupload"],
             "future_subscenarios": [
                 "provider_job_retry",
                 "outbox_delivery_retry"
