@@ -50,3 +50,24 @@ subsequent narrow affected checks retain their distinct source identities in
 [the phase run](M6-P1-local.md). Final exact-head hosted full CI/fresh review,
 original dev CI and signed public publishing remain required. This review does
 not accept M6-P1 or authorize a production deployment.
+
+## Post-publication cancellation-switch recheck
+
+A later actual browser check on published head `f0db873` reproduced one additional
+client-flow defect: a prepared replacement switched to reversal-only retained a
+disabled row value. The server rejected the inconsistent request with a focused,
+definitive no-write response. That failed observation is retained privately.
+
+The client now sends a replacement row only when its frozen request actually
+selects a replacement preview. Independent source review confirmed that a pending
+replacement retry retains its original preview, row, reason and request key.
+Independent real-browser recheck submitted the same switch-to-cancel path with
+both replacement fields null, completed the linked cancellation, and confirmed
+zero net cash on that cancelled root. A separate interrupted replacement retried
+unchanged and produced the correct linked replacement. Screenshots were viewed
+and hashed; no unbalanced journal was found. The finding is resolved in the
+scoped client patch. Owned recreated runtime and credentials were cleaned up.
+
+The correction consumes Cycle6 of the existing six-cycle authorization. The final
+new head must receive full original hosted CI and a fresh review; earlier-head
+CI or review cannot authorize its merge. M6-P1 acceptance remains a human decision.

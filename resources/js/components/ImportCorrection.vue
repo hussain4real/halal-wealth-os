@@ -23,7 +23,9 @@ const { fields, locked, busy, errors, notice, submit, recover } =
         (fields) => ({
             ...fields,
             replacement_id: fields.replacement_id || null,
-            replacement_row: fields.replacement_row || null,
+            replacement_row: fields.replacement_id
+                ? fields.replacement_row || null
+                : null,
         }),
     );
 const confirmed = ref(false);

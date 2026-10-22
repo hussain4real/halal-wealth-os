@@ -1,6 +1,6 @@
 # M6-P1 implementation record
 
-Status: IN_PROGRESS, cycle 5 of at most 6. Owner: m6p1-coordinator; sole implementation writer.
+Status: IN_PROGRESS, cycle 6 of at most 6. Owner: m6p1-coordinator; sole implementation writer.
 
 The human owner accepted M5 and authorized canonical M6-P1, a PR to dev, merge after full CI and a fresh exact-head review, original post-merge CI and existing signed /dev/null verification. Baseline dev: `6de411da86858763537be326914fab86d3ffa19a`. Existing M5 acceptance/review metadata is carried forward intact.
 
@@ -103,3 +103,27 @@ rechecked the mobile layout. No blocking source/rendered finding remains; all
 four identity findings and the low selector finding are resolved. See
 [the independent review](M6-P1-independent-review.md). Fresh hosted CI/review,
 normal dev merge and original post-merge CI/publication remain unclaimed here.
+
+## Cycle6 post-publication cancellation correction
+
+Before merge, an additional actual browser path confirmed that choosing a
+replacement row and then switching to reversal-only retained the now-disabled
+row field. The request sent no replacement preview but row1; the backend safely
+rejected it with a definitive no-write response. Preserve that observed failure.
+Scope the client row payload to an actually selected replacement, retaining
+unchanged frozen payloads for interrupted replacement retries. Independent
+source and actual switch-and-cancel rechecks, affected frontend/TIA and final
+new-head original CI/fresh review are required. The earlier published head and
+its original CI/review are preserved; they cannot authorize merging a newer head.
+
+The narrow client correction passed lint, TypeScript and build. Independent actual
+browser recheck confirmed the repaired cancellation payload, complete linked
+reversal and net-zero cancelled root; a separate interrupted replacement retained
+its original row/preview on unchanged retry and completed its linked replacement.
+Independent source review found no remaining blocker in the conditional transform.
+All original failing observations and prior proof identities remain preserved.
+
+Fresh native TIA after the cancellation patch passed all 1,012 tests and 6,807
+assertions. The phase is READY_FOR_REVIEW locally, with no remaining demonstrated
+local blocker. Final new-head hosted full CI/fresh review and original dev
+CI/publication are still required; neither M6-P1 nor M6 is self-accepted.

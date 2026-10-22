@@ -365,12 +365,12 @@
     "execution_status": {
         "phase": "M6-P1",
         "status": "READY_FOR_REVIEW",
-        "cycle": 5,
-        "cycles_used": 5,
+        "cycle": 6,
+        "cycles_used": 6,
         "max_cycles": 6,
         "phase_acceptance": "PENDING_HUMAN_DECISION",
         "milestone_acceptance": "M5_ACCEPTED",
-        "checkpoint": "Cycle5 local full original probe passed at598d0f7; final selector polish at0ab4ae8 passed affected HTTP/PHPStan/frontend and independent source/rendered re-review. Final fresh native TIA running. READY_FOR_REVIEW; exact-head hosted originalCI/freshreview, devmerge and originalpostmergeCI/publishing pending. Human M6-P1 acceptance pending."
+        "checkpoint": "Cycle6 cancellation-switch fix verified by independent actualbrowser andsource, lint/types/build, freshnativeTIA1012tests6807assertions. No remaining demonstrated localfinding. READY_FOR_REVIEW; finalnewhead stillrequiresoriginalfullhostedCI/freshreview,devmerge,originalpostmergeCIandsignedpublicpost. M6-P1owneracceptancepending."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2833,9 +2833,9 @@
         "exact_selectors": 367,
         "recovery_tables": 63,
         "original_failure_probe": "PASS_BASELINE_DELIBERATE_FAILURE_RESTORED_BASELINE",
-        "native_tia": "FRESH_PASS_1012_TESTS_6807_ASSERTIONS_BEFORE_SELECTOR_POLISH",
+        "native_tia": "FRESH_CYCLE6_PASS_1012_TESTS_6807_ASSERTIONS",
         "source_review": "READY_FOR_REVIEW",
-        "rendered_review": "PASS_ACTUAL_JOURNEY_AND_POLISHED_SELECTOR_RECHECK",
+        "rendered_review": "PASS_INITIAL_JOURNEY_POLISHED_SELECTOR_AND_CANCELLATION_SWITCH_PLUS_PENDING_REPLACEMENT_RETRY",
         "phase_acceptance": "PENDING_HUMAN_DECISION",
         "hosted_delivery": "PENDING",
         "independent_review": "runs/M6-P1-independent-review.md"
