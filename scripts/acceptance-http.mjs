@@ -14,6 +14,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { root, testingEnvironment, sourceIdentity } from './verification.mjs';
+import { statementJourney } from './statement-http.mjs';
 
 const directory = mkdtempSync(path.join(root, '.runtime/acceptance-'));
 const metricsFile = path.join(directory, 'requests.jsonl');
@@ -216,7 +217,7 @@ child.stderr.on('data', (chunk) => {
 });
 const report = {
     schema: 1,
-    phase: 'M5-P3',
+    phase: 'M6-P1',
     source_sha256: source,
     junit_sha256: existsSync(path.join(root, 'build/junit.xml'))
         ? createHash('sha256')
@@ -438,6 +439,19 @@ try {
             .net_worth.total.minor,
         '91600',
     );
+    const imported = await statementJourney({
+        owner,
+        foreign,
+        admin,
+        account: bank,
+        date: prepared.date,
+        page,
+        fixture,
+        key,
+    });
+    const importMarkers = imported.private_markers;
+    delete imported.private_markers;
+    report.statement_import = imported;
     const foreignPaths = [
         `/accounts/${bank}`,
         `/transactions/${salary.id}`,
@@ -483,6 +497,11 @@ try {
         '/valuations',
         '/dashboard/snapshots',
         '/dashboard/rules',
+        '/imports',
+        '/imports/inspect',
+        `/imports/${imported.preview_id}/approve`,
+        `/imports/${imported.preview_id}/revise`,
+        `/imports/receipts/${imported.receipt_id}/1/correct`,
     ];
     const boundaryState = fixture('fingerprint').sha256;
     const uploadFilesBefore = storedFiles(
@@ -612,10 +631,21 @@ try {
         logs.includes('auth.login'),
         'Real authentication log positive control is required',
     );
+    const sessions = storedFiles(
+        path.join(env.LARAVEL_STORAGE_PATH, 'framework/sessions'),
+    )
+        .map((file) => readFileSync(file, 'utf8'))
+        .join('\n');
+    for (const marker of importMarkers)
+        assert(
+            !sessions.includes(marker),
+            'Statement financial input must not be flashed into file sessions',
+        );
     for (const secret of [
         ...secrets,
         'acceptance-owner@example.test',
         'Synthetic manual acceptance',
+        ...importMarkers,
     ])
         assert(
             secret && !logs.includes(secret) && !serverLog.includes(secret),
@@ -633,7 +663,8 @@ try {
         result: 'PASS',
         foreign_owner_and_admin_reads: foreignPaths.length * 2,
         protected_route_count: protectedRoutes.length,
-        multipart_files: 'REJECTED_NO_FINANCIAL_WRITES',
+        multipart_files:
+            'UNSUPPORTED_ATTACHMENTS_REJECTED_SUPPORTED_CSV_SEPARATELY_VERIFIED',
         sensitive_logs:
             'NO_SYNTHETIC_SECRETS_OR_FINANCIAL_INPUT_WITH_AUTH_POSITIVE_CONTROL',
         cross_site_no_token: 'DENIED',

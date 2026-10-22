@@ -2,6 +2,7 @@
 
 namespace Tests\Support;
 
+use App\Domain\Imports\StatementImports;
 use App\Domain\Ledger\AccountType;
 use App\Domain\Ledger\CreateAccount;
 use App\Domain\Ledger\PostingService;
@@ -37,9 +38,17 @@ final class ReleaseFixtures
         PortfolioFixtures::mode($owner, $fractionalPortfolio);
         $foreignBank = FxFixtures::account($foreign);
         GoalFixtures::cash($foreign, $foreignBank, '23.67');
+        $imports = app(StatementImports::class);
+        $source = StatementFixtures::preview($owner, $bank, [['amount' => '1.23', 'provider_id' => 'SYNTHETIC-RECOVERY-IMPORT']]);
+        $imported = $imports->approve($owner, (string) $source->id, 'synthetic-recovery-import', ['1']);
+        $replacement = StatementFixtures::preview($owner, $bank, [['amount' => '2.34', 'provider_id' => 'SYNTHETIC-RECOVERY-IMPORT']]);
+        $corrected = $imports->correct($owner, (string) $imported->id, '1', 'synthetic-recovery-import-replace', 'Synthetic retained replacement', (string) $replacement->id, '1');
+        $cancelled = $imports->correct($owner, (string) $corrected->id, '1', 'synthetic-recovery-import-cancel', 'Synthetic retained cancellation');
+        StatementFixtures::preview($foreign, $foreignBank, [['description' => 'FOREIGN-STATEMENT-SOURCE-MUST-NOT-APPEAR', 'provider_id' => 'FOREIGN-STATEMENT-ID']]);
 
         return ['owner' => (string) $owner->id, 'foreign' => (string) $foreign->id, 'bank' => (string) $bank->id,
             'goal' => (string) $goal->id, 'portfolio' => (string) $fractionalPortfolio->id,
-            'assessment' => (string) $fixture['assessment']->id];
+            'assessment' => (string) $fixture['assessment']->id, 'import_source' => (string) $source->source_id, 'import_snapshot' => (string) $source->id,
+            'import_receipt' => (string) $imported->id, 'import_corrected' => (string) $corrected->id, 'import_cancelled' => (string) $cancelled->id];
     }
 }

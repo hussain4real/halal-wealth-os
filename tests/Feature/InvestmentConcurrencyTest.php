@@ -193,6 +193,8 @@ test('investment reservation pool cannot overlap bank cash goal backing', functi
     expect(fn () => app(GoalBacking::class)->account($this->owner, (string) $this->account->id))->toThrow(ValidationException::class);
 });
 test('empty event schema roundtrip preserves existing opening journal bytes and retained events refuse downgrade', function () {
+    $imports = require database_path('migrations/2026_10_22_100000_create_statement_imports.php');
+    $imports->down();
     P::opening($this->owner, $this->p, [P::row($this->asset)]);
     $journals = DB::table('journal_entries')->orderBy('id')->get()->toJson();
     $opening = DB::table('portfolio_opening_rows')->get()->toJson();
@@ -206,6 +208,7 @@ test('empty event schema roundtrip preserves existing opening journal bytes and 
     $migration->up();
     $purification->up();
     $decisions->up();
+    $imports->up();
     expect(DB::table('journal_entries')->orderBy('id')->get()->toJson())->toBe($journals)->and(DB::table('portfolio_opening_rows')->get()->toJson())->toBe($opening);
     $event = I::event($this->owner, $this->p, $this->asset);
     expect(fn () => DB::transaction(fn () => DB::table('investment_events')->where('id', $event->id)->update(['reason' => 'Mutated'])))->toThrow(PDOException::class);

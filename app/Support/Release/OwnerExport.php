@@ -44,12 +44,12 @@ final class OwnerExport
                     throw new RuntimeException('Export owner is unavailable.');
                 }
                 $captured = $connection->selectOne('SELECT transaction_timestamp()::text AS captured')->captured;
-                $manifest = ['schema_version' => 1, 'captured_at' => $captured, 'encoding' => $contract['encoding'],
+                $manifest = ['schema_version' => $contract['schema_version'], 'captured_at' => $captured, 'encoding' => $contract['encoding'],
                     'contract_sha256' => $contract['sha256'],
                     'scope' => 'Complete retained owner database history; not an authentication or operational restore backup.',
                     'profile_fields' => $contract['profile_fields'], 'excluded_reason' => $contract['excluded_reason'],
                     'excluded_tables' => [], 'sections' => []];
-                self::write($output, '{"schema_version":1,"profile":'.self::json($profile).',"data":{');
+                self::write($output, '{"schema_version":'.self::json($contract['schema_version']).',"profile":'.self::json($profile).',"data":{');
                 $firstTable = true;
                 foreach ($contract['tables'] as $table) {
                     if ($table['scope'] === 'excluded') {

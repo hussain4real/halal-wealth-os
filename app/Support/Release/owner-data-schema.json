@@ -1,5 +1,5 @@
 {
-    "schema_version": 1,
+    "schema_version": 2,
     "encoding": "Every non-null PostgreSQL scalar is text. JSON/JSONB is stored database JSON text, preserving numeric values; JSONB does not retain original input whitespace or key order.",
     "profile_fields": [
         "id",
@@ -4110,6 +4110,329 @@
                 },
                 {
                     "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "statement_adapters",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "config",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "digest",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "statement_claims",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "logical_key",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "fact_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "receipt_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "token",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "journal_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "event_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "portfolio_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "statement_receipts",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "request_payload",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "snapshot_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "outcomes",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "corrects_receipt_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "corrects_token",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "reason",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "statement_snapshots",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "adapter_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "digest",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "interpretation",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "statement_sources",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "namespace",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "account_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "currency",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "digest",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "byte_count",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source_base64",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
                     "type": "timestamp with time zone",
                     "udt": "timestamptz",
                     "nullable": "NO"

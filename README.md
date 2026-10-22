@@ -4,11 +4,16 @@ A private personal wealth application bootstrapped with the complete official
 Laravel Inertia/Vue starter. Public source visibility does not authorize public
 SaaS or access to personal financial data.
 
-M0, M1-P1 and M1-P2 are human accepted. M1-P3 manual FX and reconciliation
-is locally verified and unaccepted; M1 milestone acceptance remains a separate human
-decision. See [current state](docs/halal-wealth-os/STATE.json) and
-[the phase contract](docs/halal-wealth-os/phases/M1-P3.md). Historical verification
-counts below remain labelled with their original phase checkpoints.
+M0 through M5 milestones and all 18 phases through M5-P3 are human accepted.
+M6-P1 is authorized and in progress. The accepted implementation through M5-P3
+is merged into dev. Production release and phases after M6-P1 require separate
+authority. See
+[current roadmap status](docs/halal-wealth-os/STATUS.md),
+[current state](docs/halal-wealth-os/STATE.json) and
+[the M5 review](docs/halal-wealth-os/runs/M5-independent-review.md).
+
+Historical phase notes below retain their original verification counts and
+pending-gate observations. They do not override the current status above.
 
 The starter is pinned to `d282e817c6c2fa1bd475f7c42ea785ccfc67d0ab`. All five
 optional authentication features were retained by its official finalizer:
@@ -199,7 +204,8 @@ history and receipts with atomic posting, safe retries and retained corrections.
 See [posting contracts](docs/halal-wealth-os/POSTING-AND-RETRIES.md),
 [local verification](docs/halal-wealth-os/runs/M1-P2-local.md) and
 [independent rendered UX review](docs/halal-wealth-os/runs/M1-P2-visual-review.md).
-M1-P1 and M1-P2 are human accepted; the M1 milestone remains unaccepted.
+At that checkpoint M1-P1 and M1-P2 were accepted and the M1 milestone gate
+was pending. M1 was subsequently [owner accepted](docs/halal-wealth-os/runs/M1-acceptance.md).
 
 ## M1-P3 manual FX and reconciliation
 

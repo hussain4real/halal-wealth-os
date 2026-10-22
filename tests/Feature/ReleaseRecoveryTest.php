@@ -17,8 +17,11 @@ test('encrypted populated recovery reconciles complete tables balances positions
     $report = (new ReleaseRecovery)->run();
     expect($identity())->toBe($source);
     $report['producer'] = ['source_sha256' => $source, 'run_id' => getenv('HWO_RELEASE_RUN_ID') ?: 'FOCUSED_ONLY'];
-    expect($report['result'])->toBe('PASS')->and($report['tables'])->toBe(58)
-        ->and($report['reader_fingerprints'])->toHaveKeys(['cash', 'positions', 'reservations', 'shariah'])
+    expect($report['result'])->toBe('PASS')->and($report['tables'])->toBe(63)
+        ->and($report['reader_fingerprints'])->toHaveKeys(['cash', 'positions', 'reservations', 'shariah', 'imports'])
+        ->and($report['table_fingerprints']['statement_sources']['rows'])->toBe(3)
+        ->and($report['table_fingerprints']['statement_receipts']['rows'])->toBe(3)
+        ->and($report['table_fingerprints']['statement_claims']['rows'])->toBeGreaterThan(0)
         ->and($report['restored_sequences_write'])->toBeTrue()->and($report['restored_immutability_guard'])->toBeTrue()
         ->and($report['populated_downgrade_refused'])->toBeTrue()
         ->and($report['wrong_key_target_unchanged'])->toBeTrue()

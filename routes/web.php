@@ -12,6 +12,7 @@ use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PurificationController;
+use App\Http\Controllers\StatementImportController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ValuationController;
 use App\Http\Middleware\RequireProductionTwoFactor;
@@ -28,6 +29,17 @@ Route::get('ready', function () {
 })->name('readiness');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+
+    Route::get('imports', [StatementImportController::class, 'index'])->name('imports.index');
+    Route::post('imports/inspect', [StatementImportController::class, 'inspect'])->middleware('throttle:statement-import')->name('imports.inspect');
+    Route::post('imports', [StatementImportController::class, 'store'])->middleware('throttle:statement-import')->name('imports.store');
+    Route::get('imports/requests/{key}', [StatementImportController::class, 'status'])->name('imports.status');
+    Route::get('imports/receipts/{receipt}', [StatementImportController::class, 'receipt'])->whereNumber('receipt')->name('imports.receipt');
+    Route::post('imports/receipts/{receipt}/{token}/correct', [StatementImportController::class, 'correct'])->whereNumber(['receipt', 'token'])->name('imports.correct');
+    Route::get('imports/{snapshot}', [StatementImportController::class, 'show'])->whereNumber('snapshot')->name('imports.show');
+    Route::post('imports/{snapshot}/revise', [StatementImportController::class, 'revise'])->whereNumber('snapshot')->name('imports.revise');
+    Route::post('imports/{snapshot}/approve', [StatementImportController::class, 'approve'])->whereNumber('snapshot')->name('imports.approve');
+    Route::get('imports/{snapshot}/export', [StatementImportController::class, 'export'])->whereNumber('snapshot')->name('imports.export');
 
     Route::get('opportunities', [DecisionController::class, 'index'])->name('opportunities.index');
     Route::get('opportunities/new', [DecisionController::class, 'form'])->name('opportunities.create');

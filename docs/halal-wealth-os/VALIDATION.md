@@ -304,6 +304,26 @@ The rehearsal does not populate every business scenario or authorize production.
 
 Native Pest TIA, new page bindings, full uncached gates, source/rendered review,
 publication sanitation, latest-head hosted review/CI and original dev CI plus
-actual signed progress publishing remain separate. M6-P1 is the next unimplemented
-phase rejection. No green report accepts M5-P3/M5 or permits deployment. See
+actual signed progress publishing remain separate. The later M6-P1 contract below
+advances the implemented boundary. No green report grants owner acceptance or permits deployment. See
 `ops/release/` for configuration, backup/rollback procedures and owner handover.
+
+## M6-P1 implemented verification contract
+
+The full lane includes bounded CSV parsing/mapping, immutable private previews,
+explicit identity and matching, selected-batch atomicity, exact request recovery,
+real concurrent approvals/corrections, linked root reversals and safe CSV export.
+Native HTTP uses real multipart uploads, cookies and CSRF; it checks no preview
+financial writes, malformed selection rollback, once-only retry/reupload, foreign
+owner/admin denial, formula-safe download and linked cancellation.
+
+All five import relations are included in the strict owner-export v2 catalog and
+populated encrypted PostgreSQL recovery. Recovery reconciles all 63 tables and
+reopens the retained source, preview and correction receipt. Financial coverage
+adds every concrete Imports file at the unchanged 90 percent floor. The map adds
+all five M6-P1 criteria while retaining existing exact selectors and invariants.
+F17 claims only executed synthetic statement reupload; provider-job and outbox
+retry scenarios remain future. F18 remains future M7. Unimplemented-phase
+rejection targets M6-P2. Full uncached gates, separate native TIA, failure
+propagation, independent source/rendered review, fresh hosted review/CI and
+original post-merge CI/publishing remain separate requirements.
