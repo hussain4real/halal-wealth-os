@@ -1,6 +1,6 @@
 # M5-P2 local run
 
-Current status: VERIFICATION_PENDING_EXTERNAL_NPM_AUDIT, cycle 5 of at most 6 under the owner's 22 October 2026
+Current status: VERIFICATION_PENDING, cycle 6 of at most 6 under the owner's 22 October 2026
 M5-P1 acceptance and M5-P2 authorization. The sole coordinator owns source;
 independent reviewers remain read-only with exclusive disposable resources.
 Base: dev merge `2060bfbe4cce27103dba843d454a642be642fe56`. Earlier M5-P1 cycles
@@ -206,3 +206,38 @@ or replaced by cached/alternate-registry evidence. The corrected head still
 requires full verification, original hosted CI and fresh review before merge.
 The /dev/null terminal client returned HTTP 200; actual signed CI publication
 remains pending an eligible green dev merge. M5-P2/M5 remain unaccepted.
+
+## Cycle 6: native CI storage boundary
+
+The fresh review of corrected head `036b73a` completed with no findings and all
+threads resolved. Original CI [39713681159](https://github.com/hussain4real/halal-wealth-os/actions/runs/39713681159)
+passed its npm audit, 903 tests / 5,954 assertions, 4,573/4,839 statements and
+all 57 financial coverage floors. Its actual HTTP check then failed the required
+real authentication-log positive control. That original failure is retained;
+it is not the earlier npm timeout.
+
+Private native A/B probes identified the boundary: PHP's GPCS setting omits the
+process storage-path variable from both HTTP superglobals, even though getenv
+can read it. Laravel therefore resolved logs/sessions/cache outside the owned
+harness directory. The complete original native runner reproduced the identical
+failure under GPCS, with owned process/database cleanup. Prior report bytes were
+restored exactly. An initial incomplete diagnostic probe remains a failure.
+
+The two-file harness correction binds the existing metrics-sibling owned storage
+before kernel/config bootstrap through native getenv. It changes no application
+code, global ini, logging policy or authentication control. The exclusively owned
+server now explicitly uses GPCS and all 30 samples assert actual GPCS and owned
+storage. Required auth.login evidence and all secret/financial-input sentinels
+remain enforced. Independent affected-source review passed.
+
+Corrected native HTTP journey, security boundaries, real log control, 30-sample
+performance (p95 229.823708ms) and owned cleanup passed. Fresh TIA passed 903 tests
+/ 5,950 assertions, then unchanged cached replay passed. The full local verifier
+is pending its npm advisory request at this checkpoint. No full pass is claimed
+from focused native or TIA evidence. Original hosted full/failure-propagation CI
+and a fresh review must pass on the published corrected head before normal dev
+merge; original post-merge CI and signed publication follow separately.
+
+This is cycle 6/6. M5-P2 and M5 remain unaccepted; M5-P3 and deployment remain out
+of scope. Earlier source/browser evidence retains its declared limits, with no
+new rendered run claimed for unchanged application and compiled artifacts.

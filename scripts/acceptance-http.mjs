@@ -194,6 +194,8 @@ const child = spawn(
         '-d',
         'pcov.enabled=0',
         '-d',
+        'variables_order=GPCS',
+        '-d',
         'opcache.enable_cli=1',
         '-S',
         `127.0.0.1:${port}`,
@@ -682,7 +684,12 @@ try {
     assert.equal(samples.length, 30);
     assert(
         samples.every(
-            (r) => r.status === 200 && r.console === false && r.queries > 0,
+            (r) =>
+                r.status === 200 &&
+                r.console === false &&
+                r.queries > 0 &&
+                r.variables_order === 'GPCS' &&
+                r.owned_storage === true,
         ),
     );
     const sorted = samples.map((r) => r.server_ms).sort((a, b) => a - b);
@@ -714,6 +721,10 @@ try {
             postgres: php(['scripts/verify-database.php']).trim(),
             node: process.version,
             coverage_during_measurement: false,
+            php_variables_order: samples[0].variables_order,
+            owned_native_storage: samples.every(
+                (r) => r.owned_storage === true,
+            ),
         },
     };
     assert(

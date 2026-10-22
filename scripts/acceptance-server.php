@@ -10,6 +10,11 @@ $start = hrtime(true);
 define('LARAVEL_START', microtime(true));
 require __DIR__.'/../vendor/autoload.php';
 $app = require __DIR__.'/../bootstrap/app.php';
+$storage = getenv('LARAVEL_STORAGE_PATH');
+if (! is_string($storage) || $storage !== dirname((string) getenv('HWO_ACCEPTANCE_METRICS')).'/storage' || ! is_dir($storage)) {
+    throw new RuntimeException('Owned acceptance storage is required.');
+}
+$app->useStoragePath($storage);
 $request = Request::capture();
 $kernel = $app->make(Kernel::class);
 $kernel->bootstrap();
@@ -34,7 +39,7 @@ $response->send();
 $kernel->terminate($request, $response);
 $id = $request->header('X-HWO-Measure', '');
 if (preg_match('/^[a-z0-9-]{1,64}$/D', $id) === 1) {
-    $record = ['id' => $id, 'status' => $response->getStatusCode(), 'server_ms' => (hrtime(true) - $start) / 1e6, 'queries' => $queries, 'query_ms' => $queryMs, 'console' => $app->runningInConsole(), 'profile' => $profile];
+    $record = ['id' => $id, 'status' => $response->getStatusCode(), 'server_ms' => (hrtime(true) - $start) / 1e6, 'queries' => $queries, 'query_ms' => $queryMs, 'console' => $app->runningInConsole(), 'variables_order' => ini_get('variables_order'), 'owned_storage' => $app->storagePath() === $storage, 'profile' => $profile];
     if ($profileSql !== []) {
         file_put_contents(dirname(getenv('HWO_ACCEPTANCE_METRICS')).'/query-profile.json', json_encode($profileSql, JSON_THROW_ON_ERROR));
     }

@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-22T02:49:57.131220+00:00",
+    "updated_at": "2026-10-22T03:10:47.269131+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -360,12 +360,12 @@
     },
     "execution_status": {
         "phase": "M5-P2",
-        "status": "VERIFICATION_PENDING_EXTERNAL_NPM_AUDIT",
-        "cycle": 5,
-        "cycles_used": 5,
+        "status": "VERIFYING_CI_NATIVE_STORAGE_CORRECTION",
+        "cycle": 6,
+        "cycles_used": 6,
         "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
-        "checkpoint": "Cycle5 independent current uncached application903/5950,57financialfiles>=90,HTTP/security/map97/262 PASS; p95 216.241542ms. SeparateTIA903/5954 record+replay PASS; source rereview READY. Full bin/verify and originaloldhead hostedrun39712132170 FAILED npm advisory endpoint timeout. Exact new-head full/CI/freshreview and merge/postCI/publisher pending; no audit bypass."
+        "checkpoint": "Cycle6 reproduced CI nativeGPCS environment boundary; two-file ownedstorage fix independently reviewed. Real nativeGPCS HTTP/security/benchmark229.823708ms/cleanup PASS; separate freshTIA903/5950+unchangedreplay PASS. Current full verifier pending npm audit; latest correctedsource originalCI/freshreview still required before merge. No globalini/application/log-control change or waiver."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2499,33 +2499,26 @@
         "acceptance_evidence": "runs/M5-P1-acceptance.md"
     },
     "m5p2_engineering": {
-        "cycle": 5,
+        "cycle": 6,
         "max_cycles": 6,
-        "status": "VERIFICATION_PENDING_EXTERNAL_NPM_AUDIT",
+        "status": "VERIFICATION_PENDING",
         "phase_acceptance": "UNACCEPTED",
-        "current_uncached_application": {
-            "tests": 903,
-            "assertions": 5950,
-            "failures": 0,
-            "errors": 0,
-            "skips": 0,
-            "scope": "Independently executed remaining real gates; not a full bin/verify pass"
-        },
-        "current_financial_files": 57,
-        "minimum_coverage_per_file_percent": 90,
+        "scope": "Two harness files; application/Vue/runtime/compiled artifacts unchanged",
+        "root_cause": "Native PHP GPCS omits process path from ENV/SERVER; bind existing owned storage via getenv before kernel bootstrap",
+        "regression": "Original native GPCS runner exit1 same required authlogin positivecontrol; corrected current native journey/security/performance/cleanup PASS; GPCS+ownedstorage asserted on all30 samples",
+        "current_native_server_p95_ms": 229.823708,
+        "tia": "SEPARATE_FRESH_903_TESTS_5950_ASSERTIONS_AND_UNCHANGED_CACHED_REPLAY_PASS",
+        "full_local_verifier": "PENDING_NPM_ADVISORY_REQUEST;_EARLIER_TIMEOUTS_PRESERVED",
+        "prior_hosted_application": "903_TESTS_5954_ASSERTIONS_4573_OF_4839_57_FINANCIAL_FLOORS_PASS",
         "acceptance_ids": 97,
         "exact_executed_selectors": 262,
-        "local_server_p95_ms": 216.241542,
-        "tia": "SEPARATE_FRESH_903_TESTS_5954_ASSERTIONS_AND_UNCHANGED_CACHED_REPLAY_PASS",
-        "full_verifier": "FAILED_EXTERNAL_NPM_ADVISORY_TIMEOUT",
-        "review_correction": "Strict applicablefixture and requirement states; report retains all18 fixturestatuses;16fixture+1requirement regression RED before / GREEN after; actual CLI rejects recordedFAIL with exit2",
         "affected_source_review": "READY_FOR_REVIEW",
-        "browser": "PRIOR126STATES_RETAINED_APPLICATION_AND_BUILD_UNCHANGED_NO_NEW_BROWSER_RUN_CLAIM",
-        "hosted_ci": "INITIAL_HEAD_39712132170_FAILURE_NPM_ADVISORY_TIMEOUT_PRESERVED;NEW_HEAD_PENDING",
-        "fresh_hosted_review": "NEW_CORRECTED_HEAD_PENDING",
-        "merge": "PENDING",
+        "browser": "PRIOR126STATES_RETAINED_UNCHANGED_APPLICATION_BUILD;NO_NEW_BROWSER_CLAIM",
+        "latest_hosted_ci": "PENDING_NEW_CORRECTED_HEAD",
+        "latest_fresh_hosted_review": "PENDING_NEW_CORRECTED_HEAD",
+        "merge": "HELD_UNTIL_FULL_AND_EXACT_HEAD_HOSTED_GATES_PASS",
         "postmerge_ci": "PENDING",
-        "publisher": "TERMINAL_CLIENT_HTTP200_REAL_ELIGIBLE_DEV_RUN_PENDING",
+        "publisher": "TERMINAL_CLIENT_HTTP200_ELIGIBLE_DEV_MERGE_PENDING",
         "deployment": false
     },
     "m5p2_cycle4_engineering": {
@@ -2571,6 +2564,36 @@
         "merge": "PENDING",
         "postmerge_ci": "PENDING",
         "publisher": "PENDING_REAL_ELIGIBLE_DEV_RUN",
+        "deployment": false
+    },
+    "m5p2_cycle5_engineering": {
+        "cycle": 5,
+        "max_cycles": 6,
+        "status": "VERIFICATION_PENDING_EXTERNAL_NPM_AUDIT",
+        "phase_acceptance": "UNACCEPTED",
+        "current_uncached_application": {
+            "tests": 903,
+            "assertions": 5950,
+            "failures": 0,
+            "errors": 0,
+            "skips": 0,
+            "scope": "Independently executed remaining real gates; not a full bin/verify pass"
+        },
+        "current_financial_files": 57,
+        "minimum_coverage_per_file_percent": 90,
+        "acceptance_ids": 97,
+        "exact_executed_selectors": 262,
+        "local_server_p95_ms": 216.241542,
+        "tia": "SEPARATE_FRESH_903_TESTS_5954_ASSERTIONS_AND_UNCHANGED_CACHED_REPLAY_PASS",
+        "full_verifier": "FAILED_EXTERNAL_NPM_ADVISORY_TIMEOUT",
+        "review_correction": "Strict applicablefixture and requirement states; report retains all18 fixturestatuses;16fixture+1requirement regression RED before / GREEN after; actual CLI rejects recordedFAIL with exit2",
+        "affected_source_review": "READY_FOR_REVIEW",
+        "browser": "PRIOR126STATES_RETAINED_APPLICATION_AND_BUILD_UNCHANGED_NO_NEW_BROWSER_RUN_CLAIM",
+        "hosted_ci": "39713681159_AUDIT_903_TESTS_57_FLOORS_PASS_HTTP_LOG_POSITIVE_CONTROL_FAIL",
+        "fresh_hosted_review": "036b73a_EXACT_HEAD_COMPLETED_NO_FINDINGS_ALL_THREADS_RESOLVED",
+        "merge": "PENDING",
+        "postmerge_ci": "PENDING",
+        "publisher": "TERMINAL_CLIENT_HTTP200_REAL_ELIGIBLE_DEV_RUN_PENDING",
         "deployment": false
     }
 }
