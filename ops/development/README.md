@@ -6,10 +6,25 @@ PHP-only container's inability to run the complete `composer dev` command.
 It requires Debian 13 x86_64 ABI compatibility; other hosts should provide a
 supported native runtime satisfying the same platform checks.
 
+## Current security floor
+
+PHP must be at least 8.5.12 and below 8.6.0 after the
+[21 October PHP security advisory](https://www.php.net/archive/2026.php#2026-10-21-5).
+Composer, CI, the platform verifier and the pinned base image enforce this floor.
+The previous 8.5.11 image identity is retained as historical evidence in the
+source manifest; it must not be used to serve this application.
+
+The new official image index and its Linux amd64 configuration were hash-verified.
+The Linux extension/export recipe below has not been rebuilt against that new
+base during M5-P2. Its retained dependency archives need a fresh isolated build
+and the real platform/full checks on the supported ABI before reuse. The M5-P2
+local evidence uses a separate native PHP 8.5.12 build from the official verified
+source. No global PHP installation, host package or OS service was changed.
+
 ## Source and trust
 
 [Source identities](runtime-sources.json) record official digest-pinned PHP
-8.5.11/PostgreSQL 18.6 images, Composer 2.10.3 with its verified upstream SHA-256,
+8.5.12/PostgreSQL 18.6 images, Composer 2.10.3 with its verified upstream SHA-256,
 Xdebug 3.5.3 from PECL, and all Debian build-package hashes. Host APT downloaded
 packages from signed official Debian trixie/trixie-updates/security indexes,
 using the existing Debian archive keyring, into a private task directory.
@@ -38,7 +53,7 @@ requiring an explicit proposed change and approval, never disabled verification.
 ```bash
 mkdir -p .runtime/docker
 DOCKER_CONFIG="$PWD/.runtime/docker" docker build --network=none \
-  -f ops/development/php.Dockerfile -t hwo-successor-php:8.5.11 \
+  -f ops/development/php.Dockerfile -t hwo-successor-php:8.5.12 \
   "$PWD/.runtime/build-inputs"
 ```
 
@@ -87,19 +102,24 @@ queried before migration smoke.
 stops only that container and loses its tmpfs data. HTTP/Vite browser-check
 processes are stopped after inspection. Never clean up unrelated resources.
 
-## Observed limits
+## Historical M0-P2 successor observations
 
-The extension build, real platform check, lock installs, migration smoke,
+At that M0-P2 checkpoint, the extension build, real platform check, lock installs, migration smoke,
 production build, static checks, 52 tests, coverage and deliberate failure /
 restoration have executed successfully. Browser details and the clean-copy run
 are recorded in the [successor phase run](../../docs/halal-wealth-os/runs/M0-P2-successor.md).
 The optional fontaine optimization warning does not remove a starter dependency
-or feature; no unapproved optional package was added. Hosted CI remains NOT_RUN.
+or feature; no unapproved optional package was added. Hosted CI was NOT_RUN at
+that checkpoint. These retained observations do not claim the new 8.5.12 Linux
+extension image has been rebuilt; current M5 evidence is recorded separately.
 
 ## Current support and fast local tests
 
-The application accepts only PHP8.5.x, with PHP8.5.11 verified here; the runtime
-checker refuses PHP8.4 and future minor lines. Pest5.3.2/Laravel plugin5.0.1
+Current support is PHP >=8.5.12 and <8.6.0. The earlier successor verified
+PHP8.5.11; that historical runtime is now refused by the security floor. M5-P2
+uses an independently built native8.5.12 runtime; the newly pinned Linux
+extension rebuild remains NOT_RUN. The checker rejects older patches, PHP8.4
+and future minor lines. Pest5.3.2/Laravel plugin5.0.1
 and PHPUnit13.4.2 are locked. Functional Pest cases retain original assertions
 and RefreshDatabase isolation. TIA needs enabled Xdebug/PCOV in every process.
 Its cache is explicitly .runtime/pest/tia, already ignored; no shared remote
@@ -121,6 +141,8 @@ selection. Both graph and branch-bound frontend snapshot are required.
 The database name and explicit local marker identify the selected target;
 they do not independently attest that its contents are disposable. Verification
 is restricted to a separately inspected, task-owned isolated PostgreSQL
-container or the disposable CI service. Never mark a same-named database on a
+instance (native cluster or container), or the disposable CI service. Verify
+the owned data directory, process, port/socket and database identity before
+destructive commands or shutdown. Never mark a same-named database on a
 shared local server disposable. This review checkpoint adds no server-side
 sentinel or database authentication change.

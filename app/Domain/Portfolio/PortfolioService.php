@@ -89,7 +89,7 @@ final readonly class PortfolioService
             }
             $asOf = LedgerInput::date($input['as_of'] ?? null, 'as_of');
             if ($prior !== null && $asOf !== $prior->as_of) {
-                LedgerInput::fail('as_of', 'A correction retains the original opening date. Trades and later valuation updates belong to later phases.');
+                LedgerInput::fail('as_of', 'A correction retains the original opening date. Record trades in Activity and update manual prices in Prices; keep the original opening date.');
             }
             $rows = $input['rows'] ?? null;
             if (! is_array($rows) || ! array_is_list($rows) || count($rows) > 1000) {

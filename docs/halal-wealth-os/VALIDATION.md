@@ -249,3 +249,35 @@ committed dismissal and still requires the original cached receipt. Foreign
 historical record 404s remain mandatory. HTTP feedback checks carry the actual
 session cookie across the validation redirect; browser checks verify the real
 response rather than injecting errors into a page.
+
+## M5-P2 implemented verification contract
+
+`bin/verify --all` now includes a real native-HTTP/PostgreSQL manual journey,
+module request/file/log/session boundaries and the seeded dashboard performance
+gate. It discovers every implemented concrete financial source recursively and
+requires at least 90% executable-line coverage per file from current Clover;
+interfaces are explicitly declaration-only. Missing files, malformed metrics,
+failed/skipped tests, stale source/JUnit-bound HTTP proof or unknown/missing
+acceptance identities fail the command.
+
+The configured map contains 85 implemented-phase ACs and all 12 invariants, with
+exact executed class/name/file identities and explicitly scoped retained manual
+evidence. Current browser/source reviews supplement those historical observations;
+manual evidence cannot replace a configured missing test. F01-F16 are applicable;
+F17/F18, future roadmap suites, providers, AI and deployment remain unimplemented.
+
+The benchmark requires 10,000 actual posting legs, 100 positive holdings, five
+warmups and 30 sequential authenticated dashboard requests; server nearest-rank
+p95 is the 29th sorted duration and must be at most 1,000ms. Retain all samples,
+query counts/times, exact facts, cache/runtime/hardware and slow-query plans; no
+coverage driver runs in the measured server. Separate TIA recording/replay and
+native PHP/page bindings never substitute for uncached tests or browser evidence.
+
+Runtime support remains the 8.5 line, now with security floor 8.5.12. The previous
+8.5.11 runtime records remain historical, not approved current serving runtimes.
+Unimplemented-phase rejection now targets M5-P3. Required suites additionally
+include financial coverage/acceptance/performance report failures and stale-session
+read/write/export regressions. Original hosted failure-propagation CI and a fresh
+exact-head review precede normal dev merge; original dev-push application CI and
+external publishing are separately verified afterward. Phase/milestone acceptance
+remains a human decision.

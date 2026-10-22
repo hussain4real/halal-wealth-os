@@ -423,3 +423,23 @@ preserving owner-boundary 404s and exact committed receipt recovery. Repeat
 regression/browser/TIA/source checks and fresh latest-commit hosted CI/review.
 The existing normal dev merge/post-merge CI authority and all scope, privacy,
 sole-writer, acceptance and deployment boundaries remain unchanged.
+
+## Current M5-P2 authority
+
+The human owner explicitly accepted M5-P1 on 22 October 2026 and authorized
+canonical M5-P2 through implementation, independent source/rendered review,
+full uncached gates and separate TIA, a sanitized PR to dev, normal explicit-
+noreply merge after exact-head original CI and a fresh hosted review, then
+original post-merge CI verification. Recheck existing /dev/null publishing;
+preserve earlier original failures and use only the existing approved signing
+credential. This supersedes the earlier no-M5-P2 boundary within phases/M5-P2.md.
+Close the accepted predecessor claim and preserve its ten-cycle history; M5-P2
+has at most six scoped cycles under this new authorization. One implementation
+writer; independent reviewers stay source-read-only with exclusive resources.
+Verify PostgreSQL journeys, applicable golden fixtures and acceptance IDs,
+ownership/request/log boundaries, actual browser usability, explicit financial
+coverage paths and the documented seeded server workload. Coverage is a floor,
+not proof; never skip failures or lower severity/gates. No M5-P3, new product
+features, broad refactors, production penetration tests, deployment, permission
+changes, external financial actions, new credentials, history rewriting or
+main/stage changes. Human M5-P2 acceptance remains separate; never self-accept.

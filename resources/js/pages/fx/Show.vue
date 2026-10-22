@@ -51,7 +51,7 @@ const reverse = () =>
 </script>
 <template>
     <Head title="Exchange receipt" />
-    <main class="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
         <Link
             href="/fx"
             class="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline"
@@ -318,5 +318,5 @@ const reverse = () =>
         <Button as-child variant="outline" class="min-h-11"
             ><Link href="/fx/new">Record another exchange</Link></Button
         >
-    </main>
+    </div>
 </template>

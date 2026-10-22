@@ -76,7 +76,7 @@ const reverse = () => {
 
 <template>
     <Head title="Transaction record" />
-    <main class="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
         <Link
             href="/transactions"
             class="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2"
@@ -384,5 +384,5 @@ const reverse = () => {
                 </form></DialogContent
             ></Dialog
         >
-    </main>
+    </div>
 </template>

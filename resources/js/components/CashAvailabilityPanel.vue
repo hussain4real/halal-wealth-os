@@ -24,12 +24,12 @@ const underfunded = computed(() =>
                 >
                     Cash clarity
                 </p>
-                <h1
+                <h2
                     id="cash-heading"
                     class="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl"
                 >
                     What is available now?
-                </h1>
+                </h2>
                 <p
                     class="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground"
                 >
@@ -52,12 +52,12 @@ const underfunded = computed(() =>
                 aria-labelledby="available-heading"
             >
                 <div class="flex flex-wrap items-center justify-between gap-3">
-                    <h2
+                    <h3
                         id="available-heading"
                         class="text-sm font-medium text-teal-100"
                     >
                         Available now · {{ cash.actual.currency }}
-                    </h2>
+                    </h3>
                     <span
                         class="rounded-full border border-teal-100/25 px-3 py-1 text-xs"
                         >{{
@@ -112,9 +112,9 @@ const underfunded = computed(() =>
                 aria-labelledby="breakdown-heading"
                 class="min-w-0 rounded-3xl border bg-card p-6 sm:p-8"
             >
-                <h2 id="breakdown-heading" class="text-lg font-semibold">
+                <h3 id="breakdown-heading" class="text-lg font-semibold">
                     Every part, explained
-                </h2>
+                </h3>
                 <p
                     v-if="cash.actual.state !== 'complete'"
                     class="mt-2 text-xs leading-relaxed text-muted-foreground"
@@ -181,9 +181,9 @@ const underfunded = computed(() =>
             aria-labelledby="cash-missing-heading"
             class="rounded-2xl border border-amber-600/25 bg-amber-50/60 p-5 dark:bg-amber-950/20"
         >
-            <h2 id="cash-missing-heading" class="font-semibold">
+            <h3 id="cash-missing-heading" class="font-semibold">
                 Complete your cash picture
-            </h2>
+            </h3>
             <ul
                 class="mt-3 list-inside list-disc space-y-2 text-sm leading-relaxed"
             >
@@ -461,7 +461,7 @@ const underfunded = computed(() =>
             class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border bg-muted/30 p-5"
         >
             <div>
-                <h2 class="font-semibold">Explore a different month</h2>
+                <h3 class="font-semibold">Explore a different month</h3>
                 <p class="mt-1 text-sm text-muted-foreground">
                     Adjust a what-if forecast without changing your cash or
                     reservations.

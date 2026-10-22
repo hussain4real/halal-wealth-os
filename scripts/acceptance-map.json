@@ -1,0 +1,2462 @@
+{
+    "schema": 1,
+    "base_commit": "2060bfbe4cce27103dba843d454a642be642fe56",
+    "cases": {
+        "case-e4c94321f095": {
+            "class": "Tests\\Unit\\DisposablePostgresTest",
+            "name": "test_unsafe_targets_are_rejected with data set \"dataset \"production\"\"",
+            "file": "tests/Unit/DisposablePostgresTest.php"
+        },
+        "case-8b16d86a2e36": {
+            "class": "Tests\\Unit\\DisposablePostgresTest",
+            "name": "test_unsafe_targets_are_rejected with data set \"dataset \"sqlite\"\"",
+            "file": "tests/Unit/DisposablePostgresTest.php"
+        },
+        "case-c59fb47fcc75": {
+            "class": "Tests\\Unit\\DisposablePostgresTest",
+            "name": "test_explicit_local_disposable_target_is_allowed",
+            "file": "tests/Unit/DisposablePostgresTest.php"
+        },
+        "case-1aba06bbca25": {
+            "class": "Tests\\Unit\\DisposablePostgresTest",
+            "name": "test_project_local_disposable_socket_is_allowed",
+            "file": "tests/Unit/DisposablePostgresTest.php"
+        },
+        "case-1910dadf35cc": {
+            "class": "Tests\\Feature\\DashboardTest",
+            "name": "test_guests_are_redirected_to_the_login_page",
+            "file": "tests/Feature/DashboardTest.php"
+        },
+        "case-908509c2a960": {
+            "class": "Tests\\Feature\\DashboardTest",
+            "name": "test_authenticated_users_can_visit_the_dashboard",
+            "file": "tests/Feature/DashboardTest.php"
+        },
+        "case-23c5fdc93003": {
+            "class": "Tests\\Feature\\IdentityBoundaryTest",
+            "name": "anonymous requests cannot enter owner or administrative paths with data set \"('/dashboard')\"",
+            "file": "tests/Feature/IdentityBoundaryTest.php"
+        },
+        "case-f103af5ec90e": {
+            "class": "Tests\\Feature\\Auth\\RegistrationTest",
+            "name": "public registration screen is unavailable while the bundled feature remains retained",
+            "file": "tests/Feature/Auth/RegistrationTest.php"
+        },
+        "case-de8bad201adf": {
+            "class": "Tests\\Feature\\Auth\\RegistrationTest",
+            "name": "public registration submission cannot create or authenticate a user",
+            "file": "tests/Feature/Auth/RegistrationTest.php"
+        },
+        "case-ec0e784ced79": {
+            "class": "Tests\\Feature\\PrivateOnboardingTest",
+            "name": "console onboarding validates and creates only the initial synthetic owner with explicit capability",
+            "file": "tests/Feature/PrivateOnboardingTest.php"
+        },
+        "case-663f9fc57d76": {
+            "class": "Tests\\Feature\\IdentityBoundaryTest",
+            "name": "owner query and route IDs deny reading or changing a second synthetic user",
+            "file": "tests/Feature/IdentityBoundaryTest.php"
+        },
+        "case-68965d54a976": {
+            "class": "Tests\\Feature\\IdentityBoundaryTest",
+            "name": "explicit admin capability keeps resource queries and direct or forged record IDs owner scoped",
+            "file": "tests/Feature/IdentityBoundaryTest.php"
+        },
+        "case-c557154a9c93": {
+            "class": "Tests\\Feature\\AccountLifecycleTest",
+            "name": "all owner lookups and writes deny a second owner even with explicit admin capability",
+            "file": "tests/Feature/AccountLifecycleTest.php"
+        },
+        "case-ae375a8a4f17": {
+            "class": "Tests\\Feature\\SessionAuditTest",
+            "name": "login rotates the session and logout invalidates it and rotates the csrf token",
+            "file": "tests/Feature/SessionAuditTest.php"
+        },
+        "case-5227c83252b3": {
+            "class": "Tests\\Feature\\SessionAuditTest",
+            "name": "password recovery endpoints limit requests independently of submitted account identity",
+            "file": "tests/Feature/SessionAuditTest.php"
+        },
+        "case-aeca49f5da80": {
+            "class": "Tests\\Feature\\SessionAuditTest",
+            "name": "security audit records actor attribution while rejecting sensitive and nested arbitrary context",
+            "file": "tests/Feature/SessionAuditTest.php"
+        },
+        "case-66783f1c703c": {
+            "class": "Tests\\Feature\\SessionAuditTest",
+            "name": "forgotten password reset records the unauthenticated requester separately from its target",
+            "file": "tests/Feature/SessionAuditTest.php"
+        },
+        "case-908f59f2608b": {
+            "class": "Tests\\Feature\\IdentityBoundaryTest",
+            "name": "submitted owner IDs and profile capability fields cannot redirect ownership or grant administration",
+            "file": "tests/Feature/IdentityBoundaryTest.php"
+        },
+        "case-bcb27aa54c7d": {
+            "class": "Tests\\Feature\\IdentityBoundaryTest",
+            "name": "ordinary users cannot enter direct admin resource URLs or mount their Livewire list",
+            "file": "tests/Feature/IdentityBoundaryTest.php"
+        },
+        "case-57e98a76f5b4": {
+            "class": "Tests\\Feature\\IdentityBoundaryTest",
+            "name": "unverified or revoked admin capability denies the panel on the next request",
+            "file": "tests/Feature/IdentityBoundaryTest.php"
+        },
+        "case-61e4d6008f81": {
+            "class": "Tests\\Unit\\MoneyPrimitivesTest",
+            "name": "QAR decimal addition is exact and large integer JSON round trips as strings",
+            "file": "tests/Unit/MoneyPrimitivesTest.php"
+        },
+        "case-4db8735a7e07": {
+            "class": "Tests\\Feature\\AccountLifecycleTest",
+            "name": "large opening input persists exact integer minor units and remains unposted through Inertia JSON",
+            "file": "tests/Feature/AccountLifecycleTest.php"
+        },
+        "case-f302dc5082e7": {
+            "class": "Tests\\Unit\\MoneyPrimitivesTest",
+            "name": "mixed currencies and unsupported codes never imply conversion",
+            "file": "tests/Unit/MoneyPrimitivesTest.php"
+        },
+        "case-99ffd8583856": {
+            "class": "Tests\\Feature\\AccountLifecycleTest",
+            "name": "unsupported codes are rejected and currency exponents are enforced before persistence",
+            "file": "tests/Feature/AccountLifecycleTest.php"
+        },
+        "case-6a41d56a632e": {
+            "class": "Tests\\Unit\\MoneyPrimitivesTest",
+            "name": "money accepts both signed BIGINT limits and rejects arithmetic overflow",
+            "file": "tests/Unit/MoneyPrimitivesTest.php"
+        },
+        "case-6535587e6d46": {
+            "class": "Tests\\Unit\\MoneyPrimitivesTest",
+            "name": "money rejects floats integers exponent notation separators and excessive scale with data set \"('0.001')\"",
+            "file": "tests/Unit/MoneyPrimitivesTest.php"
+        },
+        "case-e9db6ae26638": {
+            "class": "Tests\\Feature\\AccountLifecycleTest",
+            "name": "invalid cash precision range and JSON numbers are rejected before any persistence with data set \"('0.001')\"",
+            "file": "tests/Feature/AccountLifecycleTest.php"
+        },
+        "case-43d293f8eba6": {
+            "class": "Tests\\Feature\\AccountLifecycleTest",
+            "name": "archive retains account and immutable request and refuses changes and deletion",
+            "file": "tests/Feature/AccountLifecycleTest.php"
+        },
+        "case-2087667a9aef": {
+            "class": "Tests\\Feature\\AccountLifecycleTest",
+            "name": "derived adapter values remain strings with liability credits and clearing exclusion in response",
+            "file": "tests/Feature/AccountLifecycleTest.php"
+        },
+        "case-2451928c330c": {
+            "class": "Tests\\Feature\\PostingServiceTest",
+            "name": "income expense and transfer post exact balanced owned journals with separate activity classification",
+            "file": "tests/Feature/PostingServiceTest.php"
+        },
+        "case-420cee76ce21": {
+            "class": "Tests\\Feature\\PostingServiceTest",
+            "name": "one minor unit imbalance and mixed currencies persist no journal or postings",
+            "file": "tests/Feature/PostingServiceTest.php"
+        },
+        "case-66d3d5c300db": {
+            "class": "Tests\\Feature\\PostingConcurrencyTest",
+            "name": "PostgreSQL rejects unbalanced state transitions and pending legs at actual commit",
+            "file": "tests/Feature/PostingConcurrencyTest.php"
+        },
+        "case-b2036b2d9c9d": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "budget activity excludes transfer opening FX principal and equity while categorized FX fee is expense once",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-5f1d1bb1a4f3": {
+            "class": "Tests\\Feature\\PostingConcurrencyTest",
+            "name": "simultaneous independent PostgreSQL requests settle one key once and return stable receipts",
+            "file": "tests/Feature/PostingConcurrencyTest.php"
+        },
+        "case-d2934fcfdd0f": {
+            "class": "Tests\\Feature\\PostingConcurrencyTest",
+            "name": "simultaneous changed payload with one key produces one success and one conflict",
+            "file": "tests/Feature/PostingConcurrencyTest.php"
+        },
+        "case-609e39e2e0d7": {
+            "class": "Tests\\Feature\\PostingServiceTest",
+            "name": "all legs and key roll back for an injected failure at each financial write checkpoint with data set \"('journal')\"",
+            "file": "tests/Feature/PostingServiceTest.php"
+        },
+        "case-6aacd24ff1ec": {
+            "class": "Tests\\Feature\\PostingServiceTest",
+            "name": "correction reverses and replaces atomically and a failed replacement preserves the original",
+            "file": "tests/Feature/PostingServiceTest.php"
+        },
+        "case-c77f2f89cff1": {
+            "class": "Tests\\Feature\\PostingConcurrencyTest",
+            "name": "events wait for the real outer commit and are discarded with an outer rollback",
+            "file": "tests/Feature/PostingConcurrencyTest.php"
+        },
+        "case-edcb3a846687": {
+            "class": "Tests\\Feature\\PostingServiceTest",
+            "name": "owner scope is enforced before retry lookup and owner namespaces are independent",
+            "file": "tests/Feature/PostingServiceTest.php"
+        },
+        "case-47609171857e": {
+            "class": "Tests\\Feature\\PostingServiceTest",
+            "name": "submitted authority unknown fields and direct monetary edits cannot bypass the server with data set \"('owner_id')\"",
+            "file": "tests/Feature/PostingServiceTest.php"
+        },
+        "case-3474fb0c27cf": {
+            "class": "Tests\\Feature\\ManualFxTest",
+            "name": "paired FX preserves both principal settlements and counts an explicit fee once with data set \"('source')\"",
+            "file": "tests/Feature/ManualFxTest.php"
+        },
+        "case-8e2525045c32": {
+            "class": "Tests\\Feature\\ManualFxTest",
+            "name": "paired FX preserves both principal settlements and counts an explicit fee once with data set \"('destination')\"",
+            "file": "tests/Feature/ManualFxTest.php"
+        },
+        "case-a2b3ccfd141d": {
+            "class": "Tests\\Feature\\ManualFxTest",
+            "name": "reporting uses only eligible direct observations and preserves saved version evidence",
+            "file": "tests/Feature/ManualFxTest.php"
+        },
+        "case-5ceba252d89c": {
+            "class": "Tests\\Feature\\ManualFxTest",
+            "name": "future observations and effective dates are excluded from earlier reporting cutoffs with data set \"('observed_at')\"",
+            "file": "tests/Feature/ManualFxTest.php"
+        },
+        "case-cb7a8b546d9a": {
+            "class": "Tests\\Feature\\ManualFxTest",
+            "name": "staleness boundary is explicit and native amounts survive missing partial conversion with data set \"(604801, 'stale')\"",
+            "file": "tests/Feature/ManualFxTest.php"
+        },
+        "case-ed990ad33d4f": {
+            "class": "Tests\\Feature\\ManualFxTest",
+            "name": "FX replacement reverses all prior members and retains separate immutable rate evidence",
+            "file": "tests/Feature/ManualFxTest.php"
+        },
+        "case-8ca9de4537f3": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "future corrections cannot erase historical eligible prices or overwrite immutable saved runs",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-b1f13fb1dd57": {
+            "class": "Tests\\Feature\\ReconciliationTest",
+            "name": "a saved reconciliation comparison is immutable and an explicit adjustment produces a linked zero difference",
+            "file": "tests/Feature/ReconciliationTest.php"
+        },
+        "case-e35b1a63f931": {
+            "class": "Tests\\Feature\\ReconciliationTest",
+            "name": "stale reconciliation refuses even a net zero change in journal evidence",
+            "file": "tests/Feature/ReconciliationTest.php"
+        },
+        "case-990618d1a5b4": {
+            "class": "Tests\\Feature\\ReconciliationTest",
+            "name": "historical cutoffs retain originals before later reversals and saved evidence never changes",
+            "file": "tests/Feature/ReconciliationTest.php"
+        },
+        "case-487ccde9312d": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "anonymous F06 translation keeps normal and essential flags independent and never posts forecasts with data set \"('1', '0')\"",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-9fde970dbd61": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "anonymous F06 translation keeps normal and essential flags independent and never posts forecasts with data set \"('1', '1')\"",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-4a0f3337decd": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "anonymous F06 translation keeps normal and essential flags independent and never posts forecasts with data set \"('0', '1')\"",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-a83e921300ad": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "anonymous F06 translation keeps normal and essential flags independent and never posts forecasts with data set \"('0', '0')\"",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-a3b8a876e042": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "salary is forecast only and matching annotates cash that already posted once",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-562838bc96c4": {
+            "class": "Tests\\Feature\\CashAvailabilityTest",
+            "name": "next-month salary already received is actual cash plus only the unpaid forecast residual",
+            "file": "tests/Feature/CashAvailabilityTest.php"
+        },
+        "case-11b1ddbf39e4": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "term annual and standing-order forecasts use configured cadence with a separate conservative provision",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-c073dd275586": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "essential run-rate is explicitly month-end and future annual provision starts on its configured date",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-f91a7cc2f008": {
+            "class": "Tests\\Unit\\BudgetCalendarTest",
+            "name": "Qatar monthly and annual anchors clamp missing days without drifting with data set \"('2026-01-31', 1, '2026-02', \u2026)\"",
+            "file": "tests/Unit/BudgetCalendarTest.php"
+        },
+        "case-3bcb20186167": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "one occurrence accepts multiple actuals and one actual splits across occurrences without duplicate expenses",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-47fbe35085a6": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "reversals reopen matched plans and correction replacements stay explicitly unclassified until matched",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-d4048da6d28e": {
+            "class": "Tests\\Feature\\BudgetConcurrencyTest",
+            "name": "concurrent allocations cannot spend actual or occurrence capacity twice with data set \"('actual')\"",
+            "file": "tests/Feature/BudgetConcurrencyTest.php"
+        },
+        "case-6b20c14b4ca0": {
+            "class": "Tests\\Feature\\BudgetConcurrencyTest",
+            "name": "concurrent allocations cannot spend actual or occurrence capacity twice with data set \"('occurrence')\"",
+            "file": "tests/Feature/BudgetConcurrencyTest.php"
+        },
+        "case-bcbb437f3ee6": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "future due revisions retain occurrence versions and posted history at the same or earlier future due date",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-6ff0770fb217": {
+            "class": "Tests\\Feature\\BudgetTest",
+            "name": "category revisions preserve snapshots and allow explicit same-family matching across flag versions",
+            "file": "tests/Feature/BudgetTest.php"
+        },
+        "case-84f1872f19e3": {
+            "class": "Tests\\Feature\\BudgetConcurrencyTest",
+            "name": "future revision and match contend on one owner boundary with one valid winner",
+            "file": "tests/Feature/BudgetConcurrencyTest.php"
+        },
+        "case-47ea3cf46f97": {
+            "class": "Tests\\Feature\\GoalTest",
+            "name": "opening reservation uses existing cash once with twelve deposits and no extra ledger",
+            "file": "tests/Feature/GoalTest.php"
+        },
+        "case-301966240417": {
+            "class": "Tests\\Unit\\GoalProjectionTest",
+            "name": "anonymous F05 translation has twelve exact deposits and independent unavailable coverage date",
+            "file": "tests/Unit/GoalProjectionTest.php"
+        },
+        "case-547405900300": {
+            "class": "Tests\\Feature\\GoalTest",
+            "name": "posted transfer increases dedicated funding once and annotations do not post",
+            "file": "tests/Feature/GoalTest.php"
+        },
+        "case-87f2cad8ab02": {
+            "class": "Tests\\Feature\\GoalTest",
+            "name": "dedicated recorded highwater reconciles correction of a precreation receipt without replacement double count",
+            "file": "tests/Feature/GoalTest.php"
+        },
+        "case-a5b0a8c8ae75": {
+            "class": "Tests\\Feature\\GoalConcurrencyTest",
+            "name": "two concurrent reservations across goals cannot claim account cash twice",
+            "file": "tests/Feature/GoalConcurrencyTest.php"
+        },
+        "case-ec9185e53baf": {
+            "class": "Tests\\Feature\\GoalConcurrencyTest",
+            "name": "concurrent dedicated and reserved plans have one winner across the shared capacity boundary",
+            "file": "tests/Feature/GoalConcurrencyTest.php"
+        },
+        "case-705e5bb5de77": {
+            "class": "Tests\\Feature\\GoalTest",
+            "name": "dedicated backing is exclusive against both modes and reserved goals cannot capture dedicated cash with data set \"('dedicated', 'dedicated')\"",
+            "file": "tests/Feature/GoalTest.php"
+        },
+        "case-75cebe6a22f9": {
+            "class": "Tests\\Feature\\GoalTest",
+            "name": "shared FIFO reservations show later withdrawal shortfall and cash restoration",
+            "file": "tests/Feature/GoalTest.php"
+        },
+        "case-f84d3e7760db": {
+            "class": "Tests\\Unit\\GoalProjectionTest",
+            "name": "zero variable reached and unavailable projections stay distinct with data set \"(['0'], '480000', 'unreachable', \u2026)\"",
+            "file": "tests/Unit/GoalProjectionTest.php"
+        },
+        "case-d9eed911d76e": {
+            "class": "Tests\\Feature\\GoalConcurrencyTest",
+            "name": "reservation racing a legitimate withdrawal never fabricates backing or rejects the ledger withdrawal",
+            "file": "tests/Feature/GoalConcurrencyTest.php"
+        },
+        "case-c7b2876094d1": {
+            "class": "Tests\\Feature\\GoalTest",
+            "name": "essential denominator matches native monthend policy without activity payload",
+            "file": "tests/Feature/GoalTest.php"
+        },
+        "case-9c99fcb3642d": {
+            "class": "Tests\\Feature\\GoalTest",
+            "name": "cross currency essential totals never imply parity and standing orders never enable reminders",
+            "file": "tests/Feature/GoalTest.php"
+        },
+        "case-ccff5c0358f9": {
+            "class": "Tests\\Feature\\CashAvailabilityTest",
+            "name": "anonymous surplus separates liquid cash protection unpaid bills and explicit buffer",
+            "file": "tests/Feature/CashAvailabilityTest.php"
+        },
+        "case-bca0cf569511": {
+            "class": "Tests\\Feature\\CashAvailabilityTest",
+            "name": "alpha salary expenses emergency funding and investment reservation conserve actual cash end to end",
+            "file": "tests/Feature/CashAvailabilityTest.php"
+        },
+        "case-c34b5dfe431e": {
+            "class": "Tests\\Feature\\CashAvailabilityTest",
+            "name": "explicit backed overlap removes one deduction and future salary never becomes actual cash",
+            "file": "tests/Feature/CashAvailabilityTest.php"
+        },
+        "case-051e5469d3b3": {
+            "class": "Tests\\Feature\\CashAvailabilityTest",
+            "name": "early actual payment is not deducted twice and reversal reopens the required residual",
+            "file": "tests/Feature/CashAvailabilityTest.php"
+        },
+        "case-3c3a316c4aab": {
+            "class": "Tests\\Feature\\CashAvailabilityTest",
+            "name": "investment target and required bill cannot simultaneously claim the same reservation purpose",
+            "file": "tests/Feature/CashAvailabilityTest.php"
+        },
+        "case-2878e01c757c": {
+            "class": "Tests\\Feature\\CashAvailabilityTest",
+            "name": "signed negative cash and raw deficit remain visible instead of funding clamp zero",
+            "file": "tests/Feature/CashAvailabilityTest.php"
+        },
+        "case-bd1e4854f681": {
+            "class": "Tests\\Feature\\CashAvailabilityReadTest",
+            "name": "an unavailable account range cannot be hidden by a second account offset",
+            "file": "tests/Feature/CashAvailabilityReadTest.php"
+        },
+        "case-d354fcbeebe5": {
+            "class": "Tests\\Feature\\CashAvailabilityHttpTest",
+            "name": "scenario fields and repeat requests change only forecast and preserve authoritative database bytes with data set \"('salary', '500')\"",
+            "file": "tests/Feature/CashAvailabilityHttpTest.php"
+        },
+        "case-266578b9474c": {
+            "class": "Tests\\Feature\\CashAvailabilityHttpTest",
+            "name": "scenario fields and repeat requests change only forecast and preserve authoritative database bytes with data set \"('contribution', '20')\"",
+            "file": "tests/Feature/CashAvailabilityHttpTest.php"
+        },
+        "case-19a5c0652244": {
+            "class": "Tests\\Feature\\CashAvailabilityHttpTest",
+            "name": "scenario fields and repeat requests change only forecast and preserve authoritative database bytes with data set \"('investment_target', '100')\"",
+            "file": "tests/Feature/CashAvailabilityHttpTest.php"
+        },
+        "case-0ecc9b2791c5": {
+            "class": "Tests\\Feature\\CashAvailabilityHttpTest",
+            "name": "scenario fields and repeat requests change only forecast and preserve authoritative database bytes with data set \"('commitments', '40')\"",
+            "file": "tests/Feature/CashAvailabilityHttpTest.php"
+        },
+        "case-20970fc56b61": {
+            "class": "Tests\\Feature\\CashAvailabilityTest",
+            "name": "missing and newly unclassified inputs are incomplete rather than invented zero",
+            "file": "tests/Feature/CashAvailabilityTest.php"
+        },
+        "case-1686ee160614": {
+            "class": "Tests\\Feature\\CashAvailabilityReadTest",
+            "name": "foreign-owner reciprocal and future quotes cannot replace the required current direct observation",
+            "file": "tests/Feature/CashAvailabilityReadTest.php"
+        },
+        "case-92262d57e956": {
+            "class": "Tests\\Feature\\CashAvailabilityReadTest",
+            "name": "recurrence evaluation limit gives an incomplete unknown count instead of truncated zero bills",
+            "file": "tests/Feature/CashAvailabilityReadTest.php"
+        },
+        "case-8ee3bb298636": {
+            "class": "Tests\\Feature\\PortfolioTest",
+            "name": "fractional opening units and prices survive exact PostgreSQL storage without cash rounding",
+            "file": "tests/Feature/PortfolioTest.php"
+        },
+        "case-686aeeb234c6": {
+            "class": "Tests\\Feature\\PortfolioHttpTest",
+            "name": "fractional display and private export preserve all exact strings and unknown basis",
+            "file": "tests/Feature/PortfolioHttpTest.php"
+        },
+        "case-f680c6448bd1": {
+            "class": "Tests\\Unit\\PortfolioMathTest",
+            "name": "full 24-place position products settle only at the native cash boundary with data set \"('QAR', '1.234567890123', '2.000000000001', \u2026)\"",
+            "file": "tests/Unit/PortfolioMathTest.php"
+        },
+        "case-44e67225987c": {
+            "class": "Tests\\Feature\\PortfolioTest",
+            "name": "one mode selects cash plus positions or whole account value never both",
+            "file": "tests/Feature/PortfolioTest.php"
+        },
+        "case-e99d5121cae2": {
+            "class": "Tests\\Feature\\PortfolioBoundaryTest",
+            "name": "aggregate signed zero values and round trip detailed modes never add the retained positions twice",
+            "file": "tests/Feature/PortfolioBoundaryTest.php"
+        },
+        "case-3cb7e0534f84": {
+            "class": "Tests\\Feature\\PortfolioTest",
+            "name": "unknown basis differs from explicit known zero and never fabricates profit",
+            "file": "tests/Feature/PortfolioTest.php"
+        },
+        "case-43d357887387": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "known prices do not manufacture unknown basis or historical transaction FX",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-3300a2ddd4ce": {
+            "class": "Tests\\Feature\\PortfolioTest",
+            "name": "mode requires a reviewed preview and exact committed retry wins after expiry and later changes",
+            "file": "tests/Feature/PortfolioTest.php"
+        },
+        "case-c0d845a31639": {
+            "class": "Tests\\Feature\\PortfolioTest",
+            "name": "source changes stale a mode preview including posted cash and a UTC day change",
+            "file": "tests/Feature/PortfolioTest.php"
+        },
+        "case-21b4a022523a": {
+            "class": "Tests\\Feature\\PortfolioHttpTest",
+            "name": "mode workflow exposes immutable preview and commits only after acknowledgement",
+            "file": "tests/Feature/PortfolioHttpTest.php"
+        },
+        "case-65062b8eb8fa": {
+            "class": "Tests\\Feature\\PortfolioConcurrencyTest",
+            "name": "two different previews of one baseline cannot both commit a mode fork",
+            "file": "tests/Feature/PortfolioConcurrencyTest.php"
+        },
+        "case-445ec7f01f6c": {
+            "class": "Tests\\Feature\\PortfolioHttpTest",
+            "name": "JSON monetary numerics and forged ownership compliance and row fields are rejected",
+            "file": "tests/Feature/PortfolioHttpTest.php"
+        },
+        "case-67e5e308249f": {
+            "class": "Tests\\Feature\\PortfolioTest",
+            "name": "manual investments retain their explicit value and unsupported terms without invented units",
+            "file": "tests/Feature/PortfolioTest.php"
+        },
+        "case-cb8ca63c36f1": {
+            "class": "Tests\\Feature\\InvestmentTest",
+            "name": "synthetic fee inclusive purchase and partial sale preserve weighted basis and net cash separately",
+            "file": "tests/Feature/InvestmentTest.php"
+        },
+        "case-c3f5f69302d0": {
+            "class": "Tests\\Feature\\InvestmentTest",
+            "name": "final sale consumes every remaining basis minor without an average price rounding truth",
+            "file": "tests/Feature/InvestmentTest.php"
+        },
+        "case-94e18d8978e8": {
+            "class": "Tests\\Unit\\BookCostTest",
+            "name": "rational partial allocations conserve every minor unit through final disposal",
+            "file": "tests/Unit/BookCostTest.php"
+        },
+        "case-f8fa4ee4ae00": {
+            "class": "Tests\\Feature\\InvestmentTest",
+            "name": "fully earmarked IPO payment consumes its own claim and confirmed allotment refund clear receivable",
+            "file": "tests/Feature/InvestmentTest.php"
+        },
+        "case-aa0977db160e": {
+            "class": "Tests\\Feature\\InvestmentTest",
+            "name": "receivable is added once in detailed mode and aggregate must be reviewed after new facts",
+            "file": "tests/Feature/InvestmentTest.php"
+        },
+        "case-8a54ca4eef24": {
+            "class": "Tests\\Feature\\InvestmentTest",
+            "name": "partial refund before allotment is permitted but overclearing unconfirmed shares and paid cancellation are rejected",
+            "file": "tests/Feature/InvestmentTest.php"
+        },
+        "case-3ef230e9017f": {
+            "class": "Tests\\Feature\\InvestmentTest",
+            "name": "split preserves cost applies one business action once and never turns execution price into a quote",
+            "file": "tests/Feature/InvestmentTest.php"
+        },
+        "case-836fbdb05982": {
+            "class": "Tests\\Unit\\BookCostTest",
+            "name": "split preserves representable precision and rejects invented fractional residue",
+            "file": "tests/Unit/BookCostTest.php"
+        },
+        "case-d3abee0db1b4": {
+            "class": "Tests\\Feature\\InvestmentConcurrencyTest",
+            "name": "two PostgreSQL backends recover one durable purchase for the same request",
+            "file": "tests/Feature/InvestmentConcurrencyTest.php"
+        },
+        "case-590db2a54e47": {
+            "class": "Tests\\Feature\\InvestmentConcurrencyTest",
+            "name": "concurrent allotment retry returns one confirmed quantity without another payment",
+            "file": "tests/Feature/InvestmentConcurrencyTest.php"
+        },
+        "case-175d693dd46c": {
+            "class": "Tests\\Feature\\InvestmentConcurrencyTest",
+            "name": "cash-link failure at actual commit retains neither event cash nor retry identity",
+            "file": "tests/Feature/InvestmentConcurrencyTest.php"
+        },
+        "case-41fb180b2ab7": {
+            "class": "Tests\\Feature\\InvestmentTest",
+            "name": "unknown basis persists through mixed acquisitions and splits then resets only after full closure",
+            "file": "tests/Feature/InvestmentTest.php"
+        },
+        "case-beda2c4af963": {
+            "class": "Tests\\Feature\\InvestmentTest",
+            "name": "oversell and invalid chronological prefixes roll back both event and journal",
+            "file": "tests/Feature/InvestmentTest.php"
+        },
+        "case-44aff7eb41e0": {
+            "class": "Tests\\Feature\\InvestmentTest",
+            "name": "atomic correction inherits ordering and recomputes later sale book cost",
+            "file": "tests/Feature/InvestmentTest.php"
+        },
+        "case-79cbc09de831": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "opposing native and reporting currency returns use retained exact dated evidence",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-166f5dda32d2": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "IPO translated basis comes from payment dates not later allotment FX",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-aa7a4443fde2": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "one missing price gives partial total and complete known allocation denominator without valuing it at zero",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-ba0c551f61c3": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "detailed net worth preserves missing and stale FX reasons while foreign zero has explicit identity metadata",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-ef8315a58fbd": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "observed and effective cutoffs both apply with deterministic same-time revisions and inclusive stale boundary",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-8ca0db056cce": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "price unit confirmation rejects a corporate action committed after the form context was captured",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-068738719986": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "aggregate and detailed accounts contribute once with unknown aggregate look-through explicit",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-a7545c9276ec": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "all holdings beyond presentation pages contribute and reads never post or alter financial facts",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-8dec9b8e3264": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "shared net worth and investment valuation settle the same component FX rounding ties",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-ca316273e5c8": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "deposit suppresses percentage while a wholly included native transfer remains internal",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-20c43940e775": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "dividends are income already in ending cash and are not counted twice in return",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-11e37ec00cbd": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "an asset without evidence is pending and never represented as verified compliant",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-599b93f8e711": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "personal notes and AI suggestions remain separate pending context even with references with data set \"('personal_note')\"",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-83c380d01fdf": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "independent current sources retain conflicting claims instead of selecting the newest globally",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-043c5152045e": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "as-of reads retain earlier source evidence and do not leak later backdated corrections",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-6f0fade57e0b": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "review is not overdue on its due date and becomes overdue after it without renewal",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-92a7a05ac493": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "future review dates are accepted and an absent review date remains explicitly unresolved",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-4eeef3b3a1f3": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "a later-effective revision leaves the predecessor current before its effective date",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-10b1b435e416": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "same successful attempts recover after asset or assessment revisions while changed attempts are refused",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-4ec83dec33b5": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "assessment changes preserve cash units cost and saved valuation evidence exactly",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-80388bc0f511": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "factual openings and trades remain recordable for every assessment classification with data set \"('pending_review')\"",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-5dd88e31c45d": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "factual openings and trades remain recordable for every assessment classification with data set \"('compliant')\"",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-efd10f946d25": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "factual openings and trades remain recordable for every assessment classification with data set \"('non_compliant')\"",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-bb48da69d003": {
+            "class": "Tests\\Feature\\AssessmentTest",
+            "name": "factual openings and trades remain recordable for every assessment classification with data set \"('questionable')\"",
+            "file": "tests/Feature/AssessmentTest.php"
+        },
+        "case-6de7d845e945": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "F12 sourced gross distribution produces NGN2 without using net income or market value and cash debits once on actual payment",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-7da1491fef42": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "explicit net and separately sourced custom bases and fixed amounts remain explainable",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-a069fa805759": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "linking an existing expense attributes charity explicitly without another journal or cash debit",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-c24f7cea7eb9": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "F15 missing instructions preserve pending uncertainty rather than zero due with data set \"(['']) #1\"",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-750483d21da6": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "F15 missing instructions preserve pending uncertainty rather than zero due with data set \"(['missing'])\"",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-a78977ca8f57": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "a specifically sourced zero is known zero and is distinct from pending",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-bfb8eee892f7": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "partial allocations reconcile and cannot exceed payment capacity across multiple obligations",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-406e8488622c": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "over-allocation to an obligation is refused even when actual payment has spare capacity",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-72b22c89aab8": {
+            "class": "Tests\\Feature\\PurificationConcurrencyTest",
+            "name": "concurrent allocations to separate obligations cannot spend the same actual payment twice",
+            "file": "tests/Feature/PurificationConcurrencyTest.php"
+        },
+        "case-55188ec93106": {
+            "class": "Tests\\Feature\\PurificationConcurrencyTest",
+            "name": "concurrent separate payments cannot over-settle one obligation",
+            "file": "tests/Feature/PurificationConcurrencyTest.php"
+        },
+        "case-6898e4970a5a": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "exact obligation retry recovers after later revisions while changed retry and duplicate business identity fail",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-24ec3b4109b8": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "upward and downward corrections retain version attribution payments and visible excess without moving cash",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-0ce307f47a21": {
+            "class": "Tests\\Feature\\PurificationTest",
+            "name": "replaced distribution retains one method series and requires explicit sourced version before more allocation",
+            "file": "tests/Feature/PurificationTest.php"
+        },
+        "case-294df6db2bce": {
+            "class": "Tests\\Feature\\PurificationConcurrencyTest",
+            "name": "competing corrections retain one successor and never branch or overwrite payment history",
+            "file": "tests/Feature/PurificationConcurrencyTest.php"
+        },
+        "case-a2eec4517c66": {
+            "class": "Tests\\Feature\\DecisionTest",
+            "name": "F13 public translation reconciles exact proposal tranches and creates no shares reservations or cash postings",
+            "file": "tests/Feature/DecisionTest.php"
+        },
+        "case-c9053c83520c": {
+            "class": "Tests\\Feature\\DecisionImportTest",
+            "name": "opt-in external synthetic proposal imports idempotently without cash claims trades or extra users",
+            "file": "tests/Feature/DecisionImportTest.php"
+        },
+        "case-7eae1d20bf2b": {
+            "class": "Tests\\Feature\\DecisionTest",
+            "name": "tranche totals count reservations across all retained versions and prevent hiding protected cash",
+            "file": "tests/Feature/DecisionTest.php"
+        },
+        "case-f4ffe125dd30": {
+            "class": "Tests\\Feature\\DecisionTest",
+            "name": "unknown watchlist preserves missing target maximum thesis terms and currency comparison",
+            "file": "tests/Feature/DecisionTest.php"
+        },
+        "case-bdc6ab0f08d7": {
+            "class": "Tests\\Feature\\DecisionTest",
+            "name": "offer fields have independent freshness and an owner source check never infers other claims",
+            "file": "tests/Feature/DecisionTest.php"
+        },
+        "case-35320516b635": {
+            "class": "Tests\\Feature\\DecisionHttpTest",
+            "name": "exact asset Shariah summary stays separate and actual receipt links back to its original thesis version",
+            "file": "tests/Feature/DecisionHttpTest.php"
+        },
+        "case-1cb14ff2f25b": {
+            "class": "Tests\\Feature\\DecisionTest",
+            "name": "shared account capacity protects other goals and dedicated emergency claims without any posting",
+            "file": "tests/Feature/DecisionTest.php"
+        },
+        "case-d33ca4f2fed4": {
+            "class": "Tests\\Feature\\DecisionConcurrencyTest",
+            "name": "competing tranche reservations across different goals cannot exceed plan capacity",
+            "file": "tests/Feature/DecisionConcurrencyTest.php"
+        },
+        "case-0d1d48069338": {
+            "class": "Tests\\Feature\\DecisionTest",
+            "name": "plan and reservation receipts recover after revisions releases and closure while changed retries fail",
+            "file": "tests/Feature/DecisionTest.php"
+        },
+        "case-72a580a8f2ba": {
+            "class": "Tests\\Feature\\DecisionTest",
+            "name": "complete decision export reconstructs released reservations and reversed factual spend with original thesis links",
+            "file": "tests/Feature/DecisionTest.php"
+        },
+        "case-187a423cb915": {
+            "class": "Tests\\Feature\\DecisionConcurrencyTest",
+            "name": "competing thesis revisions retain one successor with no branching history",
+            "file": "tests/Feature/DecisionConcurrencyTest.php"
+        },
+        "case-c0ed6f0d9569": {
+            "class": "Tests\\Feature\\DecisionTest",
+            "name": "actual over-plan purchase is attributed as fact exactly once without posting again and reversal retains zero-current-spend history",
+            "file": "tests/Feature/DecisionTest.php"
+        },
+        "case-cf02e0b7e44a": {
+            "class": "Tests\\Feature\\DecisionTest",
+            "name": "actual attribution rejects intentions unpaid subscriptions other exact references and foreign owner events",
+            "file": "tests/Feature/DecisionTest.php"
+        },
+        "case-b688f52f5016": {
+            "class": "Tests\\Feature\\DashboardHttpTest",
+            "name": "dashboard authenticates and carries complete native base and asof source drilldown",
+            "file": "tests/Feature/DashboardHttpTest.php"
+        },
+        "case-87b71acce4c3": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "complete cash and goal source collection remains complete beyond disclosure page twenty",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-a32d275bc059": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "saved snapshot preserves complete original facts labels source dates settings actions and hashes",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-a58bd9745ff3": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "M5P1 current headlines use one selected signed source set without financial writes or providers",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-4988f351b3c2": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "liability is signed once while protected goal cash stays a subset",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-1e29a7686d4b": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "paid IPO receivable is counted once before allotment and aggregate excludes detailed pieces",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-c2210969e4db": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "missing reporting rate affects base widgets but retains exact native amount and source",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-5aeae6feaeff": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "missing holding quote does not turn the investment widget into a fabricated total",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-d084eb6f3c5d": {
+            "class": "Tests\\Unit\\DashboardRulesTest",
+            "name": "configured emergency standing order produces no unsolicited setup or inferred failed-transfer prompt",
+            "file": "tests/Unit/DashboardRulesTest.php"
+        },
+        "case-03db6e7dee30": {
+            "class": "Tests\\Unit\\DashboardRulesTest",
+            "name": "past first-contribution date explains a plan review rather than asserting a failed transfer",
+            "file": "tests/Unit/DashboardRulesTest.php"
+        },
+        "case-601ff38ef26f": {
+            "class": "Tests\\Unit\\DashboardRulesTest",
+            "name": "exact allocation comparison uses full signed denominator and explicit tolerance",
+            "file": "tests/Unit/DashboardRulesTest.php"
+        },
+        "case-c35ab5c702f3": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "repeated current evaluation creates no action rows and no duplicate keys",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-1044aaaadea8": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "current dismissal retains exact retry and alternate-key receipt while later evidence resurfaces",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-542059a2589a": {
+            "class": "Tests\\Unit\\MoneyPrimitivesTest",
+            "name": "exact quantities prices and rate representation obey NUMERIC30 12 without truncation",
+            "file": "tests/Unit/MoneyPrimitivesTest.php"
+        },
+        "case-5ce628fad92f": {
+            "class": "Tests\\Unit\\FxMathTest",
+            "name": "FX final target overflow rejects without weakening valid native cash range",
+            "file": "tests/Unit/FxMathTest.php"
+        },
+        "case-5de96dd4a2da": {
+            "class": "Tests\\Feature\\PostingServiceTest",
+            "name": "posted financial values receipts legs links and owner history resist direct SQL edits",
+            "file": "tests/Feature/PostingServiceTest.php"
+        },
+        "case-aaeebe535f2a": {
+            "class": "Tests\\Feature\\PortfolioBoundaryTest",
+            "name": "all retained portfolio evidence rejects mutation and destructive downgrade before DDL",
+            "file": "tests/Feature/PortfolioBoundaryTest.php"
+        },
+        "case-159dd1b34aa7": {
+            "class": "Tests\\Feature\\DashboardConcurrencyTest",
+            "name": "all retained dashboard annotation tables reject committed mutation and downgrade before any DDL",
+            "file": "tests/Feature/DashboardConcurrencyTest.php"
+        },
+        "case-c641c9e2dcfa": {
+            "class": "Tests\\Feature\\InvestmentConcurrencyTest",
+            "name": "concurrent distinct applications cannot earmark the same investment cash twice",
+            "file": "tests/Feature/InvestmentConcurrencyTest.php"
+        },
+        "case-2d0a9f6a6865": {
+            "class": "Tests\\Feature\\ValuationTest",
+            "name": "raw pre-split prices cannot multiply post-split units and retry preserves original observation receipt",
+            "file": "tests/Feature/ValuationTest.php"
+        },
+        "case-ae50c2c38221": {
+            "class": "Tests\\Feature\\PortfolioHttpTest",
+            "name": "administrator cannot enumerate export revise or write another owners investment evidence",
+            "file": "tests/Feature/PortfolioHttpTest.php"
+        },
+        "case-48057b646d8f": {
+            "class": "Tests\\Feature\\AssessmentHttpTest",
+            "name": "all foreign owner and administrator reads writes history and export are isolated with data set \"(true)\"",
+            "file": "tests/Feature/AssessmentHttpTest.php"
+        },
+        "case-197ba8df0f89": {
+            "class": "Tests\\Feature\\PurificationHttpTest",
+            "name": "F14 foreign reads writes evidence exports allocations and releases deny ordinary owners and admins with data set \"(true)\"",
+            "file": "tests/Feature/PurificationHttpTest.php"
+        },
+        "case-587f3646fa66": {
+            "class": "Tests\\Feature\\DecisionHttpTest",
+            "name": "every foreign owner and administrator identifier is isolated on detail drafts links reservations release and export with data set \"(true)\"",
+            "file": "tests/Feature/DecisionHttpTest.php"
+        },
+        "case-f7eca283d0e6": {
+            "class": "Tests\\Feature\\DashboardHttpTest",
+            "name": "foreign ordinary and admin users cannot read export or dismiss an owned snapshot action with data set \"(true)\"",
+            "file": "tests/Feature/DashboardHttpTest.php"
+        },
+        "case-d0a28d239b04": {
+            "class": "Tests\\Feature\\PostingConcurrencyTest",
+            "name": "listener failure after commit leaves the durable journal safe to replay without duplicate posting",
+            "file": "tests/Feature/PostingConcurrencyTest.php"
+        },
+        "case-d86f6f417643": {
+            "class": "Tests\\Feature\\InvestmentConcurrencyTest",
+            "name": "failed after-commit notification recovers the committed receipt without reposting",
+            "file": "tests/Feature/InvestmentConcurrencyTest.php"
+        },
+        "case-8bb354ac8957": {
+            "class": "Tests\\Feature\\DashboardHttpTest",
+            "name": "obsolete uncommitted current dismissal is rejected definitively without writes and exposes recovery feedback",
+            "file": "tests/Feature/DashboardHttpTest.php"
+        },
+        "case-0463f98e702b": {
+            "class": "Tests\\Feature\\DashboardSnapshotTest",
+            "name": "snapshot exact retry returns original before changed settings date and ledger validation",
+            "file": "tests/Feature/DashboardSnapshotTest.php"
+        },
+        "case-de959608d4c0": {
+            "class": "Tests\\Feature\\PostingServiceTest",
+            "name": "all legs and key roll back for an injected failure at each financial write checkpoint with data set \"('leg')\"",
+            "file": "tests/Feature/PostingServiceTest.php"
+        },
+        "case-781ddd8e4626": {
+            "class": "Tests\\Feature\\PostingServiceTest",
+            "name": "all legs and key roll back for an injected failure at each financial write checkpoint with data set \"('status')\"",
+            "file": "tests/Feature/PostingServiceTest.php"
+        },
+        "case-a97bf5aa4efd": {
+            "class": "Tests\\Feature\\LedgerHttpTest",
+            "name": "foreign financial identities remain inaccessible before cached recovery even for an administrator with data set \"(true)\"",
+            "file": "tests/Feature/LedgerHttpTest.php"
+        },
+        "case-6bf1dd6eb1d4": {
+            "class": "Tests\\Feature\\BudgetHttpTest",
+            "name": "foreign planning and actual identities remain hidden before cached recovery for any user with data set \"(true)\"",
+            "file": "tests/Feature/BudgetHttpTest.php"
+        },
+        "case-c62d410a59b6": {
+            "class": "Tests\\Feature\\GoalHttpTest",
+            "name": "owner B including admin cannot access goal backing links releases revisions or cached requests",
+            "file": "tests/Feature/GoalHttpTest.php"
+        },
+        "case-05bcd30f0cdb": {
+            "class": "Tests\\Feature\\CashAvailabilityHttpTest",
+            "name": "anonymous unverified and foreign settings references cannot reach privileged planning writes",
+            "file": "tests/Feature/CashAvailabilityHttpTest.php"
+        },
+        "case-1d64eb17b7cb": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('GET', '/dashboard')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-01f08e02ea1b": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('POST', '/dashboard/snapshots')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-e1de6be96de6": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('GET', '/dashboard/snapshots/{snapshot}/export')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-6af5eeee1fd2": {
+            "class": "Tests\\Feature\\FinancialCoverageEdgesTest",
+            "name": "unavailable balance adapter preserves unknown rather than returning fabricated zero",
+            "file": "tests/Feature/FinancialCoverageEdgesTest.php"
+        },
+        "case-9676cf955ef3": {
+            "class": "Tests\\Feature\\FinancialCoverageEdgesTest",
+            "name": "FX observation boundary rejects forged ownership invalid direction and invalid exact rates without retaining observations with data set \"(['999'])\"",
+            "file": "tests/Feature/FinancialCoverageEdgesTest.php"
+        },
+        "case-064230e0d65d": {
+            "class": "Tests\\Feature\\FinancialCoverageEdgesTest",
+            "name": "FX observation boundary rejects forged ownership invalid direction and invalid exact rates without retaining observations with data set \"(['QAR'])\"",
+            "file": "tests/Feature/FinancialCoverageEdgesTest.php"
+        },
+        "case-6d3cf9cfdac9": {
+            "class": "Tests\\Feature\\FinancialCoverageEdgesTest",
+            "name": "FX observation boundary rejects forged ownership invalid direction and invalid exact rates without retaining observations with data set \"(['-1'])\"",
+            "file": "tests/Feature/FinancialCoverageEdgesTest.php"
+        },
+        "case-3c8ff51b56db": {
+            "class": "Tests\\Feature\\FinancialCoverageEdgesTest",
+            "name": "oversized marked value remains explicitly partial instead of wrapping or fabricating a value",
+            "file": "tests/Feature/FinancialCoverageEdgesTest.php"
+        },
+        "case-2add1642fb32": {
+            "class": "Tests\\Feature\\FinancialCoverageEdgesTest",
+            "name": "custom purification base requires a retained explanation before any obligation writes",
+            "file": "tests/Feature/FinancialCoverageEdgesTest.php"
+        },
+        "case-9c2eec357138": {
+            "class": "Tests\\Feature\\FinancialCoverageEdgesTest",
+            "name": "unverified or overdue thesis evidence produces attributed actions and closed opportunities are suppressed",
+            "file": "tests/Feature/FinancialCoverageEdgesTest.php"
+        },
+        "case-3b60c9fe2fb9": {
+            "class": "Tests\\Unit\\FinancialCoverageReportTest",
+            "name": "financial report accepts executed concrete calculator and explicitly identifies interface-only sources",
+            "file": "tests/Unit/FinancialCoverageReportTest.php"
+        },
+        "case-8eea784314b8": {
+            "class": "Tests\\Unit\\FinancialCoverageReportTest",
+            "name": "financial report includes covered promoted constructor executable lines emitted as Clover methods",
+            "file": "tests/Unit/FinancialCoverageReportTest.php"
+        },
+        "case-0fa95d3f190b": {
+            "class": "Tests\\Unit\\FinancialCoverageReportTest",
+            "name": "financial report rejects missing unexecuted inconsistent and below-floor calculator coverage with data set \"('statements=\"0\" coveredstatements=\"0\"', '')\"",
+            "file": "tests/Unit/FinancialCoverageReportTest.php"
+        },
+        "case-1191fec1d76a": {
+            "class": "Tests\\Unit\\FinancialCoverageReportTest",
+            "name": "financial report rejects missing unexecuted inconsistent and below-floor calculator coverage with data set \"('statements=\"1\" coveredstatements=\"0\"', '<line num=\"1\" type=\"stmt\" count=\"0\"/>')\"",
+            "file": "tests/Unit/FinancialCoverageReportTest.php"
+        },
+        "case-71c353d9e249": {
+            "class": "Tests\\Unit\\FinancialCoverageReportTest",
+            "name": "financial report rejects missing unexecuted inconsistent and below-floor calculator coverage with data set \"('statements=\"2\" coveredstatements=\"2\"', '<line num=\"1\" type=\"stmt\" count=\"2\"/>')\"",
+            "file": "tests/Unit/FinancialCoverageReportTest.php"
+        },
+        "case-e8f2188e689e": {
+            "class": "Tests\\Unit\\FinancialCoverageReportTest",
+            "name": "financial report rejects missing unexecuted inconsistent and below-floor calculator coverage with data set \"('statements=\"1\" coveredstatements=\"1\"', '<line num=\"1\" type=\"stmt\" count=\"0\"/>')\"",
+            "file": "tests/Unit/FinancialCoverageReportTest.php"
+        },
+        "case-cfaeb7116554": {
+            "class": "Tests\\Unit\\FinancialCoverageReportTest",
+            "name": "financial report rejects missing unexecuted inconsistent and below-floor calculator coverage with data set \"('statements=\"1\" coveredstatements=\"1\"', '<line num=\"1\" type=\"stmt\" count=\"-1\"/>')\"",
+            "file": "tests/Unit/FinancialCoverageReportTest.php"
+        },
+        "case-24e55b8fe72b": {
+            "class": "Tests\\Unit\\FinancialCoverageReportTest",
+            "name": "financial report refuses an omitted newly discovered financial class and duplicate coverage paths",
+            "file": "tests/Unit/FinancialCoverageReportTest.php"
+        },
+        "case-1b3aeefe4174": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement uses the nearest-rank 29th sample and includes the exact one-second boundary",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-771ff6fac0b2": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('negative')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-5db2c8c739e5": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('numeric-string')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-9b04eece2b6b": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('infinite')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-1eb32134ec19": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('too-few')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-a37039405397": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('too-many')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-22ddece9ae10": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('empty-queries')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-230dda8360e4": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('zero-queries')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-e3f49d5a0ca3": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('posting-count')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-5a7151f8b1bb": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('holding-count')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-17739bd76a1c": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('wrong-rank')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-770977eca2c0": {
+            "class": "Tests\\Unit\\PerformanceReportTest",
+            "name": "dashboard measurement refuses invalid workloads samples query proof and overstated percentiles with data set \"('slow')\"",
+            "file": "tests/Unit/PerformanceReportTest.php"
+        },
+        "case-daabb4f542f8": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map resolves exact configured cases and explicit retained evidence without claiming a tool pass",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-a1d268a2d046": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses missing renamed skipped or zero-assertion executed cases with data set \"('missing')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-39b74e8432e3": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses missing renamed skipped or zero-assertion executed cases with data set \"('renamed')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-f819f8b030d6": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses missing renamed skipped or zero-assertion executed cases with data set \"('skipped')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-45b5a70e6726": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses missing renamed skipped or zero-assertion executed cases with data set \"('zero-assertions')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-21629202b48c": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses omitted criteria changed manual evidence and unsupported fixture pass claims with data set \"('omitted')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-c36fd13506c2": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses omitted criteria changed manual evidence and unsupported fixture pass claims with data set \"('manual')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-ef1b041b0dcc": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses omitted criteria changed manual evidence and unsupported fixture pass claims with data set \"('future')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-f697e542bbf8": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses omitted criteria changed manual evidence and unsupported fixture pass claims with data set \"('null-evidence')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        },
+        "case-53ead0164a16": {
+            "class": "Tests\\Unit\\AcceptanceMapTest",
+            "name": "acceptance map refuses omitted criteria changed manual evidence and unsupported fixture pass claims with data set \"('missing-fixture')\"",
+            "file": "tests/Unit/AcceptanceMapTest.php"
+        }
+    },
+    "manual_artifacts": {
+        "artifact-fef43d579e25": {
+            "public_path": "docs/halal-wealth-os/runs/M0-independent-review.md",
+            "sha256": "e6acf1437828fdd0d4abf64a637e898a4244905fefb6db55db473083b0a12c17",
+            "evidence_kind": "retained_manual_or_original_tool_observation",
+            "scope": "Retained public independent review, with criterion-local scope below. Not newly executed current UI/tool evidence.",
+            "current_execution_claim": false
+        },
+        "artifact-fe013981bf9b": {
+            "public_path": "docs/halal-wealth-os/runs/M1-independent-review.md",
+            "sha256": "61fe782cb1e5b8055bad1ebb05382b8c641028beda7aa67558b8fcdf771a6677",
+            "evidence_kind": "retained_manual_or_original_tool_observation",
+            "scope": "Retained public independent review, with criterion-local scope below. Not newly executed current UI/tool evidence.",
+            "current_execution_claim": false
+        },
+        "artifact-a429dd02b34b": {
+            "public_path": "docs/halal-wealth-os/runs/M2-independent-review.md",
+            "sha256": "b333e27f180a2fe2dcc9889ac59a01d86308c179bf5242a115fe2f77ed7df835",
+            "evidence_kind": "retained_manual_or_original_tool_observation",
+            "scope": "Retained public independent review, with criterion-local scope below. Not newly executed current UI/tool evidence.",
+            "current_execution_claim": false
+        },
+        "artifact-10ce17c36a57": {
+            "public_path": "docs/halal-wealth-os/runs/M3-independent-review.md",
+            "sha256": "5ab004791bde6850cd76dc8b9365aca9e416d1ea2b919a7a054e688b5737f464",
+            "evidence_kind": "retained_manual_or_original_tool_observation",
+            "scope": "Retained public independent review, with criterion-local scope below. Not newly executed current UI/tool evidence.",
+            "current_execution_claim": false
+        },
+        "artifact-d6acb6501975": {
+            "public_path": "docs/halal-wealth-os/runs/M4-independent-review.md",
+            "sha256": "bf2006e40f0f8e916094ec65a24cb418dc7b831d49b3d768a49f7a1f5fc229d1",
+            "evidence_kind": "retained_manual_or_original_tool_observation",
+            "scope": "Retained public independent review, with criterion-local scope below. Not newly executed current UI/tool evidence.",
+            "current_execution_claim": false
+        },
+        "artifact-41caa6f2a7f9": {
+            "public_path": "docs/halal-wealth-os/runs/M5-P1-rendered-review.md",
+            "sha256": "33a1b342b00194042289888b122eab190258cd198803aed7ac2f08d838fce123",
+            "evidence_kind": "retained_manual_or_original_tool_observation",
+            "scope": "Retained public independent review, with criterion-local scope below. Not newly executed current UI/tool evidence.",
+            "current_execution_claim": false
+        },
+        "m5p2-source": {
+            "public_path": "docs/halal-wealth-os/runs/M5-P2-source-review.md",
+            "sha256": "6537da8134b69cb6508afc1ecde101faa67d1c0a1ab55e918dddba09fd614c77",
+            "evidence_kind": "current_independent_source_review",
+            "scope": "Current scoped independent review; actual observations and limitations are explicit. Not owner acceptance, hosted CI, merge or deployment.",
+            "current_execution_claim": false
+        },
+        "m5p2-rendered": {
+            "public_path": "docs/halal-wealth-os/runs/M5-P2-rendered-review.md",
+            "sha256": "432dbdc570912715ea9ddd54a990a37fdd85153e6b6aae066042187c7ba84b3a",
+            "evidence_kind": "current_independent_rendered_review",
+            "scope": "Current scoped independent review; actual observations and limitations are explicit. Not owner acceptance, hosted CI, merge or deployment.",
+            "current_execution_claim": false
+        }
+    },
+    "requirements": {
+        "M0-P1-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Historical planning-only M0-P1-AC1 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
+            ]
+        },
+        "M0-P1-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Historical planning-only M0-P1-AC2 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
+            ]
+        },
+        "M0-P1-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Historical planning-only M0-P1-AC3 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
+            ]
+        },
+        "M0-P1-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Historical planning-only M0-P1-AC4 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
+            ]
+        },
+        "M0-P1-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Historical planning-only M0-P1-AC5 observation and original Git/tool/scope/ID evidence. Later authorized application work is not prohibited by that historical snapshot."
+            ]
+        },
+        "M0-P2-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M0-P2-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M0-P2-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-e4c94321f095", "case-8b16d86a2e36"],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M0-P2-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-c59fb47fcc75", "case-1aba06bbca25"],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M0-P2-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-1910dadf35cc", "case-908509c2a960"],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M0-P3-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-23c5fdc93003",
+                "case-f103af5ec90e",
+                "case-de8bad201adf",
+                "case-ec0e784ced79"
+            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M0-P3-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-663f9fc57d76",
+                "case-68965d54a976",
+                "case-c557154a9c93"
+            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M0-P3-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-ae375a8a4f17",
+                "case-5227c83252b3",
+                "case-aeca49f5da80",
+                "case-66783f1c703c"
+            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M0-P3-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M0-P3-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-908f59f2608b",
+                "case-bcb27aa54c7d",
+                "case-57e98a76f5b4"
+            ],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "manual_scope": [
+                "Retained accepted M0-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P1-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-61e4d6008f81", "case-4db8735a7e07"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P1-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-f302dc5082e7", "case-99ffd8583856"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P1-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-6a41d56a632e",
+                "case-6535587e6d46",
+                "case-e9db6ae26638"
+            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P1-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-43d293f8eba6", "case-2087667a9aef"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P1-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-c557154a9c93", "case-2087667a9aef"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P2-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-2451928c330c",
+                "case-420cee76ce21",
+                "case-66d3d5c300db"
+            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P2-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-2451928c330c", "case-b2036b2d9c9d"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P2-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-5f1d1bb1a4f3", "case-d2934fcfdd0f"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P2-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-609e39e2e0d7",
+                "case-6aacd24ff1ec",
+                "case-c77f2f89cff1",
+                "case-de959608d4c0",
+                "case-781ddd8e4626"
+            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P2-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-edcb3a846687",
+                "case-47609171857e",
+                "case-c557154a9c93"
+            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P3-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-3474fb0c27cf", "case-8e2525045c32"],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P3-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-3474fb0c27cf",
+                "case-8e2525045c32",
+                "case-b2036b2d9c9d"
+            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P3-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-a2b3ccfd141d",
+                "case-5ceba252d89c",
+                "case-cb7a8b546d9a"
+            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P3-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-ed990ad33d4f",
+                "case-a2b3ccfd141d",
+                "case-8ca9de4537f3"
+            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M1-P3-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-b1f13fb1dd57",
+                "case-e35b1a63f931",
+                "case-990618d1a5b4"
+            ],
+            "manual_artifact_ids": ["artifact-fe013981bf9b"],
+            "manual_scope": [
+                "Retained accepted M1-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P1-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-487ccde9312d",
+                "case-9fde970dbd61",
+                "case-4a0f3337decd",
+                "case-a83e921300ad"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P1-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-a3b8a876e042", "case-562838bc96c4"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P1-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-11b1ddbf39e4",
+                "case-c073dd275586",
+                "case-f91a7cc2f008"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P1-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-3bcb20186167",
+                "case-47fbe35085a6",
+                "case-d4048da6d28e",
+                "case-6b20c14b4ca0"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P1-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-bcbb437f3ee6",
+                "case-6ff0770fb217",
+                "case-84f1872f19e3"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P2-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-47ea3cf46f97", "case-301966240417"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P2-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-547405900300", "case-87f2cad8ab02"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P2-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-a5b0a8c8ae75",
+                "case-ec9185e53baf",
+                "case-705e5bb5de77"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P2-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-75cebe6a22f9",
+                "case-f84d3e7760db",
+                "case-d9eed911d76e"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P2-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-c7b2876094d1",
+                "case-9c99fcb3642d",
+                "case-301966240417"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P3-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-ccff5c0358f9", "case-bca0cf569511"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P3-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-c34b5dfe431e",
+                "case-051e5469d3b3",
+                "case-3c3a316c4aab"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P3-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-2878e01c757c", "case-bd1e4854f681"],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P3-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-d354fcbeebe5",
+                "case-266578b9474c",
+                "case-19a5c0652244",
+                "case-0ecc9b2791c5"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M2-P3-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-20970fc56b61",
+                "case-1686ee160614",
+                "case-92262d57e956"
+            ],
+            "manual_artifact_ids": ["artifact-a429dd02b34b"],
+            "manual_scope": [
+                "Retained accepted M2-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P1-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-8ee3bb298636",
+                "case-686aeeb234c6",
+                "case-f680c6448bd1"
+            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P1-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-44e67225987c", "case-e99d5121cae2"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P1-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-3cb7e0534f84", "case-43d357887387"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P1-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-3300a2ddd4ce",
+                "case-c0d845a31639",
+                "case-21b4a022523a",
+                "case-65062b8eb8fa"
+            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P1-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-445ec7f01f6c", "case-67e5e308249f"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "scope": "Automated spoofing/manual-instrument guards plus retained explicit label/source review. These selectors alone do not establish the current screen wording; inherited UX-M3-01 remains recorded until repaired and re-reviewed.",
+            "manual_scope": [
+                "Retained accepted M3-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P2-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-cb8ca63c36f1",
+                "case-c3f5f69302d0",
+                "case-94e18d8978e8"
+            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P2-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-f8fa4ee4ae00",
+                "case-aa0977db160e",
+                "case-8a54ca4eef24"
+            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P2-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-3ef230e9017f", "case-836fbdb05982"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P2-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-d3abee0db1b4",
+                "case-590db2a54e47",
+                "case-175d693dd46c"
+            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P2-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-41fb180b2ab7",
+                "case-beda2c4af963",
+                "case-44aff7eb41e0"
+            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P3-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-79cbc09de831", "case-166f5dda32d2"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P3-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-aa7a4443fde2",
+                "case-43d357887387",
+                "case-ba0c551f61c3"
+            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P3-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-8ca9de4537f3",
+                "case-ef8315a58fbd",
+                "case-8ca0db056cce"
+            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P3-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-068738719986",
+                "case-a7545c9276ec",
+                "case-8dec9b8e3264"
+            ],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M3-P3-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-ca316273e5c8", "case-20c43940e775"],
+            "manual_artifact_ids": ["artifact-10ce17c36a57"],
+            "manual_scope": [
+                "Retained accepted M3-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P1-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-11e37ec00cbd", "case-599b93f8e711"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P1-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-83c380d01fdf", "case-043c5152045e"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P1-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-6f0fade57e0b", "case-92a7a05ac493"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P1-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-043c5152045e",
+                "case-4eeef3b3a1f3",
+                "case-10b1b435e416"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P1-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-4ec83dec33b5",
+                "case-80388bc0f511",
+                "case-5dd88e31c45d",
+                "case-efd10f946d25",
+                "case-bb48da69d003"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P2-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-6de7d845e945", "case-7da1491fef42"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P2-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-6de7d845e945", "case-a069fa805759"],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P2-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-c24f7cea7eb9",
+                "case-750483d21da6",
+                "case-a78977ca8f57"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P2-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-bfb8eee892f7",
+                "case-406e8488622c",
+                "case-72b22c89aab8",
+                "case-55188ec93106"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P2-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-6898e4970a5a",
+                "case-24ec3b4109b8",
+                "case-0ce307f47a21",
+                "case-294df6db2bce"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P3-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-a2eec4517c66",
+                "case-c9053c83520c",
+                "case-7eae1d20bf2b"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P3-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-f4ffe125dd30",
+                "case-bdc6ab0f08d7",
+                "case-35320516b635"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P3-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-1cb14ff2f25b",
+                "case-d33ca4f2fed4",
+                "case-ec9185e53baf"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P3-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-0d1d48069338",
+                "case-72a580a8f2ba",
+                "case-187a423cb915"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M4-P3-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-a2eec4517c66",
+                "case-c0ed6f0d9569",
+                "case-cf02e0b7e44a"
+            ],
+            "manual_artifact_ids": ["artifact-d6acb6501975"],
+            "manual_scope": [
+                "Retained accepted M4-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M5-P1-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-b688f52f5016",
+                "case-87b71acce4c3",
+                "case-a32d275bc059"
+            ],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
+            "manual_scope": [
+                "Retained accepted M5-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M5-P1-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-a58bd9745ff3",
+                "case-4988f351b3c2",
+                "case-1e29a7686d4b"
+            ],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
+            "manual_scope": [
+                "Retained accepted M5-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M5-P1-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-c2210969e4db", "case-5aeae6feaeff"],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
+            "manual_scope": [
+                "Retained accepted M5-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M5-P1-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": ["case-d084eb6f3c5d", "case-03db6e7dee30"],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
+            "manual_scope": [
+                "Retained accepted M5-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "M5-P1-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-601ff38ef26f",
+                "case-c35ab5c702f3",
+                "case-1044aaaadea8"
+            ],
+            "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
+            "manual_scope": [
+                "Retained accepted M5-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+            ]
+        },
+        "INV-01": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-2451928c330c",
+                "case-420cee76ce21",
+                "case-66d3d5c300db"
+            ],
+            "manual_artifact_ids": []
+        },
+        "INV-02": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-61e4d6008f81",
+                "case-542059a2589a",
+                "case-5ce628fad92f",
+                "case-f680c6448bd1"
+            ],
+            "manual_artifact_ids": []
+        },
+        "INV-03": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-5de96dd4a2da",
+                "case-aaeebe535f2a",
+                "case-159dd1b34aa7"
+            ],
+            "manual_artifact_ids": []
+        },
+        "INV-04": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-547405900300",
+                "case-b2036b2d9c9d",
+                "case-aa0977db160e",
+                "case-4988f351b3c2"
+            ],
+            "manual_artifact_ids": []
+        },
+        "INV-05": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-a5b0a8c8ae75",
+                "case-ec9185e53baf",
+                "case-c641c9e2dcfa",
+                "case-d33ca4f2fed4"
+            ],
+            "manual_artifact_ids": []
+        },
+        "INV-06": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-f8fa4ee4ae00",
+                "case-beda2c4af963",
+                "case-44aff7eb41e0"
+            ],
+            "manual_artifact_ids": []
+        },
+        "INV-07": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-44e67225987c",
+                "case-e99d5121cae2",
+                "case-068738719986"
+            ],
+            "manual_artifact_ids": []
+        },
+        "INV-08": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-5ceba252d89c",
+                "case-ef8315a58fbd",
+                "case-2d0a9f6a6865",
+                "case-ba0c551f61c3"
+            ],
+            "manual_artifact_ids": []
+        },
+        "INV-09": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-11e37ec00cbd",
+                "case-83c380d01fdf",
+                "case-043c5152045e",
+                "case-c24f7cea7eb9"
+            ],
+            "manual_artifact_ids": []
+        },
+        "INV-10": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-68965d54a976",
+                "case-c557154a9c93",
+                "case-ae50c2c38221",
+                "case-48057b646d8f",
+                "case-197ba8df0f89",
+                "case-587f3646fa66",
+                "case-f7eca283d0e6",
+                "case-a97bf5aa4efd",
+                "case-6bf1dd6eb1d4",
+                "case-c62d410a59b6",
+                "case-05bcd30f0cdb"
+            ],
+            "manual_artifact_ids": [],
+            "scope": "Executed module-specific owner/admin/export negatives for currently implemented modules. M6 jobs/uploads and M7 AI tools remain unimplemented, not claimed tested. New release web-session revocation regression remains mandatory pending separately."
+        },
+        "INV-11": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-d0a28d239b04",
+                "case-d86f6f417643",
+                "case-8bb354ac8957",
+                "case-0463f98e702b"
+            ],
+            "manual_artifact_ids": [],
+            "scope": "Durable implemented financial idempotency plus obsolete uncommitted rejection. External publisher HTTP405 remains failed/unverified; this is not exactly-once external delivery evidence."
+        },
+        "INV-12": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["artifact-fef43d579e25"],
+            "scope": "Retained manual original harness observations; current M5-P2 report/failure-propagation/mandatory-artifact gates must execute anew. No JUnit selector is invented to stand in for CLI/approval evidence.",
+            "manual_scope": [
+                "Retained real failure propagation and negative report/tool/service checks; fresh full/CI receipts remain separate."
+            ]
+        },
+        "M5-P2-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [],
+            "manual_artifact_ids": ["m5p2-rendered"],
+            "tool_check": "HTTP_JOURNEY"
+        },
+        "M5-P2-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-daabb4f542f8",
+                "case-a1d268a2d046",
+                "case-39b74e8432e3",
+                "case-f819f8b030d6",
+                "case-45b5a70e6726",
+                "case-21629202b48c",
+                "case-c36fd13506c2",
+                "case-ef1b041b0dcc",
+                "case-f697e542bbf8",
+                "case-53ead0164a16"
+            ],
+            "manual_artifact_ids": ["m5p2-source"],
+            "tool_check": "ACCEPTANCE_MAP"
+        },
+        "M5-P2-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-6af5eeee1fd2",
+                "case-9676cf955ef3",
+                "case-064230e0d65d",
+                "case-6d3cf9cfdac9",
+                "case-3c8ff51b56db",
+                "case-2add1642fb32",
+                "case-9c2eec357138",
+                "case-3b60c9fe2fb9",
+                "case-8eea784314b8",
+                "case-0fa95d3f190b",
+                "case-1191fec1d76a",
+                "case-71c353d9e249",
+                "case-e8f2188e689e",
+                "case-cfaeb7116554",
+                "case-24e55b8fe72b"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": "FINANCIAL_COVERAGE"
+        },
+        "M5-P2-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-1d64eb17b7cb",
+                "case-01f08e02ea1b",
+                "case-e1de6be96de6"
+            ],
+            "manual_artifact_ids": ["m5p2-source", "m5p2-rendered"],
+            "tool_check": "HTTP_SECURITY"
+        },
+        "M5-P2-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-1b3aeefe4174",
+                "case-771ff6fac0b2",
+                "case-5db2c8c739e5",
+                "case-9b04eece2b6b",
+                "case-1eb32134ec19",
+                "case-a37039405397",
+                "case-22ddece9ae10",
+                "case-230dda8360e4",
+                "case-e3f49d5a0ca3",
+                "case-5a7151f8b1bb",
+                "case-17739bd76a1c",
+                "case-770977eca2c0"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": "DASHBOARD_PERFORMANCE"
+        }
+    },
+    "fixtures": {
+        "F01": {
+            "name": "Exact money",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-61e4d6008f81", "case-f302dc5082e7"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F02": {
+            "name": "Transfer invariance",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-2451928c330c", "case-b2036b2d9c9d"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F03": {
+            "name": "Atomicity and retry",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-609e39e2e0d7", "case-5f1d1bb1a4f3"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F04": {
+            "name": "FX conversion",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-3474fb0c27cf", "case-8e2525045c32"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F05": {
+            "name": "Emergency target",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-47ea3cf46f97", "case-301966240417"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F06": {
+            "name": "Different expense flags",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-487ccde9312d", "case-4a0f3337decd"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F07": {
+            "name": "Deployable-now",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-ccff5c0358f9", "case-c34b5dfe431e"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F08": {
+            "name": "Book cost and sale",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-cb8ca63c36f1", "case-94e18d8978e8"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F09": {
+            "name": "IPO subscription",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-f8fa4ee4ae00", "case-8a54ca4eef24"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F10": {
+            "name": "Split",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-3ef230e9017f", "case-836fbdb05982"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F11": {
+            "name": "FX-adjusted return",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-79cbc09de831", "case-166f5dda32d2"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F12": {
+            "name": "Purification linkage",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-6de7d845e945", "case-a069fa805759"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F13": {
+            "name": "Investment plan",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": ["case-a2eec4517c66", "case-c9053c83520c"],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F14": {
+            "name": "Owner isolation",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": [
+                "case-c557154a9c93",
+                "case-197ba8df0f89",
+                "case-587f3646fa66",
+                "case-f7eca283d0e6"
+            ],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed.",
+            "requirement_refs": ["INV-10"]
+        },
+        "F15": {
+            "name": "Missing evidence/data",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": [
+                "case-aa7a4443fde2",
+                "case-11e37ec00cbd",
+                "case-c24f7cea7eb9",
+                "case-c2210969e4db",
+                "case-43d357887387"
+            ],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed."
+        },
+        "F16": {
+            "name": "Reservation race and withdrawal",
+            "status": "IMPLEMENTED_SYNTHETIC_TRANSLATION_RETAINED_EXECUTED",
+            "case_ids": [
+                "case-a5b0a8c8ae75",
+                "case-d9eed911d76e",
+                "case-75cebe6a22f9"
+            ],
+            "source_originals": "PRIVATE_NOT_EMBEDDED",
+            "scope": "Exact public synthetic tests; not a claim that canonical private original inputs were newly executed.",
+            "requirement_refs": ["M2-P2-AC3", "M2-P2-AC4", "INV-05"]
+        },
+        "F17": {
+            "name": "Import and provider retry",
+            "status": "FUTURE_M6_NOT_IMPLEMENTED",
+            "case_ids": [],
+            "scope": "Statement upload/provider/outbox scenarios are future; existing private plan CLI import is a different implemented operation."
+        },
+        "F18": {
+            "name": "AI trust boundary",
+            "status": "FUTURE_M7_NOT_IMPLEMENTED",
+            "case_ids": [],
+            "scope": "No AI tool or live-model test claimed."
+        }
+    },
+    "evidence_semantics": "AND: configured exact cases must pass in current uncached JUnit and every configured scoped manual artifact must retain its hash. Historical and current observations retain their declared limits; manual evidence never replaces a missing configured test or owner acceptance."
+}

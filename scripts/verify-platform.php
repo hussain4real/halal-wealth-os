@@ -14,7 +14,7 @@ $coverage = (extension_loaded('pcov') && filter_var(ini_get('pcov.enabled'), FIL
 if (! $coverage) {
     fwrite(STDERR, 'Missing enabled PCOV/Xdebug coverage driver'.PHP_EOL);
 }
-if (PHP_VERSION_ID < 80500 || PHP_VERSION_ID >= 80600) {
-    fwrite(STDERR, 'PHP 8.5.x is required by this application'.PHP_EOL);
+if (PHP_VERSION_ID < 80512 || PHP_VERSION_ID >= 80600) {
+    fwrite(STDERR, 'PHP 8.5.12 or later in the 8.5.x line is required (security patch floor)'.PHP_EOL);
 }
-exit(count($missing) || ! $coverage || (PHP_VERSION_ID < 80500 || PHP_VERSION_ID >= 80600) ? 2 : 0);
+exit(count($missing) || ! $coverage || (PHP_VERSION_ID < 80512 || PHP_VERSION_ID >= 80600) ? 2 : 0);

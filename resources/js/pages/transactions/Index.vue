@@ -25,7 +25,7 @@ defineProps<{
 
 <template>
     <Head title="Transactions" />
-    <main class="mx-auto w-full max-w-5xl space-y-8 px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto w-full max-w-5xl space-y-8 px-4 py-8 sm:px-8 sm:py-12">
         <header class="flex flex-wrap items-end justify-between gap-5">
             <div>
                 <p
@@ -184,5 +184,5 @@ defineProps<{
             <ReceiptText class="size-4 shrink-0" />Records describe your ledger.
             They do not send money or connect to a bank.
         </p>
-    </main>
+    </div>
 </template>

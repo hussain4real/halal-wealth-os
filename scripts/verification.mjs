@@ -1,6 +1,6 @@
-import { randomBytes } from 'node:crypto';
+import { randomBytes, createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
@@ -112,4 +112,36 @@ export function manifest() {
 export function reportFailure(error) {
     console.error(error.message);
     process.exitCode = error.status || 2;
+}
+
+export function sourceIdentity() {
+    const inventory = spawnSync(
+        'git',
+        ['ls-files', '-z', '--cached', '--others', '--exclude-standard'],
+        { cwd: root, encoding: 'utf8' },
+    );
+    if (inventory.status !== 0)
+        throw new VerificationFailure('Source inventory must succeed');
+    const files = inventory.stdout
+        .split('\0')
+        .filter(
+            (file) =>
+                /^(app|bootstrap|config|routes|resources|scripts|tests|bin|database|ops|\.github)\//.test(
+                    file,
+                ) ||
+                /^(composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|phpstan\.neon|vite\.config\.ts|tsconfig\.json)$/.test(
+                    file,
+                ),
+        );
+    if (!files.length)
+        throw new VerificationFailure('Source inventory must not be empty');
+    const hash = createHash('sha256');
+    for (const file of [...new Set(files)].sort())
+        hash.update(file)
+            .update('\0')
+            .update((statSync(path.join(root, file)).mode & 0o777).toString(8))
+            .update('\0')
+            .update(readFileSync(path.join(root, file)))
+            .update('\0');
+    return hash.digest('hex');
 }

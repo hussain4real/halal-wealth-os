@@ -236,8 +236,8 @@ const rowError = (index: number, field: string) =>
         ><template #intro
             >{{ account.name }} · {{ account.currency }}. This is the complete
             opening book. Corrections replace the selected book at its original
-            UTC date and retain every previous version. Trades and later price
-            updates belong to later phases.</template
+            UTC date and retain every previous version. Record trades in
+            Activity and update manual prices in Prices.</template
         >
         <section
             class="rounded-2xl border bg-muted/25 p-5 text-sm leading-relaxed"

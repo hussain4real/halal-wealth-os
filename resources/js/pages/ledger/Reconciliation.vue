@@ -45,7 +45,7 @@ const submit = () =>
 </script>
 <template>
     <Head title="Statement comparison" />
-    <main class="mx-auto w-full max-w-4xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto w-full max-w-4xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
         <LedgerNav />
         <header>
             <p
@@ -243,5 +243,5 @@ const submit = () =>
                 >Open earlier comparison</Link
             >
         </nav>
-    </main>
+    </div>
 </template>

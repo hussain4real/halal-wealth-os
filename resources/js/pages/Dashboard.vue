@@ -96,7 +96,7 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
 </script>
 <template>
     <Head title="Your financial overview" />
-    <main
+    <div
         class="mx-auto w-full max-w-6xl space-y-9 p-4 [overflow-wrap:anywhere] sm:p-8"
     >
         <header class="flex flex-wrap items-start justify-between gap-5">
@@ -489,5 +489,5 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
                 >Security settings</Link
             >
         </nav>
-    </main>
+    </div>
 </template>

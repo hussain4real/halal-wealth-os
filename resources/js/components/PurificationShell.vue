@@ -4,7 +4,7 @@ defineProps<{ title: string }>();
 </script>
 <template>
     <Head :title="title" />
-    <main
+    <div
         class="mx-auto w-full max-w-6xl space-y-7 px-4 py-8 [overflow-wrap:anywhere] sm:px-8 sm:py-12"
     >
         <Link
@@ -29,5 +29,5 @@ defineProps<{ title: string }>();
             workflow does not issue religious rulings, calculate zakat, transfer
             money or liquidate investments. No default rate is supplied.
         </footer>
-    </main>
+    </div>
 </template>

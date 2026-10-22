@@ -112,10 +112,9 @@ defineProps<{
                     }}
                 </p>
                 <p class="mt-4 text-xs text-muted-foreground">
-                    Opening prices and manual values are reference values for
-                    their recorded UTC date only. Older evidence is retained and
-                    a complete current value is unavailable. Current-price
-                    updates belong to a later phase.
+                    Opening prices and manual values retain their recorded UTC
+                    date. Use Prices for dated observations and Valuations for
+                    current as-of calculations. Older evidence stays in history.
                 </p>
             </section>
         </div>

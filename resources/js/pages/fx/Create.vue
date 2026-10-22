@@ -93,7 +93,7 @@ const fieldClass =
             original ? 'Correct currency exchange' : 'Record currency exchange'
         "
     />
-    <main class="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
         <Link
             :href="original ? `/fx/${original.id}` : '/fx'"
             class="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground underline"
@@ -424,5 +424,5 @@ const fieldClass =
                 /></Button>
             </footer>
         </form>
-    </main>
+    </div>
 </template>
