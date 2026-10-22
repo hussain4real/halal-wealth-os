@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Portfolio;
 
+use App\Domain\Ledger\CorrectionHistory;
 use App\Domain\Ledger\LedgerInput;
 use App\Domain\Ledger\PostingService;
+use App\Domain\Ledger\RetainedCorrection;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
 use App\Models\User;
@@ -16,12 +18,28 @@ use stdClass;
 
 final readonly class InvestmentService
 {
-    public function __construct(private PortfolioRead $read, private InvestmentReplay $replay, private PostingService $posting) {}
+    public function __construct(private PortfolioRead $read, private InvestmentReplay $replay, private PostingService $posting, private CorrectionHistory $history) {}
 
     /** @param array<string,mixed> $input */
     public function record(User $owner, string $id, string $key, array $input): stdClass
     {
-        return DB::transaction(function () use ($owner, $id, $key, $input): stdClass {
+        return $this->recordOperation($owner, $id, $key, $input, null);
+    }
+
+    /** @param array<string,mixed> $input */
+    public function replaceRetained(User $owner, string $id, string $key, array $input, RetainedCorrection $completion): stdClass
+    {
+        if (($input['replaces_id'] ?? '') === '') {
+            LedgerInput::fail('replaces_id', 'A retained replacement requires its original event.');
+        }
+
+        return $this->recordOperation($owner, $id, $key, $input, $completion);
+    }
+
+    /** @param array<string,mixed> $input */
+    private function recordOperation(User $owner, string $id, string $key, array $input, ?RetainedCorrection $completion): stdClass
+    {
+        return DB::transaction(function () use ($owner, $id, $key, $input, $completion): stdClass {
             LedgerInput::lock($owner);
             PortfolioInput::only($input, ['kind', 'asset_id', 'effective_date', 'quantity', 'unit_price', 'amount', 'fee', 'tax', 'split_numerator', 'split_denominator',
                 'subscription_id', 'action_reference', 'confirmed', 'source', 'reason', 'replaces_id']);
@@ -35,6 +53,7 @@ final readonly class InvestmentService
             $priorFrames = $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), checkDates: $checkDates)['cash_frames'];
             $prior = ($input['replaces_id'] ?? '') === '' ? null : $this->member($owner, $id, LedgerInput::identifier($input['replaces_id']));
             if ($prior !== null) {
+                $this->history->authorize($owner, 'event', (string) $prior->id, $completion);
                 if ($prior->kind !== $data['kind'] || $prior->kind === 'ipo_intent' || $prior->action_reference !== $data['action_reference']) {
                     LedgerInput::fail('replaces_id', 'A correction retains event kind and business reference. Applications with dependent facts require linked child corrections.');
                 }
@@ -46,13 +65,27 @@ final readonly class InvestmentService
             $this->cash($owner, $account, $event);
             $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), true, $priorFrames, $checkDates);
 
+            if ($prior !== null) {
+                $this->history->complete($owner, 'event', (string) $prior->id, (string) $event->id, $event->currency, 'replacement', $completion);
+            }
+
             return $event;
         });
     }
 
     public function reverse(User $owner, string $id, string $eventId, string $key, string $reason): stdClass
     {
-        return DB::transaction(function () use ($owner, $id, $eventId, $key, $reason): stdClass {
+        return $this->reverseOperation($owner, $id, $eventId, $key, $reason, null);
+    }
+
+    public function reverseRetained(User $owner, string $id, string $eventId, string $key, string $reason, RetainedCorrection $completion): stdClass
+    {
+        return $this->reverseOperation($owner, $id, $eventId, $key, $reason, $completion);
+    }
+
+    private function reverseOperation(User $owner, string $id, string $eventId, string $key, string $reason, ?RetainedCorrection $completion): stdClass
+    {
+        return DB::transaction(function () use ($owner, $id, $eventId, $key, $reason, $completion): stdClass {
             LedgerInput::lock($owner);
             $payload = ['portfolio_account_id' => $id, 'reverse_id' => $eventId, 'reason' => $reason];
             if ($cached = LedgerInput::cached('investment_events', $owner, $key, $payload)) {
@@ -60,9 +93,11 @@ final readonly class InvestmentService
             }
             $account = $this->active($owner, $id);
             $prior = $this->member($owner, $id, $eventId);
+            $this->history->authorize($owner, 'event', (string) $prior->id, $completion);
             $priorFrames = $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'))['cash_frames'];
             $event = $this->cancel($owner, $account, $prior, $key, LedgerInput::text($reason, 'reason'), $payload);
             $this->replay->capture($owner, $id, now('UTC')->format('Y-m-d\TH:i:s\Z'), true, $priorFrames);
+            $this->history->complete($owner, 'event', (string) $prior->id, (string) $event->id, $event->currency, 'cancelled', $completion);
 
             return $event;
         });

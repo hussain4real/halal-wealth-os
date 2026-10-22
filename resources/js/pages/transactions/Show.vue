@@ -229,6 +229,22 @@ const reverse = () => {
             </ul>
         </section>
         <section
+            v-if="transaction.import_receipt_id"
+            class="rounded-2xl border p-5 sm:p-7"
+        >
+            <h2 class="font-medium">Imported entry</h2>
+            <p class="mt-2 text-sm text-muted-foreground">
+                Correct or cancel this entry from its import receipt to keep its
+                source and linked history together.
+            </p>
+            <Button variant="outline" class="mt-4" as-child
+                ><Link
+                    :href="'/imports/receipts/' + transaction.import_receipt_id"
+                    >Open import receipt</Link
+                ></Button
+            >
+        </section>
+        <section
             v-if="transaction.fx_operation_id"
             class="rounded-2xl border p-5 sm:p-7"
         >
@@ -264,7 +280,8 @@ const reverse = () => {
                     transaction.status === 'posted' &&
                     transaction.kind !== 'reversal' &&
                     !transaction.fx_operation_id &&
-                    !transaction.investment
+                    !transaction.investment &&
+                    !transaction.import_receipt_id
                 "
                 class="rounded-2xl border border-dashed p-5 sm:p-7"
                 aria-labelledby="correction-heading"

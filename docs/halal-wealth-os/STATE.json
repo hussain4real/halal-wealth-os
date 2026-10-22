@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-22T11:21:17.612355+00:00",
+    "updated_at": "2026-10-22T16:40:19.873799+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -19,7 +19,7 @@
         "branch": "feat/m6-p1-statement-import",
         "baseline_head": "6de411da86858763537be326914fab86d3ffa19a",
         "started_at": "2026-10-22T09:53:50.814621+00:00",
-        "status": "READY_FOR_REVIEW"
+        "status": "VERIFICATION_PENDING"
     },
     "repository": {
         "root": null,
@@ -355,7 +355,7 @@
         "recorded_at": "2026-10-22T09:53:50.814621+00:00",
         "scope": "Accept M5; implement canonical M6-P1 only, open PR to dev, merge after exact-head full CI and fresh review, verify original post-merge CI and existing signed /dev/null publishing.",
         "accepted_dependencies": ["M5-P3"],
-        "max_cycles": 8,
+        "max_cycles": 10,
         "main_stage_changes": false,
         "deployment": false,
         "later_phases": false,
@@ -368,17 +368,24 @@
             "additional_cycles": 2,
             "total_ceiling": 8,
             "scope": "Fix both PR21 hosted P2 findings, then exact-head original CI/fresh review and normal dev merge/postmerge CI/publishing."
+        },
+        "import_bypass_cycle_authorization": {
+            "authorized_by": "human-owner",
+            "additional_cycles": 2,
+            "previous_ceiling": 8,
+            "total_ceiling": 10,
+            "scope": "PR21 import correction bypass; preserve cycles1-8 and repeat exact-head CI, independent source/rendered and fresh hosted review, normal dev merge and original post-merge publishing"
         }
     },
     "execution_status": {
         "phase": "M6-P1",
-        "status": "READY_FOR_REVIEW",
-        "cycle": 8,
-        "cycles_used": 8,
-        "max_cycles": 8,
+        "status": "VERIFICATION_PENDING",
+        "cycle": 9,
+        "cycles_used": 9,
+        "max_cycles": 10,
         "phase_acceptance": "PENDING_HUMAN_DECISION",
         "milestone_acceptance": "M5_ACCEPTED",
-        "checkpoint": "FinalauthorizedCycle8 READY: guardedfreshTIA1024tests6934assertions,52parserunit115assertions,3clientchecks, types/PHPStan/build, independent source/rendered review andownedruntimecleanupPASS. Bothnewfindingsresolvedlocally. NewheadfulloriginalCI/freshreview, normaldevmerge,originalpostCIandsignedpublicpoststillpending. Eightofeightcyclesused; owneracceptancepending."
+        "checkpoint": "Owner authorized two further cycles, total ceiling10. Import correction bypass fixed at service boundary with exact retained successor validation. Final TIA/source/rendered and uncached release gates in progress; fresh exact-head hosted CI/review, normal merge, original dev CI and signed public post still required."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2876,5 +2883,36 @@
             "rendered_verdict": "PASS_SCOPED_JOURNEY_OWNED_RUNTIME_AND_CREDENTIALS_CLEANED",
             "new_hosted_gates": "PENDING"
         }
+    },
+    "m6p1_budget_extension_after_import_bypass": {
+        "authorized_by": "human-owner",
+        "additional_cycles": 2,
+        "previous_ceiling": 8,
+        "total_ceiling": 10,
+        "scope": "PR21 import correction bypass; preserve cycles1-8 and repeat exact-head CI, independent source/rendered and fresh hosted review, normal dev merge and original post-merge publishing"
+    },
+    "m6p1_cycle9_engineering": {
+        "cycle": 9,
+        "total_ceiling": 10,
+        "status": "FINAL_SOURCE_PASS_RUNTIME_GATES_PENDING",
+        "scope": "Protect import-created and latest replacement targets at correction services and route UI to retained import history",
+        "phase_acceptance": "UNACCEPTED",
+        "deployment": false,
+        "fresh_tia_tests": 1069,
+        "fresh_tia_assertions": 7251,
+        "mapped_selectors": 424,
+        "source_review": "PASS_SOURCE_REVIEW",
+        "sanitation": "PUBLISHABLE_SOURCE",
+        "source_sha256": "9dcd405275b55cf36a618fda5ee537d6b5ef9065278ace49f7a9c0ecfd45921b"
+    },
+    "m6p1_cycle8_checkpoint": {
+        "phase": "M6-P1",
+        "status": "READY_FOR_REVIEW",
+        "cycle": 8,
+        "cycles_used": 8,
+        "max_cycles": 8,
+        "phase_acceptance": "PENDING_HUMAN_DECISION",
+        "milestone_acceptance": "M5_ACCEPTED",
+        "checkpoint": "FinalauthorizedCycle8 READY: guardedfreshTIA1024tests6934assertions,52parserunit115assertions,3clientchecks, types/PHPStan/build, independent source/rendered review andownedruntimecleanupPASS. Bothnewfindingsresolvedlocally. NewheadfulloriginalCI/freshreview, normaldevmerge,originalpostCIandsignedpublicpoststillpending. Eightofeightcyclesused; owneracceptancepending."
     }
 }

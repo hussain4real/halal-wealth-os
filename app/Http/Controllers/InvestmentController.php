@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Ledger\CorrectionHistory;
 use App\Domain\Ledger\LedgerInput;
 use App\Domain\Portfolio\InvestmentService;
 use App\Domain\Portfolio\PortfolioRead;
@@ -70,12 +71,16 @@ class InvestmentController extends Controller
         });
     }
 
-    public function create(Request $request, string $portfolio): Response
+    public function create(Request $request, string $portfolio): Response|RedirectResponse
     {
-        return PortfolioRead::coherent(function () use ($request, $portfolio): Response {
+        return PortfolioRead::coherent(function () use ($request, $portfolio): Response|RedirectResponse {
             $owner = $this->owner($request);
             $s = $this->read->state($owner, $portfolio, $this->now());
             $prior = $request->query('replace') === null ? null : $this->member($owner, $portfolio, LedgerInput::identifier($request->query('replace')));
+            $import = $prior === null ? null : app(CorrectionHistory::class)->origin($owner, 'event', (string) $prior->id);
+            if ($import !== null) {
+                return redirect('/imports/receipts/'.$import['receipt_id']);
+            }
             $selectedId = $request->query('asset');
             $selected = $prior === null && $selectedId !== null ? LedgerInput::owned('portfolio_assets', $owner, LedgerInput::identifier($selectedId)) : null;
             $assets = DB::table('portfolio_assets as a')->where('a.owner_id', $owner->id)->where('a.currency', $s['currency'])->whereIn('a.kind', ['equity', 'unitized_fund'])
@@ -160,6 +165,7 @@ class InvestmentController extends Controller
             'cash_effect' => $this->money($e->currency, $cash), 'journal_id' => $member === null ? null : (string) $member->journal_id, 'reverses_id' => $e->reverses_id === null ? null : (string) $e->reverses_id,
             'replaces_id' => $e->replaces_id === null ? null : (string) $e->replaces_id, 'reversed_by' => $reverse === null ? null : (string) $reverse,
             'replacement_id' => $replacement === null ? null : (string) $replacement,
+            'import_receipt_id' => app(CorrectionHistory::class)->origin($owner, 'event', (string) $e->id)['receipt_id'] ?? null,
             'decision' => $decision === null ? null : ['opportunity_id' => (string) $decision->opportunity_id, 'tranche_key' => $decision->tranche_key, 'reason' => $decision->reason]];
     }
 

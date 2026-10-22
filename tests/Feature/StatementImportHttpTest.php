@@ -7,6 +7,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Inertia\Testing\AssertableInertia as Page;
 use Tests\Support\FxFixtures;
+use Tests\Support\InvestmentFixtures;
+use Tests\Support\PortfolioFixtures;
 use Tests\Support\StatementFixtures as S;
 use Tests\TestCase;
 
@@ -130,3 +132,39 @@ test('every retained import write shares the owner throttle without blocking rec
     $this->get('/imports/receipts/'.$r->id)->assertOk();
     $this->assertDatabaseCount('journal_entries', 1);
 })->with(['revise', 'approve', 'correct']);
+
+test('import-owned financial receipts route corrections through source history and reject generic writes', function (bool $investment, bool $replacement) {
+    $account = $investment ? PortfolioFixtures::account($this->owner) : $this->bank;
+    $portfolio = $investment ? PortfolioFixtures::link($this->owner, $account) : null;
+    $asset = $investment ? PortfolioFixtures::asset($this->owner) : null;
+    if ($investment) {
+        InvestmentFixtures::fund($this->owner, $account);
+    }
+    $row = $investment ? ['type' => 'buy', 'amount' => '4.57', 'quantity' => '1', 'asset_id' => (string) $asset->id, 'operation_reference' => 'HTTP-GUARD-EVENT'] : [];
+    $imports = app(StatementImports::class);
+    $snapshot = S::preview($this->owner, $account, [$row]);
+    $receipt = $imports->approve($this->owner, (string) $snapshot->id, 'synthetic-http-guard-original', ['1']);
+    if ($replacement) {
+        $receipt = $imports->correct($this->owner, (string) $receipt->id, '1', 'synthetic-http-guard-replace', 'Retain correction provenance', (string) $snapshot->id, '1');
+    }
+    $target = $imports->receipt($this->owner, (string) $receipt->id)['outcomes'][0]['target'];
+    $this->actingAs($this->owner);
+    $page = $investment ? '/portfolio/'.$portfolio->id.'/events/'.$target['event_id'] : '/transactions/'.$target['journal_id'];
+    $form = $investment ? '/portfolio/'.$portfolio->id.'/events/new?replace='.$target['event_id'] : $page.'/correct';
+    $this->get($page)->assertOk()->assertInertia(fn (Page $p) => $p->where(($investment ? 'event' : 'transaction').'.import_receipt_id', (string) $receipt->id));
+    $this->get($form)->assertRedirect('/imports/receipts/'.$receipt->id);
+    $before = DB::table('journal_entries')->count();
+    $payload = $investment ? InvestmentFixtures::input($asset, ['replaces_id' => $target['event_id'], 'action_reference' => 'HTTP-GUARD-EVENT'])
+        : ['kind' => 'income', 'account_id' => (string) $account->id, 'amount' => '6.78', 'effective_date' => now('UTC')->toDateString(), 'description' => 'Generic bypass'];
+    $this->postJson($investment ? '/portfolio/'.$portfolio->id.'/events' : $page.'/correct', [...$payload, 'idempotency_key' => 'statement:pretend-http-coordinator'])->assertUnprocessable();
+    $this->postJson($page.'/reverse', ['idempotency_key' => 'statement:pretend-http-reverse', 'reason' => 'Generic bypass'])->assertUnprocessable();
+    $this->postJson($page.'/reverse', ['idempotency_key' => 'synthetic-forged-client-authority', 'reason' => 'Generic bypass', 'completion' => ['receiptId' => (string) $receipt->id, 'token' => '1']])->assertUnprocessable();
+    expect(DB::table('journal_entries')->count())->toBe($before);
+    foreach ([false, true] as $admin) {
+        $foreign = User::factory()->create(['is_admin' => $admin]);
+        $this->actingAs($foreign)->getJson($page)->assertNotFound();
+        $this->postJson($page.'/reverse', ['idempotency_key' => 'synthetic-foreign-financial-correction', 'reason' => 'Foreign correction'])->assertNotFound();
+        $this->getJson($form)->assertNotFound();
+    }
+    $this->actingAs($this->owner)->postJson('/imports/receipts/'.$receipt->id.'/1/correct', ['idempotency_key' => 'synthetic-http-guard-cancel', 'reason' => 'Linked import cancellation'])->assertCreated();
+})->with([false, true])->with([false, true]);

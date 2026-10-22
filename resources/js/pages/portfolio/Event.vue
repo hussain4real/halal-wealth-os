@@ -159,9 +159,25 @@ const reviewing = ref(false);
             facts. Execution prices and book cost do not supply a current
             valuation. Current book results are on the activity page.
         </p>
+        <section
+            v-if="event.import_receipt_id"
+            class="max-w-4xl rounded-2xl border p-5 sm:p-7"
+        >
+            <h2 class="font-semibold">Imported entry</h2>
+            <p class="mt-2 text-sm text-muted-foreground">
+                Correct or cancel this event from its import receipt to keep its
+                source and linked cash history together.
+            </p>
+            <Button variant="outline" class="mt-4" as-child
+                ><Link :href="'/imports/receipts/' + event.import_receipt_id"
+                    >Open import receipt</Link
+                ></Button
+            >
+        </section>
         <form
             v-if="
-                (!event.reversed_by &&
+                (!event.import_receipt_id &&
+                    !event.reversed_by &&
                     event.kind !== 'reversal' &&
                     !account.archived) ||
                 locked

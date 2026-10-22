@@ -2,6 +2,7 @@ import type { ExactMoney } from './accounts';
 export type InvestmentEvent = {
     id: string;
     reference: string;
+    import_receipt_id: string | null;
     kind: string;
     effective_date: string;
     sort_id: string;

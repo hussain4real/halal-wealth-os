@@ -2,10 +2,15 @@
 
 use App\Domain\Imports\ImportRejected;
 use App\Domain\Imports\StatementImports;
+use App\Domain\Ledger\CorrectionHistory;
 use App\Domain\Ledger\PostingService;
+use App\Domain\Ledger\RetainedCorrection;
+use App\Domain\Portfolio\InvestmentService;
+use App\Domain\Shared\Money\Currency;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Tests\Support\FxFixtures;
 use Tests\Support\InvestmentFixtures as I;
@@ -359,4 +364,150 @@ test('retention crossing caused by approval rolls back all financial writes and 
         $this->assertDatabaseCount($table, 0);
     }
     expect(S::retentionBytes($this->owner))->toBeLessThan(24 * 1024 * 1024);
+});
+
+test('generic cash corrections cannot bypass imported root or latest replacement history', function (string $kind, bool $replacement, bool $reverse) {
+    $other = FxFixtures::account($this->owner);
+    $row = ['type' => $kind === 'transfer' ? 'transfer_out' : $kind, 'amount' => '4.57', 'provider_id' => 'GUARDED-CASH',
+        ...($kind === 'transfer' ? ['counterparty_account_id' => (string) $other->id, 'operation_reference' => 'GUARDED-TRANSFER'] : [])];
+    $snapshot = S::preview($this->owner, $this->bank, [$row]);
+    $receipt = $this->imports->approve($this->owner, (string) $snapshot->id, 'synthetic-guard-cash-original', ['1']);
+    if ($replacement) {
+        $snapshot = S::preview($this->owner, $this->bank, [$row]);
+        $receipt = $this->imports->correct($this->owner, (string) $receipt->id, '1', 'synthetic-guard-cash-replace', 'Correct retained amount', (string) $snapshot->id, '1');
+    }
+    $outcome = $this->imports->receipt($this->owner, (string) $receipt->id)['outcomes'][0];
+    $journal = $outcome['target']['journal_id'];
+    // Reused provider/source keys need not create a new target claim.
+    if ($replacement) {
+        expect(DB::table('statement_claims')->where('journal_id', $journal)->exists())->toBeFalse();
+    }
+    $before = DB::table('journal_entries')->count();
+    $posting = app(PostingService::class);
+    $input = ['kind' => $kind, 'account_id' => (string) $this->bank->id, 'amount' => '6.78', 'effective_date' => now('UTC')->toDateString(), 'description' => 'Generic bypass',
+        ...($kind === 'transfer' ? ['destination_account_id' => (string) $other->id] : [])];
+    expect(fn () => $reverse
+        ? $posting->reverse($this->owner, $journal, 'statement:pretend-coordinator-key', 'Generic bypass')
+        : $posting->correct($this->owner, $journal, 'statement:pretend-coordinator-key', $input))->toThrow(ValidationException::class);
+    expect(DB::table('journal_entries')->count())->toBe($before)
+        ->and($this->imports->receipt($this->owner, (string) $receipt->id)['outcomes'][0]['correctable'])->toBeTrue();
+    $cancel = $this->imports->correct($this->owner, (string) $receipt->id, '1', 'synthetic-guard-cash-cancel', 'Use retained import history');
+    DB::table('accounts')->where('id', $this->bank->id)->update(['archived_at' => now()]);
+    expect($this->imports->correct($this->owner, (string) $receipt->id, '1', 'synthetic-guard-cash-cancel', 'Use retained import history')->id)->toBe($cancel->id)
+        ->and(DB::table('journal_entries')->count())->toBe($before + 1);
+})->with(['income', 'expense', 'transfer'])->with([false, true])->with([false, true]);
+
+test('generic investment corrections cannot bypass imported root or latest replacement history', function (string $kind, bool $replacement, bool $reverse) {
+    $account = P::account($this->owner);
+    $portfolio = P::link($this->owner, $account);
+    $asset = P::asset($this->owner);
+    I::fund($this->owner, $account);
+    if ($kind === 'sell') {
+        I::event($this->owner, $portfolio, $asset, ['quantity' => '20']);
+    }
+    $row = ['type' => $kind, 'amount' => '4.57', 'quantity' => in_array($kind, ['buy', 'sell'], true) ? '1' : '', 'asset_id' => (string) $asset->id,
+        'operation_reference' => 'GUARDED-EVENT', 'provider_id' => 'GUARDED-INVESTMENT'];
+    $snapshot = S::preview($this->owner, $account, [$row]);
+    $receipt = $this->imports->approve($this->owner, (string) $snapshot->id, 'synthetic-guard-event-original', ['1']);
+    if ($replacement) {
+        $snapshot = S::preview($this->owner, $account, [$row]);
+        $receipt = $this->imports->correct($this->owner, (string) $receipt->id, '1', 'synthetic-guard-event-replace', 'Correct retained consideration', (string) $snapshot->id, '1');
+    }
+    $target = $this->imports->receipt($this->owner, (string) $receipt->id)['outcomes'][0]['target'];
+    $before = DB::table('investment_events')->count();
+    $journals = DB::table('journal_entries')->count();
+    $service = app(InvestmentService::class);
+    $input = I::input($asset, ['kind' => $kind, 'quantity' => in_array($kind, ['buy', 'sell'], true) ? '1' : '', 'amount' => '6.78',
+        'action_reference' => 'GUARDED-EVENT', 'source' => 'statement:pretend-import', 'replaces_id' => $target['event_id']]);
+    expect(fn () => $reverse
+        ? $service->reverse($this->owner, (string) $portfolio->id, $target['event_id'], 'statement:pretend-coordinator-key', 'Generic bypass')
+        : $service->record($this->owner, (string) $portfolio->id, 'statement:pretend-coordinator-key', $input))->toThrow(ValidationException::class);
+    expect(DB::table('investment_events')->count())->toBe($before)->and(DB::table('journal_entries')->count())->toBe($journals);
+    $cancel = $this->imports->correct($this->owner, (string) $receipt->id, '1', 'synthetic-guard-event-cancel', 'Use retained import history');
+    DB::table('accounts')->where('id', $account->id)->update(['archived_at' => now()]);
+    expect($this->imports->correct($this->owner, (string) $receipt->id, '1', 'synthetic-guard-event-cancel', 'Use retained import history')->id)->toBe($cancel->id)
+        ->and(DB::table('investment_events')->count())->toBe($before + 1);
+})->with(['buy', 'sell', 'dividend', 'fee'])->with([false, true])->with([false, true]);
+
+test('retained correction completion cannot commit absent or mismatched successor proof', function (bool $investment, string $fault) {
+    $account = $investment ? P::account($this->owner) : $this->bank;
+    $portfolio = $investment ? P::link($this->owner, $account) : null;
+    $asset = $investment ? P::asset($this->owner) : null;
+    I::fund($this->owner, $account);
+    $row = $investment ? ['type' => 'buy', 'amount' => '4.57', 'quantity' => '1', 'asset_id' => (string) $asset->id, 'operation_reference' => 'PROOF-TRADE'] : [];
+    $snapshot = S::preview($this->owner, $account, [$row]);
+    $receipt = $this->imports->approve($this->owner, (string) $snapshot->id, 'synthetic-proof-original', ['1']);
+    $prior = $this->imports->receipt($this->owner, (string) $receipt->id)['outcomes'][0];
+    $before = [];
+    foreach (['journal_entries', 'postings', 'investment_events', 'statement_receipts', 'statement_claims'] as $table) {
+        $before[$table] = DB::table($table)->count();
+    }
+    $completion = new RetainedCorrection((string) $receipt->id, $fault === 'wrong-token' ? '999' : '1', function (string $id) use ($receipt, $prior, $fault, $investment): stdClass {
+        if ($fault === 'missing' || $fault === 'wrong-token') {
+            return $receipt;
+        }
+        $target = [...$prior['target'], $investment ? 'event_id' : 'journal_id' => $fault === 'wrong-target' ? '999999' : $id];
+        $outcome = [...$prior, 'type' => $fault === 'wrong-type' ? 'replacement' : 'cancelled', 'target' => $target,
+            'original_target' => $prior['target'], 'origin' => ['receipt_id' => (string) $receipt->id, 'token' => $fault === 'wrong-origin' ? '2' : '1']];
+        $next = (array) $receipt;
+        unset($next['id']);
+        $next['reference'] = (string) Str::ulid();
+        $next['idempotency_key'] = 'synthetic-forged-successor';
+        $next['corrects_receipt_id'] = $receipt->id;
+        $next['corrects_token'] = '1';
+        $next['outcomes'] = json_encode(['1' => $outcome], JSON_THROW_ON_ERROR);
+        DB::table('statement_receipts')->insert($next);
+
+        return (object) $next;
+    });
+    expect(fn () => $investment
+        ? app(InvestmentService::class)->reverseRetained($this->owner, (string) $portfolio->id, $prior['target']['event_id'], 'synthetic-proof-reverse', 'Proof rejection', $completion)
+        : app(PostingService::class)->reverseRetained($this->owner, $prior['target']['journal_id'], 'synthetic-proof-reverse', 'Proof rejection', $completion))->toThrow(ValidationException::class);
+    foreach ($before as $table => $count) {
+        expect(DB::table($table)->count())->toBe($count);
+    }
+    expect($this->imports->receipt($this->owner, (string) $receipt->id)['outcomes'][0]['correctable'])->toBeTrue();
+})->with([false, true])->with(['missing', 'wrong-token', 'wrong-target', 'wrong-type', 'wrong-origin']);
+
+test('matched manual transfer and investment roots retain generic corrections and exact committed recovery', function (bool $investment) {
+    $posting = app(PostingService::class);
+    if ($investment) {
+        $account = P::account($this->owner);
+        $portfolio = P::link($this->owner, $account);
+        $asset = P::asset($this->owner);
+        I::fund($this->owner, $account);
+        $root = I::event($this->owner, $portfolio, $asset);
+        $snapshot = S::preview($this->owner, $account, [['type' => 'match_investment', 'amount' => '56.08', 'direction' => 'out', 'match_id' => (string) $root->id]]);
+    } else {
+        $account = $this->bank;
+        $other = FxFixtures::account($this->owner);
+        $root = $posting->record($this->owner, 'synthetic-manual-matched-transfer', ['kind' => 'transfer', 'account_id' => (string) $account->id, 'destination_account_id' => (string) $other->id,
+            'amount' => '4.57', 'description' => 'Manual transfer', 'effective_date' => now('UTC')->toDateString()]);
+        $snapshot = S::preview($this->owner, $account, [['type' => 'match_transfer', 'amount' => '4.57', 'direction' => 'out', 'match_id' => (string) $root->id]]);
+    }
+    $receipt = $this->imports->approve($this->owner, (string) $snapshot->id, 'synthetic-manual-match', ['1']);
+    expect($this->imports->receipt($this->owner, (string) $receipt->id)['outcomes'][0]['type'])->toBe('matched')
+        ->and(app(CorrectionHistory::class)->origin($this->owner, $investment ? 'event' : 'journal', (string) $root->id))->toBeNull();
+    $reverse = fn () => $investment
+        ? app(InvestmentService::class)->reverse($this->owner, (string) $portfolio->id, (string) $root->id, 'synthetic-manual-match-reversal', 'Manual root correction')
+        : $posting->reverse($this->owner, (string) $root->id, 'synthetic-manual-match-reversal', 'Manual root correction');
+    $result = $reverse();
+    DB::table('accounts')->where('id', $account->id)->update(['archived_at' => now()]);
+    expect($reverse()->id)->toBe($result->id);
+    $this->assertDatabaseCount('statement_receipts', 1);
+})->with([false, true]);
+
+test('cash replacement successor retains actual destination currency and remains guarded', function () {
+    $snapshot = S::preview($this->owner, $this->bank, [[]]);
+    $receipt = $this->imports->approve($this->owner, (string) $snapshot->id, 'synthetic-currency-origin', ['1']);
+    $usd = FxFixtures::account($this->owner, Currency::USD);
+    $replacement = S::preview($this->owner, $usd, [['currency' => 'USD', 'amount' => '14.56']], 'Synthetic corrected currency');
+    $corrected = $this->imports->correct($this->owner, (string) $receipt->id, '1', 'synthetic-currency-replacement', 'Correct the retained account and currency', (string) $replacement->id, '1');
+    $target = $this->imports->receipt($this->owner, (string) $corrected->id)['outcomes'][0]['target'];
+    expect($target['currency'])->toBe('USD')
+        ->and(DB::table('postings')->where('journal_id', $target['journal_id'])->distinct()->pluck('currency_code')->all())->toBe(['USD'])
+        ->and(DB::table('statement_claims')->where('journal_id', $target['journal_id'])->pluck('currency')->unique()->all())->toBe(['USD']);
+    expect(fn () => app(PostingService::class)->reverse($this->owner, $target['journal_id'], 'synthetic-currency-bypass', 'Forbidden generic correction'))->toThrow(ValidationException::class);
+    $this->imports->correct($this->owner, (string) $corrected->id, '1', 'synthetic-currency-cancel', 'Cancel corrected currency');
+    expect($this->imports->receipt($this->owner, (string) $corrected->id)['outcomes'][0]['correctable'])->toBeFalse();
 });

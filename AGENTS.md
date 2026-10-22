@@ -493,3 +493,7 @@ One source writer; independent grounding/design/source/rendered reviewers remain
 ## M6-P1 hosted-finding correction budget
 
 The human owner explicitly authorized two additional scoped correction and verification cycles on 22 October 2026 for both PR #21 P2 findings: retained import evidence limits/throttling and currency-mapping UI. Preserve cycles1-6 and original results; the total ceiling is eight, not a reset. Correct both findings, repeat affected PostgreSQL/TIA/source/rendered checks, publish to the same PR against dev, and obtain fresh exact-head original CI and hosted review before normal approved-noreply merge. Verify original post-merge CI and actual existing signed /dev/null publishing. All prior sole-writer, privacy, acceptance, phase, credential and deployment boundaries remain in force.
+
+## M6-P1 import correction bypass budget
+
+The human owner explicitly authorized two additional scoped correction and verification cycles for PR #21's import correction bypass. Preserve cycles1-8 and earlier budget decisions; the total ceiling is ten. Correct generic transaction/investment correction paths while preserving owned import receipt successors, matched-only manual corrections, exact committed retries and atomicity. Repeat PostgreSQL/TIA/source/rendered gates and obtain fresh exact-head original CI and hosted review before normal approved-noreply dev merge. Verify original post-merge CI and actual existing signed /dev/null publishing. All prior sole-writer, privacy, phase acceptance, credential and deployment boundaries remain in force.

@@ -6,6 +6,7 @@ namespace App\Domain\Imports;
 
 use App\Domain\Ledger\LedgerInput;
 use App\Domain\Ledger\PostingService;
+use App\Domain\Ledger\RetainedCorrection;
 use App\Domain\Portfolio\InvestmentReplay;
 use App\Domain\Portfolio\InvestmentService;
 use App\Domain\Portfolio\PortfolioInput;
@@ -315,39 +316,43 @@ final class StatementImports
                 if ($command['type'] === 'match' || $command['type'] !== $prior['command']['type']) {
                     LedgerInput::fail('replacement', 'A replacement retains the original financial operation kind.');
                 }
-                if ($command['type'] === 'investment') {
-                    if ($command['portfolio_id'] !== $target['portfolio_id'] || $command['input']['action_reference'] !== $prior['command']['input']['action_reference']) {
-                        LedgerInput::fail('replacement', 'Investment corrections retain their portfolio and business action reference.');
-                    }
-                    $event = $this->investments->record($owner, $target['portfolio_id'], 'statement:'.hash('sha256', $key), [...$command['input'], 'replaces_id' => $target['event_id']]);
-                    $result = $this->eventTarget($event);
-                } else {
-                    $journal = $this->posting->correct($owner, $target['journal_id'], 'statement:'.hash('sha256', $key), $command['input']);
-                    $result = $this->journalTarget($journal->id, $command['currency']);
+                if ($command['type'] === 'investment' && ($command['portfolio_id'] !== $target['portfolio_id'] || $command['input']['action_reference'] !== $prior['command']['input']['action_reference'])) {
+                    LedgerInput::fail('replacement', 'Investment corrections retain their portfolio and business action reference.');
                 }
             } elseif ($replacementRow !== null) {
                 LedgerInput::fail('replacement', 'A replacement row requires its owned preview.');
-            } elseif ($target['event_id'] !== null) {
-                $event = $this->investments->reverse($owner, $target['portfolio_id'], $target['event_id'], 'statement:'.hash('sha256', $key), $reason);
-                $result = $this->eventTarget($event);
-            } else {
-                $journal = $this->posting->reverse($owner, $target['journal_id'], 'statement:'.hash('sha256', $key), $reason);
-                $result = $this->journalTarget($journal->id, $target['currency']);
             }
-            $outcome = ['type' => $row === null ? 'cancelled' : 'replacement', 'target' => $result, 'original_target' => $target,
-                'origin' => ['receipt_id' => $receiptId, 'token' => $token], 'row' => $row['number'] ?? $token,
-                'fact_hash' => $row === null ? $prior['fact_hash'] : $this->fact($row), 'transfer_hash' => $row === null ? $prior['transfer_hash'] : $this->transferHash($row), 'data' => $row['data'] ?? $prior['data'], 'command' => $row['command'] ?? $prior['command']];
-            $receipt = $this->insert('receipts', $owner, ['idempotency_key' => LedgerInput::key($key), 'payload_hash' => LedgerInput::hash($payload), 'request_payload' => $this->json($payload),
-                'snapshot_id' => $snapshotId, 'corrects_receipt_id' => $receiptId, 'corrects_token' => $token, 'reason' => $reason, 'outcomes' => $this->json(['1' => $outcome])]);
-            if ($row !== null) {
-                foreach ($this->keys($source, $row, $row['resolution_status'] !== 'retained') as $logical => $hash) {
-                    $this->claim($owner, $logical, $hash, (string) $receipt->id, '1', $result);
+            $completion = new RetainedCorrection($receiptId, $token, function (string $resultId, string $currency) use ($owner, $target, $row, $receiptId, $token, $prior, $key, $payload, $snapshotId, $reason, $source): stdClass {
+                $result = $target['event_id'] === null ? $this->journalTarget((int) $resultId, $currency)
+                    : $this->eventTarget(LedgerInput::owned('investment_events', $owner, $resultId));
+                $outcome = ['type' => $row === null ? 'cancelled' : 'replacement', 'target' => $result, 'original_target' => $target,
+                    'origin' => ['receipt_id' => $receiptId, 'token' => $token], 'row' => $row['number'] ?? $token,
+                    'fact_hash' => $row === null ? $prior['fact_hash'] : $this->fact($row), 'transfer_hash' => $row === null ? $prior['transfer_hash'] : $this->transferHash($row), 'data' => $row['data'] ?? $prior['data'], 'command' => $row['command'] ?? $prior['command']];
+                $receipt = $this->insert('receipts', $owner, ['idempotency_key' => LedgerInput::key($key), 'payload_hash' => LedgerInput::hash($payload), 'request_payload' => $this->json($payload),
+                    'snapshot_id' => $snapshotId, 'corrects_receipt_id' => $receiptId, 'corrects_token' => $token, 'reason' => $reason, 'outcomes' => $this->json(['1' => $outcome])]);
+                if ($row !== null) {
+                    foreach ($this->keys($source, $row, $row['resolution_status'] !== 'retained') as $logical => $hash) {
+                        $this->claim($owner, $logical, $hash, (string) $receipt->id, '1', $result);
+                    }
                 }
+
+                $this->retention($owner, 32 * 1024 * 1024);
+
+                return $receipt;
+            });
+            if ($row !== null) {
+                if ($command['type'] === 'investment') {
+                    $this->investments->replaceRetained($owner, $target['portfolio_id'], 'statement:'.hash('sha256', $key), [...$command['input'], 'replaces_id' => $target['event_id']], $completion);
+                } else {
+                    $this->posting->correctRetained($owner, $target['journal_id'], 'statement:'.hash('sha256', $key), $command['input'], $completion);
+                }
+            } elseif ($target['event_id'] !== null) {
+                $this->investments->reverseRetained($owner, $target['portfolio_id'], $target['event_id'], 'statement:'.hash('sha256', $key), $reason, $completion);
+            } else {
+                $this->posting->reverseRetained($owner, $target['journal_id'], 'statement:'.hash('sha256', $key), $reason, $completion);
             }
 
-            $this->retention($owner, 32 * 1024 * 1024);
-
-            return $receipt;
+            return $this->successor($owner, $receiptId, $token) ?? throw new \LogicException('Missing completed import successor.');
         });
     }
 

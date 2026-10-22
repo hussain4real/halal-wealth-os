@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Domain\Imports\StatementCorrectionHistory;
 use App\Domain\Ledger\AccountBalanceReader;
+use App\Domain\Ledger\CorrectionHistory;
 use App\Domain\Ledger\DeferredOpeningBalances;
 use App\Domain\Ledger\OpeningBalanceGateway;
 use App\Domain\Ledger\PostedAccountBalances;
@@ -27,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(CorrectionHistory::class, StatementCorrectionHistory::class);
         $this->app->bind(AccountBalanceReader::class, PostedAccountBalances::class);
         $this->app->bind(OpeningBalanceGateway::class, DeferredOpeningBalances::class);
     }
