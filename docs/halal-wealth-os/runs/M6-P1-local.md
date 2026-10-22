@@ -1,6 +1,6 @@
 # M6-P1 implementation record
 
-Status: IN_PROGRESS, cycle 4 of at most 6. Owner: m6p1-coordinator; sole implementation writer.
+Status: IN_PROGRESS, cycle 5 of at most 6. Owner: m6p1-coordinator; sole implementation writer.
 
 The human owner accepted M5 and authorized canonical M6-P1, a PR to dev, merge after full CI and a fresh exact-head review, original post-merge CI and existing signed /dev/null verification. Baseline dev: `6de411da86858763537be326914fab86d3ffa19a`. Existing M5 acceptance/review metadata is carried forward intact.
 
@@ -55,3 +55,17 @@ shapes and separated boundary/work validation handling corrected those errors
 without suppressions or baseline changes. PHPStan then passed with zero errors;
 90 affected CSV/import/export/recovery tests passed 766 assertions. Full release
 proof still requires the final clean-source run.
+
+## Cycle5
+
+The fresh full run passed 1,012 tests and 6,807 assertions, all 61 financial
+coverage floors, actual native HTTP/security/workload and 63-table encrypted
+recovery. Final release proof rejected the new imports reader because its exact
+reader inventory still named the four M5 readers. Add imports to the strict
+required set and require rejection when that fingerprint is omitted; preserve
+all source/JUnit/run/Git/build bindings and repeat the complete original gate.
+The advisory endpoint timeout recovered through the same official service with
+no advisories; no mirror, skip or suppressed diagnostic was used. Fresh native
+TIA independently passed the same 1,012 tests and 6,807 assertions. Independent
+source/publication review of ab37481 returned READY_FOR_REVIEW, with all four
+identity/ambiguity findings resolved and no demonstrated blocking issue.

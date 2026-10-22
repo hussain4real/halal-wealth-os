@@ -21,7 +21,7 @@ export function validateRecoveryProof(receipt, source, runId, tables) {
             [...tables].sort((a, b) => a.localeCompare(b)).join(',') ||
         Object.keys(receipt.reader_fingerprints ?? {})
             .sort((a, b) => a.localeCompare(b))
-            .join(',') !== 'cash,positions,reservations,shariah' ||
+            .join(',') !== 'cash,imports,positions,reservations,shariah' ||
         !Array.isArray(receipt.migrations) ||
         receipt.migrations.length < 1 ||
         new Set(receipt.migrations).size !== receipt.migrations.length

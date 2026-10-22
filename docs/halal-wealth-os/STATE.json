@@ -365,12 +365,12 @@
     "execution_status": {
         "phase": "M6-P1",
         "status": "IN_PROGRESS",
-        "cycle": 4,
-        "cycles_used": 4,
+        "cycle": 5,
+        "cycles_used": 5,
         "max_cycles": 6,
         "phase_acceptance": "PENDING_HUMAN_DECISION",
         "milestone_acceptance": "M5_ACCEPTED",
-        "checkpoint": "Cycle3 focused111tests/720assertions passed including reviewed identity ambiguity, alias and multiplicity corrections. First clean full gate stopped at formatting in three newly edited evidence files before tests. Cycle4 finalizes format/evidence and repeats full native/uncached/TIA/source/rendered gates; no full release or remote PASS claimed."
+        "checkpoint": "Cycle4 full1012tests/6807assertions, all61financialfloors, nativeHTTP/security/workload and populated63-table recovery passed. Finalizer correctly rejected its outdated reader inventory after imports added. Cycle5 extends exact required reader inventory with a missing-import-reader regression and repeats full clean gates; no final release/remote PASS yet."
     },
     "dependency_patch": {
         "authorized": true,
