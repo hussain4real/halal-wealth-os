@@ -4,15 +4,14 @@ A private personal wealth application bootstrapped with the complete official
 Laravel Inertia/Vue starter. Public source visibility does not authorize public
 SaaS or access to personal financial data.
 
-M0 through M5 milestones and all 18 phases through M5-P3 are human accepted.
-M6-P1 implements private CSV mapping/preview, atomic selected approval, deduplication,
-explicit matching, linked corrections and safe evidence export; final dev delivery
-is in review. The accepted implementation through M5-P3
-is merged into dev. Production release and phases after M6-P1 require separate
-authority. See
-[current roadmap status](docs/halal-wealth-os/STATUS.md),
+M0 through M5 milestones and all 19 phases through M6-P1 are human accepted
+and merged into dev. M6-P1 adds private CSV mapping and preview, atomic selected
+approval, deduplication, explicit matching, linked corrections and safe export.
+M6-P2 market/FX adapters are authorized and awaiting the required provider selection
+approval. Production release, live integrations and later phases require separate
+authority. See [current roadmap status](docs/halal-wealth-os/STATUS.md),
 [current state](docs/halal-wealth-os/STATE.json) and
-[the M5 review](docs/halal-wealth-os/runs/M5-independent-review.md).
+[M6-P1 acceptance](docs/halal-wealth-os/runs/M6-P1-acceptance.md).
 
 Historical phase notes below retain their original verification counts and
 pending-gate observations. They do not override the current status above.
