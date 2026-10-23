@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ObservationTimeEvidence from '@/components/ObservationTimeEvidence.vue';
 import { Link } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
@@ -438,8 +439,7 @@ const underfunded = computed(() =>
                     Direct reporting observation #{{ component.rate.id }} ·
                     {{ component.rate.source }} · {{ component.rate.value }}
                     {{ cash.actual.currency }} per {{ component.currency }} ·
-                    Effective {{ component.rate.effective_at }} · Observed
-                    {{ component.rate.observed_at }}
+                    <ObservationTimeEvidence :timing="component.rate" />
                 </p>
                 <p v-else class="text-xs text-muted-foreground">
                     {{

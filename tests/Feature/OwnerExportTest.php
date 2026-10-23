@@ -35,8 +35,9 @@ test('complete owner export contains every financial section and excludes authen
     $document = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
     expect($document['schema_version'])->toBe(2)
         ->and($document['profile']['id'])->toBe((string) $owner->id)
-        ->and($document['data'])->toHaveCount(53)
-        ->and($document['manifest']['sections'])->toHaveCount(53)
+        ->and($document['data'])->toHaveCount(57)
+        ->and($document['manifest']['sections'])->toHaveCount(57)
+        ->and($document['data'])->toHaveKeys(['market_mappings', 'market_attempts', 'market_results', 'market_admissions'])
         ->and($document['profile'])->not->toHaveKeys(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes']);
     ob_start();
     try {

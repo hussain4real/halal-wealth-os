@@ -331,3 +331,38 @@ original post-merge CI/publishing remain separate requirements.
 The M6-P1 hosted-review correction adds retained-evidence byte budgets across all five import tables:24MiB for new previews/revisions/approvals,32MiB for linked corrections with already-retained evidence. New replacement-preview preparation remains under the normal budget. Check the exact owner-export PHP encoding, including quotes, backslashes and Unicode line separators; rejection must roll back financial writes, receipts and claims together. Committed identical retries and receipt/status reads remain available. All import POST routes share a per-owner20/min limiter. Browser review must exercise currency-label add/replace/remove, saved reuse and mismatched-account errors without conversion.
 
 Final M6-P1 review corrections additionally verify the empty-account CTA against the actual typed GET account-index form, canonical value-map key normalization before duplicate/empty validation, and exact alignment of UI keys with PHP CSV-cell trimming. Preserve Unicode boundary label characters and saved targets; new interpretations do not mutate retained snapshots. The full gate includes client normalization checks, and parser cases cover normalized collisions and whitespace-only keys.
+
+## M6-P2 verification contract
+
+The market lane adds provider contracts, a bounded exact JSON-number parser,
+disabled Twelve Data transport, source-time policy, owned mapping HTTP and real
+PostgreSQL contention. Daily prices retain their date and exchange calendar;
+source instants remain null. Historical readers require both the completed-day
+policy boundary and actual receipt cutoff. Instant FX retains its genuine
+provider timestamp. Manual observations keep their existing timestamp contract.
+
+New checks cover timeout/429, bounded Retry-After, no unmatched HTTP, permanent
+payload rejection, finite charged attempts, shared price/FX credits, late-worker
+arbitration, duplicate admission, owner isolation, complete-export headroom and
+committed request recovery. Scheduled jobs reuse durable winners for interrupted
+fan-out. Shared fetch status and owned admission status remain separate.
+
+All four append-only market relations join the strict 67-table recovery catalog.
+Populated encrypted recovery retains source-date prices, instant FX, failed
+responses and an interrupted charged request; restored financial/status readers
+and operational budget evidence must reconcile. Owner export includes owned
+mappings/admissions and their referenced shared result/attempt evidence. Other
+shared provider operational history remains part of full backup.
+
+Coverage includes every concrete Integrations and Shared/Observations file at
+the unchanged 90 percent executable-line floor. The acceptance map retains all
+424 predecessor selectors and adds 78 executed market selectors, for 502 total
+and 112 implemented AC/invariant IDs. F17 additionally covers provider-job
+retry; outbox delivery remains future M6-P3 and F18 remains future M7.
+
+Native HTTP checks use actual cookies/CSRF and synthetic provider fixtures;
+rendered desktop/mobile request recovery, fresh native TIA recording/replay and
+page/PHP selection, source/sanitation review and clean uncached release proof
+remain separate gates. Unimplemented-phase rejection targets M6-P3. Provider
+selection is explicitly approved for mocks only; no live entitlement, account,
+credential, network smoke, deployment or phase acceptance is inferred.

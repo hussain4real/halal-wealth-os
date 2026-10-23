@@ -1,3 +1,4 @@
+import type { ObservationTiming, OpeningTiming } from './observation-time';
 import type { LedgerMoney } from './ledger';
 export type MetricKey =
     | 'net_worth'
@@ -30,19 +31,19 @@ export type DashboardSource = {
     asset_id?: string;
     goal_id?: string;
     portfolio_account_id?: string;
-    price?: {
-        source: string;
-        observed_at: string;
-        effective_at: string;
-        id: string;
-    } | null;
-    fx: {
-        source: string;
-        observed_at: string;
-        effective_at: string;
-        id: string;
-        value: string;
-    } | null;
+    price?:
+        | ((ObservationTiming | OpeningTiming) & {
+              source: string;
+              id: string;
+          })
+        | null;
+    fx:
+        | (ObservationTiming & {
+              source: string;
+              id: string;
+              value: string;
+          })
+        | null;
 };
 export type DashboardAction = {
     key: string;

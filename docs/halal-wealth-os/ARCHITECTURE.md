@@ -7,7 +7,8 @@ M5-P2 is owner accepted; see [its acceptance](runs/M5-P2-acceptance.md).
 M5-P3 is owner accepted; see [its acceptance](runs/M5-P3-acceptance.md).
 All M5 phases and the M5 milestone are human accepted. M6-P1 is merged and
 human accepted; see [M6-P1 acceptance](runs/M6-P1-acceptance.md).
-M6-P2 is authorized, pending the required provider selection record.
+M6-P2 is authorized with owner-approved Twelve Data selection for disabled,
+synthetic adapters only. Live access and retention/display entitlement remain blocked.
 Deployment, live-provider access and phases after M6-P2 remain separate decisions.
 Reporting composes existing source contracts inside a coherent database snapshot;
 it retains dashboard evidence and rule/dismissal history without posting financial

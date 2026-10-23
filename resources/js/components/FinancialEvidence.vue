@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ObservationTimeEvidence from '@/components/ObservationTimeEvidence.vue';
 import { Link } from '@inertiajs/vue3';
 import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
 import { modeLabel, evidenceLabel } from '@/types/portfolio';
@@ -235,10 +236,7 @@ const reasons: Record<string, string> = {
                     · version {{ component.rate.version }}
                 </p>
                 <p>{{ component.rate.source }}</p>
-                <p>
-                    Effective {{ component.rate.effective_at }} · Observed
-                    {{ component.rate.observed_at }}
-                </p>
+                <ObservationTimeEvidence :timing="component.rate" />
             </div>
             <details class="mt-4 text-sm">
                 <summary class="min-h-10 cursor-pointer py-2">

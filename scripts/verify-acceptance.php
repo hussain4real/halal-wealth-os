@@ -23,6 +23,11 @@ try {
             throw new RuntimeException('BLOCKED: current native HTTP statement-import evidence did not pass.');
         }
     }
+    foreach (['outage_preserves_stale_observation', 'honest_daily_source', 'exact_retry_after_supersession', 'owner_admin_isolation', 'real_csrf_rejection'] as $check) {
+        if (($http['market_data']['result'] ?? null) !== 'PASS' || ($http['market_data'][$check] ?? null) !== true || ($http['market_data']['live_access'] ?? null) !== 'BLOCKED_MOCK_ONLY') {
+            throw new RuntimeException('BLOCKED: current native HTTP market evidence did not pass.');
+        }
+    }
     $process = proc_open(['node', 'scripts/verification-source.mjs'], [1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, $root);
     if (! is_resource($process)) {
         throw new RuntimeException('BLOCKED: source inventory could not start.');

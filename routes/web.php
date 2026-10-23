@@ -9,6 +9,7 @@ use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\LedgerController;
+use App\Http\Controllers\MarketDataController;
 use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PurificationController;
@@ -29,6 +30,9 @@ Route::get('ready', function () {
 })->name('readiness');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+
+    Route::get('market-data', [MarketDataController::class, 'index'])->name('market.index');
+    Route::post('market-data', [MarketDataController::class, 'store'])->middleware('throttle:market-data')->name('market.store');
 
     Route::get('imports', [StatementImportController::class, 'index'])->name('imports.index');
     Route::post('imports/inspect', [StatementImportController::class, 'inspect'])->middleware('throttle:statement-import')->name('imports.inspect');

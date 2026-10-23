@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ObservationTimeEvidence from '@/components/ObservationTimeEvidence.vue';
 import { Link } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import type { ExactMoney } from '@/types/accounts';
@@ -22,7 +23,7 @@ const reason = (s: string) => s.replaceAll('_', ' ');
                 <p
                     class="text-xs font-semibold tracking-widest text-muted-foreground uppercase"
                 >
-                    Dated manual valuation · {{ result.base_currency }}
+                    Dated valuation · {{ result.base_currency }}
                 </p>
                 <span class="rounded-full border px-3 py-1 text-sm">{{
                     result.ending.state === 'complete'
@@ -333,7 +334,7 @@ const reason = (s: string) => s.replaceAll('_', ' ');
                 </summary>
                 <div class="space-y-3 break-words text-muted-foreground">
                     <p v-if="c.price">
-                        Manual price {{ c.price.value }} {{ c.currency }} ·
+                        Price {{ c.price.value }} {{ c.currency }} ·
                         {{ c.price.source }} ·
                         {{
                             c.price.id
@@ -341,26 +342,20 @@ const reason = (s: string) => s.replaceAll('_', ' ');
                                   c.price.id +
                                   ' / version ' +
                                   c.price.version
-                                : 'opening ' + c.price.opening_id
-                        }}<span class="block"
-                            >Effective
-                            {{ c.price.effective_at ?? c.price.effective_date }}
-                            · observed
-                            {{
-                                c.price.observed_at ?? 'opening statement date'
-                            }}</span
-                        >
+                                : 'opening ' +
+                                  ('opening_id' in c.price
+                                      ? c.price.opening_id
+                                      : '')
+                        }}
+                        <ObservationTimeEvidence :timing="c.price" />
                     </p>
                     <p v-else>
                         No unit-price observation applies to this component.
                     </p>
                     <p v-if="c.fx">
                         FX {{ c.fx.value }} · {{ c.fx.source }} · observation
-                        {{ c.fx.id }} / version {{ c.fx.version
-                        }}<span class="block"
-                            >Effective {{ c.fx.effective_at }} · observed
-                            {{ c.fx.observed_at }}</span
-                        >
+                        {{ c.fx.id }} / version {{ c.fx.version }}
+                        <ObservationTimeEvidence :timing="c.fx" />
                     </p>
                     <p v-else>
                         Same-currency / zero conversion, or FX unavailable.

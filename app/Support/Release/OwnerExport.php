@@ -36,57 +36,7 @@ final class OwnerExport
             $connection->transaction(function () use ($owner, $connection, $output): void {
                 $connection->statement('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY');
                 $connection->statement("SET LOCAL TIME ZONE 'UTC'");
-                $contract = OwnerDataSchema::current($connection);
-                $id = (string) $owner->id;
-                $profile = $connection->table('users')->where('id', $id)
-                    ->selectRaw('id::text, name::text, email::text, email_verified_at::text, created_at::text, updated_at::text')->first();
-                if ($profile === null) {
-                    throw new RuntimeException('Export owner is unavailable.');
-                }
-                $captured = $connection->selectOne('SELECT transaction_timestamp()::text AS captured')->captured;
-                $manifest = ['schema_version' => $contract['schema_version'], 'captured_at' => $captured, 'encoding' => $contract['encoding'],
-                    'contract_sha256' => $contract['sha256'],
-                    'scope' => 'Complete retained owner database history; not an authentication or operational restore backup.',
-                    'profile_fields' => $contract['profile_fields'], 'excluded_reason' => $contract['excluded_reason'],
-                    'excluded_tables' => [], 'sections' => []];
-                self::write($output, '{"schema_version":'.self::json($contract['schema_version']).',"profile":'.self::json($profile).',"data":{');
-                $firstTable = true;
-                foreach ($contract['tables'] as $table) {
-                    if ($table['scope'] === 'excluded') {
-                        $manifest['excluded_tables'][] = $table['table'];
-
-                        continue;
-                    }
-                    if ($table['scope'] === 'profile') {
-                        continue;
-                    }
-                    if (! $firstTable) {
-                        self::write($output, ',');
-                    }
-                    $firstTable = false;
-                    self::write($output, self::json($table['table']).':[');
-                    $hash = hash_init('sha256');
-                    hash_update($hash, '[');
-                    $count = 0;
-                    $query = $this->query($connection, $table, $id);
-                    foreach ($query->cursor() as $record) {
-                        $row = json_decode($record->export_row, false, flags: JSON_THROW_ON_ERROR);
-                        foreach ($table['columns'] as $column) {
-                            $value = $row->{$column['name']};
-                            if ($value !== null && in_array($column['udt'], ['json', 'jsonb'], true)) {
-                                $this->evidence(json_decode($value, true, flags: JSON_THROW_ON_ERROR | JSON_BIGINT_AS_STRING), $id);
-                            }
-                        }
-                        $bytes = ($count === 0 ? '' : ',').self::json($row);
-                        self::write($output, $bytes);
-                        hash_update($hash, $bytes);
-                        $count++;
-                    }
-                    self::write($output, ']');
-                    hash_update($hash, ']');
-                    $manifest['sections'][$table['table']] = ['rows' => $count, 'sha256' => hash_final($hash), 'columns' => array_column($table['columns'], 'name'), 'ownership' => $table['scope']];
-                }
-                self::write($output, '},"manifest":'.self::json($manifest).'}');
+                $this->snapshot($owner, $connection, $output);
             });
             fclose($output);
 
@@ -101,6 +51,82 @@ final class OwnerExport
         }
     }
 
+    /** Complete current encoded export size; caller supplies the owning transaction. */
+    public function bytes(User $owner): int
+    {
+        $output = fopen('php://temp', 'w+b');
+        if ($output === false) {
+            throw new RuntimeException('Private export accounting is unavailable.');
+        }
+        try {
+            $this->snapshot($owner, DB::connection(), $output);
+            $size = ftell($output);
+            if ($size === false) {
+                throw new RuntimeException('Private export accounting failed.');
+            }
+
+            return $size;
+        } finally {
+            fclose($output);
+        }
+    }
+
+    /** @param resource $output */
+    private function snapshot(User $owner, Connection $connection, $output): void
+    {
+        $contract = OwnerDataSchema::current($connection);
+        $id = (string) $owner->id;
+        $profile = $connection->table('users')->where('id', $id)
+            ->selectRaw('id::text, name::text, email::text, email_verified_at::text, created_at::text, updated_at::text')->first();
+        if ($profile === null) {
+            throw new RuntimeException('Export owner is unavailable.');
+        }
+        $captured = $connection->selectOne('SELECT transaction_timestamp()::text AS captured')->captured;
+        $manifest = ['schema_version' => $contract['schema_version'], 'captured_at' => $captured, 'encoding' => $contract['encoding'],
+            'contract_sha256' => $contract['sha256'],
+            'scope' => 'Complete retained owner database history; not an authentication or operational restore backup.',
+            'profile_fields' => $contract['profile_fields'], 'excluded_reason' => $contract['excluded_reason'],
+            'excluded_tables' => [], 'sections' => []];
+        self::write($output, '{"schema_version":'.self::json($contract['schema_version']).',"profile":'.self::json($profile).',"data":{');
+        $firstTable = true;
+        foreach ($contract['tables'] as $table) {
+            if ($table['scope'] === 'excluded') {
+                $manifest['excluded_tables'][] = $table['table'];
+
+                continue;
+            }
+            if ($table['scope'] === 'profile') {
+                continue;
+            }
+            if (! $firstTable) {
+                self::write($output, ',');
+            }
+            $firstTable = false;
+            self::write($output, self::json($table['table']).':[');
+            $hash = hash_init('sha256');
+            hash_update($hash, '[');
+            $count = 0;
+            $query = $this->query($connection, $table, $id);
+            foreach ($query->cursor() as $record) {
+                $row = json_decode($record->export_row, false, flags: JSON_THROW_ON_ERROR);
+                foreach ($table['columns'] as $column) {
+                    $value = $row->{$column['name']};
+                    if ($value !== null && in_array($column['udt'], ['json', 'jsonb'], true)) {
+                        $this->evidence(json_decode($value, true, flags: JSON_THROW_ON_ERROR | JSON_BIGINT_AS_STRING), $id);
+                    }
+                }
+                $bytes = ($count === 0 ? '' : ',').self::json($row);
+                self::write($output, $bytes);
+                hash_update($hash, $bytes);
+                $count++;
+            }
+            self::write($output, ']');
+            hash_update($hash, ']');
+            $manifest['sections'][$table['table']] = ['rows' => $count, 'sha256' => hash_final($hash), 'columns' => array_column($table['columns'], 'name'), 'ownership' => $table['scope']];
+        }
+        self::write($output, '},"manifest":'.self::json($manifest).'}');
+    }
+
     /** @param Table $table */
     private function query(Connection $connection, array $table, string $owner): Builder
     {
@@ -108,6 +134,12 @@ final class OwnerExport
         switch ($table['scope']) {
             case 'owner':
                 $query->where('t.owner_id', $owner);
+                break;
+            case 'market_result':
+                $query->whereIn('t.id', $connection->table('market_admissions')->where('owner_id', $owner)->select('result_id'));
+                break;
+            case 'market_attempt':
+                $query->whereIn('t.id', $connection->table('market_results as r')->join('market_admissions as m', 'm.result_id', '=', 'r.id')->where('m.owner_id', $owner)->select('r.attempt_id'));
                 break;
             case 'account':
                 $query->join('accounts as a', 'a.id', '=', 't.account_id')->where('a.owner_id', $owner);

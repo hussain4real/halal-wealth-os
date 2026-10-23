@@ -10,6 +10,7 @@ use App\Domain\Ledger\ReconciliationService;
 use App\Domain\Reporting\NetWorthSnapshot;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
+use App\Domain\Shared\Observations\ObservationRead;
 use App\Http\Requests\LedgerRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -180,7 +181,7 @@ class LedgerController extends Controller
     private function ratePayload(stdClass $row): array
     {
         return ['id' => (string) $row->id, 'base_currency' => $row->base_currency, 'quote_currency' => $row->quote_currency, 'value' => $row->value, 'version' => (string) $row->version,
-            'observed_at' => LedgerInput::utc($row->observed_at), 'effective_at' => LedgerInput::utc($row->effective_at), 'source' => $row->source,
+            ...ObservationRead::evidence($row), 'source' => $row->source,
             'supersedes_id' => $row->supersedes_id === null ? null : (string) $row->supersedes_id, 'correction_reason' => $row->correction_reason];
     }
 

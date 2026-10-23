@@ -41,7 +41,7 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     $required = [];
     foreach ($roadmap['phases'] as $phase) {
         $required = [...$required, ...$phase['acceptanceIds']];
-        if ($phase['id'] === 'M6-P1') {
+        if ($phase['id'] === 'M6-P2') {
             break;
         }
     }
@@ -112,13 +112,13 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
             continue;
         }
         if ($id === 'F17') {
-            if (($fixture['status'] ?? null) !== 'PARTIAL_M6_P1_STATEMENT_EXECUTED_PROVIDER_OUTBOX_FUTURE' || ($fixture['case_ids'] ?? []) === []
-                || ($fixture['implemented_subscenarios'] ?? null) !== ['statement_reupload'] || ($fixture['future_subscenarios'] ?? null) !== ['provider_job_retry', 'outbox_delivery_retry']) {
-                throw new RuntimeException('BLOCKED: F17 requires explicit executed statement-only evidence and future provider/outbox limits.');
+            if (($fixture['status'] ?? null) !== 'PARTIAL_M6_P2_STATEMENT_PROVIDER_EXECUTED_OUTBOX_FUTURE' || ($fixture['case_ids'] ?? []) === []
+                || ($fixture['implemented_subscenarios'] ?? null) !== ['statement_reupload', 'provider_job_retry'] || ($fixture['future_subscenarios'] ?? null) !== ['outbox_delivery_retry']) {
+                throw new RuntimeException('BLOCKED: F17 requires explicit executed statement/provider evidence and future outbox limits.');
             }
             foreach ($fixture['case_ids'] as $caseId) {
-                if (! isset($map['cases'][$caseId]) || ! str_starts_with($map['cases'][$caseId]['file'], 'tests/Feature/StatementImport')) {
-                    throw new RuntimeException('BLOCKED: F17 statement evidence must resolve an exact implemented import case.');
+                if (! isset($map['cases'][$caseId]) || (! str_starts_with($map['cases'][$caseId]['file'], 'tests/Feature/StatementImport') && ! in_array($map['cases'][$caseId]['file'], ['tests/Feature/MarketRefreshTest.php', 'tests/Feature/MarketHttpTest.php', 'tests/Feature/MarketConcurrencyTest.php'], true))) {
+                    throw new RuntimeException('BLOCKED: F17 statement/provider evidence must resolve an exact implemented import case.');
                 }
             }
 

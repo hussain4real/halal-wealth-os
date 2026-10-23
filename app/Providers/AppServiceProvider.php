@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Domain\Imports\StatementCorrectionHistory;
+use App\Domain\Integrations\FxProvider;
+use App\Domain\Integrations\PriceProvider;
+use App\Domain\Integrations\TwelveData;
 use App\Domain\Ledger\AccountBalanceReader;
 use App\Domain\Ledger\CorrectionHistory;
 use App\Domain\Ledger\DeferredOpeningBalances;
@@ -29,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(PriceProvider::class, TwelveData::class);
+        $this->app->bind(FxProvider::class, TwelveData::class);
         $this->app->bind(CorrectionHistory::class, StatementCorrectionHistory::class);
         $this->app->bind(AccountBalanceReader::class, PostedAccountBalances::class);
         $this->app->bind(OpeningBalanceGateway::class, DeferredOpeningBalances::class);
@@ -40,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        RateLimiter::for('market-data', fn (Request $request) => Limit::perMinute(20)->by('market:'.($request->user()->id ?? $request->ip())));
         RateLimiter::for('statement-import', fn (Request $request) => Limit::perMinute(20)->by('statement:'.($request->user()->id ?? $request->ip())));
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(Account::class, AccountPolicy::class);

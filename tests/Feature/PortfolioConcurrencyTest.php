@@ -285,12 +285,14 @@ test('incomplete raw opening book rolls back at actual PostgreSQL commit', funct
     $this->assertDatabaseCount('portfolio_requests', 1);
 });
 test('empty portfolio migration down and upgrade preserve existing ledger accounts journals and report', function () {
+    $market = require database_path('migrations/2026_10_23_070000_create_market_refresh_evidence.php');
     $imports = require database_path('migrations/2026_10_22_100000_create_statement_imports.php');
     $imports->down();
     $owner = User::factory()->create();
     $a = P::account($owner);
     app(PostingService::class)->record($owner, 'portfolio-upgrade-cash', ['kind' => 'income', 'account_id' => (string) $a->id, 'amount' => '13.57', 'effective_date' => now('UTC')->toDateString(), 'description' => 'Synthetic retained cash']);
     $report = app(NetWorthSnapshot::class)->save($owner, 'portfolio-upgrade-report', Currency::QAR, now('UTC')->format('Y-m-d\\TH:i:s\\Z'));
+    $market->down();
     $decisions = require database_path('migrations/2026_10_21_064500_create_decision_records.php');
     $decisions->down();
     $purification = require database_path('migrations/2026_10_20_073000_create_purification_records.php');
@@ -310,6 +312,7 @@ test('empty portfolio migration down and upgrade preserve existing ledger accoun
     $assessment->up();
     $purification->up();
     $decisions->up();
+    $market->up();
     $imports->up();
     expect(app(NetWorthSnapshot::class)->capture($owner, Currency::QAR, now('UTC')->format('Y-m-d\\TH:i:s\\Z'))['total']['minor'])->toBe('1357')->and(DB::table('valuation_reports')->where('id', $report->id)->value('evidence'))->toBe($report->evidence);
     $this->assertDatabaseCount('journal_entries', 1);

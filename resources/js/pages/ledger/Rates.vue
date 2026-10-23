@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ObservationTimeEvidence from '@/components/ObservationTimeEvidence.vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import InputError from '@/components/InputError.vue';
 import LedgerFeedback from '@/components/LedgerFeedback.vue';
@@ -280,8 +281,9 @@ const selectClass =
                             }}
                         </p>
                         <p class="mt-1 text-xs text-muted-foreground">
-                            Version {{ rate.version }} · {{ rate.effective_at }}
+                            Version {{ rate.version }}
                         </p>
+                        <ObservationTimeEvidence :timing="rate" />
                         <p class="mt-2 text-sm [overflow-wrap:anywhere]">
                             {{ rate.source }}
                         </p>

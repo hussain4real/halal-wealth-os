@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-23T06:27:51.960568+00:00",
+    "updated_at": "2026-10-23T08:25:59.217931+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -19,7 +19,7 @@
         "branch": "feat/m6-p2-provider-adapters",
         "baseline_head": "decef9b54d8fa67f559eb42873250a9768dbec19",
         "started_at": "2026-10-23T06:21:55.000813+00:00",
-        "status": "BLOCKED_PROVIDER_SELECTION"
+        "status": "VERIFYING"
     },
     "repository": {
         "root": null,
@@ -269,11 +269,11 @@
         {
             "id": "M6-P2",
             "depends_on": ["M6-P1"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "IN_PROGRESS",
+            "owner": "m6p2-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M6-P2-local.md"
         },
         {
             "id": "M6-P3",
@@ -366,13 +366,13 @@
     },
     "execution_status": {
         "phase": "M6-P2",
-        "status": "BLOCKED_PROVIDER_SELECTION",
-        "cycle": 0,
-        "cycles_used": 0,
+        "status": "VERIFYING",
+        "cycle": 4,
+        "cycles_used": 4,
         "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M6_UNACCEPTED",
-        "checkpoint": "M6-P1 owner acceptance and verified PR21 delivery recorded; original ten-cycle history retained. M6-P2 canonical specification, disabled AV/ECB provider proposal and independent read-only grounding/design prepared. Mandatory AC5 owner provider access/licensing selection approval is pending. Zero implementation cycles consumed; no application edits, new CI, PR, merge or live-provider operation."
+        "checkpoint": "Source-commit preparation: all1147fresh nativeTIA cases/8568assertions pass; unchanged byte-identical graph replay and actual native PHP7files/page1file probes pass with source restored. Formatter-only test import refreshed its1affectedfile. Source/sanitation and actual populated/recovery rendered review pass. Clean committed full release and original hosted failure-propagation CI/fresh review remain required before merge; no PR/merge attempted at this checkpoint."
     },
     "dependency_patch": {
         "authorized": true,
@@ -2072,7 +2072,9 @@
             }
         ],
         "operational_incident": "Coordinator bootstrap temporarily used default socket port; older idle cloud database socket unavailable, original server still running, no restart/reset/settings/data changes attempted; old contents not reverified. Safe recovery remains an owner disposition item.",
-        "carried_findings": ["UX-M3-01 low stale guidance remains open and is not claimed fixed"],
+        "carried_findings": [
+            "UX-M3-01 low stale guidance remains open and is not claimed fixed"
+        ],
         "connection_notifications": "Same environment and original full/TIA workers verified; logs advanced and no duplicate checks started; terminal results preserved separately.",
         "local_engineering_complete": true,
         "independent_local_engineering_review": "PASS_FINAL_EXACT575_SOURCE109_BUILD_FULL681_4485_COVERAGE3636_3868_59NODE_FRESH_RENDERED_TIA_RECORD_REPLAY_NATIVE_PLANNER_NO_NEW_TECHNICAL_FINDING",
@@ -2985,5 +2987,87 @@
         "cycles_used": 10,
         "max_cycles": 10,
         "deployment": false
+    },
+    "m6p2_provider_selection_history": [
+        {
+            "proposal": 1,
+            "providers": ["Alpha Vantage", "ECB"],
+            "decision": "DECLINED",
+            "decided_by": "human-owner",
+            "recorded_at": "2026-10-23T06:51:58.996404+00:00",
+            "source": "Owner chose different providers in response to the provider selection question."
+        }
+    ],
+    "m6p2_provider_selection": {
+        "proposal": 2,
+        "provider": "Twelve Data",
+        "data_types": ["raw_daily_prices", "direct_reporting_fx"],
+        "decision": "APPROVED_MOCK_ONLY",
+        "record": "PROVIDER-ACCESS.md",
+        "live": "BLOCKED",
+        "new_credentials": false,
+        "purchase_authorized": false,
+        "approved_by": "human-owner",
+        "approved_at": "2026-10-23T06:53:26.712083+00:00",
+        "live_retention": "BLOCKED_DEFAULT_DELETION_TERMS_NEED_DOCUMENTED_PERMISSION_OR_VERIFIED_EXEMPTION"
+    },
+    "m6p2_engineering": {
+        "cycle": 4,
+        "ceiling": 6,
+        "status": "IMPLEMENTING",
+        "prior_cycle": {
+            "cycle": 1,
+            "checks": "Focused boundary/contract and 88 affected PostgreSQL cases passed; full release gates not run.",
+            "review": "CHANGES_REQUIRED: late first response incorrectly suppressed remaining attempts. Reproduced before correction."
+        },
+        "current_scope": "Commit reviewed sanitized source, run clean full release; publish PRdev and require original exact-head CI/fresh hosted review, normal noreply dev merge, original devCI and signed publishing verification.",
+        "completed_cycles": [
+            {
+                "cycle": 1,
+                "checks": "Focused boundary/contract and 88 affected PostgreSQL cases passed; full release gates not run.",
+                "review": "CHANGES_REQUIRED: late first response incorrectly suppressed remaining attempts. Reproduced before correction."
+            },
+            {
+                "cycle": 2,
+                "result": "FULL_REGRESSIONS_REQUIRE_CORRECTION",
+                "tests": 1145,
+                "passed": 1138,
+                "failures": 3,
+                "errors": 4,
+                "assertions": 7673,
+                "review": "Core PASS; UI attestation P2 corrected at source; browser pending.",
+                "scope": "New integration and source-time coverage floors met. Seven failures require older migration-boundary and export-section expectation updates."
+            },
+            {
+                "cycle": 3,
+                "source_sanitation": "PASS_WITH_CORRECTIONS_RETAINED",
+                "rendered": "PASS_DESKTOP_MOBILE_RECOVERY_AND_POPULATED_EVIDENCE",
+                "tia_fresh": {
+                    "result": "FAILED",
+                    "tests": 1147,
+                    "passed": 1146,
+                    "errors": 1,
+                    "assertions": 8563,
+                    "duration_ms": 172807,
+                    "cause": "New valuation test confused portfolio and ledger account ids; focused fixture had coincident ids."
+                }
+            }
+        ],
+        "harness_correction": "Independent review found new tool-check names absent from the final validator; criteria now reference the existing validated HTTP journey, with the strict new market proof checks retained. Provider selection uses its scoped hashed owner record and exact disabled tests, without claiming a live/tool license check.",
+        "acceptance_selectors": 502,
+        "acceptance_requirements": 112,
+        "independent_source_review": "runs/M6-P2-independent-review.md",
+        "live_connectivity": "BLOCKED_MOCK_ONLY_NO_ACCOUNT_KEY_OR_ENTITLEMENT",
+        "native_tia": {
+            "fresh_tests": 1147,
+            "fresh_assertions": 8568,
+            "fresh_duration_ms": 171885,
+            "unchanged_replay": "CACHED_BYTE_IDENTICAL_GRAPH_NOT_NEW_EXECUTION",
+            "php_probe_affected_files": 7,
+            "page_probe_affected_files": 1,
+            "source_restored": true,
+            "post_format_affected_files": 1,
+            "source_sha256": "b52afcb258cb887bbded15302579959346e0157563f7e393b93915db3f09f632"
+        }
     }
 }

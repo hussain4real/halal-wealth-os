@@ -33,6 +33,7 @@ const mainNavItems: NavItem[] = [
     { title: 'Monthly plan', href: '/budgets', icon: CalendarDays },
     { title: 'Goals & protection', href: '/goals', icon: Target },
     { title: 'Portfolio', href: '/portfolio', icon: ChartNoAxesCombined },
+    { title: 'Market data', href: '/market-data', icon: ChartNoAxesCombined },
     { title: 'Asset catalog', href: '/assets', icon: LayoutGrid },
     { title: 'Opportunities', href: '/opportunities', icon: Target },
     {

@@ -14,6 +14,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { root, testingEnvironment, sourceIdentity } from './verification.mjs';
+import { marketJourney } from './market-http.mjs';
 import { statementJourney } from './statement-http.mjs';
 
 const directory = mkdtempSync(path.join(root, '.runtime/acceptance-'));
@@ -217,7 +218,7 @@ child.stderr.on('data', (chunk) => {
 });
 const report = {
     schema: 1,
-    phase: 'M6-P1',
+    phase: 'M6-P2',
     source_sha256: source,
     junit_sha256: existsSync(path.join(root, 'build/junit.xml'))
         ? createHash('sha256')
@@ -452,6 +453,14 @@ try {
     const importMarkers = imported.private_markers;
     delete imported.private_markers;
     report.statement_import = imported;
+    report.market_data = await marketJourney({
+        owner,
+        foreign,
+        admin,
+        fixture,
+        page,
+        key,
+    });
     const foreignPaths = [
         `/accounts/${bank}`,
         `/transactions/${salary.id}`,
