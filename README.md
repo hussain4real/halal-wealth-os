@@ -7,8 +7,9 @@ SaaS or access to personal financial data.
 M0 through M5 milestones and all 19 phases through M6-P1 are human accepted
 and merged into dev. M6-P1 adds private CSV mapping and preview, atomic selected
 approval, deduplication, explicit matching, linked corrections and safe export.
-M6-P2 market/FX adapters are authorized and awaiting the required provider selection
-approval. Production release, live integrations and later phases require separate
+M6-P2 market/FX adapters use owner-approved Twelve Data in mock-only mode;
+implementation verification is in progress and live access remains blocked.
+Production release, live integrations and later phases require separate
 authority. See [current roadmap status](docs/halal-wealth-os/STATUS.md),
 [current state](docs/halal-wealth-os/STATE.json) and
 [M6-P1 acceptance](docs/halal-wealth-os/runs/M6-P1-acceptance.md).

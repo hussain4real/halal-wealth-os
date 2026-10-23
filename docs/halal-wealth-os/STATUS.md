@@ -4,7 +4,7 @@ Status checked on 23 October 2026 against dev merge `decef9b54d8fa67f559eb428732
 
 `ROADMAP.json` is the preserved canonical identifier/dependency index. Its initial phase labels are not current delivery claims. `STATE.json`, separate owner acceptance records and observed GitHub source/CI provide execution status.
 
-19 of 25 phases are implemented, merged into dev and human accepted, from M0-P1 through M6-P1. M0 through M5 milestone gates are accepted. M6 remains in progress. M6-P2 is authorized and its provider selection proposal awaits the access/licensing approval required by its canonical acceptance criteria.
+19 of 25 phases are implemented, merged into dev and human accepted, from M0-P1 through M6-P1. M0 through M5 milestone gates are accepted. M6 remains in progress. M6-P2 uses owner-approved Twelve Data for disabled, mock-only adapters. Implementation verification is in progress; live access and entitlement remain blocked.
 
 | Milestone | Implemented or planned scope                                                              | Current gate                    |
 | --------- | ----------------------------------------------------------------------------------------- | ------------------------------- |
@@ -14,7 +14,7 @@ Status checked on 23 October 2026 against dev merge `decef9b54d8fa67f559eb428732
 | M3        | Assets, portfolio modes, trades/IPO/corporate actions and evidence-based valuation        | Accepted                        |
 | M4        | Versioned Shariah evidence, purification records, opportunities/theses/tranches           | Accepted                        |
 | M5        | Dashboard/actions, end-to-end hardening, owner export and encrypted recovery              | Accepted                        |
-| M6        | CSV statement imports; market/FX adapters; opt-in reminders; personal Drive export        | M6-P1 accepted; M6-P2 preparing |
+| M6        | CSV statement imports; market/FX adapters; opt-in reminders; personal Drive export        | M6-P1 accepted; M6-P2 verifying |
 | M7        | Read-only Wealth Copilot tools, grounded evaluations and V2 operational gate              | Planned; unimplemented          |
 
 The independent M5 review passed a fresh uncached full gate: 928 tests /6,344
@@ -28,9 +28,10 @@ browser session or production check is claimed. Owned review resources stopped.
 
 M6-P2 adds approved market and FX provider adapters, exact observation admission,
 bounded scheduled retries, attributable safe run records and manual fallback.
-The [provider proposal](PROVIDER-ACCESS.md) awaits owner approval. Disabled mock
-verification is distinct from live connectivity, which remains blocked without
-separate access authority. No live provider, bank, Google or AI connection is claimed.
+The [provider selection](PROVIDER-ACCESS.md) is approved for Twelve Data, mock
+only. Disabled mock verification is distinct from live connectivity, which
+remains blocked without separate access and entitlement authority. No live
+provider, bank, Google or AI connection is claimed.
 
 M6-P3 reminders, M6-P4 personal Drive export and all M7 Copilot/evaluation work
 remain planned. A private V1 deployment separately needs a selected environment,
@@ -48,4 +49,8 @@ was anonymously verified after publication. On 23 October, the original project
 verification script again confirmed HTTP200, the visible message and the PR21
 link. An earlier plain-urllib request returned HTTP403; both observations are
 retained. The original signed publisher remains successful. Earlier failure
-history is preserved. M6-P2 has no implementation, CI, review or live-provider pass yet.
+history is preserved. M6-P2 has local implementation and independently reviewed
+source/rendered evidence. Its final clean release, original hosted CI and fresh
+exact-head review remain pending; no merge, owner acceptance or live-provider
+pass is claimed. Its [run record](runs/M6-P2-local.md) preserves original failures
+and the six-cycle history.

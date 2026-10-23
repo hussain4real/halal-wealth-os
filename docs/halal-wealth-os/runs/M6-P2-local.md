@@ -47,7 +47,16 @@ Preparation consumed no implementation cycle. The ceiling remains six.
 - Cycle 5 adds an observable provider-FX overflow case: a valid retained rate
   that exceeds the money range yields an explicit partial result, retains its
   source identity and creates no financial posting. It repeats affected TIA,
-  independent delta review and clean full release/delivery gates.
+  independent delta review and clean full release/delivery gates. Its fresh TIA
+  and clean uncached tests passed all 1,147 cases with 8,577 assertions. All 71
+  concrete financial floors, native HTTP/security/performance and populated
+  recovery passed. Finalization then stopped: the validator still expected the
+  predecessor five-reader fingerprint set instead of the six actually restored.
+- Cycle 6 corrects that strict set to require market evidence alongside all
+  earlier readers. The regression failed before the change and passed afterward,
+  including rejection when market evidence is absent. No receipt is relabeled;
+  current full release and hosted gates must run again. This is the last
+  authorized correction cycle; the total ceiling remains six.
 
 The disabled adapters require explicit testing mode and fake HTTP. Raw daily
 prices retain their calendar date and no invented publication instant; FX keeps

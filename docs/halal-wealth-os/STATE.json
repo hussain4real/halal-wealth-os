@@ -367,12 +367,12 @@
     "execution_status": {
         "phase": "M6-P2",
         "status": "VERIFYING",
-        "cycle": 5,
-        "cycles_used": 5,
+        "cycle": 6,
+        "cycles_used": 6,
         "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M6_UNACCEPTED",
-        "checkpoint": "Cycle4 clean release: isolated locked npm install passed after shared-node_modules validation failed. Uncached1147tests/8572assertions passed; unchanged financial coverage gate stopped ValuationFx15/17 below90percent. Cycle5 adds observable overflow/provider-reference regression, preserves original failure and repeats affected TIA/source review and clean full delivery gates."
+        "checkpoint": "Cycle5 freshTIA1147tests8577assertionsPASS; clean uncached1147tests8577assertions,71financialfloors, nativeHTTP/performance and populated recoveryPASS. Finalization stopped because validator still expected five reader fingerprints instead of six including market. Cycle6 corrects strict reader contract with fail-before/pass-after regression; repeats affected TIA/source review and clean full/hosted delivery gates. SixofSixcycles allocated; no new correction cycle is authorized."
     },
     "dependency_patch": {
         "authorized": true,
@@ -3012,7 +3012,7 @@
         "live_retention": "BLOCKED_DEFAULT_DELETION_TERMS_NEED_DOCUMENTED_PERMISSION_OR_VERIFIED_EXEMPTION"
     },
     "m6p2_engineering": {
-        "cycle": 5,
+        "cycle": 6,
         "ceiling": 6,
         "status": "IMPLEMENTING",
         "prior_cycle": {
@@ -3020,7 +3020,7 @@
             "checks": "Focused boundary/contract and 88 affected PostgreSQL cases passed; full release gates not run.",
             "review": "CHANGES_REQUIRED: late first response incorrectly suppressed remaining attempts. Reproduced before correction."
         },
-        "current_scope": "Exercise retained provider FX overflow as explicit partial value with source identity and no financial writes; repeat affected TIA, independent delta/sanitation review, clean full release and authorized hosted/merge/post-merge gates.",
+        "current_scope": "Correct strict recovery finalization to require market alongside all five earlier readers; preserve prior failure, demonstrate fail-before/pass-after, repeat independent review and clean full authorized delivery gates. Last authorized correction cycle.",
         "completed_cycles": [
             {
                 "cycle": 1,
@@ -3061,6 +3061,24 @@
                 "duration_ms": 167364,
                 "coverage_failure": "ValuationFx15/17 below unchanged90percent floor",
                 "environment_correction": "Shared npm dependency tree failed validation; isolated npm ci from unchanged lockfile passed with zero advisories."
+            },
+            {
+                "cycle": 5,
+                "result": "TEST_COVERAGE_HTTP_RECOVERY_PASS_FINALIZATION_BLOCKED",
+                "tests": 1147,
+                "passed": 1147,
+                "assertions": 8577,
+                "duration_ms": 170302,
+                "financial_floors": 71,
+                "http": "PASS",
+                "recovery": "PASS_67_TABLES_SIX_READERS",
+                "finalization_failure": "Validator still expected predecessor five-reader set; actual receipt correctly includes market as sixth reader.",
+                "native_tia": {
+                    "result": "PASS_FRESH_FULL_AFTER_ENVIRONMENT_CHANGE",
+                    "tests": 1147,
+                    "assertions": 8577,
+                    "duration_ms": 170340
+                }
             }
         ],
         "harness_correction": "Independent review found new tool-check names absent from the final validator; criteria now reference the existing validated HTTP journey, with the strict new market proof checks retained. Provider selection uses its scoped hashed owner record and exact disabled tests, without claiming a live/tool license check.",
