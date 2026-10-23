@@ -169,3 +169,18 @@ owned server stopped before the clean full gate.
 Independent source and publication review passed the correction without a
 blocking issue. The final clean committed release run and fresh hosted CI/review
 are still required; the earlier hosted P2 remains part of the review history.
+
+## Cycle 8: refreshed rendered-evidence binding
+
+The first cycle 7 clean release run executed all 1,150 tests: 1,132 passed,
+17 failed and one errored, with 8,368 assertions. The acceptance-map guard rejected
+the updated rendered-review document because its pinned hash still identified
+the earlier document. Application checks passed; the release did not. The
+original failure and prior document binding remain retained.
+
+Cycle 8 refreshes that single reviewed manual-artifact hash and its scope to
+include the separately attributed coordinator capacity follow-up. All existing
+selectors, prior manual artifacts and strict hash/refusal guards remain in place.
+No application source changed. The remaining authorized cycle is consumed;
+the total ceiling is eight. Affected checks, native TIA and clean full release
+verification must pass again before publication and fresh hosted review.

@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-23T18:55:09.824571+00:00",
+    "updated_at": "2026-10-23T18:59:43.118291+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -3012,7 +3012,7 @@
         "live_retention": "BLOCKED_DEFAULT_DELETION_TERMS_NEED_DOCUMENTED_PERMISSION_OR_VERIFIED_EXEMPTION"
     },
     "m6p2_engineering": {
-        "cycle": 7,
+        "cycle": 8,
         "ceiling": 8,
         "status": "VERIFYING",
         "prior_cycle": {
@@ -3020,7 +3020,7 @@
             "checks": "Focused boundary/contract and 88 affected PostgreSQL cases passed; full release gates not run.",
             "review": "CHANGES_REQUIRED: late first response incorrectly suppressed remaining attempts. Reproduced before correction."
         },
-        "current_scope": "Explicit admission-capacity outcomes, bounded job evidence and truthful owned status; regressions preserve committed recovery and healthy-owner fan-out.",
+        "current_scope": "Refresh the reviewed rendered-evidence binding and repeat strict acceptance-map, native TIA and clean full release checks; application correction remains unchanged.",
         "completed_cycles": [
             {
                 "cycle": 1,
@@ -3090,6 +3090,18 @@
                 "recovery_readers": 6,
                 "original_pr_ci": 39927991777,
                 "fresh_review": "Unresolved P2: admission capacity silently reports accepted on exact head 1e880924"
+            },
+            {
+                "cycle": 7,
+                "result": "FULL_RELEASE_BLOCKED_BY_STALE_RENDERED_EVIDENCE_HASH",
+                "tests": 1150,
+                "passed": 1132,
+                "failures": 17,
+                "errors": 1,
+                "assertions": 8368,
+                "duration_ms": 176976,
+                "cause": "Updated reviewed rendered document no longer matched its pinned manual artifact hash; strict acceptance-map guard refused stale evidence.",
+                "application_source": "UNCHANGED_AFTER_SOURCE_RENDERED_REVIEW_PASS"
             }
         ],
         "harness_correction": "Independent review found new tool-check names absent from the final validator; criteria now reference the existing validated HTTP journey, with the strict new market proof checks retained. Provider selection uses its scoped hashed owner record and exact disabled tests, without claiming a live/tool license check.",

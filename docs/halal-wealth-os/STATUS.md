@@ -52,9 +52,10 @@ retained. The original signed publisher remains successful. Earlier failure
 history is preserved. M6-P2 is implemented in [PR22](https://github.com/hussain4real/halal-wealth-os/pull/22)
 and remains unmerged. The original exact-head CI passed; the replacement hosted
 review found an admission-capacity P2. The owner authorized two additional
-cycles, bringing the total ceiling to eight. Cycle 7 corrects the outcome and
-owned warning while preserving retained observations and committed recovery;
-current verification and fresh hosted review remain required. Its
+cycles, bringing the total ceiling to eight. Cycle 7 corrected the outcome and
+owned warning while preserving retained observations and committed recovery. Its
+clean release run then rejected a stale rendered-evidence hash. Cycle 8 refreshes
+that reviewed binding; current verification and fresh hosted review remain required. Its
 [run record](runs/M6-P2-local.md) preserves all original failures and prior cycles.
 No M6-P2 acceptance, live-provider pass, post-merge CI or PR22 publication is
 claimed.
