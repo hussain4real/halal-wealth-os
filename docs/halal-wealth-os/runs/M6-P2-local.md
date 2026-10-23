@@ -38,7 +38,16 @@ Preparation consumed no implementation cycle. The ceiling remains six.
   account scope. Focused IDs had happened to coincide. The original run is
   retained.
 - Cycle 4 corrects that fixture with deliberately divergent identifiers before
-  repeating fresh TIA and all remaining delivery gates. It is in progress.
+  repeating fresh TIA and all remaining delivery gates. Its clean uncached run
+  passed all 1,147 tests with 8,572 assertions, then stopped at the unchanged
+  coverage floor: ValuationFx had 15 of 17 covered statements. The initial
+  shared dependency-tree check also failed; an isolated install from the
+  unchanged npm lockfile passed with zero advisories. Both originals remain
+  retained. No passing release is inferred.
+- Cycle 5 adds an observable provider-FX overflow case: a valid retained rate
+  that exceeds the money range yields an explicit partial result, retains its
+  source identity and creates no financial posting. It repeats affected TIA,
+  independent delta review and clean full release/delivery gates.
 
 The disabled adapters require explicit testing mode and fake HTTP. Raw daily
 prices retain their calendar date and no invented publication instant; FX keeps

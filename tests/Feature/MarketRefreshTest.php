@@ -58,7 +58,11 @@ test('FX provider admission is reporting only with exact source timestamp and ge
     expect((string) $row->value)->toBe('3.640000000001')->and($row->purpose)->toBe('reporting')->and($row->time_policy)->toBe('provider-instant-v1');
     $r = DB::table('market_admissions')->first();
     expect($this->refresh->admit($this->owner, (string) $m->id, (string) $r->result_id)->id)->toBe($r->id);
+    $overflow = app(ValuationFx::class)->convert($this->owner, '9223372036854775807', Currency::USD, Currency::QAR, '2026-10-23T12:00:00Z', 'reporting');
+    expect($overflow['value'])->toBeNull()->and($overflow['reason'])->toBe('fx_value_out_of_range')
+        ->and($overflow['rate']['id'])->toBe((string) $row->id)->and($overflow['rate']['value'])->toBe('3.640000000001');
     $this->assertDatabaseCount('fx_observations', 1);
+    $this->assertDatabaseCount('journal_entries', 0);
 });
 
 test('wrong currency and future observation fail attributably without replacing prior price', function () {
