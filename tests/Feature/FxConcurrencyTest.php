@@ -301,11 +301,14 @@ test('failed reconciliation result rolls back its posting and a retry produces o
 });
 
 test('empty FX migration rolls back and remigrates while populated evidence refuses downgrade before DDL', function () {
+    $market = require database_path('migrations/2026_10_23_070000_create_market_refresh_evidence.php');
+    $market->down();
     // Target this schema explicitly; later planning migrations follow it now.
     $migration = require database_path('migrations/2026_10_18_060000_create_manual_fx_and_reconciliation.php');
     $migration->down();
     expect(Schema::hasTable('fx_operations'))->toBeFalse();
     $migration->up();
+    $market->up();
     $owner = User::factory()->create();
     app(FxService::class)->record($owner, 'fx-downgrade-base', Fx::input(Fx::account($owner), Fx::account($owner, Currency::NGN)));
     $migration = require database_path('migrations/2026_10_18_060000_create_manual_fx_and_reconciliation.php');
@@ -315,6 +318,8 @@ test('empty FX migration rolls back and remigrates while populated evidence refu
 });
 
 test('FX schema upgrade preserves prior journals and unconsumed opening intents without automatic posting', function () {
+    $market = require database_path('migrations/2026_10_23_070000_create_market_refresh_evidence.php');
+    $market->down();
     $owner = User::factory()->create();
     $account = app(CreateAccount::class)->create($owner, 'Synthetic upgrade opening', AccountType::Bank, Currency::QAR, Money::fromDecimal(Currency::QAR, '125.50'));
     $journal = app(PostingService::class)->record($owner, 'upgrade-existing-journal', ['kind' => 'income', 'account_id' => (string) $account->id, 'amount' => '17.35', 'effective_date' => now()->toDateString(), 'description' => 'Synthetic pre-upgrade movement']);
@@ -322,6 +327,7 @@ test('FX schema upgrade preserves prior journals and unconsumed opening intents 
     $migration = require database_path('migrations/2026_10_18_060000_create_manual_fx_and_reconciliation.php');
     $migration->down();
     $migration->up();
+    $market->up();
     expect((array) DB::table('accounts')->where('id', $account->id)->first())->toBe($before['account'])
         ->and((array) DB::table('opening_balance_intents')->where('account_id', $account->id)->first())->toBe($before['intent'])
         ->and((array) DB::table('journal_entries')->where('id', $journal->id)->first())->toBe($before['journal'])

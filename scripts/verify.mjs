@@ -52,6 +52,7 @@ try {
             'M5-P2',
             'M5-P3',
             'M6-P1',
+            'M6-P2',
         ].includes(phase)
     ) {
         throw new VerificationFailure(
@@ -271,6 +272,12 @@ try {
             'StatementImportTest',
             'StatementImportHttpTest',
             'StatementImportConcurrencyTest',
+            'ProviderBoundaryTest',
+            'TwelveDataContractTest',
+            'TwelveDataTransportTest',
+            'MarketRefreshTest',
+            'MarketHttpTest',
+            'MarketConcurrencyTest',
         ]) {
             if (!discovered.stdout.includes(required)) {
                 throw new VerificationFailure(
@@ -292,7 +299,7 @@ try {
         run('node', ['scripts/acceptance-http.mjs'], { env });
         run('node', ['scripts/verify-release.mjs'], { env });
         run('php', ['scripts/verify-acceptance.php'], { env });
-        console.log('PASS M0-P2 through M6-P1 implemented verification');
+        console.log('PASS M0-P2 through M6-P2 implemented verification');
         console.log(
             'NOT_APPLICABLE: future domain suites, integrations, live AI and deployment.',
         );

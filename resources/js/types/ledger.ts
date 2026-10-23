@@ -1,3 +1,4 @@
+import type { ObservationTiming } from './observation-time';
 export type LedgerMoney = { currency: string; minor: string; amount: string };
 export type LedgerAccount = {
     id: string;
@@ -34,14 +35,12 @@ export type FxOperation = {
     replaces_id: string | null;
     replacement_id: string | null;
 };
-export type RateObservation = {
+export type RateObservation = ObservationTiming & {
     id: string;
     base_currency: string;
     quote_currency: string;
     value: string;
     version: string;
-    observed_at: string;
-    effective_at: string;
     source: string;
     supersedes_id: string | null;
     correction_reason: string | null;
@@ -73,16 +72,16 @@ export type SnapshotComponent = {
     state: string;
     converted: LedgerMoney | null;
     conversion: string;
-    rate: {
-        id: string;
-        value: string;
-        source: string;
-        observed_at: string;
-        effective_at: string;
-        base: string;
-        quote: string;
-        version: string;
-    } | null;
+    rate:
+        | (ObservationTiming & {
+              id: string;
+              value: string;
+              source: string;
+              base: string;
+              quote: string;
+              version: string;
+          })
+        | null;
     opening: {
         intent_id: string;
         minor: string;

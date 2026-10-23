@@ -112,6 +112,8 @@ test('price and saved evidence reject committed mutation and destructive downgra
     expect(Schema::hasTable('portfolio_prices'))->toBeTrue();
 });
 test('empty valuation migration roundtrip preserves pre-existing immutable opening and ledger rows', function () {
+    $market = require database_path('migrations/2026_10_23_070000_create_market_refresh_evidence.php');
+    $market->down();
     $decisions = require database_path('migrations/2026_10_21_064500_create_decision_records.php');
     $decisions->down();
     $purification = require database_path('migrations/2026_10_20_073000_create_purification_records.php');
@@ -124,5 +126,6 @@ test('empty valuation migration roundtrip preserves pre-existing immutable openi
     $m->up();
     $purification->up();
     $decisions->up();
+    $market->up();
     expect(DB::table('portfolio_opening_rows')->orderBy('id')->get()->toJson())->toBe($rows)->and(DB::table('accounts')->orderBy('id')->get()->toJson())->toBe($accounts);
 });

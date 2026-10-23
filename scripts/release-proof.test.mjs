@@ -21,6 +21,7 @@ const valid = () => ({
     reader_fingerprints: {
         cash: source,
         imports: source,
+        market: source,
         positions: source,
         reservations: source,
         shariah: source,
@@ -60,6 +61,9 @@ await test('actual run identity is required and rejected receipts are never rela
         },
         (r) => {
             delete r.reader_fingerprints.imports;
+        },
+        (r) => {
+            delete r.reader_fingerprints.market;
         },
     ]) {
         const receipt = valid();

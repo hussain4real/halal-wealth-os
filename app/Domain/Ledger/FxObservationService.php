@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Ledger;
 
 use App\Domain\Shared\Money\Currency;
+use App\Domain\Shared\Observations\ObservationTime;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -16,8 +17,27 @@ final class FxObservationService
     /** @param array<string, mixed> $input */
     public function record(User $owner, string $key, array $input, string $purpose = 'reporting'): stdClass
     {
-        return DB::transaction(function () use ($owner, $key, $input, $purpose): stdClass {
+        return $this->recordTime($owner, $key, $input, $purpose, null);
+    }
+
+    /** @param array<string,mixed> $input */
+    public function recordProvider(User $owner, string $key, array $input, ObservationTime $time): stdClass
+    {
+        if ($time->sourceDate !== null) {
+            LedgerInput::fail('observed_at', 'This provider FX contract requires its genuine source timestamp.');
+        }
+
+        return $this->recordTime($owner, $key, $input, 'reporting', $time);
+    }
+
+    /** @param array<string,mixed> $input */
+    private function recordTime(User $owner, string $key, array $input, string $purpose, ?ObservationTime $time): stdClass
+    {
+        return DB::transaction(function () use ($owner, $key, $input, $purpose, $time): stdClass {
             LedgerInput::lock($owner);
+            if ($time !== null) {
+                LedgerInput::instant($time->receivedAt, 'received_at');
+            }
             foreach (array_diff(array_keys($input), ['base_currency', 'quote_currency', 'value', 'source', 'observed_at', 'effective_at', 'supersedes_id', 'correction_reason']) as $field) {
                 LedgerInput::fail($field, 'This field cannot be submitted.');
             }
@@ -39,6 +59,9 @@ final class FxObservationService
                 'source' => LedgerInput::text($input['source'] ?? null, 'source'), 'observed_at' => LedgerInput::instant($input['observed_at'] ?? null, 'observed_at'),
                 'effective_at' => LedgerInput::instant($input['effective_at'] ?? null, 'effective_at'), 'supersedes_id' => $prior?->id,
                 'correction_reason' => $prior === null ? null : LedgerInput::text($input['correction_reason'] ?? null, 'correction_reason')];
+            if ($time !== null) {
+                $payload = [...$payload, ...$time->columns()];
+            }
             if ($cached = LedgerInput::cached('fx_observations', $owner, $key, $payload)) {
                 return $cached;
             }

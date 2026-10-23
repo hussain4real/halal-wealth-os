@@ -871,13 +871,13 @@
                     "name": "observed_at",
                     "type": "timestamp with time zone",
                     "udt": "timestamptz",
-                    "nullable": "NO"
+                    "nullable": "YES"
                 },
                 {
                     "name": "effective_at",
                     "type": "timestamp with time zone",
                     "udt": "timestamptz",
-                    "nullable": "NO"
+                    "nullable": "YES"
                 },
                 {
                     "name": "source",
@@ -902,6 +902,42 @@
                     "type": "timestamp with time zone",
                     "udt": "timestamptz",
                     "nullable": "NO"
+                },
+                {
+                    "name": "source_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "source_timezone",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "received_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "eligible_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "age_from",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "time_policy",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
                 }
             ],
             "order": ["id"]
@@ -1939,6 +1975,274 @@
                 }
             ],
             "order": ["id"]
+        },
+        {
+            "table": "market_admissions",
+            "scope": "owner",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "mapping_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "result_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "target_key",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "sample_key",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "outcome",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "safe_code",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "price_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "fx_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
+            "table": "market_attempts",
+            "scope": "market_attempt",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "provider",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "feed_key",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "feed",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "refresh_window",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "ordinal",
+                    "type": "smallint",
+                    "udt": "int2",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "credits",
+                    "type": "smallint",
+                    "udt": "int2",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "claimed_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "deadline",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
+            "table": "market_mappings",
+            "scope": "owner",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "request_payload",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "feed",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "target",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "enabled",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
+            "table": "market_results",
+            "scope": "market_result",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "attempt_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "received_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "status",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "safe_code",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "retry_after",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "sample",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "winner_key",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "YES"
+                }
+            ]
         },
         {
             "table": "migrations",
@@ -3190,13 +3494,13 @@
                     "name": "observed_at",
                     "type": "timestamp with time zone",
                     "udt": "timestamptz",
-                    "nullable": "NO"
+                    "nullable": "YES"
                 },
                 {
                     "name": "effective_at",
                     "type": "timestamp with time zone",
                     "udt": "timestamptz",
-                    "nullable": "NO"
+                    "nullable": "YES"
                 },
                 {
                     "name": "source",
@@ -3221,6 +3525,42 @@
                     "type": "timestamp with time zone",
                     "udt": "timestamptz",
                     "nullable": "NO"
+                },
+                {
+                    "name": "source_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "source_timezone",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "received_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "eligible_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "age_from",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "time_policy",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
                 }
             ],
             "order": ["id"]

@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 use App\Actions\Fortify\ResetUserPassword;
+use App\Domain\Integrations\MarketFeed;
+use App\Domain\Integrations\MarketRefresh;
+use App\Domain\Ledger\LedgerInput;
 use App\Domain\Ledger\PostingService;
 use App\Domain\Planning\GoalView;
 use App\Domain\Portfolio\PortfolioRead;
@@ -12,8 +15,10 @@ use App\Domain\Shared\Money\Currency;
 use App\Models\User;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Tests\Support\DecisionFixtures;
 use Tests\Support\DisposablePostgres;
+use Tests\Support\MarketFixtures;
 use Tests\Support\PortfolioFixtures as P;
 
 require __DIR__.'/../vendor/autoload.php';
@@ -39,6 +44,28 @@ $result = match ($command) {
         }
 
         return ['users' => $users, 'date' => now('UTC')->toDateString(), 'upload_path' => route('livewire.upload-file', [], false), 'plan' => DecisionFixtures::input(['currency' => 'QAR', 'target' => '100', 'maximum' => '100', 'tranches' => '[{"key":"initial","label":"Initial proposal","amount":"60","condition":"Review terms"},{"key":"reserve","label":"Conditional proposal","amount":"40","condition":"Review evidence"}]'])];
+    })(),
+    'market-prepare' => (function () use ($owner): array {
+        $user = $owner();
+        $account = P::link($user, P::account($user, Currency::USD));
+        P::mode($user, $account);
+        $asset = P::asset($user, ['currency' => 'USD', 'identifier' => 'SYNTH', 'market' => 'Synthetic XNAS listing']);
+
+        return ['portfolio_account_id' => (string) $account->id, 'asset_id' => (string) $asset->id,
+            'context' => app(PriceObservationService::class)->context($user, (string) $account->id)];
+    })(),
+    'market-refresh' => (function () use ($owner, $argv): array {
+        $mapping = LedgerInput::owned('market_mappings', $owner(), $argv[2]);
+        $feed = MarketFeed::from(json_decode($mapping->feed, true, flags: JSON_THROW_ON_ERROR));
+        config(['market_data.mode' => 'mock']);
+        Http::preventStrayRequests();
+        Http::fake(['api.twelvedata.com/*' => ($argv[3] ?? '') === 'timeout'
+            ? Http::failedConnection()
+            : Http::response(MarketFixtures::priceBody(now('America/New_York')->subDays(10)->toDateString()))]);
+        $before = DB::table('portfolio_prices')->where('owner_id', $owner()->id)->orderBy('id')->get()->toJson();
+        $result = app(MarketRefresh::class)->refresh($feed, now('UTC')->toDateString());
+
+        return ['result' => $result, 'prior_unchanged' => $before === DB::table('portfolio_prices')->where('owner_id', $owner()->id)->orderBy('id')->get()->toJson()];
     })(),
     'inspect' => (function () use ($owner): array {
         $user = $owner();

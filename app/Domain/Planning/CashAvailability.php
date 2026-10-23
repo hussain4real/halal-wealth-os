@@ -7,6 +7,7 @@ namespace App\Domain\Planning;
 use App\Domain\Ledger\LedgerInput;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
+use App\Domain\Shared\Observations\ObservationRead;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use stdClass;
@@ -60,12 +61,16 @@ SQL, [$owner->id, json_encode($requirements, JSON_THROW_ON_ERROR)])->count;
                 $missing[] = 'unclassified_required_commitments';
             }
             $rates = [];
-            foreach (DB::select(<<<'SQL'
-SELECT DISTINCT ON(base_currency) id::text,value::text,source,base_currency AS base,quote_currency AS quote,observed_at,effective_at,series_id,version
-FROM fx_observations WHERE owner_id=? AND purpose='reporting' AND quote_currency=? AND observed_at<=?::timestamptz AND effective_at<=?::timestamptz
-ORDER BY base_currency,effective_at DESC,observed_at DESC,id DESC
-SQL, [$owner->id, $base->value, $cutoff, $cutoff]) as $rate) {
-                $rates[$rate->base] = [...(array) $rate, 'observed_at' => LedgerInput::utc($rate->observed_at), 'effective_at' => LedgerInput::utc($rate->effective_at)];
+            $eligible = ObservationRead::eligibilitySql('r', 'p.cutoff');
+            foreach (DB::select(<<<SQL
+WITH p AS (SELECT ?::timestamptz AS cutoff)
+SELECT DISTINCT ON(base_currency) id::text,value::text,source,base_currency AS base,quote_currency AS quote,observed_at,effective_at,series_id,version,
+ source_date,source_timezone,received_at,eligible_at,age_from,time_policy
+FROM fx_observations r CROSS JOIN p WHERE owner_id=? AND purpose='reporting' AND quote_currency=? AND {$eligible}
+ORDER BY base_currency,COALESCE(effective_at,eligible_at) DESC,COALESCE(observed_at,received_at) DESC,id DESC
+SQL, [$cutoff, $owner->id, $base->value]) as $rate) {
+                $rates[$rate->base] = ['id' => $rate->id, 'value' => $rate->value, 'source' => $rate->source, 'base' => $rate->base, 'quote' => $rate->quote,
+                    ...ObservationRead::evidence($rate), 'series_id' => $rate->series_id, 'version' => $rate->version];
             }
             $groups = [];
             foreach ([$sources['groups'], $sources['contributions'], $commitments['groups']] as $set) {

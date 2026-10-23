@@ -1,14 +1,11 @@
+import type { ObservationTiming, OpeningTiming } from './observation-time';
 import type { ExactMoney } from './accounts';
 export type Ratio = { numerator: string; denominator: string; percent: string };
-export type EvidenceRate = {
+export type EvidenceRate = (ObservationTiming | OpeningTiming) & {
     id?: string | null;
     value: string;
     source: string;
-    effective_at?: string;
-    observed_at?: string;
     version?: string;
-    opening_id?: string;
-    effective_date?: string;
 };
 export type ValuationComponent = {
     portfolio_account_id?: string;
@@ -99,7 +96,7 @@ export type ValuationResult = {
     beginning: ValuationPoint | null;
     performance: Performance | null;
 };
-export type Price = {
+export type Price = ObservationTiming & {
     id: string;
     asset_id: string;
     version: string;
@@ -107,7 +104,5 @@ export type Price = {
     unit_price: string;
     source: string;
     reason: string;
-    observed_at: string;
-    effective_at: string;
     split_basis: string;
 };

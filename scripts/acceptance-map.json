@@ -2121,6 +2121,411 @@
             "class": "Tests\\Feature\\StatementImportHttpTest",
             "name": "import-owned financial receipts route corrections through source history and reject generic writes with data set \"(true) / (true)\"",
             "file": "tests/Feature/StatementImportHttpTest.php"
+        },
+        "case-m6p2-fb382a12a4c0": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "provider decimals retain exact wire lexemes including signed integer bounds",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-b442380af76f": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"rate\":1,\"rate\":2}')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-7fc76d65ee6c": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"rate\":1,\"r\\u0061te\":2}')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-a7ad5e6c2469": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"meta\":{\"currency\":\"USD\",\"cu\u2026EUR\"}}')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-137b7c1a0069": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"broken\":}')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-d5e30f9e6917": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('true')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-438c332fb027": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('                             \u2026      ')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-69a26a3406f4": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('[[],[],[],[],[],[],[],[],[],[\u2026[],[]]')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-b45c445c95bf": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"a\":[[[[[[[[[[[[[[[[[[[[0]]]\u2026]]]]]}')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-0f3ebf17013e": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "daily observation precision preserves its calendar and original known at cutoff",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-d2f3051739ab": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "a dated feed cannot fabricate an instant from future or incomplete dates with data set \"('2026-02-30', 'UTC', '2026-03-05T00:00:00Z')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-05c7d97b13b0": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "a dated feed cannot fabricate an instant from future or incomplete dates with data set \"('2026-03-08', 'America/New_York', '2026-03-09T03:59:59Z')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-d57eac2aacf4": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "a dated feed cannot fabricate an instant from future or incomplete dates with data set \"('2026-03-11', 'UTC', '2026-03-10T00:00:00Z')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-c13ddd008946": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "a dated feed cannot fabricate an instant from future or incomplete dates with data set \"('2026-03-08', 'EST invented', '2026-03-10T00:00:00Z')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-ee6ad047c7f6": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "a dated feed cannot fabricate an instant from future or incomplete dates with data set \"('2026-03-08', 'UTC', 'not-an-instant')\"",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-2663450abc34": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "timestamp feeds preserve real source instant and independently received availability",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-96bd2df86c20": {
+            "class": "Tests\\Unit\\ProviderBoundaryTest",
+            "name": "a skipped source midnight does not move the next calendar boundary forward",
+            "file": "tests/Unit/ProviderBoundaryTest.php"
+        },
+        "case-m6p2-cc2fe4bb1959": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data daily raw quote metadata and date precision remain attributable",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-7ae66aa2542b": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"(['EUR'], [])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-4a41a1644e1c": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"(['OTHER'], [])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-7bb957be6c5e": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"(['XNYS'], [])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-e408da3e57b7": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"(['UTC'], [])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-563d37149960": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"(['1min'], [])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-306d35fa28a8": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"(['Crypto'], [])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-64d16761e4c7": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"([''], [])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-14ef664ad525": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"([], ['2026-10-22'])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-0f3139c054d8": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"([], ['1e3'])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-92e10f9dafb0": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"([], ['-1'])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-dba2d13b8c9c": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"([], ['1000000000000000000'])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-333729b825cf": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data rejects wrong instrument currency and unresolved raw payloads with data set \"([], ['1.0000000000001'])\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-5b8183425713": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data FX numeric wire rate stays exact through retained replay",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-ac2e7b3d798f": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/EUR\",\"rate\":3,\u202614051}')\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-420246c7d6ca": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":0,\u202614051}')\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-70dd8d1cf51a": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1e\u202614051}')\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-895bf50deb70": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1,\u202699999}')\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-fe66dcf5aec9": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1}')\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-4d8eeb63a6aa": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"status\":\"error\",\"code\":429,\u2026sage\"}')\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-a22e5e083d5b": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"status\":\"error\",\"code\":400}')\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-bdb94bf045c4": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{}')\"",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-450ecc4b1ad5": {
+            "class": "Tests\\Unit\\TwelveDataContractTest",
+            "name": "provider identities refuse unsupported pair and instrument guesses",
+            "file": "tests/Unit/TwelveDataContractTest.php"
+        },
+        "case-m6p2-17744e64f2c0": {
+            "class": "Tests\\Unit\\TwelveDataTransportTest",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 23 Oct 2026 12:05:00 GMT', 'rate_limited', \u2026)\"",
+            "file": "tests/Unit/TwelveDataTransportTest.php"
+        },
+        "case-m6p2-19dc52d90051": {
+            "class": "Tests\\Unit\\TwelveDataTransportTest",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Thu, 22 Oct 2026 12:05:00 GMT', 'rate_limited', \u2026)\"",
+            "file": "tests/Unit/TwelveDataTransportTest.php"
+        },
+        "case-m6p2-a464fcb16b5a": {
+            "class": "Tests\\Unit\\TwelveDataTransportTest",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'malformed', 'rate_limited', \u2026)\"",
+            "file": "tests/Unit/TwelveDataTransportTest.php"
+        },
+        "case-m6p2-e97ce29de1a8": {
+            "class": "Tests\\Unit\\TwelveDataTransportTest",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, '999999999999999999', 'backoff_exceeds_policy', \u2026)\"",
+            "file": "tests/Unit/TwelveDataTransportTest.php"
+        },
+        "case-m6p2-30bc09ee8d9b": {
+            "class": "Tests\\Unit\\TwelveDataTransportTest",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 30 Oct 2026 12:00:01 GMT', 'backoff_exceeds_policy', \u2026)\"",
+            "file": "tests/Unit/TwelveDataTransportTest.php"
+        },
+        "case-m6p2-d79a9bcf457d": {
+            "class": "Tests\\Unit\\TwelveDataTransportTest",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(503, '', 'upstream_unavailable', \u2026)\"",
+            "file": "tests/Unit/TwelveDataTransportTest.php"
+        },
+        "case-m6p2-1044d843f375": {
+            "class": "Tests\\Unit\\TwelveDataTransportTest",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(401, '', 'access_or_http_error', \u2026)\"",
+            "file": "tests/Unit/TwelveDataTransportTest.php"
+        },
+        "case-m6p2-b54c79a9fec8": {
+            "class": "Tests\\Unit\\TwelveDataTransportTest",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(302, '', 'access_or_http_error', \u2026)\"",
+            "file": "tests/Unit/TwelveDataTransportTest.php"
+        },
+        "case-m6p2-3e04992e1f6e": {
+            "class": "Tests\\Unit\\TwelveDataTransportTest",
+            "name": "an unmatched mock request is blocked before external HTTP and disabled adapters never request",
+            "file": "tests/Unit/TwelveDataTransportTest.php"
+        },
+        "case-m6p2-6740ebf097c5": {
+            "class": "Tests\\Feature\\MarketConcurrencyTest",
+            "name": "concurrent refresh claims across blocked PostgreSQL backends fetch and admit one effective sample",
+            "file": "tests/Feature/MarketConcurrencyTest.php"
+        },
+        "case-m6p2-bb8f71bb1f54": {
+            "class": "Tests\\Feature\\MarketConcurrencyTest",
+            "name": "different owners and feeds contend for the last shared provider credit",
+            "file": "tests/Feature/MarketConcurrencyTest.php"
+        },
+        "case-m6p2-62b3d92b1f17": {
+            "class": "Tests\\Feature\\MarketConcurrencyTest",
+            "name": "market evidence is immutable and populated downgrade refuses before DDL",
+            "file": "tests/Feature/MarketConcurrencyTest.php"
+        },
+        "case-m6p2-3b32dd57af16": {
+            "class": "Tests\\Feature\\MarketConcurrencyTest",
+            "name": "empty market schema roundtrip preserves manual rates prices and journal bytes",
+            "file": "tests/Feature/MarketConcurrencyTest.php"
+        },
+        "case-m6p2-0684a3d03e58": {
+            "class": "Tests\\Feature\\MarketConcurrencyTest",
+            "name": "an expired worker cannot overwrite a newer committed winner and never holds locks during HTTP",
+            "file": "tests/Feature/MarketConcurrencyTest.php"
+        },
+        "case-m6p2-ae74d7e3a71d": {
+            "class": "Tests\\Feature\\MarketHttpTest",
+            "name": "market status distinguishes disabled transport shared fetch and owned admission with honest daily evidence",
+            "file": "tests/Feature/MarketHttpTest.php"
+        },
+        "case-m6p2-8306a5e8577e": {
+            "class": "Tests\\Feature\\MarketHttpTest",
+            "name": "mapping HTTP exact committed retry recovers after disable without a second version",
+            "file": "tests/Feature/MarketHttpTest.php"
+        },
+        "case-m6p2-3749d14f89c9": {
+            "class": "Tests\\Feature\\MarketHttpTest",
+            "name": "market routes reject guests foreign owner and admin target reads and writes",
+            "file": "tests/Feature/MarketHttpTest.php"
+        },
+        "case-m6p2-2d2ce8712792": {
+            "class": "Tests\\Feature\\MarketHttpTest",
+            "name": "mapping price form uses owned current history and rejects stale or forged confirmation",
+            "file": "tests/Feature/MarketHttpTest.php"
+        },
+        "case-m6p2-c6a9948fbaaa": {
+            "class": "Tests\\Feature\\MarketHttpTest",
+            "name": "market account and asset search pagination retains selected targets beyond a page",
+            "file": "tests/Feature/MarketHttpTest.php"
+        },
+        "case-m6p2-4db67c7d3046": {
+            "class": "Tests\\Feature\\MarketHttpTest",
+            "name": "scheduler remains inert by default and dispatches one job per current shared feed in mock mode",
+            "file": "tests/Feature/MarketHttpTest.php"
+        },
+        "case-m6p2-b2609c62f62c": {
+            "class": "Tests\\Feature\\MarketHttpTest",
+            "name": "job redelivery resumes missing owner fanout from committed sample without another request",
+            "file": "tests/Feature/MarketHttpTest.php"
+        },
+        "case-m6p2-1ea095f773db": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "mock price refresh retains exact source date once across requests and new day jobs",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-b3203c4becdc": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "FX provider admission is reporting only with exact source timestamp and genuine availability",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-cfef524a1dbf": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "wrong currency and future observation fail attributably without replacing prior price",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-2cf0a178c5c0": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "bounded provider timeout retries preserve last observation and charged attempts",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-0bca9226d6ef": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "date-only price cannot enter a historical cutoff before its actual receipt and remains source stale",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-8760391f26f0": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "disabled production-style mode never sends provider HTTP or loses prior mapping receipts",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-7d2842c62e88": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "rate limiting defers both price and FX feeds under the one shared provider cooldown",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-6d56a0653dd9": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "a mapping can be disabled after its reviewed account context changes and exact receipts recover",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-6e10b2ffa809": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "all historical reporting readers exclude a provider rate until it was actually received",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-a680cbdaffb0": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "daily provider prices and manual revision pages return explicit date evidence instead of failing on null instants",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-9b945b423434": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "a late first response cannot suppress the remaining durable retry budget",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-7bb6a846cd79": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "changed retained history rejects owned admission while retaining safe attributable shared evidence",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-dc4d16dde91c": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "complete export headroom rolls back observation and receipt but committed sample remains recoverable",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-03635855a8d7": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "mapping versions reject duplicate current targets obsolete retries and incompatible owned instruments",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-8836c0b41b73": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "an old uncommitted window cannot fetch and excessive provider backoff stops all new feeds",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-fea0b762884c": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "later provider refreshes preserve saved valuation bytes and original observation references",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-04cede31662a": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "shared daily credits do not reset at midnight while retained sends remain inside rolling day",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-capacity-996e1b33872e": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "full admission capacity reports partial fanout and preserves committed recovery for capped owners",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-capacity-09e523be5851": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "full admission capacity still recovers an exact rejected receipt after a mapping is disabled",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-capacity-b088c55f39fa": {
+            "class": "Tests\\Feature\\MarketHttpTest",
+            "name": "capacity blocked jobs retain prior values and expose owned warning without growing evidence",
+            "file": "tests/Feature/MarketHttpTest.php"
         }
     },
     "manual_artifacts": {
@@ -2189,6 +2594,16 @@
             "public_path": "docs/halal-wealth-os/runs/M5-P3-rendered-review.md",
             "sha256": "935cc1d4473fa89fb398d435fc47d6ed1d0c715489254425f7d1a18514b449b8",
             "scope": "Actual isolated browser TOTP/recovery/export/keyboard/theme/mobile flows; no production deployment, CI or owner acceptance claim."
+        },
+        "m6p2-provider-selection": {
+            "public_path": "docs/halal-wealth-os/runs/M6-P2-provider-selection.md",
+            "sha256": "219008a2127c0980d58bbca10c660ef0901a0e88dfceff297d8624abf4563306",
+            "scope": "Explicit owner Twelve Data selection for disabled synthetic adapters only; no live connectivity, license entitlement, account, credential or purchase approval."
+        },
+        "m6p2-rendered": {
+            "public_path": "docs/halal-wealth-os/runs/M6-P2-rendered-review.md",
+            "sha256": "e0d05ab09b30db7c9ecd53b218288488a454c0c875a9d2538336d98eaa60dbee",
+            "scope": "Actual synthetic desktop/mobile source-time evidence, target confirmation and three interrupted request recoveries; separate populated dashboard/current/saved valuation proof. Cycle7 coordinator capacity warnings, retained values, manual fallback and foreign-owner isolation are attributed separately. No live access, exhaustive accessibility certification, CI or acceptance claim."
         }
     },
     "requirements": {
@@ -3067,7 +3482,32 @@
                 "case-m6p1-276ac2db7f81",
                 "case-m6p1-79ffb39ea822",
                 "case-m6p1-0ea4ca00021b",
-                "case-m6p1-c2f4ffaaca1d"
+                "case-m6p1-c2f4ffaaca1d",
+                "case-m6p2-fb382a12a4c0",
+                "case-m6p2-cc2fe4bb1959",
+                "case-m6p2-7ae66aa2542b",
+                "case-m6p2-4a41a1644e1c",
+                "case-m6p2-7bb957be6c5e",
+                "case-m6p2-e408da3e57b7",
+                "case-m6p2-563d37149960",
+                "case-m6p2-306d35fa28a8",
+                "case-m6p2-64d16761e4c7",
+                "case-m6p2-14ef664ad525",
+                "case-m6p2-0f3139c054d8",
+                "case-m6p2-92e10f9dafb0",
+                "case-m6p2-dba2d13b8c9c",
+                "case-m6p2-333729b825cf",
+                "case-m6p2-5b8183425713",
+                "case-m6p2-ac2e7b3d798f",
+                "case-m6p2-420246c7d6ca",
+                "case-m6p2-70dd8d1cf51a",
+                "case-m6p2-895bf50deb70",
+                "case-m6p2-fe66dcf5aec9",
+                "case-m6p2-4d8eeb63a6aa",
+                "case-m6p2-a22e5e083d5b",
+                "case-m6p2-bdb94bf045c4",
+                "case-m6p2-450ecc4b1ad5",
+                "case-m6p2-dc4d16dde91c"
             ],
             "manual_artifact_ids": []
         },
@@ -3126,7 +3566,14 @@
                 "case-m6p1-55331b5cfc00",
                 "case-m6p1-a830dc56dce2",
                 "case-m6p1-5295f26fda89",
-                "case-m6p1-73a648c088a3"
+                "case-m6p1-73a648c088a3",
+                "case-m6p2-62b3d92b1f17",
+                "case-m6p2-3b32dd57af16",
+                "case-m6p2-8306a5e8577e",
+                "case-m6p2-b2609c62f62c",
+                "case-m6p2-1ea095f773db",
+                "case-m6p2-dc4d16dde91c",
+                "case-m6p2-fea0b762884c"
             ],
             "manual_artifact_ids": []
         },
@@ -3194,7 +3641,51 @@
                 "case-5ceba252d89c",
                 "case-ef8315a58fbd",
                 "case-2d0a9f6a6865",
-                "case-ba0c551f61c3"
+                "case-ba0c551f61c3",
+                "case-m6p2-fb382a12a4c0",
+                "case-m6p2-b442380af76f",
+                "case-m6p2-7fc76d65ee6c",
+                "case-m6p2-a7ad5e6c2469",
+                "case-m6p2-137b7c1a0069",
+                "case-m6p2-d5e30f9e6917",
+                "case-m6p2-438c332fb027",
+                "case-m6p2-69a26a3406f4",
+                "case-m6p2-b45c445c95bf",
+                "case-m6p2-0f3ebf17013e",
+                "case-m6p2-d2f3051739ab",
+                "case-m6p2-05c7d97b13b0",
+                "case-m6p2-d57eac2aacf4",
+                "case-m6p2-c13ddd008946",
+                "case-m6p2-ee6ad047c7f6",
+                "case-m6p2-2663450abc34",
+                "case-m6p2-96bd2df86c20",
+                "case-m6p2-cc2fe4bb1959",
+                "case-m6p2-7ae66aa2542b",
+                "case-m6p2-4a41a1644e1c",
+                "case-m6p2-7bb957be6c5e",
+                "case-m6p2-e408da3e57b7",
+                "case-m6p2-563d37149960",
+                "case-m6p2-306d35fa28a8",
+                "case-m6p2-64d16761e4c7",
+                "case-m6p2-14ef664ad525",
+                "case-m6p2-0f3139c054d8",
+                "case-m6p2-92e10f9dafb0",
+                "case-m6p2-dba2d13b8c9c",
+                "case-m6p2-333729b825cf",
+                "case-m6p2-5b8183425713",
+                "case-m6p2-ac2e7b3d798f",
+                "case-m6p2-420246c7d6ca",
+                "case-m6p2-70dd8d1cf51a",
+                "case-m6p2-895bf50deb70",
+                "case-m6p2-fe66dcf5aec9",
+                "case-m6p2-4d8eeb63a6aa",
+                "case-m6p2-a22e5e083d5b",
+                "case-m6p2-bdb94bf045c4",
+                "case-m6p2-450ecc4b1ad5",
+                "case-m6p2-ae74d7e3a71d",
+                "case-m6p2-0bca9226d6ef",
+                "case-m6p2-6e10b2ffa809",
+                "case-m6p2-fea0b762884c"
             ],
             "manual_artifact_ids": []
         },
@@ -3281,7 +3772,12 @@
                 "case-m6p1-55331b5cfc00",
                 "case-m6p1-a830dc56dce2",
                 "case-m6p1-5295f26fda89",
-                "case-m6p1-73a648c088a3"
+                "case-m6p1-73a648c088a3",
+                "case-m6p2-bb8f71bb1f54",
+                "case-m6p2-ae74d7e3a71d",
+                "case-m6p2-3749d14f89c9",
+                "case-m6p2-2d2ce8712792",
+                "case-m6p2-03635855a8d7"
             ],
             "manual_artifact_ids": [],
             "scope": "Executed module-specific owner/admin/export negatives for currently implemented modules. M6 jobs/uploads and M7 AI tools remain unimplemented, not claimed tested. New release web-session revocation regression remains mandatory pending separately."
@@ -3343,14 +3839,38 @@
                 "case-m6p1-55331b5cfc00",
                 "case-m6p1-a830dc56dce2",
                 "case-m6p1-5295f26fda89",
-                "case-m6p1-73a648c088a3"
+                "case-m6p1-73a648c088a3",
+                "case-m6p2-6740ebf097c5",
+                "case-m6p2-bb8f71bb1f54",
+                "case-m6p2-62b3d92b1f17",
+                "case-m6p2-3b32dd57af16",
+                "case-m6p2-0684a3d03e58",
+                "case-m6p2-8306a5e8577e",
+                "case-m6p2-b2609c62f62c",
+                "case-m6p2-2cf0a178c5c0",
+                "case-m6p2-9b945b423434",
+                "case-m6p2-fea0b762884c",
+                "case-m6p2-04cede31662a"
             ],
             "manual_artifact_ids": [],
             "scope": "Durable implemented financial idempotency plus obsolete uncommitted rejection. External publisher HTTP405 remains failed/unverified; this is not exactly-once external delivery evidence."
         },
         "INV-12": {
             "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
-            "actual_case_ids": [],
+            "actual_case_ids": [
+                "case-m6p2-17744e64f2c0",
+                "case-m6p2-19dc52d90051",
+                "case-m6p2-a464fcb16b5a",
+                "case-m6p2-e97ce29de1a8",
+                "case-m6p2-30bc09ee8d9b",
+                "case-m6p2-d79a9bcf457d",
+                "case-m6p2-1044d843f375",
+                "case-m6p2-b54c79a9fec8",
+                "case-m6p2-3e04992e1f6e",
+                "case-m6p2-4db67c7d3046",
+                "case-m6p2-8760391f26f0",
+                "case-m6p2-04cede31662a"
+            ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "scope": "Retained manual original harness observations; current M5-P2 report/failure-propagation/mandatory-artifact gates must execute anew. No JUnit selector is invented to stand in for CLI/approval evidence.",
             "manual_scope": [
@@ -3680,6 +4200,150 @@
             ],
             "manual_artifact_ids": [],
             "tool_check": "HTTP_SECURITY"
+        },
+        "M6-P2-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p2-17744e64f2c0",
+                "case-m6p2-19dc52d90051",
+                "case-m6p2-a464fcb16b5a",
+                "case-m6p2-e97ce29de1a8",
+                "case-m6p2-30bc09ee8d9b",
+                "case-m6p2-d79a9bcf457d",
+                "case-m6p2-1044d843f375",
+                "case-m6p2-b54c79a9fec8",
+                "case-m6p2-3e04992e1f6e",
+                "case-m6p2-ae74d7e3a71d",
+                "case-m6p2-2cf0a178c5c0",
+                "case-m6p2-0bca9226d6ef",
+                "case-m6p2-7d2842c62e88",
+                "case-m6p2-capacity-996e1b33872e",
+                "case-m6p2-capacity-b088c55f39fa"
+            ],
+            "manual_artifact_ids": ["m6p2-rendered"],
+            "tool_check": "HTTP_JOURNEY"
+        },
+        "M6-P2-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p2-6740ebf097c5",
+                "case-m6p2-bb8f71bb1f54",
+                "case-m6p2-62b3d92b1f17",
+                "case-m6p2-3b32dd57af16",
+                "case-m6p2-0684a3d03e58",
+                "case-m6p2-8306a5e8577e",
+                "case-m6p2-b2609c62f62c",
+                "case-m6p2-1ea095f773db",
+                "case-m6p2-9b945b423434",
+                "case-m6p2-dc4d16dde91c",
+                "case-m6p2-fea0b762884c",
+                "case-m6p2-04cede31662a",
+                "case-m6p2-capacity-09e523be5851"
+            ],
+            "manual_artifact_ids": ["m6p2-rendered"],
+            "tool_check": "HTTP_JOURNEY"
+        },
+        "M6-P2-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p2-fb382a12a4c0",
+                "case-m6p2-b442380af76f",
+                "case-m6p2-7fc76d65ee6c",
+                "case-m6p2-a7ad5e6c2469",
+                "case-m6p2-137b7c1a0069",
+                "case-m6p2-d5e30f9e6917",
+                "case-m6p2-438c332fb027",
+                "case-m6p2-69a26a3406f4",
+                "case-m6p2-b45c445c95bf",
+                "case-m6p2-0f3ebf17013e",
+                "case-m6p2-d2f3051739ab",
+                "case-m6p2-05c7d97b13b0",
+                "case-m6p2-d57eac2aacf4",
+                "case-m6p2-c13ddd008946",
+                "case-m6p2-ee6ad047c7f6",
+                "case-m6p2-2663450abc34",
+                "case-m6p2-96bd2df86c20",
+                "case-m6p2-cc2fe4bb1959",
+                "case-m6p2-7ae66aa2542b",
+                "case-m6p2-4a41a1644e1c",
+                "case-m6p2-7bb957be6c5e",
+                "case-m6p2-e408da3e57b7",
+                "case-m6p2-563d37149960",
+                "case-m6p2-306d35fa28a8",
+                "case-m6p2-64d16761e4c7",
+                "case-m6p2-14ef664ad525",
+                "case-m6p2-0f3139c054d8",
+                "case-m6p2-92e10f9dafb0",
+                "case-m6p2-dba2d13b8c9c",
+                "case-m6p2-333729b825cf",
+                "case-m6p2-5b8183425713",
+                "case-m6p2-ac2e7b3d798f",
+                "case-m6p2-420246c7d6ca",
+                "case-m6p2-70dd8d1cf51a",
+                "case-m6p2-895bf50deb70",
+                "case-m6p2-fe66dcf5aec9",
+                "case-m6p2-4d8eeb63a6aa",
+                "case-m6p2-a22e5e083d5b",
+                "case-m6p2-bdb94bf045c4",
+                "case-m6p2-450ecc4b1ad5",
+                "case-m6p2-cfef524a1dbf",
+                "case-m6p2-7bb6a846cd79",
+                "case-m6p2-03635855a8d7"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": "HTTP_JOURNEY"
+        },
+        "M6-P2-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p2-cc2fe4bb1959",
+                "case-m6p2-7ae66aa2542b",
+                "case-m6p2-4a41a1644e1c",
+                "case-m6p2-7bb957be6c5e",
+                "case-m6p2-e408da3e57b7",
+                "case-m6p2-563d37149960",
+                "case-m6p2-306d35fa28a8",
+                "case-m6p2-64d16761e4c7",
+                "case-m6p2-14ef664ad525",
+                "case-m6p2-0f3139c054d8",
+                "case-m6p2-92e10f9dafb0",
+                "case-m6p2-dba2d13b8c9c",
+                "case-m6p2-333729b825cf",
+                "case-m6p2-5b8183425713",
+                "case-m6p2-ac2e7b3d798f",
+                "case-m6p2-420246c7d6ca",
+                "case-m6p2-70dd8d1cf51a",
+                "case-m6p2-895bf50deb70",
+                "case-m6p2-fe66dcf5aec9",
+                "case-m6p2-4d8eeb63a6aa",
+                "case-m6p2-a22e5e083d5b",
+                "case-m6p2-bdb94bf045c4",
+                "case-m6p2-450ecc4b1ad5",
+                "case-m6p2-17744e64f2c0",
+                "case-m6p2-19dc52d90051",
+                "case-m6p2-a464fcb16b5a",
+                "case-m6p2-e97ce29de1a8",
+                "case-m6p2-30bc09ee8d9b",
+                "case-m6p2-d79a9bcf457d",
+                "case-m6p2-1044d843f375",
+                "case-m6p2-b54c79a9fec8",
+                "case-m6p2-3e04992e1f6e",
+                "case-m6p2-ae74d7e3a71d",
+                "case-m6p2-4db67c7d3046",
+                "case-m6p2-8760391f26f0",
+                "case-m6p2-6d56a0653dd9"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": "HTTP_JOURNEY"
+        },
+        "M6-P2-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p2-4db67c7d3046",
+                "case-m6p2-8760391f26f0"
+            ],
+            "manual_artifact_ids": ["m6p2-provider-selection"],
+            "tool_check": null
         }
     },
     "fixtures": {
@@ -3814,7 +4478,7 @@
         },
         "F17": {
             "name": "Import and provider retry",
-            "status": "PARTIAL_M6_P1_STATEMENT_EXECUTED_PROVIDER_OUTBOX_FUTURE",
+            "status": "PARTIAL_M6_P2_STATEMENT_PROVIDER_EXECUTED_OUTBOX_FUTURE",
             "case_ids": [
                 "case-m6p1-a4632ba04e7d",
                 "case-m6p1-276ac2db7f81",
@@ -3834,14 +4498,23 @@
                 "case-m6p1-2f7402cf77b4",
                 "case-m6p1-aa5572bdf50f",
                 "case-m6p1-c1ef4bc6175b",
-                "case-m6p1-c163a1c10dfa"
+                "case-m6p1-c163a1c10dfa",
+                "case-m6p2-6740ebf097c5",
+                "case-m6p2-bb8f71bb1f54",
+                "case-m6p2-62b3d92b1f17",
+                "case-m6p2-3b32dd57af16",
+                "case-m6p2-0684a3d03e58",
+                "case-m6p2-b2609c62f62c",
+                "case-m6p2-2cf0a178c5c0",
+                "case-m6p2-9b945b423434",
+                "case-m6p2-04cede31662a"
             ],
-            "scope": "Current exact synthetic statement reupload/identity/atomic retry cases only. Provider-job and outbox-delivery retries remain future unimplemented M6 phases; original private fixture inputs are not newly executed.",
-            "implemented_subscenarios": ["statement_reupload"],
-            "future_subscenarios": [
-                "provider_job_retry",
-                "outbox_delivery_retry"
-            ]
+            "scope": "Current executed synthetic statement reupload and provider-job retry, duplicate arbitration and durable fanout recovery only. Outbox delivery retry remains future M6-P3; original private fixture inputs are not newly executed.",
+            "implemented_subscenarios": [
+                "statement_reupload",
+                "provider_job_retry"
+            ],
+            "future_subscenarios": ["outbox_delivery_retry"]
         },
         "F18": {
             "name": "AI trust boundary",

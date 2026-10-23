@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Portfolio;
 
 use App\Domain\Ledger\LedgerInput;
+use App\Domain\Shared\Observations\ObservationTime;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -15,14 +16,31 @@ final class PriceObservationService
     /** @param array<string,mixed> $input */
     public function record(User $owner, string $key, array $input): stdClass
     {
-        return DB::transaction(function () use ($owner, $key, $input): stdClass {
+        return $this->recordTime($owner, $key, $input, null);
+    }
+
+    /** @param array<string,mixed> $input */
+    public function recordProvider(User $owner, string $key, array $input, ObservationTime $time): stdClass
+    {
+        return $this->recordTime($owner, $key, $input, $time);
+    }
+
+    /** @param array<string,mixed> $input */
+    private function recordTime(User $owner, string $key, array $input, ?ObservationTime $time): stdClass
+    {
+        $request = $time === null ? $input : [...$input, 'provider_time' => $time->columns()];
+
+        return DB::transaction(function () use ($owner, $key, $input, $time, $request): stdClass {
             LedgerInput::lock($owner);
+            if ($time !== null) {
+                LedgerInput::instant($time->receivedAt, 'received_at');
+            }
             PortfolioInput::only($input, ['portfolio_account_id', 'asset_id', 'unit_price', 'source', 'observed_at', 'effective_at', 'supersedes_id', 'reason', 'unit_basis_confirmed', 'context']);
             if (($input['unit_basis_confirmed'] ?? null) !== '1') {
                 LedgerInput::fail('unit_basis_confirmed', 'Confirm the raw price uses units after all retained splits through its effective UTC business date.');
             }
             // Recover the original request even after a later split changes the derived unit context.
-            if ($cached = LedgerInput::cached('portfolio_prices', $owner, $key, $input)) {
+            if ($cached = LedgerInput::cached('portfolio_prices', $owner, $key, $request)) {
                 return $cached;
             }
             $p = app(PortfolioRead::class)->account($owner, LedgerInput::identifier($input['portfolio_account_id'] ?? null), true);
@@ -43,16 +61,20 @@ final class PriceObservationService
             if ($prior !== null && DB::table('portfolio_prices')->where('supersedes_id', $prior->id)->exists()) {
                 LedgerInput::fail('supersedes_id', 'This price has a newer version. Open that version before correcting.');
             }
-            $effective = LedgerInput::instant($input['effective_at'] ?? null, 'effective_at');
+            $effective = $time === null ? LedgerInput::instant($input['effective_at'] ?? null, 'effective_at') : $time->eligibleAt;
+            $sourceDate = $time->sourceDate ?? substr($effective, 0, 10);
             $data = ['owner_id' => $owner->id, 'portfolio_account_id' => $p->id, 'currency' => $p->currency,
                 'asset_id' => $asset->id, 'asset_family' => $asset->family_reference, 'asset_kind' => $asset->kind,
                 'reference' => (string) Str::ulid(), 'series_id' => $prior->series_id ?? (string) Str::ulid(),
                 'version' => $prior === null ? 1 : $prior->version + 1, 'supersedes_id' => $prior?->id,
                 'unit_price' => PortfolioInput::decimal($input['unit_price'] ?? null, 'unit_price'),
-                'observed_at' => LedgerInput::instant($input['observed_at'] ?? null, 'observed_at'), 'effective_at' => $effective,
+                'observed_at' => $time === null ? LedgerInput::instant($input['observed_at'] ?? null, 'observed_at') : $time->sourceInstant, 'effective_at' => $time === null ? $effective : $time->sourceInstant,
                 'source' => LedgerInput::text($input['source'] ?? null, 'source'), 'reason' => LedgerInput::text($input['reason'] ?? null, 'reason'),
-                'split_basis' => self::splitBasis($owner, (string) $p->id, $asset->family_reference, substr($effective, 0, 10)),
-                'idempotency_key' => $key, 'payload_hash' => LedgerInput::hash($input)];
+                'split_basis' => self::splitBasis($owner, (string) $p->id, $asset->family_reference, $sourceDate),
+                'idempotency_key' => $key, 'payload_hash' => LedgerInput::hash($request)];
+            if ($time !== null) {
+                $data = [...$data, ...$time->columns()];
+            }
             $id = DB::table('portfolio_prices')->insertGetId($data);
 
             return LedgerInput::owned('portfolio_prices', $owner, (string) $id);

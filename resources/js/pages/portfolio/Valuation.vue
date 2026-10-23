@@ -40,8 +40,8 @@ const query = new URLSearchParams(props.input).toString();
         back="/portfolio"
         ><template #intro
             >Choose a dated view of your recorded wealth. Prices and exchange
-            rates come from retained manual observations. Nothing here places an
-            order or predicts a return.</template
+            rates come from retained observations with attributed sources.
+            Nothing here places an order or predicts a return.</template
         >
         <form
             action="/valuations"

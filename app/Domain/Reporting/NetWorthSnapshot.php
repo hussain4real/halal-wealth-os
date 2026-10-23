@@ -12,8 +12,8 @@ use App\Domain\Portfolio\ValuationFx;
 use App\Domain\Portfolio\ValuationMath;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
+use App\Domain\Shared\Observations\ObservationRead;
 use App\Models\User;
-use DateTimeImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -58,9 +58,7 @@ final readonly class NetWorthSnapshot
                             $component['state'] = 'missing';
                         } else {
                             $rate = $component['rate'];
-                            $age = max((new DateTimeImmutable($cutoff))->getTimestamp() - (new DateTimeImmutable($rate['observed_at']))->getTimestamp(),
-                                (new DateTimeImmutable($cutoff))->getTimestamp() - (new DateTimeImmutable($rate['effective_at']))->getTimestamp());
-                            if ($age > 604800) {
+                            if (ObservationRead::payloadStale($rate, $cutoff)) {
                                 $component['state'] = 'stale';
                             } else {
                                 try {

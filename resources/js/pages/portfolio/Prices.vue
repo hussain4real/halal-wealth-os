@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ObservationTimeEvidence from '@/components/ObservationTimeEvidence.vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import { ref, watch } from 'vue';
 import PortfolioShell from '@/components/PortfolioShell.vue';
@@ -12,7 +13,7 @@ defineOptions({
     layout: {
         breadcrumbs: [
             { title: 'Portfolio', href: '/portfolio' },
-            { title: 'Manual prices', href: '#' },
+            { title: 'Price history', href: '#' },
         ],
     },
 });
@@ -48,9 +49,13 @@ const { form, feedback, recovered, locked, submit } = usePortfolioForm(
         context: props.context,
         asset_id: props.prior?.asset_id ?? '',
         unit_price: props.prior?.unit_price ?? '',
-        source: props.prior?.source ?? '',
-        observed_at: props.prior?.observed_at ?? props.now,
-        effective_at: props.prior?.effective_at ?? props.now,
+        source: props.prior?.provider_time ? '' : (props.prior?.source ?? ''),
+        observed_at: props.prior?.provider_time
+            ? ''
+            : (props.prior?.observed_at ?? props.now),
+        effective_at: props.prior?.provider_time
+            ? ''
+            : (props.prior?.effective_at ?? props.now),
         supersedes_id: props.prior?.id ?? '',
         reason: '',
         unit_basis_confirmed: '',
@@ -67,7 +72,7 @@ watch(
     <PortfolioShell
         :title="
             prior
-                ? 'Correct a retained manual price.'
+                ? 'Record a manual price correction.'
                 : 'Add a dated manual price.'
         "
         eyebrow="Price observations · not a live feed"
@@ -284,8 +289,7 @@ watch(
                 </p>
                 <p>{{ p.source }} · asset reference {{ p.asset_id }}</p>
                 <p class="text-muted-foreground">
-                    Effective {{ p.effective_at }} · observed
-                    {{ p.observed_at }}
+                    <ObservationTimeEvidence :timing="p" />
                 </p>
                 <p>{{ p.reason }}</p>
                 <details>

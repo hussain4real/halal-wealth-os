@@ -39,7 +39,7 @@ final class OwnerDataSchema
                     'udt' => self::text($column, 'udt'), 'nullable' => self::text($column, 'nullable')];
             }
             $scope = self::text($table, 'scope');
-            if (! in_array($scope, ['owner', 'account', 'opening', 'profile', 'excluded'], true)) {
+            if (! in_array($scope, ['owner', 'account', 'opening', 'profile', 'excluded', 'market_attempt', 'market_result'], true)) {
                 throw new RuntimeException('Unknown export ownership contract.');
             }
             $tables[] = ['table' => self::identifier($table, 'table'), 'scope' => $scope, 'columns' => $columns, 'order' => self::identifiers($table['order'] ?? null)];

@@ -6,8 +6,8 @@ namespace App\Domain\Ledger;
 
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
+use App\Domain\Shared\Observations\ObservationRead;
 use App\Models\User;
-use DateTimeImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -26,7 +26,8 @@ final class FinancialSnapshot
         }
         // All accounts, journal identities, opening states and chosen rates are
         // read by ONE PostgreSQL statement. No per-account second reads.
-        $rows = DB::select(<<<'SQL'
+        $eligible = ObservationRead::eligibilitySql('rate', 'parameters.cutoff');
+        $rows = DB::select(<<<SQL
 WITH parameters AS (SELECT ?::bigint AS owner_id, ?::timestamptz AS cutoff, ?::text AS base, ?::bigint AS account_filter)
 SELECT a.id::text AS account_id,a.name,a.type,a.currency_code,a.archived_at,
  i.id::text AS intent_id,i.amount_minor::text AS opening_minor,opening.id::text AS opening_journal_id,
@@ -45,7 +46,7 @@ SELECT a.id::text AS account_id,a.name,a.type,a.currency_code,a.archived_at,
    OR EXISTS (SELECT 1 FROM fx_operation_journals member JOIN fx_operations replacement ON replacement.replaces_id = member.operation_id AND replacement.owner_id = a.owner_id WHERE member.journal_id = original.id AND member.owner_id = a.owner_id AND replacement.status IN ('posted','reversed')))
  ) THEN 'legacy_correction_timing' END AS legacy_timing_reason,
  movements.minor,movements.journals,
- q.id::text AS rate_id,q.value::text AS rate_value,q.source AS rate_source,q.observed_at,q.effective_at,q.series_id,q.version,
+ q.id::text AS rate_id,q.value::text AS rate_value,q.source AS rate_source,q.observed_at,q.effective_at,q.series_id,q.version,q.source_date,q.source_timezone,q.received_at,q.eligible_at,q.age_from,q.time_policy,
  to_char(statement_timestamp() AT TIME ZONE 'UTC','YYYY-MM-DD"T"HH24:MI:SS"Z"') AS captured_at
 FROM parameters JOIN accounts a ON a.owner_id = parameters.owner_id
 LEFT JOIN opening_balance_intents i ON i.account_id = a.id
@@ -60,8 +61,8 @@ LEFT JOIN LATERAL (
 LEFT JOIN LATERAL (
  SELECT * FROM fx_observations rate WHERE rate.owner_id = a.owner_id AND rate.purpose = 'reporting'
  AND rate.base_currency = a.currency_code AND rate.quote_currency = parameters.base
- AND rate.observed_at <= parameters.cutoff AND rate.effective_at <= parameters.cutoff
- ORDER BY rate.effective_at DESC,rate.observed_at DESC,rate.id DESC LIMIT 1
+ AND {$eligible}
+ ORDER BY COALESCE(rate.effective_at,rate.eligible_at) DESC,COALESCE(rate.observed_at,rate.received_at) DESC,rate.id DESC LIMIT 1
 ) q ON TRUE
 WHERE a.system_role IS NULL AND a.type IN ('bank','cash','investment','liability') AND (parameters.account_filter IS NULL OR a.id = parameters.account_filter)
 ORDER BY a.id
@@ -83,16 +84,14 @@ SQL, [$owner->id, $cutoff, $base->value, $accountId]);
                 }
             }
             $rate = $row->rate_id === null ? null : ['id' => $row->rate_id, 'value' => $row->rate_value, 'source' => $row->rate_source,
-                'base' => $currency->value, 'quote' => $base->value, 'observed_at' => LedgerInput::utc($row->observed_at),
-                'effective_at' => LedgerInput::utc($row->effective_at), 'series_id' => $row->series_id, 'version' => (string) $row->version];
+                'base' => $currency->value, 'quote' => $base->value, ...ObservationRead::evidence($row), 'series_id' => $row->series_id, 'version' => (string) $row->version];
             $converted = null;
             $state = $native === null ? 'unavailable' : 'missing';
             if ($native !== null && $currency === $base) {
                 $converted = $native;
                 $state = 'complete';
             } elseif ($native !== null && $rate !== null) {
-                $age = max((new DateTimeImmutable($cutoff))->getTimestamp() - (new DateTimeImmutable($row->observed_at))->getTimestamp(), (new DateTimeImmutable($cutoff))->getTimestamp() - (new DateTimeImmutable($row->effective_at))->getTimestamp());
-                if ($age > 604800) {
+                if (ObservationRead::stale($row, $cutoff)) {
                     $state = 'stale';
                 } else {
                     try {

@@ -7,7 +7,7 @@ namespace App\Domain\Planning;
 use App\Domain\Ledger\FxMath;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
-use DateTimeImmutable;
+use App\Domain\Shared\Observations\ObservationRead;
 use InvalidArgumentException;
 
 final class AvailabilityMath
@@ -114,13 +114,10 @@ final class AvailabilityMath
         if ($rate === null) {
             throw new InvalidArgumentException('missing_fx');
         }
-        $instant = new DateTimeImmutable($cutoff);
-        $observed = new DateTimeImmutable($rate['observed_at']);
-        $effective = new DateTimeImmutable($rate['effective_at']);
-        if ($rate['base'] !== $currency->value || $rate['quote'] !== $base->value || $observed > $instant || $effective > $instant) {
+        if ($rate['base'] !== $currency->value || $rate['quote'] !== $base->value || ! ObservationRead::payloadEligible($rate, $cutoff)) {
             throw new InvalidArgumentException('invalid_fx');
         }
-        if (max($instant->getTimestamp() - $observed->getTimestamp(), $instant->getTimestamp() - $effective->getTimestamp()) > 604800) {
+        if (ObservationRead::payloadStale($rate, $cutoff)) {
             throw new InvalidArgumentException('stale_fx');
         }
 

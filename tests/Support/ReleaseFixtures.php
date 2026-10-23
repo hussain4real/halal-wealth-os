@@ -3,6 +3,8 @@
 namespace Tests\Support;
 
 use App\Domain\Imports\StatementImports;
+use App\Domain\Integrations\MarketFeed;
+use App\Domain\Integrations\MarketRefresh;
 use App\Domain\Ledger\AccountType;
 use App\Domain\Ledger\CreateAccount;
 use App\Domain\Ledger\PostingService;
@@ -10,6 +12,8 @@ use App\Domain\Planning\GoalService;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
 use App\Models\User;
+use Illuminate\Http\Client\Factory;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 final class ReleaseFixtures
@@ -46,8 +50,50 @@ final class ReleaseFixtures
         $cancelled = $imports->correct($owner, (string) $corrected->id, '1', 'synthetic-recovery-import-cancel', 'Synthetic retained cancellation');
         StatementFixtures::preview($foreign, $foreignBank, [['description' => 'FOREIGN-STATEMENT-SOURCE-MUST-NOT-APPEAR', 'provider_id' => 'FOREIGN-STATEMENT-ID']]);
 
+        $market = app(MarketRefresh::class);
+        $marketPrice = MarketFixtures::price($owner);
+        $market->map($owner, 'recovery-market-fx', MarketFixtures::fxInput());
+        $market->map($foreign, 'recovery-market-foreign', MarketFixtures::fxInput('EUR', 'QAR'));
+        $priorMode = config('market_data.mode');
+        config(['market_data.mode' => 'mock']);
+        Http::preventStrayRequests();
+        Http::fake(['api.twelvedata.com/*' => function ($request) {
+            return Http::response(str_contains($request->url(), '/time_series')
+                ? MarketFixtures::priceBody(now('America/New_York')->subDay()->toDateString()) : MarketFixtures::fxBody($request['symbol']));
+        }]);
+        foreach ([$marketPrice['feed'], MarketFeed::fx('USD', 'QAR'), MarketFeed::fx('EUR', 'QAR')] as $feed) {
+            if ($market->refresh($feed, now('UTC')->toDateString())['status'] !== 'accepted') {
+                throw new \RuntimeException('Populated market recovery seed did not admit its synthetic observation.');
+            }
+        }
+        $market->map($owner, 'recovery-market-failed', MarketFixtures::fxInput('NGN', 'QAR'));
+        // Replacing the fake factory preserves an explicit, total no-network boundary.
+        Http::swap(new Factory);
+        Http::preventStrayRequests();
+        Http::fake(['api.twelvedata.com/*' => Http::response('', 401)]);
+        $market->refresh(MarketFeed::fx('NGN', 'QAR'), now('UTC')->toDateString());
+        $market->map($owner, 'recovery-market-interrupted', MarketFixtures::fxInput('JPY', 'QAR'));
+        Http::swap(new Factory);
+        Http::preventStrayRequests();
+        Http::fake(function () {
+            throw new \RuntimeException('Synthetic worker termination after charged claim');
+        });
+        try {
+            $market->refresh(MarketFeed::fx('JPY', 'QAR'), now('UTC')->toDateString());
+            throw new \LogicException('Interrupted recovery fixture must retain an unfinished charged request.');
+        } catch (\RuntimeException $error) {
+            if ($error->getMessage() !== 'Synthetic worker termination after charged claim') {
+                throw $error;
+            }
+        } finally {
+            config(['market_data.mode' => $priorMode]);
+            Http::swap(new Factory);
+            Http::preventStrayRequests();
+        }
+
         return ['owner' => (string) $owner->id, 'foreign' => (string) $foreign->id, 'bank' => (string) $bank->id,
             'goal' => (string) $goal->id, 'portfolio' => (string) $fractionalPortfolio->id,
+            'market_price_account' => (string) $marketPrice['account']->id, 'market_price_asset' => (string) $marketPrice['asset']->id,
             'assessment' => (string) $fixture['assessment']->id, 'import_source' => (string) $source->source_id, 'import_snapshot' => (string) $source->id,
             'import_receipt' => (string) $imported->id, 'import_corrected' => (string) $corrected->id, 'import_cancelled' => (string) $cancelled->id];
     }

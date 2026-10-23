@@ -1,3 +1,4 @@
+import type { ObservationTiming } from './observation-time';
 export type CashMoney = { currency: string; minor: string; amount: string };
 export type CashActual = {
     state: 'complete' | 'incomplete';
@@ -13,13 +14,13 @@ export type CashActual = {
         currency: string;
         native: Record<string, string>;
         reason: string | null;
-        rate: {
-            id: string;
-            source: string;
-            value: string;
-            observed_at: string;
-            effective_at: string;
-        } | null;
+        rate:
+            | (ObservationTiming & {
+                  id: string;
+                  source: string;
+                  value: string;
+              })
+            | null;
         conversion: string;
     }[];
 };

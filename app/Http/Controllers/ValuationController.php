@@ -8,6 +8,7 @@ use App\Domain\Portfolio\PortfolioRead;
 use App\Domain\Portfolio\PriceObservationService;
 use App\Domain\Reporting\InvestmentValuation;
 use App\Domain\Shared\Money\Currency;
+use App\Domain\Shared\Observations\ObservationRead;
 use App\Http\Requests\ValuationRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -130,7 +131,7 @@ class ValuationController extends Controller
     private function price(stdClass $r): array
     {
         return ['id' => (string) $r->id, 'asset_id' => (string) $r->asset_id, 'version' => (string) $r->version, 'series_id' => $r->series_id, 'unit_price' => (string) $r->unit_price,
-            'source' => $r->source, 'reason' => $r->reason, 'observed_at' => LedgerInput::utc($r->observed_at), 'effective_at' => LedgerInput::utc($r->effective_at), 'split_basis' => $r->split_basis];
+            'source' => $r->source, 'reason' => $r->reason, ...ObservationRead::evidence($r), 'split_basis' => $r->split_basis];
     }
 
     /** @return array{base_currency:string,cutoff:string,start:string,account_id:string} */

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ObservationTimeEvidence from '@/components/ObservationTimeEvidence.vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import { computed, nextTick, onUnmounted, ref } from 'vue';
 import CashAvailabilityPanel from '@/components/CashAvailabilityPanel.vue';
@@ -299,14 +300,12 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
                         complete total is inferred.
                     </p>
                     <p v-if="r.price" class="text-xs text-muted-foreground">
-                        Price: {{ r.price.source }} · observed
-                        {{ r.price.observed_at }} · effective
-                        {{ r.price.effective_at }}
+                        Price: {{ r.price.source }}
+                        <ObservationTimeEvidence :timing="r.price" />
                     </p>
                     <p v-if="r.fx" class="text-xs text-muted-foreground">
-                        FX: {{ r.fx.source }} · {{ r.fx.value }} · observed
-                        {{ r.fx.observed_at }} · effective
-                        {{ r.fx.effective_at }}
+                        FX: {{ r.fx.source }} · {{ r.fx.value }}
+                        <ObservationTimeEvidence :timing="r.fx" />
                     </p>
                     <nav
                         class="flex flex-wrap gap-4 underline"

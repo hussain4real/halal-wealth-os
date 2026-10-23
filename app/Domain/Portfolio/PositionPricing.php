@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Portfolio;
 
-use App\Domain\Ledger\LedgerInput;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shared\Money\Money;
+use App\Domain\Shared\Observations\ObservationRead;
 use App\Models\User;
-use DateTimeImmutable;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
@@ -28,16 +27,13 @@ final class PositionPricing
             $value = ($opening['as_of'] ?? null) === substr($cutoff, 0, 10) ? $row['manual_value'] : null;
             $reason = $value === null ? 'manual_statement_missing_for_date' : null;
         } else {
-            $quote = DB::table('portfolio_prices')->where('owner_id', $owner->id)->where('portfolio_account_id', $account)->where('asset_family', $row['asset_family'])
-                ->where('currency', $row['currency'])->where('effective_at', '<=', $cutoff)->where('observed_at', '<=', $cutoff)
-                ->orderByDesc('effective_at')->orderByDesc('observed_at')->orderByDesc('id')->first();
+            $quote = ObservationRead::latest(DB::table('portfolio_prices')->where('owner_id', $owner->id)->where('portfolio_account_id', $account)->where('asset_family', $row['asset_family'])
+                ->where('currency', $row['currency']), $cutoff);
             if ($quote !== null) {
                 $price = ['id' => (string) $quote->id, 'asset_id' => (string) $quote->asset_id, 'series_id' => $quote->series_id, 'version' => (string) $quote->version,
                     'value' => (string) $quote->unit_price, 'currency' => $quote->currency, 'source' => $quote->source,
-                    'observed_at' => LedgerInput::utc($quote->observed_at), 'effective_at' => LedgerInput::utc($quote->effective_at), 'split_basis' => $quote->split_basis];
-                $age = max((new DateTimeImmutable($cutoff))->getTimestamp() - (new DateTimeImmutable($quote->effective_at))->getTimestamp(),
-                    (new DateTimeImmutable($cutoff))->getTimestamp() - (new DateTimeImmutable($quote->observed_at))->getTimestamp());
-                $reason = $age > 604800 ? 'price_stale' : ($quote->split_basis !== PriceObservationService::splitBasis($owner, $account, $row['asset_family'], substr($cutoff, 0, 10)) ? 'price_split_basis_changed' : null);
+                    ...ObservationRead::evidence($quote), 'split_basis' => $quote->split_basis];
+                $reason = ObservationRead::stale($quote, $cutoff) ? 'price_stale' : ($quote->split_basis !== PriceObservationService::splitBasis($owner, $account, $row['asset_family'], substr($cutoff, 0, 10)) ? 'price_split_basis_changed' : null);
             } elseif (($opening['as_of'] ?? null) === substr($cutoff, 0, 10) && $row['unit_price'] !== null) {
                 $price = ['id' => null, 'value' => $row['unit_price'], 'source' => $opening['source'], 'opening_id' => $opening['id'], 'effective_date' => $opening['as_of']];
             } else {

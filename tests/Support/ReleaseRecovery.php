@@ -3,9 +3,12 @@
 namespace Tests\Support;
 
 use App\Domain\Imports\StatementImports;
+use App\Domain\Integrations\MarketRefresh;
 use App\Domain\Ledger\FinancialSnapshot;
 use App\Domain\Planning\GoalView;
 use App\Domain\Portfolio\PortfolioRead;
+use App\Domain\Portfolio\PositionPricing;
+use App\Domain\Portfolio\ValuationFx;
 use App\Domain\Shared\Money\Currency;
 use App\Models\Account;
 use App\Models\User;
@@ -219,7 +222,13 @@ final class ReleaseRecovery
         $owner = User::findOrFail($fixture['owner']);
         $snapshot = app(FinancialSnapshot::class);
         $portfolio = app(PortfolioRead::class);
-        $readers = ['cash' => $snapshot->fingerprint($snapshot->capture($owner, Currency::QAR, $cutoff)),
+        $readers = ['market' => hash('sha256', json_encode([
+            'status' => app(MarketRefresh::class)->status($owner),
+            'price' => app(PositionPricing::class)->value($owner, $fixture['market_price_account'], ['kind' => 'unitized_fund', 'currency' => 'USD', 'quantity' => '1', 'cost_basis' => null, 'unit_price' => null, 'asset_family' => DB::table('portfolio_assets')->where('id', $fixture['market_price_asset'])->value('family_reference')], null, $cutoff),
+            'fx' => app(ValuationFx::class)->convert($owner, '100', Currency::USD, Currency::QAR, $cutoff, 'reporting'),
+            'charged' => DB::table('market_attempts')->orderBy('id')->get(),
+            'results' => DB::table('market_results')->orderBy('id')->get(),
+        ], JSON_THROW_ON_ERROR)), 'cash' => $snapshot->fingerprint($snapshot->capture($owner, Currency::QAR, $cutoff)),
             'positions' => $portfolio->fingerprint($portfolio->state($owner, $fixture['portfolio'], $cutoff)),
             'reservations' => hash('sha256', json_encode(app(GoalView::class)->show($owner, $fixture['goal'], substr($cutoff, 0, 7)), JSON_THROW_ON_ERROR)),
             'shariah' => hash('sha256', json_encode(DB::table('shariah_assessments')->where('owner_id', $owner->id)->orderBy('id')->get(), JSON_THROW_ON_ERROR)),
