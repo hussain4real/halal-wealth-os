@@ -15,7 +15,7 @@ implementation. See the [selection record](M6-P2-provider-selection.md) and
 
 ## Implementation and bounded history
 
-Preparation consumed no implementation cycle. The ceiling remains six.
+Preparation consumed no implementation cycle. The original ceiling was six; the owner later authorized two additional cycles, for a total ceiling of eight.
 
 - Cycle 1 implemented exact provider/time boundaries and durable financial
   admission. Independent review found a skipped-midnight calendar defect and a
@@ -55,8 +55,9 @@ Preparation consumed no implementation cycle. The ceiling remains six.
 - Cycle 6 corrects that strict set to require market evidence alongside all
   earlier readers. The regression failed before the change and passed afterward,
   including rejection when market evidence is absent. No receipt is relabeled;
-  current full release and hosted gates must run again. This is the last
-  authorized correction cycle; the total ceiling remains six.
+  current full release and hosted gates must run again. This consumed the sixth original cycle. Its clean local release and original
+  hosted CI subsequently passed. The replacement hosted review found an
+  admission-capacity P2; that intermediate pass did not authorize merge.
 
 The disabled adapters require explicit testing mode and fake HTTP. Raw daily
 prices retain their calendar date and no invented publication instant; FX keeps
@@ -115,3 +116,56 @@ The prior PR21 signed post was rechecked through the existing terminal verifier:
 anonymous HTTP 200, visible progress body and actual PR link passed. An earlier
 plain-urllib request returned 403; both outcomes are retained. No duplicate post
 was created. This does not replace M6-P2 post-merge publishing verification.
+
+## Cycle 7: hosted admission-capacity correction
+
+The first hosted review stalled without an exposed service error. After the
+owner requested investigation and one replacement review, that replacement
+completed on the unchanged commit and found a P2: a full owner admission budget
+could leave observations unchanged while the refresh reported success. The
+owner authorized two additional correction/verification cycles, preserving all
+six earlier cycles and their original evidence.
+
+Cycle 7 returns explicit blocked or partial fan-out outcomes and counts only
+accepted admissions. Capacity exhaustion for one owner does not prevent healthy
+owners from receiving their observations. The job emits a warning containing
+only a safe code and aggregate counts. The owned page shows the admission limit,
+distinguishes an unadmitted latest sample from the last retained admission, and
+keeps historical observations visible. Exact accepted and rejected receipts
+remain recoverable after capacity exhaustion, disablement or mode changes. No
+retention limit, schema or live-provider permission was changed.
+
+The corrected capacity regressions failed against the original implementation
+with the expected false-success outcomes. The first after-change test run also
+exposed a test-fixture mistake: a second HTTP fake appended rather than replaced
+the first. A response sequence corrected that fixture. Both original failures
+are retained. The corrected focused suite passed 27 tests with 1,171 assertions.
+PHPStan, formatting/lint and TypeScript checks passed. The initial sandboxed
+PHPStan worker could not bind its local socket; the authorized retry passed.
+
+Three new exact test selectors preserve all 502 previous selectors, bringing
+the map to 505 selectors across the same 112 criteria/invariants. Current full
+release, rendered verification, native TIA, original exact-head CI and a fresh
+hosted review remain separate required gates. PR22 is unmerged; M6-P2 and M6 are
+unaccepted. No post-merge CI or PR22 progress post is claimed.
+
+Cycle 7 fresh native TIA passed 1,150 tests with 8,644 assertions. After the
+asset build changed the shared frontend snapshot, replay correctly recorded the
+full suite again: 1,150 tests and 8,640 assertions passed. The subsequent
+unchanged replay retained a byte-identical complete graph; it is cached evidence,
+not another execution. Earlier page/PHP selection proofs remain historical.
+
+The coordinator exercised the capacity page in a new headed browser fixture.
+Desktop and 390px mobile light/dark views retained the admitted rate while
+showing the newer sample as unadmitted. All four screenshots were inspected;
+mobile document/body width equaled the viewport. Keyboard skip navigation and
+both manual fallback links passed. A separate owner saw no capacity warning,
+unadmitted status or foreign observation. No console warning/error appeared in
+the exercised first-owner session. A private fixture initially compared a
+fixed-scale PostgreSQL decimal as text; an exact decimal comparison corrected
+that fixture, and its failure remains retained. Both browser sessions and the
+owned server stopped before the clean full gate.
+
+Independent source and publication review passed the correction without a
+blocking issue. The final clean committed release run and fresh hosted CI/review
+are still required; the earlier hosted P2 remains part of the review history.

@@ -32,3 +32,16 @@ rendered desktop/mobile recovery, TIA, clean release identity, exact-head hosted
 CI and fresh hosted review. Normal dev merge and original post-merge CI/public
 progress verification remain separate. M6-P2 and M6 acceptance remain human
 only; no deployment or later phase is authorized.
+
+## Cycle 7 capacity correction
+
+Independent source-read-only review passed the admission-capacity correction and
+its public records with no blocker. It checked explicit blocked/partial outcomes,
+healthy-owner continuation, exact accepted/rejected receipt recovery, owned
+capacity and unadmitted status, bounded job-warning fields and unchanged limits.
+All 502 prior acceptance selectors remain intact; three new regressions bring
+the total to 505 across the same 112 requirements. The added documents preserve
+the earlier six cycles, stalled and replacement reviews, original CI pass and
+fresh P2, together with the owner's extension to eight cycles. No private data
+or credentials were found in the reviewed additions. This source review did not
+execute tests or control the browser; those gates remain separately attributed.

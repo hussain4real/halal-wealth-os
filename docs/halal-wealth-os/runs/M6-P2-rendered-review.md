@@ -45,3 +45,20 @@ exercised rendered scope. All twelve screenshots were inspected.
 Both browser sessions were closed; the coordinator stopped each verified owned
 server. This review does not establish full uncached tests, TIA, hosted CI/review,
 merge, production deployment, live vendor access or human phase acceptance.
+
+## Cycle 7 capacity follow-up
+
+The coordinator separately exercised the capacity correction in a fresh headed
+browser. The admitted synthetic FX value remained visible while a newer shared
+sample was explicitly unadmitted. The full-budget warning explained the manual
+fallback without claiming a successful owner admission. Desktop and 390px mobile
+light/dark screenshots were captured and individually inspected; neither mobile
+view overflowed the document width. Keyboard skip navigation and both manual
+reporting-rate and price-history links worked. A second synthetic owner saw an
+empty mapping list without the first owner's warning or retained values.
+
+This is coordinator-rendered verification, separate from the independent source
+review. A private seed's fixed-scale decimal assertion initially failed and was
+corrected with exact decimal comparison before this browser run. Raw evidence
+remains private. Both isolated sessions and the owned server were stopped. Full
+release and hosted gates are reported separately; no acceptance is inferred.

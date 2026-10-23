@@ -49,8 +49,12 @@ was anonymously verified after publication. On 23 October, the original project
 verification script again confirmed HTTP200, the visible message and the PR21
 link. An earlier plain-urllib request returned HTTP403; both observations are
 retained. The original signed publisher remains successful. Earlier failure
-history is preserved. M6-P2 has local implementation and independently reviewed
-source/rendered evidence. Its final clean release, original hosted CI and fresh
-exact-head review remain pending; no merge, owner acceptance or live-provider
-pass is claimed. Its [run record](runs/M6-P2-local.md) preserves original failures
-and the six-cycle history.
+history is preserved. M6-P2 is implemented in [PR22](https://github.com/hussain4real/halal-wealth-os/pull/22)
+and remains unmerged. The original exact-head CI passed; the replacement hosted
+review found an admission-capacity P2. The owner authorized two additional
+cycles, bringing the total ceiling to eight. Cycle 7 corrects the outcome and
+owned warning while preserving retained observations and committed recovery;
+current verification and fresh hosted review remain required. Its
+[run record](runs/M6-P2-local.md) preserves all original failures and prior cycles.
+No M6-P2 acceptance, live-provider pass, post-merge CI or PR22 publication is
+claimed.

@@ -41,6 +41,7 @@ test('mock price refresh retains exact source date once across requests and new 
     Http::assertSentCount(1);
     $this->travelTo(new DateTimeImmutable('2026-10-24T12:00:00Z'));
     $this->refresh->refresh($p['feed'], '2026-10-24');
+    expect($this->refresh->status($this->owner)['mappings'][0]['unadmitted_sample'])->toBeFalse();
     Http::assertSentCount(2);
     $this->assertDatabaseCount('portfolio_prices', 1);
     $this->assertDatabaseCount('market_admissions', 1);
@@ -188,9 +189,10 @@ test('changed retained history rejects owned admission while retaining safe attr
     PortfolioFixtures::opening($this->owner, $p['account'], [PortfolioFixtures::row($p['asset'])]);
     Http::fake(['api.twelvedata.com/*' => Http::response(M::priceBody('2026-10-22'))]);
     $run = $this->refresh->refresh($p['feed'], '2026-10-23');
-    expect($run['status'])->toBe('accepted');
+    expect($run)->toMatchArray(['status' => 'rejected', 'mappings' => 0, 'rejected_mappings' => 1, 'blocked_mappings' => 0]);
     $status = $this->refresh->status($this->owner);
     expect($status['mappings'][0]['run']['status'])->toBe('accepted')->and($status['mappings'][0]['admission'])->toBe(['outcome' => 'rejected', 'code' => 'mapping_or_capacity_changed']);
+    expect($status['mappings'][0]['unadmitted_sample'])->toBeFalse();
     $receipt = DB::table('market_admissions')->first();
     expect($this->refresh->admit($this->owner, (string) $p['mapping']->id, $run['result_id'])->id)->toBe($receipt->id);
     $this->assertDatabaseCount('portfolio_prices', 0);
@@ -204,7 +206,8 @@ test('complete export headroom rolls back observation and receipt but committed 
     $limited = new MarketRefresh(app(TwelveData::class), app(TwelveData::class), 100);
     Http::fake(['api.twelvedata.com/*' => Http::response(M::fxBody())]);
     $run = $limited->refresh(MarketFeed::fx('USD', 'QAR'), '2026-10-23');
-    expect($run['status'])->toBe('accepted');
+    expect($run)->toMatchArray(['status' => 'blocked', 'code' => 'evidence_capacity', 'mappings' => 0, 'blocked_mappings' => 1]);
+    expect($limited->status($this->owner)['mappings'][0]['unadmitted_sample'])->toBeTrue();
     $this->assertDatabaseCount('fx_observations', 0);
     $this->assertDatabaseCount('market_admissions', 0);
     $this->assertDatabaseCount('market_results', 1);
@@ -219,6 +222,44 @@ test('complete export headroom rolls back observation and receipt but committed 
     expect($this->refresh->admit($this->owner, (string) $replacement->id, $run['result_id'])->outcome)->toBe('accepted');
     $this->assertDatabaseCount('fx_observations', 1);
     Http::assertSentCount(1);
+});
+
+test('full admission capacity reports partial fanout and preserves committed recovery for capped owners', function () {
+    $mapping = $this->refresh->map($this->owner, 'capacity-fx-map', M::fxInput());
+    Http::fake(['api.twelvedata.com/*' => Http::sequence()->push(M::fxBody())->push(M::fxBody(value: '3.65'))]);
+    $first = $this->refresh->refresh(MarketFeed::fx('USD', 'QAR'), '2026-10-23');
+    $receipt = DB::table('market_admissions')->where('owner_id', $this->owner->id)->first();
+    $old = DB::table('fx_observations')->where('owner_id', $this->owner->id)->first();
+    M::fillAdmissions($this->owner, (string) $mapping->id, $first['result_id']);
+    $other = User::factory()->create();
+    $this->refresh->map($other, 'healthy-fx-map', M::fxInput());
+    $this->travel(1)->days();
+    $run = $this->refresh->refresh(MarketFeed::fx('USD', 'QAR'), '2026-10-24');
+    expect($run)->toMatchArray(['status' => 'partial', 'code' => 'evidence_capacity', 'mappings' => 1, 'blocked_mappings' => 1]);
+    expect(DB::table('market_admissions')->where('owner_id', $this->owner->id)->count())->toBe(MarketRefresh::MAX_ADMISSIONS);
+    expect(DB::table('fx_observations')->where('owner_id', $this->owner->id)->get()->all())->toEqual([$old]);
+    expect(DB::table('fx_observations')->where('owner_id', $other->id)->count())->toBe(1);
+    $status = $this->refresh->status($this->owner);
+    expect($status['admission_capacity_reached'])->toBeTrue()->and($status['mappings'][0]['unadmitted_sample'])->toBeTrue();
+    $healthy = $this->refresh->status($other);
+    expect($healthy['admission_capacity_reached'])->toBeFalse()->and($healthy['mappings'][0]['unadmitted_sample'])->toBeFalse();
+    config(['market_data.mode' => 'disabled']);
+    expect($this->refresh->admit($this->owner, (string) $mapping->id, $first['result_id'])->id)->toBe($receipt->id);
+    $this->assertDatabaseCount('journal_entries', 0);
+});
+
+test('full admission capacity still recovers an exact rejected receipt after a mapping is disabled', function () {
+    $p = M::price($this->owner);
+    PortfolioFixtures::opening($this->owner, $p['account'], [PortfolioFixtures::row($p['asset'])]);
+    Http::fake(['api.twelvedata.com/*' => Http::response(M::priceBody('2026-10-22'))]);
+    $run = $this->refresh->refresh($p['feed'], '2026-10-23');
+    $receipt = DB::table('market_admissions')->first();
+    M::fillAdmissions($this->owner, (string) $p['mapping']->id, $run['result_id']);
+    $this->refresh->map($this->owner, 'capacity-disable-map', ['enabled' => '0', 'supersedes_id' => (string) $p['mapping']->id]);
+    config(['market_data.mode' => 'disabled']);
+    expect($this->refresh->admit($this->owner, (string) $p['mapping']->id, $run['result_id'])->id)->toBe($receipt->id);
+    $this->assertDatabaseCount('market_admissions', MarketRefresh::MAX_ADMISSIONS);
+    $this->assertDatabaseCount('portfolio_prices', 0);
 });
 
 test('mapping versions reject duplicate current targets obsolete retries and incompatible owned instruments', function () {

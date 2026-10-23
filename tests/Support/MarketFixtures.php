@@ -7,6 +7,7 @@ use App\Domain\Integrations\MarketRefresh;
 use App\Domain\Portfolio\PriceObservationService;
 use App\Domain\Shared\Money\Currency;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use stdClass;
 
@@ -41,5 +42,23 @@ final class MarketFixtures
     public static function fxBody(string $symbol = 'USD/QAR', string $value = '3.64', ?int $timestamp = null): string
     {
         return '{"symbol":"'.$symbol.'","rate":'.$value.',"timestamp":'.($timestamp ?? now('UTC')->subMinute()->getTimestamp()).'}';
+    }
+
+    public static function fillAdmissions(User $owner, string $mappingId, string $resultId): void
+    {
+        $remaining = MarketRefresh::MAX_ADMISSIONS - DB::table('market_admissions')->where('owner_id', $owner->id)->count();
+        DB::statement(<<<'SQL'
+WITH attempts AS (
+ INSERT INTO market_attempts(provider,feed_key,feed,refresh_window,ordinal,credits,claimed_at,deadline)
+ SELECT a.provider,a.feed_key,a.feed,DATE '2000-01-01'+g,1,1,a.claimed_at-INTERVAL '30 days',a.deadline-INTERVAL '30 days'
+ FROM market_results r JOIN market_attempts a ON a.id=r.attempt_id CROSS JOIN generate_series(1,?) g WHERE r.id=? RETURNING id
+), results AS (
+ INSERT INTO market_results(attempt_id,received_at,status,safe_code,sample,winner_key,retry_after)
+ SELECT a.id,r.received_at,'accepted','accepted',r.sample,repeat(md5(a.id::text),2),0
+ FROM attempts a CROSS JOIN market_results r WHERE r.id=? RETURNING id
+)
+INSERT INTO market_admissions(owner_id,mapping_id,result_id,target_key,sample_key,outcome,safe_code)
+SELECT ?,?,id,repeat('0',64),repeat('0',64),'rejected','synthetic_capacity_fixture' FROM results
+SQL, [$remaining, $resultId, $resultId, $owner->id, $mappingId]);
     }
 }

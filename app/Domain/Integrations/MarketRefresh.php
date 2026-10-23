@@ -125,8 +125,15 @@ final class MarketRefresh
             $accepted = DB::table('market_admissions')->where('owner_id', $owner->id)->where('target_key', $this->targetKey($target))->where('outcome', 'accepted')->orderByDesc('id')->first();
             $observation = $accepted === null ? null : DB::table($feed->kind === 'price' ? 'portfolio_prices' : 'fx_observations')
                 ->where('owner_id', $owner->id)->where('id', $accepted->price_id ?? $accepted->fx_id)->first();
+            $unadmitted = false;
+            if ($mapping->enabled && $result?->status === 'accepted') {
+                $sample = MarketSample::from($this->decoded($result->sample));
+                $unadmitted = ! DB::table('market_admissions')->where('owner_id', $owner->id)->where('target_key', $this->targetKey($target))
+                    ->where('sample_key', $sample->key())->where('outcome', 'accepted')->exists()
+                    && ! DB::table('market_admissions')->where('owner_id', $owner->id)->where('mapping_id', $mapping->id)->where('result_id', $result->id)->exists();
+            }
             $rows[] = ['id' => (string) $mapping->id, 'reference' => $mapping->reference, 'enabled' => (bool) $mapping->enabled,
-                'feed' => $feed->data(), 'target' => $target,
+                'feed' => $feed->data(), 'target' => $target, 'unadmitted_sample' => $unadmitted,
                 'run' => $attempt === null ? null : ['claimed_at' => LedgerInput::utc($attempt->claimed_at), 'deadline' => LedgerInput::utc($attempt->deadline),
                     'ordinal' => $attempt->ordinal, 'status' => $result->status ?? 'interrupted_or_running', 'code' => $result?->safe_code,
                     'retry_after' => $result->retry_after ?? 0],
@@ -136,7 +143,8 @@ final class MarketRefresh
                     'source' => $observation->source, 'stale' => ObservationRead::stale($observation, now('UTC')->format('Y-m-d\TH:i:s\Z'))]];
         }
 
-        return ['mappings' => $rows, 'mapping_count' => count($all), 'next' => count($page) > 20 ? (string) $page[19]->id : null];
+        return ['mappings' => $rows, 'mapping_count' => count($all), 'next' => count($page) > 20 ? (string) $page[19]->id : null,
+            'admission_capacity_reached' => DB::table('market_admissions')->where('owner_id', $owner->id)->count() >= self::MAX_ADMISSIONS];
     }
 
     /** @return array<string,mixed> */
@@ -247,25 +255,36 @@ final class MarketRefresh
         $ids = DB::table('market_mappings as m')->where('m.enabled', true)->where('m.feed', $this->json($sample->feed->data()))
             ->whereNotExists(fn ($q) => $q->selectRaw('1')->from('market_mappings as s')->whereColumn('s.supersedes_id', 'm.id'))->orderBy('m.id')->pluck('m.id');
         $count = 0;
+        $blocked = 0;
+        $rejected = 0;
         foreach ($ids as $id) {
             $mapping = DB::table('market_mappings')->where('id', $id)->first();
             try {
-                $this->admit(User::query()->whereKey($mapping->owner_id)->firstOrFail(), (string) $id, (string) $result->id);
+                $admission = $this->admit(User::query()->whereKey($mapping->owner_id)->firstOrFail(), (string) $id, (string) $result->id);
+                if ($admission->outcome === 'accepted') {
+                    $count++;
+                } else {
+                    $rejected++;
+                }
             } catch (ProviderFailure $failure) {
                 if ($failure->reason !== 'evidence_capacity') {
                     throw $failure;
                 }
+                $blocked++;
             }
-            $count++;
         }
 
-        return ['status' => 'accepted', 'result_id' => (string) $result->id, 'mappings' => $count];
+        $status = $blocked > 0 ? ($count > 0 ? 'partial' : 'blocked') : ($rejected > 0 ? ($count > 0 ? 'partial' : 'rejected') : 'accepted');
+
+        return ['status' => $status, 'result_id' => (string) $result->id, 'mappings' => $count,
+            'rejected_mappings' => $rejected, 'blocked_mappings' => $blocked,
+            ...($blocked > 0 ? ['code' => 'evidence_capacity'] : ($rejected > 0 ? ['code' => 'mapping_or_capacity_changed'] : []))];
     }
 
-    public function admit(User $owner, string $mappingId, string $resultId): ?stdClass
+    public function admit(User $owner, string $mappingId, string $resultId): stdClass
     {
         try {
-            return DB::transaction(function () use ($owner, $mappingId, $resultId): ?stdClass {
+            return DB::transaction(function () use ($owner, $mappingId, $resultId): stdClass {
                 LedgerInput::lock($owner);
                 $mapping = LedgerInput::owned('market_mappings', $owner, $mappingId);
                 $result = DB::table('market_results')->where('id', LedgerInput::identifier($resultId))->where('status', 'accepted')->first();
@@ -278,14 +297,14 @@ final class MarketRefresh
                 if ($cached !== null) {
                     return $cached;
                 }
+                if ($retained = DB::table('market_admissions')->where('owner_id', $owner->id)->where('mapping_id', $mapping->id)->where('result_id', $result->id)->first()) {
+                    return $retained;
+                }
                 if (! $mapping->enabled || DB::table('market_mappings')->where('supersedes_id', $mapping->id)->exists() || ! TwelveData::mockEnabled()) {
                     LedgerInput::fail('mapping', 'This mapping is disabled or superseded. Its committed receipts remain available.');
                 }
                 if (DB::table('market_admissions')->where('owner_id', $owner->id)->count() >= self::MAX_ADMISSIONS) {
-                    return null;
-                }
-                if ($retained = DB::table('market_admissions')->where('owner_id', $owner->id)->where('mapping_id', $mapping->id)->where('result_id', $result->id)->first()) {
-                    return $retained;
+                    throw new ProviderFailure('evidence_capacity');
                 }
                 $source = 'Twelve Data synthetic fixture; mock only';
                 $price = null;
@@ -315,16 +334,16 @@ final class MarketRefresh
         }
     }
 
-    private function rejection(User $owner, string $mappingId, string $resultId): ?stdClass
+    private function rejection(User $owner, string $mappingId, string $resultId): stdClass
     {
-        return DB::transaction(function () use ($owner, $mappingId, $resultId): ?stdClass {
+        return DB::transaction(function () use ($owner, $mappingId, $resultId): stdClass {
             LedgerInput::lock($owner);
             $mapping = LedgerInput::owned('market_mappings', $owner, $mappingId);
             if ($old = DB::table('market_admissions')->where('owner_id', $owner->id)->where('mapping_id', $mappingId)->where('result_id', $resultId)->first()) {
                 return $old;
             }
             if (DB::table('market_admissions')->where('owner_id', $owner->id)->count() >= self::MAX_ADMISSIONS) {
-                return null;
+                throw new ProviderFailure('evidence_capacity');
             }
             $result = DB::table('market_results')->where('id', $resultId)->first();
             $sample = MarketSample::from($this->decoded($result->sample));

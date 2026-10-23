@@ -2511,6 +2511,21 @@
             "class": "Tests\\Feature\\MarketRefreshTest",
             "name": "shared daily credits do not reset at midnight while retained sends remain inside rolling day",
             "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-capacity-996e1b33872e": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "full admission capacity reports partial fanout and preserves committed recovery for capped owners",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-capacity-09e523be5851": {
+            "class": "Tests\\Feature\\MarketRefreshTest",
+            "name": "full admission capacity still recovers an exact rejected receipt after a mapping is disabled",
+            "file": "tests/Feature/MarketRefreshTest.php"
+        },
+        "case-m6p2-capacity-b088c55f39fa": {
+            "class": "Tests\\Feature\\MarketHttpTest",
+            "name": "capacity blocked jobs retain prior values and expose owned warning without growing evidence",
+            "file": "tests/Feature/MarketHttpTest.php"
         }
     },
     "manual_artifacts": {
@@ -4201,7 +4216,9 @@
                 "case-m6p2-ae74d7e3a71d",
                 "case-m6p2-2cf0a178c5c0",
                 "case-m6p2-0bca9226d6ef",
-                "case-m6p2-7d2842c62e88"
+                "case-m6p2-7d2842c62e88",
+                "case-m6p2-capacity-996e1b33872e",
+                "case-m6p2-capacity-b088c55f39fa"
             ],
             "manual_artifact_ids": ["m6p2-rendered"],
             "tool_check": "HTTP_JOURNEY"
@@ -4220,7 +4237,8 @@
                 "case-m6p2-9b945b423434",
                 "case-m6p2-dc4d16dde91c",
                 "case-m6p2-fea0b762884c",
-                "case-m6p2-04cede31662a"
+                "case-m6p2-04cede31662a",
+                "case-m6p2-capacity-09e523be5851"
             ],
             "manual_artifact_ids": ["m6p2-rendered"],
             "tool_check": "HTTP_JOURNEY"

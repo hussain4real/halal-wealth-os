@@ -517,3 +517,16 @@ connectivity remains explicitly blocked without separate account/destination
 authority and observed smoke evidence. No new credentials, external accounts,
 live financial actions, deployment, permissions changes, later phases, main/stage
 changes, history rewriting or self-acceptance are authorized.
+
+## M6-P2 hosted capacity finding budget
+
+The human owner explicitly authorized two additional scoped correction and
+verification cycles for PR #22's fresh admission-capacity P2 finding. Preserve
+cycles 1-6, the stalled review, replacement review and original CI evidence; the
+total ceiling is eight. Correct capacity outcomes and status visibility without
+growing retained evidence beyond its bounds or losing committed retry recovery.
+Repeat affected PostgreSQL, native TIA, source/rendered, clean full release gates
+and original exact-head CI plus fresh hosted review before normal approved-
+noreply dev merge. Verify original post-merge CI and actual existing signed
+/dev/null publishing. All prior sole-writer, privacy, mock-only provider, phase
+acceptance, credential and deployment boundaries remain in force.

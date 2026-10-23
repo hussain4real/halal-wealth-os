@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-23T08:25:59.217931+00:00",
+    "updated_at": "2026-10-23T18:55:09.824571+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -3012,15 +3012,15 @@
         "live_retention": "BLOCKED_DEFAULT_DELETION_TERMS_NEED_DOCUMENTED_PERMISSION_OR_VERIFIED_EXEMPTION"
     },
     "m6p2_engineering": {
-        "cycle": 6,
-        "ceiling": 6,
-        "status": "IMPLEMENTING",
+        "cycle": 7,
+        "ceiling": 8,
+        "status": "VERIFYING",
         "prior_cycle": {
             "cycle": 1,
             "checks": "Focused boundary/contract and 88 affected PostgreSQL cases passed; full release gates not run.",
             "review": "CHANGES_REQUIRED: late first response incorrectly suppressed remaining attempts. Reproduced before correction."
         },
-        "current_scope": "Correct strict recovery finalization to require market alongside all five earlier readers; preserve prior failure, demonstrate fail-before/pass-after, repeat independent review and clean full authorized delivery gates. Last authorized correction cycle.",
+        "current_scope": "Explicit admission-capacity outcomes, bounded job evidence and truthful owned status; regressions preserve committed recovery and healthy-owner fan-out.",
         "completed_cycles": [
             {
                 "cycle": 1,
@@ -3079,14 +3079,35 @@
                     "assertions": 8577,
                     "duration_ms": 170340
                 }
+            },
+            {
+                "cycle": 6,
+                "result": "CLEAN_LOCAL_AND_ORIGINAL_HOSTED_CI_PASS_FRESH_REVIEW_REQUIRES_CORRECTION",
+                "tests": 1147,
+                "financial_floors": 71,
+                "selectors": 502,
+                "recovery_tables": 67,
+                "recovery_readers": 6,
+                "original_pr_ci": 39927991777,
+                "fresh_review": "Unresolved P2: admission capacity silently reports accepted on exact head 1e880924"
             }
         ],
         "harness_correction": "Independent review found new tool-check names absent from the final validator; criteria now reference the existing validated HTTP journey, with the strict new market proof checks retained. Provider selection uses its scoped hashed owner record and exact disabled tests, without claiming a live/tool license check.",
-        "acceptance_selectors": 502,
+        "acceptance_selectors": 505,
         "acceptance_requirements": 112,
         "independent_source_review": "runs/M6-P2-independent-review.md",
         "live_connectivity": "BLOCKED_MOCK_ONLY_NO_ACCOUNT_KEY_OR_ENTITLEMENT",
         "native_tia": {
+            "fresh_tests": 1150,
+            "fresh_assertions": 8644,
+            "fresh_duration_ms": 193549,
+            "after_build_fresh_tests": 1150,
+            "after_build_fresh_assertions": 8640,
+            "after_build_fresh_duration_ms": 187027,
+            "unchanged_replay": "CACHED_BYTE_IDENTICAL_GRAPH_NOT_NEW_EXECUTION",
+            "source_restored": true
+        },
+        "prior_native_tia": {
             "fresh_tests": 1147,
             "fresh_assertions": 8568,
             "fresh_duration_ms": 171885,
@@ -3096,6 +3117,26 @@
             "source_restored": true,
             "post_format_affected_files": 1,
             "source_sha256": "b52afcb258cb887bbded15302579959346e0157563f7e393b93915db3f09f632"
+        },
+        "cycle7_checks": {
+            "focused_tests": 27,
+            "focused_assertions": 1171,
+            "source_review": "PASS_READ_ONLY",
+            "rendered": "PASS_COORDINATOR_DESKTOP_MOBILE_LIGHT_DARK_AND_FOREIGN_OWNER",
+            "static_analysis": "PASS",
+            "types": "PASS",
+            "frontend_lint_format": "PASS",
+            "clean_full_release": "PENDING",
+            "fresh_hosted_review": "PENDING_NEW_HEAD",
+            "postmerge_ci": "NOT_REACHED",
+            "public_progress": "NOT_REACHED"
         }
+    },
+    "m6p2_budget_extension": {
+        "authorized_by": "human-owner",
+        "additional_cycles": 2,
+        "previous_ceiling": 6,
+        "total_ceiling": 8,
+        "scope": "PR22 fresh P2 admission-capacity outcome and visibility; preserve prior failures and repeat delivery gates"
     }
 }

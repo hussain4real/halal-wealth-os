@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\Support\MarketFixtures as M;
@@ -112,4 +113,30 @@ test('job redelivery resumes missing owner fanout from committed sample without 
     $this->assertDatabaseCount('fx_observations', 2);
     $this->assertDatabaseCount('market_admissions', 2);
     $this->assertDatabaseCount('journal_entries', 0);
+});
+
+test('capacity blocked jobs retain prior values and expose owned warning without growing evidence', function () {
+    $service = app(MarketRefresh::class);
+    $mapping = $service->map($this->owner, 'job-capacity-map', M::fxInput());
+    config(['market_data.mode' => 'mock']);
+    Http::fake(['api.twelvedata.com/*' => Http::sequence()->push(M::fxBody())->push(M::fxBody(value: '3.65'))]);
+    $first = $service->refresh(MarketFeed::fx('USD', 'QAR'), '2026-10-23');
+    M::fillAdmissions($this->owner, (string) $mapping->id, $first['result_id']);
+    $this->travel(1)->days();
+    Log::spy();
+    $job = new RefreshMarketFeed(MarketFeed::fx('USD', 'QAR')->data(), '2026-10-24');
+    $job->handle($service);
+    $job->handle($service);
+    Log::shouldHaveReceived('warning')->twice()->with('Market refresh admission capacity reached.', [
+        'code' => 'evidence_capacity', 'accepted_mappings' => 0, 'blocked_mappings' => 1,
+    ]);
+    Http::assertSentCount(2);
+    $this->assertDatabaseCount('fx_observations', 1);
+    $this->assertDatabaseCount('market_admissions', MarketRefresh::MAX_ADMISSIONS);
+    $this->actingAs($this->owner)->get('/market-data')->assertOk()->assertInertia(fn (Assert $p) => $p
+        ->where('admission_capacity_reached', true)->where('mappings.0.unadmitted_sample', true)
+        ->where('mappings.0.run.status', 'accepted')->where('mappings.0.observation.value', '3.640000000000'));
+    $other = User::factory()->create();
+    $this->actingAs($other)->get('/market-data')->assertOk()->assertInertia(fn (Assert $p) => $p
+        ->where('admission_capacity_reached', false)->has('mappings', 0));
 });

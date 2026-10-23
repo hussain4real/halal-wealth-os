@@ -8,6 +8,7 @@ use App\Domain\Integrations\MarketFeed;
 use App\Domain\Integrations\MarketRefresh;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Log;
 
 final class RefreshMarketFeed implements ShouldQueue
 {
@@ -22,6 +23,12 @@ final class RefreshMarketFeed implements ShouldQueue
 
     public function handle(MarketRefresh $refresh): void
     {
-        $refresh->refresh(MarketFeed::from($this->feed), $this->window);
+        $outcome = $refresh->refresh(MarketFeed::from($this->feed), $this->window);
+        if (($outcome['blocked_mappings'] ?? 0) > 0) {
+            Log::warning('Market refresh admission capacity reached.', [
+                'code' => 'evidence_capacity', 'accepted_mappings' => $outcome['mappings'],
+                'blocked_mappings' => $outcome['blocked_mappings'],
+            ]);
+        }
     }
 }

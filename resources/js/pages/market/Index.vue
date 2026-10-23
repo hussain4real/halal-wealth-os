@@ -24,6 +24,7 @@ type Mapping = {
     id: string;
     reference: string;
     enabled: boolean;
+    unadmitted_sample: boolean;
     feed: Feed;
     target:
         | { portfolio_account_id: string; asset_id: string }
@@ -50,6 +51,7 @@ const props = defineProps<{
     defaults: Record<string, string>;
     mappings: Mapping[];
     mapping_count: number;
+    admission_capacity_reached: boolean;
     next: string | null;
     accounts: Choice[];
     assets: Choice[];
@@ -136,6 +138,18 @@ function disable(mapping: Mapping) {
                 No live prices or rates are fetched. Provider selection is
                 approved for mock testing only; live licensing and access remain
                 blocked.
+            </p>
+        </div>
+        <div
+            v-if="admission_capacity_reached"
+            role="alert"
+            class="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950 dark:bg-amber-950 dark:text-amber-100"
+        >
+            <p class="font-semibold">Provider admission limit reached</p>
+            <p>
+                No new provider observations can be admitted for your account.
+                Retained observations and receipts remain available. Use sourced
+                manual prices or reporting rates when needed.
             </p>
         </div>
         <div class="mb-6 flex flex-wrap gap-3">
@@ -479,7 +493,7 @@ function disable(mapping: Mapping) {
                     No provider fetch recorded.
                 </p>
                 <p class="text-sm">
-                    Owned admission:
+                    Last retained admission:
                     {{
                         mapping.admission
                             ? mapping.admission.outcome +
@@ -487,6 +501,16 @@ function disable(mapping: Mapping) {
                               mapping.admission.code
                             : 'No observation admitted for this mapping version.'
                     }}
+                </p>
+                <p
+                    v-if="mapping.unadmitted_sample"
+                    role="status"
+                    class="rounded-xl border border-amber-300 p-3 text-sm"
+                >
+                    The latest fetched sample has not been admitted. Admission
+                    may be pending or blocked by retained-evidence capacity. The
+                    last admitted value is unchanged; use sourced manual
+                    evidence when needed.
                 </p>
                 <div
                     v-if="mapping.observation"

@@ -356,7 +356,7 @@ shared provider operational history remains part of full backup.
 
 Coverage includes every concrete Integrations and Shared/Observations file at
 the unchanged 90 percent executable-line floor. The acceptance map retains all
-424 predecessor selectors and adds 78 executed market selectors, for 502 total
+424 predecessor selectors and adds 81 market selectors, for 505 total
 and 112 implemented AC/invariant IDs. F17 additionally covers provider-job
 retry; outbox delivery remains future M6-P3 and F18 remains future M7.
 
@@ -366,3 +366,11 @@ page/PHP selection, source/sanitation review and clean uncached release proof
 remain separate gates. Unimplemented-phase rejection targets M6-P3. Provider
 selection is explicitly approved for mocks only; no live entitlement, account,
 credential, network smoke, deployment or phase acceptance is inferred.
+
+The PR22 admission-capacity correction adds exact cases for healthy-owner fan-out,
+retained accepted/rejected recovery at the cap, aggregate job warnings and owned
+capacity/unadmitted status. A successful shared fetch must not imply successful
+owner admission. Capacity checks preserve old observations and bounded evidence;
+status identifies pending or blocked latest samples without inventing a failure
+cause after a rollback. Rendered warnings and manual fallback require actual
+browser verification. Historical 502-selector receipts remain historical.
