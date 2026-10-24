@@ -154,8 +154,12 @@ final class CopilotBoundary
 
     private function finish(User $owner, string $reference, string $status, ?Tool $tool = null): void
     {
+        $changes = ['status' => $status, 'finished_at' => now('UTC')];
+        if ($tool !== null) {
+            $changes['tool'] = $tool->value;
+        }
         DB::table('copilot_requests')->where('owner_id', $owner->id)->where('reference', $reference)->where('status', 'pending')
-            ->update(['status' => $status, 'tool' => $tool?->value ?? DB::raw('tool'), 'finished_at' => now('UTC')]);
+            ->update($changes);
     }
 
     private function lock(User $owner): void

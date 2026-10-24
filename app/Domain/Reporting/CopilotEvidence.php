@@ -64,7 +64,7 @@ final class CopilotEvidence
 
         return new Evidence(Tool::Goals, $now, $now, $r['next'] === null ? 'complete_page' : 'partial_page', $r['next'],
             ['month_context' => $month, 'time_policy' => 'Current goal state; month selects essential-run-rate context, not historical goal versions.', 'goals' => $rows],
-            array_map(fn (array $g): array => ['table' => 'goal_plans', 'id' => $g['id']], $rows));
+            array_values(array_map(fn (array $g): array => $this->reference('goal_plans', $g['id']), $rows)));
     }
 
     private function holdings(User $owner, string $id, string $cutoff): Evidence
@@ -119,7 +119,13 @@ final class CopilotEvidence
         return new Evidence(Tool::Assessments, $cutoff, now('UTC')->format('Y-m-d\TH:i:s\Z'), $r['history']['next'] === null ? 'complete_page' : 'partial_page', $r['history']['next'],
             ['asset_id' => $id, 'summary' => $r['summary'], 'current' => array_map($project, $r['current']), 'history' => $history,
                 'history_scope' => 'asset family; current summary concerns the exact selected asset version; not a certification'],
-            [['table' => 'portfolio_assets', 'id' => $id], ...array_map(fn (array $row): array => ['table' => 'shariah_assessments', 'id' => $row['id']], $history)]);
+            [$this->reference('portfolio_assets', $id), ...array_values(array_map(fn (array $row): array => $this->reference('shariah_assessments', $row['id']), $history))]);
+    }
+
+    /** @return array{table:string,id:string} */
+    private function reference(string $table, string $id): array
+    {
+        return ['table' => $table, 'id' => $id];
     }
 
     /** @param array<string,mixed>|null $value

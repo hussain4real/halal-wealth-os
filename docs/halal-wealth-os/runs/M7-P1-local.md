@@ -45,3 +45,16 @@ artifacts were independently inspected with no blocking finding; see the
 artifacts and did not drive a second browser. Exactly two intentional console
 errors were reconciled. Both owned browser sessions and the server stopped.
 Native default-disabled, TIA and clean full/hosted delivery remain separate.
+
+## Cycle3 native checks and cycle4 correction
+
+Fresh native TIA recorded all 1,362 tests/10,125 assertions. PHP and Vue changes
+selected actual affected test files and were restored to identical source;
+cached replay is not fresh full execution. The first uncached release attempt
+stopped at four new PHPStan findings before coverage/native HTTP. Preserve that
+failed original.
+
+Cycle4 constructs typed source-reference lists explicitly, declares the serialized
+result shape and avoids a redundant nullable property access. No ignore, baseline
+entry, cast or widened contract is added. Current-source focused/static, fresh
+TIA and clean release checks must pass before publication. M7-P1 stays unaccepted.

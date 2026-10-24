@@ -13,6 +13,7 @@ final readonly class Evidence implements JsonSerializable
     public function __construct(public Tool $tool, public string $asOf, public string $capturedAt,
         public string $completeness, public ?string $next, public array $data, public array $sources) {}
 
+    /** @return array<string,mixed> */
     public function jsonSerialize(): array
     {
         return ['schema' => 'readonly-financial-evidence-v1', 'tool' => $this->tool->value,
