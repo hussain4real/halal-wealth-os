@@ -58,3 +58,23 @@ Cycle4 constructs typed source-reference lists explicitly, declares the serializ
 result shape and avoids a redundant nullable property access. No ignore, baseline
 entry, cast or widened contract is added. Current-source focused/static, fresh
 TIA and clean release checks must pass before publication. M7-P1 stays unaccepted.
+
+## Cycle4 checkpoint and cycle5 quota clock
+
+PHPStan passed with zero errors; all41 focused cases passed313 assertions.
+Independent review found no blocking correction-scope issue. The typing commit
+preserves the failed original without suppressions or widened contracts.
+
+A new focused regression then reproduced a daily quota mismatch between the host
+clock used for usage lookup and PostgreSQL transaction-start timestamps used for
+charges. The expected fifth-request refusal did not occur. Cycle5 binds the UTC
+window and retained charge to one database wall-clock instant obtained after the
+owner lock. Preserve failing-before evidence. Repeat affected/static/concurrency,
+fresh native TIA and clean full gates on corrected source before publication.
+
+Cycle5 focused/static checkpoint: the failing clock test passed after correction;
+53 cases/828 assertions passed across the boundary, actual PostgreSQL contention,
+owner export and populated encrypted recovery. PHPStan passed with zero errors.
+Independent source review found no blocking clock-delta issue. The test simulates
+host/database skew; it does not claim an observed real midnight lock wait.
+Fresh current-source TIA and uncached release evidence remain required.

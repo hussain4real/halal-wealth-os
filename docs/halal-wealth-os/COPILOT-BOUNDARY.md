@@ -31,7 +31,9 @@ Limits are configured in config/copilot.php. Requests reserve a conservative
 token ceiling before handoff; input, schema, provider proposal and evidence have
 byte ceilings covered by that reservation. These are admission ceilings, not
 measured or billed model tokens. Requests and reserved tokens have UTC daily
-caps. At most 512 retained requests per owner; history is not pruned to regain
+caps. One database clock instant, read after the owner lock, defines both the
+UTC admission window and charge timestamp; host clock skew or a transaction
+waiting across midnight cannot reset consumed usage. At most 512 retained requests per owner; history is not pruned to regain
 capacity. New controls/charges require actual complete-export headroom under the
 shared owner lock, with 64KiB reserved for bounded completions and revocation.
 Admission rollback preserves earlier receipts. Large evidence fails unavailable without silent truncation. Core

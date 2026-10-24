@@ -25,6 +25,20 @@ use Tests\TestCase;
 
 uses(TestCase::class);
 
+test('database charge clock prevents a day-window mismatch from resetting reserved usage', function () {
+    C::allow($this->owner);
+    // A delayed transaction can retain yesterday's now() while admission checks
+    // run after midnight. Host clock skew exposes the same inconsistent window.
+    $this->travel(2)->days();
+    $service = app(CopilotBoundary::class);
+    $query = ToolQuery::parse(['tool' => 'cash_availability', 'arguments' => []]);
+    for ($i = 0; $i < 4; $i++) {
+        expect($service->preview((string) Str::uuid(), $query)['status'])->toBe('complete');
+    }
+    expect(fn () => $service->preview((string) Str::uuid(), $query))->toThrow(HttpException::class);
+    $this->assertDatabaseCount('copilot_requests', 4);
+});
+
 test('all five evidence reads leave every retained financial owner table unchanged', function () {
     $f = C::seed($this->owner);
     $fingerprint = function (): string {

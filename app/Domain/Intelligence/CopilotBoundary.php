@@ -50,7 +50,7 @@ final class CopilotBoundary
             }
             // Revocation is always possible, including at the retained-request cap.
             DB::table('copilot_controls')->where('owner_id', $owner->id)->update(['consent' => $enabled,
-                'generation' => $control->generation + 1, 'updated_at' => now('UTC')]);
+                'generation' => $control->generation + 1, 'updated_at' => DB::raw('clock_timestamp()')]);
             if ($enabled) {
                 $this->headroom($owner);
             }
@@ -141,11 +141,13 @@ final class CopilotBoundary
             if (DB::table('copilot_requests')->where('owner_id', $owner->id)->where('reference', $reference)->exists()) {
                 return false;
             }
-            $usage = $this->usage($owner);
+            $at = $this->instant();
+            $usage = $this->usage($owner, $at);
             abort_if($usage['retained'] >= config('copilot.retained_requests') || $usage['requests_today'] >= config('copilot.requests_per_day')
                 || config('copilot.reserved_tokens_per_day') < $usage['reserved_tokens_today'] + config('copilot.tokens_per_request'), 429, 'Copilot usage limit reached. Core financial pages remain available.');
             DB::table('copilot_requests')->insert(['owner_id' => $owner->id, 'reference' => $reference,
-                'lane' => $lane, 'consent_generation' => $control->generation, 'tool' => $tool?->value, 'reserved_tokens' => config('copilot.tokens_per_request')]);
+                'lane' => $lane, 'consent_generation' => $control->generation, 'tool' => $tool?->value,
+                'reserved_tokens' => config('copilot.tokens_per_request'), 'recorded_at' => $at]);
             $this->headroom($owner);
 
             return true;
@@ -154,7 +156,7 @@ final class CopilotBoundary
 
     private function finish(User $owner, string $reference, string $status, ?Tool $tool = null): void
     {
-        $changes = ['status' => $status, 'finished_at' => now('UTC')];
+        $changes = ['status' => $status, 'finished_at' => DB::raw('clock_timestamp()')];
         if ($tool !== null) {
             $changes['tool'] = $tool->value;
         }
@@ -212,13 +214,26 @@ final class CopilotBoundary
     }
 
     /** @return array{requests_today:int,reserved_tokens_today:int,retained:int} */
-    private function usage(User $owner): array
+    private function usage(User $owner, ?string $at = null): array
     {
+        $at ??= $this->instant();
         $q = DB::table('copilot_requests')->where('owner_id', $owner->id);
         $retained = $q->count();
-        $q->where('recorded_at', '>=', now('UTC')->startOfDay());
+        $q->whereRaw("recorded_at >= (date_trunc('day', ?::timestamptz AT TIME ZONE 'UTC') AT TIME ZONE 'UTC')", [$at]);
 
         return ['requests_today' => $q->count(), 'reserved_tokens_today' => (int) $q->sum('reserved_tokens'), 'retained' => $retained];
+    }
+
+    private function instant(): string
+    {
+        // Read after the owner lock. PostgreSQL now() would retain transaction
+        // start time even if that lock waited across a UTC day boundary.
+        $at = DB::selectOne('SELECT clock_timestamp()::text AS instant')->instant;
+        if (! is_string($at)) {
+            throw new \RuntimeException('Database admission clock is unavailable.');
+        }
+
+        return $at;
     }
 
     private function configuration(): void

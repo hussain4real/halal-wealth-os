@@ -3531,6 +3531,11 @@
             "class": "Tests\\Feature\\CopilotBoundaryTest",
             "name": "all five evidence reads leave every retained financial owner table unchanged",
             "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-a7da2600fd60": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "database charge clock prevents a day-window mismatch from resetting reserved usage",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
         }
     },
     "manual_artifacts": {
@@ -5870,7 +5875,8 @@
                 "case-m7p1-ed4b6d713053",
                 "case-m7p1-fd2d6e164562",
                 "case-m7p1-ed978e95daee",
-                "case-m7p1-a5fdd697f8aa"
+                "case-m7p1-a5fdd697f8aa",
+                "case-m7p1-a7da2600fd60"
             ],
             "manual_artifact_ids": ["m7p1-rendered"],
             "tool_check": null
