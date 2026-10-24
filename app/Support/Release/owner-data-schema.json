@@ -755,6 +755,395 @@
             "order": ["id"]
         },
         {
+            "table": "drive_connections",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "subject",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "email",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "epoch",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "generation",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "status",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "folder_id",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "folder_name",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "revoke_state",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "revoke_attempts",
+                    "type": "smallint",
+                    "udt": "int2",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "revoke_lease_until",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "drive_controls",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "generation",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "stopped",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "active_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "oauth_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "session_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "oauth_verifier",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "oauth_expires",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "review",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "review_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "review_expires",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "drive_events",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "connection_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "operation_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "ordinal",
+                    "type": "smallint",
+                    "udt": "int2",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "safe_code",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "drive_operations",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "kind",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "connection_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "generation",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "epoch",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "snapshot_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "content_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "content_bytes",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "target_id",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "target_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "remote_id",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "deadline",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "state",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "attempts",
+                    "type": "smallint",
+                    "udt": "int2",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "lease",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "next_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "safe_code",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "drive_secrets",
+            "scope": "excluded",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "connection_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "ciphertext",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
             "table": "failed_jobs",
             "scope": "excluded",
             "columns": [
@@ -1979,7 +2368,6 @@
         {
             "table": "market_admissions",
             "scope": "owner",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -2047,12 +2435,12 @@
                     "udt": "timestamptz",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "market_attempts",
             "scope": "market_attempt",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -2108,12 +2496,12 @@
                     "udt": "timestamptz",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "market_mappings",
             "scope": "owner",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -2187,12 +2575,12 @@
                     "udt": "timestamptz",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "market_results",
             "scope": "market_result",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -2242,7 +2630,8 @@
                     "udt": "bpchar",
                     "nullable": "YES"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "migrations",
@@ -4248,7 +4637,6 @@
         {
             "table": "reminder_channels",
             "scope": "owner",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -4280,12 +4668,12 @@
                     "udt": "timestamptz",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "reminder_claims",
             "scope": "owner",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -4329,12 +4717,12 @@
                     "udt": "timestamptz",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "reminder_controls",
             "scope": "owner",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -4360,12 +4748,12 @@
                     "udt": "bpchar",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "reminder_notifications",
             "scope": "owner",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -4409,12 +4797,12 @@
                     "udt": "timestamptz",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "reminder_preferences",
             "scope": "owner",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -4470,12 +4858,12 @@
                     "udt": "timestamptz",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "reminder_reads",
             "scope": "owner",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -4501,12 +4889,12 @@
                     "udt": "timestamptz",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "reminder_results",
             "scope": "owner",
-            "order": ["id"],
             "columns": [
                 {
                     "name": "id",
@@ -4562,7 +4950,8 @@
                     "udt": "timestamptz",
                     "nullable": "NO"
                 }
-            ]
+            ],
+            "order": ["id"]
         },
         {
             "table": "sessions",

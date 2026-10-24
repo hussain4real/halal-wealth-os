@@ -9,7 +9,10 @@ All M5 phases and the M5 milestone are human accepted. M6-P1 is merged and
 human accepted; see [M6-P1 acceptance](runs/M6-P1-acceptance.md).
 M6-P2 is human accepted; see [M6-P2 acceptance](runs/M6-P2-acceptance.md).
 Twelve Data remains disabled and mock-only; live access and entitlement are blocked.
-M6-P3 is authorized for opt-in reminders and approved Laravel SMTP mock-only tests.
+M6-P3 is human accepted; see [its acceptance](runs/M6-P3-acceptance.md).
+Laravel SMTP remains disabled and synthetic mock-only.
+M6-P4 is authorized for personal Drive report export with approved mock-only scopes;
+see [Drive policy](DRIVE-EXPORT.md). M6-P4 and M6 remain unaccepted.
 Deployment, live external delivery and later phases remain separate decisions.
 Reporting composes existing source contracts inside a coherent database snapshot;
 it retains dashboard evidence and rule/dismissal history without posting financial

@@ -9,9 +9,10 @@ It never accepts a production target argument.
 The rehearsal applies real migrations, seeds synthetic owners and retained
 financial history, runs PostgreSQL custom-format dump, encrypts it, verifies the
 whole archive, restores into the fresh empty target in one transaction, and
-reconciles all 63 tables plus existing cash, position, goal reservation and
-assessment records/references, including retained statement source bytes, previews
-and correction receipts. It tests a wrong key without changing the target, a new
+reconciles all 79 tables and eight reader fingerprints: cash, positions,
+goal reservations, Shariah, statement imports, market observations, reminders
+and Drive. This includes encrypted OAuth/vault state, queued/unknown/uploaded
+Drive intents, disconnected connections and retained statement correction receipts. It tests a wrong key without changing the target, a new
 post-restore journal write and the restored immutable-posting trigger. It runs
 forward migrations again and compares migration order. A transactional populated
 downgrade rehearsal must refuse retained history and leave restored data intact. Only its own marked
@@ -68,3 +69,13 @@ frequency, retained generations, expiry/legal policy, RPO, RTO, key escrow,
 restore-test schedule and the person authorized to delete generations. Keep the
 last verified recoverable generation until a replacement is independently
 restored; verify expiry without deleting the sole usable backup.
+
+## Hold external work after restore
+
+Keep queue workers and scanners stopped until the authorized operator establishes
+a fresh external nonsecret execution epoch. Never copy the old Drive epoch with
+a restored database. Old connections and intents remain inspectable but held;
+missing epoch/configuration disables transport. Restoring both DB and old runtime
+configuration cannot be detected automatically. Current Drive/SMTP/provider
+transports stay disabled regardless: no live enablement is authorized. Reconnect
+and actual Google revocation require their separate approved procedures.

@@ -45,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        RateLimiter::for('drive-export', fn (Request $request) => Limit::perMinute(20)->by('drive:'.($request->user()->id ?? $request->ip())));
         RateLimiter::for('market-data', fn (Request $request) => Limit::perMinute(20)->by('market:'.($request->user()->id ?? $request->ip())));
         RateLimiter::for('statement-import', fn (Request $request) => Limit::perMinute(20)->by('statement:'.($request->user()->id ?? $request->ip())));
         Gate::policy(User::class, UserPolicy::class);

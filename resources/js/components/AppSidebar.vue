@@ -30,6 +30,7 @@ import { edit as security } from '@/routes/security';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
+    { title: 'Drive export', href: '/drive', icon: CalendarDays },
     { title: 'Reminders', href: '/notifications', icon: CalendarDays },
     { title: 'Monthly plan', href: '/budgets', icon: CalendarDays },
     { title: 'Goals & protection', href: '/goals', icon: Target },
