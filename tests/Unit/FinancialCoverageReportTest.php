@@ -4,6 +4,19 @@ use Tests\TestCase;
 
 uses(TestCase::class);
 
+test('financial coverage cannot omit the newly implemented Intelligence subtree', function () {
+    $path = $this->coverageRoot.'/app/Domain/Intelligence';
+    mkdir($path, 0700, true);
+    file_put_contents($path.'/Boundary.php', '<?php final class Boundary { public function read(): int { return 1; } }');
+    try {
+        $report = ($this->coverageXml)(($this->coverageFile)('statements="1" coveredstatements="1"', '<line num="1" type="stmt" count="2"/>'));
+        expect(fn () => HalalOS\Verification\financialCoverage($report, $this->coverageRoot))->toThrow(RuntimeException::class, 'missing financial coverage app/Domain/Intelligence/Boundary.php');
+    } finally {
+        unlink($path.'/Boundary.php');
+        rmdir($path);
+    }
+});
+
 require_once __DIR__.'/../../scripts/financial-coverage.php';
 
 beforeEach(function () {

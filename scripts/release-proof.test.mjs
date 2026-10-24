@@ -20,6 +20,7 @@ const valid = () => ({
     table_fingerprints: { accounts: { rows: 7, sha256: 'd'.repeat(64) } },
     reader_fingerprints: {
         cash: source,
+        intelligence: source,
         drive: source,
         imports: source,
         market: source,

@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CashAvailabilityController;
+use App\Http\Controllers\CopilotController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\DriveExportController;
@@ -32,6 +33,11 @@ Route::get('ready', function () {
 })->name('readiness');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+
+    Route::get('copilot', [CopilotController::class, 'index'])->name('copilot.index');
+    Route::post('copilot/consent', [CopilotController::class, 'consent'])->name('copilot.consent');
+    Route::post('copilot/preview', [CopilotController::class, 'preview'])->middleware('throttle:copilot')->name('copilot.preview');
+    Route::post('copilot/propose', [CopilotController::class, 'propose'])->middleware('throttle:copilot')->name('copilot.propose');
 
     Route::get('drive', [DriveExportController::class, 'index'])->name('drive.index');
 

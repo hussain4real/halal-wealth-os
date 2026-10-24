@@ -6,6 +6,8 @@ use App\Domain\Imports\StatementCorrectionHistory;
 use App\Domain\Integrations\FxProvider;
 use App\Domain\Integrations\PriceProvider;
 use App\Domain\Integrations\TwelveData;
+use App\Domain\Intelligence\ToolProvider;
+use App\Domain\Intelligence\UnavailableProvider;
 use App\Domain\Ledger\AccountBalanceReader;
 use App\Domain\Ledger\CorrectionHistory;
 use App\Domain\Ledger\DeferredOpeningBalances;
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(ToolProvider::class, UnavailableProvider::class);
         $this->app->bind(PriceProvider::class, TwelveData::class);
         $this->app->bind(FxProvider::class, TwelveData::class);
         $this->app->bind(CorrectionHistory::class, StatementCorrectionHistory::class);
@@ -45,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        RateLimiter::for('copilot', fn (Request $request) => Limit::perMinute(20)->by('copilot:'.($request->user()->id ?? $request->ip())));
         RateLimiter::for('drive-export', fn (Request $request) => Limit::perMinute(20)->by('drive:'.($request->user()->id ?? $request->ip())));
         RateLimiter::for('market-data', fn (Request $request) => Limit::perMinute(20)->by('market:'.($request->user()->id ?? $request->ip())));
         RateLimiter::for('statement-import', fn (Request $request) => Limit::perMinute(20)->by('statement:'.($request->user()->id ?? $request->ip())));

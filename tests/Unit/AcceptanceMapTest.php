@@ -4,6 +4,24 @@ use Tests\TestCase;
 
 uses(TestCase::class);
 
+test('F18 refuses missing boundary families expanded scope and unrelated evidence', function (string $fault) {
+    $f = &$this->acceptanceMap['fixtures']['F18'];
+    if ($fault === 'empty') {
+        $f['case_ids'] = [];
+    } elseif ($fault === 'unrelated') {
+        $f['case_ids'] = [array_key_first($this->acceptanceMap['cases'])];
+    } elseif ($fault === 'expanded') {
+        $f['implemented_subscenarios'][] = 'live_model_answers';
+    } elseif ($fault === 'future') {
+        $f['future_subscenarios'] = [];
+    } elseif ($fault === 'status') {
+        $f['status'] = 'PASS';
+    } else {
+        $f['case_ids'] = array_values(array_filter($f['case_ids'], fn ($id) => ! str_starts_with($this->acceptanceMap['cases'][$id]['name'], 'provider malicious')));
+    }
+    expect(fn () => HalalOS\Verification\acceptanceMap($this->acceptanceMap, $this->acceptanceJunit, base_path()))->toThrow(RuntimeException::class);
+})->with(['empty', 'unrelated', 'expanded', 'future', 'status', 'family']);
+
 require_once __DIR__.'/../../scripts/acceptance-map.php';
 
 beforeEach(function () {
@@ -21,7 +39,7 @@ beforeEach(function () {
 
 test('acceptance map resolves exact configured cases and explicit retained evidence without claiming a tool pass', function () {
     $report = HalalOS\Verification\acceptanceMap($this->acceptanceMap, $this->acceptanceJunit, base_path());
-    expect($report['requirements'])->toHaveCount(122)->and($report)->not->toHaveKey('result');
+    expect($report['requirements'])->toHaveCount(127)->and($report)->not->toHaveKey('result');
     expect(array_column($report['fixtures'], 'status'))->toBe(array_column($this->acceptanceMap['fixtures'], 'status'));
 });
 

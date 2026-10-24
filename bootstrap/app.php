@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CopilotPrivacy;
 use App\Http\Middleware\DriveCallbackPrivacy;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -20,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
         $middleware->authenticateSessions();
 
-        $middleware->web(prepend: [DriveCallbackPrivacy::class], append: [
+        $middleware->web(prepend: [CopilotPrivacy::class, DriveCallbackPrivacy::class], append: [
             ThrottlePasswordRecovery::class,
             HandleAppearance::class,
             HandleInertiaRequests::class,

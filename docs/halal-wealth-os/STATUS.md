@@ -1,61 +1,38 @@
 # Current roadmap status
 
-Status checked on 24 October 2026 against dev merge `0a6ce1c4ecf176015e627f60153c6deb23cbcdc5`, live GitHub delivery evidence and explicit human acceptance. Current acceptance and preparation records are local changes until reviewed and published.
+Checked on 24 October 2026 against dev merge `813fdd80697e44e6a4f3b29009c2fdcec77fa08f`, live GitHub delivery evidence, explicit human acceptance and the independent M6 review. The owner subsequently accepted M6 and authorized M7-P1 through gated dev delivery. Current M7-P1 checks and publication remain separate from earlier accepted results.
 
-`ROADMAP.json` is the preserved canonical identifier/dependency index. Its initial phase labels are not current delivery claims. `STATE.json`, separate owner acceptance records and observed GitHub source/CI provide execution status.
+`ROADMAP.json` preserves the canonical identifier/dependency index. Its initial phase labels are not current delivery claims. `STATE.json`, owner acceptance records and actual GitHub source/CI record execution status.
 
-20 of 25 phases are implemented, merged into dev and human accepted, from M0-P1 through M6-P2. M0 through M5 milestone gates are accepted. M6 remains in progress. M6-P2 delivery gates passed for owner-approved Twelve Data disabled, mock-only adapters; M6-P2 is owner accepted. M6-P3 implementation is local and under final verification; no PR merge or phase acceptance is claimed. Live access and entitlement remain blocked.
+**22 of 25 phases are implemented, merged into dev and human accepted**, from M0-P1 through M6-P4. M0 through M6 milestone gates are accepted. All four M6 phases are accepted. The independent M6 review returned **READY_FOR_OWNER**, with no demonstrated blocking P0/P1/P2 finding; M6 is human accepted; M7-P1 is authorized and in progress. M7-P1 is in progress and unaccepted; M7-P2/P3 remain planned and unauthorized.
 
-| Milestone | Implemented or planned scope                                                              | Current gate                    |
-| --------- | ----------------------------------------------------------------------------------------- | ------------------------------- |
-| M0        | Foundation, private identity, owner isolation and verification harness                    | Accepted                        |
-| M1        | Exact multi-currency ledger, transfers/reversals, manual FX and reconciliation            | Accepted                        |
-| M2        | Budgets, recurring commitments, goals, emergency protection and deployable-cash forecasts | Accepted                        |
-| M3        | Assets, portfolio modes, trades/IPO/corporate actions and evidence-based valuation        | Accepted                        |
-| M4        | Versioned Shariah evidence, purification records, opportunities/theses/tranches           | Accepted                        |
-| M5        | Dashboard/actions, end-to-end hardening, owner export and encrypted recovery              | Accepted                        |
-| M6        | CSV statement imports; market/FX adapters; opt-in reminders; personal Drive export        | M6-P2 accepted; M6-P3 verifying |
-| M7        | Read-only Wealth Copilot tools, grounded evaluations and V2 operational gate              | Planned; unimplemented          |
+| Milestone | Implemented or planned scope                                                      | Current gate                      |
+| --------- | --------------------------------------------------------------------------------- | --------------------------------- |
+| M0        | Foundation, private identity, owner isolation and verification harness            | Accepted                          |
+| M1        | Exact multi-currency ledger, transfers/reversals, manual FX and reconciliation    | Accepted                          |
+| M2        | Budgets, recurring commitments, goals, emergency protection and cash forecasts    | Accepted                          |
+| M3        | Assets, portfolio modes, trades/IPO/corporate actions and valuation               | Accepted                          |
+| M4        | Shariah evidence, purification records and opportunities/theses/tranches          | Accepted                          |
+| M5        | Dashboard/actions, hardening, owner export and encrypted recovery                 | Accepted                          |
+| M6        | Statement imports, market/FX adapters, opt-in reminders and personal Drive export | Accepted after independent review |
+| M7        | Read-only Wealth Copilot, grounded evaluation and V2 operational gate             | P1 in progress; P2/P3 planned     |
 
-The independent M5 review passed a fresh uncached full gate: 928 tests /6,344
-assertions, 57 financial coverage floors, 102 acceptance/invariant IDs /287 exact
-selectors, real HTTP/security/performance and authenticated encrypted recovery.
-No blocking defect was demonstrated. The isolated reviewed code stayed clean at
-the exact dev merge. Browser evidence is retained and explicitly scoped; no fresh
-browser session or production check is claimed. Owned review resources stopped.
+## Independent M6 result
 
-## Next owner decision
+The [independent review](runs/M6-independent-review.md) ran a fresh clean uncached release gate:1,310 tests/9,752 assertions,80 financial coverage floors,122 requirements/invariants with665 exact selectors, native HTTP/security/performance and encrypted79-table/eight-reader recovery. All926 tracked files retained identical bytes and Git modes. Owned review resources stopped. Browser evidence was independently inspected but retained; no fresh browser session, live integration or deployment is claimed.
 
-M6-P2 has approved market and FX provider adapters, exact observation admission,
-bounded scheduled retries, attributable safe run records and manual fallback.
-The [provider selection](PROVIDER-ACCESS.md) is approved for Twelve Data, mock
-only. Disabled mock verification is distinct from live connectivity, which
-remains blocked without separate access and entitlement authority. No live
-provider, bank, Google or AI connection is claimed.
+The review's one P3 observation concerns stale README/status counts in the frozen reviewed commit. These local summaries reconcile that observation without altering the review report or tested application source. Unrelated duplicate-named files in the manager checkout were preserved; the tested clone excluded them and the separate acceptance overlay.
 
-M6-P3 reminders are implemented locally with SMTP approved for synthetic mock-only testing. The uncached release, hosted CI/review and delivery gates remain pending. M6-P4 personal Drive export and all M7 Copilot/evaluation work remain planned. A private V1 deployment separately needs a selected environment,
-TLS/mail checks, secrets/key custody, backup retention and RPO/RTO, restore receipt
-and explicit rollout authority. No production deployment or real import occurred.
+## What is next
 
-## Current delivery evidence
+1. Complete the authorized [M7-P1 boundary](phases/M7-P1.md), then its original exact-head CI/fresh review, normal dev merge, original post-merge CI and signed public post verification. M7-P1 acceptance is a separate human decision.
+2. M7-P2 adds evidence-grounded answers and evaluation; its live-model evaluation requires separately approved provider access and observed results.
+3. M7-P3 covers operational controls and the V2 release gate. Neither later phase is authorized here.
 
-[M6-P1 acceptance](runs/M6-P1-acceptance.md) records the exact reviewed source,
-normal [PR21 merge](https://github.com/hussain4real/halal-wealth-os/pull/21),
-fresh review and original [post-merge CI](https://github.com/hussain4real/halal-wealth-os/actions/runs/39825244159)
-with 1,069 tests, 63 financial coverage floors and encrypted 63-table recovery.
-The signed [progress post](https://dev-null.sh/@hussain4real/commits/01a164ca-f108-72e1-9076-d28e1134a2ff)
-was anonymously verified after publication. On 23 October, the original project
-verification script again confirmed HTTP200, the visible message and the PR21
-link. An earlier plain-urllib request returned HTTP403; both observations are
-retained. The original signed publisher remains successful. Earlier failure
-history is preserved. M6-P2 [PR22](https://github.com/hussain4real/halal-wealth-os/pull/22)
-merged after original exact-head CI and fresh no-finding review. Original
-[post-merge CI](https://github.com/hussain4real/halal-wealth-os/actions/runs/40014913842)
-passed with 1,150 tests, 71 financial floors, 505 exact selectors and encrypted
-67-table/six-reader recovery. The signed [progress post](https://dev-null.sh/@hussain4real/commits/01a16a66-4d83-726f-a84a-0657e65c4e98)
-passed anonymous HTTP 200, visible-body and PR22-link checks. The
-[completion record](runs/M6-P2-completion.md) separates these delivery gates from
-owner acceptance. All eight cycles and original failures remain preserved.
-The owner accepted M6-P2 on 24 October and authorized M6-P3.
-See [acceptance](runs/M6-P2-acceptance.md) and the [M6-P3 run](runs/M6-P3-local.md).
-The approved SMTP adapter is mock-only; no live delivery or deployment is authorized.
+Provider, SMTP and Google Drive adapters remain disabled and synthetic mock-only. Live access, licensing/entitlement, accounts, credentials and real delivery need separate authority and observed checks. Private production deployment separately needs environment/TLS, key custody, backup retention/RPO/RTO, restore and rollout decisions. No deployment or real import occurred.
+
+## M6 delivery evidence
+
+[M6-P1 acceptance](runs/M6-P1-acceptance.md), [M6-P2 acceptance](runs/M6-P2-acceptance.md), [M6-P3 acceptance](runs/M6-P3-acceptance.md) and [M6-P4 acceptance](runs/M6-P4-acceptance.md) record the four completed phases.
+
+Latest [PR24](https://github.com/hussain4real/halal-wealth-os/pull/24) and original [post-merge CI40093972091](https://github.com/hussain4real/halal-wealth-os/actions/runs/40093972091), attempt1, passed. The signed [public progress post](https://dev-null.sh/@hussain4real/commits/01a16e07-139d-7235-8ecb-15b6da8ff76b) was verified by anonymous HTTP200, visible body and PR24 link. Earlier failed checks, review findings and all seven implementation cycles remain preserved; the unused eighth correction cycle was not spent.

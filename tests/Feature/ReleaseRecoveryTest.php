@@ -17,8 +17,8 @@ test('encrypted populated recovery reconciles complete tables balances positions
     $report = (new ReleaseRecovery)->run();
     expect($identity())->toBe($source);
     $report['producer'] = ['source_sha256' => $source, 'run_id' => getenv('HWO_RELEASE_RUN_ID') ?: 'FOCUSED_ONLY'];
-    expect($report['result'])->toBe('PASS')->and($report['tables'])->toBe(79)
-        ->and($report['reader_fingerprints'])->toHaveKeys(['drive', 'cash', 'positions', 'reservations', 'shariah', 'imports', 'market', 'reminders'])
+    expect($report['result'])->toBe('PASS')->and($report['tables'])->toBe(81)
+        ->and($report['reader_fingerprints'])->toHaveKeys(['intelligence', 'drive', 'cash', 'positions', 'reservations', 'shariah', 'imports', 'market', 'reminders'])
         ->and($report['table_fingerprints']['statement_sources']['rows'])->toBe(3)
         ->and($report['table_fingerprints']['statement_receipts']['rows'])->toBe(3)
         ->and($report['table_fingerprints']['statement_claims']['rows'])->toBeGreaterThan(0)
@@ -29,6 +29,8 @@ test('encrypted populated recovery reconciles complete tables balances positions
         ->and($report['table_fingerprints']['reminder_preferences']['rows'])->toBe(5)
         ->and($report['table_fingerprints']['reminder_claims']['rows'])->toBe(5)
         ->and($report['table_fingerprints']['reminder_reads']['rows'])->toBe(1)
+        ->and($report['table_fingerprints']['copilot_controls']['rows'])->toBe(2)
+        ->and($report['table_fingerprints']['copilot_requests']['rows'])->toBe(5)
         ->and($report['table_fingerprints']['drive_operations']['rows'])->toBe(4)
         ->and($report['table_fingerprints']['drive_connections']['rows'])->toBe(2)
         ->and($report['table_fingerprints']['drive_secrets']['rows'])->toBe(2)

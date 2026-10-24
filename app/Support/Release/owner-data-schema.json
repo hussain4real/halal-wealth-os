@@ -226,6 +226,110 @@
             "order": ["id"]
         },
         {
+            "table": "copilot_controls",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "consent",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "generation",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "copilot_requests",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "uuid",
+                    "udt": "uuid",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "lane",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "consent_generation",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "tool",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "status",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reserved_tokens",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "finished_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
             "table": "dashboard_dismissal_requests",
             "scope": "owner",
             "columns": [
