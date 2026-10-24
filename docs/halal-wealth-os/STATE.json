@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-23T18:59:43.118291+00:00",
+    "updated_at": "2026-10-24T02:25:41.457954+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -13,12 +13,12 @@
         "default_external_effects": false
     },
     "active_run": {
-        "phase": "M6-P2",
-        "owner": "m6p2-coordinator",
+        "phase": "M6-P3",
+        "owner": "m6p3-coordinator",
         "worktree": ".",
-        "branch": "feat/m6-p2-provider-adapters",
-        "baseline_head": "decef9b54d8fa67f559eb42873250a9768dbec19",
-        "started_at": "2026-10-23T06:21:55.000813+00:00",
+        "branch": "feat/m6-p3-reminders-outbox",
+        "baseline_head": "0a6ce1c4ecf176015e627f60153c6deb23cbcdc5",
+        "started_at": "2026-10-24T02:25:41.457954+00:00",
         "status": "VERIFYING"
     },
     "repository": {
@@ -269,20 +269,20 @@
         {
             "id": "M6-P2",
             "depends_on": ["M6-P1"],
-            "status": "IN_PROGRESS",
+            "status": "ACCEPTED",
             "owner": "m6p2-coordinator",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M6-P2-local.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-24T02:25:41.457954+00:00",
+            "evidence": "runs/M6-P2-acceptance.md"
         },
         {
             "id": "M6-P3",
             "depends_on": ["M6-P2"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "IN_PROGRESS",
+            "owner": "m6p3-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M6-P3-local.md"
         },
         {
             "id": "M6-P4",
@@ -349,15 +349,17 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "phase": "M6-P2",
-        "authorized": true,
         "authorized_by": "human-owner",
-        "recorded_at": "2026-10-23T06:21:55.000813+00:00",
-        "scope": "Accept M6-P1; implement canonical M6-P2, open PR to dev, normal merge after exact-head original CI and fresh review, verify original post-merge CI and existing signed /dev/null publishing.",
-        "accepted_dependencies": ["M6-P1"],
+        "recorded_at": "2026-10-24T02:25:41.457954+00:00",
+        "scope": "Accept M6-P2; implement canonical M6-P3, PR to dev, normal approved-noreply merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed progress publication.",
         "max_cycles": 6,
-        "main_stage_changes": false,
+        "one_source_writer": true,
+        "live_external_delivery": "BLOCKED",
         "deployment": false,
+        "phase": "M6-P3",
+        "authorized": true,
+        "accepted_dependencies": ["M6-P2"],
+        "main_stage_changes": false,
         "later_phases": false,
         "remote_pr_dev_merge": true,
         "existing_signed_publisher": true,
@@ -365,14 +367,14 @@
         "live_provider_access": false
     },
     "execution_status": {
-        "phase": "M6-P2",
+        "phase": "M6-P3",
         "status": "VERIFYING",
-        "cycle": 6,
-        "cycles_used": 6,
+        "cycle": 4,
+        "cycles_used": 4,
         "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M6_UNACCEPTED",
-        "checkpoint": "Cycle5 freshTIA1147tests8577assertionsPASS; clean uncached1147tests8577assertions,71financialfloors, nativeHTTP/performance and populated recoveryPASS. Finalization stopped because validator still expected five reader fingerprints instead of six including market. Cycle6 corrects strict reader contract with fail-before/pass-after regression; repeats affected TIA/source review and clean full/hosted delivery gates. SixofSixcycles allocated; no new correction cycle is authorized."
+        "checkpoint": "M6-P2 owner accepted; canonical M6-P3 and SMTP mock-only approved. Independent grounding/design preparation, no implementation cycle consumed."
     },
     "dependency_patch": {
         "authorized": true,
@@ -3014,7 +3016,7 @@
     "m6p2_engineering": {
         "cycle": 8,
         "ceiling": 8,
-        "status": "VERIFYING",
+        "status": "READY_FOR_REVIEW",
         "prior_cycle": {
             "cycle": 1,
             "checks": "Focused boundary/contract and 88 affected PostgreSQL cases passed; full release gates not run.",
@@ -3102,6 +3104,23 @@
                 "duration_ms": 176976,
                 "cause": "Updated reviewed rendered document no longer matched its pinned manual artifact hash; strict acceptance-map guard refused stale evidence.",
                 "application_source": "UNCHANGED_AFTER_SOURCE_RENDERED_REVIEW_PASS"
+            },
+            {
+                "cycle": 8,
+                "result": "DELIVERY_GATES_PASS_OWNER_ACCEPTANCE_PENDING",
+                "scope": "Refreshed the reviewed rendered-evidence hash; application source unchanged from cycle7 correction.",
+                "tests": 1150,
+                "assertions": 8644,
+                "financial_floors": 71,
+                "selectors": 505,
+                "requirements": 112,
+                "recovery_tables": 67,
+                "recovery_readers": 6,
+                "pr_ci": 40009099893,
+                "postmerge_ci": 40014913842,
+                "ci_attempt": 1,
+                "fresh_review": "EXACT_HEAD_COMPLETED_NO_FINDINGS_ALL_THREADS_RESOLVED",
+                "signed_progress": "ANONYMOUS_HTTP200_BODY_AND_PR22_LINK_VERIFIED"
             }
         ],
         "harness_correction": "Independent review found new tool-check names absent from the final validator; criteria now reference the existing validated HTTP journey, with the strict new market proof checks retained. Provider selection uses its scoped hashed owner record and exact disabled tests, without claiming a live/tool license check.",
@@ -3150,5 +3169,119 @@
         "previous_ceiling": 6,
         "total_ceiling": 8,
         "scope": "PR22 fresh P2 admission-capacity outcome and visibility; preserve prior failures and repeat delivery gates"
+    },
+    "m6p2_delivery": {
+        "status": "ACCEPTED",
+        "recorded_at": "2026-10-23T20:23:30.224000+00:00",
+        "completion_evidence": "runs/M6-P2-completion.md",
+        "pr": 22,
+        "head": "5656cecb9377208630b5eeb135a4195a61afe861",
+        "merge": "0a6ce1c4ecf176015e627f60153c6deb23cbcdc5",
+        "tree": "75d655079f88cd36c6aec24a76176a658c1e80ea",
+        "source_sha256": "db659555e26f0a172cbc321e55a1186b91e64c9cd33734db7ba0527618b1e139",
+        "pr_ci": {
+            "run": 40009099893,
+            "attempt": 1,
+            "result": "PASS"
+        },
+        "fresh_review": "EXACT_HEAD_AFTER_REQUEST_COMPLETED_NO_FINDINGS_ALL_THREADS_RESOLVED",
+        "postmerge_ci": {
+            "run": 40014913842,
+            "attempt": 1,
+            "result": "PASS",
+            "tests": 1150,
+            "assertions": 8644
+        },
+        "signed_publisher": "PASS",
+        "anonymous_publication": "HTTP200_VISIBLE_BODY_AND_PR22_LINK_VERIFIED",
+        "progress_url": "https://dev-null.sh/@hussain4real/commits/01a16a66-4d83-726f-a84a-0657e65c4e98",
+        "owner_phase_acceptance": "ACCEPTED",
+        "milestone_acceptance": "PENDING",
+        "live_connectivity": "BLOCKED_MOCK_ONLY",
+        "deployment": false,
+        "cycles_used": 8,
+        "max_cycles": 8,
+        "completion_records": "LOCAL_METADATA_OVERLAY_NOT_COMMITTED_OR_PUSHED",
+        "accepted_by": "human-owner",
+        "accepted_at": "2026-10-24T02:25:41.457954+00:00",
+        "acceptance_evidence": "runs/M6-P2-acceptance.md"
+    },
+    "m6p2_claim_closed": {
+        "phase": "M6-P2",
+        "owner": "m6p2-coordinator",
+        "worktree": ".",
+        "branch": "feat/m6-p2-provider-adapters",
+        "baseline_head": "decef9b54d8fa67f559eb42873250a9768dbec19",
+        "started_at": "2026-10-23T06:21:55.000813+00:00",
+        "status": "READY_FOR_REVIEW",
+        "closed_at": "2026-10-24T02:25:41.457954+00:00",
+        "reason": "HUMAN_OWNER_ACCEPTED_M6_P2"
+    },
+    "m6p3_authorization": {
+        "authorized_by": "human-owner",
+        "recorded_at": "2026-10-24T02:25:41.457954+00:00",
+        "scope": "Accept M6-P2; implement canonical M6-P3, PR to dev, normal approved-noreply merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed progress publication.",
+        "max_cycles": 6,
+        "one_source_writer": true,
+        "live_external_delivery": "BLOCKED",
+        "deployment": false
+    },
+    "m6p3_email_selection": {
+        "adapter": "Laravel SMTP",
+        "decision": "APPROVED_MOCK_ONLY",
+        "approved_by": "human-owner",
+        "recorded_at": "2026-10-24T02:25:41.457954+00:00",
+        "live_sends": "BLOCKED",
+        "new_account": false,
+        "new_credentials": false,
+        "uncertain_outcome": "RETAIN_FOR_INSPECTION_NO_AUTOMATIC_RESEND"
+    },
+    "m6p3_engineering": {
+        "cycle": 4,
+        "ceiling": 6,
+        "status": "VERIFYING",
+        "completed_cycles": [
+            {
+                "cycle": 1,
+                "result": "FAILED",
+                "reason": "Initial targeted tests could not reset schema because retained PostgreSQL trigger function already existed. Static analysis passed; no behavior assertion executed."
+            },
+            {
+                "cycle": 2,
+                "result": "CHANGES_REQUIRED",
+                "evidence": "14 targeted tests / 111 assertions passed after correcting test channel-order assumptions and building the page. Independent review found terminal queue churn, byte-capacity visibility and stale-form pause reset gaps."
+            },
+            {
+                "cycle": 3,
+                "result": "CHANGES_REQUIRED",
+                "evidence": "44 behavior/concurrency tests, 241 assertions; populated74-table7-reader recovery, static analysis,39 proof-unit cases and Node proof gates passed. Browser save failed before HTTP: numeric grace input violated string recovery envelope."
+            }
+        ]
+    },
+    "m6p2_execution_authorization_history": {
+        "phase": "M6-P2",
+        "authorized": true,
+        "authorized_by": "human-owner",
+        "recorded_at": "2026-10-23T06:21:55.000813+00:00",
+        "scope": "Accept M6-P1; implement canonical M6-P2, open PR to dev, normal merge after exact-head original CI and fresh review, verify original post-merge CI and existing signed /dev/null publishing.",
+        "accepted_dependencies": ["M6-P1"],
+        "max_cycles": 6,
+        "main_stage_changes": false,
+        "deployment": false,
+        "later_phases": false,
+        "remote_pr_dev_merge": true,
+        "existing_signed_publisher": true,
+        "new_credentials": false,
+        "live_provider_access": false
+    },
+    "m6p2_execution_status_history": {
+        "phase": "M6-P2",
+        "status": "VERIFYING",
+        "cycle": 6,
+        "cycles_used": 6,
+        "max_cycles": 6,
+        "phase_acceptance": "UNACCEPTED",
+        "milestone_acceptance": "M6_UNACCEPTED",
+        "checkpoint": "Cycle5 freshTIA1147tests8577assertionsPASS; clean uncached1147tests8577assertions,71financialfloors, nativeHTTP/performance and populated recoveryPASS. Finalization stopped because validator still expected five reader fingerprints instead of six including market. Cycle6 corrects strict reader contract with fail-before/pass-after regression; repeats affected TIA/source review and clean full/hosted delivery gates. SixofSixcycles allocated; no new correction cycle is authorized."
     }
 }

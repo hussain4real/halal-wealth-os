@@ -530,3 +530,28 @@ and original exact-head CI plus fresh hosted review before normal approved-
 noreply dev merge. Verify original post-merge CI and actual existing signed
 /dev/null publishing. All prior sole-writer, privacy, mock-only provider, phase
 acceptance, credential and deployment boundaries remain in force.
+
+## Current M6-P3 authority
+
+The human owner explicitly accepted M6-P2 on 24 October 2026 and authorized
+canonical M6-P3 through implementation, independent source/rendered review,
+a sanitized PR to dev, normal approved-noreply merge after original exact-head
+CI and fresh hosted review, then original post-merge CI and existing signed
+/dev/null publication verification. This supersedes the earlier no-M6-P3
+boundary only within phases/M6-P3.md. Record predecessor acceptance and close
+its claim, preserving all eight cycles and original failures. M6-P3 has at most
+six new scoped cycles. One source writer; no implementation subagents.
+Independent grounding/design/source/sanitation/rendered reviewers remain
+source-read-only with exclusive owned verification resources.
+
+The owner explicitly approved Laravel SMTP for disabled synthetic mock-only
+reminder testing. This selects an adapter; it authorizes no live sends, account,
+credentials, live destination, deployment or permission change. Preserve starter
+authentication mail separately. Every reminder rule/channel is opt-in; standing
+orders never opt in automatically. Use actual posted/matched schedule evidence,
+explicit grace/timezone/quiet hours, bounded durable outbox/audit and retained
+committed recovery. Uncertain SMTP outcomes must not be blindly resent. Preserve
+owner isolation, export/recovery, financial invariants, TIA/full clean gates,
+public/private boundaries and main/stage. No M6-P4, live provider integration,
+real imports, history rewrites or self-acceptance. M6-P3 and M6 acceptance remain
+human decisions.

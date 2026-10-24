@@ -2526,6 +2526,231 @@
             "class": "Tests\\Feature\\MarketHttpTest",
             "name": "capacity blocked jobs retain prior values and expose owned warning without growing evidence",
             "file": "tests/Feature/MarketHttpTest.php"
+        },
+        "case-m6p3-4a154910cca5": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "reminders are all off by default including standing orders and ordinary dashboard rules",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-96e1aca1c124": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "duplicate schedule planning jobs and committed preference retries retain one logical notification",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-42f70bf63f84": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet hours cross Qatar midnight and full grace days without manufacturing a new episode",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-7ac7ef0792ac": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "complete posted matches beyond allocation preview suppress queued missed contributions",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-d19417f5e2b6": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "partial matching and release reopen an unsent occurrence without resending a delivered one",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-8dbe24a60677": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "default and detailed external messages exclude money holdings and personal names",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-07dcb683d81b": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "pause stops new external handoffs preserves waiting evidence and works at byte capacity",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-a2d10a30f78c": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "unknown SMTP handoff and orphan claims remain inspectable and never automatically resend",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-762561492285": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "only proved no handoff schedules finite retries and respects current quiet policy",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-60807e867c2d": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "live SMTP is closed even with configured credentials and explicit owner email opt in",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-51a97e5882a6": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "fresh verification opt out and changed destination block queued mail without rerouting",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-34ef6ce07723": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "bounded scanner recovers lost queue hints using ID only jobs",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-7d19237eb65d": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "owner scoped inbox read and preference identities reject foreign resources and recover committed requests",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-b6519eeccb9c": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "reminder settings and synthetic preview routes preserve explicit opt in without creating deliveries",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-f2fd50928e98": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "a stale preference form cannot undo a newer external pause and exact old receipts do not rewind it",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-844408b5eb2b": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "full byte capacity is visible and in app publication rolls back atomically before retry",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-e79957ba404f": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "current dashboard dismissal and disabled dashboard policy suppress queued actions",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-10a84a611834": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"([], '2026-10-24T18:59:59Z', true)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-aeb3931ebc96": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"([], '2026-10-24T19:00:00Z', false)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-17fb6fea84ff": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"([], '2026-10-25T03:59:59Z', false)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-bde0678209eb": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"([], '2026-10-25T04:00:00Z', true)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-03c6eb848c5c": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"(['10:00', '12:00'], '2026-10-24T07:00:00Z', false)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-5cf9b8344490": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"(['10:00', '12:00'], '2026-10-24T09:00:00Z', true)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-9a0abcff9e39": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"(['08:00'], '2026-10-24T04:59:59Z', false)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-998d1fd7cb1f": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"(['Europe/London', '01:00', '02:00'], '2026-10-25T00:30:00Z', false)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-c4538976a916": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"(['Europe/London', '01:00', '02:00'], '2026-10-25T01:30:00Z', false)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-cc14ee16bdbe": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "quiet windows honor inclusive start exclusive end send time and DST wall clock with data set \"(['Europe/London', '01:00', '02:00'], '2026-03-29T01:00:00Z', true)\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-7e174fa5a65e": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "invalid reminder settings reject without retained writes with data set \"(['invalid/zone'])\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-239efb5569e9": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "invalid reminder settings reject without retained writes with data set \"([-1])\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-502c35597baa": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "invalid reminder settings reject without retained writes with data set \"([31])\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-d60f1eada8ed": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "invalid reminder settings reject without retained writes with data set \"(['financial'])\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-865e5153c869": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "invalid reminder settings reject without retained writes with data set \"(['07:00', '07:00'])\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-efab011a5f9e": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "invalid reminder settings reject without retained writes with data set \"(['false'])\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-83c0b02469a7": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "invalid reminder settings reject without retained writes with data set \"([true])\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-65b4bb80741a": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "invalid reminder settings reject without retained writes with data set \"([['1', '1', '1', \u2026]])\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-c5c33eca68a7": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "invalid reminder settings reject without retained writes with data set \"([[]])\"",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-6b3f90b6d42c": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "revised schedule versions require explicit fresh selection and February grace is not skipped",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-82705f350da8": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "SMTP boundary refuses an unfaked manager and treats adapter exceptions as unknown",
+            "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p3-91389e7a8e2c": {
+            "class": "Tests\\Feature\\ReminderConcurrencyTest",
+            "name": "separate PostgreSQL duplicate in app workers publish one atomic logical notification",
+            "file": "tests/Feature/ReminderConcurrencyTest.php"
+        },
+        "case-m6p3-21bc5779b5ec": {
+            "class": "Tests\\Feature\\ReminderConcurrencyTest",
+            "name": "separate PostgreSQL duplicate email workers cannot reconstruct the creators handoff permit",
+            "file": "tests/Feature/ReminderConcurrencyTest.php"
+        },
+        "case-m6p3-94e90b76289d": {
+            "class": "Tests\\Feature\\ReminderConcurrencyTest",
+            "name": "crash after durable SMTP claim leaves an inspectable unknown and scanner never resends",
+            "file": "tests/Feature/ReminderConcurrencyTest.php"
+        },
+        "case-m6p3-daff3b53a425": {
+            "class": "Tests\\Feature\\ReminderConcurrencyTest",
+            "name": "pause committed between claim and handoff blocks simulated SMTP",
+            "file": "tests/Feature/ReminderConcurrencyTest.php"
+        },
+        "case-m6p3-0cb55156af34": {
+            "class": "Tests\\Feature\\ReminderConcurrencyTest",
+            "name": "lost in app transaction rolls back both claim and publication and recovers once",
+            "file": "tests/Feature/ReminderConcurrencyTest.php"
+        },
+        "case-m6p3-5699a1b2bca0": {
+            "class": "Tests\\Feature\\ReminderConcurrencyTest",
+            "name": "reminder history remains immutable and populated downgrade refuses before DDL",
+            "file": "tests/Feature/ReminderConcurrencyTest.php"
+        },
+        "case-m6p3-8a32fefc1386": {
+            "class": "Tests\\Feature\\ReminderTest",
+            "name": "hard export overflow from other retained writers preserves inbox inspection and unconditional pause",
+            "file": "tests/Feature/ReminderTest.php"
         }
     },
     "manual_artifacts": {
@@ -2604,6 +2829,16 @@
             "public_path": "docs/halal-wealth-os/runs/M6-P2-rendered-review.md",
             "sha256": "e0d05ab09b30db7c9ecd53b218288488a454c0c875a9d2538336d98eaa60dbee",
             "scope": "Actual synthetic desktop/mobile source-time evidence, target confirmation and three interrupted request recoveries; separate populated dashboard/current/saved valuation proof. Cycle7 coordinator capacity warnings, retained values, manual fallback and foreign-owner isolation are attributed separately. No live access, exhaustive accessibility certification, CI or acceptance claim."
+        },
+        "m6p3-channel": {
+            "public_path": "docs/halal-wealth-os/runs/M6-P3-channel-selection.md",
+            "sha256": "9c946dfd7ccd6010948eeda04eced5724a227391ea113e8a3b408ba7e80a6f5e",
+            "scope": "Human-approved SMTP selection, disabled synthetic-only access and explicit uncertainty/privacy limits; no live delivery claimed."
+        },
+        "m6p3-rendered": {
+            "public_path": "docs/halal-wealth-os/runs/M6-P3-rendered-review.md",
+            "sha256": "6555f50990b1c1dc6f9661cb5f8b5c386fc5f331bad8c74d44c66623f30a15e2",
+            "scope": "Coordinator actual synthetic browser/save/recovery/foreign-owner/capacity proof and independently inspected settled screenshots; no independent browser execution, hosted delivery or accessibility certification claimed."
         }
     },
     "requirements": {
@@ -4344,6 +4579,94 @@
             ],
             "manual_artifact_ids": ["m6p2-provider-selection"],
             "tool_check": null
+        },
+        "M6-P3-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p3-96e1aca1c124",
+                "case-m6p3-a2d10a30f78c",
+                "case-m6p3-762561492285",
+                "case-m6p3-34ef6ce07723",
+                "case-m6p3-91389e7a8e2c",
+                "case-m6p3-21bc5779b5ec",
+                "case-m6p3-94e90b76289d",
+                "case-m6p3-0cb55156af34",
+                "case-m6p3-5699a1b2bca0",
+                "case-m6p3-8a32fefc1386"
+            ],
+            "manual_artifact_ids": ["m6p3-channel", "m6p3-rendered"],
+            "tool_check": null
+        },
+        "M6-P3-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p3-4a154910cca5",
+                "case-m6p3-42f70bf63f84",
+                "case-m6p3-762561492285",
+                "case-m6p3-51a97e5882a6",
+                "case-m6p3-f2fd50928e98",
+                "case-m6p3-e79957ba404f",
+                "case-m6p3-10a84a611834",
+                "case-m6p3-aeb3931ebc96",
+                "case-m6p3-17fb6fea84ff",
+                "case-m6p3-bde0678209eb",
+                "case-m6p3-03c6eb848c5c",
+                "case-m6p3-5cf9b8344490",
+                "case-m6p3-9a0abcff9e39",
+                "case-m6p3-998d1fd7cb1f",
+                "case-m6p3-c4538976a916",
+                "case-m6p3-cc14ee16bdbe",
+                "case-m6p3-7e174fa5a65e",
+                "case-m6p3-239efb5569e9",
+                "case-m6p3-502c35597baa",
+                "case-m6p3-d60f1eada8ed",
+                "case-m6p3-865e5153c869",
+                "case-m6p3-efab011a5f9e",
+                "case-m6p3-83c0b02469a7",
+                "case-m6p3-65b4bb80741a",
+                "case-m6p3-c5c33eca68a7",
+                "case-m6p3-6b3f90b6d42c"
+            ],
+            "manual_artifact_ids": ["m6p3-channel", "m6p3-rendered"],
+            "tool_check": null
+        },
+        "M6-P3-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p3-4a154910cca5",
+                "case-m6p3-7ac7ef0792ac",
+                "case-m6p3-d19417f5e2b6",
+                "case-m6p3-6b3f90b6d42c"
+            ],
+            "manual_artifact_ids": ["m6p3-channel", "m6p3-rendered"],
+            "tool_check": null
+        },
+        "M6-P3-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p3-8dbe24a60677",
+                "case-m6p3-60807e867c2d",
+                "case-m6p3-7d19237eb65d",
+                "case-m6p3-b6519eeccb9c",
+                "case-m6p3-82705f350da8"
+            ],
+            "manual_artifact_ids": ["m6p3-channel", "m6p3-rendered"],
+            "tool_check": null
+        },
+        "M6-P3-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p3-07dcb683d81b",
+                "case-m6p3-a2d10a30f78c",
+                "case-m6p3-60807e867c2d",
+                "case-m6p3-b6519eeccb9c",
+                "case-m6p3-f2fd50928e98",
+                "case-m6p3-844408b5eb2b",
+                "case-m6p3-daff3b53a425",
+                "case-m6p3-8a32fefc1386"
+            ],
+            "manual_artifact_ids": ["m6p3-channel", "m6p3-rendered"],
+            "tool_check": null
         }
     },
     "fixtures": {
@@ -4478,7 +4801,7 @@
         },
         "F17": {
             "name": "Import and provider retry",
-            "status": "PARTIAL_M6_P2_STATEMENT_PROVIDER_EXECUTED_OUTBOX_FUTURE",
+            "status": "IMPLEMENTED_M6_P3_STATEMENT_PROVIDER_OUTBOX_EXECUTED",
             "case_ids": [
                 "case-m6p1-a4632ba04e7d",
                 "case-m6p1-276ac2db7f81",
@@ -4507,14 +4830,24 @@
                 "case-m6p2-b2609c62f62c",
                 "case-m6p2-2cf0a178c5c0",
                 "case-m6p2-9b945b423434",
-                "case-m6p2-04cede31662a"
+                "case-m6p2-04cede31662a",
+                "case-m6p3-96e1aca1c124",
+                "case-m6p3-a2d10a30f78c",
+                "case-m6p3-762561492285",
+                "case-m6p3-34ef6ce07723",
+                "case-m6p3-91389e7a8e2c",
+                "case-m6p3-21bc5779b5ec",
+                "case-m6p3-94e90b76289d",
+                "case-m6p3-0cb55156af34",
+                "case-m6p3-5699a1b2bca0"
             ],
-            "scope": "Current executed synthetic statement reupload and provider-job retry, duplicate arbitration and durable fanout recovery only. Outbox delivery retry remains future M6-P3; original private fixture inputs are not newly executed.",
+            "scope": "Executed synthetic statement reupload, provider retry and durable reminder outbox duplicate/crash/safe retry cases. SMTP acceptance remains simulated and uncertain outcomes are not resent; original private inputs and live sends are not claimed.",
             "implemented_subscenarios": [
                 "statement_reupload",
-                "provider_job_retry"
+                "provider_job_retry",
+                "outbox_delivery_retry"
             ],
-            "future_subscenarios": ["outbox_delivery_retry"]
+            "future_subscenarios": []
         },
         "F18": {
             "name": "AI trust boundary",

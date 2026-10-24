@@ -189,8 +189,11 @@ final class OwnerExport
     private static function write($output, string $bytes): void
     {
         $position = ftell($output);
-        if ($position === false || $position + strlen($bytes) > self::MAX_BYTES) {
-            throw new RuntimeException('Complete export exceeds the private release size limit.');
+        if ($position === false) {
+            throw new RuntimeException('Private export position is unavailable.');
+        }
+        if ($position + strlen($bytes) > self::MAX_BYTES) {
+            throw new OwnerExportLimit('Complete export exceeds the private release size limit.');
         }
         while ($bytes !== '') {
             $written = fwrite($output, $bytes);

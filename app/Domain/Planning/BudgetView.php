@@ -12,7 +12,7 @@ use stdClass;
 
 final class BudgetView
 {
-    /** @return array{rules: list<array<string, mixed>>, categories: list<array<string, mixed>>, ...} */
+    /** @return array{rules: list<array<string, mixed>>, categories: list<array<string, mixed>>, occurrences: list<array<string,mixed>>, ...} */
     public function month(User $owner, string $month, ?string $activityBefore = null): array
     {
         PlanningInput::month($month);
