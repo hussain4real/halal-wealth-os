@@ -1,5 +1,7 @@
 # M6-P2 implementation checkpoint
 
+Historical engineering checkpoint: M6-P2 was subsequently merged, fully verified and human accepted. See [completion](M6-P2-completion.md) and [acceptance](M6-P2-acceptance.md); unaccepted statements below describe their original checkpoint.
+
 The owner accepted M6-P1 and authorized canonical M6-P2 on 23 October 2026 through
 a sanitized PR to dev, normal merge after exact-head original CI and a fresh
 review, then original post-merge CI and signed progress verification. M6-P1
@@ -184,3 +186,16 @@ selectors, prior manual artifacts and strict hash/refusal guards remain in place
 No application source changed. The remaining authorized cycle is consumed;
 the total ceiling is eight. Affected checks, native TIA and clean full release
 verification must pass again before publication and fresh hosted review.
+
+## Verified delivery
+
+Cycle 8 final clean full release and original exact-head PR CI passed. Fresh
+hosted review completed after the new request with no findings and all threads
+resolved. The normal approved-noreply dev merge preserved the reviewed tree and
+source. Original post-merge CI passed attempt 1 on the actual merge; all seven
+artifacts reconciled 1,150 tests, 8,644 assertions, 71 financial coverage floors,
+112 criteria/invariants, 505 exact selectors and 67-table/six-reader recovery.
+The signed publisher job passed, and anonymous HTTP 200 verified the actual
+visible progress message and PR22 link. See [delivery completion](M6-P2-completion.md).
+All eight cycles and original failures remain retained. Completion metadata is
+local only; M6-P2 and M6 remain unaccepted, with no live access or deployment.

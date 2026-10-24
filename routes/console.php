@@ -9,3 +9,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('market:refresh')->everyFiveMinutes()->withoutOverlapping();
+
+Schedule::command('reminders:tick')->everyMinute()->withoutOverlapping();

@@ -7,9 +7,10 @@ M5-P2 is owner accepted; see [its acceptance](runs/M5-P2-acceptance.md).
 M5-P3 is owner accepted; see [its acceptance](runs/M5-P3-acceptance.md).
 All M5 phases and the M5 milestone are human accepted. M6-P1 is merged and
 human accepted; see [M6-P1 acceptance](runs/M6-P1-acceptance.md).
-M6-P2 is authorized with owner-approved Twelve Data selection for disabled,
-synthetic adapters only. Live access and retention/display entitlement remain blocked.
-Deployment, live-provider access and phases after M6-P2 remain separate decisions.
+M6-P2 is human accepted; see [M6-P2 acceptance](runs/M6-P2-acceptance.md).
+Twelve Data remains disabled and mock-only; live access and entitlement are blocked.
+M6-P3 is authorized for opt-in reminders and approved Laravel SMTP mock-only tests.
+Deployment, live external delivery and later phases remain separate decisions.
 Reporting composes existing source contracts inside a coherent database snapshot;
 it retains dashboard evidence and rule/dismissal history without posting financial
 transactions. See [dashboard policy](DASHBOARD.md), [cash availability](CASH-AVAILABILITY.md),
@@ -59,3 +60,13 @@ Prohibit domain dependency cycles, reverse imports from Ledger into higher modul
 Purification application services compose the existing Ledger expense posting
 port; obligations and allocation/release annotations never post cash. See
 [purification recording policy](PURIFICATION.md).
+
+## M6-P3 reminder delivery
+
+Reminders compose current annotated dashboard episodes and explicitly selected incoming schedule versions. Full posted, unreleased matches suppress missed-contribution prompts; a goal funding review is not proof of a missed bank deposit. All rules/channels default off. Qatar calendar due/grace days are distinct from configured delivery timezone, local send time and quiet hours. Current and two preceding months are checked; grace is bounded to 30 days.
+
+Immutable preferences, logical episodes, channel intents, claims, results and read receipts retain owner-scoped history. A bounded mutable pause control is the safety exception; its fixed-width generation fences stale settings forms. Pause works without adding evidence even at hard export capacity. Exact committed preference retries recover before current-token/capacity checks and never rewind the control. Admission is capped at512 logical episodes, two channels and three proved-safe attempts; retained history is not pruned to regain capacity. Complete owner export size is checked, and capacity is visible.
+
+The bounded scanner invokes ID-only jobs synchronously, avoiding persistent queue-hint growth. In-app claim/publication is one transaction. SMTP commits a claim before handoff; only its creating stack holds the permit. Current verification/email, preferences, detail, matching/dismissal, timing and pause are rechecked under the owner advisory lock and current user-row lock. Uncertain claims never grant a new send, including restored evidence. Only proved no-handoff failures retry after one then five minutes, at most three attempts. SMTP has no exactly-once guarantee.
+
+Laravel SMTP is owner-approved for synthetic mock-only testing. The reminder adapter requires the testing environment plus an actual mail fake, independent of Fortify mail. Generic content is a private-page link; explicit review detail adds only review type/due date. No balances, holdings, amounts or personal financial names are included. No live delivery, account or credentials are enabled. All seven new owner relations participate in the exact74-table catalog and populated encrypted recovery, with a seventh reminder reader fingerprint.

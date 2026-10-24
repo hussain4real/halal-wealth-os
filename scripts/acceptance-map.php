@@ -41,7 +41,7 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     $required = [];
     foreach ($roadmap['phases'] as $phase) {
         $required = [...$required, ...$phase['acceptanceIds']];
-        if ($phase['id'] === 'M6-P2') {
+        if ($phase['id'] === 'M6-P3') {
             break;
         }
     }
@@ -112,14 +112,20 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
             continue;
         }
         if ($id === 'F17') {
-            if (($fixture['status'] ?? null) !== 'PARTIAL_M6_P2_STATEMENT_PROVIDER_EXECUTED_OUTBOX_FUTURE' || ($fixture['case_ids'] ?? []) === []
-                || ($fixture['implemented_subscenarios'] ?? null) !== ['statement_reupload', 'provider_job_retry'] || ($fixture['future_subscenarios'] ?? null) !== ['outbox_delivery_retry']) {
-                throw new RuntimeException('BLOCKED: F17 requires explicit executed statement/provider evidence and future outbox limits.');
+            if (($fixture['status'] ?? null) !== 'IMPLEMENTED_M6_P3_STATEMENT_PROVIDER_OUTBOX_EXECUTED' || ($fixture['case_ids'] ?? []) === []
+                || ($fixture['implemented_subscenarios'] ?? null) !== ['statement_reupload', 'provider_job_retry', 'outbox_delivery_retry'] || ($fixture['future_subscenarios'] ?? null) !== []) {
+                throw new RuntimeException('BLOCKED: F17 requires explicit executed statement, provider and outbox retry evidence.');
             }
+            $families = [];
             foreach ($fixture['case_ids'] as $caseId) {
-                if (! isset($map['cases'][$caseId]) || (! str_starts_with($map['cases'][$caseId]['file'], 'tests/Feature/StatementImport') && ! in_array($map['cases'][$caseId]['file'], ['tests/Feature/MarketRefreshTest.php', 'tests/Feature/MarketHttpTest.php', 'tests/Feature/MarketConcurrencyTest.php'], true))) {
-                    throw new RuntimeException('BLOCKED: F17 statement/provider evidence must resolve an exact implemented import case.');
+                if (! isset($map['cases'][$caseId]) || (! str_starts_with($map['cases'][$caseId]['file'], 'tests/Feature/StatementImport') && ! in_array($map['cases'][$caseId]['file'], ['tests/Feature/MarketRefreshTest.php', 'tests/Feature/MarketHttpTest.php', 'tests/Feature/MarketConcurrencyTest.php', 'tests/Feature/ReminderTest.php', 'tests/Feature/ReminderConcurrencyTest.php'], true))) {
+                    throw new RuntimeException('BLOCKED: F17 evidence must resolve an exact implemented import/provider/outbox case.');
                 }
+                $file = $map['cases'][$caseId]['file'];
+                $families[str_contains($file, 'StatementImport') ? 'statement' : (str_contains($file, 'Reminder') ? 'outbox' : 'provider')] = true;
+            }
+            if (count($families) !== 3) {
+                throw new RuntimeException('BLOCKED: F17 requires all three executed retry families.');
             }
 
             continue;

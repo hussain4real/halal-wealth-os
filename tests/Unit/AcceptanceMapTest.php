@@ -21,7 +21,7 @@ beforeEach(function () {
 
 test('acceptance map resolves exact configured cases and explicit retained evidence without claiming a tool pass', function () {
     $report = HalalOS\Verification\acceptanceMap($this->acceptanceMap, $this->acceptanceJunit, base_path());
-    expect($report['requirements'])->toHaveCount(112)->and($report)->not->toHaveKey('result');
+    expect($report['requirements'])->toHaveCount(117)->and($report)->not->toHaveKey('result');
     expect(array_column($report['fixtures'], 'status'))->toBe(array_column($this->acceptanceMap['fixtures'], 'status'));
 });
 
@@ -71,9 +71,9 @@ test('acceptance map refuses invalid configured requirement status', function ()
 
 test('acceptance map refuses expanded or unexecuted F17 provider and outbox scope', function (string $fault) {
     if ($fault === 'expanded') {
-        $this->acceptanceMap['fixtures']['F17']['implemented_subscenarios'][] = 'outbox_delivery_retry';
+        $this->acceptanceMap['fixtures']['F17']['implemented_subscenarios'][] = 'live_email';
     } elseif ($fault === 'future-omitted') {
-        $this->acceptanceMap['fixtures']['F17']['future_subscenarios'] = [];
+        $this->acceptanceMap['fixtures']['F17']['future_subscenarios'] = ['outbox_delivery_retry'];
     } elseif ($fault === 'empty') {
         $this->acceptanceMap['fixtures']['F17']['case_ids'] = [];
     } else {

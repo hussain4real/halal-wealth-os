@@ -22,6 +22,7 @@ const valid = () => ({
         cash: source,
         imports: source,
         market: source,
+        reminders: source,
         positions: source,
         reservations: source,
         shariah: source,

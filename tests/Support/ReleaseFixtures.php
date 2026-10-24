@@ -91,6 +91,8 @@ final class ReleaseFixtures
             Http::preventStrayRequests();
         }
 
+        ReminderRecoveryFixtures::seed($owner, $foreign);
+
         return ['owner' => (string) $owner->id, 'foreign' => (string) $foreign->id, 'bank' => (string) $bank->id,
             'goal' => (string) $goal->id, 'portfolio' => (string) $fractionalPortfolio->id,
             'market_price_account' => (string) $marketPrice['account']->id, 'market_price_asset' => (string) $marketPrice['asset']->id,

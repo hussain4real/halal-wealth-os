@@ -4246,6 +4246,325 @@
             "order": ["id"]
         },
         {
+            "table": "reminder_channels",
+            "scope": "owner",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "notification_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "channel",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
+            "table": "reminder_claims",
+            "scope": "owner",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "channel_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "ordinal",
+                    "type": "smallint",
+                    "udt": "int2",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "permit_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "destination_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
+            "table": "reminder_controls",
+            "scope": "owner",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "external_paused",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "generation",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
+            "table": "reminder_notifications",
+            "scope": "owner",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "episode_key",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "rule",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "source_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "due_date",
+                    "type": "date",
+                    "udt": "date",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
+            "table": "reminder_preferences",
+            "scope": "owner",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "idempotency_key",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "payload_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "version",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "supersedes_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "data",
+                    "type": "jsonb",
+                    "udt": "jsonb",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
+            "table": "reminder_reads",
+            "scope": "owner",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "notification_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "read_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
+            "table": "reminder_results",
+            "scope": "owner",
+            "order": ["id"],
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "claim_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "preference_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "outcome",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "safe_code",
+                    "type": "character varying",
+                    "udt": "varchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "message_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "retry_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "completed_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ]
+        },
+        {
             "table": "sessions",
             "scope": "excluded",
             "columns": [

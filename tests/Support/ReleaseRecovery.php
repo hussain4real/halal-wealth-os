@@ -5,6 +5,7 @@ namespace Tests\Support;
 use App\Domain\Imports\StatementImports;
 use App\Domain\Integrations\MarketRefresh;
 use App\Domain\Ledger\FinancialSnapshot;
+use App\Domain\Notifications\Reminders;
 use App\Domain\Planning\GoalView;
 use App\Domain\Portfolio\PortfolioRead;
 use App\Domain\Portfolio\PositionPricing;
@@ -222,7 +223,7 @@ final class ReleaseRecovery
         $owner = User::findOrFail($fixture['owner']);
         $snapshot = app(FinancialSnapshot::class);
         $portfolio = app(PortfolioRead::class);
-        $readers = ['market' => hash('sha256', json_encode([
+        $readers = ['reminders' => hash('sha256', json_encode(app(Reminders::class)->inbox($owner), JSON_THROW_ON_ERROR)), 'market' => hash('sha256', json_encode([
             'status' => app(MarketRefresh::class)->status($owner),
             'price' => app(PositionPricing::class)->value($owner, $fixture['market_price_account'], ['kind' => 'unitized_fund', 'currency' => 'USD', 'quantity' => '1', 'cost_basis' => null, 'unit_price' => null, 'asset_family' => DB::table('portfolio_assets')->where('id', $fixture['market_price_asset'])->value('family_reference')], null, $cutoff),
             'fx' => app(ValuationFx::class)->convert($owner, '100', Currency::USD, Currency::QAR, $cutoff, 'reporting'),
