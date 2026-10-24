@@ -11,3 +11,5 @@ Artisan::command('inspire', function () {
 Schedule::command('market:refresh')->everyFiveMinutes()->withoutOverlapping();
 
 Schedule::command('reminders:tick')->everyMinute()->withoutOverlapping();
+
+Schedule::command('drive:tick')->everyMinute()->withoutOverlapping();

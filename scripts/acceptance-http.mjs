@@ -453,6 +453,45 @@ try {
     const importMarkers = imported.private_markers;
     delete imported.private_markers;
     report.statement_import = imported;
+    const callbackGuest = new Actor();
+    const callbackDenied = await callbackGuest.request(
+        'GET',
+        '/drive/callback?state=' +
+            'a'.repeat(64) +
+            '&code=synthetic-native-callback-code',
+        undefined,
+        { headers: { Accept: 'text/html' }, status: [401] },
+    );
+    assert.equal(callbackDenied.location, null);
+    const drivePage = page((await owner.request('GET', '/drive')).body).props;
+    assert.equal(drivePage.enabled, false);
+    assert.equal(drivePage.connection, null);
+    assert.ok(
+        drivePage.snapshots.some(
+            (snapshot) => snapshot.id === String(saved.id),
+        ),
+    );
+    const blockedDrive = JSON.parse(
+        (await owner.request('POST', '/drive/connect', {}, { status: [422] }))
+            .body,
+    );
+    assert.equal(blockedDrive.definitive_no_write, true);
+    for (const actor of [foreign, admin]) {
+        const theirs = page((await actor.request('GET', '/drive')).body).props;
+        assert.equal(
+            theirs.snapshots.some(
+                (snapshot) => snapshot.id === String(saved.id),
+            ),
+            false,
+        );
+    }
+    report.drive_export = {
+        mode: 'disabled',
+        actual_owner_selection: true,
+        foreign_admin_denial: true,
+        live_connection: false,
+        callback_no_redirect: true,
+    };
     report.market_data = await marketJourney({
         owner,
         foreign,

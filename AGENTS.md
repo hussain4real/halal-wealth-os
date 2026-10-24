@@ -569,3 +569,25 @@ CI/fresh review before the already authorized normal approved-noreply dev
 merge, original post-merge CI and existing signed public progress verification.
 All prior sole-writer, mock-only SMTP, privacy, acceptance and deployment
 boundaries remain unchanged.
+
+## Current M6-P4 authority
+
+The human owner accepted M6-P3 on24 October2026 and authorized canonical M6-P4
+through independent source/rendered review, a sanitized PR to dev, normal
+approved-noreply merge after original exact-head CI and fresh hosted review,
+then original post-merge CI and existing signed public progress verification.
+Preserve all prior phase failures and eight-cycle history. M6-P4 has at most six
+new scoped implementation/verification cycles. One implementation writer; no
+implementation subagents. Independent grounding/design/source/sanitation and
+rendered reviewers stay source-read-only with exclusively owned resources.
+
+The owner explicitly approved Google drive.file plus openid/email scopes for
+disabled synthetic mock-only tests. No connected account is assumed; no live
+consent request, OAuth connection, upload, credential creation or permission
+change is authorized. Require deliberate actual-account/target confirmation,
+owner isolation, encrypted credentials, bounded queued export with manifest,
+safe expiry/disconnect/revocation and no public-link sharing. Preserve starter
+features, PHP8.5 floor, native TIA, uncached release/recovery gates and all
+financial invariants. Google Drive export does not replace database backup.
+No later phase, milestone acceptance, deployment, main/stage changes, new
+credentials or history rewriting. M6-P4/M6 acceptance remains human-only.

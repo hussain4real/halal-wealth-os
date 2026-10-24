@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Support\Release\OwnerExport;
 use Illuminate\Support\Facades\DB;
 use Inertia\Testing\AssertableInertia;
+use Tests\Support\DriveFixtures;
 use Tests\Support\ReleaseFixtures;
 use Tests\TestCase;
 
@@ -35,8 +36,8 @@ test('complete owner export contains every financial section and excludes authen
     $document = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
     expect($document['schema_version'])->toBe(2)
         ->and($document['profile']['id'])->toBe((string) $owner->id)
-        ->and($document['data'])->toHaveCount(64)
-        ->and($document['manifest']['sections'])->toHaveCount(64)
+        ->and($document['data'])->toHaveCount(67)
+        ->and($document['manifest']['sections'])->toHaveCount(67)
         ->and($document['data'])->toHaveKeys(['market_mappings', 'market_attempts', 'market_results', 'market_admissions', 'reminder_preferences', 'reminder_controls', 'reminder_notifications', 'reminder_channels', 'reminder_claims', 'reminder_results', 'reminder_reads'])
         ->and($document['profile'])->not->toHaveKeys(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes']);
     ob_start();
@@ -159,4 +160,21 @@ test('authenticated data settings page exposes complete export without embedding
     $owner = User::factory()->create();
     $this->actingAs($owner)->get('/settings/data')->assertOk()
         ->assertInertia(fn (AssertableInertia $page) => $page->component('settings/Data')->missing('records')->missing('export'));
+});
+
+test('owner exports include safe drive metadata while excluding entire oauth and token relations', function () {
+    $wire = new DriveFixtures;
+    $wire->fake();
+    $this->owner = User::factory()->create();
+    $wire->ready($this->owner);
+    DriveFixtures::queued($this->owner, DriveFixtures::snapshot($this->owner));
+    $download = app(OwnerExport::class)->download($this->owner);
+    $response = $download;
+    ob_start();
+    $response->sendContent();
+    $bytes = ob_get_clean();
+    expect($bytes)->not->toContain('synthetic-access', 'synthetic-refresh', 'ciphertext', 'oauth_verifier');
+    $json = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
+    expect($bytes)->toContain('drive_connections', 'drive_operations', 'drive_events');
+    expect($json)->toBeArray();
 });

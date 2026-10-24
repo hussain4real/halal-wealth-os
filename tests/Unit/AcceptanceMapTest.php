@@ -21,7 +21,7 @@ beforeEach(function () {
 
 test('acceptance map resolves exact configured cases and explicit retained evidence without claiming a tool pass', function () {
     $report = HalalOS\Verification\acceptanceMap($this->acceptanceMap, $this->acceptanceJunit, base_path());
-    expect($report['requirements'])->toHaveCount(117)->and($report)->not->toHaveKey('result');
+    expect($report['requirements'])->toHaveCount(122)->and($report)->not->toHaveKey('result');
     expect(array_column($report['fixtures'], 'status'))->toBe(array_column($this->acceptanceMap['fixtures'], 'status'));
 });
 

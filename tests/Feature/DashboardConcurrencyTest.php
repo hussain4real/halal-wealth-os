@@ -67,10 +67,15 @@ test('all retained dashboard annotation tables reject committed mutation and dow
 });
 test('empty dashboard schema roundtrip preserves preceding ledger evidence', function () {
     $before = DB::table('postings')->get()->toJson();
+    $drive = require database_path('migrations/2026_10_24_100000_create_drive_exports.php');
+    $drive->down();
+    expect(Schema::hasTable('drive_operations'))->toBeFalse();
     $m = require database_path('migrations/2026_10_21_083000_create_dashboard_evidence.php');
     $m->down();
     expect(Schema::hasTable('dashboard_settings'))->toBeFalse();
     $m->up();
+    $drive->up();
+    expect(Schema::hasTable('drive_operations'))->toBeTrue();
     expect(DB::table('postings')->get()->toJson())->toBe($before);
     $this->assertDatabaseCount('dashboard_snapshots', 0);
 });

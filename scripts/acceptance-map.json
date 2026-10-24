@@ -2751,6 +2751,446 @@
             "class": "Tests\\Feature\\ReminderTest",
             "name": "hard export overflow from other retained writers preserves inbox inspection and unconditional pause",
             "file": "tests/Feature/ReminderTest.php"
+        },
+        "case-m6p4-e3c2093b29f7": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "drive is disabled outside explicit synthetic mock runtime with an external epoch",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-94c139ad4822": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "oauth uses approved exact scopes pkce and one owner session bound callback",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-71da93ea3c5a": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "expired denied malformed and incorrectly decrypted callbacks cannot connect",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-bcb3fc85a895": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "wrong school account can be rejected before any destination or report is created",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-cf04975e027d": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "explicit account and destination report confirmation queues only immutable owner selected bytes",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-05a123fcdf8f": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "committed exact confirmation recovers before review expiry disconnect or capacity validation",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-a4ea4a3825cf": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "review expiry explicit acknowledgement and replacement invalidate uncommitted selections",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-34357e2d8549": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "destination substitution or new sharing fails review and the final handoff",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-d4b8a5135af0": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "unknown committed uploads reconcile the same remote ID after lost response without duplicate create",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-117e9d26910e": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "uncommitted remote failures retry only the persisted ID and stop after three uncertain attempts",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-55350de7aea4": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "remote content conflict cannot overwrite or claim success",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-8821cd24d8d9": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "expired tokens refresh without losing an omitted refresh token and recheck actual identity",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-6788cc00ea7c": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "revoked or wrong decrypted credentials fail safely and require reconnection with data set \"('cipher')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-afee593d31de": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "revoked or wrong decrypted credentials fail safely and require reconnection with data set \"('refresh')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-b7c6c933a0e8": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "revoked or wrong decrypted credentials fail safely and require reconnection with data set \"('identity')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-36475b8664e9": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "local disconnect survives remote revoke uncertainty and separates a reconnect from old work",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-31ebdc4cec9c": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "external restore epoch holds old work while preserving receipt inspection and local stop",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-631689598904": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "foreign owner and admin cannot inspect report connection receipt or disconnect",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-db48973e48ff": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "unverified owner cannot admit and handoff rechecks current verification",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-6629c56cd812": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "queued work expires without an upload after its explicit delivery deadline",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-547b16fcc93e": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "private drive page and json routes expose actual review and safe definitive failures",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-fbf77ad43bca": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "a newer oauth start supersedes an already consumed callback and rejected tokens are revoked",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-5ea64641b3da": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "credential rotation commits before later report and target validation can fail",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-e57b7b14cc4f": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "final claim crash is visibly uncertain after lease expiry and never grants a fourth create",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-edcdc4cab099": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "expired upload permission preserves uncertainty and permits only exact ID inspection with data set \"(true)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-8673419c74a3": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "expired upload permission preserves uncertainty and permits only exact ID inspection with data set \"(false)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-a657b4e72c76": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "local disconnect remains reachable after app email verification is removed",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-7a630746a070": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "Drive size preflight and final envelope reject oversize without changing ordinary saved downloads with data set \"('preflight')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-cc92fb3d4416": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "Drive size preflight and final envelope reject oversize without changing ordinary saved downloads with data set \"('envelope')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-6bb3c6187529": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "only one destination operation is admitted and exact folder retries recover its receipt",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-13538c656484": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "separate PostgreSQL duplicate confirmations recover one durable report intent",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-bb5c7f5ad3c3": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "separate PostgreSQL workers serialize one remote mutation claim",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-652b533325a5": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "disconnect committed between durable claim and handoff blocks upload and credential use",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-19743a0c1188": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "separate PostgreSQL disconnect and worker race ends locally stopped without a duplicate intent",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-1d15aa7aaa05": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "remote success followed by local result loss reconciles retained ID after crash",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-231ce7f319fb": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "held restored low IDs cannot starve a current epoch operation",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-ff814041632c": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "operation capacity never blocks receipt recovery inspection or local disconnect",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-2775cccfc377": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "Drive migration refuses populated downgrade and guards retained request and owner identities",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-448a8454e385": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "competing revoke callers cannot consume the active permit or erase its credential before handoff",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-3265d6e75b6d": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "disconnect preserves a possibly committed remote report as stopped unknown rather than cancelled",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-9dd4cd632b89": {
+            "class": "Tests\\Feature\\DriveConcurrencyTest",
+            "name": "hard owner export overflow compensates a rejected callback without retaining credentials or raw errors",
+            "file": "tests/Feature/DriveConcurrencyTest.php"
+        },
+        "case-m6p4-64e82724c57c": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google boundary accepts only bounded bearer tokens with the approved exact scopes with data set \"dataset \"extra scope\"\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-079499e704fc": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google boundary accepts only bounded bearer tokens with the approved exact scopes with data set \"dataset \"missing scope\"\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-3be3265b3637": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google boundary accepts only bounded bearer tokens with the approved exact scopes with data set \"dataset \"bad type\"\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-eac17595e79d": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google boundary accepts only bounded bearer tokens with the approved exact scopes with data set \"dataset \"string expiry\"\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-bf7f405c4f36": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google boundary accepts only bounded bearer tokens with the approved exact scopes with data set \"dataset \"short expiry\"\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-0ae948106a7c": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google boundary accepts only bounded bearer tokens with the approved exact scopes with data set \"dataset \"huge expiry\"\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-dcf1697dbdd6": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google boundary accepts only bounded bearer tokens with the approved exact scopes with data set \"dataset \"empty access\"\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-7abac9a83e4d": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google boundary accepts only bounded bearer tokens with the approved exact scopes with data set \"dataset \"oversize access\"\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-50a93a21bc42": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google boundary accepts only bounded bearer tokens with the approved exact scopes with data set \"dataset \"control access\"\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-26bbc911119b": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google refresh accepts the documented email scope alias and preserves omitted refresh credentials",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-d3e081d378cb": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google identity requires a real verified response and never infers account kind from domain with data set \"([''])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-4584ab870dfb": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google identity requires a real verified response and never infers account kind from domain with data set \"(['invalid'])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-9d3fbcacbb61": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google identity requires a real verified response and never infers account kind from domain with data set \"([false])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-cd5f0c08da16": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google identity requires a real verified response and never infers account kind from domain with data set \"(['true'])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-a18c44831c71": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "google identity requires a real verified response and never infers account kind from domain with data set \"(['xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\u2026xxxxxx'])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-8f9c23d3ee45": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('synthetic-secret', 302, 'transport_unknown')\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-aa9737f2ab2c": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('synthetic-secret', 401, 'reconnect_required')\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-5840b9b97af1": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('synthetic-secret', 403, 'reconnect_required')\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-34018cd981e5": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('synthetic-secret', 429, 'transport_unknown')\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-f3e135190272": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('synthetic-secret', 503, 'transport_unknown')\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-79163d354624": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('not-json', 200, 'invalid_response')\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-1b01bc3f39dd": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('[]', 200, 'invalid_response')\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-dc718e681717": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('sssssssssssssssssssssssssssss\u2026ssssss', 200, 'response_too_large')\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-52db8bc80874": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "unmatched mock requests fail closed rather than reaching Google",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-387067351b44": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "remote IDs and missing generateIds payloads are validated at the boundary",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-d422b0cd51cc": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "actual file privacy uses Drive me and permission identity independently of OIDC sub",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-787c3f16fc2e": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"(['other-id'])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-708976675462": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"(['text/plain'])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-c33a70d63d6b": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"([true])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-641685eee28e": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"(['school-shared-drive'])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-1da95dcf04ab": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"([[]]) #1\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-35072d2ca85c": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"([[[false, 'other-owner']]])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-120270957870": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"([[]]) #2\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-4138489c220c": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"([[['public', 'anyone', 'reader']]])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-02d696537f1c": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"([[['drive-permission-not-oidc-sub', 'user', 'reader']]])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-3cedf9fab1ad": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"([[['drive-permission-not-oidc-sub', 'group', 'owner']]])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-e87cb42ba8ee": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"([[['drive-permission-not-oidc-sub', 'user', 'owner'], ['foreign', 'user', 'reader']]])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-6d6c5b0b2e48": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "missing foreign inherited and shared permissions or changed destination fail closed with data set \"([[false]])\"",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-446f898740fa": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "remote file parent substitution and mismatched size metadata or bytes never prove upload",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-f6e7a231d235": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "duplicate create returns 409 for inspection instead of allocating a different remote identity",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-66c61c2104d8": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "owner exports include safe drive metadata while excluding entire oauth and token relations",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-m6p4-1b3b8c24dc1a": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "valid authenticated oauth callback consumes local state without retaining query credentials in session",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-e66056c25f2c": {
+            "class": "Tests\\Unit\\DriveCallbackPrivacyTest",
+            "name": "oauth guest callback does not save its code in an intended login URL",
+            "file": "tests/Unit/DriveCallbackPrivacyTest.php"
+        },
+        "case-m6p4-1f8fcdecebad": {
+            "class": "Tests\\Unit\\DriveCallbackPrivacyTest",
+            "name": "oauth unverified callback fails without flashing code or retaining an intended verification URL",
+            "file": "tests/Unit/DriveCallbackPrivacyTest.php"
+        },
+        "case-m6p4-4cdb4a7125a9": {
+            "class": "Tests\\Unit\\DriveCallbackPrivacyTest",
+            "name": "oauth callback preserves the production two factor requirement without a credential redirect",
+            "file": "tests/Unit/DriveCallbackPrivacyTest.php"
+        },
+        "case-m6p4-b43ea761b855": {
+            "class": "Tests\\Unit\\DriveCallbackPrivacyTest",
+            "name": "throttled html oauth callback cannot retain credentials before its controller",
+            "file": "tests/Unit/DriveCallbackPrivacyTest.php"
+        },
+        "case-m6p4-35dc983dfaa2": {
+            "class": "Tests\\Unit\\DriveCallbackPrivacyTest",
+            "name": "stale authenticated session oauth callback cannot redirect or retain credentials",
+            "file": "tests/Unit/DriveCallbackPrivacyTest.php"
         }
     },
     "manual_artifacts": {
@@ -2839,6 +3279,16 @@
             "public_path": "docs/halal-wealth-os/runs/M6-P3-rendered-review.md",
             "sha256": "6daf7d18316352d240e234f7c1b6f747f03c5032a737ea5f884d75b0fcacad78",
             "scope": "Coordinator actual synthetic browser/save/recovery/foreign-owner/capacity proof and independently inspected settled screenshots; no independent browser execution, hosted delivery or accessibility certification claimed."
+        },
+        "m6p4-scopes": {
+            "public_path": "docs/halal-wealth-os/runs/M6-P4-scope-selection.md",
+            "sha256": "9fd77d793232c5d1c59d7c1fec0db18045901c0cfe2ba21bfc1ca179efbde08b",
+            "scope": "Approved scope design only; disabled synthetic mocks, no consent or live account."
+        },
+        "m6p4-rendered": {
+            "public_path": "docs/halal-wealth-os/runs/M6-P4-rendered-review.md",
+            "sha256": "0c0acd56564803d5c58db215a75a537a0719ca994c5f611f8d4a4991758d1b1e",
+            "scope": "Coordinator actual synthetic browser/recovery/foreign-owner/byte proof; independent pixel/source review only, no independent execution or accessibility certification."
         }
     },
     "requirements": {
@@ -4666,6 +5116,268 @@
                 "case-m6p3-8a32fefc1386"
             ],
             "manual_artifact_ids": ["m6p3-channel", "m6p3-rendered"],
+            "tool_check": null
+        },
+        "M6-P4-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p4-94c139ad4822",
+                "case-m6p4-bcb3fc85a895",
+                "case-m6p4-cf04975e027d",
+                "case-m6p4-05a123fcdf8f",
+                "case-m6p4-8821cd24d8d9",
+                "case-m6p4-b7c6c933a0e8",
+                "case-m6p4-631689598904",
+                "case-m6p4-547b16fcc93e",
+                "case-m6p4-fbf77ad43bca",
+                "case-m6p4-13538c656484",
+                "case-m6p4-d3e081d378cb",
+                "case-m6p4-4584ab870dfb",
+                "case-m6p4-9d3fbcacbb61",
+                "case-m6p4-cd5f0c08da16",
+                "case-m6p4-a18c44831c71",
+                "case-m6p4-d422b0cd51cc",
+                "case-m6p4-787c3f16fc2e",
+                "case-m6p4-708976675462",
+                "case-m6p4-c33a70d63d6b",
+                "case-m6p4-641685eee28e",
+                "case-m6p4-1da95dcf04ab",
+                "case-m6p4-35072d2ca85c",
+                "case-m6p4-120270957870",
+                "case-m6p4-4138489c220c",
+                "case-m6p4-02d696537f1c",
+                "case-m6p4-3cedf9fab1ad",
+                "case-m6p4-e87cb42ba8ee",
+                "case-m6p4-6d6c5b0b2e48",
+                "case-m6p4-f6e7a231d235",
+                "case-m6p4-1b3b8c24dc1a",
+                "case-m6p4-e66056c25f2c",
+                "case-m6p4-1f8fcdecebad",
+                "case-m6p4-4cdb4a7125a9",
+                "case-m6p4-b43ea761b855",
+                "case-m6p4-35dc983dfaa2"
+            ],
+            "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
+            "tool_check": null
+        },
+        "M6-P4-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p4-bcb3fc85a895",
+                "case-m6p4-cf04975e027d",
+                "case-m6p4-05a123fcdf8f",
+                "case-m6p4-34357e2d8549",
+                "case-m6p4-d4b8a5135af0",
+                "case-m6p4-55350de7aea4",
+                "case-m6p4-31ebdc4cec9c",
+                "case-m6p4-631689598904",
+                "case-m6p4-547b16fcc93e",
+                "case-m6p4-5ea64641b3da",
+                "case-m6p4-7a630746a070",
+                "case-m6p4-cc92fb3d4416",
+                "case-m6p4-6bb3c6187529",
+                "case-m6p4-13538c656484",
+                "case-m6p4-bb5c7f5ad3c3",
+                "case-m6p4-19743a0c1188",
+                "case-m6p4-ff814041632c",
+                "case-m6p4-2775cccfc377",
+                "case-m6p4-3265d6e75b6d",
+                "case-m6p4-7abac9a83e4d",
+                "case-m6p4-8f9c23d3ee45",
+                "case-m6p4-aa9737f2ab2c",
+                "case-m6p4-5840b9b97af1",
+                "case-m6p4-34018cd981e5",
+                "case-m6p4-f3e135190272",
+                "case-m6p4-79163d354624",
+                "case-m6p4-1b01bc3f39dd",
+                "case-m6p4-dc718e681717",
+                "case-m6p4-787c3f16fc2e",
+                "case-m6p4-708976675462",
+                "case-m6p4-c33a70d63d6b",
+                "case-m6p4-641685eee28e",
+                "case-m6p4-1da95dcf04ab",
+                "case-m6p4-35072d2ca85c",
+                "case-m6p4-120270957870",
+                "case-m6p4-4138489c220c",
+                "case-m6p4-02d696537f1c",
+                "case-m6p4-3cedf9fab1ad",
+                "case-m6p4-e87cb42ba8ee",
+                "case-m6p4-6d6c5b0b2e48",
+                "case-m6p4-446f898740fa",
+                "case-m6p4-f6e7a231d235",
+                "case-m6p4-66c61c2104d8"
+            ],
+            "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
+            "tool_check": null
+        },
+        "M6-P4-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p4-d4b8a5135af0",
+                "case-m6p4-8821cd24d8d9",
+                "case-m6p4-6788cc00ea7c",
+                "case-m6p4-afee593d31de",
+                "case-m6p4-b7c6c933a0e8",
+                "case-m6p4-36475b8664e9",
+                "case-m6p4-fbf77ad43bca",
+                "case-m6p4-5ea64641b3da",
+                "case-m6p4-e57b7b14cc4f",
+                "case-m6p4-652b533325a5",
+                "case-m6p4-1d15aa7aaa05",
+                "case-m6p4-448a8454e385",
+                "case-m6p4-3265d6e75b6d",
+                "case-m6p4-9dd4cd632b89",
+                "case-m6p4-64e82724c57c",
+                "case-m6p4-079499e704fc",
+                "case-m6p4-3be3265b3637",
+                "case-m6p4-eac17595e79d",
+                "case-m6p4-bf7f405c4f36",
+                "case-m6p4-0ae948106a7c",
+                "case-m6p4-dcf1697dbdd6",
+                "case-m6p4-7abac9a83e4d",
+                "case-m6p4-50a93a21bc42",
+                "case-m6p4-26bbc911119b",
+                "case-m6p4-d3e081d378cb",
+                "case-m6p4-4584ab870dfb",
+                "case-m6p4-9d3fbcacbb61",
+                "case-m6p4-cd5f0c08da16",
+                "case-m6p4-a18c44831c71",
+                "case-m6p4-8f9c23d3ee45",
+                "case-m6p4-aa9737f2ab2c",
+                "case-m6p4-5840b9b97af1",
+                "case-m6p4-34018cd981e5",
+                "case-m6p4-f3e135190272",
+                "case-m6p4-79163d354624",
+                "case-m6p4-1b01bc3f39dd",
+                "case-m6p4-dc718e681717",
+                "case-m6p4-387067351b44",
+                "case-m6p4-66c61c2104d8",
+                "case-m6p4-1b3b8c24dc1a",
+                "case-m6p4-e66056c25f2c",
+                "case-m6p4-1f8fcdecebad",
+                "case-m6p4-4cdb4a7125a9",
+                "case-m6p4-b43ea761b855",
+                "case-m6p4-35dc983dfaa2"
+            ],
+            "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
+            "tool_check": null
+        },
+        "M6-P4-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p4-e3c2093b29f7",
+                "case-m6p4-05a123fcdf8f",
+                "case-m6p4-6788cc00ea7c",
+                "case-m6p4-afee593d31de",
+                "case-m6p4-b7c6c933a0e8",
+                "case-m6p4-36475b8664e9",
+                "case-m6p4-31ebdc4cec9c",
+                "case-m6p4-631689598904",
+                "case-m6p4-fbf77ad43bca",
+                "case-m6p4-a657b4e72c76",
+                "case-m6p4-652b533325a5",
+                "case-m6p4-19743a0c1188",
+                "case-m6p4-231ce7f319fb",
+                "case-m6p4-ff814041632c",
+                "case-m6p4-448a8454e385",
+                "case-m6p4-3265d6e75b6d"
+            ],
+            "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
+            "tool_check": null
+        },
+        "M6-P4-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m6p4-e3c2093b29f7",
+                "case-m6p4-94c139ad4822",
+                "case-m6p4-71da93ea3c5a",
+                "case-m6p4-bcb3fc85a895",
+                "case-m6p4-cf04975e027d",
+                "case-m6p4-05a123fcdf8f",
+                "case-m6p4-a4ea4a3825cf",
+                "case-m6p4-34357e2d8549",
+                "case-m6p4-d4b8a5135af0",
+                "case-m6p4-117e9d26910e",
+                "case-m6p4-55350de7aea4",
+                "case-m6p4-8821cd24d8d9",
+                "case-m6p4-6788cc00ea7c",
+                "case-m6p4-afee593d31de",
+                "case-m6p4-b7c6c933a0e8",
+                "case-m6p4-36475b8664e9",
+                "case-m6p4-31ebdc4cec9c",
+                "case-m6p4-631689598904",
+                "case-m6p4-db48973e48ff",
+                "case-m6p4-6629c56cd812",
+                "case-m6p4-547b16fcc93e",
+                "case-m6p4-fbf77ad43bca",
+                "case-m6p4-5ea64641b3da",
+                "case-m6p4-e57b7b14cc4f",
+                "case-m6p4-edcdc4cab099",
+                "case-m6p4-8673419c74a3",
+                "case-m6p4-a657b4e72c76",
+                "case-m6p4-7a630746a070",
+                "case-m6p4-cc92fb3d4416",
+                "case-m6p4-6bb3c6187529",
+                "case-m6p4-13538c656484",
+                "case-m6p4-bb5c7f5ad3c3",
+                "case-m6p4-652b533325a5",
+                "case-m6p4-19743a0c1188",
+                "case-m6p4-1d15aa7aaa05",
+                "case-m6p4-231ce7f319fb",
+                "case-m6p4-ff814041632c",
+                "case-m6p4-2775cccfc377",
+                "case-m6p4-448a8454e385",
+                "case-m6p4-3265d6e75b6d",
+                "case-m6p4-9dd4cd632b89",
+                "case-m6p4-64e82724c57c",
+                "case-m6p4-079499e704fc",
+                "case-m6p4-3be3265b3637",
+                "case-m6p4-eac17595e79d",
+                "case-m6p4-bf7f405c4f36",
+                "case-m6p4-0ae948106a7c",
+                "case-m6p4-dcf1697dbdd6",
+                "case-m6p4-7abac9a83e4d",
+                "case-m6p4-50a93a21bc42",
+                "case-m6p4-26bbc911119b",
+                "case-m6p4-d3e081d378cb",
+                "case-m6p4-4584ab870dfb",
+                "case-m6p4-9d3fbcacbb61",
+                "case-m6p4-cd5f0c08da16",
+                "case-m6p4-a18c44831c71",
+                "case-m6p4-8f9c23d3ee45",
+                "case-m6p4-aa9737f2ab2c",
+                "case-m6p4-5840b9b97af1",
+                "case-m6p4-34018cd981e5",
+                "case-m6p4-f3e135190272",
+                "case-m6p4-79163d354624",
+                "case-m6p4-1b01bc3f39dd",
+                "case-m6p4-dc718e681717",
+                "case-m6p4-52db8bc80874",
+                "case-m6p4-387067351b44",
+                "case-m6p4-d422b0cd51cc",
+                "case-m6p4-787c3f16fc2e",
+                "case-m6p4-708976675462",
+                "case-m6p4-c33a70d63d6b",
+                "case-m6p4-641685eee28e",
+                "case-m6p4-1da95dcf04ab",
+                "case-m6p4-35072d2ca85c",
+                "case-m6p4-120270957870",
+                "case-m6p4-4138489c220c",
+                "case-m6p4-02d696537f1c",
+                "case-m6p4-3cedf9fab1ad",
+                "case-m6p4-e87cb42ba8ee",
+                "case-m6p4-6d6c5b0b2e48",
+                "case-m6p4-446f898740fa",
+                "case-m6p4-f6e7a231d235",
+                "case-m6p4-66c61c2104d8",
+                "case-m6p4-1b3b8c24dc1a",
+                "case-m6p4-e66056c25f2c",
+                "case-m6p4-1f8fcdecebad",
+                "case-m6p4-4cdb4a7125a9",
+                "case-m6p4-b43ea761b855",
+                "case-m6p4-35dc983dfaa2"
+            ],
+            "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
             "tool_check": null
         }
     },

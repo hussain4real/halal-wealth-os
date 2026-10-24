@@ -54,6 +54,7 @@ try {
             'M6-P1',
             'M6-P2',
             'M6-P3',
+            'M6-P4',
         ].includes(phase)
     ) {
         throw new VerificationFailure(
@@ -84,6 +85,7 @@ try {
             'scripts/dashboard-targets.test.mjs',
             'scripts/release-proof.test.mjs',
             'scripts/statement-mapping-key.test.mjs',
+            'scripts/drive-attempt.test.mjs',
         ]);
         const missing = [];
         for (const command of [
@@ -281,6 +283,10 @@ try {
             'MarketConcurrencyTest',
             'ReminderTest',
             'ReminderConcurrencyTest',
+            'DriveExportTest',
+            'GoogleDriveContractTest',
+            'DriveCallbackPrivacyTest',
+            'DriveConcurrencyTest',
         ]) {
             if (!discovered.stdout.includes(required)) {
                 throw new VerificationFailure(
@@ -302,7 +308,7 @@ try {
         run('node', ['scripts/acceptance-http.mjs'], { env });
         run('node', ['scripts/verify-release.mjs'], { env });
         run('php', ['scripts/verify-acceptance.php'], { env });
-        console.log('PASS M0-P2 through M6-P3 implemented verification');
+        console.log('PASS M0-P2 through M6-P4 implemented verification');
         console.log(
             'NOT_APPLICABLE: future domain suites, integrations, live AI and deployment.',
         );

@@ -14,7 +14,7 @@ use Throwable;
 /** @phpstan-import-type Table from OwnerDataSchema */
 final class OwnerExport
 {
-    private const int MAX_BYTES = 67108864;
+    public const int MAX_BYTES = 67108864;
 
     public function download(User $owner): PrivateExportDownload
     {

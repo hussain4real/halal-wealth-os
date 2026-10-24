@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-24T02:25:41.457954+00:00",
+    "updated_at": "2026-10-24T09:40:36.471511+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -13,12 +13,12 @@
         "default_external_effects": false
     },
     "active_run": {
-        "phase": "M6-P3",
-        "owner": "m6p3-coordinator",
+        "phase": "M6-P4",
+        "owner": "m6p4-coordinator",
         "worktree": ".",
-        "branch": "feat/m6-p3-reminders-outbox",
-        "baseline_head": "0a6ce1c4ecf176015e627f60153c6deb23cbcdc5",
-        "started_at": "2026-10-24T02:25:41.457954+00:00",
+        "branch": "feat/m6-p4-drive-export",
+        "baseline_head": "6f5d6b88912e53801c65382d5c721096e7570dd4",
+        "started_at": "2026-10-24T09:40:36.471511+00:00",
         "status": "VERIFYING"
     },
     "repository": {
@@ -278,20 +278,20 @@
         {
             "id": "M6-P3",
             "depends_on": ["M6-P2"],
-            "status": "IN_PROGRESS",
+            "status": "ACCEPTED",
             "owner": "m6p3-coordinator",
-            "accepted_by": null,
-            "accepted_at": null,
-            "evidence": "runs/M6-P3-local.md"
+            "accepted_by": "human-owner",
+            "accepted_at": "2026-10-24T09:40:36.471511+00:00",
+            "evidence": "runs/M6-P3-acceptance.md"
         },
         {
             "id": "M6-P4",
             "depends_on": ["M6-P3"],
-            "status": "PLANNED",
-            "owner": null,
+            "status": "IN_PROGRESS",
+            "owner": "m6p4-coordinator",
             "accepted_by": null,
             "accepted_at": null,
-            "evidence": null
+            "evidence": "runs/M6-P4-local.md"
         },
         {
             "id": "M7-P1",
@@ -349,33 +349,29 @@
         "later_execution_authority": "execution_authorization"
     },
     "execution_authorization": {
-        "authorized_by": "human-owner",
-        "recorded_at": "2026-10-24T02:25:41.457954+00:00",
-        "scope": "Accept M6-P2; implement canonical M6-P3, PR to dev, normal approved-noreply merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed progress publication.",
-        "max_cycles": 8,
-        "one_source_writer": true,
-        "live_external_delivery": "BLOCKED",
-        "deployment": false,
-        "phase": "M6-P3",
+        "phase": "M6-P4",
         "authorized": true,
-        "accepted_dependencies": ["M6-P2"],
-        "main_stage_changes": false,
-        "later_phases": false,
-        "remote_pr_dev_merge": true,
-        "existing_signed_publisher": true,
+        "authorized_by": "human-owner",
+        "recorded_at": "2026-10-24T09:40:36.471511+00:00",
+        "scope": "Accept M6-P3; implement canonical M6-P4, dev PR, approved-noreply normal merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed public progress.",
+        "accepted_dependencies": ["M6-P3"],
+        "max_cycles": 6,
+        "one_source_writer": true,
+        "live_access": "BLOCKED_MOCK_ONLY",
         "new_credentials": false,
-        "live_provider_access": false,
-        "budget_extension": "m6p3_budget_extension"
+        "deployment": false,
+        "main_stage_changes": false,
+        "later_phases": false
     },
     "execution_status": {
-        "phase": "M6-P3",
+        "phase": "M6-P4",
         "status": "VERIFYING",
-        "cycle": 8,
-        "cycles_used": 8,
-        "max_cycles": 8,
+        "cycle": 6,
+        "cycles_used": 5,
+        "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M6_UNACCEPTED",
-        "checkpoint": "Cycle7 page correction and independent source/rendered checks passed; preserve original CI and hosted P2. Cycle8 aligns current authorization/status and final rendered binding before fresh native TIA and clean release. Original exact-head CI/fresh review, normal dev merge, post-merge CI and signed publication remain pending on corrected head."
+        "checkpoint": "Cycle6 final source/scoped privacy/integration checks pass:135tests1291assertions;122requirements638selectors,80financial floors expected,79tables8readers. Outer callback wrapper covers session/auth/throttle; valid cookie-bound callback passes. Fresh native TIA/probes, clean full release and hosted delivery remain pending. No additional correction cycle authorized."
     },
     "dependency_patch": {
         "authorized": true,
@@ -3351,5 +3347,124 @@
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M6_UNACCEPTED",
         "checkpoint": "M6-P2 owner accepted; canonical M6-P3 and SMTP mock-only approved. Independent grounding/design preparation, no implementation cycle consumed."
+    },
+    "m6p3_claim_closed": {
+        "phase": "M6-P3",
+        "owner": "m6p3-coordinator",
+        "worktree": ".",
+        "branch": "feat/m6-p3-reminders-outbox",
+        "baseline_head": "0a6ce1c4ecf176015e627f60153c6deb23cbcdc5",
+        "started_at": "2026-10-24T02:25:41.457954+00:00",
+        "status": "VERIFYING",
+        "closed_at": "2026-10-24T09:40:36.471511+00:00",
+        "reason": "HUMAN_OWNER_ACCEPTED_M6_P3"
+    },
+    "m6p3_final_execution_history": {
+        "phase": "M6-P3",
+        "status": "VERIFYING",
+        "cycle": 8,
+        "cycles_used": 8,
+        "max_cycles": 8,
+        "phase_acceptance": "UNACCEPTED",
+        "milestone_acceptance": "M6_UNACCEPTED",
+        "checkpoint": "Cycle7 page correction and independent source/rendered checks passed; preserve original CI and hosted P2. Cycle8 aligns current authorization/status and final rendered binding before fresh native TIA and clean release. Original exact-head CI/fresh review, normal dev merge, post-merge CI and signed publication remain pending on corrected head."
+    },
+    "m6p3_final_authorization_history": {
+        "authorized_by": "human-owner",
+        "recorded_at": "2026-10-24T02:25:41.457954+00:00",
+        "scope": "Accept M6-P2; implement canonical M6-P3, PR to dev, normal approved-noreply merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed progress publication.",
+        "max_cycles": 8,
+        "one_source_writer": true,
+        "live_external_delivery": "BLOCKED",
+        "deployment": false,
+        "phase": "M6-P3",
+        "authorized": true,
+        "accepted_dependencies": ["M6-P2"],
+        "main_stage_changes": false,
+        "later_phases": false,
+        "remote_pr_dev_merge": true,
+        "existing_signed_publisher": true,
+        "new_credentials": false,
+        "live_provider_access": false,
+        "budget_extension": "m6p3_budget_extension"
+    },
+    "m6p3_delivery": {
+        "status": "ACCEPTED",
+        "accepted_by": "human-owner",
+        "accepted_at": "2026-10-24T09:40:36.471511+00:00",
+        "pr": 23,
+        "head": "db2f95db937f4b072e58b15bca0364996080f7d1",
+        "merge": "6f5d6b88912e53801c65382d5c721096e7570dd4",
+        "original_pr_ci": 40076144908,
+        "postmerge_ci": 40078831600,
+        "ci_attempt": 1,
+        "fresh_review": "EXACT_HEAD_COMPLETED_NO_FINDINGS_ALL_THREADS_RESOLVED",
+        "public_progress": "ANONYMOUS_HTTP200_BODY_AND_PR23_LINK_VERIFIED",
+        "progress_url": "https://dev-null.sh/@hussain4real/commits/01a16d31-426d-7384-90f0-96e5288fe07a",
+        "cycles_used": 8,
+        "ceiling": 8,
+        "deployment": false,
+        "acceptance_evidence": "runs/M6-P3-acceptance.md"
+    },
+    "m6p4_authorization": {
+        "phase": "M6-P4",
+        "authorized": true,
+        "authorized_by": "human-owner",
+        "recorded_at": "2026-10-24T09:40:36.471511+00:00",
+        "scope": "Accept M6-P3; implement canonical M6-P4, dev PR, approved-noreply normal merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed public progress.",
+        "accepted_dependencies": ["M6-P3"],
+        "max_cycles": 6,
+        "one_source_writer": true,
+        "live_access": "BLOCKED_MOCK_ONLY",
+        "new_credentials": false,
+        "deployment": false,
+        "main_stage_changes": false,
+        "later_phases": false
+    },
+    "m6p4_scope_selection": {
+        "provider": "Google Drive",
+        "scopes": [
+            "openid",
+            "email",
+            "https://www.googleapis.com/auth/drive.file"
+        ],
+        "decision": "APPROVED_MOCK_ONLY",
+        "approved_by": "human-owner",
+        "recorded_at": "2026-10-24T09:40:36.471511+00:00",
+        "live_oauth_or_export": "BLOCKED",
+        "new_account_or_credentials": false
+    },
+    "m6p4_engineering": {
+        "cycle": 6,
+        "ceiling": 6,
+        "status": "VERIFYING",
+        "completed_cycles": [
+            {
+                "cycle": 1,
+                "result": "CORRECTIONS_REQUIRED",
+                "evidence": "71 focused tests passed; early independent read-only review found OAuth restart, refresh persistence and held-scan fairness issues. Original migration/test failures retained privately."
+            },
+            {
+                "cycle": 2,
+                "result": "CORRECTIONS_REQUIRED",
+                "evidence": "89 scoped tests/873 assertions passed; independent re-review found competing revoke claims and loss of upload uncertainty on local stop. Preserve earlier failures."
+            },
+            {
+                "cycle": 3,
+                "result": "CORRECTIONS_REQUIRED",
+                "evidence": "91/92 scoped tests passed; one assertion ran before backoff. Source review closed access/export findings, found same-instance request identity reuse in UI. Race expectation also needed unknown outcome."
+            },
+            {
+                "cycle": 4,
+                "result": "CORRECTIONS_REQUIRED",
+                "evidence": "92 scoped tests/895 assertions and3 request-state tests passed. Independent UI review found stale selection/late-response consent, checkbox reset and feedback visibility gaps."
+            },
+            {
+                "cycle": 5,
+                "result": "CORRECTION_REQUIRED_AT_FINAL_PRIVACY_CHECK",
+                "evidence": "Independent source/UI/pixel/sanitation reviews passed;92 scoped tests and3 draft-state tests passed. Final framework-source inspection found unauthenticated/unverified OAuth callback redirects can store one-use code in intended session URL. Native baseline attempt retained; strict inventory corrected to122 requirements/632 selectors without expanding F17."
+            }
+        ],
+        "cycles_used": 5
     }
 }

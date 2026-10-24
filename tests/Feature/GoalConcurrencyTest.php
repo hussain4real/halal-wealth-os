@@ -178,6 +178,9 @@ test('goal migration refuses retained history and empty roundtrip preserves M1 a
     BudgetFixtures::rule($o, $cat);
     $before = DB::table('journal_entries')->get()->toJson();
     $budgets = DB::table('planning_schedules')->get()->toJson();
+    // Remove the empty Drive schema before the historical phase boundary.
+    $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
+    expect(Schema::hasTable('drive_operations'))->toBeFalse();
     // Remove the empty reminder schema before the historical phase boundary.
     $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
     expect(Schema::hasTable('reminder_channels'))->toBeFalse();

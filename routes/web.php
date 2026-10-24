@@ -6,6 +6,7 @@ use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CashAvailabilityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DecisionController;
+use App\Http\Controllers\DriveExportController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\LedgerController;
@@ -31,6 +32,14 @@ Route::get('ready', function () {
 })->name('readiness');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+
+    Route::get('drive', [DriveExportController::class, 'index'])->name('drive.index');
+
+    Route::get('drive/requests/{key}', [DriveExportController::class, 'status'])->name('drive.status');
+    Route::post('drive/connect', [DriveExportController::class, 'begin'])->middleware('throttle:drive-export')->name('drive.connect');
+    Route::post('drive/prepare', [DriveExportController::class, 'prepare'])->middleware('throttle:drive-export')->name('drive.prepare');
+    Route::post('drive/review', [DriveExportController::class, 'review'])->middleware('throttle:drive-export')->name('drive.review');
+    Route::post('drive/confirm', [DriveExportController::class, 'confirm'])->middleware('throttle:drive-export')->name('drive.confirm');
 
     Route::get('market-data', [MarketDataController::class, 'index'])->name('market.index');
     Route::post('market-data', [MarketDataController::class, 'store'])->middleware('throttle:market-data')->name('market.store');
@@ -173,6 +182,11 @@ Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->grou
     Route::get('reconciliations/{session}', [LedgerController::class, 'reconciliationShow'])->whereNumber('session')->name('reconciliations.show');
     Route::post('reconciliations/{session}/adjust', [LedgerController::class, 'reconciliationAdjust'])->whereNumber('session')->name('reconciliations.adjust');
 });
+
+// Callback authentication returns JSON without saving its credential-bearing URL for a redirect.
+Route::get('drive/callback', [DriveExportController::class, 'callback'])->middleware('throttle:drive-export')->name('drive.callback');
+
+Route::post('drive/connections/{connection}/disconnect', [DriveExportController::class, 'disconnect'])->middleware(['auth', RequireProductionTwoFactor::class])->whereNumber('connection')->name('drive.disconnect');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('owners/{owner}', [OwnerProfileController::class, 'show'])->whereNumber('owner')->name('owners.show');
