@@ -355,23 +355,29 @@
         "recorded_at": "2026-10-24T09:40:36.471511+00:00",
         "scope": "Accept M6-P3; implement canonical M6-P4, dev PR, approved-noreply normal merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed public progress.",
         "accepted_dependencies": ["M6-P3"],
-        "max_cycles": 6,
+        "max_cycles": 8,
         "one_source_writer": true,
         "live_access": "BLOCKED_MOCK_ONLY",
         "new_credentials": false,
         "deployment": false,
         "main_stage_changes": false,
-        "later_phases": false
+        "later_phases": false,
+        "additional_cycle_authorization": {
+            "recorded_at": "2026-10-24T11:15:00.138152+00:00",
+            "additional_cycles": 2,
+            "total_ceiling": 8,
+            "scope": "PR24 confirmed P2 uncertain verification, transient identity retry and rejected grant cleanup; preserve all six cycles and repeat affected/full/TIA/browser/original CI and fresh review before authorized dev merge/postmerge/publication."
+        }
     },
     "execution_status": {
         "phase": "M6-P4",
         "status": "VERIFYING",
-        "cycle": 6,
-        "cycles_used": 5,
-        "max_cycles": 6,
+        "cycle": 7,
+        "cycles_used": 6,
+        "max_cycles": 8,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M6_UNACCEPTED",
-        "checkpoint": "Cycle6 final source/scoped privacy/integration checks pass:135tests1291assertions;122requirements638selectors,80financial floors expected,79tables8readers. Outer callback wrapper covers session/auth/throttle; valid cookie-bound callback passes. Fresh native TIA/probes, clean full release and hosted delivery remain pending. No additional correction cycle authorized."
+        "checkpoint": "Cycle7 affected162tests1599assertions, independent source/rendered/sanitation review, fresh native TIA1310tests9752assertions and actual PHP/Vue selection with exact restoration passed. Source is frozen; clean release artifacts, original corrected-head hosted CI and fresh review are evaluated against the final published commit. Merge, post-merge CI, public publishing and human acceptance remain separate gates. Ceiling8; prior6 cycles and original3P2 findings preserved."
     },
     "dependency_patch": {
         "authorized": true,
@@ -3413,13 +3419,19 @@
         "recorded_at": "2026-10-24T09:40:36.471511+00:00",
         "scope": "Accept M6-P3; implement canonical M6-P4, dev PR, approved-noreply normal merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed public progress.",
         "accepted_dependencies": ["M6-P3"],
-        "max_cycles": 6,
+        "max_cycles": 8,
         "one_source_writer": true,
         "live_access": "BLOCKED_MOCK_ONLY",
         "new_credentials": false,
         "deployment": false,
         "main_stage_changes": false,
-        "later_phases": false
+        "later_phases": false,
+        "additional_cycle_authorization": {
+            "recorded_at": "2026-10-24T11:15:00.138152+00:00",
+            "additional_cycles": 2,
+            "total_ceiling": 8,
+            "scope": "PR24 confirmed P2 uncertain verification, transient identity retry and rejected grant cleanup; preserve all six cycles and repeat affected/full/TIA/browser/original CI and fresh review before authorized dev merge/postmerge/publication."
+        }
     },
     "m6p4_scope_selection": {
         "provider": "Google Drive",
@@ -3435,8 +3447,8 @@
         "new_account_or_credentials": false
     },
     "m6p4_engineering": {
-        "cycle": 6,
-        "ceiling": 6,
+        "cycle": 7,
+        "ceiling": 8,
         "status": "VERIFYING",
         "completed_cycles": [
             {
@@ -3463,8 +3475,20 @@
                 "cycle": 5,
                 "result": "CORRECTION_REQUIRED_AT_FINAL_PRIVACY_CHECK",
                 "evidence": "Independent source/UI/pixel/sanitation reviews passed;92 scoped tests and3 draft-state tests passed. Final framework-source inspection found unauthenticated/unverified OAuth callback redirects can store one-use code in intended session URL. Native baseline attempt retained; strict inventory corrected to122 requirements/632 selectors without expanding F17."
+            },
+            {
+                "cycle": 6,
+                "result": "LOCAL_RELEASE_PASS_HOSTED_REVIEW_CHANGES_REQUIRED",
+                "evidence": "Clean release and strict seven artifacts passed1283tests9444assertions80floors122IDs638selectors79tables8readers. PR24 fresh hosted review found three P2 recovery/cleanup issues; all original failures and source/review evidence retained."
             }
         ],
-        "cycles_used": 5
+        "cycles_used": 6,
+        "max_cycles": 8
+    },
+    "m6p4_cycle_extension": {
+        "recorded_at": "2026-10-24T11:15:00.138152+00:00",
+        "additional_cycles": 2,
+        "total_ceiling": 8,
+        "scope": "PR24 confirmed P2 uncertain verification, transient identity retry and rejected grant cleanup; preserve all six cycles and repeat affected/full/TIA/browser/original CI and fresh review before authorized dev merge/postmerge/publication."
     }
 }

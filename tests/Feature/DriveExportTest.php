@@ -165,6 +165,90 @@ test('uncommitted remote failures retry only the persisted ID and stop after thr
     expect($this->wire->generated)->toBe(2)->and($this->wire->creates)->toBe(4);
 });
 
+test('non authoritative post create verification preserves unknown and reconciles the same file', function (string $kind, string $failure) {
+    if ($kind === 'report') {
+        $this->wire->ready($this->owner);
+        $r = D::queued($this->owner, D::snapshot($this->owner));
+    } else {
+        $c = $this->wire->connect($this->owner);
+        $r = $this->drive->prepare($this->owner, 'folder-parse-recovery', $c['id'], $c['generation']);
+    }
+    $this->wire->inspectFailureId = $r['remote_id'];
+    $this->wire->inspectFailure = $failure;
+    $this->drive->run($r['id']);
+    expect($this->drive->inspect($this->owner, $r['request_key']))->toMatchArray(['state' => 'unknown', 'remote_id' => $r['remote_id'],
+        'safe_code' => $failure === 'oversize' ? 'response_too_large' : 'invalid_response']);
+    $creates = $this->wire->creates;
+    $this->wire->inspectFailureId = '';
+    $this->travel(2)->minutes();
+    $this->drive->tick();
+    expect($this->drive->inspect($this->owner, $r['request_key']))->toMatchArray(['state' => 'uploaded', 'remote_id' => $r['remote_id']]);
+    expect($this->wire->creates)->toBe($creates);
+})->with(['folder', 'report'])->with(['json', 'oversize']);
+
+test('transient identity outage keeps queued and uncertain work eligible for same ID recovery', function (bool $alreadyHandedOff, bool $rotate, string $failure) {
+    $c = $this->wire->ready($this->owner);
+    $r = D::queued($this->owner, D::snapshot($this->owner));
+    if ($alreadyHandedOff) {
+        $this->wire->failure = 'after_create';
+        $this->drive->run($r['id']);
+        $this->wire->failure = '';
+        $this->travel(2)->minutes();
+    }
+    if ($rotate) {
+        $this->travel(61)->minutes();
+        $this->wire->tokenChanges['refresh_token'] = 'synthetic-rotation-before-outage';
+    }
+    $this->wire->identityStatus = $failure === 'unavailable' ? 503 : 200;
+    $this->wire->identityBody = match ($failure) {
+        'json' => 'invalid-json',
+        'oversize' => str_repeat('x', SavedReport::LIMIT + 1),
+        default => null,
+    };
+    $this->drive->run($r['id']);
+    expect($this->drive->connection($this->owner, $c['id'])['status'])->toBe('ready');
+    expect($this->drive->inspect($this->owner, $r['request_key']))->toMatchArray(['state' => 'unknown', 'safe_code' => match ($failure) {
+        'json' => 'invalid_response', 'oversize' => 'response_too_large', default => 'transport_unknown',
+    }]);
+    if ($rotate) {
+        expect(Crypt::decryptString(DB::table('drive_secrets')->where('connection_id', $c['id'])->value('ciphertext')))->toContain('synthetic-rotation-before-outage');
+    }
+    $this->wire->identityStatus = 200;
+    $this->wire->identityBody = null;
+    $this->travel(6)->minutes();
+    $this->drive->tick();
+    expect($this->drive->inspect($this->owner, $r['request_key']))->toMatchArray(['state' => 'uploaded', 'remote_id' => $r['remote_id']]);
+    expect($this->wire->creates)->toBe(2)->and($this->wire->generated)->toBe(2);
+})->with([false, true])->with([false, true])->with(['unavailable', 'json', 'oversize']);
+
+test('rejected OAuth grant scopes revoke issued credentials or report unconfirmed cleanup without admission', function (bool $revokeFails, bool $hasRefresh) {
+    $start = $this->drive->begin($this->owner, 'rejected-grant-session');
+    $this->wire->tokenChanges = ['scope' => GoogleDrive::SCOPE.' https://www.googleapis.com/auth/drive', 'refresh_token' => $hasRefresh ? 'synthetic-rejected-refresh' : null];
+    $this->wire->failure = $revokeFails ? 'revoke' : '';
+    expect(fn () => $this->drive->finish($this->owner, 'rejected-grant-session', $start['state'], 'synthetic-code'))->toThrow(DriveFailure::class,
+        $revokeFails ? 'connection_rejected_revoke_unconfirmed' : 'unapproved_scope_or_token');
+    Http::assertSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke'
+        && $request['token'] === ($hasRefresh ? 'synthetic-rejected-refresh' : 'synthetic-access'));
+    $this->assertDatabaseCount('drive_connections', 0);
+    $this->assertDatabaseCount('drive_secrets', 0);
+    expect(fn () => $this->drive->finish($this->owner, 'rejected-grant-session', $start['state'], 'synthetic-code'))->toThrow(DriveFailure::class, 'invalid_callback');
+})->with([false, true])->with([false, true]);
+
+test('rejected refreshed grants require reconnect rather than retrying revoked credentials as an identity outage', function (string $invalid, bool $revokeFails) {
+    $c = $this->wire->ready($this->owner);
+    $r = D::queued($this->owner, D::snapshot($this->owner));
+    $this->travel(61)->minutes();
+    $this->wire->tokenChanges = $invalid === 'scope' ? ['scope' => GoogleDrive::SCOPE.' extra-scope'] : ['access_token' => ''];
+    $this->wire->failure = $revokeFails ? 'revoke' : '';
+    $this->drive->run($r['id']);
+    expect($this->drive->connection($this->owner, $c['id'])['status'])->toBe('reconnect');
+    expect($this->drive->inspect($this->owner, $r['request_key']))->toMatchArray(['state' => 'reconnect',
+        'safe_code' => $revokeFails ? 'connection_rejected_revoke_unconfirmed' : ($invalid === 'scope' ? 'unapproved_scope_or_token' : 'reconnect_required')]);
+    Http::assertSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke');
+    expect($this->wire->creates)->toBe(1);
+    expect(Crypt::decryptString(DB::table('drive_secrets')->where('connection_id', $c['id'])->value('ciphertext')))->not->toContain('extra-scope');
+})->with(['scope', 'access'])->with([false, true]);
+
 test('remote content conflict cannot overwrite or claim success', function () {
     $this->wire->ready($this->owner);
     $r = D::queued($this->owner, D::snapshot($this->owner));

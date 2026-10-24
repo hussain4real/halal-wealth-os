@@ -4,6 +4,7 @@ namespace Tests\Support;
 
 use App\Domain\Integrations\Drive\DriveExports;
 use App\Domain\Integrations\Drive\GoogleDrive;
+use App\Domain\Integrations\Drive\SavedReport;
 use App\Domain\Reporting\DashboardSnapshot;
 use App\Models\User;
 use Illuminate\Http\Client\Factory;
@@ -22,6 +23,14 @@ final class DriveFixtures
     public array $tokenChanges = [];
 
     public string $failure = '';
+
+    public int $identityStatus = 200;
+
+    public ?string $identityBody = null;
+
+    public string $inspectFailureId = '';
+
+    public string $inspectFailure = '';
 
     public int $creates = 0;
 
@@ -43,7 +52,7 @@ final class DriveFixtures
                     'token_type' => 'Bearer', 'scope' => GoogleDrive::SCOPE], ...$this->tokenChanges]);
             }
             if ($url === 'https://openidconnect.googleapis.com/v1/userinfo') {
-                return Http::response($this->identity);
+                return Http::response($this->identityBody ?? $this->identity, $this->identityStatus);
             }
             if ($url === 'https://oauth2.googleapis.com/revoke') {
                 return Http::response('', $this->failure === 'revoke' ? 503 : 200);
@@ -83,6 +92,9 @@ final class DriveFixtures
             $id = basename($path);
             if (! isset($this->files[$id])) {
                 return Http::response('', 404);
+            }
+            if ($id === $this->inspectFailureId) {
+                return Http::response($this->inspectFailure === 'oversize' ? str_repeat('x', SavedReport::LIMIT + 1) : 'invalid-json');
             }
             if (str_contains($url, 'alt=media')) {
                 return Http::response($this->bodies[$id]);

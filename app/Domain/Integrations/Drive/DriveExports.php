@@ -370,8 +370,8 @@ final class DriveExports
                 $this->result($r, 'uploaded', 'remote_evidence_verified');
             } catch (DriveFailure $error) {
                 $state = match ($error->reason) {
-                    'transport_unknown', 'expired_unconfirmed' => 'unknown',
-                    'reconnect_required', 'unverified_identity', 'identity_changed' => 'reconnect',
+                    'transport_unknown', 'expired_unconfirmed', 'invalid_response', 'response_too_large' => 'unknown',
+                    'reconnect_required', 'unverified_identity', 'identity_changed', 'unapproved_scope_or_token', 'connection_rejected_revoke_unconfirmed' => 'reconnect',
                     'connection_changed', 'owner_unverified' => $r->attempts === 0 ? 'cancelled' : 'unknown',
                     'destination_not_private', 'destination_changed', 'remote_content_conflict' => 'conflict',
                     default => 'failed',
@@ -452,29 +452,32 @@ final class DriveExports
         }
     }
 
-    /** Refresh commits independently of later report/target validation. Never redeem a rotating token inside an admission rollback. */
+    /** Persist accepted rotation even if a later identity read is unavailable. Every handoff still verifies identity. */
     private function warm(User $owner, ?string $connection = null): void
     {
         $failure = $this->locked($owner, function (stdClass $control) use ($owner, $connection): ?string {
             $id = $connection ?? (string) $control->active_id;
             $link = $this->eligible($owner, $control, $id, $control->generation);
+            $identityRead = false;
             try {
                 $tokens = $this->tokens($owner, $id);
-                $refreshed = $tokens['expires'] <= now()->getTimestamp() + 30;
-                if ($refreshed) {
+                if ($tokens['expires'] <= now()->getTimestamp() + 30) {
                     $tokens = $this->google->refresh($tokens['refresh']);
+                    $this->storeTokens($owner, $id, $tokens);
                 }
+                $identityRead = true;
                 $identity = $this->google->identity($tokens['access']);
                 if ($identity['subject'] !== $link->subject || $identity['email'] !== $link->email) {
                     throw new DriveFailure('identity_changed');
                 }
-                if ($refreshed) {
-                    $this->storeTokens($owner, $id, $tokens);
-                }
             } catch (DriveFailure $error) {
+                if ($identityRead && in_array($error->reason, ['transport_unknown', 'invalid_response', 'response_too_large'], true)) {
+                    return $error->reason;
+                }
                 DB::table('drive_connections')->where('id', $id)->update(['status' => 'reconnect']);
 
-                return $error->reason;
+                return $identityRead || in_array($error->reason, ['unapproved_scope_or_token', 'connection_rejected_revoke_unconfirmed'], true)
+                    ? $error->reason : 'reconnect_required';
             }
 
             return null;

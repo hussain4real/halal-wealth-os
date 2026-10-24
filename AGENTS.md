@@ -591,3 +591,17 @@ features, PHP8.5 floor, native TIA, uncached release/recovery gates and all
 financial invariants. Google Drive export does not replace database backup.
 No later phase, milestone acceptance, deployment, main/stage changes, new
 credentials or history rewriting. M6-P4/M6 acceptance remains human-only.
+
+## M6-P4 hosted recovery correction budget
+
+The human owner explicitly authorized two additional scoped correction and
+verification cycles for PR #24’s three confirmed P2 findings. Preserve cycles1-6,
+the original CI and all hosted review evidence; total ceiling is eight. Preserve
+uncertainty and same-file reconciliation after non-authoritative verification
+failures, keep transient identity failures retryable, and safely revoke rejected
+OAuth grants with honest unconfirmed cleanup guidance. Repeat affected regression,
+actual rendered recovery, native TIA and clean uncached release gates, original
+exact-head CI and a fresh hosted review before the already-authorized normal
+approved-noreply dev merge, original post-merge CI and existing signed public
+progress verification. One source writer and all mock-only/privacy/acceptance/
+credential/deployment boundaries remain unchanged. No ninth cycle is authorized.

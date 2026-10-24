@@ -185,7 +185,7 @@ final class GoogleDrive
     }
 
     /** @return array<string,mixed> */
-    private function json(Response $response): array
+    private function json(#[\SensitiveParameter] Response $response): array
     {
         try {
             $data = json_decode($response->body(), true, 32, JSON_THROW_ON_ERROR);
@@ -200,25 +200,44 @@ final class GoogleDrive
     }
 
     /** @return array{access:string,refresh:string,expires:int} */
-    private function tokens(Response $response, #[\SensitiveParameter] string $prior): array
+    private function tokens(#[\SensitiveParameter] Response $response, #[\SensitiveParameter] string $prior): array
     {
         $data = $this->json($response);
-        $scopes = explode(' ', self::text($data, 'scope', 512));
-        $scopes = array_map(fn (string $scope): string => $scope === 'https://www.googleapis.com/auth/userinfo.email' ? 'email' : $scope, $scopes);
-        sort($scopes);
-        $expected = explode(' ', self::SCOPE);
-        sort($expected);
-        if ($scopes !== $expected || ($data['token_type'] ?? null) !== 'Bearer' || ! is_int($data['expires_in'] ?? null)
-            || $data['expires_in'] < 60 || $data['expires_in'] > 86400) {
-            throw new DriveFailure('unapproved_scope_or_token');
+        $cleanup = null;
+        foreach ([$data['refresh_token'] ?? null, $data['access_token'] ?? null, $prior] as $candidate) {
+            if (is_string($candidate) && $candidate !== '' && strlen($candidate) <= 4096 && ! preg_match('/[\x00-\x1f\x7f]/', $candidate)) {
+                $cleanup = $candidate;
+                break;
+            }
         }
+        try {
+            $scopes = explode(' ', self::text($data, 'scope', 512));
+            $scopes = array_map(fn (string $scope): string => $scope === 'https://www.googleapis.com/auth/userinfo.email' ? 'email' : $scope, $scopes);
+            sort($scopes);
+            $expected = explode(' ', self::SCOPE);
+            sort($expected);
+            if ($scopes !== $expected || ($data['token_type'] ?? null) !== 'Bearer' || ! is_int($data['expires_in'] ?? null)
+                || $data['expires_in'] < 60 || $data['expires_in'] > 86400) {
+                throw new DriveFailure('unapproved_scope_or_token');
+            }
 
-        return ['access' => self::text($data, 'access_token', 4096), 'refresh' => isset($data['refresh_token']) ? self::text($data, 'refresh_token', 4096) : $prior,
-            'expires' => now()->getTimestamp() + $data['expires_in']];
+            return ['access' => self::text($data, 'access_token', 4096), 'refresh' => isset($data['refresh_token']) ? self::text($data, 'refresh_token', 4096) : $prior,
+                'expires' => now()->getTimestamp() + $data['expires_in']];
+        } catch (DriveFailure $error) {
+            if ($cleanup === null) {
+                throw new DriveFailure('connection_rejected_revoke_unconfirmed');
+            }
+            try {
+                $this->revoke($cleanup);
+            } catch (DriveFailure) {
+                throw new DriveFailure('connection_rejected_revoke_unconfirmed');
+            }
+            throw $error;
+        }
     }
 
     /** @param array<string,mixed> $data */
-    private static function text(array $data, string $key, int $max): string
+    private static function text(#[\SensitiveParameter] array $data, string $key, int $max): string
     {
         $value = $data[$key] ?? null;
         if (! is_string($value) || $value === '' || strlen($value) > $max || preg_match('/[\x00-\x1f\x7f]/', $value)) {

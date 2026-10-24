@@ -16,3 +16,9 @@ Observed checks:
 Expected browser console entries were retained for the two deliberately aborted confirmation requests, a missing interrupted receipt, a definitive 422 rejection and foreign-owner 404s. No error-free-console or accessibility-certification claim is made. The independent reviewer inspected pixels/states; it did not independently run the browser, database or byte checks.
 
 These are local synthetic UI/recovery results. Full uncached verification, original exact-head CI, fresh hosted review, merge, original post-merge CI, signed public progress publication and owner acceptance remain separate gates.
+
+## Hosted-recovery correction review
+
+The coordinator repeated the changed outcome journeys against the built UI and a private synthetic worker. Malformed post-create metadata and a temporary identity outage each produced a visible unknown outcome with a duplicate-export warning. The worker then reconciled both original file identities; recomputed remote byte hashes matched their retained reports. Total creates remained one folder and two reports. A separately rejected refresh grant with unsuccessful revoke produced reconnect plus explicit Google account-security cleanup guidance and retained-file reconciliation instructions, without another file create.
+
+The changed warnings were readable in mobile light/dark and desktop dark captures. The desktop unknown screenshot ended before the outcome cards and is not independent pixel proof for those cards; the mobile captures and actual DOM snapshot contain that warning. The narrow layout had one main landmark, no document overflow and no credential text. The independent reviewer inspected these pixels and the public sanitation delta without running the browser, worker or database. This correction session recorded zero browser console errors or warnings; the earlier deliberately injected failures remain in the preceding history. All results remain synthetic and local.

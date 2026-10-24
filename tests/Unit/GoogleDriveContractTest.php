@@ -19,6 +19,7 @@ beforeEach(function () {
 test('google boundary accepts only bounded bearer tokens with the approved exact scopes', function (array $change) {
     $this->wire->tokenChanges = $change;
     expect(fn () => $this->google->exchange('code', 'verifier'))->toThrow(DriveFailure::class);
+    Http::assertSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke' && $request['token'] === 'synthetic-refresh');
 })->with([
     'extra scope' => [['scope' => GoogleDrive::SCOPE.' https://www.googleapis.com/auth/drive']],
     'missing scope' => [['scope' => 'openid email']],
@@ -30,6 +31,33 @@ test('google boundary accepts only bounded bearer tokens with the approved exact
     'oversize access' => [['access_token' => str_repeat('x', 4097)]],
     'control access' => [['access_token' => "x\ny"]],
 ]);
+
+test('rejected token response without a safe cleanup credential is explicitly unconfirmed', function () {
+    $this->wire->tokenChanges = ['access_token' => '', 'refresh_token' => "unsafe\ncredential"];
+    expect(fn () => $this->google->exchange('code', 'verifier'))->toThrow(DriveFailure::class, 'connection_rejected_revoke_unconfirmed');
+    Http::assertNotSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke');
+});
+
+test('rejected refresh response can clean up with a bounded prior token when returned credentials are unusable', function () {
+    $this->wire->tokenChanges = ['access_token' => '', 'refresh_token' => "unsafe\ncredential"];
+    expect(fn () => $this->google->refresh('synthetic-known-prior'))->toThrow(DriveFailure::class, 'invalid_response');
+    Http::assertSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke' && $request['token'] === 'synthetic-known-prior');
+});
+
+test('rejected grant exceptions redact response and credential arguments even when trace arguments are enabled', function () {
+    $previous = ini_set('zend.exception_ignore_args', '0');
+    try {
+        $this->wire->tokenChanges = ['scope' => 'unapproved-scope', 'access_token' => 'synthetic-private-access', 'refresh_token' => 'synthetic-private-refresh'];
+        try {
+            $this->google->exchange('synthetic-private-code', 'synthetic-private-verifier');
+            $this->fail('Rejected token response must not be admitted');
+        } catch (DriveFailure $error) {
+            expect(json_encode($error->getTrace(), JSON_THROW_ON_ERROR).(string) $error)->not->toContain('synthetic-private-access', 'synthetic-private-refresh', 'synthetic-private-code', 'synthetic-private-verifier');
+        }
+    } finally {
+        ini_set('zend.exception_ignore_args', $previous);
+    }
+});
 
 test('google refresh accepts the documented email scope alias and preserves omitted refresh credentials', function () {
     $this->wire->tokenChanges = ['scope' => str_replace(' email', ' https://www.googleapis.com/auth/userinfo.email', GoogleDrive::SCOPE), 'refresh_token' => null];

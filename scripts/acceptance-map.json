@@ -3191,6 +3191,141 @@
             "class": "Tests\\Unit\\DriveCallbackPrivacyTest",
             "name": "stale authenticated session oauth callback cannot redirect or retain credentials",
             "file": "tests/Unit/DriveCallbackPrivacyTest.php"
+        },
+        "case-m6p4-4006356deb0d": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "non authoritative post create verification preserves unknown and reconciles the same file with data set \"('folder') / ('json')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-bb6870f36abc": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "non authoritative post create verification preserves unknown and reconciles the same file with data set \"('folder') / ('oversize')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-fcf193b070cc": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "non authoritative post create verification preserves unknown and reconciles the same file with data set \"('report') / ('json')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-9491e667dca9": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "non authoritative post create verification preserves unknown and reconciles the same file with data set \"('report') / ('oversize')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-b828beb15fc7": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(false) / (false) / ('unavailable')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-3bcbefd24b80": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(false) / (false) / ('json')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-4b59f0d4bebe": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(false) / (false) / ('oversize')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-e9e59d2a7028": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(false) / (true) / ('unavailable')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-f11158a56c57": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(false) / (true) / ('json')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-b24f9752021c": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(false) / (true) / ('oversize')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-fccd1b7f3713": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(true) / (false) / ('unavailable')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-0dde994db5ad": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(true) / (false) / ('json')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-3df19f2dc339": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(true) / (false) / ('oversize')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-7fda2f163601": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(true) / (true) / ('unavailable')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-36fc65ce5d92": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(true) / (true) / ('json')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-bc9ad314e8c7": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "transient identity outage keeps queued and uncertain work eligible for same ID recovery with data set \"(true) / (true) / ('oversize')\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-d57707659ea7": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "rejected OAuth grant scopes revoke issued credentials or report unconfirmed cleanup without admission with data set \"(false) / (false)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-646c48830761": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "rejected OAuth grant scopes revoke issued credentials or report unconfirmed cleanup without admission with data set \"(false) / (true)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-c58f809dba38": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "rejected OAuth grant scopes revoke issued credentials or report unconfirmed cleanup without admission with data set \"(true) / (false)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-276aea3dd183": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "rejected OAuth grant scopes revoke issued credentials or report unconfirmed cleanup without admission with data set \"(true) / (true)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-ddf3ecb1467b": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "rejected refreshed grants require reconnect rather than retrying revoked credentials as an identity outage with data set \"('scope') / (false)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-1b38ac49eede": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "rejected refreshed grants require reconnect rather than retrying revoked credentials as an identity outage with data set \"('scope') / (true)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-6de689c577eb": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "rejected refreshed grants require reconnect rather than retrying revoked credentials as an identity outage with data set \"('access') / (false)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-b9f6f4f97388": {
+            "class": "Tests\\Feature\\DriveExportTest",
+            "name": "rejected refreshed grants require reconnect rather than retrying revoked credentials as an identity outage with data set \"('access') / (true)\"",
+            "file": "tests/Feature/DriveExportTest.php"
+        },
+        "case-m6p4-f53946b1bef6": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "rejected token response without a safe cleanup credential is explicitly unconfirmed",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-7f0ae21b62c7": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "rejected grant exceptions redact response and credential arguments even when trace arguments are enabled",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m6p4-e77d99059479": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "rejected refresh response can clean up with a bounded prior token when returned credentials are unusable",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
         }
     },
     "manual_artifacts": {
@@ -3287,7 +3422,7 @@
         },
         "m6p4-rendered": {
             "public_path": "docs/halal-wealth-os/runs/M6-P4-rendered-review.md",
-            "sha256": "0c0acd56564803d5c58db215a75a537a0719ca994c5f611f8d4a4991758d1b1e",
+            "sha256": "e002880368a47ae5a7d02065251eec8bd3329218a1be799193edbd564884f934",
             "scope": "Coordinator actual synthetic browser/recovery/foreign-owner/byte proof; independent pixel/source review only, no independent execution or accessibility certification."
         }
     },
@@ -5205,7 +5340,11 @@
                 "case-m6p4-6d6c5b0b2e48",
                 "case-m6p4-446f898740fa",
                 "case-m6p4-f6e7a231d235",
-                "case-m6p4-66c61c2104d8"
+                "case-m6p4-66c61c2104d8",
+                "case-m6p4-4006356deb0d",
+                "case-m6p4-bb6870f36abc",
+                "case-m6p4-fcf193b070cc",
+                "case-m6p4-9491e667dca9"
             ],
             "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
             "tool_check": null
@@ -5257,7 +5396,34 @@
                 "case-m6p4-1f8fcdecebad",
                 "case-m6p4-4cdb4a7125a9",
                 "case-m6p4-b43ea761b855",
-                "case-m6p4-35dc983dfaa2"
+                "case-m6p4-35dc983dfaa2",
+                "case-m6p4-4006356deb0d",
+                "case-m6p4-bb6870f36abc",
+                "case-m6p4-fcf193b070cc",
+                "case-m6p4-9491e667dca9",
+                "case-m6p4-b828beb15fc7",
+                "case-m6p4-3bcbefd24b80",
+                "case-m6p4-4b59f0d4bebe",
+                "case-m6p4-e9e59d2a7028",
+                "case-m6p4-f11158a56c57",
+                "case-m6p4-b24f9752021c",
+                "case-m6p4-fccd1b7f3713",
+                "case-m6p4-0dde994db5ad",
+                "case-m6p4-3df19f2dc339",
+                "case-m6p4-7fda2f163601",
+                "case-m6p4-36fc65ce5d92",
+                "case-m6p4-bc9ad314e8c7",
+                "case-m6p4-d57707659ea7",
+                "case-m6p4-646c48830761",
+                "case-m6p4-c58f809dba38",
+                "case-m6p4-276aea3dd183",
+                "case-m6p4-ddf3ecb1467b",
+                "case-m6p4-1b38ac49eede",
+                "case-m6p4-6de689c577eb",
+                "case-m6p4-b9f6f4f97388",
+                "case-m6p4-f53946b1bef6",
+                "case-m6p4-7f0ae21b62c7",
+                "case-m6p4-e77d99059479"
             ],
             "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
             "tool_check": null
@@ -5280,7 +5446,18 @@
                 "case-m6p4-231ce7f319fb",
                 "case-m6p4-ff814041632c",
                 "case-m6p4-448a8454e385",
-                "case-m6p4-3265d6e75b6d"
+                "case-m6p4-3265d6e75b6d",
+                "case-m6p4-d57707659ea7",
+                "case-m6p4-646c48830761",
+                "case-m6p4-c58f809dba38",
+                "case-m6p4-276aea3dd183",
+                "case-m6p4-ddf3ecb1467b",
+                "case-m6p4-1b38ac49eede",
+                "case-m6p4-6de689c577eb",
+                "case-m6p4-b9f6f4f97388",
+                "case-m6p4-f53946b1bef6",
+                "case-m6p4-7f0ae21b62c7",
+                "case-m6p4-e77d99059479"
             ],
             "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
             "tool_check": null
@@ -5375,7 +5552,34 @@
                 "case-m6p4-1f8fcdecebad",
                 "case-m6p4-4cdb4a7125a9",
                 "case-m6p4-b43ea761b855",
-                "case-m6p4-35dc983dfaa2"
+                "case-m6p4-35dc983dfaa2",
+                "case-m6p4-4006356deb0d",
+                "case-m6p4-bb6870f36abc",
+                "case-m6p4-fcf193b070cc",
+                "case-m6p4-9491e667dca9",
+                "case-m6p4-b828beb15fc7",
+                "case-m6p4-3bcbefd24b80",
+                "case-m6p4-4b59f0d4bebe",
+                "case-m6p4-e9e59d2a7028",
+                "case-m6p4-f11158a56c57",
+                "case-m6p4-b24f9752021c",
+                "case-m6p4-fccd1b7f3713",
+                "case-m6p4-0dde994db5ad",
+                "case-m6p4-3df19f2dc339",
+                "case-m6p4-7fda2f163601",
+                "case-m6p4-36fc65ce5d92",
+                "case-m6p4-bc9ad314e8c7",
+                "case-m6p4-d57707659ea7",
+                "case-m6p4-646c48830761",
+                "case-m6p4-c58f809dba38",
+                "case-m6p4-276aea3dd183",
+                "case-m6p4-ddf3ecb1467b",
+                "case-m6p4-1b38ac49eede",
+                "case-m6p4-6de689c577eb",
+                "case-m6p4-b9f6f4f97388",
+                "case-m6p4-f53946b1bef6",
+                "case-m6p4-7f0ae21b62c7",
+                "case-m6p4-e77d99059479"
             ],
             "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
             "tool_check": null

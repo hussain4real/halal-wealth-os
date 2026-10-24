@@ -109,6 +109,8 @@ function outcome(operation: Operation): string {
         return 'The private folder identity and ownership were verified in synthetic mocks. This operation uploaded no report.';
     if (operation.safe_code === 'stopped_remote_unconfirmed')
         return 'Local delivery is stopped. An earlier handoff may already have created this file; reconcile its retained identity before starting another export.';
+    if (operation.safe_code === 'connection_rejected_revoke_unconfirmed')
+        return 'Token cleanup was not confirmed. Remove the app in Google account security before reconnecting. Keep this file identity to reconcile any earlier handoff.';
     const messages: Record<string, string> = {
         queued: 'Waiting for a worker. This receipt does not yet prove delivery.',
         claimed:
