@@ -369,8 +369,8 @@
     "execution_status": {
         "phase": "M6-P3",
         "status": "VERIFYING",
-        "cycle": 4,
-        "cycles_used": 4,
+        "cycle": 6,
+        "cycles_used": 6,
         "max_cycles": 6,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M6_UNACCEPTED",
@@ -3237,7 +3237,7 @@
         "uncertain_outcome": "RETAIN_FOR_INSPECTION_NO_AUTOMATIC_RESEND"
     },
     "m6p3_engineering": {
-        "cycle": 4,
+        "cycle": 6,
         "ceiling": 6,
         "status": "VERIFYING",
         "completed_cycles": [
@@ -3255,8 +3255,29 @@
                 "cycle": 3,
                 "result": "CHANGES_REQUIRED",
                 "evidence": "44 behavior/concurrency tests, 241 assertions; populated74-table7-reader recovery, static analysis,39 proof-unit cases and Node proof gates passed. Browser save failed before HTTP: numeric grace input violated string recovery envelope."
+            },
+            {
+                "cycle": 4,
+                "result": "FULL_GATE_FAILED",
+                "evidence": "46 focused tests /274 assertions, static/frontend/proof-unit/source and settled rendered/sanitation review passed. Clean commit8d3f5b9 full gate stopped at newly published Livewire advisory GHSA-mhf7-xp6r-6qrc affecting locked4.4.7."
+            },
+            {
+                "cycle": 5,
+                "result": "TIA_FAILED",
+                "evidence": "Compatible Livewire4.4.8 patch reviewed; locked auditzero. Fresh nativeTIA executed1195 tests/1192 passed, three old schema-boundary expectations failed after adding seven reminder tables. Original failure retained."
             }
-        ]
+        ],
+        "cycle6_checks": {
+            "targeted_tests": 24,
+            "targeted_assertions": 632,
+            "native_tia_tests": 1195,
+            "native_tia_assertions": 8961,
+            "native_tia": "PASS_FRESH_WITH_RESTORED_SELECTION_PROBES",
+            "source_review": "PASS_READ_ONLY",
+            "patched_browser": "PASS_SCOPED_SAVE_FOUR_LAYOUTS_AND_OWNER_ADMIN_403",
+            "clean_uncached_release": "PENDING",
+            "remote_ci_review_merge": "NOT_REACHED"
+        }
     },
     "m6p2_execution_authorization_history": {
         "phase": "M6-P2",

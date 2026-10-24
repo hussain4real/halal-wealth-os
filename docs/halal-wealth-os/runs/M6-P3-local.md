@@ -42,3 +42,19 @@ Cycle 3: 44 behavior/concurrency tests / 241 assertions; populated encrypted 74-
 Normalize the numeric input to a string at the UI boundary, then repeat actual save/lost-response recovery, desktop/mobile light/dark and foreign-owner review, followed by affected static/TIA/full/source gates.
 
 Cycle 4 focused proof passed: 45 reminder cases plus populated encrypted recovery, 46 tests / 274 assertions. Every new concrete domain path exceeds the unchanged90% coverage floor. Independent implementation-source rereview passed. Coordinator browser proof passed actual save/recovery, stale-pause rejection, foreign-owner isolation and hard64MiB overflow inspection/pause. Independent rendered/sanitation review initially required settled-theme recapture; replacements passed with measured contrast at least17.18:1. Earlier failed captures, all tests and corrections remain private evidence. Full clean release, native TIA and remote delivery gates remain pending.
+
+Cycle 4 clean full gate failed at the unchanged dependency audit because locked Livewire4.4.7 is affected by newly published GHSA-mhf7-xp6r-6qrc. It did not reach a final uncached test/release pass. Original failure and reviewed clean commit are preserved.
+
+## Cycle 5 — compatible dependency security patch
+
+The [official advisory](https://github.com/advisories/GHSA-mhf7-xp6r-6qrc) identifies 4.4.8 as patched. A Composer dry run selected only the existing Livewire package4.4.7→4.4.8, with no installs/removals, root constraint changes or broadened limits. Apply that minimal patch, review the lock/upstream change and repeat audits, native TIA, full clean release and exact-head remote gates. No exploit or absence-of-runtime-impact claim is made.
+
+The compatible patch changed only Livewire in the lock; installation and the fresh locked Composer audit passed with zero advisories. The first full-gate failure remains retained. Final source review, uncached full release and native TIA remain separate pending checks.
+
+Cycle 5 native TIA executed 1,195 tests; 1,192 passed and three historical schema integration expectations failed. Two rollback checks omitted the new empty reminder migration before their existing market boundary; the owner-export check still expected57 sections instead of64. The security patch's locked audit and independent source review passed. The TIA failure is retained and is not a full verification pass.
+
+## Cycle 6 — historical schema boundary integration
+
+Explicitly remove and verify the new empty reminder schema before historical rollback tests, preserving every prior financial-byte assertion. Update the exact portable section count to64 and require all seven reminder section names. Repeat affected tests, fresh native TIA and clean full release. This is the final authorized correction cycle; further correction requires human authorization.
+
+Cycle 6 targeted legacy integration passed24 tests/632 assertions. Fresh native TIA passed1,195 tests/8,961 assertions; temporary Vue/PHP selection probes restored exact source bytes and cached replay passed. These are local impact checks, not uncached release proof. Independent integration source review passed without weakening prior financial assertions. On the patched runtime, the coordinator saved a paused synthetic preference, rechecked four settled desktop/mobile light/dark layouts (minimum measured control contrast17.18:1, no horizontal overflow), observed zero reminder-page JavaScript errors and verified owner admin access403. Earlier comprehensive recovery/foreign-owner browser evidence remains separately retained. Owned browser/server resources closed; clean full release and remote gates remain pending.
