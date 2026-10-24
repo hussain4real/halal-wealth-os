@@ -2837,7 +2837,7 @@
         },
         "m6p3-rendered": {
             "public_path": "docs/halal-wealth-os/runs/M6-P3-rendered-review.md",
-            "sha256": "6555f50990b1c1dc6f9661cb5f8b5c386fc5f331bad8c74d44c66623f30a15e2",
+            "sha256": "6daf7d18316352d240e234f7c1b6f747f03c5032a737ea5f884d75b0fcacad78",
             "scope": "Coordinator actual synthetic browser/save/recovery/foreign-owner/capacity proof and independently inspected settled screenshots; no independent browser execution, hosted delivery or accessibility certification claimed."
         }
     },

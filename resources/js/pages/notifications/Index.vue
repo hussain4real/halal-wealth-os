@@ -38,6 +38,25 @@ const { form, feedback, locked, recovered, submit } = usePortfolioForm(
 const query = ref(props.query);
 const preview = ref<{ subject: string; body: string } | null>(null);
 const previewError = ref('');
+function pauseExternal(): void {
+    router.post(
+        '/notifications/pause',
+        {},
+        {
+            preserveScroll: true,
+            onSuccess: () => {
+                if (locked.value) return;
+                form.prior = props.defaults.prior;
+                form.external_paused = props.defaults.external_paused;
+                form.defaults('prior', props.defaults.prior);
+                form.defaults(
+                    'external_paused',
+                    props.defaults.external_paused,
+                );
+            },
+        },
+    );
+}
 function selected(id: string): boolean {
     return form.schedules.split(',').includes(id);
 }
@@ -114,16 +133,7 @@ const labels: Record<string, string> = {
                 Live email is blocked. SMTP is approved for synthetic testing
                 only; saving email preferences does not enable real sends.
             </p>
-            <Button
-                class="mt-4"
-                variant="destructive"
-                @click="
-                    router.post(
-                        '/notifications/pause',
-                        {},
-                        { preserveScroll: true },
-                    )
-                "
+            <Button class="mt-4" variant="destructive" @click="pauseExternal"
                 >Pause all external reminders</Button
             >
             <p class="mt-2 text-xs text-muted-foreground">

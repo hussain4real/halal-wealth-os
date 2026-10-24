@@ -352,7 +352,7 @@
         "authorized_by": "human-owner",
         "recorded_at": "2026-10-24T02:25:41.457954+00:00",
         "scope": "Accept M6-P2; implement canonical M6-P3, PR to dev, normal approved-noreply merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed progress publication.",
-        "max_cycles": 6,
+        "max_cycles": 8,
         "one_source_writer": true,
         "live_external_delivery": "BLOCKED",
         "deployment": false,
@@ -364,17 +364,18 @@
         "remote_pr_dev_merge": true,
         "existing_signed_publisher": true,
         "new_credentials": false,
-        "live_provider_access": false
+        "live_provider_access": false,
+        "budget_extension": "m6p3_budget_extension"
     },
     "execution_status": {
         "phase": "M6-P3",
         "status": "VERIFYING",
-        "cycle": 6,
-        "cycles_used": 6,
-        "max_cycles": 6,
+        "cycle": 8,
+        "cycles_used": 8,
+        "max_cycles": 8,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M6_UNACCEPTED",
-        "checkpoint": "M6-P2 owner accepted; canonical M6-P3 and SMTP mock-only approved. Independent grounding/design preparation, no implementation cycle consumed."
+        "checkpoint": "Cycle7 page correction and independent source/rendered checks passed; preserve original CI and hosted P2. Cycle8 aligns current authorization/status and final rendered binding before fresh native TIA and clean release. Original exact-head CI/fresh review, normal dev merge, post-merge CI and signed publication remain pending on corrected head."
     },
     "dependency_patch": {
         "authorized": true,
@@ -3221,10 +3222,11 @@
         "authorized_by": "human-owner",
         "recorded_at": "2026-10-24T02:25:41.457954+00:00",
         "scope": "Accept M6-P2; implement canonical M6-P3, PR to dev, normal approved-noreply merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed progress publication.",
-        "max_cycles": 6,
+        "max_cycles": 8,
         "one_source_writer": true,
         "live_external_delivery": "BLOCKED",
-        "deployment": false
+        "deployment": false,
+        "budget_extension": "m6p3_budget_extension"
     },
     "m6p3_email_selection": {
         "adapter": "Laravel SMTP",
@@ -3237,8 +3239,8 @@
         "uncertain_outcome": "RETAIN_FOR_INSPECTION_NO_AUTOMATIC_RESEND"
     },
     "m6p3_engineering": {
-        "cycle": 6,
-        "ceiling": 6,
+        "cycle": 8,
+        "ceiling": 8,
         "status": "VERIFYING",
         "completed_cycles": [
             {
@@ -3265,6 +3267,25 @@
                 "cycle": 5,
                 "result": "TIA_FAILED",
                 "evidence": "Compatible Livewire4.4.8 patch reviewed; locked auditzero. Fresh nativeTIA executed1195 tests/1192 passed, three old schema-boundary expectations failed after adding seven reminder tables. Original failure retained."
+            },
+            {
+                "cycle": 6,
+                "result": "CLEAN_LOCAL_AND_ORIGINAL_CI_PASS_FRESH_REVIEW_REQUIRES_CORRECTION",
+                "tests": 1195,
+                "assertions": 8965,
+                "financial_floors": 76,
+                "requirements": 117,
+                "selectors": 550,
+                "original_pr_ci": 40057260381,
+                "fresh_review": "Confirmed P2: same-tab pause retains stale form concurrency token; unresolved."
+            },
+            {
+                "cycle": 7,
+                "result": "SOURCE_AND_BROWSER_PASS_VERIFICATION_INTERRUPTED_FOR_METADATA_FINALIZATION",
+                "scope": "Page-only pause success token/pause reconciliation when no pending draft; exact committed/uncommitted retry preserved.",
+                "source_review": "PASS_READ_ONLY",
+                "rendered": "PASS_SAME_TAB_AND_INTERRUPTED_REQUESTS_FOUR_SETTLED_LAYOUTS",
+                "verification_history": "Two private browser checker assumptions corrected; fresh TIA stopped when final metadata/binding required alignment. No fresh TIA pass claimed."
             }
         ],
         "cycle6_checks": {
@@ -3304,5 +3325,31 @@
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M6_UNACCEPTED",
         "checkpoint": "Cycle5 freshTIA1147tests8577assertionsPASS; clean uncached1147tests8577assertions,71financialfloors, nativeHTTP/performance and populated recoveryPASS. Finalization stopped because validator still expected five reader fingerprints instead of six including market. Cycle6 corrects strict reader contract with fail-before/pass-after regression; repeats affected TIA/source review and clean full/hosted delivery gates. SixofSixcycles allocated; no new correction cycle is authorized."
+    },
+    "m6p3_budget_extension": {
+        "authorized_by": "human-owner",
+        "additional_cycles": 2,
+        "previous_ceiling": 6,
+        "total_ceiling": 8,
+        "scope": "PR23 same-tab pause token recovery, exact pending draft preservation and fresh delivery gates"
+    },
+    "m6p3_initial_authorization_history": {
+        "authorized_by": "human-owner",
+        "recorded_at": "2026-10-24T02:25:41.457954+00:00",
+        "scope": "Accept M6-P2; implement canonical M6-P3, PR to dev, normal approved-noreply merge after original exact-head CI and fresh review; verify original post-merge CI and existing signed progress publication.",
+        "max_cycles": 6,
+        "one_source_writer": true,
+        "live_external_delivery": "BLOCKED",
+        "deployment": false
+    },
+    "m6p3_pre_extension_status_history": {
+        "phase": "M6-P3",
+        "status": "VERIFYING",
+        "cycle": 6,
+        "cycles_used": 6,
+        "max_cycles": 6,
+        "phase_acceptance": "UNACCEPTED",
+        "milestone_acceptance": "M6_UNACCEPTED",
+        "checkpoint": "M6-P2 owner accepted; canonical M6-P3 and SMTP mock-only approved. Independent grounding/design preparation, no implementation cycle consumed."
     }
 }

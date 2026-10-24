@@ -555,3 +555,17 @@ owner isolation, export/recovery, financial invariants, TIA/full clean gates,
 public/private boundaries and main/stage. No M6-P4, live provider integration,
 real imports, history rewrites or self-acceptance. M6-P3 and M6 acceptance remain
 human decisions.
+
+## M6-P3 hosted pause-token correction budget
+
+The human owner explicitly authorized two additional scoped correction and
+verification cycles for PR #23's same-tab pause token P2 finding. Preserve
+cycles1-6, the original successful CI and the fresh finding; total ceiling is
+eight. Refresh pause concurrency state only when no interrupted request is
+pending, preserve exact committed/uncommitted request recovery, and verify
+pause followed by save/resume in the same tab. Repeat affected checks, native
+TIA, clean full release, independent review and original exact-head hosted
+CI/fresh review before the already authorized normal approved-noreply dev
+merge, original post-merge CI and existing signed public progress verification.
+All prior sole-writer, mock-only SMTP, privacy, acceptance and deployment
+boundaries remain unchanged.
