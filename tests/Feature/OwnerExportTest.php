@@ -36,9 +36,9 @@ test('complete owner export contains every financial section and excludes authen
     $document = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
     expect($document['schema_version'])->toBe(2)
         ->and($document['profile']['id'])->toBe((string) $owner->id)
-        ->and($document['data'])->toHaveCount(67)
-        ->and($document['manifest']['sections'])->toHaveCount(67)
-        ->and($document['data'])->toHaveKeys(['market_mappings', 'market_attempts', 'market_results', 'market_admissions', 'reminder_preferences', 'reminder_controls', 'reminder_notifications', 'reminder_channels', 'reminder_claims', 'reminder_results', 'reminder_reads'])
+        ->and($document['data'])->toHaveCount(69)
+        ->and($document['manifest']['sections'])->toHaveCount(69)
+        ->and($document['data'])->toHaveKeys(['copilot_controls', 'copilot_requests', 'market_mappings', 'market_attempts', 'market_results', 'market_admissions', 'reminder_preferences', 'reminder_controls', 'reminder_notifications', 'reminder_channels', 'reminder_claims', 'reminder_results', 'reminder_reads'])
         ->and($document['profile'])->not->toHaveKeys(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes']);
     ob_start();
     try {
@@ -129,6 +129,7 @@ test('populated owner export retains revisions exact nested decimals and release
             ->and($data['decision_reservations'])->toHaveCount(1)->and($data['shariah_assessments'])->toHaveCount(2)
             ->and($data['purification_obligations'])->toHaveCount(1)->and($data['purification_allocations'])->toHaveCount(1)
             ->and(array_column($data['portfolio_opening_rows'], 'quantity'))->toContain('1.234567890123');
+        expect($data['copilot_controls'])->toHaveCount(1)->and($data['copilot_requests'])->toHaveCount(4);
         expect($data['statement_sources'])->toHaveCount(2)->and($data['statement_adapters'])->toHaveCount(1)
             ->and($data['statement_snapshots'])->toHaveCount(2)->and($data['statement_receipts'])->toHaveCount(3)
             ->and($data['statement_claims'])->not->toBeEmpty();

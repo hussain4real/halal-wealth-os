@@ -374,3 +374,23 @@ owner admission. Capacity checks preserve old observations and bounded evidence;
 status identifies pending or blocked latest samples without inventing a failure
 cause after a rollback. Rendered warnings and manual fallback require actual
 browser verification. Historical 502-selector receipts remain historical.
+
+## M7-P1 verification contract
+
+Retain the M6-P3/P4 outbox and Drive contracts and their populated export/recovery
+readers. M7-P1 adds closed read-only schemas, direct/HTTP owner enforcement,
+malicious text/write refusal, deterministic dated evidence, default disabled
+provider, consent generation fencing, conservative charged usage, immutable
+request recovery and real PostgreSQL request contention. No live model or answer
+quality is inferred from injected synthetic contract tests. F18 covers only
+registry/owner/untrusted-input boundaries; M7-P2 evaluation remains future.
+
+All new Intelligence/Reporting concrete sources retain the 90 percent financial
+line floor. Strict owner catalog grows to 81 tables, with two owner metadata
+relations and a ninth reopened Intelligence recovery reader. The full native HTTP
+lane verifies cookie/CSRF, shape refusal, default unavailable/core independence
+and secret/session redaction. Native TIA, meaningful restored-source PHP/Vue
+selection, actual desktop/mobile light/dark owner recovery review, clean uncached
+release, seven strict artifacts, original hosted CI/fresh review, normal dev merge
+and original post-merge CI/public publication remain distinct observed gates.
+Unimplemented-phase rejection targets M7-P2. No test grants phase acceptance.

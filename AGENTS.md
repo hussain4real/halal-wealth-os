@@ -605,3 +605,55 @@ exact-head CI and a fresh hosted review before the already-authorized normal
 approved-noreply dev merge, original post-merge CI and existing signed public
 progress verification. One source writer and all mock-only/privacy/acceptance/
 credential/deployment boundaries remain unchanged. No ninth cycle is authorized.
+
+## M6-P4 acceptance and independent M6 review
+
+The human owner explicitly accepted M6-P4 on24 October2026 and requested the
+independent M6 milestone review plus current roadmap status. Record phase acceptance
+and close its claim, preserving all seven cycles, original failures and unused
+eighth-cycle history. All four M6 phases are accepted; M6 itself is not.
+
+An independent source-read-only reviewer follows the private canonical M6 review,
+inspects actual merged source and acceptance/evidence, and reruns all implemented
+release regression gates in exclusively owned synthetic resources. A clean isolated
+checkout at the verified dev merge supplies strict clean release proof; disclose
+the manager’s acceptance-only overlay and unrelated untracked files separately.
+Preserve those files and never relax source-cleanliness guards. The reviewer may
+write only its report and permitted test-generated artifacts, and returns
+READY_FOR_OWNER or CHANGES_REQUIRED. Only the manager records central status;
+only the human accepts M6. No source fixes, commits, pushes, PRs, merges, live
+provider/SMTP/Google calls, credentials, deployment, permission changes or M7
+implementation are authorized by this acceptance/review request.
+
+## Independent M6 review completion
+
+The source-read-only independent M6 review returned READY_FOR_OWNER on24 October2026.
+Its clean isolated full gate passed1,310 tests/9,752 assertions,80 financial floors,
+122 requirements/665 selectors and79-table/eight-reader recovery. All926 tracked
+files kept identical bytes/modes and owned resources stopped. The report preserves
+retained versus fresh browser/live limits and a nonblocking stale-status observation.
+The manager reconciled local status summaries after the verification freeze ended.
+All four M6 phases are owner accepted; M6 itself still requires a separate human
+decision. No M7, publication, source fixes, credential or deployment authority
+is implied. Review/acceptance/status updates remain local and uncommitted.
+
+## Current M7-P1 authority
+
+The human owner explicitly accepted M6 after its independent READY_FOR_OWNER
+review and authorized canonical M7-P1 implementation, independent source/rendered
+review, a sanitized PR to dev, normal approved-noreply merge after original
+exact-head CI and a fresh hosted review, then original post-merge CI and existing
+signed public progress verification. Record M6 acceptance and preserve all earlier
+cycle/failure history and unrelated local files. One implementation writer, no
+implementation subagents; independent reviewers are source-read-only with exclusive
+resources. This phase has at most six scoped implementation/verification cycles.
+
+Implement only the read-only financial tool boundary. Every tool uses the server's
+authenticated owner, deterministic existing financial services and explicit
+currency/as-of/completeness/source metadata. Prompts/documents remain untrusted
+data. Consent, bounded usage and redacted traces cannot grant financial writes.
+The optional provider defaults disabled; no live model/provider connection, new
+account/credentials, deployment, permissions, main/stage changes, later phase,
+history rewriting or self-acceptance. Preserve native TIA, full uncached checks,
+strict release/recovery/export evidence and all starter features. M7-P1 and M7
+acceptance remain separate human decisions.

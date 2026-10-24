@@ -11,8 +11,10 @@ M6-P2 is human accepted; see [M6-P2 acceptance](runs/M6-P2-acceptance.md).
 Twelve Data remains disabled and mock-only; live access and entitlement are blocked.
 M6-P3 is human accepted; see [its acceptance](runs/M6-P3-acceptance.md).
 Laravel SMTP remains disabled and synthetic mock-only.
-M6-P4 is authorized for personal Drive report export with approved mock-only scopes;
-see [Drive policy](DRIVE-EXPORT.md). M6-P4 and M6 remain unaccepted.
+M6-P4 is human accepted; see [its acceptance](runs/M6-P4-acceptance.md) and
+[Drive policy](DRIVE-EXPORT.md). Google Drive remains disabled and mock-only.
+All four M6 phases are accepted. The [independent M6 review](runs/M6-independent-review.md)
+returned READY_FOR_OWNER; M6 is human accepted; M7-P1 is authorized and in progress.
 Deployment, live external delivery and later phases remain separate decisions.
 Reporting composes existing source contracts inside a coherent database snapshot;
 it retains dashboard evidence and rule/dismissal history without posting financial
@@ -73,3 +75,15 @@ Immutable preferences, logical episodes, channel intents, claims, results and re
 The bounded scanner invokes ID-only jobs synchronously, avoiding persistent queue-hint growth. In-app claim/publication is one transaction. SMTP commits a claim before handoff; only its creating stack holds the permit. Current verification/email, preferences, detail, matching/dismissal, timing and pause are rechecked under the owner advisory lock and current user-row lock. Uncertain claims never grant a new send, including restored evidence. Only proved no-handoff failures retry after one then five minutes, at most three attempts. SMTP has no exactly-once guarantee.
 
 Laravel SMTP is owner-approved for synthetic mock-only testing. The reminder adapter requires the testing environment plus an actual mail fake, independent of Fortify mail. Generic content is a private-page link; explicit review detail adds only review type/due date. No balances, holdings, amounts or personal financial names are included. No live delivery, account or credentials are enabled. All seven new owner relations participate in the exact74-table catalog and populated encrypted recovery, with a seventh reminder reader fingerprint.
+
+## M7-P1 read-only tool boundary
+
+Intelligence composes only the explicit Reporting\CopilotEvidence facade, with
+a closed enum registry. Reporting alone uses deterministic financial readers.
+The service derives identity from the authenticated verified owner; no model or
+HTTP owner argument is accepted. Coherent PostgreSQL reads begin before source
+lookups, and consent generations fence interrupted work. Financial writes, SQL,
+trading, sharing, arbitrary connectors and public method reflection are absent.
+See [boundary policy](COPILOT-BOUNDARY.md). Provider selection is a generic port
+with a safe unavailable default, tested using an injected synthetic contract.
+No live transport, credentials, generated answers or live evaluation is claimed.

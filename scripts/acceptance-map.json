@@ -3326,6 +3326,216 @@
             "class": "Tests\\Unit\\GoogleDriveContractTest",
             "name": "rejected refresh response can clean up with a bounded prior token when returned credentials are unusable",
             "file": "tests/Unit/GoogleDriveContractTest.php"
+        },
+        "case-m7p1-be59b9116971": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "revocation followed by new consent never revives an old provider request",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-f5823cd81cd3": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "goals pagination is explicit and continuation cannot inject new arguments",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-25d75a87139e": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "populated copilot downgrade refuses before ddl",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-adce6936f7fd": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "empty copilot roundtrip preserves predecessor data",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-e8a8f7562272": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "closed registry contains exactly five readonly schemas without owner or writes",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-bba88238af9e": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['buy', []])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-835fb0b83055": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['sell', []])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-2d62bb202d05": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['transfer', []])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-13c8052f7070": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['payment', []])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-e8f9444ab098": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['export-sharing', []])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-54931bfe3f74": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['save', []])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-437a98c4881b": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['CASH_AVAILABILITY', []])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-1b899996b218": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"([['cash_availability'], []])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-4bcb9a09a694": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['cash_availability', ['999']])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-924cca922162": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['cash_availability', [], '999'])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-128271d2f50f": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['cash_availability', ['SELECT * FROM users']])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-accfbaf88699": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['cash_availability', '{}'])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-defa1c073641": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['goals', ['2026-13']])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-e4b2d4ec977a": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['goals', ['2026-10', '0']])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-acc3ac1a9b12": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['holdings', [1, '2026-10-24T00:00:00Z']])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-d5b56518599d": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "write aliases sql owner arguments and malformed queries cannot enter dispatch with data set \"(['holdings', ['1', '2099-01-01T00:00:00Z']])\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-78408f7e6a12": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "default disabled provider and consent never impair core dashboard",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-4e3d68260fb6": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "explicit consent generations reject stale enable and always allow revocation",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-a967db70e177": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "cash and goals retain exact deterministic money metadata and omit malicious names",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-af92e7a9f92d": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "holdings saved valuations and shariah history preserve source and uncertainty",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-38162570f13f": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "foreign valid record ids and admin role cannot disclose another owner evidence",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-f2ce2bedc9cc": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('{\"tool\":\"buy\",\"arguments\":{}}')\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-4ac315b1d6bf": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('{\"tool\":\"cash_availability\",\"\u2026999\"}}')\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-a9ddf5e4e495": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('null')\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-20e9caeebc18": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('not json')\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-61003ae16ccc": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\u2026xxxxxx')\"",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-6ffbbe5723b0": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "provider failure missing adapter success and postcall revocation remain distinct",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-95b95daff181": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "input bytes utf8 and configured budget ceilings fail closed",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-3e366e9e8cc9": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "charged retries and hard history cap never free tokens but revocation survives",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-952b8cd207d8": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "oversized evidence is withheld with a redacted rejected trace",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-814afadd2a53": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "http tools enforce authentication csrf shape consent and owner data isolation",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-ed4b6d713053": {
+            "class": "Tests\\Feature\\CopilotConcurrencyTest",
+            "name": "independent postgres contenders cannot overspend the final request reservation",
+            "file": "tests/Feature/CopilotConcurrencyTest.php"
+        },
+        "case-m7p1-fd2d6e164562": {
+            "class": "Tests\\Feature\\CopilotConcurrencyTest",
+            "name": "concurrent identical request keys retain a single durable charged claim",
+            "file": "tests/Feature/CopilotConcurrencyTest.php"
+        },
+        "case-m7p1-ed978e95daee": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "ordinary form failures never flash copilot questions or documents into sessions",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-a5fdd697f8aa": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "complete export headroom rolls back new controls and charges but preserves revocation and existing recovery",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-4b6fa99c5be4": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "all five evidence reads leave every retained financial owner table unchanged",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p1-a7da2600fd60": {
+            "class": "Tests\\Feature\\CopilotBoundaryTest",
+            "name": "database charge clock prevents a day-window mismatch from resetting reserved usage",
+            "file": "tests/Feature/CopilotBoundaryTest.php"
         }
     },
     "manual_artifacts": {
@@ -3424,6 +3634,11 @@
             "public_path": "docs/halal-wealth-os/runs/M6-P4-rendered-review.md",
             "sha256": "e002880368a47ae5a7d02065251eec8bd3329218a1be799193edbd564884f934",
             "scope": "Coordinator actual synthetic browser/recovery/foreign-owner/byte proof; independent pixel/source review only, no independent execution or accessibility certification."
+        },
+        "m7p1-rendered": {
+            "sha256": "5376c609546ef4a276980402a985305c3a97679f9ad51847b9f3e6d799ab0057",
+            "scope": "Independent inspection of retained cycle3 desktop/mobile light/dark/foreign artifacts and cycle6 current-page JSON-error recovery artifacts; no live model, hard-reload persistence, answer-quality or full accessibility claim.",
+            "public_path": "docs/halal-wealth-os/runs/M7-P1-rendered-review.md"
         }
     },
     "requirements": {
@@ -4597,7 +4812,9 @@
                 "case-m6p2-ae74d7e3a71d",
                 "case-m6p2-3749d14f89c9",
                 "case-m6p2-2d2ce8712792",
-                "case-m6p2-03635855a8d7"
+                "case-m6p2-03635855a8d7",
+                "case-m7p1-38162570f13f",
+                "case-m7p1-814afadd2a53"
             ],
             "manual_artifact_ids": [],
             "scope": "Executed module-specific owner/admin/export negatives for currently implemented modules. M6 jobs/uploads and M7 AI tools remain unimplemented, not claimed tested. New release web-session revocation regression remains mandatory pending separately."
@@ -5583,6 +5800,86 @@
             ],
             "manual_artifact_ids": ["m6p4-scopes", "m6p4-rendered"],
             "tool_check": null
+        },
+        "M7-P1-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p1-e8a8f7562272",
+                "case-m7p1-bba88238af9e",
+                "case-m7p1-835fb0b83055",
+                "case-m7p1-2d62bb202d05",
+                "case-m7p1-13c8052f7070",
+                "case-m7p1-e8f9444ab098",
+                "case-m7p1-54931bfe3f74",
+                "case-m7p1-437a98c4881b",
+                "case-m7p1-1b899996b218",
+                "case-m7p1-4bcb9a09a694",
+                "case-m7p1-924cca922162",
+                "case-m7p1-128271d2f50f",
+                "case-m7p1-accfbaf88699",
+                "case-m7p1-defa1c073641",
+                "case-m7p1-e4b2d4ec977a",
+                "case-m7p1-acc3ac1a9b12",
+                "case-m7p1-d5b56518599d",
+                "case-m7p1-4b6fa99c5be4"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": null
+        },
+        "M7-P1-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p1-38162570f13f",
+                "case-m7p1-814afadd2a53",
+                "case-m7p1-ed978e95daee",
+                "case-m7p1-a5fdd697f8aa"
+            ],
+            "manual_artifact_ids": ["m7p1-rendered"],
+            "tool_check": null
+        },
+        "M7-P1-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p1-f5823cd81cd3",
+                "case-m7p1-a967db70e177",
+                "case-m7p1-af92e7a9f92d",
+                "case-m7p1-4b6fa99c5be4"
+            ],
+            "manual_artifact_ids": ["m7p1-rendered"],
+            "tool_check": null
+        },
+        "M7-P1-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p1-e8a8f7562272",
+                "case-m7p1-a967db70e177",
+                "case-m7p1-f2ce2bedc9cc",
+                "case-m7p1-4ac315b1d6bf",
+                "case-m7p1-a9ddf5e4e495",
+                "case-m7p1-20e9caeebc18",
+                "case-m7p1-61003ae16ccc"
+            ],
+            "manual_artifact_ids": [],
+            "tool_check": null
+        },
+        "M7-P1-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p1-be59b9116971",
+                "case-m7p1-78408f7e6a12",
+                "case-m7p1-6ffbbe5723b0",
+                "case-m7p1-95b95daff181",
+                "case-m7p1-3e366e9e8cc9",
+                "case-m7p1-952b8cd207d8",
+                "case-m7p1-814afadd2a53",
+                "case-m7p1-ed4b6d713053",
+                "case-m7p1-fd2d6e164562",
+                "case-m7p1-ed978e95daee",
+                "case-m7p1-a5fdd697f8aa",
+                "case-m7p1-a7da2600fd60"
+            ],
+            "manual_artifact_ids": ["m7p1-rendered"],
+            "tool_check": null
         }
     },
     "fixtures": {
@@ -5767,9 +6064,38 @@
         },
         "F18": {
             "name": "AI trust boundary",
-            "status": "FUTURE_M7_NOT_IMPLEMENTED",
-            "case_ids": [],
-            "scope": "No AI tool or live-model test claimed."
+            "status": "IMPLEMENTED_M7_P1_BOUNDARY_ONLY",
+            "case_ids": [
+                "case-m7p1-bba88238af9e",
+                "case-m7p1-835fb0b83055",
+                "case-m7p1-2d62bb202d05",
+                "case-m7p1-13c8052f7070",
+                "case-m7p1-e8f9444ab098",
+                "case-m7p1-54931bfe3f74",
+                "case-m7p1-437a98c4881b",
+                "case-m7p1-1b899996b218",
+                "case-m7p1-4bcb9a09a694",
+                "case-m7p1-924cca922162",
+                "case-m7p1-128271d2f50f",
+                "case-m7p1-accfbaf88699",
+                "case-m7p1-defa1c073641",
+                "case-m7p1-e4b2d4ec977a",
+                "case-m7p1-acc3ac1a9b12",
+                "case-m7p1-d5b56518599d",
+                "case-m7p1-38162570f13f",
+                "case-m7p1-f2ce2bedc9cc",
+                "case-m7p1-4ac315b1d6bf",
+                "case-m7p1-a9ddf5e4e495",
+                "case-m7p1-20e9caeebc18",
+                "case-m7p1-61003ae16ccc"
+            ],
+            "implemented_subscenarios": [
+                "readonly_registry",
+                "owner_authorization",
+                "untrusted_prompt_boundary"
+            ],
+            "future_subscenarios": ["M7-P2_live_answer_citations_and_quality"],
+            "scope": "Executed deterministic synthetic tool boundaries only; no generated answers, live model evaluation or V2 claim."
         }
     },
     "evidence_semantics": "AND: configured exact cases must pass in current uncached JUnit and every configured scoped manual artifact must retain its hash. Historical and current observations retain their declared limits; manual evidence never replaces a missing configured test or owner acceptance."

@@ -61,7 +61,7 @@ try {
     );
     const record = {
         result: 'PASS',
-        phase: 'M6-P4',
+        phase: 'M7-P1',
         ...proof,
         ...identity,
         build_manifest_sha256: digest(manifestPath),

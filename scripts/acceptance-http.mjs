@@ -14,6 +14,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { root, testingEnvironment, sourceIdentity } from './verification.mjs';
+import { copilotJourney } from './copilot-http.mjs';
 import { marketJourney } from './market-http.mjs';
 import { statementJourney } from './statement-http.mjs';
 
@@ -218,7 +219,7 @@ child.stderr.on('data', (chunk) => {
 });
 const report = {
     schema: 1,
-    phase: 'M6-P2',
+    phase: 'M7-P1',
     source_sha256: source,
     junit_sha256: existsSync(path.join(root, 'build/junit.xml'))
         ? createHash('sha256')
@@ -492,6 +493,7 @@ try {
         live_connection: false,
         callback_no_redirect: true,
     };
+    report.copilot = await copilotJourney({ owner, foreign, admin, page, key });
     report.market_data = await marketJourney({
         owner,
         foreign,
@@ -689,11 +691,20 @@ try {
             !sessions.includes(marker),
             'Statement financial input must not be flashed into file sessions',
         );
+    for (const marker of [
+        'SYNTHETIC-UNTRUSTED-COPILOT-TEXT',
+        'SYNTHETIC-COPILOT-CONSENT-SECRET',
+    ])
+        assert(
+            !sessions.includes(marker),
+            'Copilot text must not be flashed into file sessions',
+        );
     for (const secret of [
         ...secrets,
         'acceptance-owner@example.test',
         'Synthetic manual acceptance',
         ...importMarkers,
+        'SYNTHETIC-UNTRUSTED-COPILOT-TEXT',
     ])
         assert(
             secret && !logs.includes(secret) && !serverLog.includes(secret),

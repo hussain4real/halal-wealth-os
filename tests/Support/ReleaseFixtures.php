@@ -93,6 +93,7 @@ final class ReleaseFixtures
 
         ReminderRecoveryFixtures::seed($owner, $foreign);
         DriveRecoveryFixtures::seed($owner, $foreign);
+        CopilotRecoveryFixtures::seed($owner, $foreign);
 
         return ['owner' => (string) $owner->id, 'foreign' => (string) $foreign->id, 'bank' => (string) $bank->id,
             'goal' => (string) $goal->id, 'portfolio' => (string) $fractionalPortfolio->id,
