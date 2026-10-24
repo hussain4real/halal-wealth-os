@@ -78,3 +78,19 @@ owner export and populated encrypted recovery. PHPStan passed with zero errors.
 Independent source review found no blocking clock-delta issue. The test simulates
 host/database skew; it does not claim an observed real midnight lock wait.
 Fresh current-source TIA and uncached release evidence remain required.
+
+## Cycle5 release and cycle6 hosted recovery correction
+
+The clean uncached cycle5 release and all seven strict artifacts passed1,363 tests,
+87 financial coverage floors,127 requirements/707 selectors and81-table/nine-reader
+recovery. Native TIA, source/sanitation and rendered checks passed separately.
+The original hosted review then found that JSON500 could discard an admitted
+request identity. Actual synthetic browser reproduction generated a second UUID
+and charge. Preserve that failure and original CI; cycle6 retains the unchanged
+request for server errors or unconfirmed receipts, clearing only definitive
+responses. Current-source regression/browser/TIA/full and hosted gates remain due.
+
+Cycle6 source checks also retain prior uncertainty through later throttle or access
+errors; those cannot settle an earlier admission. The page does not reload on an
+unconfirmed response, preserving its in-memory identity instead of risking an
+authentication redirect. Only the matching definitive receipt ends that recovery.

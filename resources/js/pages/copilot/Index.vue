@@ -4,7 +4,8 @@ import { computed, ref } from 'vue';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { importObject, importPost } from '@/composables/useStatementRequest';
+import { copilotPreviewOutcome } from '@/composables/copilotPreviewOutcome';
+import { importPost } from '@/composables/useStatementRequest';
 
 type RegistryEntry = {
     name: string;
@@ -65,6 +66,7 @@ const pending = ref<null | {
     tool: string;
     arguments: Record<string, string>;
 }>(null);
+const recovery = ref<'new' | 'unconfirmed'>('new');
 const consentBusy = ref(false);
 async function consent(enabled: boolean) {
     if (consentBusy.value) return;
@@ -107,37 +109,51 @@ async function preview() {
             '/copilot/preview',
             pending.value,
         );
-        if (
-            response.ok &&
-            importObject(body) &&
-            body.status === 'complete' &&
-            importObject(body.evidence)
-        ) {
-            result.value = JSON.stringify(body.evidence, null, 2);
-            feedback.value =
-                'Read-only evidence retrieved. Check its date, completeness and source records.';
-            pending.value = null;
-        } else if (
-            response.ok &&
-            importObject(body) &&
-            body.status === 'already_charged'
-        ) {
-            feedback.value =
-                'This request was already admitted. It will not run again. Check usage, then start a new preview if needed.';
-            pending.value = null;
-        } else if (response.ok) {
-            feedback.value =
-                'Evidence is unavailable for this selection or exceeds the disclosure limit. Use the core financial page for full details.';
-            pending.value = null;
-        } else {
-            feedback.value =
-                response.status === 429
-                    ? 'Usage limit reached. Core financial pages remain available.'
-                    : 'The preview was rejected. Check consent, owned record IDs, dates and required fields.';
-            pending.value = null;
+        const outcome = copilotPreviewOutcome({
+            status: response.status,
+            body,
+            reference: pending.value.reference,
+            recovery: recovery.value,
+        });
+        switch (outcome.kind) {
+            case 'complete':
+                result.value = JSON.stringify(outcome.evidence, null, 2);
+                feedback.value =
+                    'Read-only evidence retrieved. Check its date, completeness and source records.';
+                break;
+            case 'already_charged':
+                feedback.value =
+                    'This request was already admitted. It will not run again. Check usage, then start a new preview if needed.';
+                break;
+            case 'unavailable':
+                feedback.value =
+                    'Evidence is unavailable for this selection or exceeds the disclosure limit. Use the core financial page for full details.';
+                break;
+            case 'limited':
+                feedback.value =
+                    'Usage limit reached. Core financial pages remain available.';
+                break;
+            case 'rejected':
+                feedback.value =
+                    'The preview was rejected. Check consent, owned record IDs, dates and required fields.';
+                break;
+            case 'uncertain':
+                feedback.value =
+                    'The outcome could not be confirmed. Keep this unchanged request and check it again when access or usage limits permit. A reserved charge may remain.';
+                break;
+            default: {
+                const exhaustive: never = outcome;
+                throw new Error(String(exhaustive));
+            }
         }
-        router.reload({ only: ['boundary'] });
+        if (outcome.kind === 'uncertain') recovery.value = 'unconfirmed';
+        else {
+            pending.value = null;
+            recovery.value = 'new';
+            router.reload({ only: ['boundary'] });
+        }
     } catch {
+        recovery.value = 'unconfirmed';
         feedback.value =
             'Connection interrupted. Retry this unchanged request to check its outcome. A reserved charge may remain.';
     } finally {

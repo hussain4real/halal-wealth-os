@@ -87,6 +87,7 @@ try {
             'scripts/release-proof.test.mjs',
             'scripts/statement-mapping-key.test.mjs',
             'scripts/drive-attempt.test.mjs',
+            'scripts/copilot-preview.test.mjs',
         ]);
         const missing = [];
         for (const command of [
