@@ -294,7 +294,7 @@
         },
         "case-f91a7cc2f008": {
             "class": "Tests\\Unit\\BudgetCalendarTest",
-            "name": "Qatar monthly and annual anchors clamp missing days without drifting with data set \"('2026-01-31', 1, '2026-02', …)\"",
+            "name": "Qatar monthly and annual anchors clamp missing days without drifting with data set \"('2026-01-31', 1, '2026-02', \u2026)\"",
             "file": "tests/Unit/BudgetCalendarTest.php"
         },
         "case-3bcb20186167": {
@@ -374,7 +374,7 @@
         },
         "case-f84d3e7760db": {
             "class": "Tests\\Unit\\GoalProjectionTest",
-            "name": "zero variable reached and unavailable projections stay distinct with data set \"(['0'], '480000', 'unreachable', …)\"",
+            "name": "zero variable reached and unavailable projections stay distinct with data set \"(['0'], '480000', 'unreachable', \u2026)\"",
             "file": "tests/Unit/GoalProjectionTest.php"
         },
         "case-d9eed911d76e": {
@@ -474,7 +474,7 @@
         },
         "case-f680c6448bd1": {
             "class": "Tests\\Unit\\PortfolioMathTest",
-            "name": "full 24-place position products settle only at the native cash boundary with data set \"('QAR', '1.234567890123', '2.000000000001', …)\"",
+            "name": "full 24-place position products settle only at the native cash boundary with data set \"('QAR', '1.234567890123', '2.000000000001', \u2026)\"",
             "file": "tests/Unit/PortfolioMathTest.php"
         },
         "case-44e67225987c": {
@@ -1659,7 +1659,7 @@
         },
         "case-m6p1-2bbd6b443436": {
             "class": "Tests\\Unit\\CsvStatementTest",
-            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"(' =payload')\"",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('\u00a0=payload')\"",
             "file": "tests/Unit/CsvStatementTest.php"
         },
         "case-m6p1-0f0c8e04bff8": {
@@ -2139,7 +2139,7 @@
         },
         "case-m6p2-a7ad5e6c2469": {
             "class": "Tests\\Unit\\ProviderBoundaryTest",
-            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"meta\":{\"currency\":\"USD\",\"cu…EUR\"}}')\"",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"meta\":{\"currency\":\"USD\",\"cu\u2026EUR\"}}')\"",
             "file": "tests/Unit/ProviderBoundaryTest.php"
         },
         "case-m6p2-137b7c1a0069": {
@@ -2154,17 +2154,17 @@
         },
         "case-m6p2-438c332fb027": {
             "class": "Tests\\Unit\\ProviderBoundaryTest",
-            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('                             …      ')\"",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('                             \u2026      ')\"",
             "file": "tests/Unit/ProviderBoundaryTest.php"
         },
         "case-m6p2-69a26a3406f4": {
             "class": "Tests\\Unit\\ProviderBoundaryTest",
-            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('[[],[],[],[],[],[],[],[],[],[…[],[]]')\"",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('[[],[],[],[],[],[],[],[],[],[\u2026[],[]]')\"",
             "file": "tests/Unit/ProviderBoundaryTest.php"
         },
         "case-m6p2-b45c445c95bf": {
             "class": "Tests\\Unit\\ProviderBoundaryTest",
-            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"a\":[[[[[[[[[[[[[[[[[[[[0]]]…]]]]]}')\"",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"a\":[[[[[[[[[[[[[[[[[[[[0]]]\u2026]]]]]}')\"",
             "file": "tests/Unit/ProviderBoundaryTest.php"
         },
         "case-m6p2-0f3ebf17013e": {
@@ -2279,22 +2279,22 @@
         },
         "case-m6p2-ac2e7b3d798f": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/EUR\",\"rate\":3,…14051}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/EUR\",\"rate\":3,\u202614051}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-420246c7d6ca": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":0,…14051}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":0,\u202614051}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-70dd8d1cf51a": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1e…14051}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1e\u202614051}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-895bf50deb70": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1,…99999}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1,\u202699999}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-fe66dcf5aec9": {
@@ -2304,7 +2304,7 @@
         },
         "case-m6p2-4d8eeb63a6aa": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"status\":\"error\",\"code\":429,…sage\"}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"status\":\"error\",\"code\":429,\u2026sage\"}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-a22e5e083d5b": {
@@ -2324,42 +2324,42 @@
         },
         "case-m6p2-17744e64f2c0": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 23 Oct 2026 12:05:00 GMT', 'rate_limited', …)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 23 Oct 2026 12:05:00 GMT', 'rate_limited', \u2026)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-19dc52d90051": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Thu, 22 Oct 2026 12:05:00 GMT', 'rate_limited', …)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Thu, 22 Oct 2026 12:05:00 GMT', 'rate_limited', \u2026)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-a464fcb16b5a": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'malformed', 'rate_limited', …)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'malformed', 'rate_limited', \u2026)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-e97ce29de1a8": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, '999999999999999999', 'backoff_exceeds_policy', …)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, '999999999999999999', 'backoff_exceeds_policy', \u2026)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-30bc09ee8d9b": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 30 Oct 2026 12:00:01 GMT', 'backoff_exceeds_policy', …)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 30 Oct 2026 12:00:01 GMT', 'backoff_exceeds_policy', \u2026)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-d79a9bcf457d": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(503, '', 'upstream_unavailable', …)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(503, '', 'upstream_unavailable', \u2026)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-1044d843f375": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(401, '', 'access_or_http_error', …)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(401, '', 'access_or_http_error', \u2026)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-b54c79a9fec8": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(302, '', 'access_or_http_error', …)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(302, '', 'access_or_http_error', \u2026)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-3e04992e1f6e": {
@@ -2699,7 +2699,7 @@
         },
         "case-m6p3-65b4bb80741a": {
             "class": "Tests\\Feature\\ReminderTest",
-            "name": "invalid reminder settings reject without retained writes with data set \"([['1', '1', '1', …]])\"",
+            "name": "invalid reminder settings reject without retained writes with data set \"([['1', '1', '1', \u2026]])\"",
             "file": "tests/Feature/ReminderTest.php"
         },
         "case-m6p3-c5c33eca68a7": {
@@ -3029,7 +3029,7 @@
         },
         "case-m6p4-a18c44831c71": {
             "class": "Tests\\Unit\\GoogleDriveContractTest",
-            "name": "google identity requires a real verified response and never infers account kind from domain with data set \"(['xxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxx'])\"",
+            "name": "google identity requires a real verified response and never infers account kind from domain with data set \"(['xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\u2026xxxxxx'])\"",
             "file": "tests/Unit/GoogleDriveContractTest.php"
         },
         "case-m6p4-8f9c23d3ee45": {
@@ -3069,7 +3069,7 @@
         },
         "case-m6p4-dc718e681717": {
             "class": "Tests\\Unit\\GoogleDriveContractTest",
-            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('sssssssssssssssssssssssssssss…ssssss', 200, 'response_too_large')\"",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('sssssssssssssssssssssssssssss\u2026ssssss', 200, 'response_too_large')\"",
             "file": "tests/Unit/GoogleDriveContractTest.php"
         },
         "case-m6p4-52db8bc80874": {
@@ -3464,7 +3464,7 @@
         },
         "case-m7p1-4ac315b1d6bf": {
             "class": "Tests\\Feature\\CopilotBoundaryTest",
-            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('{\"tool\":\"cash_availability\",\"…999\"}}')\"",
+            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('{\"tool\":\"cash_availability\",\"\u2026999\"}}')\"",
             "file": "tests/Feature/CopilotBoundaryTest.php"
         },
         "case-m7p1-a9ddf5e4e495": {
@@ -3479,7 +3479,7 @@
         },
         "case-m7p1-61003ae16ccc": {
             "class": "Tests\\Feature\\CopilotBoundaryTest",
-            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxx')\"",
+            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\u2026xxxxxx')\"",
             "file": "tests/Feature/CopilotBoundaryTest.php"
         },
         "case-m7p1-6ffbbe5723b0": {
@@ -4086,7 +4086,7 @@
             "public_path": "docs/halal-wealth-os/runs/M7-P2-rendered-review.md"
         },
         "m7p2-tia": {
-            "sha256": "fdc5c91c299d38f4957be9cf69b87e595035341cc2be89bd7be0a20fe4e11961",
+            "sha256": "715934eea9248a908e058c59dd8a946e2767fa49c089120b956b1a9bfa697bdf",
             "scope": "Fresh native TIA baseline plus functional PHP/Vue selection and exact restoration; current manual record must be inspected.",
             "public_path": "docs/halal-wealth-os/runs/M7-P2-TIA.md"
         },
@@ -4142,7 +4142,7 @@
             "actual_case_ids": [],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC2": {
@@ -4150,7 +4150,7 @@
             "actual_case_ids": [],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC3": {
@@ -4158,7 +4158,7 @@
             "actual_case_ids": ["case-e4c94321f095", "case-8b16d86a2e36"],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC4": {
@@ -4166,7 +4166,7 @@
             "actual_case_ids": ["case-c59fb47fcc75", "case-1aba06bbca25"],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC5": {
@@ -4174,7 +4174,7 @@
             "actual_case_ids": ["case-1910dadf35cc", "case-908509c2a960"],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC1": {
@@ -4187,7 +4187,7 @@
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC2": {
@@ -4199,7 +4199,7 @@
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC3": {
@@ -4212,7 +4212,7 @@
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC4": {
@@ -4220,7 +4220,7 @@
             "actual_case_ids": [],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC5": {
@@ -4232,7 +4232,7 @@
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC1": {
@@ -4240,7 +4240,7 @@
             "actual_case_ids": ["case-61e4d6008f81", "case-4db8735a7e07"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC2": {
@@ -4248,7 +4248,7 @@
             "actual_case_ids": ["case-f302dc5082e7", "case-99ffd8583856"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC3": {
@@ -4260,7 +4260,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC4": {
@@ -4268,7 +4268,7 @@
             "actual_case_ids": ["case-43d293f8eba6", "case-2087667a9aef"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC5": {
@@ -4276,7 +4276,7 @@
             "actual_case_ids": ["case-c557154a9c93", "case-2087667a9aef"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC1": {
@@ -4288,7 +4288,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC2": {
@@ -4296,7 +4296,7 @@
             "actual_case_ids": ["case-2451928c330c", "case-b2036b2d9c9d"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC3": {
@@ -4304,7 +4304,7 @@
             "actual_case_ids": ["case-5f1d1bb1a4f3", "case-d2934fcfdd0f"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC4": {
@@ -4318,7 +4318,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC5": {
@@ -4330,7 +4330,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC1": {
@@ -4338,7 +4338,7 @@
             "actual_case_ids": ["case-3474fb0c27cf", "case-8e2525045c32"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC2": {
@@ -4350,7 +4350,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC3": {
@@ -4362,7 +4362,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC4": {
@@ -4374,7 +4374,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC5": {
@@ -4386,7 +4386,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC1": {
@@ -4399,7 +4399,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC2": {
@@ -4407,7 +4407,7 @@
             "actual_case_ids": ["case-a3b8a876e042", "case-562838bc96c4"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC3": {
@@ -4419,7 +4419,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC4": {
@@ -4432,7 +4432,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC5": {
@@ -4444,7 +4444,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC1": {
@@ -4452,7 +4452,7 @@
             "actual_case_ids": ["case-47ea3cf46f97", "case-301966240417"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC2": {
@@ -4460,7 +4460,7 @@
             "actual_case_ids": ["case-547405900300", "case-87f2cad8ab02"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC3": {
@@ -4472,7 +4472,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC4": {
@@ -4484,7 +4484,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC5": {
@@ -4496,7 +4496,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC1": {
@@ -4504,7 +4504,7 @@
             "actual_case_ids": ["case-ccff5c0358f9", "case-bca0cf569511"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC2": {
@@ -4516,7 +4516,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC3": {
@@ -4524,7 +4524,7 @@
             "actual_case_ids": ["case-2878e01c757c", "case-bd1e4854f681"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC4": {
@@ -4537,7 +4537,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC5": {
@@ -4549,7 +4549,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC1": {
@@ -4561,7 +4561,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC2": {
@@ -4569,7 +4569,7 @@
             "actual_case_ids": ["case-44e67225987c", "case-e99d5121cae2"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC3": {
@@ -4577,7 +4577,7 @@
             "actual_case_ids": ["case-3cb7e0534f84", "case-43d357887387"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC4": {
@@ -4590,7 +4590,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC5": {
@@ -4599,7 +4599,7 @@
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "scope": "Automated spoofing/manual-instrument guards plus retained explicit label/source review. These selectors alone do not establish the current screen wording; inherited UX-M3-01 remains recorded until repaired and re-reviewed.",
             "manual_scope": [
-                "Retained accepted M3-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC1": {
@@ -4611,7 +4611,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC2": {
@@ -4623,7 +4623,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC3": {
@@ -4631,7 +4631,7 @@
             "actual_case_ids": ["case-3ef230e9017f", "case-836fbdb05982"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC4": {
@@ -4643,7 +4643,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC5": {
@@ -4655,7 +4655,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC1": {
@@ -4663,7 +4663,7 @@
             "actual_case_ids": ["case-79cbc09de831", "case-166f5dda32d2"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC2": {
@@ -4675,7 +4675,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC3": {
@@ -4687,7 +4687,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC4": {
@@ -4699,7 +4699,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC5": {
@@ -4707,7 +4707,7 @@
             "actual_case_ids": ["case-ca316273e5c8", "case-20c43940e775"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC1": {
@@ -4715,7 +4715,7 @@
             "actual_case_ids": ["case-11e37ec00cbd", "case-599b93f8e711"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC2": {
@@ -4723,7 +4723,7 @@
             "actual_case_ids": ["case-83c380d01fdf", "case-043c5152045e"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC3": {
@@ -4731,7 +4731,7 @@
             "actual_case_ids": ["case-6f0fade57e0b", "case-92a7a05ac493"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC4": {
@@ -4743,7 +4743,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC5": {
@@ -4757,7 +4757,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC1": {
@@ -4765,7 +4765,7 @@
             "actual_case_ids": ["case-6de7d845e945", "case-7da1491fef42"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC2": {
@@ -4773,7 +4773,7 @@
             "actual_case_ids": ["case-6de7d845e945", "case-a069fa805759"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC3": {
@@ -4785,7 +4785,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC4": {
@@ -4798,7 +4798,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC5": {
@@ -4811,7 +4811,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC1": {
@@ -4823,7 +4823,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC2": {
@@ -4835,7 +4835,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC3": {
@@ -4847,7 +4847,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC4": {
@@ -4859,7 +4859,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC5": {
@@ -4871,7 +4871,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC1": {
@@ -4883,7 +4883,7 @@
             ],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC2": {
@@ -4895,7 +4895,7 @@
             ],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC3": {
@@ -4903,7 +4903,7 @@
             "actual_case_ids": ["case-c2210969e4db", "case-5aeae6feaeff"],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC4": {
@@ -4911,7 +4911,7 @@
             "actual_case_ids": ["case-d084eb6f3c5d", "case-03db6e7dee30"],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC5": {
@@ -4923,7 +4923,7 @@
             ],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "INV-01": {

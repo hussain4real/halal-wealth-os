@@ -15,3 +15,5 @@ The hardened offline suite passed81 tests/859 assertions and scoped rendered re-
 ## Cycle3 full-suite compatibility
 
 The completed cycle2 native full run executed1,447 tests and exposed three stale integration expectations: the historical downgrade needed both Copilot migrations removed, and complete owner export now includes eight current-owner requests across provider and answer lanes. These checks now assert that exact boundary and all four retained statuses in each lane. The affected25 tests passed692 assertions. The failed original full output is retained; fresh full/TIA and live evaluation remain pending. Current roadmap summaries also reconcile M7-P1 acceptance.
+
+Fresh cycle3 native full TIA passed1,447 tests/11,054 assertions. PHP and Vue affected-file probes and exact source restoration passed; cached replay is separate from full execution. The HTTP evidence phase label is corrected. Actual40-case live evaluation and the clean uncached release remain pending.
