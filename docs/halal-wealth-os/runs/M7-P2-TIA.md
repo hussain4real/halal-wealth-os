@@ -38,3 +38,18 @@ After the preserved summary-selection finding, the corrected prompt at `63697673
 - `cycle5-tia-vue-selected.log`: `33152204fe21aca5de90d1418022b04c5be6e1ebcecbdcd535d48ebc0637e717`
 - `cycle5-tia-vue-restored.log`: `a8ab57497aa9a08ab97e919633e9d9b44892dbd8959d3233c88b900a3a8506b3`
 - `cycle5-tia-cached-replay.log`: `f9aa9638d4120692e13363dc35897e83164d5d7c6add52c9f50524b2f1e5f542`
+
+## Cycle7 corrected-map current-policy evidence
+
+The sixth-cycle full run remains failed at the retained F18 mapping guard. After the owner-approved fixture-list-only correction, clean checkpoint `f8d1d155dcd147c7c085bbe75773673ee0b3d944` passed a fresh native baseline:1,457 tests/11,107 assertions in310,320ms. PHP and Vue selected/restored probes passed, with exact executable identity `5f730dc802d2da5c373f4c54e455f86ee327c83d1a71c880e5af0094d8d16de0` before/after. Cached replay is separately cached evidence; selected runs do not claim another full execution or JavaScript behavior. Subsequent manual/map hash binding is separate from that restoration digest.
+
+A separate uncached --no-tia coverage run passed1,457 tests/11,107 assertions in328,924ms, with96 measured financial floors. Actual40-case live quality and final clean release/hosted delivery remain separate gates.
+
+- `cycle7-tia-record.log`: `10d6c0611863f220bf28fc63186d7118bc8a91109899348b799f9672df6b6cbf`
+- `cycle7-tia-php-selected.log`: `b76b7f2ca686c590f56bab14b9ff58ed41692d24404469a7d5a605251bb06f85`
+- `cycle7-tia-php-restored.log`: `dd777e1ca0eddd7ac26e2d467775abf1a1d3e18d61b7a2275a1c206735d9f5e4`
+- `cycle7-tia-vue-selected.log`: `ae1769bcfbd42fa040994d1478112db34394552a3ddbdcdafb4b37f0ac18710f`
+- `cycle7-tia-vue-restored.log`: `230471cce72af1d34f0c3aa36f2fb199cef13ed92b331028d244d4fe107703fe`
+- `cycle7-tia-cached-replay.log`: `816861a366181c3ba8e51d183372c6b12bbcc3c7d0a0d4810795a1e9126b99b9`
+- `cycle7-prelive-coverage.log`: `e6ee036a43f36abcc5e06ef631720b8d9badfbd1c15fdb6a4b9bab9777f8df81`
+- `cycle7-prelive-report-proof.log`: `3d0fd8c694e7f6bc5d5e1da1da27e46b67cb594b9bb6dee6eeeb6f720da4ea93`
