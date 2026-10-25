@@ -4086,7 +4086,7 @@
             "public_path": "docs/halal-wealth-os/runs/M7-P2-rendered-review.md"
         },
         "m7p2-tia": {
-            "sha256": "715934eea9248a908e058c59dd8a946e2767fa49c089120b956b1a9bfa697bdf",
+            "sha256": "9261e0887212bc2a838c9cd39b4a35ac6aa824f644ee301bec71f1c15814c7e6",
             "scope": "Fresh native TIA baseline plus functional PHP/Vue selection and exact restoration; current manual record must be inspected.",
             "public_path": "docs/halal-wealth-os/runs/M7-P2-TIA.md"
         },

@@ -23,3 +23,5 @@ Uncached pre-live coverage executed1,447 tests/11,054 assertions and passed all9
 ## Cycle4 actual live finding
 
 The first actual fixed-set live run stopped on its first case: the dated model returned recorded mode for an explicitly hypothetical request that asked for baseline facts. Numerical facts and citations were correct, but the required hypothetical label was absent. ActualHTTP200/593 input tokens/33 output tokens and the failed answer/intent/receipt remain privately retained. This is a failed live-quality result, not a transport failure or pass. The prompt now gives hypothetical framing explicit mode priority; the dataset and independent oracle remain unchanged. Prior reservations count against the same global cap. Fresh current-basis verification and a new complete live run are required.
+
+The corrected prompt passed a fresh native1,447-test/11,054-assertion baseline and repeated PHP/Vue affected-file/exact-restore checks. This fixed release set is used for prompt correction and acceptance; it is not held-out generalization or unrestricted financial prose evaluation. The complete current-basis live run and final uncached release are still pending.

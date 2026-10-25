@@ -16,3 +16,14 @@ Private log SHA256 identities:
 - `cycle3-tia-vue-selected.log`: `11140c5257cacef4cfb53dbeeb72e786f567ccbf75bcddbc94e491590192dcad`
 - `cycle3-tia-vue-restored.log`: `3bec92509e2e4a9a838861619ff97aa64eba4fda668a17510b3905310ce0e471`
 - `cycle3-tia-cached-replay.log`: `6fcab048d8a4c0da4233643fd5d62879f822a6950b226b97feac26f6f3198646`
+
+## Cycle4 current-prompt refresh
+
+After the preserved actual live hypothetical-label failure, the corrected prompt at `27e52c79ed38b1adda0f93531c1cc85d59f47684` passed a new native fresh baseline:1,447 tests/11,054 assertions in290,116ms. PHP and Vue selected/restored probes passed again; the separate unchanged replay remains cached evidence. Exact executable identity before/after the probes was `bf3d0490d9aa4564733267323ca79aa13a26e627dc681205ddf247767b5b2424`; subsequent manual hash binding is excluded from that restoration claim. No live quality or clean uncached release is inferred from TIA.
+
+- `cycle4-tia-record.log`: `27a6d2004969773820e207005b07747d9910f64c39fd4ba1877b96cfdd0decc4`
+- `cycle4-tia-php-selected.log`: `56a349962a25125382f026fa9b3615734b5a825b7c1eab35ec1da8ce4be64efa`
+- `cycle4-tia-php-restored.log`: `0636f8785f97c5dd3d496d0e2068e76127b0b634d58a8c70015a62b1d272da6f`
+- `cycle4-tia-vue-selected.log`: `241b466dbf3578013c5c077a81880ce21d8e68c48f6815be38c4077b4fe58efe`
+- `cycle4-tia-vue-restored.log`: `6f98164cf5d24644d32190ce60cfdda9be74269c244059b2de007b73f0517f46`
+- `cycle4-tia-cached-replay.log`: `91f33277a1687c39467a25d6deb98b1034286658396ea8abf6190f3a8bae7085`
