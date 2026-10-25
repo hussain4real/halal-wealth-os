@@ -1,6 +1,6 @@
 # M7-P2 execution record
 
-Status: in progress and unaccepted. One implementation owner, cycle4 of six. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
+Status: in progress and unaccepted. One implementation owner, cycle5 of six. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
 
 Implemented a default-off bounded answer planner, deterministic typed fact projection, owner-scoped source references, current-page chat/recovery and versioned30-finance/10-adversarial evaluation dataset. Initial73 affected tests797 assertions passed, alongside client schema/basis tests and actual owned loopback transport checks. A prior focused measurement gave99–100 percent coverage across the new concrete financial sources; the final full floor is not yet claimed.
 
@@ -25,3 +25,7 @@ Uncached pre-live coverage executed1,447 tests/11,054 assertions and passed all9
 The first actual fixed-set live run stopped on its first case: the dated model returned recorded mode for an explicitly hypothetical request that asked for baseline facts. Numerical facts and citations were correct, but the required hypothetical label was absent. ActualHTTP200/593 input tokens/33 output tokens and the failed answer/intent/receipt remain privately retained. This is a failed live-quality result, not a transport failure or pass. The prompt now gives hypothetical framing explicit mode priority; the dataset and independent oracle remain unchanged. Prior reservations count against the same global cap. Fresh current-basis verification and a new complete live run are required.
 
 The corrected prompt passed a fresh native1,447-test/11,054-assertion baseline and repeated PHP/Vue affected-file/exact-restore checks. This fixed release set is used for prompt correction and acceptance; it is not held-out generalization or unrestricted financial prose evaluation. The complete current-basis live run and final uncached release are still pending.
+
+## Cycle5 actual summary-selection finding
+
+The second actual run passed all six cash cases, including the prior hypothetical mode. It stopped on the emergency summary because the model selected only the backed percentage instead of the full overview. The returned scalar was accurate but did not satisfy the summary request. The failed provider/answer/intent and six partial passes remain retained, not a complete pass. The prompt now explicitly prioritizes overview for one-topic summary requests and defines the percentage-versus-months distinction. Dataset/oracle and financial code are unchanged. All nine reservations including the initial access probe remain within the same118,560-micro-USD reservation total. This is reserved headroom, not a billing claim. Cycle5 of six; no publication or acceptance yet.
