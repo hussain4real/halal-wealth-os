@@ -4146,7 +4146,7 @@
             "public_path": "docs/halal-wealth-os/runs/M7-P2-TIA.md"
         },
         "m7p2-live-evaluation": {
-            "sha256": "7d14d53f1c86d89530b67a02dcd7ec65f593907d16dfced0100ac8c30e2fb5d4",
+            "sha256": "b85883ccb1f4503f13b28bee9990c063b49980ed14b1c46e7b81b8a14ca46753",
             "scope": "Required current-basis actual synthetic OpenAI evaluation of30finance plus10adversarial/missing cases; retained observed receipt, not provider-signed and not a CI live rerun.",
             "public_path": "docs/halal-wealth-os/runs/M7-P2-live-evaluation.json"
         }

@@ -373,7 +373,7 @@
         "max_cycles": 9,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M7_UNACCEPTED",
-        "checkpoint": "C9resumed all prelive gatesPASS:1458tests11307assertions/96financialfloors806selectors132requirements, PHPVueexactrestore, client15pass, offlineactual40wirebound7817<8192. Native419581ms/uncached331133ms retained; wrongNode22failure preserved. One actual unchanged40GPT5.4 evaluation and finalrelease/hosted gates remain pending; any further failure stops."
+        "checkpoint": "Current-basis actual GPT5.4 evaluationPASS40fixedcases30finance10adversarial; independentrawintent/provider/answer/report/ledger/fact/citationjoin0discrepancies. All66reservations1574432microUSD<2M/prior26prefixunchanged. Prelive1458/11307/96floors806selectors132requirements/nativePHPVueexactrestore/client15PASS. Reviewed redacted receipt retained; clean7artifactrelease and remotePR/originalCI/freshreview/normaldevmerge/postCI/publication pending. Phase/M7unaccepted; any further failure stops."
     },
     "dependency_patch": {
         "authorized": true,
