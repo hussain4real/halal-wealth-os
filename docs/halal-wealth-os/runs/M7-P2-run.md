@@ -1,6 +1,6 @@
 # M7-P2 execution record
 
-Status: owner-resumed ninth cycle, in progress and unaccepted. One implementation owner, cycle9 of nine. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
+Status: owner-resumed ninth-cycle checks, in progress and unaccepted. One implementation owner, cycle9 of nine. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
 
 Implemented a default-off bounded answer planner, deterministic typed fact projection, owner-scoped source references, current-page chat/recovery and versioned30-finance/10-adversarial evaluation dataset. Initial73 affected tests797 assertions passed, alongside client schema/basis tests and actual owned loopback transport checks. A prior focused measurement gave99–100 percent coverage across the new concrete financial sources; the final full floor is not yet claimed.
 
@@ -67,3 +67,11 @@ The coordinator serialized STATE and the acceptance map without the project form
 ## Owner-approved narrow ninth-cycle recovery
 
 The owner explicitly authorized the independently reviewed two-file formatting repair and corrected Unit/AcceptanceMapTest.php invocation. All eight earlier cycles and failures remain preserved. The formatting patch preserves JSON semantics, all806 selectors/132 requirements and F18. Model, main prompt, fixed40 cases, oracle, calculations andUSD2 cap are unchanged. Refresh required checks before one complete live evaluation; any further failure stops. No tenth cycle, acceptance, later phase or deployment is authorized.
+
+## Ninth-cycle runtime invocation stop
+
+The exact formatting repair passed the project check;62 affected tests passed777 assertions using the correct Unit test path. The coordinator then invoked client tests directly with host Node22.7.0 instead of the existing configured Node24 wrapper. Thirteen checks passed; one test file failed TypeScript loading before its tests could run. No application defect or complete client-suite pass is inferred. The active fresh native pipeline was intentionally terminated and its partial log preserved; no full/native/coverage pass is claimed. Owned PostgreSQL/browser/server resources are stopped, no API call occurred, and all26 reservations remain unchanged. Any-failure stop requires a new owner resumption decision before remaining checks. No source correction, extra correction cycle, later phase, deployment or acceptance is inferred.
+
+## Owner-resumed ninth-cycle runtime checks
+
+The owner explicitly resumed the remaining ninth-cycle checks with the existing Node24 wrapper. No application change, new correction cycle, API call or budget change is included. Preserve the wrong-Node22 failure and intentionally interrupted native attempt. Repeat interrupted checks into new logs using the verified runtime; keep all prior tests, fixed40 dataset, oracle, model and limits unchanged. Any further failure stops; no tenth cycle or acceptance is inferred.

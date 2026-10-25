@@ -681,3 +681,7 @@ The human owner explicitly authorized the eighth correction/verification cycle, 
 ## M7-P2 owner-approved narrow ninth-cycle recovery
 
 The human owner explicitly authorized one additional narrow cycle, total ceiling nine, for the independently reviewed JSON formatting-only repair and corrected Unit/AcceptanceMapTest.php invocation, followed by required current checks, one unchanged40-case live run and the previously authorized gated delivery. All eight prior cycles/failures are preserved. Keep model, main prompt, dataset, oracle, calculations, production limits andUSD2 anchored reservation cap unchanged. No extra paid probe, retry/fallback, new credentials, live financial data or tenth cycle. Any further failure stops for another owner decision. M7-P2/M7 remain unaccepted; no M7-P3 or deployment.
+
+## M7-P2 ninth-cycle runtime resumption
+
+The human owner explicitly approved resuming the remaining ninth-cycle checks with the existing Node24 wrapper after the wrong-host-runtime stop. Ceiling nine remains unchanged. No application correction, new cycle, API call outside the single already-authorized40-case evaluation, or budget change is authorized. Preserve failed and interrupted outputs; use new log destinations and the configured runtime for all remaining checks. The exact32-metric contract, fixed40 cases, oracle, model/policy, calculations andUSD2 cap stay unchanged. Any further failure stops for another owner decision; no tenth cycle, later phase, deployment or acceptance.

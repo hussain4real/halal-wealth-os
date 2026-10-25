@@ -363,7 +363,7 @@
         "main_stage_changes": false,
         "permission_changes": false,
         "later_phases": false,
-        "latest_extension": "Human-approved narrow ninth cycle for exact formatting-only repair and corrected test invocation; unchanged model/dataset/oracle/calculations/USD2cap; any further failure stops."
+        "latest_extension": "Human explicitly resumed remaining ninth-cycle checks with existing Node24 wrapper after wrong-host-runtime stop; ceiling9 unchanged, no application correction/new cycle/budget change."
     },
     "execution_status": {
         "phase": "M7-P2",
@@ -373,7 +373,7 @@
         "max_cycles": 9,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M7_UNACCEPTED",
-        "checkpoint": "Owner authorized exact reviewed formatting-only repair and correct Unit acceptance-map test invocation. All C8 failures preserved; required current checks and one actual40 run pending. No API call or reservation after C7. Any further failure stops; no tenth cycle."
+        "checkpoint": "Owner explicitly resumed remaining ninth-cycle verification with existingNode24wrapper, no source correction or extra cycle. Preserve wrongNode22failure/interruptednative; newlogdestinations for current full/restoration/coverage/live gates. Model/fixed40/oracle/calculations/USD2cap unchanged. Any further failure stops."
     },
     "dependency_patch": {
         "authorized": true,
@@ -3730,6 +3730,26 @@
             "phase_acceptance": "UNACCEPTED",
             "milestone_acceptance": "M7_UNACCEPTED",
             "checkpoint": "Cycle8 stopped before live calls: coordinator JSON serialization caused npm formatting failure in STATE/map; affected test command used wrong Feature path for Unit/AcceptanceMapTest, so no tests executed. PHPStan0 passed. All8cyclesused; actual current native/coverage/live/release/hosted gates pending. Existing26reservations448032microUSD unchanged; source repair requires owner decision."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "IN_PROGRESS",
+            "cycle": 9,
+            "cycles_used": 9,
+            "max_cycles": 9,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "Owner authorized exact reviewed formatting-only repair and correct Unit acceptance-map test invocation. All C8 failures preserved; required current checks and one actual40 run pending. No API call or reservation after C7. Any further failure stops; no tenth cycle."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "BLOCKED",
+            "cycle": 9,
+            "cycles_used": 9,
+            "max_cycles": 9,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "C9 formatting/affected62tests777assertions passed, but coordinator ran client tests with hostNode22 rather than configured24 wrapper;13passed1TSloaderfailure. Source correction not required. Native pipeline interrupted intentionally/no fullPASS. No paidcalls;26reservations448032unchanged. Ownedresources stopped; owner resumption decision required before remaining ninth-cycle checks, with no extra correction cycle inferred."
         }
     ],
     "m7p2_execution_history": [
