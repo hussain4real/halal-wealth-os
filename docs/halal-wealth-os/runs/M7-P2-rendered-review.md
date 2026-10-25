@@ -67,3 +67,39 @@ New retained screenshot identities:
 - 05-recovery-receipt-only.png: `6028321825d1bb7b7136342eb0d237f266ad38938c47c18655ec1a29e738a05f`
 - 06-legitimate-coverage-status.png: `3ff972ae18973fc667037bb638374766ca26357255f6b75f143fe61c683cccb7`
 - 07-core-provider-independent.png: `147ebe3e3b6bdb951bbc8fd5803e27d7834a0ba9b6ed8cd1a44309785ec8a0cd`
+
+## Thirteenth-cycle commitment-FX browser checks
+
+Fresh synthetic-planner checks render missing-FX commitment money as unavailable in both scalar and cash overview, with incomplete status and the missing-conversion limitation. A known configured buffer remains visible. After one separately attributed synthetic reporting-FX source-fixture action, a new request renders400.00QAR from the existing deterministic service. That explicit source action is not an answer write: initial answers match financial baseline A, while subsequent answers match the post-action baseline B.
+
+A fourth completed400.00QAR response was deliberately lost. The complete unchanged request/UUID was checked while the fake planner was unavailable and returned already charged, with no extra invocation, charge or retained-answer replay. Four distinct completed admissions retain65,536 tokens and four synthetic planner entries. Reload clears conversation while preserving reservations; the dashboard works independently. Owned source links returned200 and the foreign-owner requests404. All120 real-evaluation reservations remained unchanged.
+
+Actual1440px desktop and390px mobile light/dark views show readable null/known figures, dated sources, one main landmark, polite status and no horizontal page overflow. Independent inspection opened all20 screenshots, including viewport captures for legible mobile known-value/recovery details, and found no concrete rendered blocker. This is synthetic UI/backend proof, not live-model quality, exhaustive ownership verification, keyboard/zoom testing or screen-reader audio. Reason-code wording and dark native month-picker contrast remain nonblocking observations.
+
+The policy-inventory sequencing error, automatic approval rejection, startup preflight assertion and subsequent staging pathspec error remain retained with explicit owner resumptions. The resumed browser preserved the initial two receipts and post-FX baseline without reset/reseed. Browser/server stopped. Current native/restoration/uncached release, a fresh frozen-basis40-case actual evaluation, hosted gates, merge, publication and acceptance remain separate.
+
+Independent private review SHA256: `62d3a510283b51f853bfa0ca82dde34d02617dd9a8395dd9a989e4985ea0cf88`.
+
+Selected current screenshot SHA256 identities:
+
+- 01-missing-scalar-desktop-light.png: `a9a34ce220e12bf5d6f0304bbb2c78ce1e7ce1bfa15e0647ce7b6a3db8272ea5`
+
+- 02-missing-scalar-desktop-dark.png: `e658fc4b7e6c91ed8f00f57774897bc22cc24ebf12ec20c5e5aa80ed849fa516`
+
+- 03-missing-overview-mobile-light.png: `a57cac0a854b1d77ae765bd76a9092a4934c05ea4380bc176c960b386eadb006`
+
+- 04-missing-overview-mobile-dark.png: `7c1f2039ee1ad2101b93231a3ab3d139abc9a58b6a5aa8bde314d1d6b743058c`
+
+- 05-known-desktop-light-viewport.png: `202013ae17de72a6aaa1820b6038e214b015716e5d7ca974f171b2e3fd8ec7e4`
+
+- 08-known-mobile-dark-viewport.png: `4102d6f082f5ebdc92e6839eb7b9237aae987b500ad2f334f18aed4adbe37430`
+
+- 09-response-lost-desktop-light.png: `c9a831cabe26822c0c46a92d0daa331a4769e76e8858d6618621f73638b01a6e`
+
+- 11-recovered-mobile-dark-viewport.png: `9a511888ba80a4b4368b93126bdab80661962eefe2a6ecf4bdb61db90ecfbee6`
+
+- 12-reload-unavailable-desktop-light.png: `4a60f98c855c289cb128457b54948e5ea68c2cda1740bf9fad260dd9ddf962e1`
+
+- 13-core-dashboard-unavailable.png: `48f85769d4aacdda896cf73a8e25258962e20fdeb6d13402785e4881cd2cdf52`
+
+- 14-foreign-source-404.png: `af52ef0984b1ec2ff0a209660fef5e27456e1c78ded30f8a27fcbbf91556a6d7`

@@ -4266,12 +4266,12 @@
             "public_path": "docs/halal-wealth-os/runs/M7-P1-rendered-review.md"
         },
         "m7p2-rendered": {
-            "sha256": "b89fb898415c2679b3b360e4056745b58cfa0f6980bf3fa21bdebf5135f24c10",
+            "sha256": "abca2b1352910d836712684be7aa5b51688d74cb360e17ff0964d410dd1dfbf7",
             "scope": "Actual corrected desktop/mobile light/dark and owner/recovery UI checks, independently inspected pixels; synthetic planner, no live quality or AT audio claim.",
             "public_path": "docs/halal-wealth-os/runs/M7-P2-rendered-review.md"
         },
         "m7p2-tia": {
-            "sha256": "006ff67da13ede42963c059ca0e10569c8f91b8e7f308d5ea585b9f2fec4c8b9",
+            "sha256": "b458d4dbc7928e0210d5603aad05cba6aa21ba8276f4ad822b98e7993491c6e1",
             "scope": "Fresh native TIA baseline plus functional PHP/Vue selection and exact restoration; current manual record must be inspected.",
             "public_path": "docs/halal-wealth-os/runs/M7-P2-TIA.md"
         },

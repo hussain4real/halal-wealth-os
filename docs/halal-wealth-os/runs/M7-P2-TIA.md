@@ -101,3 +101,31 @@ The current v3-policy/v2-prompt actual prepared-wire guard passed all40 cases, w
 - `cycle12-resumed-prelive-coverage.log`: `beeba44891fadb425b8758271fc0757c8de3cb613a99b35b165c3b238da917d6`
 - `cycle12-resumed-prelive-report-proof.log`: `1d3af068f202bcb8bd7d702bf4a0226683d08e3f8f9451c3da037f7eb6e1dd94`
 - `cycle12-resumed-wire-proof.log`: `a251bf759ef69fff784b7191d92425f2be445abdef4febd59330eeb92ac0a07e`
+
+## Thirteenth-cycle current commitment-FX and policy evidence
+
+Clean correction checkpoint `ae9e4bf6b38c532cd25d589647a5a02dbbb398c0` passed a fresh native baseline of1,484 tests/11,638 assertions. The separate uncached coverage run also executed1,484 tests/11,638 assertions and passed all97 financial floors. Every one of832 configured selectors occurs in the current JUnit across132 requirements. These measured runs do not substitute for the final clean release.
+
+A real PHP call probe selected CopilotAnswerTest and OpenAiAnswerPlannerTest; a visible Vue heading probe selected CopilotAnswerTest. Selected and restored runs passed, and executable source identity was exactly `aaf9b7e5c0a973844e0defe99fd20d1826984c1beed9e80e726927c2229a65fa` before/after. The separate unchanged replay remains cached evidence. PHP selection does not execute Vue behavior. Later manual/map hash binding is outside that source-restoration identity.
+
+The current v4-policy/v2-prompt offline actual prepared-wire check passed all40 cases: identical application/evaluation wire bodies, pinned temperature0, maximum7,115 bytes plus1,024 overhead within8,192, with zero HTTP/database queries and no key use. This is request construction, not live-model compatibility or quality. A new frozen-basis actual40, final seven-artifact release and hosted delivery remain separate gates. All earlier failed attempts and explicit owner resumptions remain retained.
+
+Current private log SHA256 identities:
+
+- cycle13-tia-record.log: `774171c579050708b5b5802652a57c08b3d7f287f24b620094e4bf39a1d14c63`
+
+- cycle13-tia-php-selected.log: `8ec05414713256926435d12712567bf7bc02c8aef36eea2f6e01f74b88b9043e`
+
+- cycle13-tia-php-restored.log: `7fa89a123e56532cb564561c5f9c27dbffad7dd2fed3e42924dbfc61af660ee4`
+
+- cycle13-tia-vue-selected.log: `623a389a880075ab1e374991670ea2513b6d7ad2bf5beb8826d1d0fe2bccd126`
+
+- cycle13-tia-vue-restored.log: `dc30937ec01eae1e36c1706e926940f9ed9eeeb77cbcd8de15989a390e60b548`
+
+- cycle13-tia-cached-replay.log: `e7e4c4a869784ad5300c21c9bd67fe94d4e366732ea13167cba5adcbc160b87a`
+
+- cycle13-prelive-coverage.log: `5eb3c512abd44160ac849fb2ba7c376f95c4e0c38cdbeb9b8b0743af817e166c`
+
+- cycle13-prelive-report-proof.log: `11d75619ea13ece4a5de2e33b2d8e2658b32691937d5ea6fdf4f103946b08302`
+
+- cycle13-wire-proof.log: `f088f740541eb0443301e169ce6de2b4ccb40b9c90a536b25ada4dea2820e6ab`
