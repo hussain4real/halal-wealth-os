@@ -295,3 +295,33 @@ test('closed period grammar keeps forced current plans from substituting facts f
     expect(answerFinancialHash())->toBe($before);
     Http::assertNothingSent();
 });
+
+test('explicit monetary quantity rejects a completeness plan and accepts a distinct correct amount request', function () {
+    $fixture = A::seed($this->owner);
+    C::allow($this->owner);
+    $wrong = new A('nigeria.coverage', 'recorded', 'selected');
+    $this->app->instance(AnswerPlanner::class, $wrong);
+    $service = app(CopilotBoundary::class);
+    $input = UntrustedInput::parse('What Nigeria-tagged value is covered in my saved valuation?', '');
+    $reference = (string) Str::uuid();
+    $before = answerFinancialHash();
+    $rejected = $service->answer($reference, $input, A::context($fixture), true);
+    expect($rejected['status'])->toBe('complete')
+        ->and($rejected['evidence']['state'])->toBe('unsupported')
+        ->and($rejected['evidence']['claim'])->toBe('nigeria.coverage')
+        ->and($rejected['evidence']['facts'])->toBe([])
+        ->and($rejected['evidence']['citations'])->toBe([]);
+    expect($service->answer($reference, $input, A::context($fixture), true)['status'])->toBe('already_charged')
+        ->and($wrong->calls)->toBe(1);
+    $correct = new A('nigeria.amount', 'recorded', 'selected');
+    $this->app->instance(AnswerPlanner::class, $correct);
+    $answer = $service->answer((string) Str::uuid(), $input, A::context($fixture), true);
+    expect($answer['evidence']['state'])->toBe('answered')
+        ->and($answer['evidence']['facts'])->toHaveCount(1)
+        ->and($answer['evidence']['facts'][0]['key'])->toBe('nigeria.amount')
+        ->and($answer['evidence']['facts'][0]['value'])->toBe(['currency' => 'QAR', 'minor' => '120000', 'amount' => '1200.00'])
+        ->and($correct->calls)->toBe(1)
+        ->and(answerFinancialHash())->toBe($before)
+        ->and(DB::table('copilot_requests')->where('owner_id', $this->owner->id)->count())->toBe(2)
+        ->and(DB::table('copilot_requests')->where('owner_id', $this->owner->id)->sum('reserved_tokens'))->toBe(32768);
+});

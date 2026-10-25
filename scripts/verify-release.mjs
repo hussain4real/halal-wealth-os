@@ -68,7 +68,7 @@ try {
             JSON.parse(readFileSync(liveReport)),
             evaluationBasis(),
             readFileSync('resources/copilot/evaluation/questions-v1.json'),
-            readFileSync('resources/copilot/answer-plan-v1.txt'),
+            readFileSync('resources/copilot/answer-plan-v2.txt'),
         ),
         live_evaluation_sha256: digest(liveReport),
         ...proof,

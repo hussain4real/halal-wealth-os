@@ -4071,6 +4071,21 @@
             "class": "Tests\\Feature\\CopilotAnswerTest",
             "name": "closed period grammar keeps forced current plans from substituting facts for future questions",
             "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-e5b69c3b2e14": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "explicit monetary quantity rejects a completeness plan and accepts a distinct correct amount request",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-5a45af15358c": {
+            "class": "Tests\\Unit\\AnswerQuantityTest",
+            "name": "requested quantity heads distinguish scalar units without using incidental words or guessing unknown constructions",
+            "file": "tests/Unit/AnswerQuantityTest.php"
+        },
+        "case-m7p2-d14a729094fc": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"nonzero temperature\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
         }
     },
     "manual_artifacts": {
@@ -4176,7 +4191,7 @@
             "public_path": "docs/halal-wealth-os/runs/M7-P1-rendered-review.md"
         },
         "m7p2-rendered": {
-            "sha256": "87442f1febe991234b6c66379a8f0a60a3fb82e53828f4d1aa6e164ecc41bee6",
+            "sha256": "2ec07d3dbf4bfeb78ff34c1064cb508c6b937b60c6d8c92f5a81f585badf4e71",
             "scope": "Actual corrected desktop/mobile light/dark and owner/recovery UI checks, independently inspected pixels; synthetic planner, no live quality or AT audio claim.",
             "public_path": "docs/halal-wealth-os/runs/M7-P2-rendered-review.md"
         },
@@ -5488,7 +5503,10 @@
                 "case-m7p2-period-638c821e85dc",
                 "case-m7p2-period-f656f11ad11a",
                 "case-m7p2-period-204cc33f096d",
-                "case-m7p2-period-a7a5e29a1b6e"
+                "case-m7p2-period-a7a5e29a1b6e",
+                "case-m7p2-e5b69c3b2e14",
+                "case-m7p2-5a45af15358c",
+                "case-m7p2-d14a729094fc"
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "scope": "Retained manual original harness observations; current M5-P2 report/failure-propagation/mandatory-artifact gates must execute anew. No JUnit selector is invented to stand in for CLI/approval evidence.",
@@ -6548,7 +6566,9 @@
                 "case-m7p2-7b169615fae9",
                 "case-m7p2-059cee090e34",
                 "case-m7p2-period-87af729b9e5c",
-                "case-m7p2-period-af1f8d2f70dd"
+                "case-m7p2-period-af1f8d2f70dd",
+                "case-m7p2-e5b69c3b2e14",
+                "case-m7p2-5a45af15358c"
             ],
             "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
             "tool_check": null
@@ -6636,7 +6656,8 @@
                 "case-m7p2-7bc49665e425",
                 "case-m7p2-17a91cbbc354",
                 "case-m7p2-7b169615fae9",
-                "case-m7p2-059cee090e34"
+                "case-m7p2-059cee090e34",
+                "case-m7p2-e5b69c3b2e14"
             ],
             "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
             "tool_check": null
@@ -6750,7 +6771,10 @@
                 "case-m7p2-period-638c821e85dc",
                 "case-m7p2-period-f656f11ad11a",
                 "case-m7p2-period-204cc33f096d",
-                "case-m7p2-period-a7a5e29a1b6e"
+                "case-m7p2-period-a7a5e29a1b6e",
+                "case-m7p2-e5b69c3b2e14",
+                "case-m7p2-5a45af15358c",
+                "case-m7p2-d14a729094fc"
             ],
             "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
             "tool_check": null
@@ -6838,7 +6862,8 @@
                 "case-m7p2-7bc49665e425",
                 "case-m7p2-17a91cbbc354",
                 "case-m7p2-7b169615fae9",
-                "case-m7p2-059cee090e34"
+                "case-m7p2-059cee090e34",
+                "case-m7p2-e5b69c3b2e14"
             ],
             "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
             "tool_check": null
@@ -6945,7 +6970,8 @@
                 "case-m7p2-period-638c821e85dc",
                 "case-m7p2-period-f656f11ad11a",
                 "case-m7p2-period-204cc33f096d",
-                "case-m7p2-period-a7a5e29a1b6e"
+                "case-m7p2-period-a7a5e29a1b6e",
+                "case-m7p2-d14a729094fc"
             ],
             "manual_artifact_ids": ["m7p2-live-evaluation"],
             "tool_check": "LIVE_ANSWER_EVALUATION"
@@ -7199,7 +7225,8 @@
                 "case-m7p2-01c34c0a51f9",
                 "case-m7p2-period-87af729b9e5c",
                 "case-m7p2-period-af1f8d2f70dd",
-                "case-m7p2-period-a7a5e29a1b6e"
+                "case-m7p2-period-a7a5e29a1b6e",
+                "case-m7p2-e5b69c3b2e14"
             ],
             "implemented_subscenarios": [
                 "readonly_registry",

@@ -18,10 +18,10 @@ test('every failed unknown or complete live attempt keeps its conservative globa
     expect(reserveAnswerEvaluation($this->budgetRoot, 'case1', str_repeat('a', 64), str_repeat('b', 64)))->toBe(29984);
     expect(reserveAnswerEvaluation($this->budgetRoot, 'case1-retry', str_repeat('c', 64), str_repeat('d', 64)))->toBe(58144);
     $total = 58144;
-    for ($i = 0; $i < 104; $i++) {
+    for ($i = 0; $i < 139; $i++) {
         $total = reserveAnswerEvaluation($this->budgetRoot, 'case'.$i, str_repeat('a', 64), str_repeat('b', 64));
     }
-    expect($total)->toBe(2986784);
+    expect($total)->toBe(3972384);
     expect(fn () => reserveAnswerEvaluation($this->budgetRoot, 'over-cap', str_repeat('a', 64), str_repeat('b', 64)))->toThrow(RuntimeException::class, 'budget exhausted');
 });
 
@@ -67,7 +67,8 @@ test('approved model prices and caps are required before a new reservation can t
     'underpriced output' => ['output_price_micro_usd_per_million', 4500000],
     'wrong input bound' => ['max_input_tokens', 16384],
     'lower production charge' => ['production_reservation_tokens', 8192],
-    'higher total cap' => ['total_cap_micro_usd', 4000000],
+    'higher total cap' => ['total_cap_micro_usd', 5000000],
+    'nonzero temperature' => ['temperature', 1],
 ]);
 
 test('new-model reservations append to an intact anchored legacy mini history', function () {

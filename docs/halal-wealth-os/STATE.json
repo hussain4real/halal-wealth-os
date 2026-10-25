@@ -353,27 +353,27 @@
         "recorded_at": "2026-10-25T04:10:59.969588+00:00",
         "scope": "Accept M7-P1; implement canonical M7-P2, independently reviewed sanitized dev PR, normal approved-noreply merge after original exact-head CI and fresh review, original postmerge CI and signed public progress verification.",
         "accepted_dependencies": ["M7-P1"],
-        "max_cycles": 11,
+        "max_cycles": 12,
         "one_source_writer": true,
         "live_access": "APPROVED_OPENAI_SYNTHETIC_EVALUATION_ONLY",
         "credential_creation": "APPROVED_SECURE_PRIVATE_LOCAL_SETUP",
-        "evaluation_spend_cap_usd": "3.00",
+        "evaluation_spend_cap_usd": "4.00",
         "real_financial_data_external_disclosure": false,
         "deployment": false,
         "main_stage_changes": false,
         "permission_changes": false,
         "later_phases": false,
-        "latest_extension": "Human authorized cycle11 closed current-evidence period grammar; same already approved USD3 total cap and one unused40-case run. Preserve all10cycles/failures; any further failure stops."
+        "latest_extension": "Human explicitly authorized cycle12 metric-selection correction and USD4 total reservation cap, preserving80ledgerentries1968672 and all failures. One reviewed new40 evaluation after local gates; no extra paid probe/retry/fallback and any further unexpected failure stops."
     },
     "execution_status": {
         "phase": "M7-P2",
         "status": "IN_PROGRESS",
-        "cycle": 11,
-        "cycles_used": 11,
-        "max_cycles": 11,
+        "cycle": 12,
+        "cycles_used": 12,
+        "max_cycles": 12,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M7_UNACCEPTED",
-        "checkpoint": "C11 prelive gates passed: fresh native1466/11387, exact PHP/Vue restoration, uncached1466/11387 and96financialfloors,814currentJUnit selectors/132requirements,37mapchecks, actual40offlinewiremax6793+1024/noHTTP/noDB. Current source/rendered/contract reviews pass; earlier failures/resumptions preserved. Manual hashes completed before paid basis freeze. Single new current-basis40 live evaluation remains pending; real66reservations1574432/USD3 unchanged, any further failure stops. No merge/acceptance/deployment."
+        "checkpoint": "C12 implementation and current focused checks passed103/1349, completeNode15, map37/312, front/PHPStan; independentfinalsource/policyreviews pass. Initialpre-freeze share-in falsepositive corrected to reviewedshare-of role with preserved knownred/green, old814selectors preserved/new3=>817. Actualall40preparedwire7115+1024=8139<8192 bothlanestemp0/policyv3cap4M. Freshsyntheticbrowserwrongkindreject/correct1200QAR/legitimatecoverage/identicalreceipt recovery/mobile/ownership/core pass,4charges65536/financeunchanged/real80ledger1968672unchanged. Browser/serveroff; native/restoration/uncached/live/release pending; no13th/anyunexpectedfailurestop."
     },
     "dependency_patch": {
         "authorized": true,

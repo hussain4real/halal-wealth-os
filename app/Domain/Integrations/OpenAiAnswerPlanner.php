@@ -49,7 +49,7 @@ final class OpenAiAnswerPlanner implements AnswerPlanner
         }
         $this->observation += ['policy_sha256' => AnswerEvaluationPolicy::digest(), 'payload_sha256' => $payloadHash,
             'wire_bytes' => strlen($wire), 'evaluation' => $this->evaluation, 'reasoning_effort' => $policy['reasoning_effort'],
-            'store' => $policy['store'], 'max_input_tokens' => $this->evaluation ? $policy['max_input_tokens'] : $policy['production_reservation_tokens'] - $policy['max_output_tokens'],
+            'store' => $policy['store'], 'temperature' => $policy['temperature'], 'max_input_tokens' => $this->evaluation ? $policy['max_input_tokens'] : $policy['production_reservation_tokens'] - $policy['max_output_tokens'],
             'max_output_tokens' => $policy['max_output_tokens']];
         $this->evaluationPayloadHash = null;
         try {
@@ -144,8 +144,8 @@ final class OpenAiAnswerPlanner implements AnswerPlanner
         if (config('copilot.answer_model') !== $policy['model'] || config('copilot.tokens_per_request') !== $policy['production_reservation_tokens']) {
             throw new RuntimeException('Answer policy reservation/model mismatch.');
         }
-        $prompt = file_get_contents(resource_path('copilot/answer-plan-v1.txt'));
-        $payload = ['model' => $policy['model'], 'store' => $policy['store'], 'reasoning' => ['effort' => $policy['reasoning_effort']], 'max_output_tokens' => $policy['max_output_tokens'],
+        $prompt = file_get_contents(resource_path('copilot/answer-plan-v2.txt'));
+        $payload = ['model' => $policy['model'], 'store' => $policy['store'], 'reasoning' => ['effort' => $policy['reasoning_effort']], 'temperature' => $policy['temperature'], 'max_output_tokens' => $policy['max_output_tokens'],
             'instructions' => $prompt, 'input' => json_encode(['QUESTION' => $input->question, 'DOCUMENT' => $input->document], JSON_THROW_ON_ERROR),
             'text' => ['format' => ['type' => 'json_schema', 'name' => 'financial_answer_plan_v1', 'strict' => true, 'schema' => AnswerPlan::schema()]]];
         $wire = json_encode($payload, JSON_THROW_ON_ERROR);

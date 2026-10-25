@@ -88,7 +88,8 @@ test('valid strict response selects a claim while outgoing payload excludes trus
     $plan = $wire->plan(UntrustedInput::parse('available cash', 'UNTRUSTED synthetic document'));
     expect($plan->claim)->toBe(AnswerClaim::CashAvailable)->and($wire->observation['usage']['total_tokens'])->toBe(120)->and($wire->observation['http_attempts'])->toBe(1);
     Http::assertSent(function ($request) {
-        expect($request['store'])->toBeFalse()->and($request['model'])->toBe('gpt-5.4-2026-03-05')->and($request['text']['format']['strict'])->toBeTrue();
+        expect($request['store'])->toBeFalse()->and($request['model'])->toBe('gpt-5.4-2026-03-05')->and($request['text']['format']['strict'])->toBeTrue()
+            ->and($request->data()['temperature'] ?? null)->toBe(0);
         expect(array_keys(json_decode($request['input'], true)))->toBe(['QUESTION', 'DOCUMENT']);
         expect($request->data())->not->toHaveKeys(['tools', 'owner_id', 'context', 'facts', 'previous_response_id']);
 

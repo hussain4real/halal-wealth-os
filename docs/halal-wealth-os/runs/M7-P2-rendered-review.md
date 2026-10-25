@@ -46,3 +46,24 @@ New retained screenshot SHA256 identities:
 - 08-core-provider-unavailable.png: `25032537e7ae16062a30d3788b8ad978ca5f136a19358f2f9426472f85623938`
 
 The new independent rendered review returned a scoped synthetic pass after inspecting all11 actual screenshots and matching the8 JSON/11 image hashes. No concrete rendered blocker was found. Private report SHA256: `8e0a79715076bd400989423b1cb88477a5bd202f7c2a61292f019079e8dbd354`. The earlier assertion and startup failures retain their stopped outcomes and explicit owner resumptions.
+
+## Twelfth-cycle explicit-quantity browser checks
+
+Fresh actual synthetic-planner checks forced the earlier wrong completeness claim for an explicit Nigeria-value question. The server returned unsupported, retaining the original model claim and emitting no facts/citations; it did not rewrite the claim or count abstention as correct. A separate explicit request selecting the proper amount rendered1200.00QAR with its authorized saved-valuation source and dates. A legitimate coverage-status question still returned completeness text.
+
+A controlled post-commit response loss preserved the actual returned amount receipt privately, then interrupted delivery. The unchanged complete request/UUID was checked while the synthetic planner was unavailable and settled to already charged/no re-execution/no retained-answer replay. Four distinct admissions reserved65,536 tokens in total; no limits or history were reset. Financial rows and all80 real evaluation reservations were unchanged. Owned-source HTTP200 and foreign-source404 were observed; core dashboard access worked with the planner unavailable.
+
+Actual1440px desktop and390px mobile light/dark views retained one main landmark, nonempty polite announcements, the current pinned model label and no horizontal page overflow. These are mock-planner UI/backend checks, not an actual new model-quality run or assistive-technology audio proof. Browser/server are stopped; independent review of the new pixel set is pending. Prior cycle11 failures and explicit resumptions remain recorded.
+
+New retained screenshot identities:
+
+- 01-wrong-quantity-rejected.png: `89af2b008daf5885159bef306ec58547899152091f1b77579e435dccb27e75a2`
+- 02-correct-amount.png: `b983c92a02a811f3c00bd8fd7ea325ddd93220af391732521aa6ca332105dfdd`
+- 03-owner-1440-dark.png: `0858621946163c9619a1e319ed671a6631c33c89f8a060e00bb56f7b2a3a8fdf`
+- 03-owner-1440-light.png: `844f24d7ebaaa0347d6bf8a4aeff4d36053fd447facdf7bc8f99d756d09edb00`
+- 03-owner-390-dark.png: `dcc65b303c4e6e58202bf98f1ccf20dbcf3d25d3c869db3bf4399aea74a9efef`
+- 03-owner-390-light.png: `81c430b133933b93d1f83e1c944c9592448ef83fd88a23bc02ebab4fa3732273`
+- 04-committed-response-loss.png: `b43a58de76076b4832c5dd63a93cdbe567b2e875558bd71a44b9b8be782bfeb2`
+- 05-recovery-receipt-only.png: `6028321825d1bb7b7136342eb0d237f266ad38938c47c18655ec1a29e738a05f`
+- 06-legitimate-coverage-status.png: `3ff972ae18973fc667037bb638374766ca26357255f6b75f143fe61c683cccb7`
+- 07-core-provider-independent.png: `147ebe3e3b6bdb951bbc8fd5803e27d7834a0ba9b6ed8cd1a44309785ec8a0cd`

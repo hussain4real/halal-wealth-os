@@ -19,7 +19,7 @@ import {
 } from './verify-answer-eval.mjs';
 const digest = (x) => createHash('sha256').update(x).digest('hex');
 const dataset = readFileSync('resources/copilot/evaluation/questions-v1.json');
-const prompt = readFileSync('resources/copilot/answer-plan-v1.txt');
+const prompt = readFileSync('resources/copilot/answer-plan-v2.txt');
 function syntheticValidatorFixture() {
     const cases = JSON.parse(dataset).cases.map((c, i) => ({
         id: c.id,
@@ -33,6 +33,7 @@ function syntheticValidatorFixture() {
         handler_transfers: 1,
         native_curl_stats: true,
         model: 'gpt-5.4-2026-03-05',
+        temperature: 0,
         policy_sha256: policyDigest,
         payload_sha256: digest('explicit-stub-wire-' + i),
         evaluation: true,
@@ -70,7 +71,7 @@ function syntheticValidatorFixture() {
         ),
     }));
     return {
-        version: 'live-answer-evaluation-v2',
+        version: 'live-answer-evaluation-v3',
         started_at: '2026-10-25T03:59:00Z',
         completed_at: '2026-10-25T04:01:00Z',
         result: 'PASS',
@@ -80,6 +81,7 @@ function syntheticValidatorFixture() {
         dataset_sha256: digest(dataset),
         prompt_sha256: digest(prompt),
         model: 'gpt-5.4-2026-03-05',
+        temperature: 0,
         store: false,
         max_output_tokens: 512,
         max_input_tokens: 8192,
@@ -87,7 +89,7 @@ function syntheticValidatorFixture() {
         policy_sha256: policyDigest,
         cases,
         totals: { cases: 40, input_tokens: 4000, output_tokens: 800 },
-        total_eval_cap_micro_usd: 3000000,
+        total_eval_cap_micro_usd: 4000000,
         reserved_total_micro_usd: 1128224,
         limitation:
             'retained observed receipt; not a provider-signed attestation',
@@ -102,6 +104,10 @@ await test('retained live evidence validator rejects changed basis missing cases
     for (const mutate of [
         (r) => (r.transport = 'stub'),
         (r) => (r.model = 'gpt-5.4-mini-2026-03-17'),
+        (r) => (r.temperature = 1),
+        (r) => delete r.temperature,
+        (r) => (r.cases[0].temperature = 1),
+        (r) => delete r.cases[0].temperature,
         (r) => (r.policy.case_reservation_micro_usd = 1),
         (r) => (r.cases[0].policy_sha256 = 'f'.repeat(64)),
         (r) => (r.cases[0].wire_bytes = 8192),
@@ -118,7 +124,7 @@ await test('retained live evidence validator rejects changed basis missing cases
         (r) => (r.cases[0].response_id_sha256 = r.cases[1].response_id_sha256),
         (r) => (r.cases[0].usage.output_tokens = 513),
         (r) => (r.cases[0].checks.no_financial_writes = false),
-        (r) => (r.reserved_total_micro_usd = 3000001),
+        (r) => (r.reserved_total_micro_usd = 4000001),
         (r) => (r.prompt_sha256 = '0'.repeat(64)),
         (r) => (r.totals.input_tokens = 0),
     ]) {

@@ -8,14 +8,15 @@ const digest = (x) => createHash('sha256').update(x).digest('hex');
 export const releasePolicy = Object.freeze(
     JSON.parse(
         readFileSync(
-            path.join(root, 'resources/copilot/evaluation/policy-v2.json'),
+            path.join(root, 'resources/copilot/evaluation/policy-v3.json'),
         ),
     ),
 );
 const approvedPolicy = {
-    version: 'answer-evaluation-policy-v2',
+    version: 'answer-evaluation-policy-v3',
     model: 'gpt-5.4-2026-03-05',
     reasoning_effort: 'none',
+    temperature: 0,
     store: false,
     max_input_tokens: 8192,
     max_output_tokens: 512,
@@ -23,7 +24,7 @@ const approvedPolicy = {
     input_price_micro_usd_per_million: 2500000,
     output_price_micro_usd_per_million: 15000000,
     case_reservation_micro_usd: 28160,
-    total_cap_micro_usd: 3000000,
+    total_cap_micro_usd: 4000000,
     production_reservation_tokens: 16384,
 };
 if (!isDeepStrictEqual(releasePolicy, approvedPolicy))
@@ -34,7 +35,7 @@ export function validateLiveReport(report, basis, dataset, prompt) {
         throw Error('BLOCKED M7-P2 live evaluation: ' + s);
     };
     if (
-        report.version !== 'live-answer-evaluation-v2' ||
+        report.version !== 'live-answer-evaluation-v3' ||
         report.result !== 'PASS' ||
         report.synthetic_only !== true ||
         report.transport !== 'actual-openai-responses' ||
@@ -42,6 +43,7 @@ export function validateLiveReport(report, basis, dataset, prompt) {
         report.dataset_sha256 !== digest(dataset) ||
         report.prompt_sha256 !== digest(prompt) ||
         report.model !== releasePolicy.model ||
+        report.temperature !== releasePolicy.temperature ||
         !isDeepStrictEqual(report.policy, releasePolicy) ||
         report.policy_sha256 !== policyDigest ||
         report.max_input_tokens !== releasePolicy.max_input_tokens ||
@@ -162,6 +164,7 @@ export function validateLiveReport(report, basis, dataset, prompt) {
             r.max_input_tokens !== releasePolicy.max_input_tokens ||
             r.max_output_tokens !== releasePolicy.max_output_tokens ||
             r.reasoning_effort !== releasePolicy.reasoning_effort ||
+            r.temperature !== releasePolicy.temperature ||
             r.store !== false ||
             !Number.isSafeInteger(r.wire_bytes) ||
             r.wire_bytes < 1 ||
@@ -225,6 +228,7 @@ export function validateLiveReport(report, basis, dataset, prompt) {
     return {
         result: 'PASS',
         model: releasePolicy.model,
+        temperature: releasePolicy.temperature,
         policy_sha256: policyDigest,
         max_input_tokens: releasePolicy.max_input_tokens,
         basis_sha256: basis,
@@ -250,7 +254,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
                         ),
                     ),
                     readFileSync(
-                        path.join(root, 'resources/copilot/answer-plan-v1.txt'),
+                        path.join(root, 'resources/copilot/answer-plan-v2.txt'),
                     ),
                 ),
             ),

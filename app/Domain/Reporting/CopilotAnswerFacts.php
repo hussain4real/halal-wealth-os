@@ -12,6 +12,7 @@ use App\Domain\Portfolio\ValuationMath;
 use App\Domain\Reporting\Copilot\Answers\AnswerContext;
 use App\Domain\Reporting\Copilot\Answers\AnswerPeriod;
 use App\Domain\Reporting\Copilot\Answers\AnswerPlan;
+use App\Domain\Reporting\Copilot\Answers\AnswerQuantity;
 use App\Domain\Reporting\Copilot\Answers\AnswerTopic;
 use App\Domain\Shared\Money\Currency;
 use App\Domain\Shariah\AssessmentRead;
@@ -51,6 +52,9 @@ final class CopilotAnswerFacts
             $facts = $field === 'overview' ? array_values($data['facts']) : (isset($data['facts'][$field]) ? [$data['facts'][$field]] : []);
             if ($facts === []) {
                 return [...$base, 'state' => 'unsupported', 'text' => 'That claim is not available in this source context.'];
+            }
+            if ($field !== 'overview' && ! AnswerQuantity::supported($question, $facts[0]['kind'])) {
+                return [...$base, 'state' => 'unsupported', 'text' => 'The selected metric does not match the requested quantity. Ask explicitly for an amount, percentage, count or status. No different quantity is substituted.'];
             }
 
             return [...$base, 'state' => 'answered', 'text' => $plan->mode === 'hypothetical'
