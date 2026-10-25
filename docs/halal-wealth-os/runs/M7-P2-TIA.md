@@ -68,3 +68,18 @@ PHP and Vue native affected-file selection and exact restoration passed. Executa
 - `cycle9-resumed-tia-cached-replay.log`: `d69affa2469f82f88c3ba91726415fb9f046b2447da65e1ffa04e8f62580e4d1`
 - `cycle9-resumed-prelive-coverage.log`: `3668edd73723a15af4034d4eb9507e09b5ce0a7632d2413fff8023fe3237cb7f`
 - `cycle9-resumed-prelive-report-proof.log`: `9c1ac4220a8512959b404f2bd8db8d78ddeffd3477b9939d3df29072048b6e5f`
+
+## Eleventh-cycle corrected-period current-source evidence
+
+After explicit owner resumptions and preservation of the coordinator browser/setup failures, clean checkpoint `c05fca83d686c46b94827ca806cd4dab59ab7d58` passed a fresh native baseline:1,466 tests/11,387 assertions in351,203ms. Concrete PHP and visible Vue probes selected the relevant answer test files; all selected/restored runs passed. Exact executable source before/after was `01ccd15fb3d945a0fe168cb5d70518402d6514ef0be6e626007f90fc0301c935`. Cached replay is separate from full execution; PHP selection does not execute Vue behavior. Subsequent manual/map hash binding is separate from that restoration digest.
+
+A separate uncached --no-tia coverage run passed1,466 tests/11,387 assertions in348,425ms, covering7,447/7,866 application statements and all96 financial floors. All814 configured selectors are present in this current uncached JUnit;132 requirements remain mapped. The actual40 prepared wire requests retain the approved closed semantic schema and maximum6,793 bytes plus1,024 overhead within8,192; no HTTP or database queries occurred in that offline guard. This does not establish live model quality. New actual40 evaluation, clean seven-artifact release and hosted delivery remain separate gates.
+
+- `cycle11-resumed-tia-record.log`: `029e8328ca00324833ec99d1fe0aef915a734580e708f783c75519fc004fe06a`
+- `cycle11-tia-php-selected.log`: `2aeed599f3265022802d90c85b20d08f31872a441292d63da887e11cbda87823`
+- `cycle11-tia-php-restored.log`: `03a871de949a3b3d869c7eb46de2d5aee890097a7ced91356a360e781c698bbc`
+- `cycle11-tia-vue-selected.log`: `71dfd26c6534e93ee1e5563842392eb7ebdd4459c1e5b8ee8c3636f4e2de25e4`
+- `cycle11-tia-vue-restored.log`: `f3a72c3d04af14e7b7bbaf0e5b50fb5d84a61687df4133dbcf9bc90749e12e25`
+- `cycle11-tia-cached-replay.log`: `a47046384f62772d9965251a1a5ec69bde2a26dd7f4e53f9db4c055311396201`
+- `cycle11-resumed-prelive-coverage.log`: `c49abba74c18f478a38b854625688742242d1c81c35421b111b5724ca575f05f`
+- `cycle11-resumed-prelive-report-proof.log`: `67ccfbcd19e279895d56777c87906f3f75a07b4af5fd7cbf74b7c0ef75d6a54a`

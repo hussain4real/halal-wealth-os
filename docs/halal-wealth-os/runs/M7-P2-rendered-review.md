@@ -44,3 +44,5 @@ New retained screenshot SHA256 identities:
 - 06-owner-390-light.png: `591a1f454da7fceb2c30c3f30406b5b46a00dfb9c0fe16974bb2b4979e89f006`
 - 07-future-state-rejected.png: `7cec24dee4b72618b9489b402ef2e8b0d76b7c7bda92dcfb578b9bb9056c7c0f`
 - 08-core-provider-unavailable.png: `25032537e7ae16062a30d3788b8ad978ca5f136a19358f2f9426472f85623938`
+
+The new independent rendered review returned a scoped synthetic pass after inspecting all11 actual screenshots and matching the8 JSON/11 image hashes. No concrete rendered blocker was found. Private report SHA256: `8e0a79715076bd400989423b1cb88477a5bd202f7c2a61292f019079e8dbd354`. The earlier assertion and startup failures retain their stopped outcomes and explicit owner resumptions.
