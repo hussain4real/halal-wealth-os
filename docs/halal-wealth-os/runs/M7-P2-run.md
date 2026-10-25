@@ -29,3 +29,5 @@ The corrected prompt passed a fresh native1,447-test/11,054-assertion baseline a
 ## Cycle5 actual summary-selection finding
 
 The second actual run passed all six cash cases, including the prior hypothetical mode. It stopped on the emergency summary because the model selected only the backed percentage instead of the full overview. The returned scalar was accurate but did not satisfy the summary request. The failed provider/answer/intent and six partial passes remain retained, not a complete pass. The prompt now explicitly prioritizes overview for one-topic summary requests and defines the percentage-versus-months distinction. Dataset/oracle and financial code are unchanged. All nine reservations including the initial access probe remain within the same118,560-micro-USD reservation total. This is reserved headroom, not a billing claim. Cycle5 of six; no publication or acceptance yet.
+
+Cycle5 fresh native1,447-test/11,054-assertion verification and repeated PHP/Vue affected selection/exact restoration passed. The latest prompt has independent scoped review; a complete strict live run on its fixed basis remains required.

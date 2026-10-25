@@ -27,3 +27,14 @@ After the preserved actual live hypothetical-label failure, the corrected prompt
 - `cycle4-tia-vue-selected.log`: `241b466dbf3578013c5c077a81880ce21d8e68c48f6815be38c4077b4fe58efe`
 - `cycle4-tia-vue-restored.log`: `6f98164cf5d24644d32190ce60cfdda9be74269c244059b2de007b73f0517f46`
 - `cycle4-tia-cached-replay.log`: `91f33277a1687c39467a25d6deb98b1034286658396ea8abf6190f3a8bae7085`
+
+## Cycle5 current-prompt refresh
+
+After the preserved summary-selection finding, the corrected prompt at `63697673ca201e696c24fe1c30a39f63fc974340` passed a fresh native baseline:1,447 tests/11,054 assertions in289,673ms. PHP and Vue selected/restored probes passed; unchanged replay is separately cached evidence. Exact executable identity before/after the probes was `3b01eb27410aea3cfec75917125d1834b8e24acb9c700a8cc1b9e18722df44f2`; subsequent manual hash binding is separate. No complete live quality or clean release result is inferred.
+
+- `cycle5-tia-record.log`: `286cd466ea2eab811edc6066705782a7c08aff288f3bec1263cae8c8a3041172`
+- `cycle5-tia-php-selected.log`: `4fbbdf549bde0ce68294a012f92ed7c0776e5d21f1cc31e96c11033974a40a6c`
+- `cycle5-tia-php-restored.log`: `00206db74118f73a888df7912f42c268e444c326bfa6a93437fa792cb6d52b3e`
+- `cycle5-tia-vue-selected.log`: `33152204fe21aca5de90d1418022b04c5be6e1ebcecbdcd535d48ebc0637e717`
+- `cycle5-tia-vue-restored.log`: `a8ab57497aa9a08ab97e919633e9d9b44892dbd8959d3233c88b900a3a8506b3`
+- `cycle5-tia-cached-replay.log`: `f9aa9638d4120692e13363dc35897e83164d5d7c6add52c9f50524b2f1e5f542`
