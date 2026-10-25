@@ -53,7 +53,7 @@ Fresh actual synthetic-planner checks forced the earlier wrong completeness clai
 
 A controlled post-commit response loss preserved the actual returned amount receipt privately, then interrupted delivery. The unchanged complete request/UUID was checked while the synthetic planner was unavailable and settled to already charged/no re-execution/no retained-answer replay. Four distinct admissions reserved65,536 tokens in total; no limits or history were reset. Financial rows and all80 real evaluation reservations were unchanged. Owned-source HTTP200 and foreign-source404 were observed; core dashboard access worked with the planner unavailable.
 
-Actual1440px desktop and390px mobile light/dark views retained one main landmark, nonempty polite announcements, the current pinned model label and no horizontal page overflow. These are mock-planner UI/backend checks, not an actual new model-quality run or assistive-technology audio proof. Browser/server are stopped; independent review of the new pixel set is pending. Prior cycle11 failures and explicit resumptions remain recorded.
+Actual1440px desktop and390px mobile light/dark views retained one main landmark, nonempty polite announcements, the current pinned model label and no horizontal page overflow. These are mock-planner UI/backend checks, not an actual new model-quality run or assistive-technology audio proof. Browser/server are stopped. Independent review of all10 actual new screenshots and their bound JSON returned a scoped synthetic pass, with the availability-refresh timing limit retained. Private review SHA256: `acbcdfe88b55ae1973534a46bc56feb33a681324c513b911aaf750dd2bbb4be3`. Prior cycle11 failures and explicit resumptions remain recorded.
 
 New retained screenshot identities:
 

@@ -83,3 +83,21 @@ A separate uncached --no-tia coverage run passed1,466 tests/11,387 assertions in
 - `cycle11-tia-cached-replay.log`: `a47046384f62772d9965251a1a5ec69bde2a26dd7f4e53f9db4c055311396201`
 - `cycle11-resumed-prelive-coverage.log`: `c49abba74c18f478a38b854625688742242d1c81c35421b111b5724ca575f05f`
 - `cycle11-resumed-prelive-report-proof.log`: `67ccfbcd19e279895d56777c87906f3f75a07b4af5fd7cbf74b7c0ef75d6a54a`
+
+## Twelfth-cycle quantity-contract current-source evidence
+
+Clean correction checkpoint `85bcf5f9d5c9612510a6dd0aaab73bf829062860` passed a fresh native baseline:1,469 tests/11,508 assertions in318,653ms. Concrete PHP and visible Vue probes selected the relevant answer test files; selected/restored checks passed and exact executable identity was `136dab4050d2fb844fc0de8a5683a3e57ea098b7fbb3b0837a21ce124bb24c2b` before/after. Cached replay is separate from full execution; PHP selection does not execute Vue behavior. Subsequent manual/map bindings are distinct from that restoration identity.
+
+A separate uncached --no-tia run passed1,469 tests/11,512 assertions in370,764ms, covering7462/7881 application statements and all97 financial floors, including the new pure quantity guard. All817 configured selectors occur in current JUnit across132 requirements. Counts belong to their actual runs; the native assertion aggregate is not substituted for uncached evidence.
+
+The current v3-policy/v2-prompt actual prepared-wire guard passed all40 cases, with identical wire bodies in application/evaluation lanes, temperature0, maximum7,115 bytes plus1,024 overhead within8,192. HTTP/database counts were zero and no key was used. This is a request-construction check, not provider compatibility or live answer quality. The new current-basis actual40, final clean seven-artifact release and hosted delivery remain separate gates.
+
+- `cycle12-resumed-tia-record.log`: `d6e2218aa8b77c544752fcdf76b55c7405759f22807bbaa2ebca3add4410377d`
+- `cycle12-tia-php-selected.log`: `b3fd5a27cc44cb17a057114fa073391d86ca3219acd5eeb696babaa4da2ec800`
+- `cycle12-tia-php-restored.log`: `b3f8354cb8bcc41b1969a1b0b5e2359baf1395c5277e2fd3ea8e40209e583daf`
+- `cycle12-tia-vue-selected.log`: `6618d30044af19a2bee32b9104d56615e8f208bf0e0d31ec1f13d8e9a4d5825a`
+- `cycle12-tia-vue-restored.log`: `2761e7fb4cba307cbc64241bbf5a5204a17cd0b90717eddbbcf27d0057a3f773`
+- `cycle12-tia-cached-replay.log`: `40767237422ec267a8522c2b716dbc43b80ec3dd695f515f8edf7a7665e81c32`
+- `cycle12-resumed-prelive-coverage.log`: `beeba44891fadb425b8758271fc0757c8de3cb613a99b35b165c3b238da917d6`
+- `cycle12-resumed-prelive-report-proof.log`: `1d3af068f202bcb8bd7d702bf4a0226683d08e3f8f9451c3da037f7eb6e1dd94`
+- `cycle12-resumed-wire-proof.log`: `a251bf759ef69fff784b7191d92425f2be445abdef4febd59330eeb92ac0a07e`
