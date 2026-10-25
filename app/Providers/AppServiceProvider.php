@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Domain\Imports\StatementCorrectionHistory;
 use App\Domain\Integrations\FxProvider;
+use App\Domain\Integrations\OpenAiAnswerPlanner;
 use App\Domain\Integrations\PriceProvider;
 use App\Domain\Integrations\TwelveData;
+use App\Domain\Intelligence\Answers\AnswerPlanner;
 use App\Domain\Intelligence\ToolProvider;
 use App\Domain\Intelligence\UnavailableProvider;
 use App\Domain\Ledger\AccountBalanceReader;
@@ -35,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ToolProvider::class, UnavailableProvider::class);
+        $this->app->bind(AnswerPlanner::class, OpenAiAnswerPlanner::class);
         $this->app->bind(PriceProvider::class, TwelveData::class);
         $this->app->bind(FxProvider::class, TwelveData::class);
         $this->app->bind(CorrectionHistory::class, StatementCorrectionHistory::class);

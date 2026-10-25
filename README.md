@@ -4,16 +4,9 @@ A private personal wealth application bootstrapped with the complete official
 Laravel Inertia/Vue starter. Public source visibility does not authorize public
 SaaS or access to personal financial data.
 
-M0 through M6 milestone gates and all 22 phases through M6-P4 are human accepted
-and merged into dev. M7-P1 is authorized and in progress: five owner-scoped
-read-only evidence tools, explicit consent and bounded usage. It remains
-unaccepted; its full release and delivery gates are recorded separately.
-Twelve Data, Laravel SMTP and Google Drive stay disabled and mock-only. No live
-model is selected or connected. M7-P2/P3, deployment and live integrations need
-separate authority. See [current status](docs/halal-wealth-os/STATUS.md),
-[M6 acceptance](docs/halal-wealth-os/runs/M6-acceptance.md),
-[M7-P1 scope](docs/halal-wealth-os/phases/M7-P1.md) and
-[read-only copilot policy](docs/halal-wealth-os/COPILOT-BOUNDARY.md).
+M0 through M6 and M7-P1 are human accepted and merged into dev. M7-P2 is authorized and in progress: bounded evidence-grounded chat and a separately measured synthetic live-model evaluation. It remains unaccepted; local checks, live quality, CI, review, merge and publication are separate gates.
+
+Twelve Data, Laravel SMTP and Google Drive stay disabled and mock-only. The default-off OpenAI answer adapter may be used only within the separately approved synthetic M7-P2 evaluation; no real financial records are disclosed. M7-P3, deployment and live financial integrations need separate authority. See [current status](docs/halal-wealth-os/STATUS.md), [M6 acceptance](docs/halal-wealth-os/runs/M6-acceptance.md), [M7-P1 acceptance](docs/halal-wealth-os/runs/M7-P1-acceptance.md), [M7-P2 scope](docs/halal-wealth-os/phases/M7-P2.md) and [read-only copilot policy](docs/halal-wealth-os/COPILOT-BOUNDARY.md).
 
 Historical phase notes below retain their original verification counts and
 pending-gate observations. They do not override the current status above.

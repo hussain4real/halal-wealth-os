@@ -1,3 +1,5 @@
+import { validateLiveReport } from './verify-answer-eval.mjs';
+import { evaluationBasis, liveReport } from './answer-eval-basis.mjs';
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { sourceIdentity, root } from './verification.mjs';
@@ -61,7 +63,14 @@ try {
     );
     const record = {
         result: 'PASS',
-        phase: 'M7-P1',
+        phase: 'M7-P2',
+        live_evaluation: validateLiveReport(
+            JSON.parse(readFileSync(liveReport)),
+            evaluationBasis(),
+            readFileSync('resources/copilot/evaluation/questions-v1.json'),
+            readFileSync('resources/copilot/answer-plan-v2.txt'),
+        ),
+        live_evaluation_sha256: digest(liveReport),
         ...proof,
         ...identity,
         build_manifest_sha256: digest(manifestPath),

@@ -13,7 +13,7 @@ test('F18 refuses missing boundary families expanded scope and unrelated evidenc
     } elseif ($fault === 'expanded') {
         $f['implemented_subscenarios'][] = 'live_model_answers';
     } elseif ($fault === 'future') {
-        $f['future_subscenarios'] = [];
+        $f['future_subscenarios'] = ['M7-P3'];
     } elseif ($fault === 'status') {
         $f['status'] = 'PASS';
     } else {
@@ -39,7 +39,7 @@ beforeEach(function () {
 
 test('acceptance map resolves exact configured cases and explicit retained evidence without claiming a tool pass', function () {
     $report = HalalOS\Verification\acceptanceMap($this->acceptanceMap, $this->acceptanceJunit, base_path());
-    expect($report['requirements'])->toHaveCount(127)->and($report)->not->toHaveKey('result');
+    expect($report['requirements'])->toHaveCount(132)->and($report)->not->toHaveKey('result');
     expect(array_column($report['fixtures'], 'status'))->toBe(array_column($this->acceptanceMap['fixtures'], 'status'));
 });
 

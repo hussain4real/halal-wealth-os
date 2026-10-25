@@ -23,6 +23,9 @@ final class CopilotRecoveryFixtures
                 'lane' => 'provider', 'consent_generation' => 1, 'status' => $status, 'reserved_tokens' => 16384,
                 'finished_at' => $status === 'pending' ? null : now('UTC')]);
         }
+        foreach (['complete', 'unavailable', 'rejected', 'pending'] as $status) {
+            DB::table('copilot_requests')->insert(['owner_id' => $owner->id, 'reference' => (string) Str::uuid(), 'lane' => 'answer', 'consent_generation' => 1, 'status' => $status, 'reserved_tokens' => 16384, 'finished_at' => $status === 'pending' ? null : now('UTC')]);
+        }
         DB::table('copilot_requests')->insert(['owner_id' => $foreign->id, 'reference' => (string) Str::uuid(),
             'lane' => 'provider', 'consent_generation' => 1, 'reserved_tokens' => 16384]);
     }

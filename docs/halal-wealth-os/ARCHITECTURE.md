@@ -14,7 +14,7 @@ Laravel SMTP remains disabled and synthetic mock-only.
 M6-P4 is human accepted; see [its acceptance](runs/M6-P4-acceptance.md) and
 [Drive policy](DRIVE-EXPORT.md). Google Drive remains disabled and mock-only.
 All four M6 phases are accepted. The [independent M6 review](runs/M6-independent-review.md)
-returned READY_FOR_OWNER; M6 is human accepted; M7-P1 is authorized and in progress.
+returned READY_FOR_OWNER; M6 and M7-P1 are human accepted; M7-P2 is authorized and in progress.
 Deployment, live external delivery and later phases remain separate decisions.
 Reporting composes existing source contracts inside a coherent database snapshot;
 it retains dashboard evidence and rule/dismissal history without posting financial
@@ -87,3 +87,13 @@ trading, sharing, arbitrary connectors and public method reflection are absent.
 See [boundary policy](COPILOT-BOUNDARY.md). Provider selection is a generic port
 with a safe unavailable default, tested using an injected synthetic contract.
 No live transport, credentials, generated answers or live evaluation is claimed.
+
+## M7-P2 bounded answers and live evaluation
+
+Reporting owns typed answer queries, claim/topic enums, period policy, deterministic projections and the fixed owned source resolver. Intelligence owns the optional AnswerPlanner port and authenticated once-only/consent boundary; Integrations implements the OpenAI adapter inward through that port. Reporting does not import Intelligence. Model output selects one closed claim/mode/scope, with no money, arithmetic, IDs, URLs or tool executions. Server-authored text and typed facts attribute current cash/goal data, explicitly selected saved investment intervals and dated assessment sources. Unsupported periods return an inability rather than a substituted current balance. Hypothetical requests show recorded baseline facts only.
+
+The planner receives only the explicitly confirmed question/document, which can themselves contain personal information; trusted source records and selected IDs remain local. No chat history is transmitted or persisted. Uncertain transport keeps the same current-page request and fields; a matching charged receipt settles it without repeating the call. Revoke/re-enable refreshes consent generation while preserving that pending request. Hard reload clears local messages and does not promise durable answer recovery. Redacted reservations/statuses remain exportable and restored answer-lane requests stay charged.
+
+The default-off adapter uses dated gpt-5.4-2026-03-05 Responses, reasoning none, temperature0, store=false, no tools, strict JSON, one attempt,512 output tokens, an at-most30-second complete-body deadline and64KiB identity-encoded response ceiling. No actual key is committed or loaded by ordinary CI. The live entrypoint allows exact versioned synthetic questions only and the approved private sibling env. Its single private append-only budget ledger is independent of evidence output paths, includes the earlier access probe and failed/unknown reservations, and refuses deleted/replaced/truncated/symlinked history. The current owner-approved aggregate conservative reservation cap is USD5; all earlier failed/probe reservations remain charged. Evaluation alone has the8,192-input bound; production16,384-token admission and owner daily caps stay unchanged.
+
+Evaluation basis B binds runtime, prompt, dataset, independent literal oracle, grader, adapter, tests and harness. Only the generated receipt's own acceptance-reference hash is normalized. Observed live R(B) is retained separately; final release source S includes its actual reference hash. Source changes invalidate B. CI validates that retained current-basis observation and deterministic integration again; it neither repeats live calls nor treats stubs as answer-quality evidence. The retained coordinator receipt is not a provider-signed attestation. No new signing key or external financial action is introduced.

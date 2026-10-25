@@ -38,6 +38,9 @@ Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->grou
     Route::post('copilot/consent', [CopilotController::class, 'consent'])->name('copilot.consent');
     Route::post('copilot/preview', [CopilotController::class, 'preview'])->middleware('throttle:copilot')->name('copilot.preview');
     Route::post('copilot/propose', [CopilotController::class, 'propose'])->middleware('throttle:copilot')->name('copilot.propose');
+    Route::get('copilot/chat', [CopilotController::class, 'chat'])->name('copilot.chat');
+    Route::post('copilot/answer', [CopilotController::class, 'answer'])->middleware('throttle:copilot')->name('copilot.answer');
+    Route::get('copilot/source/{kind}/{id}', [CopilotController::class, 'source'])->name('copilot.source');
 
     Route::get('drive', [DriveExportController::class, 'index'])->name('drive.index');
 

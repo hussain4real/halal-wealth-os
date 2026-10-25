@@ -130,7 +130,7 @@ test('populated copilot downgrade refuses before ddl', function () {
 
 test('empty copilot roundtrip preserves predecessor data', function () {
     $before = DB::table('users')->count();
-    $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertSuccessful();
+    $this->artisan('migrate:rollback', ['--step' => 2, '--force' => true])->assertSuccessful();
     expect(DB::getSchemaBuilder()->hasTable('copilot_controls'))->toBeFalse();
     $this->artisan('migrate', ['--force' => true])->assertSuccessful();
     expect(DB::table('users')->count())->toBe($before);

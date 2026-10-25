@@ -2,7 +2,10 @@
 
 return [
     'enabled' => env('COPILOT_ENABLED', false) === true,
-    // No live provider adapter or credential is selected in M7-P1.
+    // Optional answer transport; no key is committed or available to ordinary CI.
+    'answer_enabled' => env('COPILOT_ANSWER_ENABLED', false) === true,
+    'answer_model' => 'gpt-5.4-2026-03-05',
+    'openai_key' => env('OPENAI_API_KEY'),
     'requests_per_day' => 10,
     'reserved_tokens_per_day' => 65536,
     'tokens_per_request' => 16384,

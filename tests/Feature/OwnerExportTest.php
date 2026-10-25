@@ -129,7 +129,11 @@ test('populated owner export retains revisions exact nested decimals and release
             ->and($data['decision_reservations'])->toHaveCount(1)->and($data['shariah_assessments'])->toHaveCount(2)
             ->and($data['purification_obligations'])->toHaveCount(1)->and($data['purification_allocations'])->toHaveCount(1)
             ->and(array_column($data['portfolio_opening_rows'], 'quantity'))->toContain('1.234567890123');
-        expect($data['copilot_controls'])->toHaveCount(1)->and($data['copilot_requests'])->toHaveCount(4);
+        expect($data['copilot_controls'])->toHaveCount(1)->and($data['copilot_requests'])->toHaveCount(8);
+        foreach (['provider', 'answer'] as $lane) {
+            $requests = collect($data['copilot_requests'])->where('lane', $lane);
+            expect($requests->pluck('status')->sort()->values()->all())->toBe(['complete', 'pending', 'rejected', 'unavailable']);
+        }
         expect($data['statement_sources'])->toHaveCount(2)->and($data['statement_adapters'])->toHaveCount(1)
             ->and($data['statement_snapshots'])->toHaveCount(2)->and($data['statement_receipts'])->toHaveCount(3)
             ->and($data['statement_claims'])->not->toBeEmpty();
