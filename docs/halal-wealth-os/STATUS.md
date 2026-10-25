@@ -1,6 +1,6 @@
 # Current roadmap status
 
-Checked on 25 October 2026 against dev merge `9204f07a037384562e226533a1e3bdfe0a7c0728`, retained GitHub delivery evidence and explicit human acceptance. M7-P1 is owner accepted; M7-P2 is authorized and in progress. Its cycle13 local checks passed; a new current-basis fixed40 synthetic live evaluation, final clean release, corrected-head CI/review, merge and publication remain separate pending gates.
+Checked on 25 October 2026 against dev merge `9204f07a037384562e226533a1e3bdfe0a7c0728`, retained GitHub delivery evidence and explicit human acceptance. M7-P1 is owner accepted; M7-P2 is authorized and in progress. Its current fixed40 synthetic live evaluation passed; final clean release, corrected-head CI/review, merge and publication remain separate pending gates.
 
 `ROADMAP.json` preserves the canonical identifier/dependency index. Its initial phase labels are not current delivery claims. `STATE.json`, owner acceptance records and actual GitHub source/CI record execution status.
 

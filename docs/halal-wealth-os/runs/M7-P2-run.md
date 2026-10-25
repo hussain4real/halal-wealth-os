@@ -1,6 +1,6 @@
 # M7-P2 execution record
 
-Status: cycle13 local pre-evaluation checks passed; current-basis live evaluation and final delivery pending. One implementation owner, cycle13 of thirteen; unaccepted.
+Status: cycle13 actual live evaluation passed; final clean release and corrected-head delivery pending. One implementation owner, cycle13 of thirteen; unaccepted.
 
 Implemented a default-off bounded answer planner, deterministic typed fact projection, owner-scoped source references, current-page chat/recovery and versioned30-finance/10-adversarial evaluation dataset. Initial73 affected tests797 assertions passed, alongside client schema/basis tests and actual owned loopback transport checks. A prior focused measurement gave99–100 percent coverage across the new concrete financial sources; the final full floor is not yet claimed.
 
@@ -189,3 +189,11 @@ Fresh native and separate uncached coverage each passed1,484 tests/11,638 assert
 The subsequent staging invocation included an already-staged deleted policy path and failed before commit. The owner explicitly resumed; staging only the14 existing reviewed paths preserved the rename, verified the exact15-path index and committed the correction with approved author and committer. This failure, the earlier sequencing/startup assertions and automatic approval rejection remain retained. No browser request or paid reservation was reset.
 
 All source/test/map/manual bindings are completed before the new paid freeze. The actual new40 evaluation remains unused; all120 earlier reservations retain3,095,072microUSD and exact bytes. One new40 would total4,221,472 underUSD5. No extra paid probe/retry/fallback, cycle14, later phase or acceptance. Final clean release, original corrected-head CI/fresh review, normal dev merge, original merge CI and signed anonymous publication remain separate pending gates.
+
+## Thirteenth-cycle actual live evaluation complete
+
+The single new actual synthetic evaluation passed all40 fixed cases:30 finance and10 adversarial or missing-data cases, on the frozen source basis and pinned temperature0. Independent raw request/provider/answer/report joins, literal expected values, authorized citations and ledger checks passed within that fixed dataset. Missing-FX scalar/overview behavior is separately established by the new regression and actual synthetic browser checks; this fixed-set result is not exhaustive FX verification, a repeatability guarantee, provider-side exactly-once proof or general financial-advice quality.
+
+The report retains50,806 input and1,082 output tokens. All120 earlier ledger entries remain byte-identical;40 new reservations bring the total to4,221,472microUSD under the owner-approvedUSD5 cap. These are conservative reservations, not billed usage. No further paid probe, retry, fallback or model call is authorized. All failures and partial evaluations remain retained.
+
+Only the independently reviewed complete receipt and its own normalized map hash were bound after the paid freeze; parsed report values are unchanged. No other source/test/manual binding changed. Final clean uncached release, corrected-head original hosted CI and fresh no-finding review with resolved threads, normal dev merge, original merge CI and signed anonymous publication remain separate pending gates. M7-P2/M7 remain unaccepted; no M7-P3 or deployment.
