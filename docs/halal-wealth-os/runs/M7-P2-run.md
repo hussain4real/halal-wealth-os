@@ -1,6 +1,6 @@
 # M7-P2 execution record
 
-Status: owner-authorized cycle12 correction in progress; unaccepted. One implementation owner, cycle11 of eleven. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
+Status: cycle12 actual live evaluation passed; final clean release and corrected-head delivery pending. One implementation owner, cycle12 of twelve; unaccepted. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
 
 Implemented a default-off bounded answer planner, deterministic typed fact projection, owner-scoped source references, current-page chat/recovery and versioned30-finance/10-adversarial evaluation dataset. Initial73 affected tests797 assertions passed, alongside client schema/basis tests and actual owned loopback transport checks. A prior focused measurement gave99–100 percent coverage across the new concrete financial sources; the final full floor is not yet claimed.
 
@@ -153,3 +153,11 @@ All40 actual current prepared request bodies carry temperature0 in both lanes; m
 Fresh native baseline passed1,469 tests/11,508 assertions; actual PHP/Vue selection and exact restoration passed. Separate uncached coverage passed1,469 tests/11,512 assertions, all97 financial floors and817 current executed selectors across132 requirements. Source/policy and current synthetic rendered reviews passed within their declared scopes. The actual40 prepared request bodies enforce temperature0 in both lanes and fit7,115+1,024 bytes within8,192, with no HTTP/database queries or key use in that offline guard.
 
 All source/test/map/manual bindings are completed before the paid basis freeze. One fresh complete40-case evaluation remains required, using the existing approved private key and unchanged dataset/oracle/model/prices/production limits. All80 historical reservations totaling1,968,672microUSD remain intact; the new run would total3,095,072 belowUSD4. No extra probe/retry/fallback, thirteenth cycle or acceptance is included. No current live PASS, final clean release, corrected-head hosted CI/review, merge or publication is claimed yet.
+
+## Twelfth-cycle actual live evaluation complete
+
+The single new actual synthetic evaluation passed all40 fixed cases:30 finance and10 adversarial or missing-data cases, on the frozen source basis with pinned temperature0. Independent raw request/provider/answer/report joins, literal expected values, authorized citations and ledger checks passed within the fixed dataset. The previously failed Nigeria-value question now selects its monetary fact. This does not establish general semantic correctness, repeatability, provider-side exactly-once execution or unrestricted financial-advice quality.
+
+The completed report retains50,806 input and1,082 output tokens. All80 earlier ledger entries remain byte-identical;40 new reservations bring the total to3,095,072microUSD under the owner-approvedUSD4 cap. These are conservative reservations, not billed usage. No additional probe, retry, fallback or model call is included. All failed and partial evaluations remain retained privately.
+
+Only the reviewed redacted complete receipt and its own normalized map hash were updated after the paid source freeze. No other source/test/manual binding changed. Final clean uncached release, corrected-head original hosted CI, a new completed exact-head review with all threads resolved, normal dev merge, original post-merge CI and signed anonymous publication are still separate pending gates. M7-P2 and M7 remain unaccepted; no M7-P3 or deployment.
