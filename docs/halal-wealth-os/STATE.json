@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-25T07:51:05.384416+00:00",
+    "updated_at": "2026-10-25T19:07:00.508295+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -353,27 +353,27 @@
         "recorded_at": "2026-10-25T04:10:59.969588+00:00",
         "scope": "Accept M7-P1; implement canonical M7-P2, independently reviewed sanitized dev PR, normal approved-noreply merge after original exact-head CI and fresh review, original postmerge CI and signed public progress verification.",
         "accepted_dependencies": ["M7-P1"],
-        "max_cycles": 12,
+        "max_cycles": 13,
         "one_source_writer": true,
         "live_access": "APPROVED_OPENAI_SYNTHETIC_EVALUATION_ONLY",
         "credential_creation": "APPROVED_SECURE_PRIVATE_LOCAL_SETUP",
-        "evaluation_spend_cap_usd": "4.00",
+        "evaluation_spend_cap_usd": "5.00",
         "real_financial_data_external_disclosure": false,
         "deployment": false,
         "main_stage_changes": false,
         "permission_changes": false,
         "later_phases": false,
-        "latest_extension": "Human explicitly authorized cycle12 metric-selection correction and USD4 total reservation cap, preserving80ledgerentries1968672 and all failures. One reviewed new40 evaluation after local gates; no extra paid probe/retry/fallback and any further unexpected failure stops."
+        "latest_extension": "Human explicitly authorized one cycle13/USD5 total reservation cap for confirmed missing-FX commitment projection P2. Preserve120ledgerentries3095072 and all failures; one new40 after local reviewed/frozen gates, no extra probe/retry/fallback and any further unexpected failure stops."
     },
     "execution_status": {
         "phase": "M7-P2",
         "status": "IN_PROGRESS",
-        "cycle": 12,
-        "cycles_used": 12,
-        "max_cycles": 12,
+        "cycle": 13,
+        "cycles_used": 13,
+        "max_cycles": 13,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M7_UNACCEPTED",
-        "checkpoint": "C12 actual pinned GPT5.4 evaluation PASS40 fixed cases30finance10adversarial, temperature0/current frozen basis; independent raw payload/provider/answer/oracle/citation/ledger joins PASS. All120 reservations3095072microUSD below4M and original80 byte-prefix exact. Prelive native1469/11508, uncached1469/11512/97floors/817selectors132requirements, source/rendered and exact restoration passed. Final clean seven-artifact release and corrected-head original CI/fresh review/resolved threads/normal dev merge/postCI/signed anonymous publication remain separate pending gates. All12 cycles/failures retained; no more paid calls,13th cycle or acceptance."
+        "checkpoint": "C13 affected118/1475,client15,map37/312/832selectors132req and independent source/cap reviews PASS. Actual synthetic browser missingFXscalar+overview unavailable; explicit FX fixture then400QAR; full exactrequest retry already_charged/noanswerreplay/no extra execution;4completeadmissions/65536tokens/4fakeplannerentries, owner200foreign404, core unavailable-planner independence, responsive themes/main/polite PASS. Browser/server stopped; independent new pixel review pending. Prior sequencing, approval rejection and startup preflight failures preserved with explicit owner resumptions. All120ledger3095072/d718 unchanged; no newpaidcall. Native/restoration/uncached/currentmanualbinding/frozenbasis/new40/finalcleanrelease/newheadCI/freshreview/merge/postCI/publication pending;13of13/USD5/no14th/unaccepted."
     },
     "dependency_patch": {
         "authorized": true,
@@ -3790,6 +3790,17 @@
             "phase_acceptance": "UNACCEPTED",
             "milestone_acceptance": "M7_UNACCEPTED",
             "checkpoint": "C10 plannedred2confirmed/affected97tests1202assertions/client15/lint/static passed; independentperiodsource reviewCHANGES_REQUIRED: arbitrary duration date-complement and future unpaid-state wording still admitted. Five read-onlycounterexamplesconfirmed. All10cyclesused/anyfailurestop. No newAPI;66reservations1574432unchanged under approved3M. PG/browser/serverstopped; followupdeleted. C11closed-current-grammarproposalonly, no correction/merge authorized."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "BLOCKED",
+            "cycle": 12,
+            "cycles_used": 12,
+            "max_cycles": 12,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "C12 actual40 and clean1469/11508/97floors/817selectors/7artifacts passed; fresh exacta1f5 review raised valid missing/staleFX commitment subtotal P2. PR26 unmerged; all120 ledger3095072 retained and follow-up deleted. Owner then authorized cycle13/USD5.",
+            "outcome": "C12_LIVE_AND_CLEAN_RELEASE_PASS_THEN_NEW_HOSTED_MISSING_FX_P2"
         }
     ],
     "m7p2_execution_history": [
@@ -3832,6 +3843,27 @@
             "phase_acceptance": "UNACCEPTED",
             "milestone_acceptance": "M7_UNACCEPTED",
             "checkpoint": "C7 correctedmap37tests312assertionsPASS; freshnative+separateuncachedcoverage1457tests11107assertionsPASS;96 financialfloors;PHP/VueexactrestorePASS;15NodechecksPASS. Actualunchanged40GPT5.4evaluation+finalcleanrelease/hostedgatespending. Allpreviousfailures+279072microreservationspreserved;7of7anyfurtherfailurestop."
+        }
+    ],
+    "m7p2_authorization_history": [
+        {
+            "phase": "M7-P2",
+            "authorized": true,
+            "authorized_by": "human-owner",
+            "recorded_at": "2026-10-25T04:10:59.969588+00:00",
+            "scope": "Accept M7-P1; implement canonical M7-P2, independently reviewed sanitized dev PR, normal approved-noreply merge after original exact-head CI and fresh review, original postmerge CI and signed public progress verification.",
+            "accepted_dependencies": ["M7-P1"],
+            "max_cycles": 12,
+            "one_source_writer": true,
+            "live_access": "APPROVED_OPENAI_SYNTHETIC_EVALUATION_ONLY",
+            "credential_creation": "APPROVED_SECURE_PRIVATE_LOCAL_SETUP",
+            "evaluation_spend_cap_usd": "4.00",
+            "real_financial_data_external_disclosure": false,
+            "deployment": false,
+            "main_stage_changes": false,
+            "permission_changes": false,
+            "later_phases": false,
+            "latest_extension": "Human explicitly authorized cycle12 metric-selection correction and USD4 total reservation cap, preserving80ledgerentries1968672 and all failures. One reviewed new40 evaluation after local gates; no extra paid probe/retry/fallback and any further unexpected failure stops."
         }
     ]
 }

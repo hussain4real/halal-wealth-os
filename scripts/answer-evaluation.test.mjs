@@ -71,7 +71,7 @@ function syntheticValidatorFixture() {
         ),
     }));
     return {
-        version: 'live-answer-evaluation-v3',
+        version: 'live-answer-evaluation-v4',
         started_at: '2026-10-25T03:59:00Z',
         completed_at: '2026-10-25T04:01:00Z',
         result: 'PASS',
@@ -89,7 +89,7 @@ function syntheticValidatorFixture() {
         policy_sha256: policyDigest,
         cases,
         totals: { cases: 40, input_tokens: 4000, output_tokens: 800 },
-        total_eval_cap_micro_usd: 4000000,
+        total_eval_cap_micro_usd: 5000000,
         reserved_total_micro_usd: 1128224,
         limitation:
             'retained observed receipt; not a provider-signed attestation',
@@ -109,6 +109,10 @@ await test('retained live evidence validator rejects changed basis missing cases
         (r) => (r.cases[0].temperature = 1),
         (r) => delete r.cases[0].temperature,
         (r) => (r.policy.case_reservation_micro_usd = 1),
+        (r) => (r.policy.total_cap_micro_usd = 6000000),
+        (r) => (r.total_eval_cap_micro_usd = 4000000),
+        (r) => (r.total_eval_cap_micro_usd = 6000000),
+        (r) => (r.version = 'live-answer-evaluation-v3'),
         (r) => (r.cases[0].policy_sha256 = 'f'.repeat(64)),
         (r) => (r.cases[0].wire_bytes = 8192),
         (r) => (r.cases[0].max_input_tokens = 16384),
@@ -124,7 +128,7 @@ await test('retained live evidence validator rejects changed basis missing cases
         (r) => (r.cases[0].response_id_sha256 = r.cases[1].response_id_sha256),
         (r) => (r.cases[0].usage.output_tokens = 513),
         (r) => (r.cases[0].checks.no_financial_writes = false),
-        (r) => (r.reserved_total_micro_usd = 4000001),
+        (r) => (r.reserved_total_micro_usd = 5000001),
         (r) => (r.prompt_sha256 = '0'.repeat(64)),
         (r) => (r.totals.input_tokens = 0),
     ]) {

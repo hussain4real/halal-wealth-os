@@ -3,6 +3,8 @@
 use App\Domain\Intelligence\Answers\AnswerPlanner;
 use App\Domain\Intelligence\CopilotBoundary;
 use App\Domain\Intelligence\UntrustedInput;
+use App\Domain\Ledger\FxObservationService;
+use App\Domain\Planning\CashAvailability;
 use App\Domain\Reporting\AnswerSources;
 use App\Domain\Reporting\Copilot\Answers\AnswerClaim;
 use App\Domain\Reporting\Copilot\Answers\AnswerContext;
@@ -324,4 +326,132 @@ test('explicit monetary quantity rejects a completeness plan and accepts a disti
         ->and(answerFinancialHash())->toBe($before)
         ->and(DB::table('copilot_requests')->where('owner_id', $this->owner->id)->count())->toBe(2)
         ->and(DB::table('copilot_requests')->where('owner_id', $this->owner->id)->sum('reserved_tokens'))->toBe(32768);
+});
+
+test('unconverted required commitments never become an authoritative total', function (bool $mixed) {
+    $f = A::seed($this->owner);
+    $foreign = B::rule($this->owner, B::category($this->owner), ['currency' => 'USD', 'amount' => '100', 'first_due_date' => '2026-10-22']);
+    $requirements = [['schedule_id' => (string) $foreign->id, 'required' => '1']];
+    if ($mixed) {
+        $domestic = B::rule($this->owner, B::category($this->owner), ['amount' => '200', 'first_due_date' => '2026-10-22']);
+        $requirements[] = ['schedule_id' => (string) $domestic->id, 'required' => '1'];
+    }
+    AvailabilityFixtures::settings($this->owner, ['prior_id' => (string) $f['settings']->id, 'requirements' => $requirements]);
+    $before = answerFinancialHash();
+    $values = [];
+    foreach (['cash.commitments' => 'How much is unfunded in required commitments before my next income?', 'cash.overview' => 'Show my cash overview'] as $claim => $question) {
+        $answer = app(CopilotAnswerFacts::class)->answer($this->owner, AnswerPlan::parse(['claim' => $claim, 'mode' => 'recorded', 'scope' => 'current']), A::context($f), $question);
+        expect($answer['state'])->toBe('answered')->and($answer['completeness'])->toBe('incomplete');
+        expect($answer['limitations'])->toContain('USD:missing_fx')->and($answer['as_of'])->toBe('2026-10-20T23:59:59Z');
+        $fact = collect($answer['facts'])->firstWhere('key', 'cash.commitments');
+        expect($fact['kind'])->toBe('money')->and($fact['label'])->toBe('Unfunded required commitments');
+        $values[] = $fact['value'];
+    }
+    expect(answerFinancialHash())->toBe($before);
+    Http::assertNothingSent();
+    expect($values)->toBe([null, null]);
+})->with(['only foreign commitment' => [false], 'mixed known and unconverted commitments' => [true]]);
+
+/** @return list<array<string,mixed>> */
+function copilotCommitmentViews(User $owner, array $fixture): array
+{
+    $views = [];
+    foreach (['cash.commitments' => 'How much is unfunded in required commitments before my next income?', 'cash.overview' => 'Show my cash overview'] as $claim => $question) {
+        $views[] = app(CopilotAnswerFacts::class)->answer($owner, AnswerPlan::parse(['claim' => $claim, 'mode' => 'recorded', 'scope' => 'current']), A::context($fixture), $question);
+    }
+
+    return $views;
+}
+
+test('stale and owner ineligible commitment rates preserve unavailable totals', function (string $kind) {
+    $f = A::seed($this->owner);
+    $bill = B::rule($this->owner, B::category($this->owner), ['currency' => 'USD', 'amount' => '100', 'first_due_date' => '2026-10-22']);
+    AvailabilityFixtures::settings($this->owner, ['prior_id' => (string) $f['settings']->id, 'requirements' => [['schedule_id' => (string) $bill->id, 'required' => '1']]]);
+    $quote = FxFixtures::quote('USD', 'QAR', '2');
+    $rateOwner = $this->owner;
+    if ($kind === 'stale') {
+        $quote = [...$quote, 'observed_at' => '2026-10-10T00:00:00Z', 'effective_at' => '2026-10-10T00:00:00Z'];
+    } elseif ($kind === 'foreign') {
+        $rateOwner = User::factory()->create();
+    } else {
+        $quote = FxFixtures::quote('QAR', 'USD', '0.5');
+    }
+    app(FxObservationService::class)->record($rateOwner, 'answer-commitment-'.$kind, $quote);
+    $before = answerFinancialHash();
+    foreach (copilotCommitmentViews($this->owner, $f) as $answer) {
+        expect($answer['state'])->toBe('answered')->and($answer['completeness'])->toBe('incomplete');
+        expect($answer['limitations'])->toContain($kind === 'stale' ? 'USD:stale_fx' : 'USD:missing_fx');
+        expect(collect($answer['facts'])->firstWhere('key', 'cash.commitments')['value'])->toBeNull();
+    }
+    expect(answerFinancialHash())->toBe($before);
+    Http::assertNothingSent();
+})->with(['stale reporting rate' => ['stale'], 'foreign owner reporting rate' => ['foreign'], 'reverse pair is not a direct rate' => ['reverse']]);
+
+test('fully converted mixed commitments retain the existing exact total', function () {
+    $f = A::seed($this->owner);
+    $requirements = [];
+    foreach (['QAR' => '200', 'USD' => '100'] as $currency => $amount) {
+        $bill = B::rule($this->owner, B::category($this->owner), ['currency' => $currency, 'amount' => $amount, 'first_due_date' => '2026-10-22']);
+        $requirements[] = ['schedule_id' => (string) $bill->id, 'required' => '1'];
+    }
+    AvailabilityFixtures::settings($this->owner, ['prior_id' => (string) $f['settings']->id, 'requirements' => $requirements]);
+    app(FxObservationService::class)->record($this->owner, 'answer-commitment-valid-rate', FxFixtures::quote('USD', 'QAR', '2'));
+    $before = answerFinancialHash();
+    foreach (copilotCommitmentViews($this->owner, $f) as $answer) {
+        expect($answer['completeness'])->toBe('complete');
+        expect(collect($answer['facts'])->firstWhere('key', 'cash.commitments')['value'])->toBe(['currency' => 'QAR', 'minor' => '40000', 'amount' => '400.00']);
+    }
+    expect(answerFinancialHash())->toBe($before);
+    Http::assertNothingSent();
+});
+
+test('paired conversion rounded zero remains known commitment evidence', function () {
+    $f = A::seed($this->owner);
+    $foreign = FxFixtures::account($this->owner, Currency::USD);
+    GoalFixtures::cash($this->owner, $foreign, '0.02');
+    $bill = B::rule($this->owner, B::category($this->owner), ['currency' => 'USD', 'amount' => '0.01', 'first_due_date' => '2026-10-22']);
+    AvailabilityFixtures::settings($this->owner, ['prior_id' => (string) $f['settings']->id, 'requirements' => [['schedule_id' => (string) $bill->id, 'required' => '1']]]);
+    app(FxObservationService::class)->record($this->owner, 'answer-commitment-rounded-rate', FxFixtures::quote('USD', 'QAR', '0.5'));
+    $before = answerFinancialHash();
+    $actual = app(CashAvailability::class)->capture($this->owner, complete: true)['actual'];
+    $component = collect($actual['components'])->firstWhere('currency', 'USD');
+    expect($component['native']['unfunded'])->toBe('1')->and($component['converted']['unfunded'])->toBe('0');
+    foreach (copilotCommitmentViews($this->owner, $f) as $answer) {
+        expect($answer['completeness'])->toBe('complete');
+        expect(collect($answer['facts'])->firstWhere('key', 'cash.commitments')['value'])->toBe(['currency' => 'QAR', 'minor' => '0', 'amount' => '0.00']);
+    }
+    expect(answerFinancialHash())->toBe($before);
+    Http::assertNothingSent();
+});
+
+test('foreign cash FX gaps do not hide known unfunded commitments that need no conversion', function (string $amount) {
+    $f = A::seed($this->owner);
+    $foreign = FxFixtures::account($this->owner, Currency::USD);
+    GoalFixtures::cash($this->owner, $foreign, '0.02');
+    if ($amount !== '0') {
+        $bill = B::rule($this->owner, B::category($this->owner), ['amount' => $amount, 'first_due_date' => '2026-10-22']);
+        AvailabilityFixtures::settings($this->owner, ['prior_id' => (string) $f['settings']->id, 'requirements' => [['schedule_id' => (string) $bill->id, 'required' => '1']]]);
+    }
+    $before = answerFinancialHash();
+    foreach (copilotCommitmentViews($this->owner, $f) as $answer) {
+        expect($answer['completeness'])->toBe('incomplete')->and($answer['limitations'])->toContain('USD:missing_fx');
+        $value = collect($answer['facts'])->firstWhere('key', 'cash.commitments')['value'];
+        expect($value['currency'])->toBe('QAR')->and($value['amount'])->toBe($amount === '0' ? '0.00' : '200.00');
+    }
+    expect(answerFinancialHash())->toBe($before);
+    Http::assertNothingSent();
+})->with(['known zero without an FX need' => ['0'], 'known domestic amount' => ['200']]);
+
+test('unrelated non FX incompleteness retains known configured commitments and its warning', function () {
+    $f = A::seed($this->owner);
+    $bill = B::rule($this->owner, B::category($this->owner), ['amount' => '200', 'first_due_date' => '2026-10-22']);
+    B::rule($this->owner, B::category($this->owner), ['amount' => '75', 'first_due_date' => '2026-10-22']);
+    AvailabilityFixtures::settings($this->owner, ['prior_id' => (string) $f['settings']->id, 'requirements' => [['schedule_id' => (string) $bill->id, 'required' => '1']]]);
+    $before = answerFinancialHash();
+    foreach (copilotCommitmentViews($this->owner, $f) as $answer) {
+        expect($answer['completeness'])->toBe('incomplete')->and($answer['limitations'])->toContain('unclassified_required_commitments');
+        expect(collect($answer['facts'])->firstWhere('key', 'cash.commitments')['value'])->toBe(['currency' => 'QAR', 'minor' => '20000', 'amount' => '200.00']);
+    }
+    expect(answerFinancialHash())->toBe($before);
+    Http::assertNothingSent();
 });

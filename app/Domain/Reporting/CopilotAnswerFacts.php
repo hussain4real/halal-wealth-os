@@ -70,6 +70,8 @@ final class CopilotAnswerFacts
     {
         $r = app(CashAvailability::class)->capture($owner, complete: true);
         $a = $r['actual'];
+        $commitmentsKnown = array_all($a['components'], fn (array $component): bool => $component['native']['unfunded'] === '0'
+            || array_key_exists('unfunded', $component['converted']));
         $sources = [];
         foreach ($r['accounts'] as $row) {
             $sources[] = app(AnswerSources::class)->citation($owner, 'account', (string) $row['id'], 'Included cash source account');
@@ -85,7 +87,7 @@ final class CopilotAnswerFacts
                 'raw' => $this->fact('cash.raw', 'Signed raw availability', 'money', $a['raw']),
                 'buffer' => $this->fact('cash.buffer', 'Configured cash buffer', 'money', $a['buffer']),
                 'shortfall' => $this->fact('cash.shortfall', 'Actual shortfall', 'money', $a['shortfall']),
-                'commitments' => $this->fact('cash.commitments', 'Unfunded required commitments', 'money', $a['breakdown']['unfunded'] ?? null)]];
+                'commitments' => $this->fact('cash.commitments', 'Unfunded required commitments', 'money', $commitmentsKnown ? ($a['breakdown']['unfunded'] ?? null) : null)]];
     }
 
     /** @return array<string,mixed> */

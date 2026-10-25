@@ -4086,6 +4086,81 @@
             "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
             "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"nonzero temperature\"\"",
             "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-c13-b30920610853": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "unconverted required commitments never become an authoritative total with data set \"dataset \"only foreign commitment\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-b2e8cd375103": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "unconverted required commitments never become an authoritative total with data set \"dataset \"mixed known and unconverted commitments\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-40a917e079e5": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "stale and owner ineligible commitment rates preserve unavailable totals with data set \"dataset \"stale reporting rate\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-dee1b311d85e": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "stale and owner ineligible commitment rates preserve unavailable totals with data set \"dataset \"foreign owner reporting rate\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-f1aa98563b6d": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "stale and owner ineligible commitment rates preserve unavailable totals with data set \"dataset \"reverse pair is not a direct rate\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-c4cdf0cfc2be": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fully converted mixed commitments retain the existing exact total",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-9d0bb22aa9f8": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "paired conversion rounded zero remains known commitment evidence",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-98fb9974b63e": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "foreign cash FX gaps do not hide known unfunded commitments that need no conversion with data set \"dataset \"known zero without an FX need\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-626a4bb55d1c": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "foreign cash FX gaps do not hide known unfunded commitments that need no conversion with data set \"dataset \"known domestic amount\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-3f68cb81b267": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "unrelated non FX incompleteness retains known configured commitments and its warning",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c13-f329e49896c1": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"stale total cap\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-c13-36d485fefcd6": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"above approved total cap\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-c13-b7c99f1e55cf": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"wrong cap type\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-c13-481f15a72ede": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"stale policy version\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-c13-0f88a8eda772": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved evaluation policy binds the five dollar aggregate ceiling",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
         }
     },
     "manual_artifacts": {
@@ -5291,7 +5366,17 @@
                 "case-m7p2-period-638c821e85dc",
                 "case-m7p2-period-f656f11ad11a",
                 "case-m7p2-period-204cc33f096d",
-                "case-m7p2-period-a7a5e29a1b6e"
+                "case-m7p2-period-a7a5e29a1b6e",
+                "case-m7p2-c13-b30920610853",
+                "case-m7p2-c13-b2e8cd375103",
+                "case-m7p2-c13-40a917e079e5",
+                "case-m7p2-c13-dee1b311d85e",
+                "case-m7p2-c13-f1aa98563b6d",
+                "case-m7p2-c13-c4cdf0cfc2be",
+                "case-m7p2-c13-9d0bb22aa9f8",
+                "case-m7p2-c13-98fb9974b63e",
+                "case-m7p2-c13-626a4bb55d1c",
+                "case-m7p2-c13-3f68cb81b267"
             ],
             "manual_artifact_ids": []
         },
@@ -5392,7 +5477,8 @@
                 "case-m7p2-session-5ef9c4c35b9d",
                 "case-m7p2-session-a972bd4d4a7e",
                 "case-m7p2-session-ec97a414afd6",
-                "case-m7p2-session-2cf69b177602"
+                "case-m7p2-session-2cf69b177602",
+                "case-m7p2-c13-dee1b311d85e"
             ],
             "manual_artifact_ids": [],
             "scope": "Executed module-specific owner/admin/export negatives for currently implemented modules. M6 jobs/uploads and M7 AI tools remain unimplemented, not claimed tested. New release web-session revocation regression remains mandatory pending separately."
@@ -5506,7 +5592,12 @@
                 "case-m7p2-period-a7a5e29a1b6e",
                 "case-m7p2-e5b69c3b2e14",
                 "case-m7p2-5a45af15358c",
-                "case-m7p2-d14a729094fc"
+                "case-m7p2-d14a729094fc",
+                "case-m7p2-c13-f329e49896c1",
+                "case-m7p2-c13-36d485fefcd6",
+                "case-m7p2-c13-b7c99f1e55cf",
+                "case-m7p2-c13-481f15a72ede",
+                "case-m7p2-c13-0f88a8eda772"
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "scope": "Retained manual original harness observations; current M5-P2 report/failure-propagation/mandatory-artifact gates must execute anew. No JUnit selector is invented to stand in for CLI/approval evidence.",
@@ -6568,7 +6659,17 @@
                 "case-m7p2-period-87af729b9e5c",
                 "case-m7p2-period-af1f8d2f70dd",
                 "case-m7p2-e5b69c3b2e14",
-                "case-m7p2-5a45af15358c"
+                "case-m7p2-5a45af15358c",
+                "case-m7p2-c13-b30920610853",
+                "case-m7p2-c13-b2e8cd375103",
+                "case-m7p2-c13-40a917e079e5",
+                "case-m7p2-c13-dee1b311d85e",
+                "case-m7p2-c13-f1aa98563b6d",
+                "case-m7p2-c13-c4cdf0cfc2be",
+                "case-m7p2-c13-9d0bb22aa9f8",
+                "case-m7p2-c13-98fb9974b63e",
+                "case-m7p2-c13-626a4bb55d1c",
+                "case-m7p2-c13-3f68cb81b267"
             ],
             "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
             "tool_check": null
@@ -6774,7 +6875,22 @@
                 "case-m7p2-period-a7a5e29a1b6e",
                 "case-m7p2-e5b69c3b2e14",
                 "case-m7p2-5a45af15358c",
-                "case-m7p2-d14a729094fc"
+                "case-m7p2-d14a729094fc",
+                "case-m7p2-c13-b30920610853",
+                "case-m7p2-c13-b2e8cd375103",
+                "case-m7p2-c13-40a917e079e5",
+                "case-m7p2-c13-dee1b311d85e",
+                "case-m7p2-c13-f1aa98563b6d",
+                "case-m7p2-c13-c4cdf0cfc2be",
+                "case-m7p2-c13-9d0bb22aa9f8",
+                "case-m7p2-c13-98fb9974b63e",
+                "case-m7p2-c13-626a4bb55d1c",
+                "case-m7p2-c13-3f68cb81b267",
+                "case-m7p2-c13-f329e49896c1",
+                "case-m7p2-c13-36d485fefcd6",
+                "case-m7p2-c13-b7c99f1e55cf",
+                "case-m7p2-c13-481f15a72ede",
+                "case-m7p2-c13-0f88a8eda772"
             ],
             "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
             "tool_check": null
@@ -6971,7 +7087,12 @@
                 "case-m7p2-period-f656f11ad11a",
                 "case-m7p2-period-204cc33f096d",
                 "case-m7p2-period-a7a5e29a1b6e",
-                "case-m7p2-d14a729094fc"
+                "case-m7p2-d14a729094fc",
+                "case-m7p2-c13-f329e49896c1",
+                "case-m7p2-c13-36d485fefcd6",
+                "case-m7p2-c13-b7c99f1e55cf",
+                "case-m7p2-c13-481f15a72ede",
+                "case-m7p2-c13-0f88a8eda772"
             ],
             "manual_artifact_ids": ["m7p2-live-evaluation"],
             "tool_check": "LIVE_ANSWER_EVALUATION"
@@ -7226,7 +7347,17 @@
                 "case-m7p2-period-87af729b9e5c",
                 "case-m7p2-period-af1f8d2f70dd",
                 "case-m7p2-period-a7a5e29a1b6e",
-                "case-m7p2-e5b69c3b2e14"
+                "case-m7p2-e5b69c3b2e14",
+                "case-m7p2-c13-b30920610853",
+                "case-m7p2-c13-b2e8cd375103",
+                "case-m7p2-c13-40a917e079e5",
+                "case-m7p2-c13-dee1b311d85e",
+                "case-m7p2-c13-f1aa98563b6d",
+                "case-m7p2-c13-c4cdf0cfc2be",
+                "case-m7p2-c13-9d0bb22aa9f8",
+                "case-m7p2-c13-98fb9974b63e",
+                "case-m7p2-c13-626a4bb55d1c",
+                "case-m7p2-c13-3f68cb81b267"
             ],
             "implemented_subscenarios": [
                 "readonly_registry",

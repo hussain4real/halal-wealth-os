@@ -8,12 +8,12 @@ const digest = (x) => createHash('sha256').update(x).digest('hex');
 export const releasePolicy = Object.freeze(
     JSON.parse(
         readFileSync(
-            path.join(root, 'resources/copilot/evaluation/policy-v3.json'),
+            path.join(root, 'resources/copilot/evaluation/policy-v4.json'),
         ),
     ),
 );
 const approvedPolicy = {
-    version: 'answer-evaluation-policy-v3',
+    version: 'answer-evaluation-policy-v4',
     model: 'gpt-5.4-2026-03-05',
     reasoning_effort: 'none',
     temperature: 0,
@@ -24,7 +24,7 @@ const approvedPolicy = {
     input_price_micro_usd_per_million: 2500000,
     output_price_micro_usd_per_million: 15000000,
     case_reservation_micro_usd: 28160,
-    total_cap_micro_usd: 4000000,
+    total_cap_micro_usd: 5000000,
     production_reservation_tokens: 16384,
 };
 if (!isDeepStrictEqual(releasePolicy, approvedPolicy))
@@ -35,7 +35,7 @@ export function validateLiveReport(report, basis, dataset, prompt) {
         throw Error('BLOCKED M7-P2 live evaluation: ' + s);
     };
     if (
-        report.version !== 'live-answer-evaluation-v3' ||
+        report.version !== 'live-answer-evaluation-v4' ||
         report.result !== 'PASS' ||
         report.synthetic_only !== true ||
         report.transport !== 'actual-openai-responses' ||
