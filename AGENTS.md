@@ -657,3 +657,11 @@ account/credentials, deployment, permissions, main/stage changes, later phase,
 history rewriting or self-acceptance. Preserve native TIA, full uncached checks,
 strict release/recovery/export evidence and all starter features. M7-P1 and M7
 acceptance remain separate human decisions.
+
+## Current M7-P2 authority
+
+The human owner accepted M7-P1 on25 October2026 and authorized canonical M7-P2 through implementation, independent source/rendered review, sanitized dev PR, normal approved-noreply merge after original exact-head CI and fresh hosted review, then original post-merge CI and existing signed public progress verification. Preserve M7-P1's six cycles and all earlier failures; close its claim and record its acceptance. M7-P2 has six new scoped implementation/verification cycles. One source writer; no implementation subagents. Independent grounding/design/source/sanitation/rendered reviewers stay source-read-only with exclusive resources.
+
+The owner approved secure OpenAI key creation in the selected project and a private local env destination outside the public checkout. Use that key only for bounded synthetic M7-P2 evaluation, with a dated pinned model configuration and conservative USD2 total evaluation cap. No real financial data or personal documents may be disclosed externally. Live evaluation, stub tests, release gates, CI, review, merge, publication and owner acceptance remain separate. At least30 finance plus10 adversarial/missing-data cases are required; unavailable live access blocks the AI release gate. Never relabel mock transport as live answer quality.
+
+Preserve deterministic existing financial services, authorized source resolution, consent, once-only bounded requests, exact currencies/dates/completeness, sourced uncertain Shariah language and explicit hypothetical labeling. The optional provider remains disabled by default. No M7-P3, deployment, live financial actions, new scopes/permissions, main/stage changes, history rewriting or self-acceptance. Approved author and committer remain hussain4real <45605752+hussain4real@users.noreply.github.com>.

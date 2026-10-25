@@ -30,7 +30,7 @@ test('encrypted populated recovery reconciles complete tables balances positions
         ->and($report['table_fingerprints']['reminder_claims']['rows'])->toBe(5)
         ->and($report['table_fingerprints']['reminder_reads']['rows'])->toBe(1)
         ->and($report['table_fingerprints']['copilot_controls']['rows'])->toBe(2)
-        ->and($report['table_fingerprints']['copilot_requests']['rows'])->toBe(5)
+        ->and($report['table_fingerprints']['copilot_requests']['rows'])->toBe(9)
         ->and($report['table_fingerprints']['drive_operations']['rows'])->toBe(4)
         ->and($report['table_fingerprints']['drive_connections']['rows'])->toBe(2)
         ->and($report['table_fingerprints']['drive_secrets']['rows'])->toBe(2)

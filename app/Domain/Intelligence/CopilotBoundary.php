@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Domain\Intelligence;
 
+use App\Domain\Intelligence\Answers\AnswerPlanner;
+use App\Domain\Reporting\Copilot\Answers\AnswerContext;
 use App\Domain\Reporting\Copilot\Tool;
 use App\Domain\Reporting\Copilot\ToolQuery;
+use App\Domain\Reporting\CopilotAnswerFacts;
 use App\Domain\Reporting\CopilotEvidence;
 use App\Models\User;
 use App\Support\Release\OwnerExport;
@@ -104,6 +107,46 @@ final class CopilotBoundary
         }
 
         return $this->execute($owner, $reference, $query);
+    }
+
+    /** @return array<string,mixed> */
+    public function answer(string $reference, UntrustedInput $input, AnswerContext $context, bool $disclosureConfirmed): array
+    {
+        $owner = $this->owner();
+        abort_unless($disclosureConfirmed, 422, 'Confirm question/document disclosure before sending.');
+        $context->authorize($owner);
+        if (! $this->admit($owner, $reference, 'answer', null)) {
+            return ['status' => 'already_charged', 'reference' => $reference];
+        }
+        try {
+            $planner = app(AnswerPlanner::class);
+            if (! $planner->available()) {
+                throw new \RuntimeException('Answer provider unavailable.');
+            }
+            $plan = DB::transaction(function () use ($owner, $reference, $input, $planner) {
+                $this->lock($owner);
+                $this->permit($owner, $reference);
+
+                return $planner->plan($input);
+            });
+
+            return DB::transaction(function () use ($owner, $reference, $plan, $context, $input): array {
+                DB::statement('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
+                $this->lock($owner);
+                $this->permit($owner, $reference);
+                $answer = app(CopilotAnswerFacts::class)->answer($owner, $plan, $context, $input->question);
+                if (strlen(json_encode($answer, JSON_THROW_ON_ERROR)) > config('copilot.evidence_bytes')) {
+                    throw new \RuntimeException('Answer exceeds disclosure ceiling.');
+                }
+                $this->finish($owner, $reference, 'complete', $plan->claim->tool());
+
+                return ['status' => 'complete', 'reference' => $reference, 'evidence' => $answer];
+            });
+        } catch (Throwable) {
+            $this->finish($owner, $reference, 'unavailable');
+
+            return ['status' => 'unavailable', 'reference' => $reference];
+        }
     }
 
     /** @return array<string,mixed> */

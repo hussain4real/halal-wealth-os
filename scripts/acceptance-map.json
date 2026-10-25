@@ -294,7 +294,7 @@
         },
         "case-f91a7cc2f008": {
             "class": "Tests\\Unit\\BudgetCalendarTest",
-            "name": "Qatar monthly and annual anchors clamp missing days without drifting with data set \"('2026-01-31', 1, '2026-02', \u2026)\"",
+            "name": "Qatar monthly and annual anchors clamp missing days without drifting with data set \"('2026-01-31', 1, '2026-02', …)\"",
             "file": "tests/Unit/BudgetCalendarTest.php"
         },
         "case-3bcb20186167": {
@@ -374,7 +374,7 @@
         },
         "case-f84d3e7760db": {
             "class": "Tests\\Unit\\GoalProjectionTest",
-            "name": "zero variable reached and unavailable projections stay distinct with data set \"(['0'], '480000', 'unreachable', \u2026)\"",
+            "name": "zero variable reached and unavailable projections stay distinct with data set \"(['0'], '480000', 'unreachable', …)\"",
             "file": "tests/Unit/GoalProjectionTest.php"
         },
         "case-d9eed911d76e": {
@@ -474,7 +474,7 @@
         },
         "case-f680c6448bd1": {
             "class": "Tests\\Unit\\PortfolioMathTest",
-            "name": "full 24-place position products settle only at the native cash boundary with data set \"('QAR', '1.234567890123', '2.000000000001', \u2026)\"",
+            "name": "full 24-place position products settle only at the native cash boundary with data set \"('QAR', '1.234567890123', '2.000000000001', …)\"",
             "file": "tests/Unit/PortfolioMathTest.php"
         },
         "case-44e67225987c": {
@@ -1659,7 +1659,7 @@
         },
         "case-m6p1-2bbd6b443436": {
             "class": "Tests\\Unit\\CsvStatementTest",
-            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"('\u00a0=payload')\"",
+            "name": "spreadsheet CSV neutralizes formulas including whitespace control and unicode prefixes with data set \"(' =payload')\"",
             "file": "tests/Unit/CsvStatementTest.php"
         },
         "case-m6p1-0f0c8e04bff8": {
@@ -2139,7 +2139,7 @@
         },
         "case-m6p2-a7ad5e6c2469": {
             "class": "Tests\\Unit\\ProviderBoundaryTest",
-            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"meta\":{\"currency\":\"USD\",\"cu\u2026EUR\"}}')\"",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"meta\":{\"currency\":\"USD\",\"cu…EUR\"}}')\"",
             "file": "tests/Unit/ProviderBoundaryTest.php"
         },
         "case-m6p2-137b7c1a0069": {
@@ -2154,17 +2154,17 @@
         },
         "case-m6p2-438c332fb027": {
             "class": "Tests\\Unit\\ProviderBoundaryTest",
-            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('                             \u2026      ')\"",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('                             …      ')\"",
             "file": "tests/Unit/ProviderBoundaryTest.php"
         },
         "case-m6p2-69a26a3406f4": {
             "class": "Tests\\Unit\\ProviderBoundaryTest",
-            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('[[],[],[],[],[],[],[],[],[],[\u2026[],[]]')\"",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('[[],[],[],[],[],[],[],[],[],[…[],[]]')\"",
             "file": "tests/Unit/ProviderBoundaryTest.php"
         },
         "case-m6p2-b45c445c95bf": {
             "class": "Tests\\Unit\\ProviderBoundaryTest",
-            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"a\":[[[[[[[[[[[[[[[[[[[[0]]]\u2026]]]]]}')\"",
+            "name": "ambiguous duplicate json keys are rejected even with escaped spelling with data set \"('{\"a\":[[[[[[[[[[[[[[[[[[[[0]]]…]]]]]}')\"",
             "file": "tests/Unit/ProviderBoundaryTest.php"
         },
         "case-m6p2-0f3ebf17013e": {
@@ -2279,22 +2279,22 @@
         },
         "case-m6p2-ac2e7b3d798f": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/EUR\",\"rate\":3,\u202614051}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/EUR\",\"rate\":3,…14051}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-420246c7d6ca": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":0,\u202614051}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":0,…14051}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-70dd8d1cf51a": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1e\u202614051}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1e…14051}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-895bf50deb70": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1,\u202699999}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"symbol\":\"USD/QAR\",\"rate\":1,…99999}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-fe66dcf5aec9": {
@@ -2304,7 +2304,7 @@
         },
         "case-m6p2-4d8eeb63a6aa": {
             "class": "Tests\\Unit\\TwelveDataContractTest",
-            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"status\":\"error\",\"code\":429,\u2026sage\"}')\"",
+            "name": "Twelve Data FX rejects malformed or unavailable observations safely with data set \"('{\"status\":\"error\",\"code\":429,…sage\"}')\"",
             "file": "tests/Unit/TwelveDataContractTest.php"
         },
         "case-m6p2-a22e5e083d5b": {
@@ -2324,42 +2324,42 @@
         },
         "case-m6p2-17744e64f2c0": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 23 Oct 2026 12:05:00 GMT', 'rate_limited', \u2026)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 23 Oct 2026 12:05:00 GMT', 'rate_limited', …)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-19dc52d90051": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Thu, 22 Oct 2026 12:05:00 GMT', 'rate_limited', \u2026)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Thu, 22 Oct 2026 12:05:00 GMT', 'rate_limited', …)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-a464fcb16b5a": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'malformed', 'rate_limited', \u2026)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'malformed', 'rate_limited', …)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-e97ce29de1a8": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, '999999999999999999', 'backoff_exceeds_policy', \u2026)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, '999999999999999999', 'backoff_exceeds_policy', …)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-30bc09ee8d9b": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 30 Oct 2026 12:00:01 GMT', 'backoff_exceeds_policy', \u2026)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(429, 'Fri, 30 Oct 2026 12:00:01 GMT', 'backoff_exceeds_policy', …)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-d79a9bcf457d": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(503, '', 'upstream_unavailable', \u2026)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(503, '', 'upstream_unavailable', …)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-1044d843f375": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(401, '', 'access_or_http_error', \u2026)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(401, '', 'access_or_http_error', …)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-b54c79a9fec8": {
             "class": "Tests\\Unit\\TwelveDataTransportTest",
-            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(302, '', 'access_or_http_error', \u2026)\"",
+            "name": "provider HTTP failures expose only fixed safe codes and honor bounded Retry After with data set \"(302, '', 'access_or_http_error', …)\"",
             "file": "tests/Unit/TwelveDataTransportTest.php"
         },
         "case-m6p2-3e04992e1f6e": {
@@ -2699,7 +2699,7 @@
         },
         "case-m6p3-65b4bb80741a": {
             "class": "Tests\\Feature\\ReminderTest",
-            "name": "invalid reminder settings reject without retained writes with data set \"([['1', '1', '1', \u2026]])\"",
+            "name": "invalid reminder settings reject without retained writes with data set \"([['1', '1', '1', …]])\"",
             "file": "tests/Feature/ReminderTest.php"
         },
         "case-m6p3-c5c33eca68a7": {
@@ -3029,7 +3029,7 @@
         },
         "case-m6p4-a18c44831c71": {
             "class": "Tests\\Unit\\GoogleDriveContractTest",
-            "name": "google identity requires a real verified response and never infers account kind from domain with data set \"(['xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\u2026xxxxxx'])\"",
+            "name": "google identity requires a real verified response and never infers account kind from domain with data set \"(['xxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxx'])\"",
             "file": "tests/Unit/GoogleDriveContractTest.php"
         },
         "case-m6p4-8f9c23d3ee45": {
@@ -3069,7 +3069,7 @@
         },
         "case-m6p4-dc718e681717": {
             "class": "Tests\\Unit\\GoogleDriveContractTest",
-            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('sssssssssssssssssssssssssssss\u2026ssssss', 200, 'response_too_large')\"",
+            "name": "fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies with data set \"('sssssssssssssssssssssssssssss…ssssss', 200, 'response_too_large')\"",
             "file": "tests/Unit/GoogleDriveContractTest.php"
         },
         "case-m6p4-52db8bc80874": {
@@ -3464,7 +3464,7 @@
         },
         "case-m7p1-4ac315b1d6bf": {
             "class": "Tests\\Feature\\CopilotBoundaryTest",
-            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('{\"tool\":\"cash_availability\",\"\u2026999\"}}')\"",
+            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('{\"tool\":\"cash_availability\",\"…999\"}}')\"",
             "file": "tests/Feature/CopilotBoundaryTest.php"
         },
         "case-m7p1-a9ddf5e4e495": {
@@ -3479,7 +3479,7 @@
         },
         "case-m7p1-61003ae16ccc": {
             "class": "Tests\\Feature\\CopilotBoundaryTest",
-            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx\u2026xxxxxx')\"",
+            "name": "provider malicious proposals are untrusted and raw text never enters traces with data set \"('xxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxx')\"",
             "file": "tests/Feature/CopilotBoundaryTest.php"
         },
         "case-m7p1-6ffbbe5723b0": {
@@ -3536,6 +3536,446 @@
             "class": "Tests\\Feature\\CopilotBoundaryTest",
             "name": "database charge clock prevents a day-window mismatch from resetting reserved usage",
             "file": "tests/Feature/CopilotBoundaryTest.php"
+        },
+        "case-m7p2-3723c77a7dd5": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-cash-overview\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-25728b3deac6": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-cash-available\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-73e4d1c14dfc": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-cash-raw\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-cd16af790f9e": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-cash-buffer\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-5292647bb94f": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-cash-shortfall\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-2e2435cafd10": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-cash-commitments\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-947064c6820a": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-emergency-overview\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-b54a1e79dcb7": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-emergency-target\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-227290601d78": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-emergency-backed\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-72aebba98fc7": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-emergency-remaining\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-9565dd755325": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-emergency-progress\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-d69d411cadd5": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-emergency-coverage\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-bcaa2132a2b6": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-nigeria-overview\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-adc9ec931de7": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-nigeria-amount\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-ed7f6dadc5e9": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-nigeria-share\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-399f194bad75": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-nigeria-denominator\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-0c5dfcc7e2f9": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-nigeria-coverage\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-21a74a21a8f6": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-nigeria-components\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-7887c9b8ffe5": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-changes-overview\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-fdfd2d465724": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-changes-amount\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-d6435e93140c": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-changes-return\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c5aa7a4dfe65": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-changes-flows\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-5bdd0ceed34a": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-changes-native\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-83ce2133af27": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-changes-fx\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-bdb1ffe8a791": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-assessments-overview\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-74498a8f4926": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-assessments-classification\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-31c17921bd92": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-assessments-review\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-26108ecb05a9": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-assessments-provider\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-fe367913913f": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-assessments-methodology\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-3b0b64c181d0": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"finance-assessments-count\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-70f3cb9806c0": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-foreign\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-2c6b7f7afd5b": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-trade\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-2f339fa47f3f": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-guarantee\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-1ec7846824a9": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-certify\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-9162445be13e": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-ipo\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-41c35c0eeea0": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-injection\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-4ec751b3f0d0": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-missing-goal\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-af99aa7c775f": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-missing-run\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-80098d02ad07": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-missing-asset\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-01c34c0a51f9": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "fixed evaluation answers match independent exact facts and authorized citations without financial writes with data set \"dataset \"adversarial-past-cash\"\"",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-0f6af89adfb2": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "foreign context and source table injection are rejected before model admission even for an admin",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-bdbfa3696a01": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "revocation and reconsent fence the old plan and exact receipt retry cannot execute again",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-9e1664e171d7": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "answer disclosure failures budgets and source constraints preserve privacy and ordinary core pages",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-62588dc6bbbf": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "unknown geography cannot masquerade as known zero Nigeria exposure",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-6d037dac2997": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "missing essential run rate remains explicit while backed emergency money stays exact",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-ce7f1cf64d29": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "period mismatch cannot replace requested historical cash with current facts while money amounts are not years",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-d00f02fe5c15": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "answer migration preserves predecessors and refuses downgrade before populated lane ddl",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-5c0e9aa56f27": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "negative signed availability and missing FX are never replaced with invented deployable cash",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-49b43bf05c77": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "external investment deposits suppress unsupported return and FX claims without suppressing known value change",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-c3dad1092928": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "conflicting attributed assessment sources remain unresolved and never become application certification",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-907ac18f91a4": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "disabled answer transport and absent consent leave chat and core available without external requests",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-7e6208bd0876": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "chat source suggestions are bounded owned latest versions and never sent automatically to the planner",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-bf96333320bc": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "independent oracle rejects numeric label certification action and unrelated owned citation mutations",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-45332ec9331b": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "evaluation oracle rejects extra or changed rendered assessment claims and false completeness",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-016f3fd530c2": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "closed answer plan admits every enum claim and rejects write number owner or url fields",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-4fc75b8401f2": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "valid strict response selects a claim while outgoing payload excludes trusted record context and financial values",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-74a7fab5df2b": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "disabled missing key insufficient reservation and transport errors fail without raw disclosure",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-6a3e4dc5773b": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"http500\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-15cb351441db": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"oversize\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-19c30062a5e8": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"malformed\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-ffc3b8f98c22": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"null\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-90da2d706586": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-id\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-16a1ce31bac1": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-status\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-ee19a311260c": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-model\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-da3095cb8d1f": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-usage\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-9649fa806705": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-output\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-73b63709207e": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-input_tokens\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-050bf280f599": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-output_tokens\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-9a40b7769081": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-total_tokens\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-14d5e3decdfb": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-output-0\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-54d4d64c83e4": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-output-1\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-d31b136af965": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-output-2\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-7ee630855b26": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "unverified response schema usage tool calls and unsafe plans cannot become an answer with data set \"dataset \"bad-output-3\"\"",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-0eeb29ed3f5c": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "answer context rejects owner sql arbitrary keys invalid ids dates and future cutoffs",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-eeb4a2946815": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "provider deadline covers delayed response bodies and complete chunked receipts within the byte ceiling",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-ea1a61433218": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "every failed unknown or complete live attempt keeps its conservative global reservation",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-f72255727c2c": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "truncated replaced deleted or symlinked ledger state cannot silently reset the budget with data set \"('truncated')\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-7bc49665e425": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "truncated replaced deleted or symlinked ledger state cannot silently reset the budget with data set \"('deleted')\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-17a91cbbc354": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "truncated replaced deleted or symlinked ledger state cannot silently reset the budget with data set \"('replaced')\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-7b169615fae9": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "truncated replaced deleted or symlinked ledger state cannot silently reset the budget with data set \"('symlinked')\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-059cee090e34": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "private evaluation evidence writes commit complete json and reject invalid or symlinked destinations",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-session-803ca447a016": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('GET', '/copilot/chat')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-m7p2-session-af7b49603870": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('POST', '/copilot/answer')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-m7p2-session-5d84506935f5": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('GET', '/copilot/source/account/1')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-m7p2-session-5ef9c4c35b9d": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('GET', '/copilot')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-m7p2-session-a972bd4d4a7e": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('POST', '/copilot/preview')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-m7p2-session-ec97a414afd6": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('POST', '/copilot/propose')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-m7p2-session-2cf69b177602": {
+            "class": "Tests\\Feature\\ReleaseSecurityTest",
+            "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('POST', '/copilot/consent')\"",
+            "file": "tests/Feature/ReleaseSecurityTest.php"
         }
     },
     "manual_artifacts": {
@@ -3639,6 +4079,21 @@
             "sha256": "5376c609546ef4a276980402a985305c3a97679f9ad51847b9f3e6d799ab0057",
             "scope": "Independent inspection of retained cycle3 desktop/mobile light/dark/foreign artifacts and cycle6 current-page JSON-error recovery artifacts; no live model, hard-reload persistence, answer-quality or full accessibility claim.",
             "public_path": "docs/halal-wealth-os/runs/M7-P1-rendered-review.md"
+        },
+        "m7p2-rendered": {
+            "sha256": "ff18adc23f99c83176d97f86389a37ee01a7e8915105283b24ddba6eebeac52c",
+            "scope": "Actual corrected desktop/mobile light/dark and owner/recovery UI checks, independently inspected pixels; synthetic planner, no live quality or AT audio claim.",
+            "public_path": "docs/halal-wealth-os/runs/M7-P2-rendered-review.md"
+        },
+        "m7p2-tia": {
+            "sha256": "fdc5c91c299d38f4957be9cf69b87e595035341cc2be89bd7be0a20fe4e11961",
+            "scope": "Fresh native TIA baseline plus functional PHP/Vue selection and exact restoration; current manual record must be inspected.",
+            "public_path": "docs/halal-wealth-os/runs/M7-P2-TIA.md"
+        },
+        "m7p2-live-evaluation": {
+            "sha256": "7d14d53f1c86d89530b67a02dcd7ec65f593907d16dfced0100ac8c30e2fb5d4",
+            "scope": "Required current-basis actual synthetic OpenAI evaluation of30finance plus10adversarial/missing cases; retained observed receipt, not provider-signed and not a CI live rerun.",
+            "public_path": "docs/halal-wealth-os/runs/M7-P2-live-evaluation.json"
         }
     },
     "requirements": {
@@ -3687,7 +4142,7 @@
             "actual_case_ids": [],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC2": {
@@ -3695,7 +4150,7 @@
             "actual_case_ids": [],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC3": {
@@ -3703,7 +4158,7 @@
             "actual_case_ids": ["case-e4c94321f095", "case-8b16d86a2e36"],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC4": {
@@ -3711,7 +4166,7 @@
             "actual_case_ids": ["case-c59fb47fcc75", "case-1aba06bbca25"],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P2-AC5": {
@@ -3719,7 +4174,7 @@
             "actual_case_ids": ["case-1910dadf35cc", "case-908509c2a960"],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC1": {
@@ -3732,7 +4187,7 @@
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC2": {
@@ -3744,7 +4199,7 @@
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC3": {
@@ -3757,7 +4212,7 @@
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC4": {
@@ -3765,7 +4220,7 @@
             "actual_case_ids": [],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M0-P3-AC5": {
@@ -3777,7 +4232,7 @@
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "manual_scope": [
-                "Retained accepted M0-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M0-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC1": {
@@ -3785,7 +4240,7 @@
             "actual_case_ids": ["case-61e4d6008f81", "case-4db8735a7e07"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC2": {
@@ -3793,7 +4248,7 @@
             "actual_case_ids": ["case-f302dc5082e7", "case-99ffd8583856"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC3": {
@@ -3805,7 +4260,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC4": {
@@ -3813,7 +4268,7 @@
             "actual_case_ids": ["case-43d293f8eba6", "case-2087667a9aef"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P1-AC5": {
@@ -3821,7 +4276,7 @@
             "actual_case_ids": ["case-c557154a9c93", "case-2087667a9aef"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC1": {
@@ -3833,7 +4288,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC2": {
@@ -3841,7 +4296,7 @@
             "actual_case_ids": ["case-2451928c330c", "case-b2036b2d9c9d"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC3": {
@@ -3849,7 +4304,7 @@
             "actual_case_ids": ["case-5f1d1bb1a4f3", "case-d2934fcfdd0f"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC4": {
@@ -3863,7 +4318,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P2-AC5": {
@@ -3875,7 +4330,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC1": {
@@ -3883,7 +4338,7 @@
             "actual_case_ids": ["case-3474fb0c27cf", "case-8e2525045c32"],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC2": {
@@ -3895,7 +4350,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC3": {
@@ -3907,7 +4362,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC4": {
@@ -3919,7 +4374,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M1-P3-AC5": {
@@ -3931,7 +4386,7 @@
             ],
             "manual_artifact_ids": ["artifact-fe013981bf9b"],
             "manual_scope": [
-                "Retained accepted M1-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M1-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC1": {
@@ -3944,7 +4399,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC2": {
@@ -3952,7 +4407,7 @@
             "actual_case_ids": ["case-a3b8a876e042", "case-562838bc96c4"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC3": {
@@ -3964,7 +4419,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC4": {
@@ -3977,7 +4432,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P1-AC5": {
@@ -3989,7 +4444,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC1": {
@@ -3997,7 +4452,7 @@
             "actual_case_ids": ["case-47ea3cf46f97", "case-301966240417"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC2": {
@@ -4005,7 +4460,7 @@
             "actual_case_ids": ["case-547405900300", "case-87f2cad8ab02"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC3": {
@@ -4017,7 +4472,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC4": {
@@ -4029,7 +4484,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P2-AC5": {
@@ -4041,7 +4496,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC1": {
@@ -4049,7 +4504,7 @@
             "actual_case_ids": ["case-ccff5c0358f9", "case-bca0cf569511"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC2": {
@@ -4061,7 +4516,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC3": {
@@ -4069,7 +4524,7 @@
             "actual_case_ids": ["case-2878e01c757c", "case-bd1e4854f681"],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC4": {
@@ -4082,7 +4537,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M2-P3-AC5": {
@@ -4094,7 +4549,7 @@
             ],
             "manual_artifact_ids": ["artifact-a429dd02b34b"],
             "manual_scope": [
-                "Retained accepted M2-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M2-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC1": {
@@ -4106,7 +4561,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC2": {
@@ -4114,7 +4569,7 @@
             "actual_case_ids": ["case-44e67225987c", "case-e99d5121cae2"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC3": {
@@ -4122,7 +4577,7 @@
             "actual_case_ids": ["case-3cb7e0534f84", "case-43d357887387"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC4": {
@@ -4135,7 +4590,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P1-AC5": {
@@ -4144,7 +4599,7 @@
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "scope": "Automated spoofing/manual-instrument guards plus retained explicit label/source review. These selectors alone do not establish the current screen wording; inherited UX-M3-01 remains recorded until repaired and re-reviewed.",
             "manual_scope": [
-                "Retained accepted M3-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC1": {
@@ -4156,7 +4611,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC2": {
@@ -4168,7 +4623,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC3": {
@@ -4176,7 +4631,7 @@
             "actual_case_ids": ["case-3ef230e9017f", "case-836fbdb05982"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC4": {
@@ -4188,7 +4643,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P2-AC5": {
@@ -4200,7 +4655,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC1": {
@@ -4208,7 +4663,7 @@
             "actual_case_ids": ["case-79cbc09de831", "case-166f5dda32d2"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC2": {
@@ -4220,7 +4675,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC3": {
@@ -4232,7 +4687,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC4": {
@@ -4244,7 +4699,7 @@
             ],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M3-P3-AC5": {
@@ -4252,7 +4707,7 @@
             "actual_case_ids": ["case-ca316273e5c8", "case-20c43940e775"],
             "manual_artifact_ids": ["artifact-10ce17c36a57"],
             "manual_scope": [
-                "Retained accepted M3-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M3-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC1": {
@@ -4260,7 +4715,7 @@
             "actual_case_ids": ["case-11e37ec00cbd", "case-599b93f8e711"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC2": {
@@ -4268,7 +4723,7 @@
             "actual_case_ids": ["case-83c380d01fdf", "case-043c5152045e"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC3": {
@@ -4276,7 +4731,7 @@
             "actual_case_ids": ["case-6f0fade57e0b", "case-92a7a05ac493"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC4": {
@@ -4288,7 +4743,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P1-AC5": {
@@ -4302,7 +4757,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC1": {
@@ -4310,7 +4765,7 @@
             "actual_case_ids": ["case-6de7d845e945", "case-7da1491fef42"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC2": {
@@ -4318,7 +4773,7 @@
             "actual_case_ids": ["case-6de7d845e945", "case-a069fa805759"],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC3": {
@@ -4330,7 +4785,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC4": {
@@ -4343,7 +4798,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P2-AC5": {
@@ -4356,7 +4811,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P2-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P2-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC1": {
@@ -4368,7 +4823,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC2": {
@@ -4380,7 +4835,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC3": {
@@ -4392,7 +4847,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC4": {
@@ -4404,7 +4859,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M4-P3-AC5": {
@@ -4416,7 +4871,7 @@
             ],
             "manual_artifact_ids": ["artifact-d6acb6501975"],
             "manual_scope": [
-                "Retained accepted M4-P3-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M4-P3-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC1": {
@@ -4428,7 +4883,7 @@
             ],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC1 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC1 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC2": {
@@ -4440,7 +4895,7 @@
             ],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC2 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC2 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC3": {
@@ -4448,7 +4903,7 @@
             "actual_case_ids": ["case-c2210969e4db", "case-5aeae6feaeff"],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC3 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC3 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC4": {
@@ -4456,7 +4911,7 @@
             "actual_case_ids": ["case-d084eb6f3c5d", "case-03db6e7dee30"],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC4 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC4 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "M5-P1-AC5": {
@@ -4468,7 +4923,7 @@
             ],
             "manual_artifact_ids": ["artifact-41caa6f2a7f9"],
             "manual_scope": [
-                "Retained accepted M5-P1-AC5 review row or explicitly stated AC1\u2013AC5 range; historical manual observation, not fresh browser execution."
+                "Retained accepted M5-P1-AC5 review row or explicitly stated AC1–AC5 range; historical manual observation, not fresh browser execution."
             ]
         },
         "INV-01": {
@@ -4814,7 +5269,14 @@
                 "case-m6p2-2d2ce8712792",
                 "case-m6p2-03635855a8d7",
                 "case-m7p1-38162570f13f",
-                "case-m7p1-814afadd2a53"
+                "case-m7p1-814afadd2a53",
+                "case-m7p2-session-803ca447a016",
+                "case-m7p2-session-af7b49603870",
+                "case-m7p2-session-5d84506935f5",
+                "case-m7p2-session-5ef9c4c35b9d",
+                "case-m7p2-session-a972bd4d4a7e",
+                "case-m7p2-session-ec97a414afd6",
+                "case-m7p2-session-2cf69b177602"
             ],
             "manual_artifact_ids": [],
             "scope": "Executed module-specific owner/admin/export negatives for currently implemented modules. M6 jobs/uploads and M7 AI tools remain unimplemented, not claimed tested. New release web-session revocation regression remains mandatory pending separately."
@@ -5880,6 +6342,453 @@
             ],
             "manual_artifact_ids": ["m7p1-rendered"],
             "tool_check": null
+        },
+        "M7-P2-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p2-3723c77a7dd5",
+                "case-m7p2-25728b3deac6",
+                "case-m7p2-73e4d1c14dfc",
+                "case-m7p2-cd16af790f9e",
+                "case-m7p2-5292647bb94f",
+                "case-m7p2-2e2435cafd10",
+                "case-m7p2-947064c6820a",
+                "case-m7p2-b54a1e79dcb7",
+                "case-m7p2-227290601d78",
+                "case-m7p2-72aebba98fc7",
+                "case-m7p2-9565dd755325",
+                "case-m7p2-d69d411cadd5",
+                "case-m7p2-bcaa2132a2b6",
+                "case-m7p2-adc9ec931de7",
+                "case-m7p2-ed7f6dadc5e9",
+                "case-m7p2-399f194bad75",
+                "case-m7p2-0c5dfcc7e2f9",
+                "case-m7p2-21a74a21a8f6",
+                "case-m7p2-7887c9b8ffe5",
+                "case-m7p2-fdfd2d465724",
+                "case-m7p2-d6435e93140c",
+                "case-m7p2-c5aa7a4dfe65",
+                "case-m7p2-5bdd0ceed34a",
+                "case-m7p2-83ce2133af27",
+                "case-m7p2-bdb1ffe8a791",
+                "case-m7p2-74498a8f4926",
+                "case-m7p2-31c17921bd92",
+                "case-m7p2-26108ecb05a9",
+                "case-m7p2-fe367913913f",
+                "case-m7p2-3b0b64c181d0",
+                "case-m7p2-70f3cb9806c0",
+                "case-m7p2-2c6b7f7afd5b",
+                "case-m7p2-2f339fa47f3f",
+                "case-m7p2-1ec7846824a9",
+                "case-m7p2-9162445be13e",
+                "case-m7p2-41c35c0eeea0",
+                "case-m7p2-4ec751b3f0d0",
+                "case-m7p2-af99aa7c775f",
+                "case-m7p2-80098d02ad07",
+                "case-m7p2-01c34c0a51f9",
+                "case-m7p2-0f6af89adfb2",
+                "case-m7p2-bdbfa3696a01",
+                "case-m7p2-9e1664e171d7",
+                "case-m7p2-62588dc6bbbf",
+                "case-m7p2-6d037dac2997",
+                "case-m7p2-ce7f1cf64d29",
+                "case-m7p2-d00f02fe5c15",
+                "case-m7p2-5c0e9aa56f27",
+                "case-m7p2-49b43bf05c77",
+                "case-m7p2-c3dad1092928",
+                "case-m7p2-907ac18f91a4",
+                "case-m7p2-7e6208bd0876",
+                "case-m7p2-bf96333320bc",
+                "case-m7p2-45332ec9331b",
+                "case-m7p2-016f3fd530c2",
+                "case-m7p2-4fc75b8401f2",
+                "case-m7p2-74a7fab5df2b",
+                "case-m7p2-6a3e4dc5773b",
+                "case-m7p2-15cb351441db",
+                "case-m7p2-19c30062a5e8",
+                "case-m7p2-ffc3b8f98c22",
+                "case-m7p2-90da2d706586",
+                "case-m7p2-16a1ce31bac1",
+                "case-m7p2-ee19a311260c",
+                "case-m7p2-da3095cb8d1f",
+                "case-m7p2-9649fa806705",
+                "case-m7p2-73b63709207e",
+                "case-m7p2-050bf280f599",
+                "case-m7p2-9a40b7769081",
+                "case-m7p2-14d5e3decdfb",
+                "case-m7p2-54d4d64c83e4",
+                "case-m7p2-d31b136af965",
+                "case-m7p2-7ee630855b26",
+                "case-m7p2-0eeb29ed3f5c",
+                "case-m7p2-eeb4a2946815",
+                "case-m7p2-ea1a61433218",
+                "case-m7p2-f72255727c2c",
+                "case-m7p2-7bc49665e425",
+                "case-m7p2-17a91cbbc354",
+                "case-m7p2-7b169615fae9",
+                "case-m7p2-059cee090e34"
+            ],
+            "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
+            "tool_check": null
+        },
+        "M7-P2-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p2-3723c77a7dd5",
+                "case-m7p2-25728b3deac6",
+                "case-m7p2-73e4d1c14dfc",
+                "case-m7p2-cd16af790f9e",
+                "case-m7p2-5292647bb94f",
+                "case-m7p2-2e2435cafd10",
+                "case-m7p2-947064c6820a",
+                "case-m7p2-b54a1e79dcb7",
+                "case-m7p2-227290601d78",
+                "case-m7p2-72aebba98fc7",
+                "case-m7p2-9565dd755325",
+                "case-m7p2-d69d411cadd5",
+                "case-m7p2-bcaa2132a2b6",
+                "case-m7p2-adc9ec931de7",
+                "case-m7p2-ed7f6dadc5e9",
+                "case-m7p2-399f194bad75",
+                "case-m7p2-0c5dfcc7e2f9",
+                "case-m7p2-21a74a21a8f6",
+                "case-m7p2-7887c9b8ffe5",
+                "case-m7p2-fdfd2d465724",
+                "case-m7p2-d6435e93140c",
+                "case-m7p2-c5aa7a4dfe65",
+                "case-m7p2-5bdd0ceed34a",
+                "case-m7p2-83ce2133af27",
+                "case-m7p2-bdb1ffe8a791",
+                "case-m7p2-74498a8f4926",
+                "case-m7p2-31c17921bd92",
+                "case-m7p2-26108ecb05a9",
+                "case-m7p2-fe367913913f",
+                "case-m7p2-3b0b64c181d0",
+                "case-m7p2-70f3cb9806c0",
+                "case-m7p2-2c6b7f7afd5b",
+                "case-m7p2-2f339fa47f3f",
+                "case-m7p2-1ec7846824a9",
+                "case-m7p2-9162445be13e",
+                "case-m7p2-41c35c0eeea0",
+                "case-m7p2-4ec751b3f0d0",
+                "case-m7p2-af99aa7c775f",
+                "case-m7p2-80098d02ad07",
+                "case-m7p2-01c34c0a51f9",
+                "case-m7p2-0f6af89adfb2",
+                "case-m7p2-bdbfa3696a01",
+                "case-m7p2-9e1664e171d7",
+                "case-m7p2-62588dc6bbbf",
+                "case-m7p2-6d037dac2997",
+                "case-m7p2-ce7f1cf64d29",
+                "case-m7p2-d00f02fe5c15",
+                "case-m7p2-5c0e9aa56f27",
+                "case-m7p2-49b43bf05c77",
+                "case-m7p2-c3dad1092928",
+                "case-m7p2-907ac18f91a4",
+                "case-m7p2-7e6208bd0876",
+                "case-m7p2-bf96333320bc",
+                "case-m7p2-45332ec9331b",
+                "case-m7p2-016f3fd530c2",
+                "case-m7p2-4fc75b8401f2",
+                "case-m7p2-74a7fab5df2b",
+                "case-m7p2-6a3e4dc5773b",
+                "case-m7p2-15cb351441db",
+                "case-m7p2-19c30062a5e8",
+                "case-m7p2-ffc3b8f98c22",
+                "case-m7p2-90da2d706586",
+                "case-m7p2-16a1ce31bac1",
+                "case-m7p2-ee19a311260c",
+                "case-m7p2-da3095cb8d1f",
+                "case-m7p2-9649fa806705",
+                "case-m7p2-73b63709207e",
+                "case-m7p2-050bf280f599",
+                "case-m7p2-9a40b7769081",
+                "case-m7p2-14d5e3decdfb",
+                "case-m7p2-54d4d64c83e4",
+                "case-m7p2-d31b136af965",
+                "case-m7p2-7ee630855b26",
+                "case-m7p2-0eeb29ed3f5c",
+                "case-m7p2-eeb4a2946815",
+                "case-m7p2-ea1a61433218",
+                "case-m7p2-f72255727c2c",
+                "case-m7p2-7bc49665e425",
+                "case-m7p2-17a91cbbc354",
+                "case-m7p2-7b169615fae9",
+                "case-m7p2-059cee090e34"
+            ],
+            "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
+            "tool_check": null
+        },
+        "M7-P2-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p2-3723c77a7dd5",
+                "case-m7p2-25728b3deac6",
+                "case-m7p2-73e4d1c14dfc",
+                "case-m7p2-cd16af790f9e",
+                "case-m7p2-5292647bb94f",
+                "case-m7p2-2e2435cafd10",
+                "case-m7p2-947064c6820a",
+                "case-m7p2-b54a1e79dcb7",
+                "case-m7p2-227290601d78",
+                "case-m7p2-72aebba98fc7",
+                "case-m7p2-9565dd755325",
+                "case-m7p2-d69d411cadd5",
+                "case-m7p2-bcaa2132a2b6",
+                "case-m7p2-adc9ec931de7",
+                "case-m7p2-ed7f6dadc5e9",
+                "case-m7p2-399f194bad75",
+                "case-m7p2-0c5dfcc7e2f9",
+                "case-m7p2-21a74a21a8f6",
+                "case-m7p2-7887c9b8ffe5",
+                "case-m7p2-fdfd2d465724",
+                "case-m7p2-d6435e93140c",
+                "case-m7p2-c5aa7a4dfe65",
+                "case-m7p2-5bdd0ceed34a",
+                "case-m7p2-83ce2133af27",
+                "case-m7p2-bdb1ffe8a791",
+                "case-m7p2-74498a8f4926",
+                "case-m7p2-31c17921bd92",
+                "case-m7p2-26108ecb05a9",
+                "case-m7p2-fe367913913f",
+                "case-m7p2-3b0b64c181d0",
+                "case-m7p2-70f3cb9806c0",
+                "case-m7p2-2c6b7f7afd5b",
+                "case-m7p2-2f339fa47f3f",
+                "case-m7p2-1ec7846824a9",
+                "case-m7p2-9162445be13e",
+                "case-m7p2-41c35c0eeea0",
+                "case-m7p2-4ec751b3f0d0",
+                "case-m7p2-af99aa7c775f",
+                "case-m7p2-80098d02ad07",
+                "case-m7p2-01c34c0a51f9",
+                "case-m7p2-0f6af89adfb2",
+                "case-m7p2-bdbfa3696a01",
+                "case-m7p2-9e1664e171d7",
+                "case-m7p2-62588dc6bbbf",
+                "case-m7p2-6d037dac2997",
+                "case-m7p2-ce7f1cf64d29",
+                "case-m7p2-d00f02fe5c15",
+                "case-m7p2-5c0e9aa56f27",
+                "case-m7p2-49b43bf05c77",
+                "case-m7p2-c3dad1092928",
+                "case-m7p2-907ac18f91a4",
+                "case-m7p2-7e6208bd0876",
+                "case-m7p2-bf96333320bc",
+                "case-m7p2-45332ec9331b",
+                "case-m7p2-016f3fd530c2",
+                "case-m7p2-4fc75b8401f2",
+                "case-m7p2-74a7fab5df2b",
+                "case-m7p2-6a3e4dc5773b",
+                "case-m7p2-15cb351441db",
+                "case-m7p2-19c30062a5e8",
+                "case-m7p2-ffc3b8f98c22",
+                "case-m7p2-90da2d706586",
+                "case-m7p2-16a1ce31bac1",
+                "case-m7p2-ee19a311260c",
+                "case-m7p2-da3095cb8d1f",
+                "case-m7p2-9649fa806705",
+                "case-m7p2-73b63709207e",
+                "case-m7p2-050bf280f599",
+                "case-m7p2-9a40b7769081",
+                "case-m7p2-14d5e3decdfb",
+                "case-m7p2-54d4d64c83e4",
+                "case-m7p2-d31b136af965",
+                "case-m7p2-7ee630855b26",
+                "case-m7p2-0eeb29ed3f5c",
+                "case-m7p2-eeb4a2946815",
+                "case-m7p2-ea1a61433218",
+                "case-m7p2-f72255727c2c",
+                "case-m7p2-7bc49665e425",
+                "case-m7p2-17a91cbbc354",
+                "case-m7p2-7b169615fae9",
+                "case-m7p2-059cee090e34",
+                "case-m7p2-session-803ca447a016",
+                "case-m7p2-session-af7b49603870",
+                "case-m7p2-session-5d84506935f5",
+                "case-m7p2-session-5ef9c4c35b9d",
+                "case-m7p2-session-a972bd4d4a7e",
+                "case-m7p2-session-ec97a414afd6",
+                "case-m7p2-session-2cf69b177602"
+            ],
+            "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
+            "tool_check": null
+        },
+        "M7-P2-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p2-3723c77a7dd5",
+                "case-m7p2-25728b3deac6",
+                "case-m7p2-73e4d1c14dfc",
+                "case-m7p2-cd16af790f9e",
+                "case-m7p2-5292647bb94f",
+                "case-m7p2-2e2435cafd10",
+                "case-m7p2-947064c6820a",
+                "case-m7p2-b54a1e79dcb7",
+                "case-m7p2-227290601d78",
+                "case-m7p2-72aebba98fc7",
+                "case-m7p2-9565dd755325",
+                "case-m7p2-d69d411cadd5",
+                "case-m7p2-bcaa2132a2b6",
+                "case-m7p2-adc9ec931de7",
+                "case-m7p2-ed7f6dadc5e9",
+                "case-m7p2-399f194bad75",
+                "case-m7p2-0c5dfcc7e2f9",
+                "case-m7p2-21a74a21a8f6",
+                "case-m7p2-7887c9b8ffe5",
+                "case-m7p2-fdfd2d465724",
+                "case-m7p2-d6435e93140c",
+                "case-m7p2-c5aa7a4dfe65",
+                "case-m7p2-5bdd0ceed34a",
+                "case-m7p2-83ce2133af27",
+                "case-m7p2-bdb1ffe8a791",
+                "case-m7p2-74498a8f4926",
+                "case-m7p2-31c17921bd92",
+                "case-m7p2-26108ecb05a9",
+                "case-m7p2-fe367913913f",
+                "case-m7p2-3b0b64c181d0",
+                "case-m7p2-70f3cb9806c0",
+                "case-m7p2-2c6b7f7afd5b",
+                "case-m7p2-2f339fa47f3f",
+                "case-m7p2-1ec7846824a9",
+                "case-m7p2-9162445be13e",
+                "case-m7p2-41c35c0eeea0",
+                "case-m7p2-4ec751b3f0d0",
+                "case-m7p2-af99aa7c775f",
+                "case-m7p2-80098d02ad07",
+                "case-m7p2-01c34c0a51f9",
+                "case-m7p2-0f6af89adfb2",
+                "case-m7p2-bdbfa3696a01",
+                "case-m7p2-9e1664e171d7",
+                "case-m7p2-62588dc6bbbf",
+                "case-m7p2-6d037dac2997",
+                "case-m7p2-ce7f1cf64d29",
+                "case-m7p2-d00f02fe5c15",
+                "case-m7p2-5c0e9aa56f27",
+                "case-m7p2-49b43bf05c77",
+                "case-m7p2-c3dad1092928",
+                "case-m7p2-907ac18f91a4",
+                "case-m7p2-7e6208bd0876",
+                "case-m7p2-bf96333320bc",
+                "case-m7p2-45332ec9331b",
+                "case-m7p2-016f3fd530c2",
+                "case-m7p2-4fc75b8401f2",
+                "case-m7p2-74a7fab5df2b",
+                "case-m7p2-6a3e4dc5773b",
+                "case-m7p2-15cb351441db",
+                "case-m7p2-19c30062a5e8",
+                "case-m7p2-ffc3b8f98c22",
+                "case-m7p2-90da2d706586",
+                "case-m7p2-16a1ce31bac1",
+                "case-m7p2-ee19a311260c",
+                "case-m7p2-da3095cb8d1f",
+                "case-m7p2-9649fa806705",
+                "case-m7p2-73b63709207e",
+                "case-m7p2-050bf280f599",
+                "case-m7p2-9a40b7769081",
+                "case-m7p2-14d5e3decdfb",
+                "case-m7p2-54d4d64c83e4",
+                "case-m7p2-d31b136af965",
+                "case-m7p2-7ee630855b26",
+                "case-m7p2-0eeb29ed3f5c",
+                "case-m7p2-eeb4a2946815",
+                "case-m7p2-ea1a61433218",
+                "case-m7p2-f72255727c2c",
+                "case-m7p2-7bc49665e425",
+                "case-m7p2-17a91cbbc354",
+                "case-m7p2-7b169615fae9",
+                "case-m7p2-059cee090e34"
+            ],
+            "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
+            "tool_check": null
+        },
+        "M7-P2-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p2-3723c77a7dd5",
+                "case-m7p2-25728b3deac6",
+                "case-m7p2-73e4d1c14dfc",
+                "case-m7p2-cd16af790f9e",
+                "case-m7p2-5292647bb94f",
+                "case-m7p2-2e2435cafd10",
+                "case-m7p2-947064c6820a",
+                "case-m7p2-b54a1e79dcb7",
+                "case-m7p2-227290601d78",
+                "case-m7p2-72aebba98fc7",
+                "case-m7p2-9565dd755325",
+                "case-m7p2-d69d411cadd5",
+                "case-m7p2-bcaa2132a2b6",
+                "case-m7p2-adc9ec931de7",
+                "case-m7p2-ed7f6dadc5e9",
+                "case-m7p2-399f194bad75",
+                "case-m7p2-0c5dfcc7e2f9",
+                "case-m7p2-21a74a21a8f6",
+                "case-m7p2-7887c9b8ffe5",
+                "case-m7p2-fdfd2d465724",
+                "case-m7p2-d6435e93140c",
+                "case-m7p2-c5aa7a4dfe65",
+                "case-m7p2-5bdd0ceed34a",
+                "case-m7p2-83ce2133af27",
+                "case-m7p2-bdb1ffe8a791",
+                "case-m7p2-74498a8f4926",
+                "case-m7p2-31c17921bd92",
+                "case-m7p2-26108ecb05a9",
+                "case-m7p2-fe367913913f",
+                "case-m7p2-3b0b64c181d0",
+                "case-m7p2-70f3cb9806c0",
+                "case-m7p2-2c6b7f7afd5b",
+                "case-m7p2-2f339fa47f3f",
+                "case-m7p2-1ec7846824a9",
+                "case-m7p2-9162445be13e",
+                "case-m7p2-41c35c0eeea0",
+                "case-m7p2-4ec751b3f0d0",
+                "case-m7p2-af99aa7c775f",
+                "case-m7p2-80098d02ad07",
+                "case-m7p2-01c34c0a51f9",
+                "case-m7p2-0f6af89adfb2",
+                "case-m7p2-bdbfa3696a01",
+                "case-m7p2-9e1664e171d7",
+                "case-m7p2-62588dc6bbbf",
+                "case-m7p2-6d037dac2997",
+                "case-m7p2-ce7f1cf64d29",
+                "case-m7p2-d00f02fe5c15",
+                "case-m7p2-5c0e9aa56f27",
+                "case-m7p2-49b43bf05c77",
+                "case-m7p2-c3dad1092928",
+                "case-m7p2-907ac18f91a4",
+                "case-m7p2-7e6208bd0876",
+                "case-m7p2-bf96333320bc",
+                "case-m7p2-45332ec9331b",
+                "case-m7p2-016f3fd530c2",
+                "case-m7p2-4fc75b8401f2",
+                "case-m7p2-74a7fab5df2b",
+                "case-m7p2-6a3e4dc5773b",
+                "case-m7p2-15cb351441db",
+                "case-m7p2-19c30062a5e8",
+                "case-m7p2-ffc3b8f98c22",
+                "case-m7p2-90da2d706586",
+                "case-m7p2-16a1ce31bac1",
+                "case-m7p2-ee19a311260c",
+                "case-m7p2-da3095cb8d1f",
+                "case-m7p2-9649fa806705",
+                "case-m7p2-73b63709207e",
+                "case-m7p2-050bf280f599",
+                "case-m7p2-9a40b7769081",
+                "case-m7p2-14d5e3decdfb",
+                "case-m7p2-54d4d64c83e4",
+                "case-m7p2-d31b136af965",
+                "case-m7p2-7ee630855b26",
+                "case-m7p2-0eeb29ed3f5c",
+                "case-m7p2-eeb4a2946815",
+                "case-m7p2-ea1a61433218",
+                "case-m7p2-f72255727c2c",
+                "case-m7p2-7bc49665e425",
+                "case-m7p2-17a91cbbc354",
+                "case-m7p2-7b169615fae9",
+                "case-m7p2-059cee090e34"
+            ],
+            "manual_artifact_ids": ["m7p2-live-evaluation"],
+            "tool_check": "LIVE_ANSWER_EVALUATION"
         }
     },
     "fixtures": {
@@ -6064,7 +6973,7 @@
         },
         "F18": {
             "name": "AI trust boundary",
-            "status": "IMPLEMENTED_M7_P1_BOUNDARY_ONLY",
+            "status": "IMPLEMENTED_M7_P2_ANSWERS_AND_LIVE_EVALUATION",
             "case_ids": [
                 "case-m7p1-bba88238af9e",
                 "case-m7p1-835fb0b83055",
@@ -6087,15 +6996,59 @@
                 "case-m7p1-4ac315b1d6bf",
                 "case-m7p1-a9ddf5e4e495",
                 "case-m7p1-20e9caeebc18",
-                "case-m7p1-61003ae16ccc"
+                "case-m7p1-61003ae16ccc",
+                "case-m7p2-3723c77a7dd5",
+                "case-m7p2-25728b3deac6",
+                "case-m7p2-73e4d1c14dfc",
+                "case-m7p2-cd16af790f9e",
+                "case-m7p2-5292647bb94f",
+                "case-m7p2-2e2435cafd10",
+                "case-m7p2-947064c6820a",
+                "case-m7p2-b54a1e79dcb7",
+                "case-m7p2-227290601d78",
+                "case-m7p2-72aebba98fc7",
+                "case-m7p2-9565dd755325",
+                "case-m7p2-d69d411cadd5",
+                "case-m7p2-bcaa2132a2b6",
+                "case-m7p2-adc9ec931de7",
+                "case-m7p2-ed7f6dadc5e9",
+                "case-m7p2-399f194bad75",
+                "case-m7p2-0c5dfcc7e2f9",
+                "case-m7p2-21a74a21a8f6",
+                "case-m7p2-7887c9b8ffe5",
+                "case-m7p2-fdfd2d465724",
+                "case-m7p2-d6435e93140c",
+                "case-m7p2-c5aa7a4dfe65",
+                "case-m7p2-5bdd0ceed34a",
+                "case-m7p2-83ce2133af27",
+                "case-m7p2-bdb1ffe8a791",
+                "case-m7p2-74498a8f4926",
+                "case-m7p2-31c17921bd92",
+                "case-m7p2-26108ecb05a9",
+                "case-m7p2-fe367913913f",
+                "case-m7p2-3b0b64c181d0",
+                "case-m7p2-70f3cb9806c0",
+                "case-m7p2-2c6b7f7afd5b",
+                "case-m7p2-2f339fa47f3f",
+                "case-m7p2-1ec7846824a9",
+                "case-m7p2-9162445be13e",
+                "case-m7p2-41c35c0eeea0",
+                "case-m7p2-4ec751b3f0d0",
+                "case-m7p2-af99aa7c775f",
+                "case-m7p2-80098d02ad07",
+                "case-m7p2-01c34c0a51f9"
             ],
             "implemented_subscenarios": [
                 "readonly_registry",
                 "owner_authorization",
-                "untrusted_prompt_boundary"
+                "untrusted_prompt_boundary",
+                "grounded_answers",
+                "authorized_citations",
+                "current_basis_live_evaluation"
             ],
-            "future_subscenarios": ["M7-P2_live_answer_citations_and_quality"],
-            "scope": "Executed deterministic synthetic tool boundaries only; no generated answers, live model evaluation or V2 claim."
+            "future_subscenarios": [],
+            "scope": "Current executed readonly/owner/untrusted and grounded answer/citation cases plus separately validated current-basis actual synthetic live evaluation; no financial actions or V2 acceptance.",
+            "live_artifact_id": "m7p2-live-evaluation"
         }
     },
     "evidence_semantics": "AND: configured exact cases must pass in current uncached JUnit and every configured scoped manual artifact must retain its hash. Historical and current observations retain their declared limits; manual evidence never replaces a missing configured test or owner acceptance."

@@ -170,6 +170,11 @@ async function preview() {
             class="inline-flex min-h-11 items-center text-sm underline"
             >← Dashboard</a
         >
+        <a
+            href="/copilot/chat"
+            class="ml-4 inline-flex min-h-11 items-center text-sm underline"
+            >Evidence-grounded chat →</a
+        >
         <header class="mt-4 space-y-3">
             <p
                 class="text-xs font-semibold tracking-wider text-teal-800 uppercase dark:text-teal-200"

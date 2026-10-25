@@ -23,4 +23,4 @@ test('password recovery invalidates an existing owner session before financial r
     Auth::forgetGuards();
     $this->post('/login', ['email' => $owner->email, 'password' => 'Synthetic-recovered-password-47'])->assertRedirect('/dashboard');
     $this->get('/dashboard')->assertOk();
-})->with([['GET', '/copilot'], ['POST', '/copilot/preview'], ['POST', '/copilot/propose'], ['POST', '/copilot/consent'], ['GET', '/dashboard'], ['POST', '/dashboard/snapshots'], ['GET', '/dashboard/snapshots/{snapshot}/export']]);
+})->with([['GET', '/copilot/chat'], ['POST', '/copilot/answer'], ['GET', '/copilot/source/account/1'], ['GET', '/copilot'], ['POST', '/copilot/preview'], ['POST', '/copilot/propose'], ['POST', '/copilot/consent'], ['GET', '/dashboard'], ['POST', '/dashboard/snapshots'], ['GET', '/dashboard/snapshots/{snapshot}/export']]);

@@ -82,8 +82,11 @@ try {
         || $release['deployment_authorized'] !== false || $release['owner_phase_acceptance'] !== 'PENDING') {
         throw new RuntimeException('BLOCKED: current release identity and actual recovery evidence do not match.');
     }
+    if (($release['live_evaluation']['result'] ?? null) !== 'PASS' || ($release['live_evaluation']['cases'] ?? 0) < 40 || ! hash_equals(hash_file('sha256', $root.'/docs/halal-wealth-os/runs/M7-P2-live-evaluation.json'), $release['live_evaluation_sha256'] ?? '')) {
+        throw new RuntimeException('BLOCKED: current live answer evaluation receipt missing.');
+    }
     $report['result'] = 'PASS';
-    $report['tool_checks'] = ['HTTP_JOURNEY' => 'PASS', 'ACCEPTANCE_MAP' => 'PASS', 'FINANCIAL_COVERAGE' => 'PASS', 'HTTP_SECURITY' => 'PASS', 'DASHBOARD_PERFORMANCE' => 'PASS', 'RELEASE_READINESS' => 'PASS'];
+    $report['tool_checks'] = ['HTTP_JOURNEY' => 'PASS', 'ACCEPTANCE_MAP' => 'PASS', 'FINANCIAL_COVERAGE' => 'PASS', 'HTTP_SECURITY' => 'PASS', 'DASHBOARD_PERFORMANCE' => 'PASS', 'RELEASE_READINESS' => 'PASS', 'LIVE_ANSWER_EVALUATION' => 'PASS'];
     foreach ($report['requirements'] as $row) {
         if ($row['tool_check'] !== null && ! isset($report['tool_checks'][$row['tool_check']])) {
             throw new RuntimeException('BLOCKED: unknown acceptance tool check.');

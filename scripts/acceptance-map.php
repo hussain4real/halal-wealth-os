@@ -41,7 +41,7 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     $required = [];
     foreach ($roadmap['phases'] as $phase) {
         $required = [...$required, ...$phase['acceptanceIds']];
-        if ($phase['id'] === 'M7-P1') {
+        if ($phase['id'] === 'M7-P2') {
             break;
         }
     }
@@ -105,15 +105,15 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     foreach ($map['fixtures'] as $id => $fixture) {
         evidenceIds($fixture['case_ids'] ?? null, $id);
         if ($id === 'F18') {
-            if (($fixture['case_ids'] ?? []) === [] || ($fixture['status'] ?? null) !== 'IMPLEMENTED_M7_P1_BOUNDARY_ONLY'
-                || ($fixture['implemented_subscenarios'] ?? null) !== ['readonly_registry', 'owner_authorization', 'untrusted_prompt_boundary']
-                || ($fixture['future_subscenarios'] ?? null) !== ['M7-P2_live_answer_citations_and_quality']) {
-                throw new RuntimeException('BLOCKED: F18 requires scoped executed tool boundaries, with live answer evaluation still future.');
+            if (($fixture['case_ids'] ?? []) === [] || ($fixture['status'] ?? null) !== 'IMPLEMENTED_M7_P2_ANSWERS_AND_LIVE_EVALUATION'
+                || ($fixture['implemented_subscenarios'] ?? null) !== ['readonly_registry', 'owner_authorization', 'untrusted_prompt_boundary', 'grounded_answers', 'authorized_citations', 'current_basis_live_evaluation']
+                || ($fixture['future_subscenarios'] ?? null) !== []) {
+                throw new RuntimeException('BLOCKED: F18 requires exact boundary, grounded-answer/citation and current live-evaluation evidence.');
             }
             $families = [];
             foreach ($fixture['case_ids'] as $caseId) {
                 $case = $map['cases'][$caseId] ?? null;
-                if (! is_array($case) || $case['file'] !== 'tests/Feature/CopilotBoundaryTest.php') {
+                if (! is_array($case) || ! in_array($case['file'], ['tests/Feature/CopilotBoundaryTest.php', 'tests/Feature/CopilotAnswerTest.php'], true)) {
                     throw new RuntimeException('BLOCKED: F18 evidence must resolve exact implemented copilot boundary cases.');
                 }
                 foreach (['write aliases' => 'registry', 'foreign valid' => 'owner', 'provider malicious' => 'untrusted'] as $prefix => $family) {
@@ -121,6 +121,10 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
                         $families[$family] = true;
                     }
                 }
+            }
+            $answers = array_filter($fixture['case_ids'], fn ($caseId) => str_starts_with($map['cases'][$caseId]['name'], 'fixed evaluation answers'));
+            if (count($answers) < 40 || ($fixture['live_artifact_id'] ?? null) !== 'm7p2-live-evaluation' || ! isset($map['manual_artifacts']['m7p2-live-evaluation'])) {
+                throw new RuntimeException('BLOCKED: F18 requires40 exact answer cases and retained live receipt.');
             }
             if (count($families) !== 3) {
                 throw new RuntimeException('BLOCKED: F18 requires registry, owner and untrusted text execution.');

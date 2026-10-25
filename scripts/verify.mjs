@@ -56,6 +56,7 @@ try {
             'M6-P3',
             'M6-P4',
             'M7-P1',
+            'M7-P2',
         ].includes(phase)
     ) {
         throw new VerificationFailure(
@@ -88,6 +89,8 @@ try {
             'scripts/statement-mapping-key.test.mjs',
             'scripts/drive-attempt.test.mjs',
             'scripts/copilot-preview.test.mjs',
+            'scripts/copilot-answer.test.mjs',
+            'scripts/answer-evaluation.test.mjs',
         ]);
         const missing = [];
         for (const command of [
@@ -286,6 +289,8 @@ try {
             'ReminderTest',
             'ReminderConcurrencyTest',
             'CopilotBoundaryTest',
+            'CopilotAnswerTest',
+            'OpenAiAnswerPlannerTest',
             'CopilotConcurrencyTest',
             'DriveExportTest',
             'GoogleDriveContractTest',
@@ -309,12 +314,13 @@ try {
         }
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
+        run('node', ['scripts/verify-answer-eval.mjs'], { env });
         run('node', ['scripts/acceptance-http.mjs'], { env });
         run('node', ['scripts/verify-release.mjs'], { env });
         run('php', ['scripts/verify-acceptance.php'], { env });
-        console.log('PASS M0-P2 through M7-P1 implemented verification');
+        console.log('PASS M0-P2 through M7-P2 implemented verification');
         console.log(
-            'NOT_APPLICABLE: future domain suites, integrations, live AI and deployment.',
+            'NOT_APPLICABLE: future domain suites, live financial integrations and deployment. Live AI is separately measured on synthetic inputs.',
         );
     }
 } catch (error) {

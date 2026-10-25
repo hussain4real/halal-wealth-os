@@ -58,7 +58,7 @@ jobs:
         with:
           php-version: '8.5.12'
           tools: composer:2.10.3
-          extensions: pdo_pgsql, bcmath, intl, pcntl, zip, sodium, xdebug-3.5.3
+          extensions: curl, pdo_pgsql, bcmath, intl, pcntl, zip, sodium, xdebug-3.5.3
           coverage: xdebug
 
       - name: Setup Node
@@ -92,7 +92,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
-          name: m7-p1-verification
+          name: m7-p2-verification
           path: |
             build/junit.xml
             build/coverage.xml
