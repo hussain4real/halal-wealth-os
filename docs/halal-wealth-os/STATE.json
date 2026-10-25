@@ -373,7 +373,7 @@
         "max_cycles": 9,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M7_UNACCEPTED",
-        "checkpoint": "Owner explicitly resumed remaining ninth-cycle verification with existingNode24wrapper, no source correction or extra cycle. Preserve wrongNode22failure/interruptednative; newlogdestinations for current full/restoration/coverage/live gates. Model/fixed40/oracle/calculations/USD2cap unchanged. Any further failure stops."
+        "checkpoint": "C9resumed all prelive gatesPASS:1458tests11307assertions/96financialfloors806selectors132requirements, PHPVueexactrestore, client15pass, offlineactual40wirebound7817<8192. Native419581ms/uncached331133ms retained; wrongNode22failure preserved. One actual unchanged40GPT5.4 evaluation and finalrelease/hosted gates remain pending; any further failure stops."
     },
     "dependency_patch": {
         "authorized": true,

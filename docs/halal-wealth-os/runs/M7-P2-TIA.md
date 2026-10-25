@@ -53,3 +53,18 @@ A separate uncached --no-tia coverage run passed1,457 tests/11,107 assertions in
 - `cycle7-tia-cached-replay.log`: `816861a366181c3ba8e51d183372c6b12bbcc3c7d0a0d4810795a1e9126b99b9`
 - `cycle7-prelive-coverage.log`: `e6ee036a43f36abcc5e06ef631720b8d9badfbd1c15fdb6a4b9bab9777f8df81`
 - `cycle7-prelive-report-proof.log`: `3d0fd8c694e7f6bc5d5e1da1da27e46b67cb594b9bb6dee6eeeb6f720da4ea93`
+
+## Ninth-cycle current semantic-contract evidence
+
+After the owner-resumed runtime correction, clean checkpoint `c38827d0926a7efc6cd2177c910440513d2d3cd7` passed a fresh native baseline:1,458 tests/11,307 assertions in419,581ms. The preceding wrong-Node22 client loader failure and intentionally interrupted native attempt remain retained and are not passes. The Node24 client/validator suite passed15 checks.
+
+PHP and Vue native affected-file selection and exact restoration passed. Executable source identity before/after was `59797f1a847c0ec42f01fa5783f55b9f191dcf67304059ce1cb4247aaf1654cd`. Cached aggregates/replay are separate from full execution, and PHP selection does not execute Vue behavior. A separate uncached --no-tia coverage run passed1,458 tests/11,307 assertions in331,133ms; all96 financial floors passed with7,422/7,841 total application statements covered. The map retains806 selectors/132 requirements with F18 unchanged. Subsequent manual/map hash binding is distinct from the restoration digest. Actual40-case model quality and final clean release/hosted gates remain separate.
+
+- `cycle9-resumed-tia-record.log`: `e58563c3b591d043bbf3ac6e7957c6624090da0b2e8aaa255a242ee036fd928b`
+- `cycle9-resumed-tia-php-selected.log`: `94901704f07b7985af1fc73f24c4020a42a5c9aa153b1af3ed53654a69950387`
+- `cycle9-resumed-tia-php-restored.log`: `29d586229b6fd9008a1901852b560424b90d86d426f9986c168e7f0d42ed6b66`
+- `cycle9-resumed-tia-vue-selected.log`: `baa49b2fcc74a5c44de60067d37d11382fea2fd9d09d320863a404dfb8adc46a`
+- `cycle9-resumed-tia-vue-restored.log`: `5e4c34e376c412cce511ad57273a5e536c6d3d4a37b073de0e64c3ac1bc69e6e`
+- `cycle9-resumed-tia-cached-replay.log`: `d69affa2469f82f88c3ba91726415fb9f046b2447da65e1ffa04e8f62580e4d1`
+- `cycle9-resumed-prelive-coverage.log`: `3668edd73723a15af4034d4eb9507e09b5ce0a7632d2413fff8023fe3237cb7f`
+- `cycle9-resumed-prelive-report-proof.log`: `9c1ac4220a8512959b404f2bd8db8d78ddeffd3477b9939d3df29072048b6e5f`

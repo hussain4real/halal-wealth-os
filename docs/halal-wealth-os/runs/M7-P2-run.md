@@ -75,3 +75,5 @@ The exact formatting repair passed the project check;62 affected tests passed777
 ## Owner-resumed ninth-cycle runtime checks
 
 The owner explicitly resumed the remaining ninth-cycle checks with the existing Node24 wrapper. No application change, new correction cycle, API call or budget change is included. Preserve the wrong-Node22 failure and intentionally interrupted native attempt. Repeat interrupted checks into new logs using the verified runtime; keep all prior tests, fixed40 dataset, oracle, model and limits unchanged. Any further failure stops; no tenth cycle or acceptance is inferred.
+
+Ninth-cycle resumed checks passed15 client/validator checks, a fresh native1,458-test/11,307-assertion baseline and separate uncached coverage of the same totals. All96 financial floors passed; the map retains806 selectors/132 requirements. PHP/Vue native selection and exact restoration passed; old interrupted/cached evidence remains separately labeled. Actual preparation of all40 fixed requests fits the unchanged input guard with no key/network/database access. These are pre-live component results, not a final clean release or actual model-quality pass.
