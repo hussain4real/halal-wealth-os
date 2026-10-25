@@ -4,10 +4,10 @@ use App\Domain\Intelligence\Answers\AnswerPlanner;
 use App\Domain\Intelligence\CopilotBoundary;
 use App\Domain\Intelligence\UntrustedInput;
 use App\Domain\Reporting\AnswerSources;
+use App\Domain\Reporting\Copilot\Answers\AnswerClaim;
 use App\Domain\Reporting\Copilot\Answers\AnswerContext;
 use App\Domain\Reporting\Copilot\Answers\AnswerPeriod;
 use App\Domain\Reporting\Copilot\Answers\AnswerPlan;
-use App\Domain\Reporting\Copilot\Answers\AnswerTopic;
 use App\Domain\Reporting\CopilotAnswerFacts;
 use App\Domain\Reporting\InvestmentValuation;
 use App\Domain\Shared\Money\Currency;
@@ -21,6 +21,7 @@ use Tests\Support\AnswerFixtures as A;
 use Tests\Support\AnswerOracle;
 use Tests\Support\AssessmentFixtures;
 use Tests\Support\AvailabilityFixtures;
+use Tests\Support\BudgetFixtures as B;
 use Tests\Support\CopilotFixtures as C;
 use Tests\Support\FxFixtures;
 use Tests\Support\GoalFixtures;
@@ -142,10 +143,10 @@ test('missing essential run rate remains explicit while backed emergency money s
 
 test('period mismatch cannot replace requested historical cash with current facts while money amounts are not years', function () {
     foreach (['How much cash yesterday?', 'cash in 2025', 'cash on 2025-01-01', 'cash next month'] as $q) {
-        expect(AnswerPeriod::supported($q, AnswerTopic::Cash, '2026-10-20T23:59:59Z'))->toBeFalse();
+        expect(AnswerPeriod::supported($q, AnswerClaim::CashAvailable, '2026-10-20T23:59:59Z'))->toBeFalse();
     }
-    expect(AnswerPeriod::supported('How much remains toward my 2025 QAR target?', AnswerTopic::Emergency, '2026-10-20T23:59:59Z'))->toBeTrue();
-    expect(AnswerPeriod::supported('changes from 2026-10-19 to 2026-10-20', AnswerTopic::Changes, '2026-10-20T23:59:59Z', '2026-10-19T23:59:59Z'))->toBeTrue();
+    expect(AnswerPeriod::supported('How much remains toward my 2025 QAR target?', AnswerClaim::EmergencyRemaining, '2026-10-20T23:59:59Z'))->toBeTrue();
+    expect(AnswerPeriod::supported('changes from 2026-10-19 to 2026-10-20', AnswerClaim::ChangesOverview, '2026-10-20T23:59:59Z', '2026-10-19T23:59:59Z'))->toBeTrue();
     $f = A::seed($this->owner);
     $r = app(CopilotAnswerFacts::class)->answer($this->owner, AnswerPlan::parse(['claim' => 'cash.available', 'mode' => 'recorded', 'scope' => 'current']), A::context($f), 'cash yesterday');
     expect($r['state'])->toBe('unsupported')->and($r['facts'])->toBe([]);
@@ -256,4 +257,41 @@ test('evaluation oracle rejects extra or changed rendered assessment claims and 
     $answer = app(CopilotAnswerFacts::class)->answer($this->owner, AnswerPlan::parse(['claim' => $case['claim'], 'mode' => 'recorded', 'scope' => 'current']), A::context($f), 'emergency coverage');
     $answer['completeness'] = 'complete';
     expect(fn () => AnswerOracle::check($this->owner, $case, $answer, $f))->toThrow(RuntimeException::class, 'uncertainty_metadata');
+});
+
+test('period regression answers emergency duration wording from complete essential evidence', function () {
+    $f = A::seed($this->owner);
+    $essential = B::category($this->owner, ['normal_budget' => '0', 'emergency_essential' => '1']);
+    B::rule($this->owner, $essential, ['amount' => '100']);
+    $before = answerFinancialHash();
+    $r = app(CopilotAnswerFacts::class)->answer($this->owner, AnswerPlan::parse(['claim' => 'emergency.coverage', 'mode' => 'recorded', 'scope' => 'current']), A::context($f), 'How many months does my emergency fund last at my recorded essential-expense rate?');
+    expect($r['state'])->toBe('answered')->and($r['completeness'])->toBe('complete');
+    expect($r['facts'])->toHaveCount(1)->and($r['facts'][0]['key'])->toBe('emergency.coverage')->and($r['facts'][0]['value'])->toBe('2.00');
+    expect(answerFinancialHash())->toBe($before);
+    Http::assertNothingSent();
+});
+
+test('period regression answers current commitment horizon without substituting shortfall', function () {
+    $f = A::seed($this->owner);
+    $bill = B::rule($this->owner, B::category($this->owner), ['amount' => '200', 'first_due_date' => '2026-10-22']);
+    AvailabilityFixtures::settings($this->owner, ['prior_id' => (string) $f['settings']->id, 'requirements' => [['schedule_id' => (string) $bill->id, 'required' => '1']]]);
+    $before = answerFinancialHash();
+    $r = app(CopilotAnswerFacts::class)->answer($this->owner, AnswerPlan::parse(['claim' => 'cash.commitments', 'mode' => 'recorded', 'scope' => 'current']), A::context($f), 'How much is unfunded in required commitments before my next income?');
+    expect($r['state'])->toBe('answered')->and($r['facts'])->toHaveCount(1);
+    expect($r['facts'][0]['key'])->toBe('cash.commitments')->and($r['facts'][0]['value'])->toMatchArray(['currency' => 'QAR', 'amount' => '200.00', 'minor' => '20000']);
+    expect(answerFinancialHash())->toBe($before);
+    Http::assertNothingSent();
+});
+
+test('closed period grammar keeps forced current plans from substituting facts for future questions', function () {
+    $f = A::seed($this->owner);
+    $essential = B::category($this->owner, ['normal_budget' => '0', 'emergency_essential' => '1']);
+    B::rule($this->owner, $essential, ['amount' => '100']);
+    $before = answerFinancialHash();
+    foreach ([['emergency.coverage', 'How many months does my emergency fund last on Christmas?'], ['cash.commitments', 'What required commitments are expected to remain unpaid before next income?']] as [$claim, $question]) {
+        $r = app(CopilotAnswerFacts::class)->answer($this->owner, AnswerPlan::parse(['claim' => $claim, 'mode' => 'recorded', 'scope' => 'current']), A::context($f), $question);
+        expect($r['state'])->toBe('unsupported')->and($r['facts'])->toBe([])->and($r['citations'])->toBe([]);
+    }
+    expect(answerFinancialHash())->toBe($before);
+    Http::assertNothingSent();
 });

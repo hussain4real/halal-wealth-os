@@ -15,7 +15,7 @@ final class AnswerEvaluationPolicy
         'reasoning_effort' => 'none', 'store' => false, 'max_input_tokens' => 8192,
         'max_output_tokens' => 512, 'wire_overhead_tokens' => 1024,
         'input_price_micro_usd_per_million' => 2500000, 'output_price_micro_usd_per_million' => 15000000,
-        'case_reservation_micro_usd' => 28160, 'total_cap_micro_usd' => 2000000,
+        'case_reservation_micro_usd' => 28160, 'total_cap_micro_usd' => 3000000,
         'production_reservation_tokens' => 16384,
     ];
 

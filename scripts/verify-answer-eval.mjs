@@ -23,7 +23,7 @@ const approvedPolicy = {
     input_price_micro_usd_per_million: 2500000,
     output_price_micro_usd_per_million: 15000000,
     case_reservation_micro_usd: 28160,
-    total_cap_micro_usd: 2000000,
+    total_cap_micro_usd: 3000000,
     production_reservation_tokens: 16384,
 };
 if (!isDeepStrictEqual(releasePolicy, approvedPolicy))
@@ -210,9 +210,9 @@ export function validateLiveReport(report, basis, dataset, prompt) {
         report.totals?.input_tokens !== input ||
         report.totals?.output_tokens !== output ||
         report.totals?.cases !== cases.length ||
-        report.total_eval_cap_micro_usd !== 2000000 ||
+        report.total_eval_cap_micro_usd !== releasePolicy.total_cap_micro_usd ||
         !Number.isSafeInteger(report.reserved_total_micro_usd) ||
-        report.reserved_total_micro_usd > 2000000 ||
+        report.reserved_total_micro_usd > releasePolicy.total_cap_micro_usd ||
         report.reserved_total_micro_usd <
             cases.length * releasePolicy.case_reservation_micro_usd
     )

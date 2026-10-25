@@ -1,6 +1,6 @@
 # M7-P2 execution record
 
-Status: owner-resumed ninth-cycle checks, in progress and unaccepted. One implementation owner, cycle9 of nine. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
+Status: owner-resumed cycle11 local verification in progress; unaccepted. One implementation owner, cycle11 of eleven. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
 
 Implemented a default-off bounded answer planner, deterministic typed fact projection, owner-scoped source references, current-page chat/recovery and versioned30-finance/10-adversarial evaluation dataset. Initial73 affected tests797 assertions passed, alongside client schema/basis tests and actual owned loopback transport checks. A prior focused measurement gave99–100 percent coverage across the new concrete financial sources; the final full floor is not yet claimed.
 
@@ -83,3 +83,41 @@ Ninth-cycle resumed checks passed15 client/validator checks, a fresh native1,458
 The single pinned GPT-5.4 run passed all40 unchanged fixed cases:30 finance and10 adversarial or missing-data cases. Independent review joined all intents, actual provider observations, deterministic answers, literal oracle facts,50 citations and ledger entries with zero discrepancies. Observed usage totaled48,486 input and1,082 output tokens. All66 conservative reservations total1,574,432microUSD under the unchangedUSD2 cap; the prior26-entry prefix is unchanged. Reservations are not billed usage.
 
 The sanitized retained receipt binds the frozen current source basis, prompt, dataset and approved policy. It is observed evidence, not provider-signed attestation or a CI live rerun. The fixed release set measures bounded claim/mode/scope selection and integrated deterministic facts, not held-out generalization or unrestricted financial prose. Producer-observed database checks enforce owner resolution, no financial writes and one16,384-token admission per case; independent review did not query the database. All prior failures remain retained. The final clean release, hosted CI/review, merge, post-merge CI and actual signed public post remain pending and separate from owner acceptance.
+
+## Fresh hosted review stop
+
+PR26 at4784f2c retains a passing clean seven-artifact release and actual40-case evaluation. Its fresh hosted review started after the explicit request and completed with one confirmed P2: the period guard rejects ordinary duration wording containing last and the current required-commitment horizon containing next income. Read-only predicate checks and independent source triage confirm the issue. The fixed evaluation set did not contain those phrasings. No source correction or merge is authorized with all nine cycles used. Original CI40178030278 attempt1 continues without cancellation or rerun.
+
+A correction changes the source basis and requires a new complete40-case live receipt. Existing66 reservations total1,574,432microUSD; one new40-case reservation would total2,700,832, exceeding the currentUSD2 cap. A scoped tenth cycle andUSD3 total cap are only a private proposal pending explicit owner approval. No model, key, account, price, input/output bound, production limit, dataset, oracle or calculation change is proposed. All prior passes and failures remain retained; resources are stopped and no new call occurred. No merge, post-merge CI, publication or owner acceptance is claimed.
+
+## Owner-authorized cycle10 and total reservation cap
+
+The owner authorized the confirmed period-guard correction and a USD3 total evaluation reservation cap. Preserve all nine previous cycles, the original hosted P2 and every pass/failure. The repair must allow duration wording and the current required-commitment due horizon while rejecting historical/future balances, including forced-claim and mixed-clause requests. Keep the fixed40 dataset, main prompt,32 metrics, independent oracle, model, prices, input/output bounds, financial calculations and production admission unchanged. The existing66 reservations remain intact; a new40-case run would total2,700,832microUSD under the proposed3,000,000 bound. No extra paid probe, retry or fallback is included. Any further failure stops. The quiet same-chat completion follow-up is approved for gated delivery, not another correction cycle or paid call.
+
+## Tenth-cycle source-review stop
+
+The planned red regressions reproduced both hosted-review examples. The correction passed97 affected tests/1,202 assertions,15 client/validator tests, formatting and static analysis. Budget review confirmed exactUSD3 coupling with unchanged per-call/production limits and all66 ledger entries intact. These are partial passes, not a completed cycle release.
+
+The independent period implementation review returned CHANGES_REQUIRED. Its masks could still admit a duration question with an unsupported date complement, or a future unpaid-state question phrased as expected to remain unpaid. Five read-only predicate counterexamples confirm the source finding. No further source correction, browser/native/full run or live call is authorized with all ten cycles used. The follow-up was deleted and owned PostgreSQL/browser/server resources are stopped. No new reservation occurred; the approvedUSD3 cap remains and historical reservations total1,574,432microUSD. A proposal for an additional bounded cycle would replace permissive masks with complete current-evidence grammar, preserving all existing tests and broad/date rejection for unmatched requests. No merge, acceptance or deployment is claimed.
+
+## Owner-authorized cycle11
+
+The owner authorized one additional cycle for complete bounded current-evidence question grammar, keeping the approvedUSD3 cap. Preserve all ten prior cycles, source findings, positive/negative tests, ledger entries and historical receipts. Anchor the entire duration or current-commitment construction with finite subject/object/suffix grammar; no open wildcard, date exception list or future-word blacklist. Preserve months-only essential-rate output and unchanged residual relative/date guards. Complete all current-source/regression/browser/native/restoration/coverage checks before one new unchanged40-case live run. No extra probe/retry/fallback, model/pricing/financial calculation/production limit change, twelfth cycle, later phase, deployment or acceptance. The approved quiet completion follow-up can resume for a corrected published delivery-ready head.
+
+## Eleventh-cycle browser assertion stop
+
+The bounded period grammar passed100 focused tests/1,224 assertions, static analysis, formatting,15 client/validator tests,37 mapping tests/312 assertions and independent source review. These partial gates do not constitute a completed release. The coordinator then asserted that a completed answer would reappear after response loss. That expectation conflicts with the retained-status design: the answer is intentionally not stored. The actual same-reference recovery returned already admitted and did not execute again, with exactly one completed synthetic goals charge. Financial data and all66 real evaluation reservations are unchanged. No new live model call occurred.
+
+The failed browser assertion and actual outcome are preserved privately. Owned browser/server/PostgreSQL resources are stopped and no completion follow-up is active. Under the owner’s any-failure stop condition, remaining cycle11 checks require explicit resumption. No application fix, new cycle, budget increase, merge or acceptance is proposed by this diagnosis.
+
+## Owner resumed remaining cycle11 checks
+
+The owner explicitly approved resuming after the coordinator’s browser assertion error. Preserve the failed assertion and its independent diagnosis; no source repair, new cycle or cap change is included. Verify the admitted/no-reexecution receipt separately from ordinary answer delivery. Resume owned resources without resetting charges, then finish remaining local checks and the single existing authorized40-case live evaluation before gated delivery. Any further failure stops; M7-P2/M7 remain unaccepted.
+
+## Resumed eleventh-cycle setup stop
+
+Before any browser/native/live check, the coordinator omitted the saved owned PostgreSQL startup options. The process tried default5432 and exited after failing to bind. It did not connect to or change the shared server, and owned55120 remains stopped. No application correction, new cycle, cap change, browser execution or model call occurred. The saved owned options remain55120, the private socket, UTC and loopback only. Preserve this failed startup and all earlier results; the owner’s any-failure stop condition requires another explicit resumption decision.
+
+## Current eleventh-cycle browser results
+
+After explicit saved-options resumption, owned database identity was confirmed and the existing synthetic database was preserved. Fresh ordinary duration and current-commitment answers passed; date/future counterexamples returned no substituted facts. Mobile/desktop light/dark, current model label, polite announcements, source ownership and core independence passed. The first owner retained four admissions, the second one; financial rows and66 actual evaluation reservations remained unchanged. Both prior coordinator failures remain retained. Browser/server are stopped. Independent rendered review, fresh native/restoration/uncached coverage, one current-basis40-case live run and final release/hosted delivery remain separate pending gates.

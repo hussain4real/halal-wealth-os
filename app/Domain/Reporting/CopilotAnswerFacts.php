@@ -44,7 +44,7 @@ final class CopilotAnswerFacts
             if ($data === null) {
                 return [...$base, 'state' => 'missing_context', 'text' => 'Select the owned goal, saved valuation or asset required for this question. Emergency purpose is an explicit user selection, never inferred from a name.'];
             }
-            if (! AnswerPeriod::supported($question, $topic, $data['as_of'], $data['start'] ?? null)) {
+            if (! AnswerPeriod::supported($question, $plan->claim, $data['as_of'], $data['start'] ?? null)) {
                 return [...$base, 'state' => 'unsupported', 'text' => 'The requested dates or relative period are not supported by the selected source. No current value is substituted.'];
             }
             $field = $plan->claim->field();

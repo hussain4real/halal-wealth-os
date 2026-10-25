@@ -87,7 +87,7 @@ function syntheticValidatorFixture() {
         policy_sha256: policyDigest,
         cases,
         totals: { cases: 40, input_tokens: 4000, output_tokens: 800 },
-        total_eval_cap_micro_usd: 2000000,
+        total_eval_cap_micro_usd: 3000000,
         reserved_total_micro_usd: 1128224,
         limitation:
             'retained observed receipt; not a provider-signed attestation',
@@ -118,7 +118,7 @@ await test('retained live evidence validator rejects changed basis missing cases
         (r) => (r.cases[0].response_id_sha256 = r.cases[1].response_id_sha256),
         (r) => (r.cases[0].usage.output_tokens = 513),
         (r) => (r.cases[0].checks.no_financial_writes = false),
-        (r) => (r.reserved_total_micro_usd = 2000001),
+        (r) => (r.reserved_total_micro_usd = 3000001),
         (r) => (r.prompt_sha256 = '0'.repeat(64)),
         (r) => (r.totals.input_tokens = 0),
     ]) {

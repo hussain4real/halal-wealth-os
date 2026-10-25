@@ -4031,6 +4031,46 @@
             "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
             "name": "all fixed evaluation inputs fit the actual semantic schema wire without provider access",
             "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-period-87af729b9e5c": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "period regression answers emergency duration wording from complete essential evidence",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-period-af1f8d2f70dd": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "period regression answers current commitment horizon without substituting shortfall",
+            "file": "tests/Feature/CopilotAnswerTest.php"
+        },
+        "case-m7p2-period-a1b226343b35": {
+            "class": "Tests\\Unit\\AnswerPeriodTest",
+            "name": "current emergency duration verbs remain months without granting another period",
+            "file": "tests/Unit/AnswerPeriodTest.php"
+        },
+        "case-m7p2-period-1ea1babfea84": {
+            "class": "Tests\\Unit\\AnswerPeriodTest",
+            "name": "current required commitment due horizon is not future balance permission",
+            "file": "tests/Unit/AnswerPeriodTest.php"
+        },
+        "case-m7p2-period-638c821e85dc": {
+            "class": "Tests\\Unit\\AnswerPeriodTest",
+            "name": "unmasked relative periods explicit dates and selected intervals retain their source boundaries",
+            "file": "tests/Unit/AnswerPeriodTest.php"
+        },
+        "case-m7p2-period-f656f11ad11a": {
+            "class": "Tests\\Unit\\AnswerPeriodTest",
+            "name": "closed period grammar rejects date targets prefix contamination and arbitrary duration suffixes",
+            "file": "tests/Unit/AnswerPeriodTest.php"
+        },
+        "case-m7p2-period-204cc33f096d": {
+            "class": "Tests\\Unit\\AnswerPeriodTest",
+            "name": "closed period grammar rejects projected unpaid states and contaminated commitment objects",
+            "file": "tests/Unit/AnswerPeriodTest.php"
+        },
+        "case-m7p2-period-a7a5e29a1b6e": {
+            "class": "Tests\\Feature\\CopilotAnswerTest",
+            "name": "closed period grammar keeps forced current plans from substituting facts for future questions",
+            "file": "tests/Feature/CopilotAnswerTest.php"
         }
     },
     "manual_artifacts": {
@@ -4136,7 +4176,7 @@
             "public_path": "docs/halal-wealth-os/runs/M7-P1-rendered-review.md"
         },
         "m7p2-rendered": {
-            "sha256": "ff18adc23f99c83176d97f86389a37ee01a7e8915105283b24ddba6eebeac52c",
+            "sha256": "d7b5004380e2267d05272a280078737230102e3dc371d923b6b5dbb7d18a940d",
             "scope": "Actual corrected desktop/mobile light/dark and owner/recovery UI checks, independently inspected pixels; synthetic planner, no live quality or AT audio claim.",
             "public_path": "docs/halal-wealth-os/runs/M7-P2-rendered-review.md"
         },
@@ -5230,7 +5270,13 @@
                 "case-m6p2-ae74d7e3a71d",
                 "case-m6p2-0bca9226d6ef",
                 "case-m6p2-6e10b2ffa809",
-                "case-m6p2-fea0b762884c"
+                "case-m6p2-fea0b762884c",
+                "case-m7p2-period-a1b226343b35",
+                "case-m7p2-period-1ea1babfea84",
+                "case-m7p2-period-638c821e85dc",
+                "case-m7p2-period-f656f11ad11a",
+                "case-m7p2-period-204cc33f096d",
+                "case-m7p2-period-a7a5e29a1b6e"
             ],
             "manual_artifact_ids": []
         },
@@ -5434,7 +5480,15 @@
                 "case-m7p2-6b30200d3ef6",
                 "case-m7p2-18a718cbf549",
                 "case-m7p2-5c1608faa873",
-                "case-m7p2-cycle8-semantic-wire"
+                "case-m7p2-cycle8-semantic-wire",
+                "case-m7p2-period-87af729b9e5c",
+                "case-m7p2-period-af1f8d2f70dd",
+                "case-m7p2-period-a1b226343b35",
+                "case-m7p2-period-1ea1babfea84",
+                "case-m7p2-period-638c821e85dc",
+                "case-m7p2-period-f656f11ad11a",
+                "case-m7p2-period-204cc33f096d",
+                "case-m7p2-period-a7a5e29a1b6e"
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "scope": "Retained manual original harness observations; current M5-P2 report/failure-propagation/mandatory-artifact gates must execute anew. No JUnit selector is invented to stand in for CLI/approval evidence.",
@@ -6492,7 +6546,9 @@
                 "case-m7p2-7bc49665e425",
                 "case-m7p2-17a91cbbc354",
                 "case-m7p2-7b169615fae9",
-                "case-m7p2-059cee090e34"
+                "case-m7p2-059cee090e34",
+                "case-m7p2-period-87af729b9e5c",
+                "case-m7p2-period-af1f8d2f70dd"
             ],
             "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
             "tool_check": null
@@ -6686,7 +6742,15 @@
                 "case-m7p2-6b30200d3ef6",
                 "case-m7p2-18a718cbf549",
                 "case-m7p2-5c1608faa873",
-                "case-m7p2-cycle8-semantic-wire"
+                "case-m7p2-cycle8-semantic-wire",
+                "case-m7p2-period-87af729b9e5c",
+                "case-m7p2-period-af1f8d2f70dd",
+                "case-m7p2-period-a1b226343b35",
+                "case-m7p2-period-1ea1babfea84",
+                "case-m7p2-period-638c821e85dc",
+                "case-m7p2-period-f656f11ad11a",
+                "case-m7p2-period-204cc33f096d",
+                "case-m7p2-period-a7a5e29a1b6e"
             ],
             "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
             "tool_check": null
@@ -6873,7 +6937,15 @@
                 "case-m7p2-6b30200d3ef6",
                 "case-m7p2-18a718cbf549",
                 "case-m7p2-5c1608faa873",
-                "case-m7p2-cycle8-semantic-wire"
+                "case-m7p2-cycle8-semantic-wire",
+                "case-m7p2-period-87af729b9e5c",
+                "case-m7p2-period-af1f8d2f70dd",
+                "case-m7p2-period-a1b226343b35",
+                "case-m7p2-period-1ea1babfea84",
+                "case-m7p2-period-638c821e85dc",
+                "case-m7p2-period-f656f11ad11a",
+                "case-m7p2-period-204cc33f096d",
+                "case-m7p2-period-a7a5e29a1b6e"
             ],
             "manual_artifact_ids": ["m7p2-live-evaluation"],
             "tool_check": "LIVE_ANSWER_EVALUATION"
@@ -7124,7 +7196,10 @@
                 "case-m7p2-4ec751b3f0d0",
                 "case-m7p2-af99aa7c775f",
                 "case-m7p2-80098d02ad07",
-                "case-m7p2-01c34c0a51f9"
+                "case-m7p2-01c34c0a51f9",
+                "case-m7p2-period-87af729b9e5c",
+                "case-m7p2-period-af1f8d2f70dd",
+                "case-m7p2-period-a7a5e29a1b6e"
             ],
             "implemented_subscenarios": [
                 "readonly_registry",

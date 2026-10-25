@@ -353,27 +353,27 @@
         "recorded_at": "2026-10-25T04:10:59.969588+00:00",
         "scope": "Accept M7-P1; implement canonical M7-P2, independently reviewed sanitized dev PR, normal approved-noreply merge after original exact-head CI and fresh review, original postmerge CI and signed public progress verification.",
         "accepted_dependencies": ["M7-P1"],
-        "max_cycles": 9,
+        "max_cycles": 11,
         "one_source_writer": true,
         "live_access": "APPROVED_OPENAI_SYNTHETIC_EVALUATION_ONLY",
         "credential_creation": "APPROVED_SECURE_PRIVATE_LOCAL_SETUP",
-        "evaluation_spend_cap_usd": "2.00",
+        "evaluation_spend_cap_usd": "3.00",
         "real_financial_data_external_disclosure": false,
         "deployment": false,
         "main_stage_changes": false,
         "permission_changes": false,
         "later_phases": false,
-        "latest_extension": "Human explicitly resumed remaining ninth-cycle checks with existing Node24 wrapper after wrong-host-runtime stop; ceiling9 unchanged, no application correction/new cycle/budget change."
+        "latest_extension": "Human authorized cycle11 closed current-evidence period grammar; same already approved USD3 total cap and one unused40-case run. Preserve all10cycles/failures; any further failure stops."
     },
     "execution_status": {
         "phase": "M7-P2",
         "status": "IN_PROGRESS",
-        "cycle": 9,
-        "cycles_used": 9,
-        "max_cycles": 9,
+        "cycle": 11,
+        "cycles_used": 11,
+        "max_cycles": 11,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M7_UNACCEPTED",
-        "checkpoint": "Current-basis actual GPT5.4 evaluationPASS40fixedcases30finance10adversarial; independentrawintent/provider/answer/report/ledger/fact/citationjoin0discrepancies. All66reservations1574432microUSD<2M/prior26prefixunchanged. Prelive1458/11307/96floors806selectors132requirements/nativePHPVueexactrestore/client15PASS. Reviewed redacted receipt retained; clean7artifactrelease and remotePR/originalCI/freshreview/normaldevmerge/postCI/publication pending. Phase/M7unaccepted; any further failure stops."
+        "checkpoint": "Human resumed C11 with independently verified saved55120/UTC/private-socket options. Owned database identity confirmed, no reseed/reset. Fresh synthetic browser corrected-duration2.00/currentcommitments200QAR/date+futureunsupported/foreign404/mobilelightdark passed with unchanged finance/66realledger; failed assertion and setup attempt retained. Browser/server stopped; current native/restoration/coverage/live/release remain pending. Sameceiling11/USD3/one40run, any further failure stops."
     },
     "dependency_patch": {
         "authorized": true,
@@ -3750,6 +3750,46 @@
             "phase_acceptance": "UNACCEPTED",
             "milestone_acceptance": "M7_UNACCEPTED",
             "checkpoint": "C9 formatting/affected62tests777assertions passed, but coordinator ran client tests with hostNode22 rather than configured24 wrapper;13passed1TSloaderfailure. Source correction not required. Native pipeline interrupted intentionally/no fullPASS. No paidcalls;26reservations448032unchanged. Ownedresources stopped; owner resumption decision required before remaining ninth-cycle checks, with no extra correction cycle inferred."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "IN_PROGRESS",
+            "cycle": 9,
+            "cycles_used": 9,
+            "max_cycles": 9,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "Current-basis actual GPT5.4 evaluationPASS40fixedcases30finance10adversarial; independentrawintent/provider/answer/report/ledger/fact/citationjoin0discrepancies. All66reservations1574432microUSD<2M/prior26prefixunchanged. Prelive1458/11307/96floors806selectors132requirements/nativePHPVueexactrestore/client15PASS. Reviewed redacted receipt retained; clean7artifactrelease and remotePR/originalCI/freshreview/normaldevmerge/postCI/publication pending. Phase/M7unaccepted; any further failure stops."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "BLOCKED",
+            "cycle": 9,
+            "cycles_used": 9,
+            "max_cycles": 9,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "PR26 fresh exact-head hostedreview completed with one confirmedP2: AnswerPeriod standalone last/next rejects valid emergency-duration/current-commitment horizon wording. Published4784f2c/localclean7artifacts/current40PASS retained; originalCI40178030278attempt1continues untouched. All9cyclesused/anyfailurestop, no source correction/merge authorized. Current66reservations1574432under2M; newbasis40wouldtotal2700832, requires explicitcycle10+3Mcap approval. Ownedresourcesoff/noAPIcalls."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "IN_PROGRESS",
+            "cycle": 10,
+            "cycles_used": 10,
+            "max_cycles": 10,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "Owner authorized cycle10/USD3 total reservation cap. Correct only period-expression rejection/current-commitment horizon with regression/browser/current-source checks, preserve all9cycles/failures and66ledgerentries1574432. New current-basis40 required after all binding changes; original4784 CI/review/receipt remain historical. Any further failure stops; no11th cycle."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "BLOCKED",
+            "cycle": 10,
+            "cycles_used": 10,
+            "max_cycles": 10,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "C10 plannedred2confirmed/affected97tests1202assertions/client15/lint/static passed; independentperiodsource reviewCHANGES_REQUIRED: arbitrary duration date-complement and future unpaid-state wording still admitted. Five read-onlycounterexamplesconfirmed. All10cyclesused/anyfailurestop. No newAPI;66reservations1574432unchanged under approved3M. PG/browser/serverstopped; followupdeleted. C11closed-current-grammarproposalonly, no correction/merge authorized."
         }
     ],
     "m7p2_execution_history": [
