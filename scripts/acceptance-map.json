@@ -3976,6 +3976,56 @@
             "class": "Tests\\Feature\\ReleaseSecurityTest",
             "name": "password recovery invalidates an existing owner session before financial reads writes or exports with data set \"('POST', '/copilot/consent')\"",
             "file": "tests/Feature/ReleaseSecurityTest.php"
+        },
+        "case-m7p2-e4103ed4e412": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "evaluation intent pins the exact serialized request once while production reservation remains unchanged",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-c65a9d866c9c": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "evaluation guards reject missing changed or oversized intents and mismatched model before any request",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-588efdf7610c": {
+            "class": "Tests\\Feature\\OpenAiAnswerPlannerTest",
+            "name": "evaluation rejects observed input usage over its tighter limit without another transfer",
+            "file": "tests/Feature/OpenAiAnswerPlannerTest.php"
+        },
+        "case-m7p2-b3966ae3c2ac": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"wrong model\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-69bb9422ed47": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"underpriced input\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-2fcb8b77d25d": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"underpriced output\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-9789a8429e57": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"wrong input bound\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-6b30200d3ef6": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"lower production charge\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-18a718cbf549": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "approved model prices and caps are required before a new reservation can touch the ledger with data set \"dataset \"higher total cap\"\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p2-5c1608faa873": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "new-model reservations append to an intact anchored legacy mini history",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
         }
     },
     "manual_artifacts": {
@@ -5368,7 +5418,17 @@
                 "case-m6p2-3e04992e1f6e",
                 "case-m6p2-4db67c7d3046",
                 "case-m6p2-8760391f26f0",
-                "case-m6p2-04cede31662a"
+                "case-m6p2-04cede31662a",
+                "case-m7p2-e4103ed4e412",
+                "case-m7p2-c65a9d866c9c",
+                "case-m7p2-588efdf7610c",
+                "case-m7p2-b3966ae3c2ac",
+                "case-m7p2-69bb9422ed47",
+                "case-m7p2-2fcb8b77d25d",
+                "case-m7p2-9789a8429e57",
+                "case-m7p2-6b30200d3ef6",
+                "case-m7p2-18a718cbf549",
+                "case-m7p2-5c1608faa873"
             ],
             "manual_artifact_ids": ["artifact-fef43d579e25"],
             "scope": "Retained manual original harness observations; current M5-P2 report/failure-propagation/mandatory-artifact gates must execute anew. No JUnit selector is invented to stand in for CLI/approval evidence.",
@@ -6609,7 +6669,17 @@
                 "case-m7p2-session-5ef9c4c35b9d",
                 "case-m7p2-session-a972bd4d4a7e",
                 "case-m7p2-session-ec97a414afd6",
-                "case-m7p2-session-2cf69b177602"
+                "case-m7p2-session-2cf69b177602",
+                "case-m7p2-e4103ed4e412",
+                "case-m7p2-c65a9d866c9c",
+                "case-m7p2-588efdf7610c",
+                "case-m7p2-b3966ae3c2ac",
+                "case-m7p2-69bb9422ed47",
+                "case-m7p2-2fcb8b77d25d",
+                "case-m7p2-9789a8429e57",
+                "case-m7p2-6b30200d3ef6",
+                "case-m7p2-18a718cbf549",
+                "case-m7p2-5c1608faa873"
             ],
             "manual_artifact_ids": ["m7p2-rendered", "m7p2-tia"],
             "tool_check": null
@@ -6785,7 +6855,17 @@
                 "case-m7p2-7bc49665e425",
                 "case-m7p2-17a91cbbc354",
                 "case-m7p2-7b169615fae9",
-                "case-m7p2-059cee090e34"
+                "case-m7p2-059cee090e34",
+                "case-m7p2-e4103ed4e412",
+                "case-m7p2-c65a9d866c9c",
+                "case-m7p2-588efdf7610c",
+                "case-m7p2-b3966ae3c2ac",
+                "case-m7p2-69bb9422ed47",
+                "case-m7p2-2fcb8b77d25d",
+                "case-m7p2-9789a8429e57",
+                "case-m7p2-6b30200d3ef6",
+                "case-m7p2-18a718cbf549",
+                "case-m7p2-5c1608faa873"
             ],
             "manual_artifact_ids": ["m7p2-live-evaluation"],
             "tool_check": "LIVE_ANSWER_EVALUATION"
@@ -7036,7 +7116,17 @@
                 "case-m7p2-4ec751b3f0d0",
                 "case-m7p2-af99aa7c775f",
                 "case-m7p2-80098d02ad07",
-                "case-m7p2-01c34c0a51f9"
+                "case-m7p2-01c34c0a51f9",
+                "case-m7p2-e4103ed4e412",
+                "case-m7p2-c65a9d866c9c",
+                "case-m7p2-588efdf7610c",
+                "case-m7p2-b3966ae3c2ac",
+                "case-m7p2-69bb9422ed47",
+                "case-m7p2-2fcb8b77d25d",
+                "case-m7p2-9789a8429e57",
+                "case-m7p2-6b30200d3ef6",
+                "case-m7p2-18a718cbf549",
+                "case-m7p2-5c1608faa873"
             ],
             "implemented_subscenarios": [
                 "readonly_registry",

@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Integrations\AnswerEvaluationPolicy;
 use App\Domain\Integrations\OpenAiAnswerPlanner;
 use App\Domain\Intelligence\UntrustedInput;
 use App\Domain\Reporting\Copilot\Answers\AnswerClaim;
@@ -14,7 +15,7 @@ uses(TestCase::class);
 
 function answerProviderReceipt(): array
 {
-    return ['id' => 'resp_synthetic_not_live', 'status' => 'completed', 'model' => 'gpt-5.4-mini-2026-03-17', 'usage' => ['input_tokens' => 100, 'output_tokens' => 20, 'total_tokens' => 120],
+    return ['id' => 'resp_synthetic_not_live', 'status' => 'completed', 'model' => 'gpt-5.4-2026-03-05', 'usage' => ['input_tokens' => 100, 'output_tokens' => 20, 'total_tokens' => 120],
         'output' => [['type' => 'reasoning'], ['type' => 'message', 'content' => [['type' => 'output_text', 'text' => '{"claim":"cash.available","mode":"recorded","scope":"current"}']]]]];
 }
 
@@ -44,7 +45,7 @@ test('valid strict response selects a claim while outgoing payload excludes trus
     $plan = $wire->plan(UntrustedInput::parse('available cash', 'UNTRUSTED synthetic document'));
     expect($plan->claim)->toBe(AnswerClaim::CashAvailable)->and($wire->observation['usage']['total_tokens'])->toBe(120)->and($wire->observation['http_attempts'])->toBe(1);
     Http::assertSent(function ($request) {
-        expect($request['store'])->toBeFalse()->and($request['model'])->toBe('gpt-5.4-mini-2026-03-17')->and($request['text']['format']['strict'])->toBeTrue();
+        expect($request['store'])->toBeFalse()->and($request['model'])->toBe('gpt-5.4-2026-03-05')->and($request['text']['format']['strict'])->toBeTrue();
         expect(array_keys(json_decode($request['input'], true)))->toBe(['QUESTION', 'DOCUMENT']);
         expect($request->data())->not->toHaveKeys(['tools', 'owner_id', 'context', 'facts', 'previous_response_id']);
 
@@ -145,4 +146,49 @@ test('provider deadline covers delayed response bodies and complete chunked rece
         }
         proc_close($process);
     }
+});
+
+test('evaluation intent pins the exact serialized request once while production reservation remains unchanged', function () {
+    Http::fake(['api.openai.com/v1/responses' => Http::response(answerProviderReceipt(), 200)]);
+    $input = UntrustedInput::parse('What percentage is backed?', 'Synthetic only');
+    $planner = new OpenAiAnswerPlanner(evaluation: true);
+    $intent = $planner->prepareEvaluation($input);
+    expect($intent['policy']['max_input_tokens'])->toBe(8192)
+        ->and(config('copilot.tokens_per_request'))->toBe(16384)
+        ->and($intent['wire_bytes'] + 1024)->toBeLessThanOrEqual(8192);
+    $planner->plan($input);
+    Http::assertSent(fn ($request) => hash('sha256', $request->body()) === $intent['payload_sha256'] && strlen($request->body()) === $intent['wire_bytes']);
+    expect($planner->observation['policy_sha256'])->toBe(AnswerEvaluationPolicy::digest())
+        ->and($planner->observation['evaluation'])->toBeTrue()
+        ->and($planner->observation['max_input_tokens'])->toBe(8192);
+    expect(fn () => $planner->plan($input))->toThrow(RuntimeException::class, 'prepared request');
+    expect(fn () => $planner->prepareEvaluation($input))->toThrow(RuntimeException::class, 'fresh evaluation');
+    Http::assertSentCount(1);
+});
+
+test('evaluation guards reject missing changed or oversized intents and mismatched model before any request', function () {
+    Http::fake();
+    $input = UntrustedInput::parse('cash', '');
+    expect(fn () => (new OpenAiAnswerPlanner(evaluation: true))->plan($input))->toThrow(RuntimeException::class, 'prepared request');
+    expect(fn () => (new OpenAiAnswerPlanner)->prepareEvaluation($input))->toThrow(RuntimeException::class, 'fresh evaluation');
+    $planner = new OpenAiAnswerPlanner(evaluation: true);
+    $planner->prepareEvaluation($input);
+    expect(fn () => $planner->plan(UntrustedInput::parse('different question', '')))->toThrow(RuntimeException::class, 'prepared request');
+    // Control characters expand on the actual JSON wire; the ordinary 2KiB input bound still holds.
+    expect(fn () => (new OpenAiAnswerPlanner(evaluation: true))->prepareEvaluation(UntrustedInput::parse('cash', str_repeat("\x01", 1000))))->toThrow(RuntimeException::class, 'input ceiling');
+    config(['copilot.answer_model' => 'gpt-5.4-mini-2026-03-17']);
+    expect(fn () => (new OpenAiAnswerPlanner(evaluation: true))->prepareEvaluation($input))->toThrow(RuntimeException::class, 'model mismatch');
+    Http::assertNothingSent();
+});
+
+test('evaluation rejects observed input usage over its tighter limit without another transfer', function () {
+    $receipt = answerProviderReceipt();
+    $receipt['usage'] = ['input_tokens' => 8193, 'output_tokens' => 20, 'total_tokens' => 8213];
+    Http::fake(['api.openai.com/v1/responses' => Http::response($receipt, 200)]);
+    $input = UntrustedInput::parse('cash', '');
+    $planner = new OpenAiAnswerPlanner(evaluation: true);
+    $planner->prepareEvaluation($input);
+    expect(fn () => $planner->plan($input))->toThrow(RuntimeException::class, 'unavailable');
+    expect($planner->observation['http_attempts'])->toBe(1)->and($planner->observation['outcome'])->toBe('unavailable');
+    Http::assertSentCount(1);
 });

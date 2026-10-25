@@ -12,7 +12,11 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { evaluationBasis } from './answer-eval-basis.mjs';
-import { validateLiveReport } from './verify-answer-eval.mjs';
+import {
+    validateLiveReport,
+    releasePolicy,
+    policyDigest,
+} from './verify-answer-eval.mjs';
 const digest = (x) => createHash('sha256').update(x).digest('hex');
 const dataset = readFileSync('resources/copilot/evaluation/questions-v1.json');
 const prompt = readFileSync('resources/copilot/answer-plan-v1.txt');
@@ -28,7 +32,15 @@ function syntheticValidatorFixture() {
         http_attempts: 1,
         handler_transfers: 1,
         native_curl_stats: true,
-        model: 'gpt-5.4-mini-2026-03-17',
+        model: 'gpt-5.4-2026-03-05',
+        policy_sha256: policyDigest,
+        payload_sha256: digest('explicit-stub-wire-' + i),
+        evaluation: true,
+        wire_bytes: 1000,
+        max_input_tokens: 8192,
+        max_output_tokens: 512,
+        reasoning_effort: 'none',
+        store: false,
         claim: c.claim,
         mode: c.mode,
         scope: c.scope,
@@ -58,7 +70,7 @@ function syntheticValidatorFixture() {
         ),
     }));
     return {
-        version: 'live-answer-evaluation-v1',
+        version: 'live-answer-evaluation-v2',
         started_at: '2026-10-25T03:59:00Z',
         completed_at: '2026-10-25T04:01:00Z',
         result: 'PASS',
@@ -67,13 +79,16 @@ function syntheticValidatorFixture() {
         basis_sha256: 'a'.repeat(64),
         dataset_sha256: digest(dataset),
         prompt_sha256: digest(prompt),
-        model: 'gpt-5.4-mini-2026-03-17',
+        model: 'gpt-5.4-2026-03-05',
         store: false,
         max_output_tokens: 512,
+        max_input_tokens: 8192,
+        policy: structuredClone(releasePolicy),
+        policy_sha256: policyDigest,
         cases,
         totals: { cases: 40, input_tokens: 4000, output_tokens: 800 },
         total_eval_cap_micro_usd: 2000000,
-        reserved_total_micro_usd: 585504,
+        reserved_total_micro_usd: 1128224,
         limitation:
             'retained observed receipt; not a provider-signed attestation',
     };
@@ -86,6 +101,15 @@ await test('retained live evidence validator rejects changed basis missing cases
     );
     for (const mutate of [
         (r) => (r.transport = 'stub'),
+        (r) => (r.model = 'gpt-5.4-mini-2026-03-17'),
+        (r) => (r.policy.case_reservation_micro_usd = 1),
+        (r) => (r.cases[0].policy_sha256 = 'f'.repeat(64)),
+        (r) => (r.cases[0].wire_bytes = 8192),
+        (r) => (r.cases[0].max_input_tokens = 16384),
+        (r) => {
+            r.cases[0].usage.input_tokens = 8193;
+            r.cases[0].usage.total_tokens = 8213;
+        },
         (r) => (r.cases[0].handler_transfers = 2),
         (r) => (r.cases[0].native_curl_stats = false),
         (r) => (r.basis_sha256 = 'b'.repeat(64)),

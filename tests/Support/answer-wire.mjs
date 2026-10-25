@@ -3,7 +3,7 @@ import { gzipSync } from 'node:zlib';
 const receipt = JSON.stringify({
     id: 'resp_synthetic_chunked',
     status: 'completed',
-    model: 'gpt-5.4-mini-2026-03-17',
+    model: 'gpt-5.4-2026-03-05',
     usage: { input_tokens: 10, output_tokens: 10, total_tokens: 20 },
     output: [
         {

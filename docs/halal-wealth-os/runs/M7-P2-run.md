@@ -1,6 +1,6 @@
 # M7-P2 execution record
 
-Status: in progress and unaccepted. One implementation owner, cycle5 of six. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
+Status: owner-resumed sixth cycle, in progress and unaccepted. One implementation owner, cycle6 of six. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
 
 Implemented a default-off bounded answer planner, deterministic typed fact projection, owner-scoped source references, current-page chat/recovery and versioned30-finance/10-adversarial evaluation dataset. Initial73 affected tests797 assertions passed, alongside client schema/basis tests and actual owned loopback transport checks. A prior focused measurement gave99–100 percent coverage across the new concrete financial sources; the final full floor is not yet claimed.
 
@@ -31,3 +31,13 @@ The corrected prompt passed a fresh native1,447-test/11,054-assertion baseline a
 The second actual run passed all six cash cases, including the prior hypothetical mode. It stopped on the emergency summary because the model selected only the backed percentage instead of the full overview. The returned scalar was accurate but did not satisfy the summary request. The failed provider/answer/intent and six partial passes remain retained, not a complete pass. The prompt now explicitly prioritizes overview for one-topic summary requests and defines the percentage-versus-months distinction. Dataset/oracle and financial code are unchanged. All nine reservations including the initial access probe remain within the same118,560-micro-USD reservation total. This is reserved headroom, not a billing claim. Cycle5 of six; no publication or acceptance yet.
 
 Cycle5 fresh native1,447-test/11,054-assertion verification and repeated PHP/Vue affected selection/exact restoration passed. The latest prompt has independent scoped review; a complete strict live run on its fixed basis remains required.
+
+## Mandatory repeated-live-failure stop
+
+The third actual run passed ten cases, then selected a backed monetary amount for a percentage question. This remains a failed current-basis live evaluation. Three unsuccessful selection runs now trigger runbook rule8; five of six cycles are used, and further correction/paid evaluation requires explicit owner resumption. All19 model requests plus the minimal access probe, original failures and append-only reservations are retained. No complete40-case PASS, final release, push, PR, CI, merge or publishing is claimed. Owned resources are stopped. A bounded stronger-model recovery proposal is held privately; it has not been implemented or approved.
+
+## Owner-approved sixth-cycle recovery
+
+The owner explicitly approved resuming the remaining sixth cycle after the mandatory stop. All earlier failures and reservations remain retained. The current recovery pins GPT-5.4 dated2026-03-05, reasoning none/store false, strict JSON,512 output and evaluation-only8,192 input. Actual serialized wire plus1,024 overhead is checked before network; a one-use prepared-body digest binds the saved intent to the body sent. Observed usage and report/validator policy must match. Production admission stays16,384 per request. New price reservations are28,160 microUSD per case under the sameUSD2 cap, appended to unchanged anchored prior history. No extra paid probe, fallback or retry is included.
+
+Static analysis passed with zero errors. The affected91 tests passed944 assertions, including actual owned loopback transport and unchanged owner charging; five client/receipt-validator tests passed. The acceptance map preserves all795 previous selectors and adds10 executed recovery cases for805 total/132 requirements. Full current native/coverage/release and the one complete actual40-case run remain pending; no paid recovery call, PR, merge or publication has occurred. Any further failure stops.

@@ -2,12 +2,17 @@
 
 declare(strict_types=1);
 
+use App\Domain\Integrations\AnswerEvaluationPolicy;
+
 /** Durable append-only reservations, independently of the evidence destination.
  * Failed/unknown attempts retain their complete conservative reservation.
  *
  * @return int total reserved microUSD after this admission */
-function reserveAnswerEvaluation(string $privateRoot, string $case, string $basis, string $referenceHash): int
+/** @param array<string,mixed>|null $policy */
+function reserveAnswerEvaluation(string $privateRoot, string $case, string $basis, string $referenceHash, ?array $policy = null): int
 {
+    $policy = AnswerEvaluationPolicy::validate($policy ?? AnswerEvaluationPolicy::current());
+    $reservation = $policy['case_reservation_micro_usd'];
     $ledgerFile = $privateRoot.'/live-budget-ledger.jsonl';
     $anchorFile = $privateRoot.'/live-budget-anchor.json';
     $lockFile = $privateRoot.'/live-budget.lock';
@@ -77,12 +82,11 @@ function reserveAnswerEvaluation(string $privateRoot, string $case, string $basi
             }
             $total += $entry['reserved_micro_usd'];
         }
-        // At most16,384 input plus512 output tokens, at USD0.75/4.50 per1M.
-        // This over-reserves the combined16,384-token request ceiling.
-        if ($total + 14592 > 2000000) {
+        // New approved model:8,192 input plus512 output; legacy reservations stay intact.
+        if ($total + $reservation > $policy['total_cap_micro_usd']) {
             throw new RuntimeException('Synthetic evaluation budget exhausted.');
         }
-        $line = json_encode(['case' => $case, 'basis_sha256' => $basis, 'reference_sha256' => $referenceHash, 'reserved_micro_usd' => 14592, 'status' => 'reserved_before_call'], JSON_THROW_ON_ERROR)."\n";
+        $line = json_encode(['case' => $case, 'basis_sha256' => $basis, 'reference_sha256' => $referenceHash, 'reserved_micro_usd' => $reservation, 'model' => $policy['model'], 'policy_sha256' => AnswerEvaluationPolicy::digest(), 'max_input_tokens' => $policy['max_input_tokens'], 'max_output_tokens' => $policy['max_output_tokens'], 'status' => 'reserved_before_call'], JSON_THROW_ON_ERROR)."\n";
         if (fwrite($ledger, $line) !== strlen($line) || ! fflush($ledger) || ! fsync($ledger)) {
             throw new RuntimeException('Budget reservation not durable.');
         }
@@ -101,7 +105,7 @@ function reserveAnswerEvaluation(string $privateRoot, string $case, string $basi
             fclose($watermark);
         }
 
-        return $total + 14592;
+        return $total + $reservation;
     } finally {
         if (is_resource($ledger)) {
             fclose($ledger);

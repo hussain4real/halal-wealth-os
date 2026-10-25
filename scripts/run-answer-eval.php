@@ -7,6 +7,7 @@ require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/answer-eval-budget.php';
 require __DIR__.'/answer-eval-evidence.php';
 
+use App\Domain\Integrations\AnswerEvaluationPolicy;
 use App\Domain\Integrations\OpenAiAnswerPlanner;
 use App\Domain\Intelligence\Answers\AnswerPlanner;
 use App\Domain\Intelligence\CopilotBoundary;
@@ -52,14 +53,19 @@ try {
     }
     config(['app.debug' => false, 'copilot.answer_enabled' => true, 'copilot.openai_key' => $key]);
     unset($envBytes, $keyMatch, $key);
+    $policy = AnswerEvaluationPolicy::current();
+    $policyHash = AnswerEvaluationPolicy::digest();
+    if (config('copilot.answer_model') !== $policy['model'] || config('copilot.tokens_per_request') !== $policy['production_reservation_tokens']) {
+        throw new RuntimeException('Evaluation policy/config mismatch.');
+    }
     $dataset = file_get_contents($root.'/resources/copilot/evaluation/questions-v1.json');
     $cases = json_decode($dataset, true, flags: JSON_THROW_ON_ERROR)['cases'];
     $basis = trim(shell_exec('node '.escapeshellarg($root.'/scripts/answer-eval-basis.mjs')) ?? '');
     if (! preg_match('/^[a-f0-9]{64}$/D', $basis) || count($cases) < 40) {
         throw new RuntimeException('Invalid evaluation basis/inventory.');
     }
-    $report = ['version' => 'live-answer-evaluation-v1', 'started_at' => gmdate('Y-m-d\TH:i:s\Z'), 'result' => 'INCOMPLETE', 'synthetic_only' => true, 'transport' => 'actual-openai-responses', 'basis_sha256' => $basis,
-        'dataset_sha256' => hash('sha256', $dataset), 'prompt_sha256' => hash_file('sha256', $root.'/resources/copilot/answer-plan-v1.txt'), 'model' => config('copilot.answer_model'), 'store' => false, 'max_output_tokens' => 512,
+    $report = ['version' => 'live-answer-evaluation-v2', 'started_at' => gmdate('Y-m-d\TH:i:s\Z'), 'result' => 'INCOMPLETE', 'synthetic_only' => true, 'transport' => 'actual-openai-responses', 'basis_sha256' => $basis,
+        'dataset_sha256' => hash('sha256', $dataset), 'prompt_sha256' => hash_file('sha256', $root.'/resources/copilot/answer-plan-v1.txt'), 'model' => $policy['model'], 'store' => $policy['store'], 'max_output_tokens' => $policy['max_output_tokens'], 'max_input_tokens' => $policy['max_input_tokens'], 'policy' => $policy, 'policy_sha256' => $policyHash,
         'total_eval_cap_micro_usd' => 2000000, 'cases' => [], 'limitation' => 'CI verifies this current-basis retained observed receipt; not a provider-signed attestation and not a CI live rerun. Measures bounded model claim/mode/scope selection and integrated deterministic facts, not unrestricted prose quality. Selected tool is the redacted server admission selection; missing context can prevent retrieval. No provider tools are offered. Handler transfers are observed; no provider-side exactly-once execution guarantee is claimed.'];
     $hashFinance = static function (): string {
         $rows = [];
@@ -81,17 +87,19 @@ try {
         $fixture = AnswerFixtures::seed($owner);
         Auth::login($owner);
         CopilotFixtures::allow($owner);
-        $planner = new OpenAiAnswerPlanner;
+        $planner = new OpenAiAnswerPlanner(evaluation: true);
+        $input = UntrustedInput::parse($case['question'], $case['document']);
+        $intent = $planner->prepareEvaluation($input);
         app()->instance(AnswerPlanner::class, $planner);
         $before = $hashFinance();
         $reference = (string) Str::uuid();
-        $totalReserved = reserveAnswerEvaluation(dirname($root), $case['id'], $basis, hash('sha256', $reference));
-        writeAnswerEvaluationEvidence($destination.'/'.$case['id'].'-intent.json', ['case_id' => $case['id'], 'case_sha256' => $caseHash, 'basis_sha256' => $basis, 'reference_sha256' => hash('sha256', $reference), 'status' => 'reserved_before_handoff']);
-        $result = app(CopilotBoundary::class)->answer($reference, UntrustedInput::parse($case['question'], $case['document']), AnswerFixtures::context($fixture, $case['missing'] ?? null), true);
+        $totalReserved = reserveAnswerEvaluation(dirname($root), $case['id'], $basis, hash('sha256', $reference), $policy);
+        writeAnswerEvaluationEvidence($destination.'/'.$case['id'].'-intent.json', ['case_id' => $case['id'], 'case_sha256' => $caseHash, 'basis_sha256' => $basis, 'reference_sha256' => hash('sha256', $reference), 'status' => 'reserved_before_handoff', 'request' => $intent, 'reserved_micro_usd' => $policy['case_reservation_micro_usd'], 'reserved_total_micro_usd' => $totalReserved, 'production_reservation_tokens' => $policy['production_reservation_tokens']]);
+        $result = app(CopilotBoundary::class)->answer($reference, $input, AnswerFixtures::context($fixture, $case['missing'] ?? null), true);
         writeAnswerEvaluationEvidence($destination.'/'.$case['id'].'-answer.json', $result);
         $observation = $planner->observation;
         writeAnswerEvaluationEvidence($destination.'/'.$case['id'].'-provider.json', $observation);
-        if ($result['status'] !== 'complete' || ($observation['http_status'] ?? null) !== 200 || ($observation['handler_transfers'] ?? null) !== 1 || ($observation['native_curl_stats'] ?? false) !== true || ($observation['scope'] ?? null) !== $case['scope']) {
+        if ($result['status'] !== 'complete' || ($observation['http_status'] ?? null) !== 200 || ($observation['handler_transfers'] ?? null) !== 1 || ($observation['native_curl_stats'] ?? false) !== true || ($observation['scope'] ?? null) !== $case['scope'] || ($observation['policy_sha256'] ?? null) !== $policyHash || ($observation['payload_sha256'] ?? null) !== $intent['payload_sha256'] || ($observation['wire_bytes'] ?? null) !== $intent['wire_bytes'] || ($observation['evaluation'] ?? null) !== true || ($observation['max_input_tokens'] ?? null) !== $policy['max_input_tokens'] || ($observation['max_output_tokens'] ?? null) !== $policy['max_output_tokens']) {
             throw new RuntimeException('Live case failed: '.$case['id'].' (redacted observation retained).');
         }
         $checks = AnswerOracle::check($owner, $case, $result['evidence'], $fixture);
@@ -108,7 +116,7 @@ try {
         }
         $checks += ['tool_selection' => true, 'no_financial_writes' => true, 'once_only_charge' => true, 'budget_reserved_before_call' => true];
         $report['cases'][] = ['id' => $case['id'], 'case_sha256' => $caseHash, 'input_sha256' => hash('sha256', json_encode(['QUESTION' => $case['question'], 'DOCUMENT' => $case['document']], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)),
-            'observed_at' => gmdate('Y-m-d\TH:i:s\Z'), 'http_status' => $observation['http_status'], 'http_attempts' => $observation['http_attempts'], 'handler_transfers' => $observation['handler_transfers'], 'native_curl_stats' => $observation['native_curl_stats'], 'model' => $observation['model'], 'response_id_sha256' => hash('sha256', $observation['response_id']), 'usage' => $observation['usage'], 'claim' => $observation['claim'], 'mode' => $observation['mode'], 'scope' => $observation['scope'], 'selected_tool' => $selectedTool, 'checks' => $checks];
+            'observed_at' => gmdate('Y-m-d\TH:i:s\Z'), 'http_status' => $observation['http_status'], 'http_attempts' => $observation['http_attempts'], 'handler_transfers' => $observation['handler_transfers'], 'native_curl_stats' => $observation['native_curl_stats'], 'model' => $observation['model'], 'evaluation' => $observation['evaluation'], 'policy_sha256' => $policyHash, 'payload_sha256' => $observation['payload_sha256'], 'wire_bytes' => $observation['wire_bytes'], 'max_input_tokens' => $observation['max_input_tokens'], 'max_output_tokens' => $observation['max_output_tokens'], 'reasoning_effort' => $observation['reasoning_effort'], 'store' => $observation['store'], 'response_id_sha256' => hash('sha256', $observation['response_id']), 'usage' => $observation['usage'], 'claim' => $observation['claim'], 'mode' => $observation['mode'], 'scope' => $observation['scope'], 'selected_tool' => $selectedTool, 'checks' => $checks];
         $report['reserved_total_micro_usd'] = $totalReserved;
         writeAnswerEvaluationEvidence($destination.'/report.json', $report);
         Date::setTestNow();

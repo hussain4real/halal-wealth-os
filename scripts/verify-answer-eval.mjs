@@ -3,20 +3,48 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { evaluationBasis, liveReport, root } from './answer-eval-basis.mjs';
 import path from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
 const digest = (x) => createHash('sha256').update(x).digest('hex');
+export const releasePolicy = Object.freeze(
+    JSON.parse(
+        readFileSync(
+            path.join(root, 'resources/copilot/evaluation/policy-v2.json'),
+        ),
+    ),
+);
+const approvedPolicy = {
+    version: 'answer-evaluation-policy-v2',
+    model: 'gpt-5.4-2026-03-05',
+    reasoning_effort: 'none',
+    store: false,
+    max_input_tokens: 8192,
+    max_output_tokens: 512,
+    wire_overhead_tokens: 1024,
+    input_price_micro_usd_per_million: 2500000,
+    output_price_micro_usd_per_million: 15000000,
+    case_reservation_micro_usd: 28160,
+    total_cap_micro_usd: 2000000,
+    production_reservation_tokens: 16384,
+};
+if (!isDeepStrictEqual(releasePolicy, approvedPolicy))
+    throw Error('BLOCKED M7-P2 evaluation pricing/model policy');
+export const policyDigest = digest(JSON.stringify(releasePolicy));
 export function validateLiveReport(report, basis, dataset, prompt) {
     const fail = (s) => {
         throw Error('BLOCKED M7-P2 live evaluation: ' + s);
     };
     if (
-        report.version !== 'live-answer-evaluation-v1' ||
+        report.version !== 'live-answer-evaluation-v2' ||
         report.result !== 'PASS' ||
         report.synthetic_only !== true ||
         report.transport !== 'actual-openai-responses' ||
         report.basis_sha256 !== basis ||
         report.dataset_sha256 !== digest(dataset) ||
         report.prompt_sha256 !== digest(prompt) ||
-        report.model !== 'gpt-5.4-mini-2026-03-17' ||
+        report.model !== releasePolicy.model ||
+        !isDeepStrictEqual(report.policy, releasePolicy) ||
+        report.policy_sha256 !== policyDigest ||
+        report.max_input_tokens !== releasePolicy.max_input_tokens ||
         report.store !== false ||
         report.max_output_tokens !== 512
     )
@@ -129,6 +157,20 @@ export function validateLiveReport(report, basis, dataset, prompt) {
         )
             fail('case selection or real transport');
         if (
+            r.policy_sha256 !== policyDigest ||
+            r.evaluation !== true ||
+            r.max_input_tokens !== releasePolicy.max_input_tokens ||
+            r.max_output_tokens !== releasePolicy.max_output_tokens ||
+            r.reasoning_effort !== releasePolicy.reasoning_effort ||
+            r.store !== false ||
+            !Number.isSafeInteger(r.wire_bytes) ||
+            r.wire_bytes < 1 ||
+            r.wire_bytes + releasePolicy.wire_overhead_tokens >
+                releasePolicy.max_input_tokens ||
+            !/^[a-f0-9]{64}$/.test(r.payload_sha256)
+        )
+            fail('enforced request policy');
+        if (
             !/^[a-f0-9]{64}$/.test(r.response_id_sha256) ||
             receipts.has(r.response_id_sha256)
         )
@@ -143,7 +185,9 @@ export function validateLiveReport(report, basis, dataset, prompt) {
             r.usage.output_tokens > 512 ||
             r.usage.total_tokens !==
                 r.usage.input_tokens + r.usage.output_tokens ||
-            r.usage.total_tokens > 16384
+            r.usage.input_tokens > releasePolicy.max_input_tokens ||
+            r.usage.total_tokens >
+                releasePolicy.max_input_tokens + releasePolicy.max_output_tokens
         )
             fail('measured usage');
         for (const k of [
@@ -169,7 +213,8 @@ export function validateLiveReport(report, basis, dataset, prompt) {
         report.total_eval_cap_micro_usd !== 2000000 ||
         !Number.isSafeInteger(report.reserved_total_micro_usd) ||
         report.reserved_total_micro_usd > 2000000 ||
-        report.reserved_total_micro_usd < cases.length * 14592
+        report.reserved_total_micro_usd <
+            cases.length * releasePolicy.case_reservation_micro_usd
     )
         fail('totals/budget');
     if (
@@ -179,6 +224,9 @@ export function validateLiveReport(report, basis, dataset, prompt) {
         fail('trust limitation');
     return {
         result: 'PASS',
+        model: releasePolicy.model,
+        policy_sha256: policyDigest,
+        max_input_tokens: releasePolicy.max_input_tokens,
         basis_sha256: basis,
         cases: cases.length,
         finance: cases.filter((c) => c.category === 'finance').length,
