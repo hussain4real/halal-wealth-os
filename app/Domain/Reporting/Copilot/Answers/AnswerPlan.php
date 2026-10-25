@@ -31,7 +31,8 @@ final readonly class AnswerPlan
     public static function schema(): array
     {
         return ['type' => 'object', 'properties' => [
-            'claim' => ['type' => 'string', 'enum' => array_map(fn (AnswerClaim $c): string => $c->value, AnswerClaim::cases())],
+            'claim' => ['type' => 'string', 'enum' => array_map(fn (AnswerClaim $c): string => $c->value, AnswerClaim::cases()),
+                'description' => 'Choose the requested metric by meaning and units, not word similarity. '.implode('; ', array_map(fn (AnswerClaim $c): string => $c->value.'='.$c->meaning(), AnswerClaim::cases()))],
             'mode' => ['type' => 'string', 'enum' => ['recorded', 'hypothetical']],
             'scope' => ['type' => 'string', 'enum' => ['current', 'selected', 'unsupported']],
         ], 'required' => ['claim', 'mode', 'scope'], 'additionalProperties' => false];

@@ -2,7 +2,7 @@
     "schema_version": 1,
     "plan_version": "1.0",
     "project": "Halal Wealth OS",
-    "updated_at": "2026-10-25T07:44:34.753794+00:00",
+    "updated_at": "2026-10-25T07:51:05.384416+00:00",
     "policy": {
         "implementation_unit": "phase",
         "one_implementation_owner": true,
@@ -353,7 +353,7 @@
         "recorded_at": "2026-10-25T04:10:59.969588+00:00",
         "scope": "Accept M7-P1; implement canonical M7-P2, independently reviewed sanitized dev PR, normal approved-noreply merge after original exact-head CI and fresh review, original postmerge CI and signed public progress verification.",
         "accepted_dependencies": ["M7-P1"],
-        "max_cycles": 7,
+        "max_cycles": 9,
         "one_source_writer": true,
         "live_access": "APPROVED_OPENAI_SYNTHETIC_EVALUATION_ONLY",
         "credential_creation": "APPROVED_SECURE_PRIVATE_LOCAL_SETUP",
@@ -363,17 +363,17 @@
         "main_stage_changes": false,
         "permission_changes": false,
         "later_phases": false,
-        "latest_extension": "Human-approved narrow seventh cycle for exact F18 map correction; all prior failures and USD2 cap preserved."
+        "latest_extension": "Human-approved narrow ninth cycle for exact formatting-only repair and corrected test invocation; unchanged model/dataset/oracle/calculations/USD2cap; any further failure stops."
     },
     "execution_status": {
         "phase": "M7-P2",
         "status": "IN_PROGRESS",
-        "cycle": 7,
-        "cycles_used": 7,
-        "max_cycles": 7,
+        "cycle": 9,
+        "cycles_used": 9,
+        "max_cycles": 9,
         "phase_acceptance": "UNACCEPTED",
         "milestone_acceptance": "M7_UNACCEPTED",
-        "checkpoint": "C7 correctedmap37tests312assertionsPASS; freshnative+separateuncachedcoverage1457tests11107assertionsPASS;96 financialfloors;PHP/VueexactrestorePASS;15NodechecksPASS. Actualunchanged40GPT5.4evaluation+finalcleanrelease/hostedgatespending. Allpreviousfailures+279072microreservationspreserved;7of7anyfurtherfailurestop."
+        "checkpoint": "Owner authorized exact reviewed formatting-only repair and correct Unit acceptance-map test invocation. All C8 failures preserved; required current checks and one actual40 run pending. No API call or reservation after C7. Any further failure stops; no tenth cycle."
     },
     "dependency_patch": {
         "authorized": true,
@@ -3700,6 +3700,36 @@
             "milestone_acceptance": "M7_UNACCEPTED",
             "checkpoint": "Cycle1 implements bounded answer planner, deterministic fact catalog/citations, current-page chat and strict40-case evaluation. Preserve runtime/setup failures; no complete release/live evaluation/hosted pass claimed.",
             "outcome": "INTERRUPTED_COMPOSER_DEFAULT_300_SECOND_WRAPPER_TIMEOUT"
+        },
+        {
+            "phase": "M7-P2",
+            "status": "BLOCKED",
+            "cycle": 7,
+            "cycles_used": 7,
+            "max_cycles": 7,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "C7 local1457/11107/96floorsPASS but actualGPT5.4live stopped after5passes: cash.shortfall selected for unfunded commitments, expectedcash.commitments. All7cyclesused/anyfailurestop;26ledgerentries448032microUSDretained under2Mcap. NoPR/push/merge. Complete32metric-semantic-contractproposal remains unapplied pending ownerdecision."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "IN_PROGRESS",
+            "cycle": 8,
+            "cycles_used": 8,
+            "max_cycles": 8,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "Owner approved eighth-cycle semantic contract; applying exact reviewed32 definitions/schema metadata and scoped tests. Preserve C7 actual failure/all reservations; current full/live/release/hosted gates pending. Any further failure stops; no ninth cycle."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "BLOCKED",
+            "cycle": 8,
+            "cycles_used": 8,
+            "max_cycles": 8,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "Cycle8 stopped before live calls: coordinator JSON serialization caused npm formatting failure in STATE/map; affected test command used wrong Feature path for Unit/AcceptanceMapTest, so no tests executed. PHPStan0 passed. All8cyclesused; actual current native/coverage/live/release/hosted gates pending. Existing26reservations448032microUSD unchanged; source repair requires owner decision."
         }
     ],
     "m7p2_execution_history": [
@@ -3732,6 +3762,16 @@
             "phase_acceptance": "UNACCEPTED",
             "milestone_acceptance": "M7_UNACCEPTED",
             "checkpoint": "Cycle6 native full1457tests1456passed1maperror: coordinator incorrectly added10budget/transportcases toF18, whose unchanged guard excludes thosefiles. All6cyclesused; owner-approved any-failure stop applies. NoGPT5.4call; old20ledgerentries279072microUSDunchanged. Unapplied10-IDfixture-only correction requires one additionalcycle authorization;805selectors/132requirements retained."
+        },
+        {
+            "phase": "M7-P2",
+            "status": "IN_PROGRESS",
+            "cycle": 7,
+            "cycles_used": 7,
+            "max_cycles": 7,
+            "phase_acceptance": "UNACCEPTED",
+            "milestone_acceptance": "M7_UNACCEPTED",
+            "checkpoint": "C7 correctedmap37tests312assertionsPASS; freshnative+separateuncachedcoverage1457tests11107assertionsPASS;96 financialfloors;PHP/VueexactrestorePASS;15NodechecksPASS. Actualunchanged40GPT5.4evaluation+finalcleanrelease/hostedgatespending. Allpreviousfailures+279072microreservationspreserved;7of7anyfurtherfailurestop."
         }
     ]
 }

@@ -33,7 +33,50 @@ test('closed answer plan admits every enum claim and rejects write number owner 
         $p = AnswerPlan::parse(['claim' => $claim->value, 'mode' => 'recorded', 'scope' => $claim->topic()->scope()]);
         expect($p->claim)->toBe($claim)->and($claim->field())->toBeString();
     }
-    expect(AnswerPlan::schema()['additionalProperties'])->toBeFalse();
+    $meanings = [
+        'cash.overview' => 'All current cash measures, money.',
+        'cash.available' => 'Deployable money: max(signed raw availability, zero).',
+        'cash.raw' => 'Signed money after protected cash, unfunded requirements and buffer.',
+        'cash.buffer' => 'Configured minimum buffer money.',
+        'cash.shortfall' => 'Money deficit when raw availability is negative; not unfunded commitments.',
+        'cash.commitments' => 'Next-income-horizon required unpaid money minus explicit backed overlap.',
+        'emergency.overview' => 'All measures for the selected emergency goal.',
+        'emergency.target' => 'Selected goal target money.',
+        'emergency.backed' => 'Actual goal backing money; not a percentage.',
+        'emergency.remaining' => 'Target money still unbacked.',
+        'emergency.progress' => 'Backed/target percentage; not a money amount.',
+        'emergency.coverage' => 'Months of essential expenses covered; may be unavailable.',
+        'nigeria.overview' => 'All selected saved geographic Nigeria exposure measures.',
+        'nigeria.amount' => 'Money explicitly tagged Nigeria/NG; not NGN currency exposure.',
+        'nigeria.share' => 'Nigeria percentage of the known covered denominator.',
+        'nigeria.denominator' => 'Known covered denominator money for geographic allocation.',
+        'nigeria.coverage' => 'Valuation completeness/partialness, not a share or money amount.',
+        'nigeria.components' => 'Count of known Nigeria-tagged components.',
+        'changes.overview' => 'All investment changes in the selected saved interval.',
+        'changes.amount' => 'Saved interval value change money; not automatically return.',
+        'changes.return' => 'Supported no-external-flow value return percentage.',
+        'changes.flows' => 'External-or-unsupported movement evidence; not necessarily proven external flows.',
+        'changes.native' => 'Supported native-currency monetary value movement.',
+        'changes.fx' => 'Reporting-base money due to FX and settlement effects.',
+        'assessments.overview' => 'Eligible current assessment records, attributed by provenance.',
+        'assessments.classification' => 'Deterministic source-claim summary; may be pending_review for conflict or no claims.',
+        'assessments.review' => 'Recorded review-due dates of eligible current records.',
+        'assessments.provider' => 'Recorded provider labels; provenance is retained.',
+        'assessments.methodology' => 'Recorded methodology versions; provenance is retained.',
+        'assessments.count' => 'Count of current source_claim records only.',
+        'refuse' => 'Prohibited data/actions/claims; no tool facts.',
+        'unsupported' => 'Outside one supported topic/period; no tool facts.',
+    ];
+    $schema = AnswerPlan::schema();
+    expect(array_column(AnswerClaim::cases(), 'value'))->toBe(array_keys($meanings))
+        ->and($schema['properties']['claim']['enum'])->toBe(array_keys($meanings))
+        ->and($schema['required'])->toBe(['claim', 'mode', 'scope'])
+        ->and(array_keys($schema['properties']))->toBe(['claim', 'mode', 'scope'])
+        ->and($schema['additionalProperties'])->toBeFalse();
+    foreach (AnswerClaim::cases() as $claim) {
+        expect($claim->meaning())->toBe($meanings[$claim->value]);
+    }
+    expect($schema['properties']['claim']['description'])->toBe('Choose the requested metric by meaning and units, not word similarity. '.implode('; ', array_map(fn ($key) => $key.'='.$meanings[$key], array_keys($meanings))));
     foreach ([null, [], ['claim' => 'buy', 'mode' => 'recorded', 'scope' => 'current'], ['claim' => 'cash.available', 'mode' => 'execute', 'scope' => 'current'], ['claim' => 'cash.available', 'mode' => 'recorded', 'scope' => 'owner999'], ['claim' => 'cash.available', 'mode' => 'recorded', 'scope' => 'current', 'amount' => '999']] as $value) {
         expect(fn () => AnswerPlan::parse($value))->toThrow(Exception::class);
     }
@@ -157,7 +200,11 @@ test('evaluation intent pins the exact serialized request once while production 
         ->and(config('copilot.tokens_per_request'))->toBe(16384)
         ->and($intent['wire_bytes'] + 1024)->toBeLessThanOrEqual(8192);
     $planner->plan($input);
-    Http::assertSent(fn ($request) => hash('sha256', $request->body()) === $intent['payload_sha256'] && strlen($request->body()) === $intent['wire_bytes']);
+    Http::assertSent(function ($request) use ($intent) {
+        expect($request['text']['format']['schema'])->toBe(AnswerPlan::schema());
+
+        return hash('sha256', $request->body()) === $intent['payload_sha256'] && strlen($request->body()) === $intent['wire_bytes'];
+    });
     expect($planner->observation['policy_sha256'])->toBe(AnswerEvaluationPolicy::digest())
         ->and($planner->observation['evaluation'])->toBeTrue()
         ->and($planner->observation['max_input_tokens'])->toBe(8192);
@@ -191,4 +238,18 @@ test('evaluation rejects observed input usage over its tighter limit without ano
     expect(fn () => $planner->plan($input))->toThrow(RuntimeException::class, 'unavailable');
     expect($planner->observation['http_attempts'])->toBe(1)->and($planner->observation['outcome'])->toBe('unavailable');
     Http::assertSentCount(1);
+});
+
+test('all fixed evaluation inputs fit the actual semantic schema wire without provider access', function () {
+    Http::fake();
+    config(['copilot.openai_key' => null]);
+    $cases = json_decode(file_get_contents(base_path('resources/copilot/evaluation/questions-v1.json')), true, flags: JSON_THROW_ON_ERROR)['cases'];
+    expect($cases)->toHaveCount(40);
+    foreach ($cases as $case) {
+        $intent = (new OpenAiAnswerPlanner(evaluation: true))->prepareEvaluation(UntrustedInput::parse($case['question'], $case['document']));
+        expect($intent['wire_bytes'] + 1024)->toBeLessThanOrEqual(8192)
+            ->and($intent['policy']['max_output_tokens'])->toBe(512)
+            ->and($intent['policy_sha256'])->toBe(AnswerEvaluationPolicy::digest());
+    }
+    Http::assertNothingSent();
 });

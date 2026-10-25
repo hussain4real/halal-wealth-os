@@ -1,6 +1,6 @@
 # M7-P2 execution record
 
-Status: owner-authorized seventh cycle in progress and unaccepted. One implementation owner, cycle7 of seven. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
+Status: owner-resumed ninth cycle, in progress and unaccepted. One implementation owner, cycle9 of nine. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
 
 Implemented a default-off bounded answer planner, deterministic typed fact projection, owner-scoped source references, current-page chat/recovery and versioned30-finance/10-adversarial evaluation dataset. Initial73 affected tests797 assertions passed, alongside client schema/basis tests and actual owned loopback transport checks. A prior focused measurement gave99–100 percent coverage across the new concrete financial sources; the final full floor is not yet claimed.
 
@@ -51,3 +51,19 @@ The full native run executed1,457 tests:1,456 passed and one errored because the
 The owner explicitly authorized one additional cycle for the exact reviewed F18 fixture-list repair. All805 selectors and132 requirements remain mapped, including the ten new budget/transport cases under AC3/AC5 and INV-12. The guard, tests, financial/model/prompt/dataset/oracle/budget code are unchanged. The failed sixth-cycle full run stays failed. All prior reservations and theUSD2 cap remain intact. Required native/coverage/live/release and hosted delivery gates must still pass; any further failure stops.
 
 Seventh-cycle fresh native baseline and separate uncached coverage both passed1,457 tests/11,107 assertions. All96 financial floors passed, including the new policy class6/6 and adapter86/87 executable lines. PHP/Vue affected-file selection and exact restoration passed. All15 state/receipt/client checks passed. This is pre-live component verification; actual unchanged40-case GPT-5.4 quality and final clean seven-artifact release/hosted gates remain pending.
+
+## Seventh-cycle actual quality stop
+
+The pinned GPT-5.4 run passed five cases, then selected actual cash shortfall for the unfunded-required-commitments question. The oracle correctly rejected the wrong metric even though both synthetic values were zero. ActualHTTP200/model match/native transfer1/policy/prepared body/usage evidence are retained. The run is failed, not a complete40-case pass. All26 reservations totaling448,032microUSD remain under the sameUSD2 cap. Seven cycles are used and any-failure stop applies. The complete semantic-definition contract for all32 enum metrics is only an unapplied private proposal; the schema currently supplies enum names without these definitions. No PR, CI, merge, publication or acceptance is claimed; owned resources are stopped.
+
+## Owner-approved eighth-cycle semantic contract
+
+The owner explicitly authorized one additional cycle after the actual seventh-cycle quality failure. The reviewed change defines all32 existing metrics in static schema metadata, preserving the exact closed fields, fixed40 cases, independent oracle, main prompt, model/policy, deterministic calculations andUSD2 total reservation cap. All prior failures and26 reservations remain retained. Required current-basis checks and one complete live run remain pending; any further failure stops. No ninth cycle, PR success, merge, publication, acceptance or deployment is inferred.
+
+## Eighth-cycle execution stop
+
+The coordinator serialized STATE and the acceptance map without the project formatter. The actual frontend check failed formatting for those two files. The affected test invocation also used Feature/AcceptanceMapTest.php instead of the existing Unit path; it exited before executing tests. PHP static analysis passed with zero errors. No further checks or live calls were made after the failure. All eight cycles are used; owner any-failure stop applies. The32-definition implementation remains local and unverified, all earlier failures and26 reservations remain retained, and owned PostgreSQL/browser/server resources are stopped. Formatting-only repair and corrected test invocation require another owner decision. No PR, CI, merge, publication or acceptance occurred.
+
+## Owner-approved narrow ninth-cycle recovery
+
+The owner explicitly authorized the independently reviewed two-file formatting repair and corrected Unit/AcceptanceMapTest.php invocation. All eight earlier cycles and failures remain preserved. The formatting patch preserves JSON semantics, all806 selectors/132 requirements and F18. Model, main prompt, fixed40 cases, oracle, calculations andUSD2 cap are unchanged. Refresh required checks before one complete live evaluation; any further failure stops. No tenth cycle, acceptance, later phase or deployment is authorized.
