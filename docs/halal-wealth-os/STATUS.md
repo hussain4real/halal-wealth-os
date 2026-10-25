@@ -1,10 +1,10 @@
 # Current roadmap status
 
-Checked on 24 October 2026 against dev merge `813fdd80697e44e6a4f3b29009c2fdcec77fa08f`, live GitHub delivery evidence, explicit human acceptance and the independent M6 review. The owner subsequently accepted M6 and authorized M7-P1 through gated dev delivery. Current M7-P1 checks and publication remain separate from earlier accepted results.
+Checked on 25 October 2026 against dev merge `9204f07a037384562e226533a1e3bdfe0a7c0728`, retained GitHub delivery evidence and explicit human acceptance. M7-P1 is owner accepted; M7-P2 is authorized and in progress. Its live evaluation, release checks and publication remain separate pending gates.
 
 `ROADMAP.json` preserves the canonical identifier/dependency index. Its initial phase labels are not current delivery claims. `STATE.json`, owner acceptance records and actual GitHub source/CI record execution status.
 
-**22 of 25 phases are implemented, merged into dev and human accepted**, from M0-P1 through M6-P4. M0 through M6 milestone gates are accepted. All four M6 phases are accepted. The independent M6 review returned **READY_FOR_OWNER**, with no demonstrated blocking P0/P1/P2 finding; M6 is human accepted; M7-P1 is authorized and in progress. M7-P1 is in progress and unaccepted; M7-P2/P3 remain planned and unauthorized.
+**23 of 25 phases are implemented, merged into dev and human accepted**, from M0-P1 through M7-P1. M0 through M6 milestone gates are accepted. The independent M6 review returned **READY_FOR_OWNER** before the owner's separate acceptance. M7-P2 is in progress and unaccepted; M7-P3 remains planned and unauthorized, and M7 itself remains unaccepted.
 
 | Milestone | Implemented or planned scope                                                      | Current gate                            |
 | --------- | --------------------------------------------------------------------------------- | --------------------------------------- |

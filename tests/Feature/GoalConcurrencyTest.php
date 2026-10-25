@@ -178,8 +178,8 @@ test('goal migration refuses retained history and empty roundtrip preserves M1 a
     BudgetFixtures::rule($o, $cat);
     $before = DB::table('journal_entries')->get()->toJson();
     $budgets = DB::table('planning_schedules')->get()->toJson();
-    // Remove only the empty copilot schema before the historical phase boundary.
-    $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
+    // Remove both the empty answer-lane migration and the copilot schema.
+    $this->artisan('migrate:rollback', ['--step' => 2, '--force' => true])->assertExitCode(0);
     expect(Schema::hasTable('copilot_requests'))->toBeFalse();
     // Remove the empty Drive schema before the historical phase boundary.
     $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);

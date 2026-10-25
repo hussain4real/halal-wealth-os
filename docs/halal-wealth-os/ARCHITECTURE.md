@@ -14,7 +14,7 @@ Laravel SMTP remains disabled and synthetic mock-only.
 M6-P4 is human accepted; see [its acceptance](runs/M6-P4-acceptance.md) and
 [Drive policy](DRIVE-EXPORT.md). Google Drive remains disabled and mock-only.
 All four M6 phases are accepted. The [independent M6 review](runs/M6-independent-review.md)
-returned READY_FOR_OWNER; M6 is human accepted; M7-P1 is authorized and in progress.
+returned READY_FOR_OWNER; M6 and M7-P1 are human accepted; M7-P2 is authorized and in progress.
 Deployment, live external delivery and later phases remain separate decisions.
 Reporting composes existing source contracts inside a coherent database snapshot;
 it retains dashboard evidence and rule/dismissal history without posting financial
