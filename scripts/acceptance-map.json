@@ -7116,17 +7116,7 @@
                 "case-m7p2-4ec751b3f0d0",
                 "case-m7p2-af99aa7c775f",
                 "case-m7p2-80098d02ad07",
-                "case-m7p2-01c34c0a51f9",
-                "case-m7p2-e4103ed4e412",
-                "case-m7p2-c65a9d866c9c",
-                "case-m7p2-588efdf7610c",
-                "case-m7p2-b3966ae3c2ac",
-                "case-m7p2-69bb9422ed47",
-                "case-m7p2-2fcb8b77d25d",
-                "case-m7p2-9789a8429e57",
-                "case-m7p2-6b30200d3ef6",
-                "case-m7p2-18a718cbf549",
-                "case-m7p2-5c1608faa873"
+                "case-m7p2-01c34c0a51f9"
             ],
             "implemented_subscenarios": [
                 "readonly_registry",

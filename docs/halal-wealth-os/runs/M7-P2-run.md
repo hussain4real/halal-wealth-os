@@ -1,6 +1,6 @@
 # M7-P2 execution record
 
-Status: owner-resumed sixth cycle, in progress and unaccepted. One implementation owner, cycle6 of six. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
+Status: owner-authorized seventh cycle in progress and unaccepted. One implementation owner, cycle7 of seven. M7-P1 is owner accepted; its six-cycle and all earlier failure history remain preserved.
 
 Implemented a default-off bounded answer planner, deterministic typed fact projection, owner-scoped source references, current-page chat/recovery and versioned30-finance/10-adversarial evaluation dataset. Initial73 affected tests797 assertions passed, alongside client schema/basis tests and actual owned loopback transport checks. A prior focused measurement gave99–100 percent coverage across the new concrete financial sources; the final full floor is not yet claimed.
 
@@ -41,3 +41,11 @@ The third actual run passed ten cases, then selected a backed monetary amount fo
 The owner explicitly approved resuming the remaining sixth cycle after the mandatory stop. All earlier failures and reservations remain retained. The current recovery pins GPT-5.4 dated2026-03-05, reasoning none/store false, strict JSON,512 output and evaluation-only8,192 input. Actual serialized wire plus1,024 overhead is checked before network; a one-use prepared-body digest binds the saved intent to the body sent. Observed usage and report/validator policy must match. Production admission stays16,384 per request. New price reservations are28,160 microUSD per case under the sameUSD2 cap, appended to unchanged anchored prior history. No extra paid probe, fallback or retry is included.
 
 Static analysis passed with zero errors. The affected91 tests passed944 assertions, including actual owned loopback transport and unchanged owner charging; five client/receipt-validator tests passed. The acceptance map preserves all795 previous selectors and adds10 executed recovery cases for805 total/132 requirements. Full current native/coverage/release and the one complete actual40-case run remain pending; no paid recovery call, PR, merge or publication has occurred. Any further failure stops.
+
+## Sixth-cycle verification stop
+
+The full native run executed1,457 tests:1,456 passed and one errored because the coordinator incorrectly included ten budget/transport selectors in fixtureF18, whose existing guard permits only Copilot behavior cases. That guard remains unchanged and correctly blocked the map. This is not a complete test pass. No GPT-5.4 evaluation call was made; the prior20 reservations remain unchanged. Six cycles are used and the owner-approved any-failure stop applies. An unapplied fixture-list-only correction retains all805 selectors/132 requirements and all criterion/invariant links. It requires additional owner authorization before source correction or further gates; no PR, CI, merge, publication or acceptance is claimed.
+
+## Owner-authorized seventh-cycle map correction
+
+The owner explicitly authorized one additional cycle for the exact reviewed F18 fixture-list repair. All805 selectors and132 requirements remain mapped, including the ten new budget/transport cases under AC3/AC5 and INV-12. The guard, tests, financial/model/prompt/dataset/oracle/budget code are unchanged. The failed sixth-cycle full run stays failed. All prior reservations and theUSD2 cap remain intact. Required native/coverage/live/release and hosted delivery gates must still pass; any further failure stops.
