@@ -4467,7 +4467,7 @@
         },
         "m7p3-live-evaluation": {
             "public_path": "docs/halal-wealth-os/runs/M7-P3-live-evaluation.json",
-            "sha256": "69f14a193cdf505191b91ac184b489da86bb9f3e26e0b2c76d95b1a1a983d102",
+            "sha256": "a439d29f01d7f1fe6522d72987d69fa501f213284be0b22272c5db843273ddd0",
             "scope": "Current-source actual40 synthetic case receipt; pending until observed, mandatory live tool gate remains fail-closed."
         },
         "m7p3-operating-guide": {
