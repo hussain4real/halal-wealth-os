@@ -25,8 +25,8 @@ final class RefreshMarketFeed implements ShouldQueue
     {
         $outcome = $refresh->refresh(MarketFeed::from($this->feed), $this->window);
         if (($outcome['blocked_mappings'] ?? 0) > 0) {
-            Log::warning('Market refresh admission capacity reached.', [
-                'code' => 'evidence_capacity', 'accepted_mappings' => $outcome['mappings'],
+            Log::warning(($outcome['code'] ?? '') === 'evidence_capacity' ? 'Market refresh admission capacity reached.' : 'Market refresh has held admissions.', [
+                'code' => $outcome['code'] ?? 'mapping_or_capacity_changed', 'accepted_mappings' => $outcome['mappings'],
                 'blocked_mappings' => $outcome['blocked_mappings'],
             ]);
         }

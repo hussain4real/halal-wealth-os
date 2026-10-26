@@ -8,7 +8,7 @@ export const root = path.resolve(
     '..',
 );
 export const liveReport =
-    'docs/halal-wealth-os/runs/M7-P2-live-evaluation.json';
+    'docs/halal-wealth-os/runs/M7-P3-live-evaluation.json';
 export function evaluationBasis(directory = root) {
     const inventory = spawnSync(
         'git',
@@ -41,7 +41,7 @@ export function evaluationBasis(directory = root) {
         // selector, evidence reference, runtime/prompt/eval/test byte remains bound.
         if (file === 'scripts/acceptance-map.json') {
             const map = JSON.parse(bytes);
-            const ref = map.manual_artifacts?.['m7p2-live-evaluation'];
+            const ref = map.manual_artifacts?.['m7p3-live-evaluation'];
             if (ref) ref.sha256 = '0'.repeat(64);
             bytes = Buffer.from(JSON.stringify(map));
         }

@@ -51,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        RateLimiter::for('operations', fn (Request $request) => Limit::perMinute(20)->by('operations:'.($request->user()->id ?? $request->ip())));
         RateLimiter::for('copilot', fn (Request $request) => Limit::perMinute(20)->by('copilot:'.($request->user()->id ?? $request->ip())));
         RateLimiter::for('drive-export', fn (Request $request) => Limit::perMinute(20)->by('drive:'.($request->user()->id ?? $request->ip())));
         RateLimiter::for('market-data', fn (Request $request) => Limit::perMinute(20)->by('market:'.($request->user()->id ?? $request->ip())));

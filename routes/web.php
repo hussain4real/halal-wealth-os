@@ -13,6 +13,7 @@ use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\MarketDataController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OperationsController;
 use App\Http\Controllers\OwnerProfileController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PurificationController;
@@ -33,6 +34,10 @@ Route::get('ready', function () {
 })->name('readiness');
 
 Route::middleware(['auth', 'verified', RequireProductionTwoFactor::class])->group(function () {
+
+    Route::get('operations', [OperationsController::class, 'index'])->name('operations.index');
+    Route::post('operations/pause', [OperationsController::class, 'pause'])->name('operations.pause');
+    Route::post('operations/{channel}', [OperationsController::class, 'configure'])->middleware('throttle:operations')->name('operations.configure');
 
     Route::get('copilot', [CopilotController::class, 'index'])->name('copilot.index');
     Route::post('copilot/consent', [CopilotController::class, 'consent'])->name('copilot.consent');

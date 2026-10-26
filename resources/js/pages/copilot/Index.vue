@@ -208,8 +208,8 @@ async function preview() {
                             ? 'The read-only evidence boundary is enabled.'
                             : 'The copilot is disabled by default.'
                     }}
-                    No live model is connected. Answer generation is a later
-                    phase.
+                    Answer transport is optional and disabled by default.
+                    Current consent and operational limits apply.
                 </p>
                 <p class="mt-2 text-sm">
                     Your dashboard, accounts and reports work independently of

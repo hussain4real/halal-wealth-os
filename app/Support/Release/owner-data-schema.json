@@ -2831,6 +2831,201 @@
             "order": ["opening_intent_id"]
         },
         {
+            "table": "operation_controls",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "channel",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "paused",
+                    "type": "boolean",
+                    "udt": "bool",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "generation",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "requests_daily",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "units_daily",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "retention_days",
+                    "type": "smallint",
+                    "udt": "int2",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "operation_metrics",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "channel",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "bucket_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "attempts",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "failed",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "maximum_elapsed_ms",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
+            "table": "operation_reservations",
+            "scope": "owner",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "owner_id",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "channel",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "reference",
+                    "type": "uuid",
+                    "udt": "uuid",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "control_generation",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "units",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "allowance",
+                    "type": "integer",
+                    "udt": "int4",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "action",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "permit_hash",
+                    "type": "character",
+                    "udt": "bpchar",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "status",
+                    "type": "text",
+                    "udt": "text",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "recorded_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "NO"
+                },
+                {
+                    "name": "finished_at",
+                    "type": "timestamp with time zone",
+                    "udt": "timestamptz",
+                    "nullable": "YES"
+                },
+                {
+                    "name": "elapsed_ms",
+                    "type": "bigint",
+                    "udt": "int8",
+                    "nullable": "YES"
+                }
+            ],
+            "order": ["id"]
+        },
+        {
             "table": "passkeys",
             "scope": "excluded",
             "columns": [

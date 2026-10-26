@@ -19,17 +19,14 @@ import {
 } from './verification.mjs';
 
 await test('unknown and unimplemented phases never report a passing result', () => {
-    for (const phase of ['M99-P99', 'M7-P3']) {
+    for (const phase of ['M99-P99', 'M7-P4']) {
         const result = spawnSync(
             path.join(root, 'bin/verify'),
             ['--phase', phase],
             { encoding: 'utf8' },
         );
         assert.equal(result.status, 2);
-        assert.match(
-            result.stderr,
-            phase === 'M7-P3' ? /NOT_APPLICABLE/ : /Unknown phase/,
-        );
+        assert.match(result.stderr, /Unknown phase/);
     }
 });
 
@@ -95,4 +92,26 @@ await test('shared frontend edits, additions and deletions force a fresh baselin
     } finally {
         rmSync(fixture, { recursive: true, force: true });
     }
+});
+
+await test('prelive preparation is explicit and cannot modify ordinary release invocation', async () => {
+    const { verificationMode } = await import('./verification-mode.mjs');
+    assert.deepEqual(verificationMode(['--all']), {
+        all: true,
+        phase: null,
+        prelive: false,
+    });
+    assert.deepEqual(verificationMode(['--phase', 'M7-P3']), {
+        all: false,
+        phase: 'M7-P3',
+        prelive: false,
+    });
+    assert.equal(verificationMode(['--prelive', 'M7-P3']).prelive, true);
+    for (const args of [
+        ['--all', '--prelive', 'M7-P3'],
+        ['--prelive', 'M7-P2'],
+        ['--phase', 'M7-P3', '--prelive'],
+        ['--allow-pending'],
+    ])
+        assert.throws(() => verificationMode(args), /Usage/);
 });

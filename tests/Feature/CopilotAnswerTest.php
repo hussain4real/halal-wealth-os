@@ -44,7 +44,7 @@ function answerFinancialHash(): string
 {
     $rows = [];
     foreach (DB::select("SELECT table_name FROM information_schema.columns WHERE table_schema='public' AND column_name='owner_id' ORDER BY table_name") as $table) {
-        if (! in_array($table->table_name, ['copilot_controls', 'copilot_requests'], true)) {
+        if (! in_array($table->table_name, ['copilot_controls', 'copilot_requests', 'operation_reservations', 'operation_metrics'], true)) {
             $values = DB::table($table->table_name)->get()->map(fn ($row) => json_encode($row, JSON_THROW_ON_ERROR))->all();
             sort($values, SORT_STRING);
             $rows[$table->table_name] = $values;
@@ -67,6 +67,8 @@ test('fixed evaluation answers match independent exact facts and authorized cita
     expect($answer['status'])->toBe('complete');
     expect(AnswerOracle::check($this->owner, $case, $answer['evidence'], $fixture))->not->toBeEmpty();
     expect(answerFinancialHash())->toBe($before)->and($planner->calls)->toBe(1);
+    expect(DB::table('operation_reservations')->where('owner_id', $this->owner->id)->count())->toBe(1)
+        ->and(DB::table('operation_reservations')->where('owner_id', $this->owner->id)->sum('units'))->toBe(16384);
     expect($service->answer($reference, UntrustedInput::parse($case['question'], $case['document']), A::context($fixture, $case['missing'] ?? null), true)['status'])->toBe('already_charged');
     expect($planner->calls)->toBe(1)->and(DB::table('copilot_requests')->value('lane'))->toBe('answer');
     expect(DB::table('copilot_requests')->get()->toJson())->not->toContain($case['question']);

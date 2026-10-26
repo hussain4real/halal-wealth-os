@@ -3,6 +3,11 @@
 use App\Domain\Integrations\Drive\DriveFailure;
 use App\Domain\Integrations\Drive\GoogleDrive;
 use App\Domain\Integrations\Drive\SavedReport;
+use App\Domain\Operations\DriveAction;
+use App\Domain\Operations\OperationPermit;
+use App\Domain\Operations\Operations;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Support\Facades\Http;
 use Tests\Support\DriveFixtures;
@@ -11,14 +16,33 @@ use Tests\TestCase;
 uses(TestCase::class);
 
 beforeEach(function () {
+    RefreshDatabaseState::$migrated = false;
+    $this->artisan('migrate:fresh', ['--force' => true])->assertSuccessful();
+    $this->owner = User::factory()->create();
     $this->wire = new DriveFixtures;
     $this->wire->fake();
     $this->google = app(GoogleDrive::class);
 });
 
+afterEach(function () {
+    try {
+        $this->artisan('migrate:fresh', ['--force' => true])->assertSuccessful();
+    } finally {
+        RefreshDatabaseState::$migrated = false;
+    }
+});
+
+/** @template T
+ * @param callable(GoogleDrive):T $work
+ * @return T */
+function admittedDriveContract(User $owner, callable $work, DriveAction $action = DriveAction::Connect): mixed
+{
+    return app(Operations::class)->drive($owner, $action, fn (OperationPermit $permit) => $work(app(GoogleDrive::class)->scoped($permit)));
+}
+
 test('google boundary accepts only bounded bearer tokens with the approved exact scopes', function (array $change) {
     $this->wire->tokenChanges = $change;
-    expect(fn () => $this->google->exchange('code', 'verifier'))->toThrow(DriveFailure::class);
+    expect(fn () => admittedDriveContract($this->owner, fn (GoogleDrive $google) => $google->exchange('code', 'verifier')))->toThrow(DriveFailure::class);
     Http::assertSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke' && $request['token'] === 'synthetic-refresh');
 })->with([
     'extra scope' => [['scope' => GoogleDrive::SCOPE.' https://www.googleapis.com/auth/drive']],
@@ -34,13 +58,13 @@ test('google boundary accepts only bounded bearer tokens with the approved exact
 
 test('rejected token response without a safe cleanup credential is explicitly unconfirmed', function () {
     $this->wire->tokenChanges = ['access_token' => '', 'refresh_token' => "unsafe\ncredential"];
-    expect(fn () => $this->google->exchange('code', 'verifier'))->toThrow(DriveFailure::class, 'connection_rejected_revoke_unconfirmed');
+    expect(fn () => admittedDriveContract($this->owner, fn (GoogleDrive $google) => $google->exchange('code', 'verifier')))->toThrow(DriveFailure::class, 'connection_rejected_revoke_unconfirmed');
     Http::assertNotSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke');
 });
 
 test('rejected refresh response can clean up with a bounded prior token when returned credentials are unusable', function () {
     $this->wire->tokenChanges = ['access_token' => '', 'refresh_token' => "unsafe\ncredential"];
-    expect(fn () => $this->google->refresh('synthetic-known-prior'))->toThrow(DriveFailure::class, 'invalid_response');
+    expect(fn () => admittedDriveContract($this->owner, fn (GoogleDrive $google) => $google->refresh('synthetic-known-prior')))->toThrow(DriveFailure::class, 'invalid_response');
     Http::assertSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke' && $request['token'] === 'synthetic-known-prior');
 });
 
@@ -49,11 +73,14 @@ test('rejected grant exceptions redact response and credential arguments even wh
     try {
         $this->wire->tokenChanges = ['scope' => 'unapproved-scope', 'access_token' => 'synthetic-private-access', 'refresh_token' => 'synthetic-private-refresh'];
         try {
-            $this->google->exchange('synthetic-private-code', 'synthetic-private-verifier');
+            admittedDriveContract($this->owner, fn (GoogleDrive $google) => $google->exchange('synthetic-private-code', 'synthetic-private-verifier'));
             $this->fail('Rejected token response must not be admitted');
         } catch (DriveFailure $error) {
+            expect($error->reason)->toBe('unapproved_scope_or_token');
             expect(json_encode($error->getTrace(), JSON_THROW_ON_ERROR).(string) $error)->not->toContain('synthetic-private-access', 'synthetic-private-refresh', 'synthetic-private-code', 'synthetic-private-verifier');
         }
+        Http::assertSentCount(2);
+        Http::assertSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke');
     } finally {
         ini_set('zend.exception_ignore_args', $previous);
     }
@@ -61,14 +88,17 @@ test('rejected grant exceptions redact response and credential arguments even wh
 
 test('google refresh accepts the documented email scope alias and preserves omitted refresh credentials', function () {
     $this->wire->tokenChanges = ['scope' => str_replace(' email', ' https://www.googleapis.com/auth/userinfo.email', GoogleDrive::SCOPE), 'refresh_token' => null];
-    $tokens = $this->google->refresh('synthetic-prior-refresh');
+    $tokens = admittedDriveContract($this->owner, fn (GoogleDrive $google) => $google->refresh('synthetic-prior-refresh'));
     expect($tokens['refresh'])->toBe('synthetic-prior-refresh')->and($tokens['access'])->toBe('synthetic-access');
     expect(fn () => $this->google->refresh(''))->toThrow(DriveFailure::class, 'reconnect_required');
 });
 
 test('google identity requires a real verified response and never infers account kind from domain', function (array $change) {
     $this->wire->identity = [...$this->wire->identity, ...$change];
-    expect(fn () => $this->google->identity('synthetic-access'))->toThrow(DriveFailure::class);
+    $reason = array_key_exists('sub', $change) ? 'invalid_response' : 'unverified_identity';
+    expect(fn () => admittedDriveContract($this->owner, fn (GoogleDrive $google) => $google->identity('synthetic-access')))->toThrow(DriveFailure::class, $reason);
+    Http::assertSentCount(1);
+    Http::assertSent(fn ($request) => $request->url() === 'https://openidconnect.googleapis.com/v1/userinfo');
 })->with([
     [['sub' => '']], [['email' => 'invalid']], [['email_verified' => false]], [['email_verified' => 'true']], [['sub' => str_repeat('x', 256)]],
 ]);
@@ -76,7 +106,7 @@ test('google identity requires a real verified response and never infers account
 test('fake-only wire rejects unfaked endpoints redirects oversized and malformed responses without leaking bodies', function (string $body, int $status, string $reason) {
     Http::swap(new Factory);
     Http::fake(['https://openidconnect.googleapis.com/v1/userinfo' => Http::response($body, $status)]);
-    expect(fn () => $this->google->identity('synthetic-access'))->toThrow(DriveFailure::class, $reason);
+    expect(fn () => admittedDriveContract($this->owner, fn (GoogleDrive $google) => $google->identity('synthetic-access')))->toThrow(DriveFailure::class, $reason);
 })->with([
     ['synthetic-secret', 302, 'transport_unknown'],
     ['synthetic-secret', 401, 'reconnect_required'],
@@ -90,14 +120,14 @@ test('fake-only wire rejects unfaked endpoints redirects oversized and malformed
 
 test('unmatched mock requests fail closed rather than reaching Google', function () {
     Http::swap(new Factory);
-    expect(fn () => $this->google->identity('synthetic-access'))->toThrow(DriveFailure::class, 'transport_unknown');
+    expect(fn () => admittedDriveContract($this->owner, fn (GoogleDrive $google) => $google->identity('synthetic-access')))->toThrow(DriveFailure::class, 'transport_unknown');
 });
 
 test('remote IDs and missing generateIds payloads are validated at the boundary', function () {
     expect(fn () => GoogleDrive::identifier('../not-an-id'))->toThrow(DriveFailure::class, 'invalid_remote_id');
     Http::swap(new Factory);
     Http::fake(['*' => Http::response(['ids' => []])]);
-    expect(fn () => $this->google->generate('synthetic-access'))->toThrow(DriveFailure::class, 'invalid_remote_id');
+    expect(fn () => admittedDriveContract($this->owner, fn (GoogleDrive $google) => $google->generate('synthetic-access'), DriveAction::Prepare))->toThrow(DriveFailure::class, 'invalid_remote_id');
 });
 
 function privateDriveFolder(): array
@@ -137,7 +167,14 @@ test('remote file parent substitution and mismatched size metadata or bytes neve
 
 test('duplicate create returns 409 for inspection instead of allocating a different remote identity', function () {
     $metadata = ['id' => 'stable-folder-id', 'name' => 'HalalOS private reports', 'mimeType' => GoogleDrive::FOLDER];
-    $this->google->create('access', $metadata, null);
-    $this->google->create('access', $metadata, null);
+    admittedDriveContract($this->owner, function (GoogleDrive $google) use ($metadata): void {
+        $google->create('access', $metadata, null);
+        $google->create('access', $metadata, null);
+    }, DriveAction::Prepare);
     expect($this->wire->files)->toHaveCount(1)->and($this->wire->creates)->toBe(2);
+});
+
+test('unscoped Google transport cannot consume a fake or live handoff', function () {
+    expect(fn () => $this->google->identity('synthetic-access'))->toThrow(DriveFailure::class, 'operational_permit_required');
+    Http::assertNothingSent();
 });

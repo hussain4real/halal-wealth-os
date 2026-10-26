@@ -13,3 +13,5 @@ Schedule::command('market:refresh')->everyFiveMinutes()->withoutOverlapping();
 Schedule::command('reminders:tick')->everyMinute()->withoutOverlapping();
 
 Schedule::command('drive:tick')->everyMinute()->withoutOverlapping();
+
+Schedule::command('operations:prune-metrics')->daily()->withoutOverlapping();

@@ -63,7 +63,7 @@ try {
     );
     const record = {
         result: 'PASS',
-        phase: 'M7-P2',
+        phase: 'M7-P3',
         live_evaluation: validateLiveReport(
             JSON.parse(readFileSync(liveReport)),
             evaluationBasis(),
@@ -80,6 +80,22 @@ try {
             npm: digest('package-lock.json'),
         },
         migrations: recovery.migrations,
+        configuration_sha256: Object.fromEntries(
+            [
+                'config/copilot.php',
+                'config/market_data.php',
+                'config/drive_export.php',
+                'config/operations.php',
+                'config/mail.php',
+            ].map((file) => [file, digest(file)]),
+        ),
+        configuration_scope:
+            'Source defaults only; deployment values and live entitlement need owner review',
+        operational_rollback: {
+            result: recovery.operational_rollback.result,
+            strategy: recovery.operational_rollback.strategy,
+            code_downgrade_rehearsed: false,
+        },
         recovery_sha256: digest('build/release-recovery.json'),
         deployment_authorized: false,
         owner_phase_acceptance: 'PENDING',

@@ -3,6 +3,7 @@
 use App\Domain\Integrations\MarketFeed;
 use App\Domain\Integrations\MarketRefresh;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -28,8 +29,10 @@ function concurrentMarketRace(array $commands): array
                 if (trim((string) fgets($pair[1])) !== 'go') {
                     throw new RuntimeException('Barrier not released');
                 }
+                $beforeSends = count(Http::recorded());
                 $service = app(MarketRefresh::class);
                 $result = $service->refresh(MarketFeed::from($command['feed']), $command['window']);
+                $result['actual_fake_sends'] = count(Http::recorded()) - $beforeSends;
                 $result['backend'] = $backend;
             } catch (HttpException $error) {
                 $result = ['status' => 'conflict', 'http' => $error->getStatusCode()];

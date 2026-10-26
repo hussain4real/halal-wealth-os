@@ -2389,7 +2389,7 @@
         },
         "case-m6p2-0684a3d03e58": {
             "class": "Tests\\Feature\\MarketConcurrencyTest",
-            "name": "an expired worker cannot overwrite a newer committed winner and never holds locks during HTTP",
+            "name": "an expired worker cannot overwrite a newer committed winner and never holds provider locks during HTTP",
             "file": "tests/Feature/MarketConcurrencyTest.php"
         },
         "case-m6p2-ae74d7e3a71d": {
@@ -4161,6 +4161,191 @@
             "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
             "name": "approved evaluation policy binds the five dollar aggregate ceiling",
             "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p3-fef0ad904f7d": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "missing policy fails closed and pause requires no row allocation",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-cfa7c1e75f15": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "hard request budget retains failed and uncertain reservations and isolates owners",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-df6f22d9f933": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "hard unit allowance rejects oversized Drive actions before handoff",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-56a2c5f8fd67": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "each actual leaf send checks current stop and never recalls a previous call",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-d7d532c24a72": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "global stop and policy generation change invalidate old permits without refunds",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-586d9ea3e67c": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "finite allowance cannot be bypassed through the service send entrypoint or serialization",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-445a514e93b0": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "committed Drive allowance survives later native rollback and unknown handoff",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-1a82b7d4f7e0": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "telemetry expiry changes neither immutable usage nor another owner metrics",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-864db89ad714": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "settings reject stale resumes arbitrary fields and limits above server maxima",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-089f37bb9431": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "reservation identity and control owner are database retained and stored secrets cannot create permits",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-d7f6e40e912e": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "an allowance cannot call before its native root admission commits",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-f332680bb38f": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "monitor exposes fixed owner-local counts and honest elapsed metadata only",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-83fdc0c9a873": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "UTC budgets do not inherit a non UTC PostgreSQL session day",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-dc474d4c4374": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "a stop after partial Drive work retains uncertainty rather than no handoff",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-d7fade0f8a6c": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "an explicitly UTC current day charge still exhausts budget in another session timezone",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-21ff8f4c1841": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "Drive operational hold preserves credential validity and same ID reconciliation with data set \"(false)\"",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-f1882a43821a": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "Drive operational hold preserves credential validity and same ID reconciliation with data set \"(true)\"",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-23784738bc35": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "owner HTTP settings and summary isolate identity reject forged fields and fence stale resumes",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-6c2f600030d3": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "export capacity denies admissions and setting growth but pause is allocation free",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-3774e340cfc8": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "global metric maintenance expires only owner configured coarse buckets",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-03b5f8bc1d8c": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "operational copilot reservation follows configured native units and invalid configuration fails closed",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-4d0ff077ed76": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "retained reservation ceiling cannot be reset but stop and foreign owner remain available",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-f6354275e7fb": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "next copilot admission is visibly exhausted when remaining units cannot cover its reservation",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-2d2b22128f76": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "continuation refuses missing history rather than initializing another ledger",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p3-139b63b4906b": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "continuation uses the unchanged anchored prefix and exact next admission count",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p3-7bc6a4955944": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "current evaluation policy binds the separately approved six dollar aggregate ceiling",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p3-3a75882c67ac": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "continuation refuses copied reanchored history replaced locks anchors and changed devices with data set \"('copy_reanchor')\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p3-eaf474aee1bb": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "continuation refuses copied reanchored history replaced locks anchors and changed devices with data set \"('lock')\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p3-aedf2be1689d": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "continuation refuses copied reanchored history replaced locks anchors and changed devices with data set \"('anchor')\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p3-f69c469ba468": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "continuation refuses copied reanchored history replaced locks anchors and changed devices with data set \"('device')\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p3-a5e72c5e5d8e": {
+            "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
+            "name": "continuation refuses copied reanchored history replaced locks anchors and changed devices with data set \"('missing_identity')\"",
+            "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
+        },
+        "case-m7p3-9800be43c890": {
+            "class": "Tests\\Feature\\OwnerExportTest",
+            "name": "market export deduplicates shared attempt identities and excludes foreign-only evidence",
+            "file": "tests/Feature/OwnerExportTest.php"
+        },
+        "case-m7p3-3787644763b7": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "invalid oauth callbacks cannot spend operational allowances before native authorization",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-1af42c844a6b": {
+            "class": "Tests\\Feature\\OperationsTest",
+            "name": "callback budget rejection preserves the native state for a later explicit permitted attempt",
+            "file": "tests/Feature/OperationsTest.php"
+        },
+        "case-m7p3-27637126f563": {
+            "class": "Tests\\Feature\\Settings\\ProfileUpdateTest",
+            "name": "retained operational history refuses profile deletion before logout without changing evidence",
+            "file": "tests/Feature/Settings/ProfileUpdateTest.php"
+        },
+        "case-m7p3-654dde9f144c": {
+            "class": "Tests\\Feature\\Settings\\ProfileUpdateTest",
+            "name": "foreign operational history does not prevent deletion of a genuinely empty owner",
+            "file": "tests/Feature/Settings/ProfileUpdateTest.php"
+        },
+        "case-m7p3-e42e73d2f983": {
+            "class": "Tests\\Unit\\GoogleDriveContractTest",
+            "name": "unscoped Google transport cannot consume a fake or live handoff",
+            "file": "tests/Unit/GoogleDriveContractTest.php"
         }
     },
     "manual_artifacts": {
@@ -4277,8 +4462,18 @@
         },
         "m7p2-live-evaluation": {
             "sha256": "e8db805de2961a4dd545959a2a9e1e70d817d7619817590edd6393db564ca94a",
-            "scope": "Required current-basis actual synthetic OpenAI evaluation of30finance plus10adversarial/missing cases; retained observed receipt, not provider-signed and not a CI live rerun.",
+            "scope": "Owner-accepted historical M7-P2 actual synthetic40 receipt. Preserved unchanged; does not satisfy current M7-P3 source-basis quality.",
             "public_path": "docs/halal-wealth-os/runs/M7-P2-live-evaluation.json"
+        },
+        "m7p3-live-evaluation": {
+            "public_path": "docs/halal-wealth-os/runs/M7-P3-live-evaluation.json",
+            "sha256": "a439d29f01d7f1fe6522d72987d69fa501f213284be0b22272c5db843273ddd0",
+            "scope": "Current-source actual40 synthetic case receipt; pending until observed, mandatory live tool gate remains fail-closed."
+        },
+        "m7p3-operating-guide": {
+            "public_path": "docs/halal-wealth-os/runs/M7-P3-operating-guide.md",
+            "sha256": "f5fd820b94303b2a7ef4ba4b1e173a5c8a1a962923f113c2ba02e3e28f0f682e",
+            "scope": "Owner limits, stop/recovery, privacy/data flow/retention, matching-build rollback, release dossier and separate deployment/acceptance decision."
         }
     },
     "requirements": {
@@ -7096,6 +7291,198 @@
             ],
             "manual_artifact_ids": ["m7p2-live-evaluation"],
             "tool_check": "LIVE_ANSWER_EVALUATION"
+        },
+        "M7-P3-AC1": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p3-fef0ad904f7d",
+                "case-m7p3-cfa7c1e75f15",
+                "case-m7p3-df6f22d9f933",
+                "case-m7p3-56a2c5f8fd67",
+                "case-m7p3-d7d532c24a72",
+                "case-m7p3-586d9ea3e67c",
+                "case-m7p3-445a514e93b0",
+                "case-m7p3-1a82b7d4f7e0",
+                "case-m7p3-864db89ad714",
+                "case-m7p3-089f37bb9431",
+                "case-m7p3-d7f6e40e912e",
+                "case-m7p3-f332680bb38f",
+                "case-m7p3-83fdc0c9a873",
+                "case-m7p3-dc474d4c4374",
+                "case-m7p3-d7fade0f8a6c",
+                "case-m7p3-21ff8f4c1841",
+                "case-m7p3-f1882a43821a",
+                "case-m7p3-23784738bc35",
+                "case-m7p3-6c2f600030d3",
+                "case-m7p3-3774e340cfc8",
+                "case-m7p3-03b5f8bc1d8c",
+                "case-m7p3-4d0ff077ed76",
+                "case-m7p3-f6354275e7fb",
+                "case-m7p3-2d2b22128f76",
+                "case-m7p3-139b63b4906b",
+                "case-m7p3-7bc6a4955944",
+                "case-m7p3-3a75882c67ac",
+                "case-m7p3-eaf474aee1bb",
+                "case-m7p3-aedf2be1689d",
+                "case-m7p3-f69c469ba468",
+                "case-m7p3-a5e72c5e5d8e",
+                "case-m7p3-9800be43c890",
+                "case-m7p3-3787644763b7",
+                "case-m7p3-1af42c844a6b",
+                "case-m7p3-654dde9f144c",
+                "case-m7p3-e42e73d2f983"
+            ],
+            "manual_artifact_ids": ["m7p3-operating-guide"],
+            "tool_check": "HTTP_JOURNEY"
+        },
+        "M7-P3-AC2": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p3-fef0ad904f7d",
+                "case-m7p3-cfa7c1e75f15",
+                "case-m7p3-df6f22d9f933",
+                "case-m7p3-56a2c5f8fd67",
+                "case-m7p3-d7d532c24a72",
+                "case-m7p3-586d9ea3e67c",
+                "case-m7p3-445a514e93b0",
+                "case-m7p3-1a82b7d4f7e0",
+                "case-m7p3-864db89ad714",
+                "case-m7p3-089f37bb9431",
+                "case-m7p3-d7f6e40e912e",
+                "case-m7p3-f332680bb38f",
+                "case-m7p3-83fdc0c9a873",
+                "case-m7p3-dc474d4c4374",
+                "case-m7p3-d7fade0f8a6c",
+                "case-m7p3-21ff8f4c1841",
+                "case-m7p3-f1882a43821a",
+                "case-m7p3-23784738bc35",
+                "case-m7p3-6c2f600030d3",
+                "case-m7p3-3774e340cfc8",
+                "case-m7p3-03b5f8bc1d8c",
+                "case-m7p3-4d0ff077ed76",
+                "case-m7p3-f6354275e7fb",
+                "case-m7p3-3787644763b7",
+                "case-m7p3-1af42c844a6b",
+                "case-m7p3-27637126f563",
+                "case-m7p3-e42e73d2f983"
+            ],
+            "manual_artifact_ids": ["m7p3-operating-guide"],
+            "tool_check": "HTTP_JOURNEY"
+        },
+        "M7-P3-AC3": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p3-fef0ad904f7d",
+                "case-m7p3-cfa7c1e75f15",
+                "case-m7p3-df6f22d9f933",
+                "case-m7p3-56a2c5f8fd67",
+                "case-m7p3-d7d532c24a72",
+                "case-m7p3-586d9ea3e67c",
+                "case-m7p3-445a514e93b0",
+                "case-m7p3-1a82b7d4f7e0",
+                "case-m7p3-864db89ad714",
+                "case-m7p3-089f37bb9431",
+                "case-m7p3-d7f6e40e912e",
+                "case-m7p3-f332680bb38f",
+                "case-m7p3-83fdc0c9a873",
+                "case-m7p3-dc474d4c4374",
+                "case-m7p3-d7fade0f8a6c",
+                "case-m7p3-21ff8f4c1841",
+                "case-m7p3-f1882a43821a",
+                "case-m7p3-23784738bc35",
+                "case-m7p3-6c2f600030d3",
+                "case-m7p3-3774e340cfc8",
+                "case-m7p3-03b5f8bc1d8c",
+                "case-m7p3-4d0ff077ed76",
+                "case-m7p3-f6354275e7fb",
+                "case-m7p3-2d2b22128f76",
+                "case-m7p3-139b63b4906b",
+                "case-m7p3-7bc6a4955944",
+                "case-m7p3-3a75882c67ac",
+                "case-m7p3-eaf474aee1bb",
+                "case-m7p3-aedf2be1689d",
+                "case-m7p3-f69c469ba468",
+                "case-m7p3-a5e72c5e5d8e",
+                "case-m7p3-9800be43c890",
+                "case-m7p3-3787644763b7",
+                "case-m7p3-1af42c844a6b"
+            ],
+            "manual_artifact_ids": [
+                "m7p3-operating-guide",
+                "m7p3-live-evaluation"
+            ],
+            "tool_check": "LIVE_ANSWER_EVALUATION"
+        },
+        "M7-P3-AC4": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p3-fef0ad904f7d",
+                "case-m7p3-cfa7c1e75f15",
+                "case-m7p3-df6f22d9f933",
+                "case-m7p3-56a2c5f8fd67",
+                "case-m7p3-d7d532c24a72",
+                "case-m7p3-586d9ea3e67c",
+                "case-m7p3-445a514e93b0",
+                "case-m7p3-1a82b7d4f7e0",
+                "case-m7p3-864db89ad714",
+                "case-m7p3-089f37bb9431",
+                "case-m7p3-d7f6e40e912e",
+                "case-m7p3-f332680bb38f",
+                "case-m7p3-83fdc0c9a873",
+                "case-m7p3-dc474d4c4374",
+                "case-m7p3-d7fade0f8a6c",
+                "case-m7p3-21ff8f4c1841",
+                "case-m7p3-f1882a43821a",
+                "case-m7p3-23784738bc35",
+                "case-m7p3-6c2f600030d3",
+                "case-m7p3-3774e340cfc8",
+                "case-m7p3-03b5f8bc1d8c",
+                "case-m7p3-4d0ff077ed76",
+                "case-m7p3-f6354275e7fb",
+                "case-m7p3-2d2b22128f76",
+                "case-m7p3-139b63b4906b",
+                "case-m7p3-7bc6a4955944",
+                "case-m7p3-3a75882c67ac",
+                "case-m7p3-eaf474aee1bb",
+                "case-m7p3-aedf2be1689d",
+                "case-m7p3-f69c469ba468",
+                "case-m7p3-a5e72c5e5d8e",
+                "case-m7p3-9800be43c890",
+                "case-m7p3-27637126f563",
+                "case-m7p3-654dde9f144c"
+            ],
+            "manual_artifact_ids": ["m7p3-operating-guide"],
+            "tool_check": "RELEASE_READINESS"
+        },
+        "M7-P3-AC5": {
+            "status": "CONFIGURED_REQUIRES_CURRENT_EXECUTION",
+            "actual_case_ids": [
+                "case-m7p3-fef0ad904f7d",
+                "case-m7p3-cfa7c1e75f15",
+                "case-m7p3-df6f22d9f933",
+                "case-m7p3-56a2c5f8fd67",
+                "case-m7p3-d7d532c24a72",
+                "case-m7p3-586d9ea3e67c",
+                "case-m7p3-445a514e93b0",
+                "case-m7p3-1a82b7d4f7e0",
+                "case-m7p3-864db89ad714",
+                "case-m7p3-089f37bb9431",
+                "case-m7p3-d7f6e40e912e",
+                "case-m7p3-f332680bb38f",
+                "case-m7p3-83fdc0c9a873",
+                "case-m7p3-dc474d4c4374",
+                "case-m7p3-d7fade0f8a6c",
+                "case-m7p3-21ff8f4c1841",
+                "case-m7p3-f1882a43821a",
+                "case-m7p3-23784738bc35",
+                "case-m7p3-6c2f600030d3",
+                "case-m7p3-3774e340cfc8",
+                "case-m7p3-03b5f8bc1d8c",
+                "case-m7p3-4d0ff077ed76",
+                "case-m7p3-f6354275e7fb"
+            ],
+            "manual_artifact_ids": ["m7p3-operating-guide"],
+            "tool_check": "RELEASE_READINESS"
         }
     },
     "fixtures": {
@@ -7369,7 +7756,7 @@
             ],
             "future_subscenarios": [],
             "scope": "Current executed readonly/owner/untrusted and grounded answer/citation cases plus separately validated current-basis actual synthetic live evaluation; no financial actions or V2 acceptance.",
-            "live_artifact_id": "m7p2-live-evaluation"
+            "live_artifact_id": "m7p3-live-evaluation"
         }
     },
     "evidence_semantics": "AND: configured exact cases must pass in current uncached JUnit and every configured scoped manual artifact must retain its hash. Historical and current observations retain their declared limits; manual evidence never replaces a missing configured test or owner acceptance."

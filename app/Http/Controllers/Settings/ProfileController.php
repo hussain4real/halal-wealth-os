@@ -62,8 +62,12 @@ class ProfileController extends Controller
 
         DB::transaction(function () use ($user): void {
             LedgerInput::lock($user);
-            if (Account::query()->ownedBy($user)->exists() || DB::table('planning_categories')->where('owner_id', $user->id)->exists() || DB::table('cash_availability_settings')->where('owner_id', $user->id)->exists() || DB::table('portfolio_assets')->where('owner_id', $user->id)->exists()) {
-                throw ValidationException::withMessages(['password' => 'Your financial accounts and planning history must be retained. This profile cannot be deleted.']);
+            $operationalHistory = false;
+            foreach (['operation_controls', 'operation_reservations', 'operation_metrics'] as $table) {
+                $operationalHistory = $operationalHistory || DB::table($table)->where('owner_id', $user->id)->exists();
+            }
+            if ($operationalHistory || Account::query()->ownedBy($user)->exists() || DB::table('planning_categories')->where('owner_id', $user->id)->exists() || DB::table('cash_availability_settings')->where('owner_id', $user->id)->exists() || DB::table('portfolio_assets')->where('owner_id', $user->id)->exists()) {
+                throw ValidationException::withMessages(['password' => 'Your financial accounts, planning and operational history must be retained. This profile cannot be deleted.']);
             }
             // Logout rotates remember-token state while the model still exists.
             // Saving it after deletion would recreate an otherwise empty profile.

@@ -24,13 +24,21 @@ use Tests\Support\CopilotFixtures;
 use Tests\Support\DisposablePostgres;
 
 try {
-    if (($argv[1] ?? '') !== '--actual-synthetic-openai' || count($argv) !== 4) {
-        throw new RuntimeException('Explicit live-evaluation flag, private env and NEW destination required.');
+    if (($argv[1] ?? '') !== '--actual-synthetic-openai' || count($argv) !== 6) {
+        throw new RuntimeException('Explicit live-evaluation flag, private env, NEW evidence destination, existing budget root and reviewed continuation baseline required.');
     }
     $root = dirname(__DIR__);
+    $budgetRoot = realpath($argv[4]);
+    $baselineFile = realpath($argv[5]);
+    if ($budgetRoot === false || $budgetRoot === $root || $baselineFile === false || is_link($argv[5]) || (fileperms($baselineFile) & 0777) !== 0600) {
+        throw new RuntimeException('Explicit original budget root and private reviewed baseline required.');
+    }
+    $baseline = json_decode(file_get_contents($baselineFile), true, flags: JSON_THROW_ON_ERROR);
+    $baseline['expected_new_entries'] = 0;
+    assertAnswerEvaluationContinuation($budgetRoot, $baseline);
     $envFile = realpath($argv[2]);
     $destination = $argv[3];
-    if ($envFile === false || $envFile !== realpath(dirname($root).'/.env.local') || (fileperms($envFile) & 0777) !== 0600 || file_exists($destination)) {
+    if (is_link($argv[2]) || $envFile === false || $envFile !== realpath($budgetRoot.'/.env.local') || (fileperms($envFile) & 0777) !== 0600 || file_exists($destination)) {
         throw new RuntimeException('Use the approved private env and a new private destination.');
     }
     $parent = realpath(dirname($destination));
@@ -45,14 +53,6 @@ try {
     $app->make(Kernel::class)->bootstrap();
     $connection = DB::connection();
     DisposablePostgres::assertConfiguration(app()->environment(), $connection->getDriverName(), $connection->getConfig(), env('HWO_DISPOSABLE_DATABASE'));
-    $envBytes = file_get_contents($envFile);
-    preg_match('/^OPENAI_API_KEY=[\"\']?([A-Za-z0-9_-]{20,})[\"\']?\s*$/m', $envBytes, $keyMatch);
-    $key = $keyMatch[1] ?? null;
-    if (! is_string($key) || trim($key) === '') {
-        throw new RuntimeException('Approved key unavailable.');
-    }
-    config(['app.debug' => false, 'copilot.answer_enabled' => true, 'copilot.openai_key' => $key]);
-    unset($envBytes, $keyMatch, $key);
     $policy = AnswerEvaluationPolicy::current();
     $policyHash = AnswerEvaluationPolicy::digest();
     if (config('copilot.answer_model') !== $policy['model'] || config('copilot.tokens_per_request') !== $policy['production_reservation_tokens']) {
@@ -61,16 +61,24 @@ try {
     $dataset = file_get_contents($root.'/resources/copilot/evaluation/questions-v1.json');
     $cases = json_decode($dataset, true, flags: JSON_THROW_ON_ERROR)['cases'];
     $basis = trim(shell_exec('node '.escapeshellarg($root.'/scripts/answer-eval-basis.mjs')) ?? '');
-    if (! preg_match('/^[a-f0-9]{64}$/D', $basis) || count($cases) < 40) {
+    if (! preg_match('/^[a-f0-9]{64}$/D', $basis) || count($cases) !== 40) {
         throw new RuntimeException('Invalid evaluation basis/inventory.');
     }
+    $envBytes = file_get_contents($envFile);
+    preg_match('/^OPENAI_API_KEY=[\"\']?([A-Za-z0-9_-]{20,})[\"\']?\s*$/m', $envBytes, $keyMatch);
+    $key = $keyMatch[1] ?? null;
+    if (! is_string($key) || trim($key) === '') {
+        throw new RuntimeException('Approved key unavailable.');
+    }
+    config(['app.debug' => false, 'copilot.answer_enabled' => true, 'copilot.openai_key' => $key]);
+    unset($envBytes, $keyMatch, $key);
     $report = ['version' => 'live-answer-evaluation-v4', 'started_at' => gmdate('Y-m-d\TH:i:s\Z'), 'result' => 'INCOMPLETE', 'synthetic_only' => true, 'transport' => 'actual-openai-responses', 'basis_sha256' => $basis,
         'dataset_sha256' => hash('sha256', $dataset), 'prompt_sha256' => hash_file('sha256', $root.'/resources/copilot/answer-plan-v2.txt'), 'model' => $policy['model'], 'temperature' => $policy['temperature'], 'store' => $policy['store'], 'max_output_tokens' => $policy['max_output_tokens'], 'max_input_tokens' => $policy['max_input_tokens'], 'policy' => $policy, 'policy_sha256' => $policyHash,
         'total_eval_cap_micro_usd' => $policy['total_cap_micro_usd'], 'cases' => [], 'limitation' => 'CI verifies this current-basis retained observed receipt; not a provider-signed attestation and not a CI live rerun. Measures bounded model claim/mode/scope selection and integrated deterministic facts, not unrestricted prose quality. Selected tool is the redacted server admission selection; missing context can prevent retrieval. No provider tools are offered. Handler transfers are observed; no provider-side exactly-once execution guarantee is claimed.'];
     $hashFinance = static function (): string {
         $rows = [];
         foreach (DB::select("SELECT table_name FROM information_schema.columns WHERE table_schema='public' AND column_name='owner_id' ORDER BY table_name") as $t) {
-            if (in_array($t->table_name, ['copilot_controls', 'copilot_requests'], true)) {
+            if (in_array($t->table_name, ['copilot_controls', 'copilot_requests', 'operation_reservations', 'operation_metrics'], true)) {
                 continue;
             }
             $v = DB::table($t->table_name)->get()->map(fn ($row) => json_encode($row, JSON_THROW_ON_ERROR))->all();
@@ -80,7 +88,7 @@ try {
 
         return hash('sha256', json_encode($rows, JSON_THROW_ON_ERROR));
     };
-    foreach ($cases as $case) {
+    foreach ($cases as $caseIndex => $case) {
         // Only exact versioned synthetic questions/documents can reach this wire.
         $caseHash = hash('sha256', json_encode($case, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
         $owner = User::factory()->create();
@@ -93,7 +101,8 @@ try {
         app()->instance(AnswerPlanner::class, $planner);
         $before = $hashFinance();
         $reference = (string) Str::uuid();
-        $totalReserved = reserveAnswerEvaluation(dirname($root), $case['id'], $basis, hash('sha256', $reference), $policy);
+        $baseline['expected_new_entries'] = $caseIndex;
+        $totalReserved = reserveAnswerEvaluation($budgetRoot, $case['id'], $basis, hash('sha256', $reference), $policy, $baseline);
         writeAnswerEvaluationEvidence($destination.'/'.$case['id'].'-intent.json', ['case_id' => $case['id'], 'case_sha256' => $caseHash, 'basis_sha256' => $basis, 'reference_sha256' => hash('sha256', $reference), 'status' => 'reserved_before_handoff', 'request' => $intent, 'reserved_micro_usd' => $policy['case_reservation_micro_usd'], 'reserved_total_micro_usd' => $totalReserved, 'production_reservation_tokens' => $policy['production_reservation_tokens']]);
         $result = app(CopilotBoundary::class)->answer($reference, $input, AnswerFixtures::context($fixture, $case['missing'] ?? null), true);
         writeAnswerEvaluationEvidence($destination.'/'.$case['id'].'-answer.json', $result);

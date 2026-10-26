@@ -8,12 +8,12 @@ const digest = (x) => createHash('sha256').update(x).digest('hex');
 export const releasePolicy = Object.freeze(
     JSON.parse(
         readFileSync(
-            path.join(root, 'resources/copilot/evaluation/policy-v4.json'),
+            path.join(root, 'resources/copilot/evaluation/policy-v5.json'),
         ),
     ),
 );
 const approvedPolicy = {
-    version: 'answer-evaluation-policy-v4',
+    version: 'answer-evaluation-policy-v5',
     model: 'gpt-5.4-2026-03-05',
     reasoning_effort: 'none',
     temperature: 0,
@@ -24,7 +24,7 @@ const approvedPolicy = {
     input_price_micro_usd_per_million: 2500000,
     output_price_micro_usd_per_million: 15000000,
     case_reservation_micro_usd: 28160,
-    total_cap_micro_usd: 5000000,
+    total_cap_micro_usd: 6000000,
     production_reservation_tokens: 16384,
 };
 if (!isDeepStrictEqual(releasePolicy, approvedPolicy))

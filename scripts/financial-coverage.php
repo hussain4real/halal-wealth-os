@@ -13,7 +13,7 @@ function financialCoverage(DOMDocument $report, string $root): array
 {
     $app = $root.'/app/Domain/';
     $paths = [];
-    foreach (['Ledger', 'Planning', 'Portfolio', 'Reporting', 'Decisions', 'Imports', 'Integrations', 'Notifications', 'Intelligence', 'Shared/Money', 'Shared/Observations'] as $directory) {
+    foreach (['Ledger', 'Planning', 'Portfolio', 'Reporting', 'Decisions', 'Imports', 'Integrations', 'Notifications', 'Intelligence', 'Operations', 'Shared/Money', 'Shared/Observations'] as $directory) {
         if (! is_dir($app.$directory)) {
             continue;
         }

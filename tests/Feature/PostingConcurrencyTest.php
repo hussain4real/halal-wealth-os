@@ -13,7 +13,7 @@ use App\Domain\Shared\Money\Money;
 use App\Models\Account;
 use App\Models\JournalEntry;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
@@ -22,7 +22,18 @@ use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
 // Real commits, independent PostgreSQL connections, no wrapping test transaction.
-uses(TestCase::class, DatabaseMigrations::class);
+uses(TestCase::class);
+beforeEach(function () {
+    RefreshDatabaseState::$migrated = false;
+    $this->artisan('migrate:fresh', ['--force' => true])->assertSuccessful();
+});
+afterEach(function () {
+    try {
+        $this->artisan('migrate:fresh', ['--force' => true])->assertSuccessful();
+    } finally {
+        RefreshDatabaseState::$migrated = false;
+    }
+});
 
 /** @return array<string, string> */
 function concurrencyInput(Account $account): array

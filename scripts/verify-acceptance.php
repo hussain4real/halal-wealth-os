@@ -23,6 +23,11 @@ try {
             throw new RuntimeException('BLOCKED: current native HTTP statement-import evidence did not pass.');
         }
     }
+    foreach (['real_csrf_rejection', 'owner_admin_isolation', 'stale_resume_denied', 'stop_all_four', 'manual_posting_while_stopped', 'explicit_resume_saved_limits'] as $check) {
+        if (($http['operations']['result'] ?? null) !== 'PASS' || ($http['operations'][$check] ?? null) !== true) {
+            throw new RuntimeException('BLOCKED: current native HTTP operational control evidence did not pass.');
+        }
+    }
     foreach (['outage_preserves_stale_observation', 'honest_daily_source', 'exact_retry_after_supersession', 'owner_admin_isolation', 'real_csrf_rejection'] as $check) {
         if (($http['market_data']['result'] ?? null) !== 'PASS' || ($http['market_data'][$check] ?? null) !== true || ($http['market_data']['live_access'] ?? null) !== 'BLOCKED_MOCK_ONLY') {
             throw new RuntimeException('BLOCKED: current native HTTP market evidence did not pass.');
@@ -82,7 +87,7 @@ try {
         || $release['deployment_authorized'] !== false || $release['owner_phase_acceptance'] !== 'PENDING') {
         throw new RuntimeException('BLOCKED: current release identity and actual recovery evidence do not match.');
     }
-    if (($release['live_evaluation']['result'] ?? null) !== 'PASS' || ($release['live_evaluation']['cases'] ?? 0) < 40 || ! hash_equals(hash_file('sha256', $root.'/docs/halal-wealth-os/runs/M7-P2-live-evaluation.json'), $release['live_evaluation_sha256'] ?? '')) {
+    if (($release['live_evaluation']['result'] ?? null) !== 'PASS' || ($release['live_evaluation']['cases'] ?? 0) < 40 || ! hash_equals(hash_file('sha256', $root.'/docs/halal-wealth-os/runs/M7-P3-live-evaluation.json'), $release['live_evaluation_sha256'] ?? '')) {
         throw new RuntimeException('BLOCKED: current live answer evaluation receipt missing.');
     }
     $report['result'] = 'PASS';
