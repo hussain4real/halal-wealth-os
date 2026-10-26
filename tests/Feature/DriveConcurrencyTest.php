@@ -101,9 +101,23 @@ test('held restored low IDs cannot starve a current epoch operation', function (
 test('operation capacity never blocks receipt recovery inspection or local disconnect', function () {
     $c = $this->wire->ready($this->owner);
     $id = D::snapshot($this->owner);
+    $this->travelTo(now()->utc()->startOfDay()->addHours(12));
+    $firstDay = [];
     for ($i = 0; $i < 63; $i++) {
         $r = D::queued($this->owner, $id);
+        if ($i === 31) {
+            $firstDay = DB::table('operation_reservations')->where('owner_id', $this->owner->id)->orderBy('id')->get()->map(fn ($row) => (array) $row)->all();
+            $this->travel(1)->days();
+        }
     }
+    $usage = DB::table('operation_reservations')->where('owner_id', $this->owner->id)
+        ->selectRaw("(recorded_at AT TIME ZONE 'UTC')::date AS day, count(*) AS requests")
+        ->groupByRaw("(recorded_at AT TIME ZONE 'UTC')::date")->get();
+    expect(DB::table('operation_reservations')->where('owner_id', $this->owner->id)->orderBy('id')->limit(count($firstDay))->get()->map(fn ($row) => (array) $row)->all())->toBe($firstDay);
+    expect($usage)->toHaveCount(2);
+    expect($usage->sum('requests'))->toBe(129);
+    expect($usage->every(fn ($day) => $day->requests <= 100))->toBeTrue();
+    expect(DB::table('drive_operations')->where('owner_id', $this->owner->id)->count())->toBe(64);
     $review = $this->drive->review($this->owner, $id);
     expect(fn () => $this->drive->confirm($this->owner, 'capacity-reject-01', $review['review_token'], true))->toThrow(DriveFailure::class, 'retained_capacity');
     expect($this->drive->inspect($this->owner, $r['request_key'])['state'])->toBe('queued');
@@ -157,8 +171,22 @@ test('disconnect preserves a possibly committed remote report as stopped unknown
 });
 
 test('hard owner export overflow compensates a rejected callback without retaining credentials or raw errors', function () {
-    DB::statement("INSERT INTO dashboard_snapshots(owner_id,reference,idempotency_key,payload_hash,evidence,evidence_hash) VALUES (?,?,'synthetic-drive-hard-capacity',?,jsonb_build_object('synthetic',repeat('x',67108864)),?)", [$this->owner->id, (string) Str::ulid(), hash('sha256', 'synthetic'), hash('sha256', 'synthetic')]);
+    $once = true;
+    Event::listen(TransactionCommitted::class, function ($event) use (&$once) {
+        if ($once && $event->connection->transactionLevel() === 0
+            && DB::table('operation_reservations')->where('owner_id', $this->owner->id)->where('action', 'connect')->where('status', 'pending')->count() === 1
+            && DB::table('drive_controls')->where('owner_id', $this->owner->id)->value('oauth_hash') === null) {
+            $once = false;
+            Http::assertNothingSent();
+            expect(DB::table('drive_connections')->where('owner_id', $this->owner->id)->count())->toBe(0);
+            DB::statement("INSERT INTO dashboard_snapshots(owner_id,reference,idempotency_key,payload_hash,evidence,evidence_hash) VALUES (?,?,'synthetic-drive-hard-capacity',?,jsonb_build_object('synthetic',repeat('x',67108864)),?)", [$this->owner->id, (string) Str::ulid(), hash('sha256', 'synthetic'), hash('sha256', 'synthetic')]);
+        }
+    });
     expect(fn () => $this->wire->connect($this->owner))->toThrow(DriveFailure::class, 'owner_export_capacity');
+    expect($once)->toBeFalse();
+    expect(DB::table('operation_reservations')->where('owner_id', $this->owner->id)->count())->toBe(1);
+    expect((array) DB::table('operation_reservations')->where('owner_id', $this->owner->id)->first())->toMatchArray(['units' => 3, 'allowance' => 3, 'status' => 'uncertain']);
+    expect(DB::table('drive_controls')->where('owner_id', $this->owner->id)->value('oauth_hash'))->toBeNull();
     $this->assertDatabaseCount('drive_connections', 0);
     $this->assertDatabaseCount('drive_secrets', 0);
     Http::assertSent(fn ($request) => $request->url() === 'https://oauth2.googleapis.com/revoke');

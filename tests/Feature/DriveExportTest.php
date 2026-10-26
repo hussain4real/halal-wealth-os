@@ -362,13 +362,18 @@ test('a newer oauth start supersedes an already consumed callback and rejected t
     $start = $this->drive->begin($this->owner, 'session');
     $new = null;
     $once = true;
+    $exchanged = false;
+    // The second owner action commits between leaf sends, never inside the first send's owner lock.
+    Event::listen(TransactionCommitted::class, function () use (&$once, &$exchanged, &$new): void {
+        if ($once && $exchanged && DB::connection()->transactionLevel() === 0) {
+            $once = false;
+            $new = $this->drive->begin($this->owner, 'session');
+        }
+    });
     Http::swap(new Factory);
-    Http::fake(function ($request) use (&$once, &$new) {
+    Http::fake(function ($request) use (&$exchanged) {
         if ($request->url() === 'https://oauth2.googleapis.com/token') {
-            if ($once) {
-                $once = false;
-                $new = $this->drive->begin($this->owner, 'session');
-            }
+            $exchanged = true;
 
             return Http::response(['access_token' => 'access', 'refresh_token' => 'refresh', 'token_type' => 'Bearer', 'expires_in' => 3600, 'scope' => GoogleDrive::SCOPE]);
         }

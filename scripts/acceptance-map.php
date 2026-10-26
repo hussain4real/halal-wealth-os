@@ -41,7 +41,7 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
     $required = [];
     foreach ($roadmap['phases'] as $phase) {
         $required = [...$required, ...$phase['acceptanceIds']];
-        if ($phase['id'] === 'M7-P2') {
+        if ($phase['id'] === 'M7-P3') {
             break;
         }
     }
@@ -123,7 +123,7 @@ function acceptanceMap(array $map, DOMDocument $junit, string $root): array
                 }
             }
             $answers = array_filter($fixture['case_ids'], fn ($caseId) => str_starts_with($map['cases'][$caseId]['name'], 'fixed evaluation answers'));
-            if (count($answers) < 40 || ($fixture['live_artifact_id'] ?? null) !== 'm7p2-live-evaluation' || ! isset($map['manual_artifacts']['m7p2-live-evaluation'])) {
+            if (count($answers) < 40 || ($fixture['live_artifact_id'] ?? null) !== 'm7p3-live-evaluation' || ! isset($map['manual_artifacts']['m7p3-live-evaluation'])) {
                 throw new RuntimeException('BLOCKED: F18 requires40 exact answer cases and retained live receipt.');
             }
             if (count($families) !== 3) {

@@ -89,7 +89,7 @@ function syntheticValidatorFixture() {
         policy_sha256: policyDigest,
         cases,
         totals: { cases: 40, input_tokens: 4000, output_tokens: 800 },
-        total_eval_cap_micro_usd: 5000000,
+        total_eval_cap_micro_usd: 6000000,
         reserved_total_micro_usd: 1128224,
         limitation:
             'retained observed receipt; not a provider-signed attestation',
@@ -103,15 +103,19 @@ await test('retained live evidence validator rejects changed basis missing cases
     );
     for (const mutate of [
         (r) => (r.transport = 'stub'),
+        (r) => (r.result = 'PENDING'),
+        (r) => delete r.completed_at,
+        (r) => delete r.cases,
+        (r) => (r.total_eval_cap_micro_usd = 5000000),
         (r) => (r.model = 'gpt-5.4-mini-2026-03-17'),
         (r) => (r.temperature = 1),
         (r) => delete r.temperature,
         (r) => (r.cases[0].temperature = 1),
         (r) => delete r.cases[0].temperature,
         (r) => (r.policy.case_reservation_micro_usd = 1),
-        (r) => (r.policy.total_cap_micro_usd = 6000000),
+        (r) => (r.policy.total_cap_micro_usd = 6000001),
         (r) => (r.total_eval_cap_micro_usd = 4000000),
-        (r) => (r.total_eval_cap_micro_usd = 6000000),
+        (r) => (r.total_eval_cap_micro_usd = 6000001),
         (r) => (r.version = 'live-answer-evaluation-v3'),
         (r) => (r.cases[0].policy_sha256 = 'f'.repeat(64)),
         (r) => (r.cases[0].wire_bytes = 8192),
@@ -128,7 +132,7 @@ await test('retained live evidence validator rejects changed basis missing cases
         (r) => (r.cases[0].response_id_sha256 = r.cases[1].response_id_sha256),
         (r) => (r.cases[0].usage.output_tokens = 513),
         (r) => (r.cases[0].checks.no_financial_writes = false),
-        (r) => (r.reserved_total_micro_usd = 5000001),
+        (r) => (r.reserved_total_micro_usd = 6000001),
         (r) => (r.prompt_sha256 = '0'.repeat(64)),
         (r) => (r.totals.input_tokens = 0),
     ]) {
@@ -152,12 +156,18 @@ await test('evaluation basis binds new runtime prompt grader dataset and tests w
             'docs/halal-wealth-os/runs',
         ])
             mkdirSync(path.join(root, dir), { recursive: true });
+        const historical = {
+            sha256: '3'.repeat(64),
+            public_path: 'docs/halal-wealth-os/runs/M7-P2-live-evaluation.json',
+            scope: 'Accepted historical evaluation',
+        };
         const map = {
             manual_artifacts: {
-                'm7p2-live-evaluation': {
+                'm7p2-live-evaluation': historical,
+                'm7p3-live-evaluation': {
                     sha256: '1'.repeat(64),
                     public_path:
-                        'docs/halal-wealth-os/runs/M7-P2-live-evaluation.json',
+                        'docs/halal-wealth-os/runs/M7-P3-live-evaluation.json',
                     scope: 'Actual synthetic evaluation',
                 },
             },
@@ -175,7 +185,7 @@ await test('evaluation basis binds new runtime prompt grader dataset and tests w
         ])
             writeFileSync(path.join(root, file), 'initial');
         const before = evaluationBasis(root);
-        map.manual_artifacts['m7p2-live-evaluation'].sha256 = '2'.repeat(64);
+        map.manual_artifacts['m7p3-live-evaluation'].sha256 = '2'.repeat(64);
         writeFileSync(
             path.join(root, 'scripts/acceptance-map.json'),
             JSON.stringify(map),
@@ -183,7 +193,7 @@ await test('evaluation basis binds new runtime prompt grader dataset and tests w
         writeFileSync(
             path.join(
                 root,
-                'docs/halal-wealth-os/runs/M7-P2-live-evaluation.json',
+                'docs/halal-wealth-os/runs/M7-P3-live-evaluation.json',
             ),
             'generated',
         );
@@ -199,7 +209,14 @@ await test('evaluation basis binds new runtime prompt grader dataset and tests w
             assert.notEqual(evaluationBasis(root), before);
             writeFileSync(path.join(root, file), 'initial');
         }
-        map.manual_artifacts['m7p2-live-evaluation'].scope = 'weakened scope';
+        map.manual_artifacts['m7p2-live-evaluation'].sha256 = '4'.repeat(64);
+        writeFileSync(
+            path.join(root, 'scripts/acceptance-map.json'),
+            JSON.stringify(map),
+        );
+        assert.notEqual(evaluationBasis(root), before);
+        map.manual_artifacts['m7p2-live-evaluation'].sha256 = '3'.repeat(64);
+        map.manual_artifacts['m7p3-live-evaluation'].scope = 'weakened scope';
         writeFileSync(
             path.join(root, 'scripts/acceptance-map.json'),
             JSON.stringify(map),

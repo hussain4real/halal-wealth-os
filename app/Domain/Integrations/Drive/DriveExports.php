@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace App\Domain\Integrations\Drive;
 
 use App\Domain\Ledger\LedgerInput;
+use App\Domain\Operations\Channel;
+use App\Domain\Operations\DriveAction;
+use App\Domain\Operations\OperationBlocked;
+use App\Domain\Operations\OperationPermit;
+use App\Domain\Operations\Operations;
 use App\Models\User;
 use App\Support\Release\OwnerExport;
 use App\Support\Release\OwnerExportLimit;
@@ -44,16 +49,38 @@ final class DriveExports
         if (strlen($code) < 1 || strlen($code) > 2048) {
             throw new DriveFailure('invalid_callback');
         }
-        [$verifier, $generation] = $this->locked($owner, function (stdClass $c) use ($owner, $session, $state): array {
-            if (! $c->stopped || $c->oauth_hash === null || ! hash_equals($c->oauth_hash, hash('sha256', $state))
-                || ! hash_equals($c->session_hash ?? '', hash('sha256', $session)) || now()->gte($c->oauth_expires)) {
-                throw new DriveFailure('invalid_callback');
-            }
-            $cipher = $c->oauth_verifier;
-            DB::table('drive_controls')->where('owner_id', $owner->id)->update(['oauth_hash' => null, 'session_hash' => null, 'oauth_verifier' => null, 'oauth_expires' => null]);
+        try {
+            [$verifier, $generation, $permit] = $this->locked($owner, function (stdClass $c) use ($owner, $session, $state): array {
+                if (! $c->stopped || $c->oauth_hash === null || ! hash_equals($c->oauth_hash, hash('sha256', $state))
+                    || ! hash_equals($c->session_hash ?? '', hash('sha256', $session)) || now()->gte($c->oauth_expires)) {
+                    throw new DriveFailure('invalid_callback');
+                }
+                $permit = app(Operations::class)->reserve($owner, Channel::Drive, (string) Str::uuid(), DriveAction::Connect);
+                $cipher = $c->oauth_verifier;
+                DB::table('drive_controls')->where('owner_id', $owner->id)->update(['oauth_hash' => null, 'session_hash' => null, 'oauth_verifier' => null, 'oauth_expires' => null]);
 
-            return [$cipher, $c->generation];
-        });
+                return [$cipher, $c->generation, $permit];
+            });
+        } catch (OperationBlocked) {
+            throw new DriveFailure('operations_held');
+        }
+        try {
+            $result = (new self($this->google->scoped($permit)))->finishRemote($owner, $verifier, $generation, $code);
+            $permit->finish('complete');
+
+            return $result;
+        } catch (OperationBlocked) {
+            $permit->finish($permit->hasSent() ? 'uncertain' : 'held');
+            throw new DriveFailure('operations_held');
+        } catch (Throwable $error) {
+            $permit->finish($permit->hasSent() ? 'uncertain' : 'unavailable');
+            throw $error;
+        }
+    }
+
+    /** @return array<string,mixed> */
+    private function finishRemote(User $owner, #[\SensitiveParameter] string $verifier, string $generation, #[\SensitiveParameter] string $code): array
+    {
         try {
             $verifier = Crypt::decryptString($verifier);
         } catch (Throwable) {
@@ -96,6 +123,20 @@ final class DriveExports
         if ($cached = $this->cached($owner, $key, $input)) {
             return $this->receipt($cached);
         }
+        try {
+            return app(Operations::class)->drive($owner, DriveAction::Prepare, fn (OperationPermit $permit) => (new self($this->google->scoped($permit)))->prepareRemote($owner, $key, $connection, $generation));
+        } catch (OperationBlocked) {
+            throw new DriveFailure('operations_held');
+        }
+    }
+
+    /** @return array<string,mixed> */
+    private function prepareRemote(User $owner, string $key, string $connection, string $generation): array
+    {
+        $input = ['connection' => $connection, 'generation' => $generation, 'acknowledge_account' => true];
+        if ($cached = $this->cached($owner, $key, $input)) {
+            return $this->receipt($cached);
+        }
         $this->warm($owner, $connection);
 
         return $this->locked($owner, function (stdClass $c) use ($owner, $key, $connection, $generation, $input): array {
@@ -119,6 +160,16 @@ final class DriveExports
 
     /** @return array<string,mixed> */
     public function review(User $owner, string $snapshot): array
+    {
+        try {
+            return app(Operations::class)->drive($owner, DriveAction::Review, fn (OperationPermit $permit) => (new self($this->google->scoped($permit)))->reviewRemote($owner, $snapshot));
+        } catch (OperationBlocked) {
+            throw new DriveFailure('operations_held');
+        }
+    }
+
+    /** @return array<string,mixed> */
+    private function reviewRemote(User $owner, string $snapshot): array
     {
         $this->warm($owner);
 
@@ -145,6 +196,20 @@ final class DriveExports
 
     /** @return array<string,mixed> */
     public function confirm(User $owner, string $key, string $token, bool $acknowledged): array
+    {
+        $input = ['review_token_hash' => hash('sha256', $token), 'acknowledged' => $acknowledged];
+        if ($cached = $this->cached($owner, $key, $input)) {
+            return $this->receipt($cached);
+        }
+        try {
+            return app(Operations::class)->drive($owner, DriveAction::Confirm, fn (OperationPermit $permit) => (new self($this->google->scoped($permit)))->confirmRemote($owner, $key, $token, $acknowledged));
+        } catch (OperationBlocked) {
+            throw new DriveFailure('operations_held');
+        }
+    }
+
+    /** @return array<string,mixed> */
+    private function confirmRemote(User $owner, string $key, string $token, bool $acknowledged): array
     {
         $input = ['review_token_hash' => hash('sha256', $token), 'acknowledged' => $acknowledged];
         if ($cached = $this->cached($owner, $key, $input)) {
@@ -226,6 +291,27 @@ final class DriveExports
     public function revoke(string $connection): void
     {
         $row = DB::table('drive_connections')->where('id', LedgerInput::identifier($connection))->first();
+        $owner = $row === null ? null : User::whereKey((string) $row->owner_id)->first();
+        if ($row === null || $owner === null) {
+            return;
+        }
+        if ($row->revoke_state !== 'pending' || ! GoogleDrive::enabled() || $row->epoch !== $this->epoch() || ($row->revoke_lease_until !== null && now()->lt($row->revoke_lease_until))) {
+            return;
+        }
+        try {
+            app(Operations::class)->drive($owner, DriveAction::Revoke, function (OperationPermit $permit) use ($owner, $connection): void {
+                (new self($this->google->scoped($permit)))->revokeRemote($connection);
+                $state = DB::table('drive_connections')->where('id', $connection)->where('owner_id', $owner->id)->value('revoke_state');
+                $permit->finish($state === 'confirmed' ? 'complete' : 'uncertain');
+            });
+        } catch (OperationBlocked) {
+            // Keep native identity/uncertainty; local inspection and disconnect remain available.
+        }
+    }
+
+    private function revokeRemote(string $connection): void
+    {
+        $row = DB::table('drive_connections')->where('id', LedgerInput::identifier($connection))->first();
         if ($row === null) {
             return;
         }
@@ -280,6 +366,27 @@ final class DriveExports
     }
 
     public function run(string $operation): void
+    {
+        $row = DB::table('drive_operations')->where('id', LedgerInput::identifier($operation))->first();
+        $owner = $row === null ? null : User::whereKey((string) $row->owner_id)->first();
+        if ($row === null || $owner === null) {
+            return;
+        }
+        if (! GoogleDrive::enabled() || $row->epoch !== $this->epoch() || ! in_array($row->state, ['queued', 'claimed', 'unknown'], true) || ($row->next_at !== null && now()->lt($row->next_at)) || $row->attempts >= 3) {
+            return;
+        }
+        try {
+            app(Operations::class)->drive($owner, DriveAction::Run, function (OperationPermit $permit) use ($owner, $operation): void {
+                (new self($this->google->scoped($permit)))->runRemote($operation);
+                $state = DB::table('drive_operations')->where('id', $operation)->where('owner_id', $owner->id)->value('state');
+                $permit->finish(in_array($state, ['unknown', 'claimed'], true) ? 'uncertain' : (in_array($state, ['uploaded', 'folder_ready'], true) ? 'complete' : 'unavailable'));
+            });
+        } catch (OperationBlocked) {
+            // Keep native identity/uncertainty; local inspection and disconnect remain available.
+        }
+    }
+
+    private function runRemote(string $operation): void
     {
         $row = DB::table('drive_operations')->where('id', LedgerInput::identifier($operation))->first();
         if ($row === null || ! GoogleDrive::enabled()) {
@@ -370,7 +477,7 @@ final class DriveExports
                 $this->result($r, 'uploaded', 'remote_evidence_verified');
             } catch (DriveFailure $error) {
                 $state = match ($error->reason) {
-                    'transport_unknown', 'expired_unconfirmed', 'invalid_response', 'response_too_large' => 'unknown',
+                    'transport_unknown', 'expired_unconfirmed', 'invalid_response', 'response_too_large', 'operations_held' => 'unknown',
                     'reconnect_required', 'unverified_identity', 'identity_changed', 'unapproved_scope_or_token', 'connection_rejected_revoke_unconfirmed' => 'reconnect',
                     'connection_changed', 'owner_unverified' => $r->attempts === 0 ? 'cancelled' : 'unknown',
                     'destination_not_private', 'destination_changed', 'remote_content_conflict' => 'conflict',
@@ -471,6 +578,9 @@ final class DriveExports
                     throw new DriveFailure('identity_changed');
                 }
             } catch (DriveFailure $error) {
+                if ($error->reason === 'operations_held') {
+                    return $error->reason;
+                }
                 if ($identityRead && in_array($error->reason, ['transport_unknown', 'invalid_response', 'response_too_large'], true)) {
                     return $error->reason;
                 }

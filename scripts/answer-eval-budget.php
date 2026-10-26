@@ -9,7 +9,7 @@ use App\Domain\Integrations\AnswerEvaluationPolicy;
  *
  * @return int total reserved microUSD after this admission */
 /** @param array<string,mixed>|null $policy */
-function reserveAnswerEvaluation(string $privateRoot, string $case, string $basis, string $referenceHash, ?array $policy = null): int
+function reserveAnswerEvaluation(string $privateRoot, string $case, string $basis, string $referenceHash, ?array $policy = null, ?array $continuation = null): int
 {
     $policy = AnswerEvaluationPolicy::validate($policy ?? AnswerEvaluationPolicy::current());
     $reservation = $policy['case_reservation_micro_usd'];
@@ -21,7 +21,14 @@ function reserveAnswerEvaluation(string $privateRoot, string $case, string $basi
             throw new RuntimeException('Symlinked budget state refused.');
         }
     }
-    $lock = fopen($lockFile, 'c+');
+    if ($continuation !== null) {
+        foreach ([$ledgerFile, $anchorFile, $lockFile] as $file) {
+            if (! is_file($file) || (fileperms($file) & 0777) !== 0600) {
+                throw new RuntimeException('Existing private continuation history required.');
+            }
+        }
+    }
+    $lock = fopen($lockFile, $continuation === null ? 'c+' : 'r+');
     if ($lock === false || ! flock($lock, LOCK_EX)) {
         throw new RuntimeException('Budget lock unavailable.');
     }
@@ -30,6 +37,9 @@ function reserveAnswerEvaluation(string $privateRoot, string $case, string $basi
     try {
         if (is_file($anchorFile) !== is_file($ledgerFile)) {
             throw new RuntimeException('Incomplete budget history refused.');
+        }
+        if ($continuation !== null && (! is_file($anchorFile) || ! is_file($ledgerFile))) {
+            throw new RuntimeException('Missing continuation history refused.');
         }
         $first = ! is_file($ledgerFile);
         $ledger = fopen($ledgerFile, $first ? 'x+b' : 'a+b');
@@ -57,6 +67,9 @@ function reserveAnswerEvaluation(string $privateRoot, string $case, string $basi
                 fclose($anchor);
             }
         }
+        if ($continuation !== null) {
+            assertAnswerEvaluationBudgetFiles($privateRoot, $continuation, $lock, $ledger);
+        }
         $anchor = json_decode(file_get_contents($anchorFile), true, flags: JSON_THROW_ON_ERROR);
         $stat = fstat($ledger);
         if ($anchor['inode'] !== $stat['ino']) {
@@ -81,6 +94,9 @@ function reserveAnswerEvaluation(string $privateRoot, string $case, string $basi
                 throw new RuntimeException('Invalid budget history.');
             }
             $total += $entry['reserved_micro_usd'];
+        }
+        if ($continuation !== null) {
+            validateAnswerEvaluationContinuation($bytes, $continuation);
         }
         // New approved model:8,192 input plus512 output; legacy reservations stay intact.
         if ($total + $reservation > $policy['total_cap_micro_usd']) {
@@ -112,5 +128,116 @@ function reserveAnswerEvaluation(string $privateRoot, string $case, string $basi
         }
         flock($lock, LOCK_UN);
         fclose($lock);
+    }
+}
+
+/** Continuation never creates, copies or reanchors history. Caller supplies the reviewed pre-run prefix.
+ * @param array<string,mixed> $baseline */
+function validateAnswerEvaluationContinuation(string $bytes, array $baseline): void
+{
+    foreach (['entries', 'bytes', 'total_micro_usd', 'expected_new_entries'] as $field) {
+        if (! is_int($baseline[$field] ?? null) || $baseline[$field] < 0) {
+            throw new RuntimeException('Invalid continuation baseline.');
+        }
+    }
+    if ($baseline['entries'] < 1 || $baseline['bytes'] < 1 || $baseline['expected_new_entries'] >= 40
+        || ! is_string($baseline['sha256'] ?? null) || ! preg_match('/^[a-f0-9]{64}$/D', $baseline['sha256'])) {
+        throw new RuntimeException('Invalid continuation baseline.');
+    }
+    $prefix = substr($bytes, 0, $baseline['bytes']);
+    $lines = explode("\n", rtrim($bytes, "\n"));
+    $old = explode("\n", rtrim($prefix, "\n"));
+    if (! str_ends_with($prefix, "\n") || ! hash_equals($baseline['sha256'], hash('sha256', $prefix))
+        || count($old) !== $baseline['entries'] || count($lines) !== $baseline['entries'] + $baseline['expected_new_entries']) {
+        throw new RuntimeException('Continuation prefix or admission count changed.');
+    }
+    $total = 0;
+    foreach ($old as $line) {
+        $entry = json_decode($line, true, flags: JSON_THROW_ON_ERROR);
+        $total += $entry['reserved_micro_usd'] ?? throw new RuntimeException('Invalid continuation history.');
+    }
+    if ($total !== $baseline['total_micro_usd']) {
+        throw new RuntimeException('Continuation total changed.');
+    }
+}
+
+/** Read-only pre-key preflight under the SAME original lock; admission rechecks under lock.
+ * @param array<string,mixed> $baseline */
+function assertAnswerEvaluationContinuation(string $privateRoot, array $baseline): void
+{
+    foreach (['live-budget.lock', 'live-budget-ledger.jsonl', 'live-budget-anchor.json'] as $name) {
+        $file = $privateRoot.'/'.$name;
+        if (is_link($file) || ! is_file($file) || (fileperms($file) & 0777) !== 0600) {
+            throw new RuntimeException('Existing private continuation history required.');
+        }
+    }
+    $lock = fopen($privateRoot.'/live-budget.lock', 'r+');
+    if ($lock === false || ! flock($lock, LOCK_EX)) {
+        throw new RuntimeException('Budget lock unavailable.');
+    }
+    $openedLedger = null;
+    try {
+        $ledger = $privateRoot.'/live-budget-ledger.jsonl';
+        $openedLedger = fopen($ledger, 'rb');
+        if ($openedLedger === false) {
+            throw new RuntimeException('Original ledger unavailable.');
+        }
+        assertAnswerEvaluationBudgetFiles($privateRoot, $baseline, $lock, $openedLedger);
+        $bytes = stream_get_contents($openedLedger);
+        $anchor = json_decode(file_get_contents($privateRoot.'/live-budget-anchor.json'), true, flags: JSON_THROW_ON_ERROR);
+        if ($anchor['inode'] !== fstat($openedLedger)['ino'] || $anchor['length'] !== strlen($bytes)
+            || ! hash_equals($anchor['prefix_sha256'], hash('sha256', $bytes))) {
+            throw new RuntimeException('Continuation anchor mismatch.');
+        }
+        validateAnswerEvaluationContinuation($bytes, $baseline);
+    } finally {
+        if (is_resource($openedLedger)) {
+            fclose($openedLedger);
+        }
+        flock($lock, LOCK_UN);
+        fclose($lock);
+    }
+}
+
+/** Pin original physical files, not a copied prefix with a newly declared anchor.
+ * @param array<string,mixed> $baseline
+ * @param resource $lock
+ * @param resource $ledger */
+function assertAnswerEvaluationBudgetFiles(string $root, array $baseline, $lock, $ledger): void
+{
+    foreach (['live-budget.lock', 'live-budget-ledger.jsonl', 'live-budget-anchor.json'] as $name) {
+        $expected = $baseline['files'][$name] ?? null;
+        if (! is_array($expected) || ! is_int($expected['device'] ?? null) || ! is_int($expected['inode'] ?? null) || $expected['inode'] < 1) {
+            throw new RuntimeException('Original physical budget identities required.');
+        }
+        $path = $root.'/'.$name;
+        clearstatcache(true, $path);
+        if (is_link($path) || ! is_file($path)) {
+            throw new RuntimeException('Original budget file replaced.');
+        }
+        $pathStat = lstat($path);
+        $anchor = null;
+        if ($name === 'live-budget.lock') {
+            $stat = fstat($lock);
+        } elseif ($name === 'live-budget-ledger.jsonl') {
+            $stat = fstat($ledger);
+        } else {
+            $anchor = fopen($path, 'rb');
+            if ($anchor === false) {
+                throw new RuntimeException('Original budget anchor unavailable.');
+            }
+            $stat = fstat($anchor);
+        }
+        try {
+            foreach ([$pathStat, $stat] as $actual) {
+                if ($actual === false || $actual['dev'] !== $expected['device'] || $actual['ino'] !== $expected['inode'] || ($actual['mode'] & 0777) !== 0600) {
+                    throw new RuntimeException('Original physical budget file identity changed.');
+                }
+            }
+        } finally {
+            if (is_resource($anchor)) {
+                fclose($anchor);
+            }
+        }
     }
 }

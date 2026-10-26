@@ -6,6 +6,10 @@ namespace App\Domain\Integrations;
 
 use App\Domain\Ledger\FxObservationService;
 use App\Domain\Ledger\LedgerInput;
+use App\Domain\Operations\Channel;
+use App\Domain\Operations\OperationBlocked;
+use App\Domain\Operations\OperationPermit;
+use App\Domain\Operations\Operations;
 use App\Domain\Portfolio\PortfolioInput;
 use App\Domain\Portfolio\PortfolioRead;
 use App\Domain\Portfolio\PriceObservationService;
@@ -16,6 +20,7 @@ use App\Support\Release\OwnerExport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Ramsey\Uuid\Uuid;
 use stdClass;
 
 /** Durable shared request budget and once-only owned financial admission. */
@@ -154,6 +159,17 @@ final class MarketRefresh
             return ['status' => 'disabled'];
         }
         LedgerInput::date($window);
+        $winner = hash('sha256', $feed->key().'|'.$window);
+        if ($cached = DB::table('market_results')->where('winner_key', $winner)->first()) {
+            return $this->fanOut($cached);
+        }
+        if ($window !== now('UTC')->toDateString()) {
+            return ['status' => 'blocked', 'code' => 'window_expired'];
+        }
+        $participants = $this->participants($feed);
+        if ($participants === []) {
+            return ['status' => 'blocked', 'code' => 'operations_held'];
+        }
         $claim = $this->claim($feed, $window);
         if (isset($claim['result'])) {
             return $this->fanOut($claim['result']);
@@ -164,8 +180,17 @@ final class MarketRefresh
         $attempt = $claim['attempt'];
         $sample = null;
         $failure = null;
+        $permits = [];
+        foreach ($participants as $owner) {
+            try {
+                $reference = Uuid::uuid5(Uuid::NAMESPACE_URL, 'hwo:market:'.$attempt->id.':'.$owner->id)->toString();
+                $permits[] = DB::transaction(fn () => app(Operations::class)->reserve($owner, Channel::Market, $reference));
+            } catch (OperationBlocked) {
+                // Shared fetch remains available to other eligible owners.
+            }
+        }
         try {
-            $sample = $feed->kind === 'price' ? $this->prices->price($feed) : $this->fx->fx($feed);
+            $sample = $this->fetch($feed, $permits);
         } catch (ProviderFailure $error) {
             $failure = $error;
         }
@@ -192,7 +217,66 @@ final class MarketRefresh
             return DB::table('market_results')->where('id', $id)->first();
         });
 
+        foreach ($permits as $permit) {
+            $permit->finish(! $permit->hasSent() ? 'held' : ($result->status === 'accepted' ? 'complete' : 'unavailable'));
+        }
+
         return $result->status === 'accepted' ? $this->fanOut($result) : ['status' => $result->status, 'code' => $result->safe_code, 'result_id' => (string) $result->id];
+    }
+
+    /** @return list<User> */
+    private function participants(MarketFeed $feed): array
+    {
+        $ids = DB::table('market_mappings as m')->where('m.enabled', true)->where('m.feed', $this->json($feed->data()))
+            ->whereNotExists(fn ($query) => $query->selectRaw('1')->from('market_mappings as s')->whereColumn('s.supersedes_id', 'm.id'))
+            ->select('m.owner_id')->distinct()->orderBy('m.owner_id')->limit(65)->pluck('m.owner_id');
+        if ($ids->count() > 64) {
+            throw new ProviderFailure('participant_capacity');
+        }
+        $owners = [];
+        foreach ($ids as $id) {
+            $owner = User::whereKey($id)->first();
+            if ($owner === null || ! $owner->hasVerifiedEmail()) {
+                continue;
+            }
+            $operations = app(Operations::class);
+            $policy = $operations->policy($owner, Channel::Market);
+            $usage = $operations->usage($owner, Channel::Market);
+            if (config('operations.paused') === false && ! $policy['paused'] && $usage['requests_today'] < $policy['requests_daily']
+                && $usage['units_today'] < $policy['units_daily'] && $usage['retained'] < Operations::MAX_RESERVATIONS) {
+                $owners[] = $owner;
+            }
+        }
+
+        return $owners;
+    }
+
+    /** All applicable owner locks span the one physical send. No provider lock is held here.
+     * @param list<OperationPermit> $permits */
+    private function fetch(MarketFeed $feed, array $permits): MarketSample
+    {
+        return DB::transaction(function () use ($feed, $permits): MarketSample {
+            $active = [];
+            foreach ($permits as $permit) {
+                LedgerInput::lock($permit->owner);
+                try {
+                    $permit->assertCurrent();
+                    $active[] = $permit;
+                } catch (OperationBlocked) {
+                    // A pause committed since reservation; retain the charge but make no call for it.
+                }
+            }
+            if ($active === []) {
+                throw new ProviderFailure('operations_held', true, 60);
+            }
+            $send = fn (): MarketSample => $feed->kind === 'price' ? $this->prices->price($feed) : $this->fx->fx($feed);
+            foreach (array_reverse($active) as $permit) {
+                $next = $send;
+                $send = fn (): MarketSample => $permit->call($next);
+            }
+
+            return $send();
+        }, 1);
     }
 
     /** @return array<string,mixed> */
@@ -256,6 +340,7 @@ final class MarketRefresh
             ->whereNotExists(fn ($q) => $q->selectRaw('1')->from('market_mappings as s')->whereColumn('s.supersedes_id', 'm.id'))->orderBy('m.id')->pluck('m.id');
         $count = 0;
         $blocked = 0;
+        $operationallyHeld = 0;
         $rejected = 0;
         foreach ($ids as $id) {
             $mapping = DB::table('market_mappings')->where('id', $id)->first();
@@ -266,6 +351,9 @@ final class MarketRefresh
                 } else {
                     $rejected++;
                 }
+            } catch (OperationBlocked) {
+                $blocked++;
+                $operationallyHeld++;
             } catch (ProviderFailure $failure) {
                 if ($failure->reason !== 'evidence_capacity') {
                     throw $failure;
@@ -277,8 +365,9 @@ final class MarketRefresh
         $status = $blocked > 0 ? ($count > 0 ? 'partial' : 'blocked') : ($rejected > 0 ? ($count > 0 ? 'partial' : 'rejected') : 'accepted');
 
         return ['status' => $status, 'result_id' => (string) $result->id, 'mappings' => $count,
-            'rejected_mappings' => $rejected, 'blocked_mappings' => $blocked,
-            ...($blocked > 0 ? ['code' => 'evidence_capacity'] : ($rejected > 0 ? ['code' => 'mapping_or_capacity_changed'] : []))];
+            'rejected_mappings' => $rejected, 'blocked_mappings' => $blocked, 'operationally_held_mappings' => $operationallyHeld,
+            ...($blocked > 0 ? ['code' => $operationallyHeld === 0 ? 'evidence_capacity' : ($operationallyHeld === $blocked ? 'operations_held' : 'operations_or_capacity')]
+                : ($rejected > 0 ? ['code' => 'mapping_or_capacity_changed'] : []))];
     }
 
     public function admit(User $owner, string $mappingId, string $resultId): stdClass
@@ -299,6 +388,9 @@ final class MarketRefresh
                 }
                 if ($retained = DB::table('market_admissions')->where('owner_id', $owner->id)->where('mapping_id', $mapping->id)->where('result_id', $result->id)->first()) {
                     return $retained;
+                }
+                if (config('operations.paused') !== false || app(Operations::class)->policy($owner, Channel::Market)['paused']) {
+                    throw new OperationBlocked('paused');
                 }
                 if (! $mapping->enabled || DB::table('market_mappings')->where('supersedes_id', $mapping->id)->exists() || ! TwelveData::mockEnabled()) {
                     LedgerInput::fail('mapping', 'This mapping is disabled or superseded. Its committed receipts remain available.');

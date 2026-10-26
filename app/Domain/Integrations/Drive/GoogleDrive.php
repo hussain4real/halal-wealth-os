@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Integrations\Drive;
 
+use App\Domain\Operations\OperationBlocked;
+use App\Domain\Operations\OperationPermit;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Throwable;
@@ -11,6 +13,16 @@ use Throwable;
 /** Fixed, fake-only Google boundary. No method can enable live transport. */
 final class GoogleDrive
 {
+    private ?OperationPermit $permit = null;
+
+    public function scoped(OperationPermit $permit): self
+    {
+        $copy = clone $this;
+        $copy->permit = $permit;
+
+        return $copy;
+    }
+
     public const string SCOPE = 'https://www.googleapis.com/auth/drive.file openid email';
 
     public const string FOLDER = 'application/vnd.google-apps.folder';
@@ -153,6 +165,21 @@ final class GoogleDrive
     /** @param array<string,mixed> $data
      * @param list<int> $allowed */
     private function request(string $method, string $url, #[\SensitiveParameter] string $access, #[\SensitiveParameter] array $data = [], array $allowed = [], #[\SensitiveParameter] ?string $body = null, string $type = '', bool $json = false): Response
+    {
+        self::requireMock();
+        if ($this->permit === null) {
+            throw new DriveFailure('operational_permit_required');
+        }
+        try {
+            return $this->permit->call(fn () => $this->sendRequest($method, $url, $access, $data, $allowed, $body, $type, $json));
+        } catch (OperationBlocked) {
+            throw new DriveFailure('operations_held');
+        }
+    }
+
+    /** @param array<string,mixed> $data
+     * @param list<int> $allowed */
+    private function sendRequest(string $method, string $url, #[\SensitiveParameter] string $access, #[\SensitiveParameter] array $data = [], array $allowed = [], #[\SensitiveParameter] ?string $body = null, string $type = '', bool $json = false): Response
     {
         self::requireMock();
         Http::preventStrayRequests();

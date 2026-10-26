@@ -1,5 +1,7 @@
 <?php
 
+use App\Domain\Operations\Channel;
+use App\Domain\Operations\Operations;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -33,4 +35,17 @@ test('concurrent identical request keys retain a single durable charged claim', 
     expect(array_column($results, 'status'))->toBe(['ok', 'ok']);
     expect(array_column($results, 'outcome'))->toContain('complete', 'already_charged');
     expect(DB::table('copilot_requests')->count())->toBe(1);
+});
+
+test('operational ceiling arbitrates independent contenders before the larger native allowance', function () {
+    $owner = User::factory()->create();
+    CopilotFixtures::allow($owner);
+    $operations = app(Operations::class);
+    $policy = $operations->policy($owner, Channel::Copilot);
+    $generation = $policy['generation'];
+    unset($policy['generation']);
+    $operations->configure($owner, Channel::Copilot, $generation, [...$policy, 'requests_daily' => 1]);
+    $results = concurrentCopilotRace($owner->id, [['key' => (string) Str::uuid()], ['key' => (string) Str::uuid()]]);
+    expect(array_column($results, 'status'))->toContain('ok', 429);
+    expect(DB::table('operation_reservations')->count())->toBe(1)->and(DB::table('copilot_requests')->count())->toBe(1);
 });

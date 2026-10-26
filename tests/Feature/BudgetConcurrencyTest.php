@@ -170,11 +170,19 @@ test('planning downgrade refuses retained rows and an empty schema roundtrip pre
     expect(fn () => $migration->down())->toThrow(RuntimeException::class);
     expect(Schema::hasTable('planning_allocations'))->toBeTrue();
     $this->artisan('migrate:fresh', ['--force' => true])->assertExitCode(0);
-    $owner = User::factory()->create();
+    $owner = User::factory()->make();
+    $owner->save();
+    expect($owner->hasVerifiedEmail())->toBeTrue();
+    expect(DB::table('operation_controls')->where('owner_id', $owner->id)->count())->toBe(0);
     $account = Fx::account($owner);
     app(PostingService::class)->record($owner, 'budget-upgrade-journal', ['kind' => 'income', 'account_id' => (string) $account->id, 'amount' => '17.35', 'effective_date' => '2026-10-18', 'description' => 'Synthetic upgrade evidence']);
     $before = DB::table('journal_entries')->orderBy('id')->get()->toJson();
     $legs = DB::table('postings')->orderBy('id')->get()->toJson();
+    foreach (['operation_controls', 'operation_reservations', 'operation_metrics'] as $table) {
+        expect(DB::table($table)->count())->toBe(0);
+    }
+    $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
+    expect(Schema::hasTable('operation_controls'))->toBeFalse();
     // Remove both the empty answer-lane migration and the copilot schema.
     $this->artisan('migrate:rollback', ['--step' => 2, '--force' => true])->assertExitCode(0);
     expect(Schema::hasTable('copilot_requests'))->toBeFalse();
@@ -217,6 +225,9 @@ test('planning downgrade refuses retained rows and an empty schema roundtrip pre
     $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
     expect(Schema::hasTable('planning_categories'))->toBeFalse();
     $this->artisan('migrate', ['--force' => true])->assertExitCode(0);
+    expect(Schema::hasTable('operation_controls'))->toBeTrue();
+    expect(Schema::hasTable('operation_reservations'))->toBeTrue();
+    expect(Schema::hasTable('operation_metrics'))->toBeTrue();
     expect(DB::table('journal_entries')->orderBy('id')->get()->toJson())->toBe($before)->and(DB::table('postings')->orderBy('id')->get()->toJson())->toBe($legs);
     $this->assertDatabaseCount('planning_categories', 0);
 });

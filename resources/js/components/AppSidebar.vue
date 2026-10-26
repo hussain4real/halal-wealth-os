@@ -30,6 +30,7 @@ import { edit as security } from '@/routes/security';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
+    { title: 'Optional feature controls', href: '/operations', icon: Shield },
     { title: 'Read-only copilot', href: '/copilot', icon: Shield },
     { title: 'Drive export', href: '/drive', icon: CalendarDays },
     { title: 'Reminders', href: '/notifications', icon: CalendarDays },

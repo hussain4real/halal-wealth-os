@@ -4,6 +4,7 @@ namespace Tests\Feature\Settings;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 uses(TestCase::class, RefreshDatabase::class);
@@ -28,7 +29,10 @@ test('test_email_verification_status_is_unchanged_when_the_email_address_is_unch
     $this->assertNotNull($user->refresh()->email_verified_at);
 });
 test('test_user_can_delete_their_account', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->make();
+    $user->save();
+    expect($user->hasVerifiedEmail())->toBeTrue();
+    expect(DB::table('operation_controls')->where('owner_id', $user->id)->count())->toBe(0);
     $response = $this->actingAs($user)->delete(route('profile.destroy'), ['password' => 'password']);
     $response->assertSessionHasNoErrors()->assertRedirect(route('home'));
     $this->assertGuest();
@@ -80,4 +84,27 @@ test('case only profile email edit keeps verification', function () {
     ])->assertSessionHasNoErrors();
     $this->assertSame('owner@example.test', $user->refresh()->email);
     $this->assertTrue($verifiedAt->equalTo($user->email_verified_at));
+});
+
+test('retained operational history refuses profile deletion before logout without changing evidence', function () {
+    $user = User::factory()->create();
+    $before = DB::table('operation_controls')->where('owner_id', $user->id)->orderBy('id')->get()->toJson();
+    $this->actingAs($user)->from(route('profile.edit'))->delete(route('profile.destroy'), ['password' => 'password'])
+        ->assertSessionHasErrors('password')->assertRedirect(route('profile.edit'));
+    $this->assertAuthenticatedAs($user);
+    expect($user->fresh())->not->toBeNull();
+    expect(DB::table('operation_controls')->where('owner_id', $user->id)->orderBy('id')->get()->toJson())->toBe($before);
+});
+
+test('foreign operational history does not prevent deletion of a genuinely empty owner', function () {
+    $other = User::factory()->create();
+    $before = DB::table('operation_controls')->where('owner_id', $other->id)->orderBy('id')->get()->toJson();
+    $user = User::factory()->make();
+    $user->save();
+    expect($user->hasVerifiedEmail())->toBeTrue();
+    expect(DB::table('operation_controls')->where('owner_id', $user->id)->count())->toBe(0);
+    $this->actingAs($user)->delete(route('profile.destroy'), ['password' => 'password'])->assertSessionHasNoErrors()->assertRedirect(route('home'));
+    $this->assertGuest();
+    expect($user->fresh())->toBeNull();
+    expect(DB::table('operation_controls')->where('owner_id', $other->id)->orderBy('id')->get()->toJson())->toBe($before);
 });

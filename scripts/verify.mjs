@@ -1,3 +1,4 @@
+import { verificationMode } from './verification-mode.mjs';
 import { randomBytes } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
@@ -13,14 +14,7 @@ import {
 } from './verification.mjs';
 
 try {
-    const args = process.argv.slice(2);
-    const all = args.length === 1 && args[0] === '--all';
-    const phase = args.length === 2 && args[0] === '--phase' ? args[1] : null;
-    if (!all && !phase) {
-        throw new VerificationFailure(
-            'Usage: ./bin/verify --phase Mx-Py | --all',
-        );
-    }
+    const { phase, prelive } = verificationMode(process.argv.slice(2));
     const roadmap = JSON.parse(
         readFileSync(
             path.join(root, 'docs/halal-wealth-os/ROADMAP.json'),
@@ -57,6 +51,7 @@ try {
             'M6-P4',
             'M7-P1',
             'M7-P2',
+            'M7-P3',
         ].includes(phase)
     ) {
         throw new VerificationFailure(
@@ -91,6 +86,7 @@ try {
             'scripts/copilot-preview.test.mjs',
             'scripts/copilot-answer.test.mjs',
             'scripts/answer-evaluation.test.mjs',
+            'scripts/operation-policy.test.mjs',
         ]);
         const missing = [];
         for (const command of [
@@ -145,6 +141,7 @@ try {
             'acceptance-map-report.json',
             'release-recovery.json',
             'release-record.json',
+            'prelive-readiness.json',
         ])
             rmSync(path.join(root, 'build', file), { force: true });
         run('composer', ['validate', '--strict'], { env });
@@ -288,6 +285,7 @@ try {
             'MarketConcurrencyTest',
             'ReminderTest',
             'ReminderConcurrencyTest',
+            'OperationsTest',
             'CopilotBoundaryTest',
             'CopilotAnswerTest',
             'OpenAiAnswerPlannerTest',
@@ -314,14 +312,18 @@ try {
         }
         run('composer', ['run', 'test:coverage'], { env });
         run('php', ['scripts/verify-reports.php'], { env });
-        run('node', ['scripts/verify-answer-eval.mjs'], { env });
         run('node', ['scripts/acceptance-http.mjs'], { env });
-        run('node', ['scripts/verify-release.mjs'], { env });
-        run('php', ['scripts/verify-acceptance.php'], { env });
-        console.log('PASS M0-P2 through M7-P2 implemented verification');
-        console.log(
-            'NOT_APPLICABLE: future domain suites, live financial integrations and deployment. Live AI is separately measured on synthetic inputs.',
-        );
+        if (prelive) {
+            run('node', ['scripts/verify-prelive.mjs'], { env });
+        } else {
+            run('node', ['scripts/verify-answer-eval.mjs'], { env });
+            run('node', ['scripts/verify-release.mjs'], { env });
+            run('php', ['scripts/verify-acceptance.php'], { env });
+            console.log('PASS M0-P2 through M7-P3 implemented verification');
+            console.log(
+                'NOT_APPLICABLE: live financial integrations and deployment. Live AI is separately measured on synthetic inputs.',
+            );
+        }
     }
 } catch (error) {
     reportFailure(error);

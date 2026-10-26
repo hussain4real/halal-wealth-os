@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Integrations\MarketRefresh;
 use App\Domain\Ledger\AccountType;
 use App\Domain\Ledger\CreateAccount;
 use App\Domain\Ledger\PostingService;
@@ -8,8 +9,10 @@ use App\Domain\Shared\Money\Money;
 use App\Models\User;
 use App\Support\Release\OwnerExport;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Inertia\Testing\AssertableInertia;
 use Tests\Support\DriveFixtures;
+use Tests\Support\MarketFixtures;
 use Tests\Support\ReleaseFixtures;
 use Tests\TestCase;
 
@@ -36,9 +39,9 @@ test('complete owner export contains every financial section and excludes authen
     $document = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
     expect($document['schema_version'])->toBe(2)
         ->and($document['profile']['id'])->toBe((string) $owner->id)
-        ->and($document['data'])->toHaveCount(69)
-        ->and($document['manifest']['sections'])->toHaveCount(69)
-        ->and($document['data'])->toHaveKeys(['copilot_controls', 'copilot_requests', 'market_mappings', 'market_attempts', 'market_results', 'market_admissions', 'reminder_preferences', 'reminder_controls', 'reminder_notifications', 'reminder_channels', 'reminder_claims', 'reminder_results', 'reminder_reads'])
+        ->and($document['data'])->toHaveCount(72)
+        ->and($document['manifest']['sections'])->toHaveCount(72)
+        ->and($document['data'])->toHaveKeys(['operation_controls', 'operation_reservations', 'operation_metrics', 'copilot_controls', 'copilot_requests', 'market_mappings', 'market_attempts', 'market_results', 'market_admissions', 'reminder_preferences', 'reminder_controls', 'reminder_notifications', 'reminder_channels', 'reminder_claims', 'reminder_results', 'reminder_reads'])
         ->and($document['profile'])->not->toHaveKeys(['password', 'remember_token', 'two_factor_secret', 'two_factor_recovery_codes']);
     ob_start();
     try {
@@ -182,4 +185,42 @@ test('owner exports include safe drive metadata while excluding entire oauth and
     $json = json_decode($bytes, true, flags: JSON_THROW_ON_ERROR);
     expect($bytes)->toContain('drive_connections', 'drive_operations', 'drive_events');
     expect($json)->toBeArray();
+});
+
+test('market export deduplicates shared attempt identities and excludes foreign-only evidence', function () {
+    $owner = User::factory()->create();
+    $foreign = User::factory()->create();
+    config(['market_data.mode' => 'mock']);
+    Http::preventStrayRequests();
+    Http::fake(['api.twelvedata.com/*' => fn ($request) => Http::response(MarketFixtures::priceBody(now('America/New_York')->subDay()->toDateString(), meta: ['symbol' => $request['symbol']]))]);
+    $one = MarketFixtures::price($owner);
+    MarketFixtures::price($owner);
+    MarketFixtures::price($foreign);
+    $foreignOnly = MarketFixtures::price($foreign, ['symbol' => 'FOREIGNONLY']);
+    $market = app(MarketRefresh::class);
+    $shared = $market->refresh($one['feed'], now('UTC')->toDateString());
+    $other = $market->refresh($foreignOnly['feed'], now('UTC')->toDateString());
+    expect($shared['status'])->toBe('accepted')->and($other['status'])->toBe('accepted');
+    $sharedAttempt = (string) DB::table('market_results')->where('id', $shared['result_id'])->value('attempt_id');
+    $foreignAttempt = (string) DB::table('market_results')->where('id', $other['result_id'])->value('attempt_id');
+    $download = app(OwnerExport::class)->download($owner);
+    try {
+        $document = json_decode(file_get_contents($download->getFile()->getPathname()), true, flags: JSON_THROW_ON_ERROR);
+        expect($document['data']['market_admissions'])->toHaveCount(2)
+            ->and($document['data']['market_results'])->toHaveCount(1)
+            ->and($document['data']['market_attempts'])->toHaveCount(1)
+            ->and($document['data']['market_results'][0]['id'])->toBe($shared['result_id']);
+        expect(array_column($document['data']['market_attempts'], 'id'))->toBe([$sharedAttempt])->not->toContain($foreignAttempt);
+        foreach ($document['data']['market_admissions'] as $row) {
+            expect($row['owner_id'])->toBe((string) $owner->id)->and($row['result_id'])->toBe($shared['result_id']);
+        }
+        expect(array_column($document['data']['market_results'], 'id'))->not->toContain($other['result_id']);
+    } finally {
+        ob_start();
+        try {
+            $download->sendContent();
+        } finally {
+            ob_end_clean();
+        }
+    }
 });

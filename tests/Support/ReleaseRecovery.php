@@ -6,6 +6,10 @@ use App\Domain\Imports\StatementImports;
 use App\Domain\Integrations\MarketRefresh;
 use App\Domain\Ledger\FinancialSnapshot;
 use App\Domain\Notifications\Reminders;
+use App\Domain\Operations\Channel;
+use App\Domain\Operations\DriveAction;
+use App\Domain\Operations\OperationBlocked;
+use App\Domain\Operations\Operations;
 use App\Domain\Planning\GoalView;
 use App\Domain\Portfolio\PortfolioRead;
 use App\Domain\Portfolio\PositionPricing;
@@ -18,6 +22,7 @@ use App\Support\Release\OwnerDataSchema;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\Process\Process;
 
@@ -148,7 +153,7 @@ final class ReleaseRecovery
             }
             // A subsequent real write must use restored sequences and database constraints.
             $owner = User::findOrFail($fixture['owner']);
-            GoalFixtures::cash($owner, Account::findOrFail($fixture['bank']), '1.01');
+            $operationalRollback = $this->operationalRollback($owner, $fixture, $cutoff);
             $protected = false;
             try {
                 DB::table('postings')->where('id', DB::table('postings')->min('id'))->update(['amount_minor' => '1']);
@@ -162,7 +167,7 @@ final class ReleaseRecovery
                 'reader_fingerprints' => $before['readers'], 'migrations' => $migrations,
                 'encryption' => 'sodium-secretstream-xchacha20poly1305-v1', 'wrong_key_target_unchanged' => true,
                 'restored_sequences_write' => true, 'restored_immutability_guard' => true,
-                'populated_downgrade_refused' => true, 'deployment_authorized' => false];
+                'populated_downgrade_refused' => true, 'operational_rollback' => $operationalRollback, 'deployment_authorized' => false];
         } finally {
             sodium_memzero($key);
             DB::setDefaultConnection($this->original);
@@ -213,6 +218,116 @@ final class ReleaseRecovery
         return (int) DB::selectOne("SELECT count(*) AS n FROM information_schema.tables WHERE table_schema='public'")->n;
     }
 
+    /** Matching-build optional disable, never an old-binary/schema downgrade. */
+    private function operationalRollback(User $owner, array $fixture, string $cutoff): array
+    {
+        $ops = app(Operations::class);
+        if (config('operations.paused') !== false) {
+            throw new RuntimeException('Rehearsal must observe owner stop independently of operator stop.');
+        }
+        foreach (Channel::cases() as $channel) {
+            if ($ops->policy($owner, $channel)['paused']) {
+                throw new RuntimeException('Rehearsal requires four explicitly running synthetic owner policies.');
+            }
+        }
+        $before = $this->capture($fixture, $cutoff);
+        $policies = DB::table('operation_controls')->orderBy('id')->get();
+        $foreignBefore = DB::table('operation_controls')->where('owner_id', '<>', $owner->id)->orderBy('id')->get()->toJson();
+        $ops->pauseAll($owner);
+        $changed = 0;
+        foreach ($policies as $old) {
+            $new = DB::table('operation_controls')->where('id', $old->id)->first();
+            if ((string) $old->owner_id === (string) $owner->id) {
+                if (! $new->paused || (int) $new->generation !== (int) $old->generation + 1) {
+                    throw new RuntimeException('Owner stop did not fence every current policy.');
+                }
+                $changed++;
+                foreach (['paused', 'generation', 'updated_at'] as $allowed) {
+                    unset($old->$allowed, $new->$allowed);
+                }
+            }
+            if ($old != $new) {
+                throw new RuntimeException('Operational stop changed unrelated policy fields.');
+            }
+        }
+        $foreignAfter = DB::table('operation_controls')->where('owner_id', '<>', $owner->id)->orderBy('id')->get()->toJson();
+        $after = $this->capture($fixture, $cutoff);
+        unset($before['tables']['operation_controls'], $after['tables']['operation_controls']);
+        unset($before['readers']['operations'], $after['readers']['operations']);
+        if ($changed !== 4 || $before !== $after || $foreignBefore !== $foreignAfter) {
+            throw new RuntimeException('Optional stop changed retained history, foreign policies or financial readers.');
+        }
+        $denials = [];
+        foreach (Channel::cases() as $channel) {
+            try {
+                DB::transaction(fn () => $ops->reserve($owner, $channel, (string) Str::uuid(), $channel === Channel::Drive ? DriveAction::Revoke : null));
+                throw new RuntimeException('Paused optional admission escaped.');
+            } catch (OperationBlocked $error) {
+                if ($error->reason !== 'paused') {
+                    throw $error;
+                }
+                $denials[$channel->value] = 'paused';
+            }
+        }
+        $postDenials = $this->capture($fixture, $cutoff);
+        unset($postDenials['tables']['operation_controls'], $postDenials['readers']['operations']);
+        if ($postDenials !== $after) {
+            throw new RuntimeException('Denied optional work allocated retained evidence.');
+        }
+        $oldRows = $this->rows();
+        $manual = GoalFixtures::cash($owner, Account::findOrFail($fixture['bank']), '1.01');
+        $newRows = $this->rows();
+        $added = [];
+        foreach ($oldRows as $table => $rows) {
+            $oldCounts = array_count_values($rows);
+            $newCounts = array_count_values($newRows[$table]);
+            foreach ($oldCounts as $row => $count) {
+                if (($newCounts[$row] ?? 0) < $count) {
+                    throw new RuntimeException('Manual fallback modified or deleted retained history.');
+                }
+                $newCounts[$row] -= $count;
+            }
+            foreach ($newCounts as $row => $count) {
+                for ($i = 0; $i < $count; $i++) {
+                    $added[$table][] = json_decode($row, true, flags: JSON_THROW_ON_ERROR);
+                }
+            }
+        }
+        ksort($added);
+        if (array_keys($added) !== ['journal_entries', 'postings'] || count($added['journal_entries']) !== 1 || count($added['postings']) !== 2
+            || (string) $added['journal_entries'][0]['id'] !== (string) $manual->id || $added['journal_entries'][0]['status'] !== 'posted') {
+            throw new RuntimeException('Manual fallback added unexpected history.');
+        }
+        foreach ($added['postings'] as $posting) {
+            if ((string) $posting['journal_id'] !== (string) $manual->id || (string) $posting['owner_id'] !== (string) $owner->id || $posting['currency_code'] !== 'QAR') {
+                throw new RuntimeException('Manual fallback postings are not owned and linked.');
+            }
+        }
+        if (DB::table('postings')->where('journal_id', $manual->id)->selectRaw('sum(amount_minor) AS total')->first()->total !== '0') {
+            throw new RuntimeException('Manual fallback journal did not balance.');
+        }
+
+        return ['result' => 'PASS', 'strategy' => 'matching_build_optional_disable', 'changed_owner_policies' => $changed,
+            'denied_channels' => $denials, 'unchanged_tables' => array_keys($after['tables']),
+            'history_before_sha256' => hash('sha256', json_encode($before, JSON_THROW_ON_ERROR)),
+            'history_after_sha256' => hash('sha256', json_encode($after, JSON_THROW_ON_ERROR)),
+            'reader_fingerprints_before' => $before['readers'], 'reader_fingerprints_after' => $after['readers'],
+            'foreign_policies_unchanged' => true, 'denials_allocate_no_evidence' => true,
+            'manual_posting' => true, 'preexisting_rows_preserved' => true, 'new_rows' => ['journal_entries' => 1, 'postings' => 2],
+            'code_downgrade_rehearsed' => false, 'deployment_authorized' => false];
+    }
+
+    /** Raw rows remain in memory only; public evidence contains hashes and counts. */
+    private function rows(): array
+    {
+        $result = [];
+        foreach (OwnerDataSchema::current(DB::connection())['tables'] as $table) {
+            $result[$table['table']] = DB::table($table['table'].' as t')->selectRaw('to_jsonb(t)::text AS value')->get()->pluck('value')->all();
+        }
+
+        return $result;
+    }
+
     private function capture(array $fixture, string $cutoff): array
     {
         $contract = OwnerDataSchema::current(DB::connection());
@@ -225,7 +340,7 @@ final class ReleaseRecovery
         $owner = User::findOrFail($fixture['owner']);
         $snapshot = app(FinancialSnapshot::class);
         $portfolio = app(PortfolioRead::class);
-        $readers = ['intelligence' => hash('sha256', json_encode(CopilotRecoveryFixtures::read($owner), JSON_THROW_ON_ERROR)), 'drive' => hash('sha256', json_encode(DriveRecoveryFixtures::read($owner), JSON_THROW_ON_ERROR)), 'reminders' => hash('sha256', json_encode(app(Reminders::class)->inbox($owner), JSON_THROW_ON_ERROR)), 'market' => hash('sha256', json_encode([
+        $readers = ['operations' => hash('sha256', json_encode(app(Operations::class)->page($owner), JSON_THROW_ON_ERROR)), 'intelligence' => hash('sha256', json_encode(CopilotRecoveryFixtures::read($owner), JSON_THROW_ON_ERROR)), 'drive' => hash('sha256', json_encode(DriveRecoveryFixtures::read($owner), JSON_THROW_ON_ERROR)), 'reminders' => hash('sha256', json_encode(app(Reminders::class)->inbox($owner), JSON_THROW_ON_ERROR)), 'market' => hash('sha256', json_encode([
             'status' => app(MarketRefresh::class)->status($owner),
             'price' => app(PositionPricing::class)->value($owner, $fixture['market_price_account'], ['kind' => 'unitized_fund', 'currency' => 'USD', 'quantity' => '1', 'cost_basis' => null, 'unit_price' => null, 'asset_family' => DB::table('portfolio_assets')->where('id', $fixture['market_price_asset'])->value('family_reference')], null, $cutoff),
             'fx' => app(ValuationFx::class)->convert($owner, '100', Currency::USD, Currency::QAR, $cutoff, 'reporting'),

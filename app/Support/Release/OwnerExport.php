@@ -139,7 +139,10 @@ final class OwnerExport
                 $query->whereIn('t.id', $connection->table('market_admissions')->where('owner_id', $owner)->select('result_id'));
                 break;
             case 'market_attempt':
-                $query->whereIn('t.id', $connection->table('market_results as r')->join('market_admissions as m', 'm.result_id', '=', 'r.id')->where('m.owner_id', $owner)->select('r.attempt_id'));
+                // Each owned admission resolves one result through its non-null FK/PK.
+                // Scalar projection keeps this lookup bounded even before planner statistics exist.
+                $query->whereIn('t.id', $connection->table('market_admissions as m')->where('m.owner_id', $owner)
+                    ->selectRaw('(SELECT r.attempt_id FROM market_results r WHERE r.id = m.result_id)'));
                 break;
             case 'account':
                 $query->join('accounts as a', 'a.id', '=', 't.account_id')->where('a.owner_id', $owner);

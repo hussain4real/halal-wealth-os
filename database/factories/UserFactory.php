@@ -2,9 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Domain\Operations\Channel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 /**
@@ -12,6 +15,22 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+    /** Synthetic fixtures opt into operational allowances, never provider consent/access.
+     * Real registrations have no policy and remain stopped until explicit owner setup. */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (User $owner): void {
+            if (Schema::hasTable('operation_controls')) {
+                $rows = [];
+                foreach (Channel::cases() as $channel) {
+                    $rows[] = ['owner_id' => $owner->id, 'channel' => $channel->value, 'paused' => false,
+                        'requests_daily' => $channel->maximumRequests(), 'units_daily' => $channel->maximumUnits(), 'retention_days' => 7];
+                }
+                DB::table('operation_controls')->insert($rows);
+            }
+        });
+    }
+
     /**
      * The current password being used by the factory.
      */

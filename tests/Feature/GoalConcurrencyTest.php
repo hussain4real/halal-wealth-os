@@ -171,13 +171,21 @@ test('goal migration refuses retained history and empty roundtrip preserves M1 a
     $m = require database_path('migrations/2026_10_18_110000_create_goal_protection.php');
     expect(fn () => $m->down())->toThrow(RuntimeException::class);
     $this->artisan('migrate:fresh', ['--force' => true])->assertExitCode(0);
-    $o = User::factory()->create();
+    $o = User::factory()->make();
+    $o->save();
+    expect($o->hasVerifiedEmail())->toBeTrue();
+    expect(DB::table('operation_controls')->where('owner_id', $o->id)->count())->toBe(0);
     $a = Fx::account($o);
     G::cash($o, $a, '100');
     $cat = BudgetFixtures::category($o);
     BudgetFixtures::rule($o, $cat);
     $before = DB::table('journal_entries')->get()->toJson();
     $budgets = DB::table('planning_schedules')->get()->toJson();
+    foreach (['operation_controls', 'operation_reservations', 'operation_metrics'] as $table) {
+        expect(DB::table($table)->count())->toBe(0);
+    }
+    $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
+    expect(Schema::hasTable('operation_controls'))->toBeFalse();
     // Remove both the empty answer-lane migration and the copilot schema.
     $this->artisan('migrate:rollback', ['--step' => 2, '--force' => true])->assertExitCode(0);
     expect(Schema::hasTable('copilot_requests'))->toBeFalse();
@@ -219,6 +227,9 @@ test('goal migration refuses retained history and empty roundtrip preserves M1 a
     $this->artisan('migrate:rollback', ['--step' => 1, '--force' => true])->assertExitCode(0);
     expect(Schema::hasTable('goal_plans'))->toBeFalse();
     $this->artisan('migrate', ['--force' => true])->assertExitCode(0);
+    expect(Schema::hasTable('operation_controls'))->toBeTrue();
+    expect(Schema::hasTable('operation_reservations'))->toBeTrue();
+    expect(Schema::hasTable('operation_metrics'))->toBeTrue();
     expect(DB::table('journal_entries')->get()->toJson())->toBe($before)->and(DB::table('planning_schedules')->get()->toJson())->toBe($budgets);
 });
 

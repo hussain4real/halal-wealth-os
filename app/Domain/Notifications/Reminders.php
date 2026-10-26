@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Domain\Notifications;
 
 use App\Domain\Ledger\LedgerInput;
+use App\Domain\Operations\Channel;
+use App\Domain\Operations\OperationBlocked;
+use App\Domain\Operations\Operations;
 use App\Domain\Planning\BudgetView;
 use App\Domain\Reporting\DashboardSnapshot;
 use App\Domain\Shared\Money\Currency;
@@ -165,8 +168,9 @@ final class Reminders
         }
         $secret = bin2hex(random_bytes(32));
         $claim = null;
+        $permit = null;
         try {
-            $first = DB::transaction(function () use ($owner, $intent, $secret, &$claim): array {
+            $first = DB::transaction(function () use ($owner, $intent, $secret, &$claim, &$permit): array {
                 LedgerInput::lock($owner);
                 $owner = User::whereKey($owner->id)->lockForUpdate()->first();
                 if ($owner === null) {
@@ -180,6 +184,9 @@ final class Reminders
                 $reason = $this->blockReason($owner, $intent, $settings['data']);
                 if ($reason !== null) {
                     return $this->outcome('held', $reason);
+                }
+                if ($intent->channel === 'email') {
+                    $permit = app(Operations::class)->reserve($owner, Channel::Email, (string) Str::uuid());
                 }
                 $ordinal = DB::table('reminder_claims')->where('owner_id', $owner->id)->where('channel_id', $intent->id)->count() + 1;
                 $id = DB::table('reminder_claims')->insertGetId(['owner_id' => $owner->id, 'channel_id' => $intent->id, 'ordinal' => $ordinal,
@@ -195,20 +202,22 @@ final class Reminders
 
                 return $this->outcome('claimed');
             });
+        } catch (OperationBlocked $error) {
+            return $this->outcome('held', 'operations_'.$error->reason);
         } catch (ValidationException $error) {
             if (array_key_exists('capacity', $error->errors())) {
                 return $this->outcome('held', 'capacity');
             }
             throw $error;
         }
-        if ($first['status'] !== 'claimed' || $claim === null) {
+        if ($first['status'] !== 'claimed' || $claim === null || $permit === null) {
             return $first;
         }
 
         // This stack alone owns the permit. An old queue job or restored row cannot acquire it.
         // Never auto-retry a transaction containing a mail handoff.
         try {
-            return DB::transaction(function () use ($owner, $intent, $claim, $secret): array {
+            $outcome = DB::transaction(function () use ($owner, $intent, $claim, $secret, $permit): array {
                 LedgerInput::lock($owner);
                 $fresh = User::whereKey($owner->id)->lockForUpdate()->first();
                 if ($fresh === null) {
@@ -230,7 +239,9 @@ final class Reminders
                 $message = ReminderPolicy::message($settings['data']['detail'], $notification->rule, $notification->due_date);
                 $mail = new ReminderMessage($message['subject'], $message['body'], hash('sha256', $notification->episode_key.':email'));
                 try {
-                    $handoff = $this->mail->send($fresh->email, $mail);
+                    $handoff = $permit->call(fn () => $this->mail->send($fresh->email, $mail));
+                } catch (OperationBlocked) {
+                    $handoff = Handoff::BeforeHandoffFailure;
                 } catch (Throwable) {
                     $handoff = Handoff::Uncertain;
                 }
@@ -239,7 +250,11 @@ final class Reminders
 
                 return $this->outcome($handoff->value);
             });
+            $permit->finish($outcome['status'] === 'mock_smtp' ? 'complete' : ($outcome['status'] === 'uncertain' ? 'uncertain' : 'held'));
+
+            return $outcome;
         } catch (ValidationException $error) {
+            $permit->finish($permit->hasSent() ? 'uncertain' : 'held');
             if (array_key_exists('capacity', $error->errors())) {
                 return $this->outcome('uncertain', 'capacity_inspect_claim');
             }

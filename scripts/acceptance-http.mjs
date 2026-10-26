@@ -14,6 +14,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { root, testingEnvironment, sourceIdentity } from './verification.mjs';
+import { operationsJourney } from './operations-http.mjs';
 import { copilotJourney } from './copilot-http.mjs';
 import { marketJourney } from './market-http.mjs';
 import { statementJourney } from './statement-http.mjs';
@@ -219,7 +220,7 @@ child.stderr.on('data', (chunk) => {
 });
 const report = {
     schema: 1,
-    phase: 'M7-P2',
+    phase: 'M7-P3',
     source_sha256: source,
     junit_sha256: existsSync(path.join(root, 'build/junit.xml'))
         ? createHash('sha256')
@@ -501,6 +502,15 @@ try {
         fixture,
         page,
         key,
+    });
+    report.operations = await operationsJourney({
+        owner,
+        foreign,
+        admin,
+        page,
+        transaction,
+        bank,
+        fixture,
     });
     const foreignPaths = [
         `/accounts/${bank}`,

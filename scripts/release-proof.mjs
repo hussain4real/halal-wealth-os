@@ -22,7 +22,7 @@ export function validateRecoveryProof(receipt, source, runId, tables) {
         Object.keys(receipt.reader_fingerprints ?? {})
             .sort((a, b) => a.localeCompare(b))
             .join(',') !==
-            'cash,drive,imports,intelligence,market,positions,reminders,reservations,shariah' ||
+            'cash,drive,imports,intelligence,market,operations,positions,reminders,reservations,shariah' ||
         !Array.isArray(receipt.migrations) ||
         receipt.migrations.length < 1 ||
         new Set(receipt.migrations).size !== receipt.migrations.length
@@ -31,6 +31,7 @@ export function validateRecoveryProof(receipt, source, runId, tables) {
             'Recovery receipt is missing, stale, incomplete or not produced by this full run',
         );
     }
+    validateOperationalRollback(receipt.operational_rollback, tables);
     for (const row of Object.values(receipt.table_fingerprints)) {
         if (
             !Number.isSafeInteger(row.rows) ||
@@ -75,4 +76,54 @@ export function readReleaseIdentity(directory) {
             'Release finalization requires a clean tracked and untracked checkout',
         );
     return identity;
+}
+
+export function validateOperationalRollback(proof, tables) {
+    const oldReaders =
+        'cash,drive,imports,intelligence,market,positions,reminders,reservations,shariah';
+    const expectedTables = tables
+        .filter((t) => t !== 'operation_controls')
+        .sort((a, b) => a.localeCompare(b))
+        .join(',');
+    if (
+        proof?.result !== 'PASS' ||
+        proof.strategy !== 'matching_build_optional_disable' ||
+        proof.changed_owner_policies !== 4 ||
+        proof.code_downgrade_rehearsed !== false ||
+        proof.deployment_authorized !== false ||
+        proof.foreign_policies_unchanged !== true ||
+        proof.denials_allocate_no_evidence !== true ||
+        proof.manual_posting !== true ||
+        proof.preexisting_rows_preserved !== true ||
+        JSON.stringify(proof.new_rows) !==
+            JSON.stringify({ journal_entries: 1, postings: 2 }) ||
+        Object.keys(proof.denied_channels ?? {})
+            .sort((a, b) => a.localeCompare(b))
+            .join(',') !== 'copilot,drive,email,market' ||
+        Object.values(proof.denied_channels).some((v) => v !== 'paused') ||
+        !Array.isArray(proof.unchanged_tables) ||
+        new Set(proof.unchanged_tables).size !==
+            proof.unchanged_tables.length ||
+        [...proof.unchanged_tables]
+            .sort((a, b) => a.localeCompare(b))
+            .join(',') !== expectedTables ||
+        !/^[a-f0-9]{64}$/.test(proof.history_before_sha256 ?? '') ||
+        proof.history_before_sha256 !== proof.history_after_sha256 ||
+        Object.keys(proof.reader_fingerprints_before ?? {})
+            .sort((a, b) => a.localeCompare(b))
+            .join(',') !== oldReaders ||
+        Object.keys(proof.reader_fingerprints_after ?? {})
+            .sort((a, b) => a.localeCompare(b))
+            .join(',') !== oldReaders ||
+        Object.keys(proof.reader_fingerprints_before).some(
+            (k) =>
+                !/^[a-f0-9]{64}$/.test(proof.reader_fingerprints_before[k]) ||
+                proof.reader_fingerprints_before[k] !==
+                    proof.reader_fingerprints_after[k],
+        )
+    ) {
+        throw new Error(
+            'Operational rollback proof is missing or inconsistent',
+        );
+    }
 }

@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Domain\Intelligence;
 
 use App\Domain\Intelligence\Answers\AnswerPlanner;
+use App\Domain\Operations\Channel;
+use App\Domain\Operations\OperationPermit;
+use App\Domain\Operations\Operations;
 use App\Domain\Reporting\Copilot\Answers\AnswerContext;
 use App\Domain\Reporting\Copilot\Tool;
 use App\Domain\Reporting\Copilot\ToolQuery;
@@ -70,7 +73,7 @@ final class CopilotBoundary
             return ['status' => 'already_charged', 'reference' => $reference];
         }
 
-        return $this->execute($owner, $reference, $query);
+        return $this->execute($owner, $reference, $query, $admitted);
     }
 
     /** Selection contract only; answer generation belongs to M7-P2.
@@ -86,11 +89,12 @@ final class CopilotBoundary
             if (! $this->provider->available()) {
                 throw new \RuntimeException('Unavailable');
             }
-            $json = DB::transaction(function () use ($owner, $reference, $input): string {
+            $json = DB::transaction(function () use ($owner, $reference, $input, $admitted): string {
                 $this->lock($owner);
                 $this->permit($owner, $reference);
+                $admitted->assertCurrent();
 
-                return $this->provider->propose($input, Tool::registry(), config('copilot.provider_output_bytes'));
+                return $admitted->call(fn () => $this->provider->propose($input, Tool::registry(), config('copilot.provider_output_bytes')));
             });
             if (strlen($json) > config('copilot.provider_output_bytes')) {
                 throw new \RuntimeException('Oversized proposal');
@@ -101,12 +105,12 @@ final class CopilotBoundary
             }
             $query = ToolQuery::parse($proposal);
         } catch (Throwable) {
-            $this->finish($owner, $reference, 'unavailable');
+            $this->finish($owner, $reference, 'unavailable', null, $admitted);
 
             return ['status' => 'unavailable', 'reference' => $reference];
         }
 
-        return $this->execute($owner, $reference, $query);
+        return $this->execute($owner, $reference, $query, $admitted);
     }
 
     /** @return array<string,mixed> */
@@ -115,7 +119,8 @@ final class CopilotBoundary
         $owner = $this->owner();
         abort_unless($disclosureConfirmed, 422, 'Confirm question/document disclosure before sending.');
         $context->authorize($owner);
-        if (! $this->admit($owner, $reference, 'answer', null)) {
+        $admitted = $this->admit($owner, $reference, 'answer', null);
+        if (! $admitted) {
             return ['status' => 'already_charged', 'reference' => $reference];
         }
         try {
@@ -123,66 +128,69 @@ final class CopilotBoundary
             if (! $planner->available()) {
                 throw new \RuntimeException('Answer provider unavailable.');
             }
-            $plan = DB::transaction(function () use ($owner, $reference, $input, $planner) {
+            $plan = DB::transaction(function () use ($owner, $reference, $input, $planner, $admitted) {
                 $this->lock($owner);
                 $this->permit($owner, $reference);
+                $admitted->assertCurrent();
 
-                return $planner->plan($input);
+                return $admitted->call(fn () => $planner->plan($input));
             });
 
-            return DB::transaction(function () use ($owner, $reference, $plan, $context, $input): array {
+            return DB::transaction(function () use ($owner, $reference, $plan, $context, $input, $admitted): array {
                 DB::statement('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
                 $this->lock($owner);
                 $this->permit($owner, $reference);
+                $admitted->assertCurrent();
                 $answer = app(CopilotAnswerFacts::class)->answer($owner, $plan, $context, $input->question);
                 if (strlen(json_encode($answer, JSON_THROW_ON_ERROR)) > config('copilot.evidence_bytes')) {
                     throw new \RuntimeException('Answer exceeds disclosure ceiling.');
                 }
-                $this->finish($owner, $reference, 'complete', $plan->claim->tool());
+                $this->finish($owner, $reference, 'complete', $plan->claim->tool(), $admitted);
 
                 return ['status' => 'complete', 'reference' => $reference, 'evidence' => $answer];
             });
         } catch (Throwable) {
-            $this->finish($owner, $reference, 'unavailable');
+            $this->finish($owner, $reference, 'unavailable', null, $admitted);
 
             return ['status' => 'unavailable', 'reference' => $reference];
         }
     }
 
     /** @return array<string,mixed> */
-    private function execute(User $owner, string $reference, ToolQuery $query): array
+    private function execute(User $owner, string $reference, ToolQuery $query, OperationPermit $admitted): array
     {
         try {
             // Recheck consent after provider return; it cannot cache or carry authority.
-            return DB::transaction(function () use ($owner, $reference, $query): array {
+            return DB::transaction(function () use ($owner, $reference, $query, $admitted): array {
                 DB::statement('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
                 $this->lock($owner);
                 $this->permit($owner, $reference);
+                $admitted->assertCurrent();
                 $result = $this->evidence->read($owner, $query)->jsonSerialize();
                 if (strlen(json_encode($result, JSON_THROW_ON_ERROR)) > config('copilot.evidence_bytes')) {
                     throw new \RuntimeException('Evidence exceeds disclosure ceiling');
                 }
-                $this->finish($owner, $reference, 'complete', $query->tool);
+                $this->finish($owner, $reference, 'complete', $query->tool, $admitted);
 
                 return ['status' => 'complete', 'reference' => $reference, 'evidence' => $result];
             });
         } catch (Throwable) {
-            $this->finish($owner, $reference, 'rejected');
+            $this->finish($owner, $reference, 'rejected', null, $admitted);
 
             return ['status' => 'unavailable', 'reference' => $reference];
         }
     }
 
-    private function admit(User $owner, string $reference, string $lane, ?Tool $tool): bool
+    private function admit(User $owner, string $reference, string $lane, ?Tool $tool): ?OperationPermit
     {
         Validator::make(['reference' => $reference], ['reference' => ['required', 'uuid']])->validate();
         $this->configuration();
 
-        return DB::transaction(function () use ($owner, $reference, $lane, $tool): bool {
+        return DB::transaction(function () use ($owner, $reference, $lane, $tool): ?OperationPermit {
             $this->lock($owner);
             $control = $this->allowed($owner);
             if (DB::table('copilot_requests')->where('owner_id', $owner->id)->where('reference', $reference)->exists()) {
-                return false;
+                return null;
             }
             $at = $this->instant();
             $usage = $this->usage($owner, $at);
@@ -193,11 +201,11 @@ final class CopilotBoundary
                 'reserved_tokens' => config('copilot.tokens_per_request'), 'recorded_at' => $at]);
             $this->headroom($owner);
 
-            return true;
+            return app(Operations::class)->reserve($owner, Channel::Copilot, $reference);
         });
     }
 
-    private function finish(User $owner, string $reference, string $status, ?Tool $tool = null): void
+    private function finish(User $owner, string $reference, string $status, ?Tool $tool, OperationPermit $admitted): void
     {
         $changes = ['status' => $status, 'finished_at' => DB::raw('clock_timestamp()')];
         if ($tool !== null) {
@@ -205,6 +213,7 @@ final class CopilotBoundary
         }
         DB::table('copilot_requests')->where('owner_id', $owner->id)->where('reference', $reference)->where('status', 'pending')
             ->update($changes);
+        $admitted->finish($status === 'complete' ? 'complete' : 'unavailable');
     }
 
     private function lock(User $owner): void

@@ -275,6 +275,8 @@ test('mapping versions reject duplicate current targets obsolete retries and inc
 });
 
 test('an old uncommitted window cannot fetch and excessive provider backoff stops all new feeds', function () {
+    $this->refresh->map($this->owner, 'quota-usd-consumer', M::fxInput());
+    $this->refresh->map($this->owner, 'quota-eur-consumer', M::fxInput('EUR', 'QAR'));
     Http::fake(['api.twelvedata.com/*' => Http::response('', 429, ['Retry-After' => '604801'])]);
     expect($this->refresh->refresh(MarketFeed::fx('USD', 'QAR'), '2026-10-22'))->toMatchArray(['status' => 'blocked', 'code' => 'window_expired']);
     Http::assertNothingSent();
@@ -311,12 +313,19 @@ test('later provider refreshes preserve saved valuation bytes and original obser
 test('shared daily credits do not reset at midnight while retained sends remain inside rolling day', function () {
     $this->travelTo(new DateTimeImmutable('2026-10-23T22:20:00Z'));
     Http::fake(['api.twelvedata.com/*' => fn ($request) => Http::response(M::priceBody('2026-10-22', meta: ['symbol' => $request['symbol'], 'exchange_timezone' => 'UTC']))]);
+    $consumer = $this->owner;
     for ($i = 0; $i < 800; $i++) {
         if ($i > 0 && $i % 8 === 0) {
             $this->travel(60)->seconds();
         }
+        if ($i % 64 === 0) {
+            $consumer = User::factory()->create();
+        }
+        M::price($consumer, ['symbol' => 'SYNTH'.$i, 'exchange_timezone' => 'UTC']);
         expect($this->refresh->refresh(MarketFeed::price('SYNTH'.$i, 'USD', 'XNAS', 'UTC'), '2026-10-23')['status'])->toBe('accepted');
     }
+    M::price($consumer, ['symbol' => 'MIDNIGHT', 'exchange_timezone' => 'UTC']);
+    M::price($consumer, ['symbol' => 'AFTER24H', 'exchange_timezone' => 'UTC']);
     $this->travelTo(new DateTimeImmutable('2026-10-24T00:00:00Z'));
     expect($this->refresh->refresh(MarketFeed::price('MIDNIGHT', 'USD', 'XNAS', 'UTC'), '2026-10-24'))->toMatchArray(['status' => 'deferred', 'code' => 'shared_credit_limit']);
     $this->assertDatabaseCount('market_attempts', 800);

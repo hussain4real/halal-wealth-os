@@ -19,6 +19,7 @@ const valid = () => ({
     tables: 1,
     table_fingerprints: { accounts: { rows: 7, sha256: 'd'.repeat(64) } },
     reader_fingerprints: {
+        operations: source,
         cash: source,
         intelligence: source,
         drive: source,
@@ -36,6 +37,37 @@ const valid = () => ({
     restored_sequences_write: true,
     restored_immutability_guard: true,
     deployment_authorized: false,
+    operational_rollback: {
+        result: 'PASS',
+        strategy: 'matching_build_optional_disable',
+        changed_owner_policies: 4,
+        denied_channels: {
+            copilot: 'paused',
+            market: 'paused',
+            email: 'paused',
+            drive: 'paused',
+        },
+        unchanged_tables: ['accounts'],
+        history_before_sha256: source,
+        history_after_sha256: source,
+        reader_fingerprints_before: Object.fromEntries(
+            'cash,drive,imports,intelligence,market,positions,reminders,reservations,shariah'
+                .split(',')
+                .map((k) => [k, source]),
+        ),
+        reader_fingerprints_after: Object.fromEntries(
+            'cash,drive,imports,intelligence,market,positions,reminders,reservations,shariah'
+                .split(',')
+                .map((k) => [k, source]),
+        ),
+        foreign_policies_unchanged: true,
+        denials_allocate_no_evidence: true,
+        manual_posting: true,
+        preexisting_rows_preserved: true,
+        new_rows: { journal_entries: 1, postings: 2 },
+        code_downgrade_rehearsed: false,
+        deployment_authorized: false,
+    },
 });
 
 await test('actual run identity is required and rejected receipts are never relabeled or mutated', () => {
@@ -156,5 +188,35 @@ await test('actual Git release identity refuses tracked and untracked changes', 
         assert.equal(readReleaseIdentity(directory).dirty, false);
     } finally {
         rmSync(directory, { recursive: true, force: true });
+    }
+});
+
+await test('operational rollback evidence cannot omit stops, history, foreign isolation or exact manual deltas', () => {
+    for (const mutate of [
+        (r) => delete r.operational_rollback,
+        (r) => (r.operational_rollback.result = 'PENDING'),
+        (r) => (r.operational_rollback.strategy = 'old_binary'),
+        (r) => delete r.operational_rollback.denied_channels.drive,
+        (r) => (r.operational_rollback.denied_channels.email = 'capacity'),
+        (r) => (r.operational_rollback.unchanged_tables = []),
+        (r) => (r.operational_rollback.history_after_sha256 = 'f'.repeat(64)),
+        (r) =>
+            (r.operational_rollback.reader_fingerprints_after.cash = 'f'.repeat(
+                64,
+            )),
+        (r) => (r.operational_rollback.foreign_policies_unchanged = false),
+        (r) => (r.operational_rollback.manual_posting = false),
+        (r) => (r.operational_rollback.preexisting_rows_preserved = false),
+        (r) => (r.operational_rollback.new_rows.accounts = 1),
+        (r) => (r.operational_rollback.code_downgrade_rehearsed = true),
+    ]) {
+        const r = valid();
+        mutate(r);
+        const bytes = JSON.stringify(r);
+        assert.throws(
+            () => validateRecoveryProof(r, source, run, ['accounts']),
+            /rollback/,
+        );
+        assert.equal(JSON.stringify(r), bytes);
     }
 });
