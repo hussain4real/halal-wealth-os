@@ -28,14 +28,7 @@ defineProps<{
     <div class="mx-auto w-full max-w-5xl space-y-8 px-4 py-8 sm:px-8 sm:py-12">
         <header class="flex flex-wrap items-end justify-between gap-5">
             <div>
-                <p
-                    class="mb-2 text-xs font-medium tracking-widest text-muted-foreground uppercase"
-                >
-                    Your money, clearly recorded
-                </p>
-                <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
-                    Transactions
-                </h1>
+                <h1 class="display-title text-4xl sm:text-5xl">Transactions</h1>
                 <p
                     class="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground"
                 >
@@ -43,7 +36,7 @@ defineProps<{
                     moved between your accounts.
                 </p>
             </div>
-            <Button as-child class="min-h-11"
+            <Button v-if="transactions.length" as-child class="min-h-11"
                 ><Link href="/transactions/new"
                     ><Plus class="size-4" /> Record transaction</Link
                 ></Button
@@ -51,7 +44,7 @@ defineProps<{
         </header>
         <section
             v-if="transactions.length === 0"
-            class="rounded-2xl border border-dashed bg-muted/20 px-5 py-16 text-center"
+            class="rounded-2xl border bg-card px-5 py-16 text-center"
             aria-labelledby="empty-heading"
         >
             <div
@@ -60,7 +53,7 @@ defineProps<{
                 <ReceiptText class="size-5 text-muted-foreground" />
             </div>
             <h2 id="empty-heading" class="text-xl font-semibold">
-                A clear picture starts with one record
+                No transactions yet
             </h2>
             <p
                 class="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground"
@@ -71,7 +64,7 @@ defineProps<{
                         : 'Add a personal account first, then record your first transaction. No bank connection is needed.'
                 }}
             </p>
-            <Button as-child class="mt-6 min-h-11" variant="outline"
+            <Button as-child class="mt-6 min-h-11"
                 ><Link
                     :href="has_accounts ? '/transactions/new' : '/accounts'"
                     >{{

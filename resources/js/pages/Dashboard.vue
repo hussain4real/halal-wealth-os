@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import ObservationTimeEvidence from '@/components/ObservationTimeEvidence.vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
+import type { LucideIcon } from '@lucide/vue';
+import {
+    ArrowUpRight,
+    Bookmark,
+    CircleDollarSign,
+    Layers3,
+    RefreshCw,
+    Target,
+    Wallet,
+    Landmark,
+} from '@lucide/vue';
 import { computed, nextTick, onUnmounted, ref } from 'vue';
 import CashAvailabilityPanel from '@/components/CashAvailabilityPanel.vue';
 import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
@@ -28,37 +39,58 @@ defineOptions({
 const metrics = [
     {
         key: 'net_worth',
+        icon: Landmark,
         label: 'Net worth',
         note: 'Selected assets and signed liabilities, counted once.',
     },
     {
         key: 'liabilities',
+        icon: Layers3,
         label: 'Liability contribution',
         note: 'Already included in net worth. Never subtracted twice.',
     },
     {
         key: 'liquid_cash',
+        icon: Wallet,
         label: 'Liquid cash',
         note: 'Posted bank and cash balances; protection is shown below.',
     },
     {
         key: 'investments',
+        icon: CircleDollarSign,
         label: 'Investment value',
         note: 'Selected cash, holdings and IPO receivables, or whole-account value.',
     },
     {
         key: 'funded_goals',
+        icon: Target,
         label: 'Funded goals',
         note: 'Actual backed cash, a subset of wealth. Nominal claims stay separate.',
     },
-] satisfies { key: MetricKey; label: string; note: string }[];
+] satisfies { key: MetricKey; icon: LucideIcon; label: string; note: string }[];
+const cutoffLabel = computed(() => {
+    const timestamp = new Date(props.dashboard.cutoff);
+    if (Number.isNaN(timestamp.getTime())) return props.dashboard.cutoff;
+    return new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Qatar',
+        dateStyle: 'medium',
+        timeStyle: 'medium',
+    }).format(timestamp);
+});
 const selected = ref<MetricKey | null>(null);
 const count = ref(20);
 const sourceHeading = ref<HTMLElement | null>(null);
 const sourceRows = computed(() =>
     selected.value ? props.dashboard.sources[selected.value] : [],
 );
-async function inspect(key: MetricKey) {
+let sourceTrigger: HTMLButtonElement | null = null;
+async function closeSources() {
+    selected.value = null;
+    await nextTick();
+    sourceTrigger?.focus();
+}
+async function inspect(key: MetricKey, event: MouseEvent) {
+    sourceTrigger = event.currentTarget as HTMLButtonElement;
     selected.value = key;
     count.value = 20;
     await nextTick();
@@ -100,35 +132,42 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
     <div
         class="mx-auto w-full max-w-6xl space-y-9 p-4 [overflow-wrap:anywhere] sm:p-8"
     >
-        <header class="flex flex-wrap items-start justify-between gap-5">
+        <header class="flex flex-wrap items-center justify-between gap-4">
             <div class="max-w-2xl">
-                <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+                <h1 class="display-title text-4xl sm:text-5xl">
                     Your financial overview
                 </h1>
-                <p class="mt-3 text-muted-foreground">
-                    See what you own, what is protected, and which records need
-                    attention.
-                </p>
                 <p class="mt-3 text-xs text-muted-foreground">
                     {{ snapshot ? 'Saved snapshot' : 'Current view' }} ·
-                    {{ dashboard.cutoff }} · Qatar planning date
-                    {{ dashboard.planning_date }}
+                    <time
+                        :datetime="dashboard.cutoff"
+                        :title="dashboard.cutoff"
+                        >{{ cutoffLabel }}</time
+                    >
+                    (Qatar)
+                    <span class="block"
+                        >Planning date {{ dashboard.planning_date }}</span
+                    >
                 </p>
             </div>
             <nav
-                class="flex flex-wrap gap-4 text-sm"
+                class="flex flex-wrap gap-2 text-sm"
                 aria-label="Dashboard tools"
             >
                 <Link
-                    class="min-h-11 content-center underline"
-                    href="/dashboard/rules"
-                    >Action rules</Link
-                ><Link
-                    class="min-h-11 content-center underline"
+                    aria-label="Refresh current view"
+                    class="overview-tool"
                     :href="
                         '/dashboard?base_currency=' + dashboard.base_currency
                     "
-                    >Refresh current view</Link
+                >
+                    <RefreshCw class="size-4" aria-hidden="true" /> Refresh
+                </Link>
+                <a
+                    class="overview-tool bg-primary text-primary-foreground"
+                    href="#snapshot-tools"
+                    ><Bookmark class="size-4" aria-hidden="true" /> Save a
+                    snapshot</a
                 >
             </nav>
         </header>
@@ -150,63 +189,35 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
                 >Export complete snapshot evidence</a
             >
         </section>
-        <form
-            @submit.prevent="submit('/dashboard/snapshots')"
-            class="flex flex-wrap items-end gap-4 border-b pb-5"
-        >
-            <PortfolioAttempt
-                :errors="form.errors"
-                :uncertain="feedback.uncertain.value"
-                :recovered="recovered"
-                history="/dashboard"
-            />
-            <fieldset :disabled="locked || form.processing">
-                <label class="grid gap-2 text-sm"
-                    >Snapshot reporting currency<select
-                        v-model="form.base_currency"
-                        class="min-h-11 rounded-lg border bg-background px-3"
-                    >
-                        <option v-for="c in currencies" :key="c">
-                            {{ c }}
-                        </option>
-                    </select></label
-                >
-            </fieldset>
-            <button
-                :disabled="form.processing"
-                class="min-h-11 rounded-lg bg-teal-800 px-5 text-sm font-medium text-white dark:bg-teal-200 dark:text-teal-950"
-            >
-                {{
-                    locked ? 'Retry exact snapshot' : 'Save a current snapshot'
-                }}
-            </button>
-            <p class="max-w-lg text-xs text-muted-foreground">
-                A new snapshot captures current records. It never posts money or
-                an investment.
-            </p>
-        </form>
-        <section
-            aria-label="Financial position"
-            class="grid gap-x-7 gap-y-5 sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <section aria-label="Financial position" class="position-grid">
             <article
                 v-for="m in metrics"
                 :key="m.key"
-                class="min-w-0 border-b pb-5"
+                class="position-metric"
+                :class="{ 'position-hero': m.key === 'net_worth' }"
             >
-                <h2 class="text-sm font-medium text-muted-foreground">
-                    {{ m.label }} · {{ dashboard.base_currency }}
+                <h2 class="metric-label">
+                    <component
+                        :is="m.icon"
+                        class="size-4 shrink-0"
+                        aria-hidden="true"
+                    />
+                    {{ m.label }}
                 </h2>
-                <p class="mt-3 text-2xl font-semibold tabular-nums">
+                <p class="metric-value">
                     <CurrencyDisplay
                         v-if="dashboard.widgets[m.key].total"
+                        group-thousands
                         :amount="dashboard.widgets[m.key].total?.amount ?? null"
                         :currency="dashboard.base_currency"
-                    /><span v-else>Partial / unavailable</span>
+                    /><span v-else
+                        >Partial / unavailable ·
+                        {{ dashboard.base_currency }}</span
+                    >
                 </p>
                 <p
                     v-if="dashboard.widgets[m.key].state !== 'complete'"
-                    class="mt-2 text-sm text-amber-900 dark:text-amber-200"
+                    class="metric-warning mt-2 text-sm text-amber-900 dark:text-amber-200"
                 >
                     {{ dashboard.widgets[m.key].missing }} component(s) missing.
                     Known subtotal:
@@ -218,21 +229,23 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
                         :currency="dashboard.base_currency"
                     />.
                 </p>
-                <p class="mt-2 text-xs leading-relaxed text-muted-foreground">
+                <p class="metric-note mt-2 text-sm leading-snug">
                     {{ m.note }}
                 </p>
                 <button
-                    @click="inspect(m.key)"
-                    class="mt-2 min-h-11 text-sm underline"
+                    @click="inspect(m.key, $event)"
+                    :aria-label="'View ' + m.label.toLowerCase() + ' sources'"
+                    class="metric-source"
                     :aria-expanded="selected === m.key"
                 >
-                    View {{ m.label.toLowerCase() }} sources
+                    View sources
+                    <ArrowUpRight class="size-4" aria-hidden="true" />
                 </button>
             </article>
         </section>
         <section
             v-if="selected"
-            class="space-y-4 rounded-xl border p-5"
+            class="space-y-4 rounded-2xl border bg-card p-6"
             aria-label="Captured source detail"
         >
             <div class="flex flex-wrap justify-between gap-3">
@@ -245,7 +258,7 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
                     source detail
                 </h2>
                 <button
-                    @click="selected = null"
+                    @click="closeSources"
                     class="min-h-11 text-sm underline"
                 >
                     Close source detail
@@ -337,7 +350,10 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
                 Show more sources ({{ count }} / {{ sourceRows.length }})
             </button>
         </section>
-        <section class="space-y-5" aria-labelledby="next-actions">
+        <section
+            class="space-y-4 rounded-2xl border bg-card p-5 sm:p-7"
+            aria-labelledby="next-actions"
+        >
             <p
                 v-if="page.props.errors.action_key"
                 role="alert"
@@ -346,11 +362,12 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
                 {{ page.props.errors.action_key }}
             </p>
             <div class="flex flex-wrap items-center justify-between gap-3">
-                <h2 id="next-actions" class="text-2xl font-semibold">
+                <h2 id="next-actions" class="display-title text-3xl">
                     Next actions
-                    <span class="text-base text-muted-foreground">{{
-                        visible.length
-                    }}</span>
+                    <span
+                        class="ml-2 inline-grid min-w-7 place-items-center rounded-full bg-secondary px-2 py-1 align-middle font-sans text-sm text-secondary-foreground"
+                        >{{ visible.length }}</span
+                    >
                 </h2>
                 <Link
                     href="/dashboard/rules"
@@ -463,6 +480,44 @@ const { form, locked, recovered, feedback, submit } = usePortfolioForm(
                 </li>
             </ul>
         </details>
+        <form
+            id="snapshot-tools"
+            tabindex="-1"
+            @submit.prevent="submit('/dashboard/snapshots')"
+            class="flex scroll-mt-6 flex-wrap items-end gap-4 rounded-2xl border bg-card p-6"
+        >
+            <h2 class="display-title w-full text-3xl">Save a snapshot</h2>
+            <PortfolioAttempt
+                :errors="form.errors"
+                :uncertain="feedback.uncertain.value"
+                :recovered="recovered"
+                history="/dashboard"
+            />
+            <fieldset :disabled="locked || form.processing">
+                <label class="grid gap-2 text-sm"
+                    >Snapshot reporting currency<select
+                        v-model="form.base_currency"
+                        class="min-h-11 rounded-lg border bg-background px-3"
+                    >
+                        <option v-for="c in currencies" :key="c">
+                            {{ c }}
+                        </option>
+                    </select></label
+                >
+            </fieldset>
+            <button
+                :disabled="form.processing"
+                class="min-h-11 rounded-lg bg-teal-800 px-5 text-sm font-medium text-white dark:bg-teal-200 dark:text-teal-950"
+            >
+                {{
+                    locked ? 'Retry exact snapshot' : 'Save a current snapshot'
+                }}
+            </button>
+            <p class="max-w-lg text-xs text-muted-foreground">
+                A new snapshot captures current records. It never posts money or
+                an investment.
+            </p>
+        </form>
         <section v-if="snapshots.length" aria-label="Saved dashboard snapshots">
             <h2 class="text-lg font-semibold">Saved views</h2>
             <ul class="mt-3 divide-y">

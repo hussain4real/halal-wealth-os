@@ -3,6 +3,7 @@
 export function currencyDisplay(
     amount: string | null,
     currency: string | null,
+    groupThousands = false,
 ): string | null {
     if (
         amount === null ||
@@ -11,5 +12,10 @@ export function currencyDisplay(
         !/^[A-Z]{3}$/.test(currency)
     )
         return null;
+    if (groupThousands) {
+        const [integer, fraction] = amount.split('.');
+        const grouped = integer.replace(/\B(?=(\d{3})+$)/g, ',');
+        amount = fraction === undefined ? grouped : grouped + '.' + fraction;
+    }
     return `${amount} ${currency}`;
 }

@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
 import type { BudgetMoney } from '@/types/budget';
-defineProps<{ value: BudgetMoney }>();
+defineProps<{ value: BudgetMoney; groupThousands?: boolean }>();
 </script>
 <template>
     <span class="inline-block min-w-0 [overflow-wrap:anywhere]">
-        <CurrencyDisplay :amount="value.amount" :currency="value.currency" />
+        <CurrencyDisplay
+            :amount="value.amount"
+            :currency="value.currency"
+            :group-thousands="groupThousands"
+        />
         <span
             v-if="!value.available"
             class="mt-1 block text-xs font-normal text-muted-foreground"
