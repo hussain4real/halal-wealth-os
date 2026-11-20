@@ -18,10 +18,11 @@ test('every failed unknown or complete live attempt keeps its conservative globa
     expect(reserveAnswerEvaluation($this->budgetRoot, 'case1', str_repeat('a', 64), str_repeat('b', 64)))->toBe(29984);
     expect(reserveAnswerEvaluation($this->budgetRoot, 'case1-retry', str_repeat('c', 64), str_repeat('d', 64)))->toBe(58144);
     $total = 58144;
-    for ($i = 0; $i < 211; $i++) {
+    // The probe plus 710 case reservations fit, including the two above.
+    for ($i = 2; $i < 710; $i++) {
         $total = reserveAnswerEvaluation($this->budgetRoot, 'case'.$i, str_repeat('a', 64), str_repeat('b', 64));
     }
-    expect($total)->toBe(5999904);
+    expect($total)->toBe(19995424);
     expect(fn () => reserveAnswerEvaluation($this->budgetRoot, 'over-cap', str_repeat('a', 64), str_repeat('b', 64)))->toThrow(RuntimeException::class, 'budget exhausted');
 });
 
@@ -67,11 +68,11 @@ test('approved model prices and caps are required before a new reservation can t
     'underpriced output' => ['output_price_micro_usd_per_million', 4500000],
     'wrong input bound' => ['max_input_tokens', 16384],
     'lower production charge' => ['production_reservation_tokens', 8192],
-    'stale total cap' => ['total_cap_micro_usd', 5000000],
-    'above approved total cap' => ['total_cap_micro_usd', 6000001],
-    'higher total cap' => ['total_cap_micro_usd', 7000000],
-    'wrong cap type' => ['total_cap_micro_usd', '6000000'],
-    'stale policy version' => ['version', 'answer-evaluation-policy-v4'],
+    'stale total cap' => ['total_cap_micro_usd', 6000000],
+    'above approved total cap' => ['total_cap_micro_usd', 20000001],
+    'higher total cap' => ['total_cap_micro_usd', 21000000],
+    'wrong cap type' => ['total_cap_micro_usd', '20000000'],
+    'stale policy version' => ['version', 'answer-evaluation-policy-v5'],
     'nonzero temperature' => ['temperature', 1],
 ]);
 
@@ -123,8 +124,8 @@ test('continuation uses the unchanged anchored prefix and exact next admission c
     expect(fn () => assertAnswerEvaluationContinuation($this->budgetRoot, $baseline))->toThrow(RuntimeException::class, 'prefix');
 });
 
-test('current evaluation policy binds the separately approved six dollar aggregate ceiling', function () {
-    expect(AnswerEvaluationPolicy::current()['total_cap_micro_usd'])->toBe(6000000);
+test('current evaluation policy binds the separately approved twenty dollar aggregate ceiling', function () {
+    expect(AnswerEvaluationPolicy::current()['total_cap_micro_usd'])->toBe(20000000);
     expect(AnswerEvaluationPolicy::current()['case_reservation_micro_usd'])->toBe(28160);
 });
 

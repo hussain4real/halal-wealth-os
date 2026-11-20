@@ -11,18 +11,18 @@ use RuntimeException;
 final class AnswerEvaluationPolicy
 {
     private const array APPROVED = [
-        'version' => 'answer-evaluation-policy-v5', 'model' => 'gpt-5.4-2026-03-05',
+        'version' => 'answer-evaluation-policy-v6', 'model' => 'gpt-5.4-2026-03-05',
         'reasoning_effort' => 'none', 'temperature' => 0, 'store' => false, 'max_input_tokens' => 8192,
         'max_output_tokens' => 512, 'wire_overhead_tokens' => 1024,
         'input_price_micro_usd_per_million' => 2500000, 'output_price_micro_usd_per_million' => 15000000,
-        'case_reservation_micro_usd' => 28160, 'total_cap_micro_usd' => 6000000,
+        'case_reservation_micro_usd' => 28160, 'total_cap_micro_usd' => 20000000,
         'production_reservation_tokens' => 16384,
     ];
 
     /** @return Policy */
     public static function current(): array
     {
-        $bytes = (new Filesystem)->get(dirname(__DIR__, 3).'/resources/copilot/evaluation/policy-v5.json');
+        $bytes = (new Filesystem)->get(dirname(__DIR__, 3).'/resources/copilot/evaluation/policy-v6.json');
 
         return self::validate(json_decode($bytes, true, flags: JSON_THROW_ON_ERROR));
     }

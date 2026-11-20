@@ -4289,7 +4289,7 @@
         },
         "case-m7p3-7bc6a4955944": {
             "class": "Tests\\Unit\\AnswerEvaluationBudgetTest",
-            "name": "current evaluation policy binds the separately approved six dollar aggregate ceiling",
+            "name": "current evaluation policy binds the separately approved twenty dollar aggregate ceiling",
             "file": "tests/Unit/AnswerEvaluationBudgetTest.php"
         },
         "case-m7p3-3a75882c67ac": {
