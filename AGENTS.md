@@ -727,3 +727,16 @@ The human owner explicitly authorized ONE narrow additional M7-P3 verification c
 ## M7-P3 owner-authorized narrow tenth verification cycle
 
 The human owner explicitly authorized ONE narrow additional verification cycle, total ceiling ten, to correct the native HTTP evidence producer phase toM7-P3 and make prelive preparation reject an incorrect phase immediately. Apply the exact independently reviewed two-script scope plus project formatting; preserve all nine prior cycles and actual artifact bytes rather than relabelling them. Regenerate current evidence and prove a private wrong-phase copy is rejected by the phase guard, then complete required native/restoration/full deterministic/independent/frozen-basis gates and the still-unused ONE approved40 evaluation before existing release/PR/originalCI/freshreview/normaldevmerge/postCI/signedpublication. Production code, dataset/oracle/model/prices, coverage rules andUSD6 cap remain unchanged. No extra paid probe/retry/fallback, eleventh cycle, newcredential, deployment/main-stage change/laterphase/acceptance.
+
+## PR #28 evaluation authorization
+
+On 20 November 2026, the owner approved a USD 20 cumulative conservative
+reservation cap for one live run of the existing 40 synthetic questions for
+PR #28. This superseded the USD 6 ceiling for that run only. The run used the
+original private evaluation ledger and preserved all previous reservations.
+The model, dataset, oracle and per-request limits stayed unchanged.
+
+The authorized run is complete. Reuse the retained receipt when its evaluated
+source matches. This authorization grants no further paid calls, retries,
+fallbacks, credentials or deployment. Verify current CI and hosted review
+before merging into dev.
