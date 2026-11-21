@@ -19,6 +19,22 @@ import { copilotJourney } from './copilot-http.mjs';
 import { marketJourney } from './market-http.mjs';
 import { statementJourney } from './statement-http.mjs';
 
+const ciHttp = process.argv.length === 3 && process.argv[2] === '--ci-http';
+const junitPath = path.join(root, 'build/junit.xml');
+if (ciHttp) {
+    assert.match(process.env.HWO_RELEASE_RUN_ID ?? '', /^[a-f0-9]{32}$/);
+    assert.ok(
+        !existsSync(junitPath),
+        'Parallel CI acceptance requires an isolated HTTP job',
+    );
+} else {
+    assert.equal(
+        process.argv.length,
+        2,
+        'Unsupported HTTP verification arguments',
+    );
+}
+
 const directory = mkdtempSync(path.join(root, '.runtime/acceptance-'));
 const metricsFile = path.join(directory, 'requests.jsonl');
 const env = {
@@ -222,10 +238,9 @@ const report = {
     schema: 1,
     phase: 'M7-P3',
     source_sha256: source,
-    junit_sha256: existsSync(path.join(root, 'build/junit.xml'))
-        ? createHash('sha256')
-              .update(readFileSync(path.join(root, 'build/junit.xml')))
-              .digest('hex')
+    ...(ciHttp ? { producer: { run_id: process.env.HWO_RELEASE_RUN_ID } } : {}),
+    junit_sha256: existsSync(junitPath)
+        ? createHash('sha256').update(readFileSync(junitPath)).digest('hex')
         : null,
     started_at: new Date().toISOString(),
     result: 'PENDING',

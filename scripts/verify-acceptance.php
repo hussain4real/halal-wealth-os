@@ -7,6 +7,12 @@ require_once __DIR__.'/financial-coverage.php';
 require_once __DIR__.'/performance-report.php';
 
 try {
+    $ciShards = $argc === 2 && $argv[1] === '--ci-shards';
+    if (! $ciShards && $argc !== 1) {
+        throw new RuntimeException('BLOCKED: unsupported acceptance verification arguments.');
+    }
+    $releasePath = $ciShards ? 'ci-verification-record.json' : 'release-record.json';
+    $reportPath = $ciShards ? 'ci-acceptance-report.json' : 'acceptance-map-report.json';
     $root = dirname(__DIR__);
     $junit = new DOMDocument;
     if (! $junit->load($root.'/build/junit.xml', LIBXML_NONET)) {
@@ -41,7 +47,11 @@ try {
     stream_get_contents($pipes[2]);
     fclose($pipes[1]);
     fclose($pipes[2]);
-    if (proc_close($process) !== 0 || preg_match('/^[a-f0-9]{64}$/D', $source) !== 1 || ! hash_equals($source, $http['source_sha256'] ?? '') || ! hash_equals(hash_file('sha256', $root.'/build/junit.xml'), $http['junit_sha256'] ?? '')) {
+    $httpMatchesRun = $ciShards
+        ? array_key_exists('junit_sha256', $http) && $http['junit_sha256'] === null
+            && ($http['producer']['run_id'] ?? '') === getenv('HWO_RELEASE_RUN_ID')
+        : hash_equals(hash_file('sha256', $root.'/build/junit.xml'), $http['junit_sha256'] ?? '');
+    if (proc_close($process) !== 0 || preg_match('/^[a-f0-9]{64}$/D', $source) !== 1 || ! hash_equals($source, $http['source_sha256'] ?? '') || ! $httpMatchesRun) {
         throw new RuntimeException('BLOCKED: HTTP proof does not match current sources and JUnit.');
     }
     HalalOS\Verification\dashboardPerformance($http['performance']);
@@ -72,7 +82,7 @@ try {
             throw new RuntimeException('BLOCKED: release Git identity failed.');
         }
     }
-    $release = json_decode(file_get_contents($root.'/build/release-record.json'), true, flags: JSON_THROW_ON_ERROR);
+    $release = json_decode(file_get_contents($root.'/build/'.$releasePath), true, flags: JSON_THROW_ON_ERROR);
     $recovery = json_decode(file_get_contents($root.'/build/release-recovery.json'), true, flags: JSON_THROW_ON_ERROR);
     if (($release['dirty'] ?? null) !== false || $gitIdentity['status'] !== ''
         || ($release['commit'] ?? '') !== $gitIdentity['commit'] || ($release['tree'] ?? '') !== $gitIdentity['tree']
@@ -84,24 +94,30 @@ try {
         || ! hash_equals($source, $recovery['producer']['source_sha256'] ?? '')
         || ! is_string(getenv('HWO_RELEASE_RUN_ID')) || ! preg_match('/^[a-f0-9]{32}$/D', getenv('HWO_RELEASE_RUN_ID'))
         || ! hash_equals(getenv('HWO_RELEASE_RUN_ID'), $recovery['producer']['run_id'] ?? '')
+        || ($ciShards && ! hash_equals(hash_file('sha256', $root.'/build/acceptance-http.json'), $release['http_sha256'] ?? ''))
         || $release['deployment_authorized'] !== false || $release['owner_phase_acceptance'] !== 'PENDING') {
         throw new RuntimeException('BLOCKED: current release identity and actual recovery evidence do not match.');
     }
     if (($release['live_evaluation']['result'] ?? null) !== 'PASS' || ($release['live_evaluation']['cases'] ?? 0) < 40 || ! hash_equals(hash_file('sha256', $root.'/docs/halal-wealth-os/runs/M7-P3-live-evaluation.json'), $release['live_evaluation_sha256'] ?? '')) {
         throw new RuntimeException('BLOCKED: current live answer evaluation receipt missing.');
     }
+    $carriedForward = ($release['live_evaluation']['scope'] ?? null) === 'APPROVED_CI_CARRY_FORWARD';
+    if (($release['verification_scope'] ?? 'RELEASE') !== ($ciShards ? 'CI_ONLY' : 'RELEASE') || ($carriedForward && ! $ciShards)) {
+        throw new RuntimeException('BLOCKED: acceptance and evaluation scopes do not match.');
+    }
     $report['result'] = 'PASS';
-    $report['tool_checks'] = ['HTTP_JOURNEY' => 'PASS', 'ACCEPTANCE_MAP' => 'PASS', 'FINANCIAL_COVERAGE' => 'PASS', 'HTTP_SECURITY' => 'PASS', 'DASHBOARD_PERFORMANCE' => 'PASS', 'RELEASE_READINESS' => 'PASS', 'LIVE_ANSWER_EVALUATION' => 'PASS'];
+    $report['verification_scope'] = $ciShards ? 'CI_ONLY' : 'RELEASE';
+    $report['tool_checks'] = ['HTTP_JOURNEY' => 'PASS', 'ACCEPTANCE_MAP' => 'PASS', 'FINANCIAL_COVERAGE' => 'PASS', 'HTTP_SECURITY' => 'PASS', 'DASHBOARD_PERFORMANCE' => 'PASS', 'RELEASE_READINESS' => 'PASS', 'LIVE_ANSWER_EVALUATION' => $carriedForward ? 'APPROVED_CI_CARRY_FORWARD' : 'PASS'];
     foreach ($report['requirements'] as $row) {
         if ($row['tool_check'] !== null && ! isset($report['tool_checks'][$row['tool_check']])) {
             throw new RuntimeException('BLOCKED: unknown acceptance tool check.');
         }
     }
     $report['artifact_sha256'] = [];
-    foreach (['junit.xml', 'coverage.xml', 'financial-coverage.json', 'acceptance-http.json', 'release-record.json', 'release-recovery.json'] as $file) {
+    foreach (['junit.xml', 'coverage.xml', 'financial-coverage.json', 'acceptance-http.json', $releasePath, 'release-recovery.json'] as $file) {
         $report['artifact_sha256'][$file] = hash_file('sha256', $root.'/build/'.$file);
     }
-    file_put_contents($root.'/build/acceptance-map-report.json', json_encode($report, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR)."\n");
+    file_put_contents($root.'/build/'.$reportPath, json_encode($report, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR)."\n");
     echo 'Acceptance map: '.count($report['requirements']).' AC/invariant IDs; '.$report['unique_executed_selectors']." exact executed cases; tool gates passed.\n";
 } catch (Throwable $error) {
     fwrite(STDERR, $error->getMessage()."\n");

@@ -1,3 +1,4 @@
+import { verifyCiEvaluation } from './ci-evaluation-evidence.mjs';
 import { validateLiveReport } from './verify-answer-eval.mjs';
 import { evaluationBasis, liveReport } from './answer-eval-basis.mjs';
 import { createHash } from 'node:crypto';
@@ -12,12 +13,20 @@ import {
 const digest = (file) =>
     createHash('sha256').update(readFileSync(file)).digest('hex');
 try {
-    rmSync('build/release-record.json', { force: true });
+    const ciShards =
+        process.argv.length === 3 && process.argv[2] === '--ci-shards';
+    if (!ciShards && process.argv.length !== 2)
+        throw new Error('Unsupported release verification arguments');
+    const recordPath = ciShards
+        ? 'build/ci-verification-record.json'
+        : 'build/release-record.json';
+    rmSync(recordPath, { force: true });
     const identity = readReleaseIdentity(root);
     const recovery = JSON.parse(
         readFileSync('build/release-recovery.json', 'utf8'),
     );
-    const http = JSON.parse(readFileSync('build/acceptance-http.json', 'utf8'));
+    const httpPath = 'build/acceptance-http.json';
+    const http = JSON.parse(readFileSync(httpPath, 'utf8'));
     const source = sourceIdentity();
     const junit = digest('build/junit.xml');
     const catalog = JSON.parse(
@@ -32,7 +41,10 @@ try {
     if (
         http.result !== 'PASS' ||
         http.source_sha256 !== source ||
-        http.junit_sha256 !== junit
+        (ciShards
+            ? http.junit_sha256 !== null ||
+              http.producer?.run_id !== process.env.HWO_RELEASE_RUN_ID
+            : http.junit_sha256 !== junit)
     )
         throw new Error('Current HTTP/source/JUnit proof did not reconcile');
     const manifestPath = 'public/build/manifest.json';
@@ -64,12 +76,18 @@ try {
     const record = {
         result: 'PASS',
         phase: 'M7-P3',
-        live_evaluation: validateLiveReport(
-            JSON.parse(readFileSync(liveReport)),
-            evaluationBasis(),
-            readFileSync('resources/copilot/evaluation/questions-v1.json'),
-            readFileSync('resources/copilot/answer-plan-v2.txt'),
-        ),
+        verification_scope: ciShards ? 'CI_ONLY' : 'RELEASE',
+        ...(ciShards ? { http_sha256: digest(httpPath) } : {}),
+        live_evaluation: ciShards
+            ? verifyCiEvaluation()
+            : validateLiveReport(
+                  JSON.parse(readFileSync(liveReport)),
+                  evaluationBasis(),
+                  readFileSync(
+                      'resources/copilot/evaluation/questions-v1.json',
+                  ),
+                  readFileSync('resources/copilot/answer-plan-v2.txt'),
+              ),
         live_evaluation_sha256: digest(liveReport),
         ...proof,
         ...identity,
@@ -105,12 +123,9 @@ try {
             'Populated downgrade is unsupported; restore matching code and backup or use reviewed forward correction',
         ],
     };
-    writeFileSync(
-        'build/release-record.json',
-        `${JSON.stringify(record, null, 2)}\n`,
-    );
+    writeFileSync(recordPath, `${JSON.stringify(record, null, 2)}\n`);
     console.log(
-        'PASS release source/build/migration identity and actual encrypted recovery proof',
+        `PASS ${ciShards ? 'CI' : 'release'} source/build/migration identity and actual encrypted recovery proof`,
     );
 } catch (error) {
     console.error(error.message);

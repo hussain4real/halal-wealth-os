@@ -1,0 +1,6 @@
+{
+    "evaluated_commit": "2aebc7e149575f305dd4b91fa137f24f58dfe5c6",
+    "evaluated_basis_sha256": "67e7ac7b2dc075535f2b5c00e00aa890943b5fc34a49345acdefd6e0d73dbf17",
+    "approved_ci_basis_sha256": "77748cb55a77209c9a7f71f00873f031cd312298fe611b0a0bf8b3c74830a311",
+    "scope": "Eight-shard CI and synthetic test fixtures only"
+}

@@ -311,27 +311,47 @@ test('later provider refreshes preserve saved valuation bytes and original obser
 });
 
 test('shared daily credits do not reset at midnight while retained sends remain inside rolling day', function () {
-    $this->travelTo(new DateTimeImmutable('2026-10-23T22:20:00Z'));
+    $firstClaim = new DateTimeImmutable('2026-10-23T22:20:00Z');
+    $this->travelTo($firstClaim);
     Http::fake(['api.twelvedata.com/*' => fn ($request) => Http::response(M::priceBody('2026-10-22', meta: ['symbol' => $request['symbol'], 'exchange_timezone' => 'UTC']))]);
-    $consumer = $this->owner;
-    for ($i = 0; $i < 800; $i++) {
-        if ($i > 0 && $i % 8 === 0) {
-            $this->travel(60)->seconds();
-        }
-        if ($i % 64 === 0) {
-            $consumer = User::factory()->create();
-        }
-        M::price($consumer, ['symbol' => 'SYNTH'.$i, 'exchange_timezone' => 'UTC']);
-        expect($this->refresh->refresh(MarketFeed::price('SYNTH'.$i, 'USD', 'XNAS', 'UTC'), '2026-10-23')['status'])->toBe('accepted');
+
+    // A retained claim consumes a credit even if its outcome was never recorded.
+    // Seed prior claims at the provider's valid cadence; exercise the live boundary below.
+    $history = [];
+    for ($i = 0; $i < 799; $i++) {
+        $feed = MarketFeed::price('SYNTH'.$i, 'USD', 'XNAS', 'UTC');
+        $claimedAt = $firstClaim->modify('+'.intdiv($i, 8).' minutes');
+        $history[] = [
+            'provider' => 'twelve_data',
+            'feed_key' => $feed->key(),
+            'feed' => json_encode($feed->data(), JSON_THROW_ON_ERROR),
+            'refresh_window' => '2026-10-23',
+            'ordinal' => 1,
+            'credits' => 1,
+            'claimed_at' => $claimedAt,
+            'deadline' => $claimedAt->modify('+20 seconds'),
+        ];
     }
-    M::price($consumer, ['symbol' => 'MIDNIGHT', 'exchange_timezone' => 'UTC']);
-    M::price($consumer, ['symbol' => 'AFTER24H', 'exchange_timezone' => 'UTC']);
+    DB::table('market_attempts')->insert($history);
+    $this->assertDatabaseCount('market_attempts', 799);
+
+    $otherOwner = User::factory()->create();
+    M::price($this->owner, ['symbol' => 'LASTCREDIT', 'exchange_timezone' => 'UTC']);
+    M::price($otherOwner, ['symbol' => 'MIDNIGHT', 'exchange_timezone' => 'UTC']);
+    M::price($otherOwner, ['symbol' => 'AFTER24H', 'exchange_timezone' => 'UTC']);
+
+    $this->travelTo(new DateTimeImmutable('2026-10-23T23:59:59Z'));
+    expect($this->refresh->refresh(MarketFeed::price('LASTCREDIT', 'USD', 'XNAS', 'UTC'), '2026-10-23')['status'])->toBe('accepted');
+    $this->assertDatabaseCount('market_attempts', 800);
+    Http::assertSentCount(1);
+
     $this->travelTo(new DateTimeImmutable('2026-10-24T00:00:00Z'));
     expect($this->refresh->refresh(MarketFeed::price('MIDNIGHT', 'USD', 'XNAS', 'UTC'), '2026-10-24'))->toMatchArray(['status' => 'deferred', 'code' => 'shared_credit_limit']);
     $this->assertDatabaseCount('market_attempts', 800);
-    Http::assertSentCount(800);
+    Http::assertSentCount(1);
+
     $this->travelTo(new DateTimeImmutable('2026-10-24T22:20:00Z'));
     expect($this->refresh->refresh(MarketFeed::price('AFTER24H', 'USD', 'XNAS', 'UTC'), '2026-10-24')['status'])->toBe('accepted');
     $this->assertDatabaseCount('market_attempts', 801);
-    Http::assertSentCount(801);
+    Http::assertSentCount(2);
 });
