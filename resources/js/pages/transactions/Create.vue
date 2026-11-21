@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
-import { ArrowLeft, ArrowRight, Check, ShieldCheck } from '@lucide/vue';
+import {
+    ArrowLeft,
+    ArrowDownLeft,
+    ArrowUpRight,
+    ArrowLeftRight,
+    Check,
+    ReceiptText,
+} from '@lucide/vue';
 import { computed, nextTick, ref, watch } from 'vue';
 import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
 import InputError from '@/components/InputError.vue';
@@ -41,6 +48,11 @@ const form = useForm(
         receipt_reference: props.original?.receipt_reference ?? '',
     },
 );
+const movements = [
+    { value: 'expense', label: 'Expense', icon: ArrowUpRight },
+    { value: 'income', label: 'Income', icon: ArrowDownLeft },
+    { value: 'transfer', label: 'Transfer', icon: ArrowLeftRight },
+] as const;
 const uncertain = ref(false);
 const source = computed(() =>
     props.accounts.find((account) => account.id === form.account_id),
@@ -112,7 +124,7 @@ const submit = () => {
 
 <template>
     <Head :title="original ? 'Correct transaction' : 'Record transaction'" />
-    <div class="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto w-full max-w-6xl space-y-6 px-4 py-8 sm:px-8">
         <Link
             :href="original ? `/transactions/${original.id}` : '/transactions'"
             class="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2"
@@ -121,29 +133,20 @@ const submit = () => {
             }}</Link
         >
         <header>
-            <p
-                class="mb-2 text-xs font-medium tracking-widest text-muted-foreground uppercase"
-            >
-                {{
-                    original
-                        ? 'Correct with a clear trail'
-                        : 'A little clarity, every day'
-                }}
-            </p>
-            <h1 class="text-3xl font-semibold tracking-tight">
+            <h1 class="display-title text-4xl sm:text-5xl">
                 {{ original ? 'Correct transaction' : 'Record a transaction' }}
             </h1>
             <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {{
                     original
                         ? 'The original is retained and cancelled on its original business date. Your replacement uses the date below. Both records save together.'
-                        : 'Choose the movement, add the details, and keep a reliable record.'
+                        : 'Choose the movement and account, then review the entry before posting.'
                 }}
             </p>
         </header>
         <section
             v-if="accounts.length === 0"
-            class="rounded-2xl border bg-muted/30 p-7"
+            class="rounded-2xl border bg-card p-7"
         >
             <h2 class="font-semibold">You need an active personal account</h2>
             <p class="mt-2 text-sm text-muted-foreground">
@@ -157,14 +160,14 @@ const submit = () => {
         <form
             v-else
             @submit.prevent="submit"
-            class="overflow-hidden rounded-2xl border bg-card shadow-sm"
+            class="grid items-start gap-5 xl:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]"
         >
             <div
                 v-if="failure || uncertain"
                 tabindex="-1"
                 data-posting-error
                 role="alert"
-                class="m-5 rounded-xl border border-destructive/40 bg-destructive/5 p-4 text-sm sm:m-7"
+                class="rounded-xl border border-destructive/40 bg-destructive/5 p-4 text-sm xl:col-span-2"
             >
                 <p class="font-medium">
                     {{
@@ -186,25 +189,39 @@ const submit = () => {
             </div>
             <fieldset
                 :disabled="form.processing"
-                class="space-y-7 p-5 disabled:opacity-70 sm:p-7"
+                class="min-w-0 space-y-6 rounded-2xl border bg-card p-5 disabled:opacity-70 sm:p-7"
             >
                 <legend class="sr-only">Transaction details</legend>
-                <div>
-                    <Label for="transaction-kind">Movement</Label
-                    ><select
-                        id="transaction-kind"
-                        v-model="form.kind"
-                        class="mt-2 min-h-11 w-full rounded-lg border border-input bg-background px-3 text-sm focus-visible:outline-2"
-                        :aria-invalid="Boolean(form.errors.kind)"
-                        aria-describedby="kind-error"
-                    >
-                        <option value="expense">Expense · money out</option>
-                        <option value="income">Income · money in</option>
-                        <option value="transfer">
-                            Transfer · between your accounts
-                        </option></select
-                    ><InputError id="kind-error" :message="form.errors.kind" />
-                </div>
+                <fieldset>
+                    <legend class="mb-3 text-sm font-medium">Movement</legend>
+                    <div class="grid grid-cols-3 gap-1 rounded-xl bg-muted p-1">
+                        <label
+                            v-for="movement in movements"
+                            :key="movement.value"
+                            class="min-w-0 cursor-pointer"
+                        >
+                            <input
+                                type="radio"
+                                name="transaction-kind"
+                                v-model="form.kind"
+                                :value="movement.value"
+                                :aria-invalid="Boolean(form.errors.kind)"
+                                aria-describedby="kind-error"
+                                class="peer sr-only"
+                            />
+                            <span
+                                class="flex min-h-11 items-center justify-center gap-1 rounded-lg px-1 text-sm font-medium text-muted-foreground peer-checked:bg-primary peer-checked:text-primary-foreground peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ring sm:gap-2"
+                            >
+                                <component
+                                    :is="movement.icon"
+                                    class="size-4 shrink-0"
+                                    aria-hidden="true"
+                                />{{ movement.label }}
+                            </span>
+                        </label>
+                    </div>
+                    <InputError id="kind-error" :message="form.errors.kind" />
+                </fieldset>
                 <div
                     class="grid gap-6"
                     :class="form.kind === 'transfer' ? 'sm:grid-cols-2' : ''"
@@ -274,8 +291,18 @@ const submit = () => {
                             id="destination-hint"
                             class="mt-2 text-xs text-muted-foreground"
                         >
-                            A different account in the same currency. No FX
-                            conversion.
+                            <template v-if="source && !destinations.length"
+                                >You need another active
+                                {{ source.currency }} account to record this
+                                transfer.
+                                <Link href="/accounts" class="underline"
+                                    >Manage accounts</Link
+                                ></template
+                            >
+                            <template v-else
+                                >Choose a different account in the same
+                                currency.</template
+                            >
                         </p>
                         <InputError
                             id="destination-error"
@@ -386,61 +413,114 @@ const submit = () => {
                     />
                 </div>
             </fieldset>
-            <div class="space-y-5 border-t bg-muted/25 p-5 sm:p-7">
-                <div aria-label="Transaction preview" class="space-y-2 text-sm">
-                    <p class="font-medium">Before you record</p>
-                    <p class="leading-relaxed text-muted-foreground">
-                        <span class="capitalize">{{ form.kind }}</span
-                        ><span v-if="source"> · {{ source.name }}</span
-                        ><template
-                            v-if="form.kind === 'transfer' && destination"
-                        >
-                            <ArrowRight class="mx-1 inline size-3" />
-                            {{ destination.name }}</template
-                        >
-                    </p>
+            <section
+                aria-labelledby="entry-preview"
+                class="min-w-0 overflow-hidden rounded-2xl border bg-card xl:sticky xl:top-5"
+            >
+                <header
+                    class="space-y-4 bg-sidebar p-5 text-sidebar-foreground sm:p-7"
+                >
+                    <h2
+                        id="entry-preview"
+                        class="flex items-center gap-2 text-sm font-medium"
+                    >
+                        <ReceiptText
+                            aria-hidden="true"
+                            class="size-4 text-sidebar-primary"
+                        />
+                        Entry preview
+                    </h2>
                     <p
-                        v-if="source && form.amount"
-                        class="text-xl font-semibold"
+                        class="display-title text-4xl [overflow-wrap:anywhere] sm:text-5xl"
                     >
                         <CurrencyDisplay
+                            v-if="source && form.amount"
                             :amount="form.amount"
                             :currency="source.currency"
+                            group-thousands
                         />
+                        <template v-else>{{
+                            source ? 'Enter an amount' : 'Choose an account'
+                        }}</template>
                     </p>
+                </header>
+                <div class="space-y-5 p-5 sm:p-7">
+                    <dl class="divide-y text-sm">
+                        <div
+                            class="flex items-baseline justify-between gap-4 pb-3"
+                        >
+                            <dt class="text-muted-foreground">Movement</dt>
+                            <dd class="font-medium capitalize">
+                                {{ form.kind }}
+                            </dd>
+                        </div>
+                        <div
+                            class="flex items-baseline justify-between gap-4 py-3"
+                        >
+                            <dt class="shrink-0 text-muted-foreground">
+                                {{
+                                    form.kind === 'transfer'
+                                        ? 'From account'
+                                        : 'Account'
+                                }}
+                            </dt>
+                            <dd
+                                class="text-right font-medium [overflow-wrap:anywhere]"
+                            >
+                                {{ source?.name ?? '—' }}
+                            </dd>
+                        </div>
+                        <div
+                            v-if="form.kind === 'transfer'"
+                            class="flex items-baseline justify-between gap-4 py-3"
+                        >
+                            <dt class="shrink-0 text-muted-foreground">
+                                To account
+                            </dt>
+                            <dd
+                                class="text-right font-medium [overflow-wrap:anywhere]"
+                            >
+                                {{ destination?.name ?? '—' }}
+                            </dd>
+                        </div>
+                        <div
+                            class="flex items-baseline justify-between gap-4 pt-3"
+                        >
+                            <dt class="text-muted-foreground">
+                                Effective date
+                            </dt>
+                            <dd class="font-medium tabular-nums">
+                                {{ form.effective_date || '—' }}
+                            </dd>
+                        </div>
+                    </dl>
                     <p
                         v-if="form.kind === 'transfer'"
-                        class="text-xs text-muted-foreground"
+                        class="text-sm text-muted-foreground"
                     >
-                        Moves money between accounts. It does not create income
-                        or expense.
+                        Transfers move money between accounts and are excluded
+                        from income and expenses.
                     </p>
+                    <p role="status" class="sr-only">
+                        {{ form.processing ? 'Recording transaction' : '' }}
+                    </p>
+                    <Button
+                        :aria-busy="form.processing"
+                        type="submit"
+                        :disabled="form.processing"
+                        class="min-h-12 w-full gap-2"
+                        ><Check class="size-4" /><span>{{
+                            form.processing
+                                ? 'Recording…'
+                                : original
+                                  ? 'Reverse and record replacement'
+                                  : form.kind === 'transfer'
+                                    ? 'Record transfer'
+                                    : 'Post transaction'
+                        }}</span></Button
+                    >
                 </div>
-                <p role="status" class="sr-only">
-                    {{ form.processing ? 'Recording transaction' : '' }}
-                </p>
-                <Button
-                    :aria-busy="form.processing"
-                    type="submit"
-                    :disabled="form.processing"
-                    class="min-h-12 w-full gap-2"
-                    ><Check class="size-4" /><span>{{
-                        form.processing
-                            ? 'Recording…'
-                            : original
-                              ? 'Reverse and record replacement'
-                              : form.kind === 'transfer'
-                                ? 'Record transfer'
-                                : 'Post transaction'
-                    }}</span></Button
-                >
-                <p
-                    class="flex items-start justify-center gap-2 text-xs leading-relaxed text-muted-foreground"
-                >
-                    <ShieldCheck class="size-4 shrink-0" />Your record is saved
-                    atomically. Corrections keep the original history.
-                </p>
-            </div>
+            </section>
         </form>
     </div>
 </template>

@@ -23,3 +23,13 @@ await test('currency display distinguishes missing or malformed values from zero
         assert.equal(currencyDisplay(amount, currency), null);
     }
 });
+
+await test('dashboard digit grouping preserves signs, large integers and fractional precision', () => {
+    assert.equal(
+        currencyDisplay('-9007199254740993.00000001', 'USD', true),
+        '-9,007,199,254,740,993.00000001 USD',
+    );
+    assert.equal(currencyDisplay('123456', 'JPY', true), '123,456 JPY');
+    assert.equal(currencyDisplay('0.00', 'QAR', true), '0.00 QAR');
+    assert.equal(currencyDisplay(null, 'USD', true), null);
+});

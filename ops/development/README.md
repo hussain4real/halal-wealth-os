@@ -119,8 +119,8 @@ Current support is PHP >=8.5.12 and <8.6.0. The earlier successor verified
 PHP8.5.11; that historical runtime is now refused by the security floor. M5-P2
 uses an independently built native8.5.12 runtime; the newly pinned Linux
 extension rebuild remains NOT_RUN. The checker rejects older patches, PHP8.4
-and future minor lines. Pest5.3.2/Laravel plugin5.0.1
-and PHPUnit13.4.2 are locked. Functional Pest cases retain original assertions
+and future minor lines. The exact Pest, Laravel plugin and PHPUnit versions are recorded in
+`composer.lock`. Functional Pest cases retain original assertions
 and RefreshDatabase isolation. TIA needs enabled Xdebug/PCOV in every process.
 Its cache is explicitly .runtime/pest/tia, already ignored; no shared remote
 baseline, account, credential or paid service is enabled. defaultBranch('dev')

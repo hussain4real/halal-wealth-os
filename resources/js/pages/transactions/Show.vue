@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
-import { ArrowLeft, Check, FileText, RotateCcw } from '@lucide/vue';
+import { ArrowLeft, ArrowRight, Check, FileText, RotateCcw } from '@lucide/vue';
 import { computed, nextTick, ref } from 'vue';
 import CurrencyDisplay from '@/components/CurrencyDisplay.vue';
 import InputError from '@/components/InputError.vue';
@@ -77,11 +77,28 @@ const reverse = () => {
 <template>
     <Head title="Transaction record" />
     <div class="mx-auto w-full max-w-3xl space-y-7 px-4 py-8 sm:px-8 sm:py-12">
-        <Link
-            href="/transactions"
-            class="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2"
-            ><ArrowLeft class="size-4" />Transaction history</Link
+        <nav
+            aria-label="Transaction navigation"
+            class="flex flex-wrap items-center justify-between gap-2"
         >
+            <Link
+                href="/transactions"
+                class="inline-flex min-h-10 items-center gap-2 text-sm text-muted-foreground hover:text-foreground focus-visible:outline-2"
+                ><ArrowLeft class="size-4" />Transaction history</Link
+            >
+            <Link
+                v-if="
+                    transaction.kind === 'income' ||
+                    transaction.kind === 'expense'
+                "
+                :href="
+                    '/budgets?month=' + transaction.effective_date.slice(0, 7)
+                "
+                class="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary hover:underline"
+                >View monthly plan
+                <ArrowRight aria-hidden="true" class="size-4"
+            /></Link>
+        </nav>
         <header class="space-y-3">
             <div class="flex flex-wrap items-center gap-2">
                 <span

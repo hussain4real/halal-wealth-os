@@ -2,8 +2,14 @@
 import { computed } from 'vue';
 import { currencyDisplay } from '@/lib/currencyDisplay';
 
-const props = defineProps<{ amount: string | null; currency: string | null }>();
-const display = computed(() => currencyDisplay(props.amount, props.currency));
+const props = defineProps<{
+    amount: string | null;
+    currency: string | null;
+    groupThousands?: boolean;
+}>();
+const display = computed(() =>
+    currencyDisplay(props.amount, props.currency, props.groupThousands),
+);
 </script>
 
 <template>
