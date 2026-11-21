@@ -47,7 +47,11 @@ try {
     stream_get_contents($pipes[2]);
     fclose($pipes[1]);
     fclose($pipes[2]);
-    if (proc_close($process) !== 0 || preg_match('/^[a-f0-9]{64}$/D', $source) !== 1 || ! hash_equals($source, $http['source_sha256'] ?? '') || ! hash_equals(hash_file('sha256', $root.'/build/junit.xml'), $http['junit_sha256'] ?? '')) {
+    $httpMatchesRun = $ciShards
+        ? array_key_exists('junit_sha256', $http) && $http['junit_sha256'] === null
+            && ($http['producer']['run_id'] ?? '') === getenv('HWO_RELEASE_RUN_ID')
+        : hash_equals(hash_file('sha256', $root.'/build/junit.xml'), $http['junit_sha256'] ?? '');
+    if (proc_close($process) !== 0 || preg_match('/^[a-f0-9]{64}$/D', $source) !== 1 || ! hash_equals($source, $http['source_sha256'] ?? '') || ! $httpMatchesRun) {
         throw new RuntimeException('BLOCKED: HTTP proof does not match current sources and JUnit.');
     }
     HalalOS\Verification\dashboardPerformance($http['performance']);
@@ -90,6 +94,7 @@ try {
         || ! hash_equals($source, $recovery['producer']['source_sha256'] ?? '')
         || ! is_string(getenv('HWO_RELEASE_RUN_ID')) || ! preg_match('/^[a-f0-9]{32}$/D', getenv('HWO_RELEASE_RUN_ID'))
         || ! hash_equals(getenv('HWO_RELEASE_RUN_ID'), $recovery['producer']['run_id'] ?? '')
+        || ($ciShards && ! hash_equals(hash_file('sha256', $root.'/build/acceptance-http.json'), $release['http_sha256'] ?? ''))
         || $release['deployment_authorized'] !== false || $release['owner_phase_acceptance'] !== 'PENDING') {
         throw new RuntimeException('BLOCKED: current release identity and actual recovery evidence do not match.');
     }

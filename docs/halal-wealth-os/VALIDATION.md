@@ -48,7 +48,9 @@ PR and push CI run each full-suite test once across eight time-balanced Pest
 shards, with an isolated PostgreSQL service per shard. The `ci` job checks that
 the merged JUnit matches full test discovery with no missing, skipped or repeated
 cases and applies the existing financial coverage floors to the combined Clover
-report. It also checks the build, audits, migrations, HTTP acceptance and recovery.
+report. HTTP acceptance runs alongside Pest in its own database and reports the current
+source and CI attempt. The final job verifies that receipt with the merged test
+reports, build, audits, migrations and recovery.
 Refresh the schedule with `pest --ci --no-tia --update-shards` on a disposable
 test database when the per-shard timings diverge.
 

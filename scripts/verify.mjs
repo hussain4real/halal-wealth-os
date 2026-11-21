@@ -1,7 +1,13 @@
 import { verificationMode } from './verification-mode.mjs';
 import { randomBytes } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
+import {
+    copyFileSync,
+    existsSync,
+    mkdirSync,
+    readFileSync,
+    rmSync,
+} from 'node:fs';
 import path from 'node:path';
 import {
     VerificationFailure,
@@ -345,7 +351,14 @@ try {
             run('composer', ['run', 'test:coverage'], { env });
         }
         run('php', ['scripts/verify-reports.php'], { env });
-        run('node', ['scripts/acceptance-http.mjs'], { env });
+        if (ciShards) {
+            copyFileSync(
+                path.join(root, 'build/ci-http/acceptance-http.json'),
+                path.join(root, 'build/acceptance-http.json'),
+            );
+        } else {
+            run('node', ['scripts/acceptance-http.mjs'], { env });
+        }
         if (prelive) {
             run('node', ['scripts/verify-prelive.mjs'], { env });
         } else if (ciShards) {

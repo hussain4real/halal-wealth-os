@@ -25,7 +25,8 @@ try {
     const recovery = JSON.parse(
         readFileSync('build/release-recovery.json', 'utf8'),
     );
-    const http = JSON.parse(readFileSync('build/acceptance-http.json', 'utf8'));
+    const httpPath = 'build/acceptance-http.json';
+    const http = JSON.parse(readFileSync(httpPath, 'utf8'));
     const source = sourceIdentity();
     const junit = digest('build/junit.xml');
     const catalog = JSON.parse(
@@ -40,7 +41,10 @@ try {
     if (
         http.result !== 'PASS' ||
         http.source_sha256 !== source ||
-        http.junit_sha256 !== junit
+        (ciShards
+            ? http.junit_sha256 !== null ||
+              http.producer?.run_id !== process.env.HWO_RELEASE_RUN_ID
+            : http.junit_sha256 !== junit)
     )
         throw new Error('Current HTTP/source/JUnit proof did not reconcile');
     const manifestPath = 'public/build/manifest.json';
@@ -73,6 +77,7 @@ try {
         result: 'PASS',
         phase: 'M7-P3',
         verification_scope: ciShards ? 'CI_ONLY' : 'RELEASE',
+        ...(ciShards ? { http_sha256: digest(httpPath) } : {}),
         live_evaluation: ciShards
             ? verifyCiEvaluation()
             : validateLiveReport(
