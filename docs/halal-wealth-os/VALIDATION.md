@@ -44,6 +44,21 @@ platform/constraint checks reject earlier and future minor lines. Pest 5/Laravel
 plugin and PHPUnit 13 preserve all existing test bodies, setup behavior, data
 providers and database guards. Functional syntax is required by TIA.
 
+PR and push CI run each full-suite test once across eight time-balanced Pest
+shards, with an isolated PostgreSQL service per shard. The `ci` job checks that
+the merged JUnit matches full test discovery with no missing, skipped or repeated
+cases and applies the existing financial coverage floors to the combined Clover
+report. It also checks the build, audits, migrations, HTTP acceptance and recovery.
+Refresh the schedule with `pest --ci --no-tia --update-shards` on a disposable
+test database when the per-shard timings diverge.
+
+The approved CI-only receipt carry-forward identifies the earlier evaluated commit
+and the exact sharding source fingerprint. CI emits its own verification and
+acceptance records. A release still requires its own current-basis live receipt.
+
+The separate deliberate-failure rehearsal is available on demand through the tests workflow's `failure_probe`
+input, or locally with `./bin/probe-failure`.
+
 Full verification and CI use Pest --ci --no-tia, with both Feature/Unit discovery,
 uncached execution, real coverage, mandatory reports and no required skips.
 The optional local TIA entry point requires its own complete baseline and the

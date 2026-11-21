@@ -14,7 +14,9 @@ import {
 } from './verification.mjs';
 
 try {
-    const { phase, prelive } = verificationMode(process.argv.slice(2));
+    const { phase, prelive, ciShards } = verificationMode(
+        process.argv.slice(2),
+    );
     const roadmap = JSON.parse(
         readFileSync(
             path.join(root, 'docs/halal-wealth-os/ROADMAP.json'),
@@ -130,8 +132,12 @@ try {
             throw new VerificationFailure(`BLOCKED:\n${missing.join('\n')}`);
         const env = {
             ...testingEnvironment(),
-            HWO_RELEASE_RUN_ID: randomBytes(16).toString('hex'),
+            HWO_RELEASE_RUN_ID: ciShards
+                ? process.env.HWO_RELEASE_RUN_ID
+                : randomBytes(16).toString('hex'),
         };
+        if (!/^[a-f0-9]{32}$/.test(env.HWO_RELEASE_RUN_ID ?? ''))
+            throw new VerificationFailure('Missing verification run identity.');
         mkdirSync(path.join(root, 'build'), { recursive: true });
         for (const file of [
             'junit.xml',
@@ -142,6 +148,8 @@ try {
             'release-recovery.json',
             'release-record.json',
             'prelive-readiness.json',
+            'ci-verification-record.json',
+            'ci-acceptance-report.json',
         ])
             rmSync(path.join(root, 'build', file), { force: true });
         run('composer', ['validate', '--strict'], { env });
@@ -310,11 +318,42 @@ try {
                 'BLOCKED: manifest has no real starter test:coverage command',
             );
         }
-        run('composer', ['run', 'test:coverage'], { env });
+        if (ciShards) {
+            run('composer', ['run', 'lint:check'], { env });
+            run('composer', ['run', 'types:check'], { env });
+            run(
+                'php',
+                [
+                    'vendor/bin/pest',
+                    '--ci',
+                    '--no-tia',
+                    '--list-tests-xml',
+                    'build/pest-inventory.xml',
+                ],
+                { env },
+            );
+            run(
+                'php',
+                [
+                    'scripts/merge-ci-shards.php',
+                    'build/pest-inventory.xml',
+                    'build/ci-shards',
+                ],
+                { env },
+            );
+        } else {
+            run('composer', ['run', 'test:coverage'], { env });
+        }
         run('php', ['scripts/verify-reports.php'], { env });
         run('node', ['scripts/acceptance-http.mjs'], { env });
         if (prelive) {
             run('node', ['scripts/verify-prelive.mjs'], { env });
+        } else if (ciShards) {
+            run('node', ['scripts/verify-release.mjs', '--ci-shards'], { env });
+            run('php', ['scripts/verify-acceptance.php', '--ci-shards'], {
+                env,
+            });
+            console.log('PASS uncached CI checks with eight Pest shards');
         } else {
             run('node', ['scripts/verify-answer-eval.mjs'], { env });
             run('node', ['scripts/verify-release.mjs'], { env });

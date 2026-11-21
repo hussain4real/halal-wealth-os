@@ -14,6 +14,7 @@ use App\Domain\Reporting\CopilotAnswerFacts;
 use App\Domain\Reporting\InvestmentValuation;
 use App\Domain\Shared\Money\Currency;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -38,6 +39,8 @@ beforeEach(function () {
 });
 afterEach(function () {
     Date::setTestNow();
+    // These tests exercise real commits, so the next transactional test needs a clean schema.
+    RefreshDatabaseState::$migrated = false;
 });
 
 function answerFinancialHash(): string
