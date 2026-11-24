@@ -740,3 +740,17 @@ The authorized run is complete. Reuse the retained receipt when its evaluated
 source matches. This authorization grants no further paid calls, retries,
 fallbacks, credentials or deployment. Verify current CI and hosted review
 before merging into dev.
+
+## Agent skills
+
+### Issue tracker
+
+Engineering issues and specs are tracked in GitHub Issues for `hussain4real/halal-wealth-os`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the five default triage labels. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Use a single domain context. See `docs/agents/domain.md`.
