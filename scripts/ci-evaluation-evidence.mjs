@@ -6,19 +6,20 @@ import { validateLiveReport } from './verify-answer-eval.mjs';
 
 const evaluatedCommit = '2aebc7e149575f305dd4b91fa137f24f58dfe5c6';
 const approvalFile = 'docs/halal-wealth-os/runs/ci-sharding-approval.json';
-// PR #31's four documentation files, including the formatting correction.
-const documentationBase = '9309f5277a205704af50faae0083e8336b3b78d1';
-const approvedDocumentationCommit = '18601331bac1f4656a311489f3880430da5c3c86';
-const approvedDocumentationTreeSha256 =
-    '9779c2288a7a7769a06789099a8d1aeeb81172a59398f5b4324f711a203e0853';
-const documentationFiles = [
+// PR #31's approved docs and exact WebAuthn 5.3.13 lockfile change.
+const pr31Base = '9309f5277a205704af50faae0083e8336b3b78d1';
+const approvedPr31Commit = '604a82393291b419ef5b72723a5e794ff26ec04f';
+const approvedPr31TreeSha256 =
+    'aeb4123ed1081309f2636a3279d98310b10e27605eb8850ce3063b6eca8dc3f4';
+const pr31Files = [
     'AGENTS.md',
+    'composer.lock',
     'docs/agents/domain.md',
     'docs/agents/issue-tracker.md',
     'docs/agents/triage-labels.md',
 ];
-const documentationExceptionPaths = new Set([
-    ...documentationFiles,
+const pr31ExceptionPaths = new Set([
+    ...pr31Files,
     approvalFile,
     'scripts/ci-evaluation-evidence.mjs',
 ]);
@@ -80,21 +81,21 @@ export function verifyCiEvaluation() {
     if (!shardingOnly) {
         // Pin the approved paths, modes and blob identities independently of
         // feature-branch ancestry so the reviewed tree also works after squashing.
-        const documentation = approval.pr31_documentation;
+        const pr31 = approval.pr31_webauthn;
         if (
-            documentation?.reviewed_commit !== approvedDocumentationCommit ||
-            documentation.approved_ci_basis_sha256 !== basis
+            pr31?.reviewed_commit !== approvedPr31Commit ||
+            pr31.approved_ci_basis_sha256 !== basis
         )
             fail();
-        git('merge-base', '--is-ancestor', documentationBase, 'HEAD');
-        const paths = changedPaths(documentationBase);
-        const documentationTreeSha256 = createHash('sha256')
-            .update(git('ls-tree', '-z', 'HEAD', '--', ...documentationFiles))
+        git('merge-base', '--is-ancestor', pr31Base, 'HEAD');
+        const paths = changedPaths(pr31Base);
+        const treeSha256 = createHash('sha256')
+            .update(git('ls-tree', '-z', 'HEAD', '--', ...pr31Files))
             .digest('hex');
         if (
-            paths.length !== documentationExceptionPaths.size ||
-            !paths.every((file) => documentationExceptionPaths.has(file)) ||
-            documentationTreeSha256 !== approvedDocumentationTreeSha256
+            paths.length !== pr31ExceptionPaths.size ||
+            !paths.every((file) => pr31ExceptionPaths.has(file)) ||
+            treeSha256 !== approvedPr31TreeSha256
         )
             fail();
     }
