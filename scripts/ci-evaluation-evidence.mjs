@@ -5,6 +5,12 @@ import { validateLiveReport } from './verify-answer-eval.mjs';
 
 const evaluatedCommit = '2aebc7e149575f305dd4b91fa137f24f58dfe5c6';
 const approvalFile = 'docs/halal-wealth-os/runs/ci-sharding-approval.json';
+// PR #31's four documentation files, including the formatting correction.
+const approvedDocumentationCommit = '18601331bac1f4656a311489f3880430da5c3c86';
+const documentationExceptionPaths = new Set([
+    approvalFile,
+    'scripts/ci-evaluation-evidence.mjs',
+]);
 const approvedPaths = new Set([
     '.github/workflows/tests.yml',
     'docs/halal-wealth-os/VALIDATION.md',
@@ -44,19 +50,39 @@ export function verifyCiEvaluation() {
     // identical to the one at the reviewed head. Never generate a new live receipt.
     if (git('status', '--porcelain', '--untracked-files=normal').length) fail();
     git('merge-base', '--is-ancestor', evaluatedCommit, 'HEAD');
-    const files = git('diff', '--name-only', '-z', evaluatedCommit, 'HEAD')
-        .toString()
-        .split('\0')
-        .filter(Boolean);
+    const changedPaths = (commit) =>
+        git('diff', '--no-renames', '--name-only', '-z', commit, 'HEAD')
+            .toString()
+            .split('\0')
+            .filter(Boolean);
     const approval = JSON.parse(readFileSync(approvalFile));
     if (
-        files.some((file) => !approvedPaths.has(file)) ||
         approval.evaluated_commit !== evaluatedCommit ||
-        approval.approved_ci_basis_sha256 !== basis ||
         approval.evaluated_basis_sha256 !== report.basis_sha256 ||
         !receipt.equals(git('show', `${evaluatedCommit}:${liveReport}`))
     )
         fail();
+
+    const shardingOnly =
+        approval.approved_ci_basis_sha256 === basis &&
+        changedPaths(evaluatedCommit).every((file) => approvedPaths.has(file));
+    if (!shardingOnly) {
+        // Pin the documentation bytes to the reviewed commit. Only the verifier
+        // and its approval record may differ from that exact source tree.
+        const documentation = approval.pr31_documentation;
+        if (
+            documentation?.reviewed_commit !== approvedDocumentationCommit ||
+            documentation.approved_ci_basis_sha256 !== basis
+        )
+            fail();
+        git('merge-base', '--is-ancestor', approvedDocumentationCommit, 'HEAD');
+        const paths = changedPaths(approvedDocumentationCommit);
+        if (
+            paths.length !== documentationExceptionPaths.size ||
+            !paths.every((file) => documentationExceptionPaths.has(file))
+        )
+            fail();
+    }
     return {
         ...validateLiveReport(
             report,
