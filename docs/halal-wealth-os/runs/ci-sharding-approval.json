@@ -2,5 +2,15 @@
     "evaluated_commit": "2aebc7e149575f305dd4b91fa137f24f58dfe5c6",
     "evaluated_basis_sha256": "67e7ac7b2dc075535f2b5c00e00aa890943b5fc34a49345acdefd6e0d73dbf17",
     "approved_ci_basis_sha256": "77748cb55a77209c9a7f71f00873f031cd312298fe611b0a0bf8b3c74830a311",
-    "scope": "Eight-shard CI and synthetic test fixtures only"
+    "scope": "Eight-shard CI and synthetic test fixtures only",
+    "pr31_documentation": {
+        "reviewed_commit": "18601331bac1f4656a311489f3880430da5c3c86",
+        "approved_ci_basis_sha256": "b2f2f2387d3bb3cec0b8e5c21590872803e7e54beffddd759e2a47d1c042a910",
+        "scope": "PR #31 exact agent skills documentation and CI receipt verification only"
+    },
+    "pr31_webauthn": {
+        "reviewed_commit": "604a82393291b419ef5b72723a5e794ff26ec04f",
+        "approved_ci_basis_sha256": "8d99cf2abc07e7d5e77b29c39b7a79d296ec6260f5211a7a6f0a8b8c9572027e",
+        "scope": "PR #31 exact agent skills documentation, WebAuthn 5.3.13 lockfile update, and CI receipt verification only"
+    }
 }
